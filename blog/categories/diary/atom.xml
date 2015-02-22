@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-02-22T22:21:02+09:00</updated>
+  <updated>2015-02-22T22:48:43+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -32,17 +32,33 @@ $ rake generate
 $ rake deploy
 </code></p>
 
-<p>そのあと、DNSでCNAMEに <code>katsyoshi.github.io</code> を設定し、リポジトリのトップに <code>blog.katsyoshi.org</code> と書いた <code>CNAME</code> ファイルを追加しおわりです。</p>
+<p>そのあと、DNSでCNAMEに <code>katsyoshi.github.io</code> を設定し、リポジトリ<del>のトップ</del>に <code>blog.katsyoshi.org</code> と書いた <code>source/CNAME</code> ファイルを追加しおわりです。</p>
 
 <h2>おわり</h2>
 
 <p>おわり</p>
+
+<h2>追記</h2>
+
+<p>実は記事を追加したあと <code>rake deploy</code> ができないという問題がありましたが、そのときは、</p>
+
+<p><code>sh
+$ rake generate
+$ cd _deploy
+$ git pull origin/master
+$ cd ../
+$ rake deploy
+</code></p>
+
+<p>で更新されます。</p>
 
 <h3>参考サイト</h3>
 
 <ol>
 <li><a href="http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/">http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/</a></li>
 <li><a href="http://blog.textfile.org/20141014/github/">http://blog.textfile.org/20141014/github/</a></li>
+<li><a href="http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress">http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress</a></li>
+<li><a href="http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/">http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/</a></li>
 </ol>
 
 ]]></content>
