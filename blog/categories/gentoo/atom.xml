@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gentoo | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/gentoo/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-02-22T23:19:10+09:00</updated>
+  <updated>2015-02-24T00:33:25+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Emerge --syncをgitにかえたはなし]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/02/24/portage2git/"/>
+    <updated>2015-02-24T00:13:18+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/02/24/portage2git</id>
+    <content type="html"><![CDATA[<p>portageはデフォルトだと <code>rsync</code> を利用しての更新をしているので、
+<code>git</code> を用いた方法に変更します。</p>
+
+<h2>準備</h2>
+
+<p><code>portage</code> を <code>2.2.17</code> に変更し、USEフラグとして <code>git</code> をつかいます。</p>
+
+<p>```sh</p>
+
+<h1>USE=&ldquo;git ${USE}&rdquo; emerge -av \=portage-2.2.17</h1>
+
+<p>```</p>
+
+<p>つぎに、Gitのリポジトリを見に行くように<a href="http://qiita.com/wjn/items/a3b71059211711501e35">設定</a>します。</p>
+
+<p>と設定してあとはいつもどおり <code>sudo eix-sync</code> させるだけで大丈夫です。</p>
+
+<h2>おわり</h2>
+
+<p>基本的にはリンク先だけ見てればいけると思います。</p>
+
+<p>引越ししてWiMAXの電波の入りがわるくなったので鉄製ボウル買おうかとおもってたら2時間ほど<a href="https://ingress.com">徘徊</a>してました。</p>
+
+<h3>参考サイト</h3>
+
+<ol>
+<li><a href="http://qiita.com/wjn/items/a3b71059211711501e35">http://qiita.com/wjn/items/a3b71059211711501e35</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Project:Portage/Sync">https://wiki.gentoo.org/wiki/Project:Portage/Sync</a></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[とりあえずibusやめてみた]]></title>
@@ -213,45 +251,6 @@ $ bundle exec ruby mikutter.rb
 これで快適なmikutterライフがておくれますね。</p>
 
 <p><img src="/images/photo/mikutter.png" alt="mikutter" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gentoo Install Battle Part II]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2014/08/21/gentoo-install-battle-part-ii/"/>
-    <updated>2014-08-21T20:01:51+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2014/08/21/gentoo-install-battle-part-ii</id>
-    <content type="html"><![CDATA[<p>X240の準備は終ったので、<a href="http://wiki.gentoo.org/wiki/Quick_install_guide">インストール</a>します。基本的にはこの流れです。</p>
-
-<h2>USBブート</h2>
-
-<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">作成したUSBメモリ</a>をX240に差して起動します。
-起動したら、まずパーティションの設定を行います。</p>
-
-<p><code>sh
-$ gpart /dev/sda
-</code></p>
-
-<p>で不要なパーティションを削除し、必要なパーティションを作成します。</p>
-
-<h2>無線LAN</h2>
-
-<p>ネットワークを接続しますが、今回は無線LANを利用してインストールを行います。</p>
-
-<p>まず、どこか適当な位置に<a href="http://www.xmisao.com/2014/01/16/how-to-connect-wpa2-wireless-lan-using-wpa-supplicant.html">リンク先</a>のファイルを作成してください。</p>
-
-<p>次に以下のコマンドを実行します。</p>
-
-<p><code>sh
-$ wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config
-</code></p>
-
-<p>実行したら、接続されているのでATL + F2とかでコンソールの表示を変更してください。</p>
-
-<h2>おわり</h2>
-
-<p>有線のLANケーブルがなかったからはまった。
-続きは明日以降に…</p>
 ]]></content>
   </entry>
   
