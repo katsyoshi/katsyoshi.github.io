@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-03-17T12:30:13+09:00</updated>
+  <updated>2015-03-18T01:41:08+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,18 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Asakusa.rbの300回記念パーティに行ってきた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/03/18/party-of-asakusa-dot-rb-300th/"/>
+    <updated>2015-03-18T01:26:33+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/03/18/party-of-asakusa-dot-rb-300th</id>
+    <content type="html"><![CDATA[<p>Asakusa.rbの300回記念パーティに行ってきた。
+ずーっと、devopsについてちょっと気になることがあったので(@hsbt)[<a href="https://twitter.com/hsbt">https://twitter.com/hsbt</a>]聞いてみたりしてた。</p>
+
+<p>あとは終ったあとかなり早い花見してた。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Herokuでmaster以外のブランチを利用してデプロイする方法]]></title>
@@ -138,57 +150,6 @@ $ xdg-mime default google-chrome.desktop x-scheme-handler/https
 <h3>参考</h3>
 
 <p>&lsquo;xdg-open&rsquo;, archlinux wiki, <a href="https://wiki.archlinux.org/index.php/xdg-open,">https://wiki.archlinux.org/index.php/xdg-open,</a> 2015/02/16</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[とりあえずibusやめてみた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/02/12/remove-ibus/"/>
-    <updated>2015-02-12T07:10:29+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/02/12/remove-ibus</id>
-    <content type="html"><![CDATA[<p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
-
-<h2>前提条件</h2>
-
-<p>ここでは<a href="http://www.gentoo.org">Gentoo/Linux</a>での導入方法について述べています。
-日本語変換エンジンとしてMozcについて述べています。</p>
-
-<h2>導入</h2>
-
-<p>とりあえずfcitxをインストール、設定します。</p>
-
-<p>```sh
-$ emerge -av fcitx</p>
-
-<p>$ $EDITOR .xinitrc</p>
-
-<p>export XMODIFIERS=@im=&ldquo;fcitx&rdquo;
-export GTK_IM_MODULE=&ldquo;fcitx&rdquo;
-export QT_IM_MODULE=&ldquo;fcitx&rdquo;
-fcitx
-```</p>
-
-<p>これでインストールはこれでおわりです。</p>
-
-<h2>fcitxでmozc</h2>
-
-<p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
-
-<p>```sh
-$ $EDITOR /etc/portage/make.conf
-USE=&ldquo;fcitx ${USE}&rdquo;</p>
-
-<p>$ sudo emerge -av mozc
-```</p>
-
-<p>で、インストールすれば使えるようになります。</p>
-
-<h2>おわり</h2>
-
-<p><a href="http://anond.hatelabo.jp/20150210030728">こういうの</a>があったので、真面目にかこうかと思ったんですがどめんどうなので導入メモになりました。</p>
-
-<p>あと引越ししたので贈っていただいてもいいんですよ？
-<a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
 ]]></content>
   </entry>
   

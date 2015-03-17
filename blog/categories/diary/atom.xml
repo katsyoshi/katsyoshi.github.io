@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-03-17T12:30:13+09:00</updated>
+  <updated>2015-03-18T01:41:08+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,18 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Asakusa.rbの300回記念パーティに行ってきた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/03/18/party-of-asakusa-dot-rb-300th/"/>
+    <updated>2015-03-18T01:26:33+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/03/18/party-of-asakusa-dot-rb-300th</id>
+    <content type="html"><![CDATA[<p>Asakusa.rbの300回記念パーティに行ってきた。
+ずーっと、devopsについてちょっと気になることがあったので(@hsbt)[<a href="https://twitter.com/hsbt">https://twitter.com/hsbt</a>]聞いてみたりしてた。</p>
+
+<p>あとは終ったあとかなり早い花見してた。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blogの引越し]]></title>
@@ -230,62 +242,6 @@ ForAndRange.rs:2     for n in range(1u32, 101) {</p>
 
 <p>ということで名古屋から新宿まで塩尻を経由して鈍行の中央線を走破しました。
 おわり。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[秘境でハッカソンがあったので行ってきた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2014/07/22/akiyamago-hackathon-2014/"/>
-    <updated>2014-07-22T20:09:11+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2014/07/22/akiyamago-hackathon-2014</id>
-    <content type="html"><![CDATA[<p>7月19日〜7月21日まで秋山郷の<a href="https://www.google.co.jp/maps/place/%E3%81%8B%E3%81%9F%E3%81%8F%E3%82%8A%E3%81%AE%E5%AE%BF/@36.9184265,138.6375958,18z/data=!4m2!3m1!1s0x0:0xec3b9141469e30fc">かたくりの宿</a>という場所でHackathonがあったので行ってきました。</p>
-
-<h2>1日目</h2>
-
-<p>1日目は仕事があったので仕事を終えてから新幹線で越後湯沢まで出て、<a href="https://twitter.com/m_asama">@m_asama</a>さんと合流して秋山郷へ。</p>
-
-<p>途中、最短経路が<a href="http://www.city.tokamachi.lg.jp/page/10040200057.html">土砂に埋もれて</a>通行できないので<a href="http://www.pref.niigata.lg.jp/tokamachi_seibi/1356771341657.html">迂回</a>して行きました。途中の道は狹く、えっここ通るの？って感じの道を通りました。宿に着いたらもう午後6時ですぐに食事の時間となりました。</p>
-
-<p>夕飯は山菜づくしな夕飯でした。</p>
-
-<p>夕飯終ってハックタイムでしたが、食堂を利用する予定だったので、食堂が空くまで部屋でだべってました。
-午後9時頃からハックタイムが始まりました。その日はとても眠かったので<a href="https://twitter.com/kotatsu_mi">@kotatu_mi</a>に絡んですぐに寝ました。</p>
-
-<h2>2日目</h2>
-
-<p>2日目は宿の人に起こされて起きました。朝食はこんなかんじでした。</p>
-
-<p><img src="/images/photo/akiyamago-2breakfast.png%20=%20256x" alt="二日目朝食" /></p>
-
-<p>朝食後、<a href="https://www.google.co.jp/maps/place/%E8%A6%8B%E5%80%89%E6%A9%8B/@36.91872,138.637115,17z/data=!3m1!4b1!4m2!3m1!1s0x5ff601b97e1ba7bb:0x1577cfb29a624fa7">近くの橋</a>まで散歩しました。軽い散歩だと思ってたら、山道で辛かった。</p>
-
-<p><img src="/images/photo/akiyamago-mikura-hashi.png%20=%20256x" alt="見倉橋" /></p>
-
-<p>そのまま帰るのはもったいないと思って反対側を登りました。登りきったら、近くにcool wind holeがあるらしいのでそこまで行ってみました。</p>
-
-<p><img src="/images/photo/akiyamago-cool-wind-hole.png%20=%20256x" alt="風穴" /></p>
-
-<p>帰りは山道がつらいしつかれたので、周って帰りました。</p>
-
-<p>昼飯は<a href="https://www.google.co.jp/maps/place/%E6%A5%BD%E9%A4%8A%E9%A4%A8/@36.9179309,138.6369755,13z/data=!4m5!1m2!2m1!1z5bCP6LWk5rKi!3m1!1s0x601dff32c6304d99:0xaacce4d76fa870ff">小赤沢</a>まで温泉と熊らーめんを食べました。</p>
-
-<p><img src="/images/photo/akiyamago-kuma-ramen.png%20=%20256x" alt="熊らーめん" /></p>
-
-<p>宿に戻ってからはしばらくはハックタイムでした。夕食後、星を見に外出たらすごく星が綺麗でした。</p>
-
-<p><img src="/images/photo/akiyamago-milkyway.png%20=%20%20256x" alt="星きれい" /></p>
-
-<p>星見に行ったあとにハックタイムがあり、<a href="https://github.com/katsyoshi/mikutter-docker">mikutterでDockerのコントロール</a>をしようとしてました。</p>
-
-<h2>3日目</h2>
-
-<p>午前中は夜の続きをやってました。</p>
-
-<p>帰りは<a href="https://www.google.co.jp/maps/place/%E5%88%87%E6%98%8E%E6%B8%A9%E6%B3%89/@36.8097569,138.6200903,18z/data=!4m7!1m4!3m3!1s0x601dff32c6304d99:0xaacce4d76fa870ff!2z5qW96aSK6aSo!3b1!3m1!1s0x0:0x30280b0e98e9ad4a">切明温泉</a>にたちより、長野回りで帰りました。</p>
-
-<h2>今回の成果</h2>
-
-<p><a href="https://www.google.co.jp/search?q=%E6%88%90%E6%9E%9C%E4%BD%95%E3%82%82%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%E3%81%A7%E3%81%97%E3%81%9F%E3%83%BC&amp;newwindow=1&amp;espv=2&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ei=gmjOU9KXOcne8AXRl4KYCg&amp;ved=0CAYQ_AUoAQ&amp;biw=1166&amp;bih=986#facrc=_&amp;imgdii=_&amp;imgrc=tETgdA-yYjU4tM%253A%3BqWbTS9xBjlMpPM%3Bhttp%253A%252F%252Ftubagra.com%252Ftbg-wp%252Fwp-content%252Fuploads%252F2013%252F06%252F0213.jpg%3Bhttp%253A%252F%252Ftubagra.com%252F16457%252F%3B600%3B490">成果</a>です</p>
 ]]></content>
   </entry>
   
