@@ -9,13 +9,9 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="タイトルのとおりです。
-Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。 インストール dockerのGentooインストールページを参考にoverlayを導入します。 1
-2
-3
-$ sudo layman -a docker
-$ sudo eix-sync
-$ sudo &hellip;">
+  <meta name="description" content="寒くなりはじめましたね。今年も残すところあと二ヶ月ですね。
+先日、浅草浅草寺で、Ingressおじさんに声かけられてイライラしてます。 そういうことでmikutterのAdventCalendarを立てましたので参加してくだされ~
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +81,45 @@ $ sudo &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/mikutter-advent-calendar/">Mikutter Advent Calendar</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T23:13:40+09:00" pubdate data-updated="true">Nov 4<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>寒くなりはじめましたね。今年も残すところあと二ヶ月ですね。
+先日、浅草浅草寺で、Ingressおじさんに声かけられてイライラしてます。</p>
+
+<p>そういうことで<a href="http://www.adventar.org/calendars/401">mikutterのAdventCalendar</a>を立てましたので参加してくだされ~</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -831,83 +866,6 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/26/use-spdy-in-nginx/">SPDYをさくっと動かしてみた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-26T13:59:19+09:00" pubdate data-updated="true">Jun 26<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>NGINXでSPDY3.1が<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html">サポートされている</a>ようなので動かしてみた。</p>
-
-<h2>準備</h2>
-
-<p>SPDYは<a href="http://ja.wikipedia.org/wiki/SPDY#.E6.A6.82.E8.A6.81">SSL必須</a>のようなのでとりあえずOpenSSLで<a href="http://dogmap.jp/2011/05/10/nginx-ssl/">野良証明書を作成</a>します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /path/to/cert/dir
-</span><span class='line'><span class="nv">$ </span>openssl genrsa -des3 -out server.key 2048
-</span><span class='line'><span class="nv">$ </span>openssl req -new -key server.key -out server.csr
-</span><span class='line'><span class="nv">$ </span>openssl rsa -in server.key.org -out server.key
-</span><span class='line'><span class="nv">$ </span>openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>NGINXの設定</h2>
-
-<p>とりあえずNGINXの<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html">設定ファイルを作成</a>します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>server <span class="o">{</span>
-</span><span class='line'>    listen 443 ssl spdy;
-</span><span class='line'>    ssl_certificate server.crt;
-</span><span class='line'>    ssl_certificate_key server.key;
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と設定したらNGINXを再起動します。
-これでSPDYで動いてます。わいわい。</p>
-
-<p><img src="/images/photo/spdy.png" alt="SPDY" /></p>
-
-<p>オレオレ証明書なのでそのうちちゃんとした証明書を使いたいですね。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -925,6 +883,10 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/03/17/heroku-deploy-anther-branch/">Herokuでmaster以外のブランチを利用してデプロイする方法</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/02/24/portage2git/">Emerge &#8211;syncをgitにかえたはなし</a>
       </li>
     
@@ -938,10 +900,6 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
     
       <li class="post">
         <a href="/blog/2015/02/12/remove-ibus/">とりあえずibusやめてみた</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/31/emacs-fonts/">Rictyやめるってよ</a>
       </li>
     
   </ul>

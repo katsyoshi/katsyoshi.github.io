@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-02-24T00:33:25+09:00</updated>
+  <updated>2015-03-17T12:30:13+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Herokuでmaster以外のブランチを利用してデプロイする方法]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/03/17/heroku-deploy-anther-branch/"/>
+    <updated>2015-03-17T12:08:17+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/03/17/heroku-deploy-anther-branch</id>
+    <content type="html"><![CDATA[<p><code>sh
+$ git push heroku your-branch:master
+</code></p>
+
+<h3>参考</h3>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing">http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing</a></li>
+<li><a href="http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7">http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7</a></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Railsで空のテストファイルを削除]]></title>
