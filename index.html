@@ -9,9 +9,9 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="Asakusa.rbの300回記念パーティに行ってきた。
-ずーっと、devopsについてちょっと気になることがあったので@hsbtさんに聞いてみたりしてた。 あとは終ったあとかなり早い花見してた。
-">
+  <meta name="description" content="Ubuntuで lxc を利用して、サーバを立ててたときに嵌ったこと はじまり Proxyを利用してインターネットに接続している。
+このネットワークとして ping はLAN内なら届くが、外(google.com)とかには出ない。
+設定がうまくいってるかどうかの確認する方法として、 apt-get &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/06/careless-miss/">不注意なこと</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-06T22:25:28+09:00" pubdate data-updated="true">Apr 6<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ubuntuで <code>lxc</code> を利用して、サーバを立ててたときに嵌ったこと</p>
+
+<h2>はじまり</h2>
+
+<p>Proxyを利用してインターネットに接続している。
+このネットワークとして <code>ping</code> はLAN内なら届くが、外(google.com)とかには出ない。
+設定がうまくいってるかどうかの確認する方法として、 <code>apt-get update</code> を利用して確認している。</p>
+
+<p>最初は、 <code>lxc</code> の設定がうまくいっていないと思いなんども見直してたりした。
+それでもWANの方に出ることができなかった。</p>
+
+<p>サーバのネットワーク設定がよくないと思ってなんども見直したけど、問題なさそう。
+最後に <code>sudo -i</code> で root にログインしたあと、 <code>apt-get update</code> したら、
+ダウンロードはじまり、次へ進むことができた。</p>
+
+<h2>原因</h2>
+
+<p>原因としては <code>sudo command</code> で実行しても <code>Defaults reset_env</code> で環境変数がリセットされてたようだった。
+ので、<code>Defaults keep_env+="PATH"</code> とか追加して解決した。</p>
+
+<h2>おわり</h2>
+
+<p>簡単なミスで3時間ほど時間を費したのでなんとかしたい。</p>
+
+<h3>参考URL</h3>
+
+<ol>
+<li><a href="http://www.maepachi.com/blog/entry?id=128">http://www.maepachi.com/blog/entry?id=128</a></li>
+<li><a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -719,62 +785,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/12/01/mikutter-advent-calendar-1-day/">Mikutter Advent Calendar 1日目</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-01T23:59:59+09:00" pubdate data-updated="true">Dec 1<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.adventar.org/calendar/401">一日目</a>らしいですね。</p>
-
-<h2>今のmikutter環境</h2>
-
-<p>はGentoo/Linuxで動いています。</p>
-
-<p>よく考えてみたら今の環境になってLinuxでmikutterを使うのははじめてです。 Linuxになって一番感じたのインストールすごく楽になったことです。</p>
-
-<h2>今までのmikutter環境</h2>
-
-<p>今までMacで基本的に利用してたので苦労してた。 Macではとくにインストール、gemのupdateが大変でした。 Macでの環境では、HomebrewのGTK2のせいか、RubyGtk2がまともに動かないことが頻繁におこりました。 あと、最後まで解決できなかったのが特定の文字列がくるとクラッシュするというバグがありました。</p>
-
-<h2>mikutterとの出会い</h2>
-
-<p>出会いとしてはtwitterでTLを眺めてたら、@toshi_a って人がtwitterクライアントをつくってるらしいということで 取り敢えずFreeBSDでインストールしたのがはじめてだったとおもいます。 このときはFreeBSDでインストールして、X転送したものをMacで表示したとおもいます。</p>
-
-<p>それ以降はMacでインストールして、<a href="http://github.com/katsyoshi/fav">mikutterのプラグイン</a>を書いて公開したりしてました。</p>
-
-<h2>おわり</h2>
-
-<p>おわりおわり。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -790,6 +800,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/06/careless-miss/">不注意なこと</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/18/party-of-asakusa-dot-rb-300th/">Asakusa.rbの300回記念パーティに行ってきた</a>
       </li>
     
@@ -803,10 +817,6 @@
     
       <li class="post">
         <a href="/blog/2015/02/22/mv-sakura-github-dot-io/">Blogの引越し</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/02/16/setting-xdg-open/">XDGの設定</a>
       </li>
     
   </ul>
