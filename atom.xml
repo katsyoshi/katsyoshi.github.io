@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-04-06T22:47:25+09:00</updated>
+  <updated>2015-04-07T19:48:39+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Known_hostsに載っていないホストに接続確認しないようにする]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/"/>
+    <updated>2015-04-07T19:40:03+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection</id>
+    <content type="html"><![CDATA[<p>昨日の<a href="http://blog.katsyoshi.org/blog/2015/04/06/careless-miss/">続き</a>で、 <code>lxc</code> で大量のサーバを立てて、
+SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。</p>
+
+<h2>解決方法</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh -oStrictHostKeyChecking=no anywhere.example.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で接続確認の <code>yes or no</code> が出てこなくなります。</p>
+
+<h2>おわり</h2>
+
+<p>おわり。</p>
+
+<p>そのうち <code>lxc</code> で100個ほどのインスタンスのベンチマークとりたい…</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[不注意なこと]]></title>
@@ -849,57 +873,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 
 <p>有線のLANケーブルがなかったからはまった。
 続きは明日以降に…</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gentoo Install Battle Part I]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2014/08/20/gentoo-install-battle-part-i/"/>
-    <updated>2014-08-20T23:48:45+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2014/08/20/gentoo-install-battle-part-i</id>
-    <content type="html"><![CDATA[<p>ここにThinkPad X240があります。これの中身を Gentoo/Linux にします。</p>
-
-<h2>準備</h2>
-
-<p>準備として、Gentoo/LinuxのLiveCDを作成、Bootの設定を行います。</p>
-
-<h3>イメージ作成</h3>
-
-<p>まずLiveCDイメージをダウンロードしUSBフラッシュメモリにコピーします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wget ftp://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140814.iso
-</span><span class='line'><span class="nv">$ </span>dd <span class="nv">of</span><span class="o">=</span>/path/to/disk <span class="k">if</span><span class="o">=</span>install-amd64-minimal-20140814.iso <span class="nv">bs</span><span class="o">=</span>4m
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でイメージの作成終了です。
-次に、X240の設定を行います。</p>
-
-<h3>X240の起動準備</h3>
-
-<p>Windowsを起動し、Shift押しながら再起動します。
-再起動したら、以下の順番でBIOSを起動させます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>トラブルシューティング -&gt; 詳細オプション -&gt; UEFIファームウェアの設定 -&gt; 再起動
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でBIOSがたちあがるので、Secure BootとUEFI BootとBoot順の設定を変更します。</p>
-
-<p>Seucre Bootでは<code>Securety -&gt; Secure Boot -&gt; Secure Boot [Enable]</code>を<code>[Disable]</code>に変更</p>
-
-<p>UEFI Bootでは<code>Startup -&gt; UEFI/Legacy Boot [UEFI only]</code>を<code>[Both]</code>に変更</p>
-
-<p>Boot順の設定では、<code>Startup -&gt; Boot</code>でBootさせたい順番に変更</p>
-
-<p>BIOSを変更したらRestartします。</p>
-
-<h2>まとめ</h2>
-
-<p>とりあえず今日はここで終りです。インストールは明日以降にします。</p>
 ]]></content>
   </entry>
   

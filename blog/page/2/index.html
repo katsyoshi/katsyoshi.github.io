@@ -9,7 +9,7 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="一日目らしいですね。 今のmikutter環境 はGentoo/Linuxで動いています。 よく考えてみたら今の環境になってLinuxでmikutterを使うのははじめてです。 Linuxになって一番感じたのインストールすごく楽になったことです。 今までのmikutter環境 &hellip;">
+  <meta name="description" content="ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。 インストール これは簡単で Gemfile に typescript-rails を追加すればいけます。ですが、jQueryがTypeScript v1. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,102 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/12/typescript-in-rails/">Ruby on RailsでTypeScriptを使ってみる</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-12T11:41:25+09:00" pubdate data-updated="true">Jan 12<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。</p>
+
+<h2>インストール</h2>
+
+<p>これは簡単で <code>Gemfile</code> に <code>typescript-rails</code> を追加すればいけます。ですが、<a href="http://stackoverflow.com/questions/28117786/why-am-i-not-able-to-compile-a-file-that-references-jquery-d-ts">jQueryがTypeScript v1.4以上しかサポートしていないようなので</a>それに対応したものも追加します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;typescript-src&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/typescript-src-ruby&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;typescript-rails&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>インストールはこれだけでOKです。</p>
+
+<h3>jQueryをつかう</h3>
+
+<p>TypeScriptでjQueryを使う場合、TypeScriptの型定義ファイルをインストールする必要があります。
+で、それを自力で作るのは大変なので、 <code>tsd</code> を利用してインストールします。</p>
+
+<h4>tsd をインストール</h4>
+
+<p><code>tsd</code> は <code>npm</code> でインストールできるので、それでインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>npm install tsd -g
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でインストールできたので、この <code>tsd</code> を利用してjQueryの型定義ファイルをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tsd init
+</span><span class='line'><span class="nv">$ $EDITOR</span> tsd.json
+</span><span class='line'>  path: <span class="s2">&quot;app/assets/javascripts/typings&quot;</span>,
+</span><span class='line'>  bundle: <span class="s2">&quot;app/assets/javascripts/typings/tsd.d.ts&quot;</span>
+</span><span class='line'><span class="nv">$ </span>tsd query jquery -osa install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でjQueryを利用する準備は整いました。</p>
+
+<h2>TypeScriptを書いてみよう</h2>
+
+<p>コンソールに <code>hello, world!</code> を出すだけの例を示します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でいけますよ。
+が <code>$('#hello').text('hoge');</code> いかねぇ。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -729,84 +825,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">Gentoo Install Battle Part I</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-20T23:48:45+09:00" pubdate data-updated="true">Aug 20<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ここにThinkPad X240があります。これの中身を Gentoo/Linux にします。</p>
-
-<h2>準備</h2>
-
-<p>準備として、Gentoo/LinuxのLiveCDを作成、Bootの設定を行います。</p>
-
-<h3>イメージ作成</h3>
-
-<p>まずLiveCDイメージをダウンロードしUSBフラッシュメモリにコピーします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wget ftp://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140814.iso
-</span><span class='line'><span class="nv">$ </span>dd <span class="nv">of</span><span class="o">=</span>/path/to/disk <span class="k">if</span><span class="o">=</span>install-amd64-minimal-20140814.iso <span class="nv">bs</span><span class="o">=</span>4m
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でイメージの作成終了です。
-次に、X240の設定を行います。</p>
-
-<h3>X240の起動準備</h3>
-
-<p>Windowsを起動し、Shift押しながら再起動します。
-再起動したら、以下の順番でBIOSを起動させます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>トラブルシューティング -&gt; 詳細オプション -&gt; UEFIファームウェアの設定 -&gt; 再起動
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でBIOSがたちあがるので、Secure BootとUEFI BootとBoot順の設定を変更します。</p>
-
-<p>Seucre Bootでは<code>Securety -&gt; Secure Boot -&gt; Secure Boot [Enable]</code>を<code>[Disable]</code>に変更</p>
-
-<p>UEFI Bootでは<code>Startup -&gt; UEFI/Legacy Boot [UEFI only]</code>を<code>[Both]</code>に変更</p>
-
-<p>Boot順の設定では、<code>Startup -&gt; Boot</code>でBootさせたい順番に変更</p>
-
-<p>BIOSを変更したらRestartします。</p>
-
-<h2>まとめ</h2>
-
-<p>とりあえず今日はここで終りです。インストールは明日以降にします。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -824,6 +842,10 @@ RubyChallengeはコミッタでも間違えててむずかしい。
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/07/many-ssh-connection/">Known_hostsに載っていないホストに接続確認しないようにする</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/06/careless-miss/">不注意なこと</a>
       </li>
     
@@ -837,10 +859,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
     
       <li class="post">
         <a href="/blog/2015/02/24/portage2git/">Emerge &#8211;syncをgitにかえたはなし</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/02/22/mv-sakura-github-dot-io/">Blogの引越し</a>
       </li>
     
   </ul>

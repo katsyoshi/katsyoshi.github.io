@@ -5,14 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>RubyKaigi2014 - katsyoshiのめもみたいなもの</title>
+  <title>Known_hostsに載っていないホストに接続確認しないようにする - katsyoshiのめもみたいなもの</title>
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="RubyKaigi2014に行ってきました。
-聞いたもの一覧です。 1日目 Building the Ruby interpreter &mdash; What is easy and what is difficult?
-Symbol GC スライド
-Eliminating Giant VM &hellip;">
+  <meta name="description" content="昨日の続きで、 lxc で大量のサーバを立てて、
+SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。 解決方法 1
+$ ssh -oStrictHostKeyChecking=no anywhere.example.com で接続確認の yes or no &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +20,7 @@ Eliminating Giant VM &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.katsyoshi.org/blog/2014/09/22/rubykaigi2014">
+  <link rel="canonical" href="http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
@@ -85,7 +84,7 @@ Eliminating Giant VM &hellip;">
   
   <header>
     
-      <h1 class="entry-title">RubyKaigi2014</h1>
+      <h1 class="entry-title">Known_hostsに載っていないホストに接続確認しないようにする</h1>
     
     
       <p class="meta">
@@ -101,68 +100,29 @@ Eliminating Giant VM &hellip;">
   
 
 
-<time datetime="2014-09-22T19:10:00+09:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2014</time>
+<time datetime="2015-04-07T19:40:03+09:00" pubdate data-updated="true">Apr 7<span>th</span>, 2015</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="http://rubykaigi.org/2014">RubyKaigi2014</a>に行ってきました。
-聞いたもの一覧です。</p>
+<div class="entry-content"><p>昨日の<a href="/blog/2015/04/06/careless-miss/">続き</a>で、 <code>lxc</code> で大量のサーバを立てて、
+SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。</p>
 
-<h2>1日目</h2>
+<h2>解決方法</h2>
 
-<ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-KoichiSasada">Building the Ruby interpreter &mdash; What is easy and what is difficult?</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-NarihiroNakamura">Symbol GC</a> <a href="http://www.slideshare.net/authorNari/symbol-gc">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ReiOdaira">Eliminating Giant VM Lock in Ruby through Hardware Transactional Memory</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-SzuKaiHsu">Cores unleashed Part II: Introduction to GobiesVM (and Software Transactional Memory)</a> <a href="https://speakerdeck.com/brucehsu/core-unleashed-part-ii-introduction-to-gobiesvm-and-stm-at-rubykaigi-2014">スライド</a></li>
-<li>Committers vs. the world</li>
-</ul>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh -oStrictHostKeyChecking=no anywhere.example.com</span></code></pre></td></tr></table></div></figure>
 
 
-<p>初日は笹田さんのキーノートを聞いた。あとはなりさんのSymbolをGCする話、HTM、STMの話を聞いていた。
-SymbolをGCする話はいままでGCされないことを知らなかったので便利かなと。
-懇親会では、笹田さんと鳥井さんがペアルックだったので写真撮ったのですが、携帯のカメラアプリで保存できなかったのが心のこりです。</p>
-
-<h2>2日目</h2>
-
-<ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-YukihiroMatzMatsumoto">Comming soon&hellip;</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroIde">A Just in Time compiler for CRuby (CRuby言語処理系向けJITコンパイラ)</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ThiagoScalone-DanielRodriguez">MRuby as Development Platform for Payments</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-TakehikoYOSHIDA">Open the door of embedded systems to IoT! mruby on LEGO Mindstorms EV3®</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ShotaFukumori">Scalable deployments &ndash; How we deploy Rails app to 100+ hosts in a minute</a> <a href="https://speakerdeck.com/sorah/scalable-deployments-how-we-deploy-rails-app-to-150-plus-hosts-in-a-minute">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MATSUMOTORyosuke">Resource Control Architecture scripting with mruby for a Web Server Separating Computer Resources Virtually at Each HTTP Request</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroNakagawa">ServerEngine: a framework for multiprocess servers in Ruby</a> <a href="http://www.slideshare.net/treasure-data/rubykaigi-2014-serverengine">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/LT">Ligthting Talks</a></li>
-</ul>
-
-
-<p>RubyをJIT使って速くしようという話。福盛さんのデプロイを早くするのは面白かった。どこで利用できるのって話はおいておいて。
-松本(り)さんはこのtalkが切っ掛けで<a href="http://hb.matsumoto-r.jp/entry/2014/09/20/003531">就職決まった</a>ようです。LTも面白かったです。</p>
-
-<h2>3日目</h2>
-
-<ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-JonanScheffler">Everything is Broken: A Story of Hope</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-NaotoshiSeo">Fluentd Hacking Guide (Fluentd ソースコード完全解説)</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-PremSichanugrist">The Ruby Challenge</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasatoshiSEKI">Make your own synchronization mechanism.</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-KouheiSutou">Three Ruby usages &ndash; High-level interface, Glue and Embedding &ndash; Inside Droonga</a> <a href="http://speakerdeck.com/u/kou/p/three-ruby-usages">スライド</a></li>
-</ul>
-
-
-<p>3日目はゆっくり来てAaronとか聞こうかとおもってたけど、午前中はロビーでだらだらしすぎてなにもきいていないです。
-午後から、Jonanは2011の最後のRubyKaigiのときに会ってたので今こういうことやってるのだなーと。
-fluentdのプラグイン書いてるけど、なんとなく動いてるし、そのプラグインを利用してて特に問題なかったので、これがあってよかった。
-RubyChallengeはコミッタでも間違えててむずかしい。
-咳さんと須藤さんの話はすごくよかった。</p>
+<p>で接続確認の <code>yes or no</code> が出てこなくなります。</p>
 
 <h2>おわり</h2>
 
-<p>RubyKaigi2014行ってきました。この3日間非常に楽しく過ごせました。</p>
+<p>おわり。</p>
+
+<p>そのうち <code>lxc</code> で100個ほどのインスタンスのベンチマークとりたい…</p>
 </div>
 
 
@@ -185,12 +145,12 @@ RubyChallengeはコミッタでも間違えててむずかしい。
   
 
 
-<time datetime="2014-09-22T19:10:00+09:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2014</time>
+<time datetime="2015-04-07T19:40:03+09:00" pubdate data-updated="true">Apr 7<span>th</span>, 2015</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+    <a class='category' href='/blog/categories/ssh/'>ssh</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -199,7 +159,7 @@ RubyChallengeはコミッタでも間違えててむずかしい。
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.katsyoshi.org/blog/2014/09/22/rubykaigi2014/" data-via="" data-counturl="http://blog.katsyoshi.org/blog/2014/09/22/rubykaigi2014/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/" data-via="" data-counturl="http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/" >Tweet</a>
   
   
   
@@ -210,10 +170,8 @@ RubyChallengeはコミッタでも間違えててむずかしい。
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/09/15/went-to-nagoya-and-nagano/" title="Previous Post: なごや、ながのに行ってきた">&laquo; なごや、ながのに行ってきた</a>
+        <a class="basic-alignment left" href="/blog/2015/04/06/careless-miss/" title="Previous Post: 不注意なこと">&laquo; 不注意なこと</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/10/01/pitfall-in-docker/" title="Next Post: Dockerではまってます">Dockerではまってます &raquo;</a>
       
     </p>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

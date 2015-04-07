@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-04-06T22:47:25+09:00</updated>
+  <updated>2015-04-07T19:48:39+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Known_hostsに載っていないホストに接続確認しないようにする]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/"/>
+    <updated>2015-04-07T19:40:03+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection</id>
+    <content type="html"><![CDATA[<p>昨日の<a href="/blog/2015/04/06/careless-miss/">続き</a>で、 <code>lxc</code> で大量のサーバを立てて、
+SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。</p>
+
+<h2>解決方法</h2>
+
+<p><code>
+$ ssh -oStrictHostKeyChecking=no anywhere.example.com
+</code></p>
+
+<p>で接続確認の <code>yes or no</code> が出てこなくなります。</p>
+
+<h2>おわり</h2>
+
+<p>おわり。</p>
+
+<p>そのうち <code>lxc</code> で100個ほどのインスタンスのベンチマークとりたい…</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[不注意なこと]]></title>
@@ -116,57 +140,6 @@ $ git push heroku your-branch:master
 <ol>
 <li><a href="http://qiita.com/wjn/items/a3b71059211711501e35">http://qiita.com/wjn/items/a3b71059211711501e35</a></li>
 <li><a href="https://wiki.gentoo.org/wiki/Project:Portage/Sync">https://wiki.gentoo.org/wiki/Project:Portage/Sync</a></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Blogの引越し]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/02/22/mv-sakura-github-dot-io/"/>
-    <updated>2015-02-22T18:29:09+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/02/22/mv-sakura-github-dot-io</id>
-    <content type="html"><![CDATA[<p>自分でblogを管理するのがちょっとだけ面倒になってきたので、
-このblogを<a href="katsyoshi.github.io">github.io</a>に移行した。</p>
-
-<h2>手順</h2>
-
-<p>github.com に <code>katsyoshi.github.io</code> というリポジトリを作成し、以下のコマンドを実行</p>
-
-<p><code>sh
-$ rake setup_github_pages
-set your github repogitory
-$ rake generate
-$ rake deploy
-</code></p>
-
-<p>そのあと、DNSでCNAMEに <code>katsyoshi.github.io</code> を設定し、リポジトリ<del>のトップ</del>に <code>blog.katsyoshi.org</code> と書いた <code>source/CNAME</code> ファイルを追加しおわりです。</p>
-
-<h2>おわり</h2>
-
-<p>おわり</p>
-
-<h2>追記</h2>
-
-<p>実は記事を追加したあと <code>rake deploy</code> ができないという問題がありましたが、そのときは、</p>
-
-<p><code>sh
-$ rake generate
-$ cd _deploy
-$ git pull origin/master
-$ cd ../
-$ rake deploy
-</code></p>
-
-<p>で更新されます。</p>
-
-<h3>参考サイト</h3>
-
-<ol>
-<li><a href="http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/">http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/</a></li>
-<li><a href="http://blog.textfile.org/20141014/github/">http://blog.textfile.org/20141014/github/</a></li>
-<li><a href="http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress">http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress</a></li>
-<li><a href="http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/">http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/</a></li>
 </ol>
 
 ]]></content>
