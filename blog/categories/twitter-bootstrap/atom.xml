@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Twitter-bootstrap | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/twitter-bootstrap/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-04-09T18:14:59+09:00</updated>
+  <updated>2015-04-09T18:19:23+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -28,7 +28,7 @@
 
 <p>まず、<code>Gemfile</code> に以下のように追記をします。</p>
 
-<p><code>
+<p><code>ruby
 source 'https://rails-assets.org' do
   gem 'rails-asstes-bootstrap-sass-official'
 end

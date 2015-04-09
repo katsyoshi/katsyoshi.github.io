@@ -118,12 +118,13 @@
 
 <p>まず、<code>Gemfile</code> に以下のように追記をします。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>source 'https://rails-assets.org' do
-</span><span class='line'>  gem 'rails-asstes-bootstrap-sass-official'
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s1">&#39;https://rails-assets.org&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;rails-asstes-bootstrap-sass-official&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>あとはいつも通りにインストールします。
@@ -133,8 +134,9 @@
 
 <p>以上の設定が終ったあと、 <code>cucumber</code> でテストを実行すると、</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>File to import not found or unreadable: bootstrap-sass-official/bootstrap-sprockets.</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">File</span> <span class="n">to</span> <span class="n">import</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">or</span> <span class="ss">unreadable</span><span class="p">:</span> <span class="n">bootstrap</span><span class="o">-</span><span class="n">sass</span><span class="o">-</span><span class="n">official</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">sprockets</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>などといわれますのでオチを参考にファイル名変更して終了です。</p>
