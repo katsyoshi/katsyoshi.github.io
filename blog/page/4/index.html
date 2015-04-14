@@ -9,7 +9,8 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="Jubatus Handson行ってきました 行ってきました。 fluent-plugin-jubatus 0.0.2をリリースしました 先日大江戸Ruby会議04に行ってみたらやる気が湧いてきたので半年ほど寝かせておいたfluent-plugin-jubatusをアップデートしました。 &hellip;">
+  <meta name="description" content="最近話題のDocker使ってJubatusを動かしてみたのでメモ的なものを 環境 環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作 Vagrant: 1.5.4
+docker: 0.11.1 Dockerfile &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +80,69 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/12/jubatus-runs-on-docker/">JubatusをDocker上で動かしてみた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-12T23:50:33+09:00" pubdate data-updated="true">May 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近話題の<a href="https://www.docker.io/">Docker</a>使ってJubatusを動かしてみたのでメモ的なものを</p>
+
+<h2>環境</h2>
+
+<p>環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作</p>
+
+<ul>
+<li>Vagrant: 1.5.4</li>
+<li>docker: 0.11.1</li>
+</ul>
+
+
+<h2>Dockerfile</h2>
+
+<p><a href="https://github.com/katsyoshi/docker-jubatus">リポジトリ</a>を作成しておきましたのでcloneして実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/katsyoshi/docker-jubatus
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>docker-jubatus
+</span><span class='line'><span class="nv">$ </span>docker build .
+</span><span class='line'><span class="nv">$ </span>docker run -p 9199:9199 最後に出てきたハッシュ値
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で動きはじめます。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -714,6 +778,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/15/looks-good-new-machine/">おにゅーな</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/09/file-name-needs-scss-extention/">ファイル名間違えてテスト通らなかった話</a>
       </li>
     
@@ -727,10 +795,6 @@
     
       <li class="post">
         <a href="/blog/2015/03/18/party-of-asakusa-dot-rb-300th/">Asakusa.rbの300回記念パーティに行ってきた</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/17/heroku-deploy-anther-branch/">Herokuでmaster以外のブランチを利用してデプロイする方法</a>
       </li>
     
   </ul>
