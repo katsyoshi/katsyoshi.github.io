@@ -126,6 +126,21 @@ Linuxで使ってみた。</p>
 <p>VSC使ってみたけど、日本語表示がされない。
 <img src="/images/screenshot/vsc_japanese.png" alt="" /></p>
 
+<p><em>追記</em>
+フォントを変更すると表示できるようになりました。</p>
+
+<p><code>File -&gt; Preferences -&gt; User Settings</code> から、 <code>settings.json</code> を開き、
+以下のように追加する</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;editor.fontFamily&quot;</span><span class="p">:</span> <span class="s2">&quot;Ricty&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <p>デバッガ動かすためにMONOが必要。
 <img src="/images/screenshot/vsc_debugger_needed_mono.png" alt="" /></p>
 
