@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-04-30T13:38:29+09:00</updated>
+  <updated>2015-04-30T13:43:32+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -35,7 +35,8 @@ Linuxで使ってみた。</p>
 <p>VSC使ってみたけど、日本語表示がされない。
 <img src="http://blog.katsyoshi.org/images/screenshot/vsc_japanese.png" alt="" /></p>
 
-<p>デバッガ動かすためにMONOが必要。</p>
+<p>デバッガ動かすためにMONOが必要。
+<img src="http://blog.katsyoshi.org/images/screenshot/vsc_debugger_needed_mono.png" alt="" /></p>
 
 <p>などあります。</p>
 
