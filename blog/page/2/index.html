@@ -9,10 +9,8 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="普段、emacs上でフォントを Ricty にして使ってたけど、微妙にずれるのを解消できなかったはなし 症状と設定 Rictyのときの症状と設定をのせておきます。 1
-2
-3
-(set-face-attribute &#39;default nil :family &quot;Ricty&quot &hellip;">
+  <meta name="description" content="ibus-1.5からあまり評判がよろしくない(特に不満はない)ので、あたらしくfcitxを導入してみた。 前提条件 ここではGentoo/Linuxでの導入方法について述べています。
+日本語変換エンジンとしてMozcについて述べています。 導入 とりあえずfcitxをインストール、設定します。 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +80,96 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/12/remove-ibus/">とりあえずibusやめてみた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-12T07:10:29+09:00" pubdate data-updated="true">Feb 12<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
+
+<h2>前提条件</h2>
+
+<p>ここでは<a href="http://www.gentoo.org">Gentoo/Linux</a>での導入方法について述べています。
+日本語変換エンジンとしてMozcについて述べています。</p>
+
+<h2>導入</h2>
+
+<p>とりあえずfcitxをインストール、設定します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>emerge -av fcitx
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ $EDITOR</span> .xinitrc
+</span><span class='line'>
+</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'>fcitx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでインストールはこれでおわりです。</p>
+
+<h2>fcitxでmozc</h2>
+
+<p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ $EDITOR</span> /etc/portage/make.conf
+</span><span class='line'><span class="nv">USE</span><span class="o">=</span><span class="s2">&quot;fcitx ${USE}&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>sudo emerge -av mozc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、インストールすれば使えるようになります。</p>
+
+<h2>おわり</h2>
+
+<p><a href="http://anond.hatelabo.jp/20150210030728">こういうの</a>があったので、真面目にかこうかと思ったんですがどめんどうなので導入メモになりました。</p>
+
+<p>あと引越ししたので贈っていただいてもいいんですよ？
+<a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -764,77 +852,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/12/jubatus-in-gentoo/">Gentoo LinuxむけのJubatusパッケージ書いたよ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-12T12:29:20+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">PC</a>を<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">買い替えた</a>ので<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">環境構築</a>してます。
-<a href="https://github.com/kazuki/overlay/tree/master/sci-calculators/jubatus">Jubatusのoverlay</a>があったのですが、古かったので新しく<a href="https://github.com/katsyoshi/overlay">Jubatusのoverlay</a>作成しました。</p>
-
-<h2>インストール</h2>
-
-<p>これは、以下のコマンドでインストールができます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># curl https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml &gt; /etc/layman/overlays/katsyoshi.xml</span>
-</span><span class='line'><span class="c"># layman -f -a katsyoshi</span>
-</span><span class='line'><span class="c"># eix-sync</span>
-</span><span class='line'><span class="c"># emerge -av jubatus</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でいけるとおもいます。</p>
-
-<h2>未実装</h2>
-
-<ul>
-<li>jubatus_coreのオプションがはたらいてない(ハズ)</li>
-<li>jubatus_msgpack-rpcの依存パッケージにdev-libs/msgpackをいれていない</li>
-<li>jubatusのオプションを確認していない</li>
-</ul>
-
-
-<p>などなどあるので、PRまってます。</p>
-
-<h2>まとめ</h2>
-
-<p><a href="https://github.com/kazuki/overlay/">よくみたら</a>必要なライブラリのパッケージもあったのでこれのバージョンとjubatus_core追加するだけでよかったかも。</p>
-
-<p>ちゃんちゃん</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -852,6 +869,10 @@ RubyChallengeはコミッタでも間違えててむずかしい。
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/30/use-visual-studio-code/">Visual Studio Codeを使ってみた</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/15/looks-good-new-machine/">おにゅーな</a>
       </li>
     
@@ -865,10 +886,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
     
       <li class="post">
         <a href="/blog/2015/04/06/careless-miss/">不注意なこと</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/18/party-of-asakusa-dot-rb-300th/">Asakusa.rbの300回記念パーティに行ってきた</a>
       </li>
     
   </ul>

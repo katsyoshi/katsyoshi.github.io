@@ -9,9 +9,10 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="以前買ったX240があまりにも使い辛いので
-X250を買った。それ以外にもメガネも一つ買ってみた。 あと欲しいのは、ルンバかなあ
-">
+  <meta name="description" content="Visual Studio Codeというものがでたので普段利用している
+Linuxで使ってみた。 インストール は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
+以下のコマンドで実行できます 1
+$ ./Code 感想 VSC使ってみたけど、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +82,63 @@ X250を買った。それ以外にもメガネも一つ買ってみた。 あと
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/30/use-visual-studio-code/">Visual Studio Codeを使ってみた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-30T13:09:55+09:00" pubdate data-updated="true">Apr 30<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://code.visualstudio.com/">Visual Studio Code</a>というものがでたので普段利用している
+Linuxで使ってみた。</p>
+
+<h2>インストール</h2>
+
+<p>は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
+以下のコマンドで実行できます</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./Code</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>感想</h2>
+
+<p>VSC使ってみたけど、日本語表示がされない。
+<img src="/images/screenshot/vsc_japanese.png" alt="" /></p>
+
+<p>デバッガ動かすためにMONOが必要。</p>
+
+<p>などあります。</p>
+
+<p>そのうちなにかこれで書くかなぁ。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -603,96 +661,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/12/remove-ibus/">とりあえずibusやめてみた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-02-12T07:10:29+09:00" pubdate data-updated="true">Feb 12<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
-
-<h2>前提条件</h2>
-
-<p>ここでは<a href="http://www.gentoo.org">Gentoo/Linux</a>での導入方法について述べています。
-日本語変換エンジンとしてMozcについて述べています。</p>
-
-<h2>導入</h2>
-
-<p>とりあえずfcitxをインストール、設定します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>emerge -av fcitx
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ $EDITOR</span> .xinitrc
-</span><span class='line'>
-</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'>fcitx
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでインストールはこれでおわりです。</p>
-
-<h2>fcitxでmozc</h2>
-
-<p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ $EDITOR</span> /etc/portage/make.conf
-</span><span class='line'><span class="nv">USE</span><span class="o">=</span><span class="s2">&quot;fcitx ${USE}&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ </span>sudo emerge -av mozc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で、インストールすれば使えるようになります。</p>
-
-<h2>おわり</h2>
-
-<p><a href="http://anond.hatelabo.jp/20150210030728">こういうの</a>があったので、真面目にかこうかと思ったんですがどめんどうなので導入メモになりました。</p>
-
-<p>あと引越ししたので贈っていただいてもいいんですよ？
-<a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -708,6 +676,10 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/30/use-visual-studio-code/">Visual Studio Codeを使ってみた</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/15/looks-good-new-machine/">おにゅーな</a>
       </li>
     
@@ -721,10 +693,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
     
       <li class="post">
         <a href="/blog/2015/04/06/careless-miss/">不注意なこと</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/18/party-of-asakusa-dot-rb-300th/">Asakusa.rbの300回記念パーティに行ってきた</a>
       </li>
     
   </ul>

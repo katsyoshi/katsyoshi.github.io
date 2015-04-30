@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-04-15T01:24:43+09:00</updated>
+  <updated>2015-04-30T13:31:46+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Visual Studio Codeを使ってみた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/04/30/use-visual-studio-code/"/>
+    <updated>2015-04-30T13:09:55+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/04/30/use-visual-studio-code</id>
+    <content type="html"><![CDATA[<p><a href="https://code.visualstudio.com/">Visual Studio Code</a>というものがでたので普段利用している
+Linuxで使ってみた。</p>
+
+<h2>インストール</h2>
+
+<p>は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
+以下のコマンドで実行できます</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./Code</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>感想</h2>
+
+<p>VSC使ってみたけど、日本語表示がされない。
+<img src="http://blog.katsyoshi.org/images/screenshot/vsc_japanese.png" alt="" /></p>
+
+<p>デバッガ動かすためにMONOが必要。</p>
+
+<p>などあります。</p>
+
+<p>そのうちなにかこれで書くかなぁ。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[おにゅーな]]></title>
@@ -789,50 +819,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 
 <p>ということで名古屋から新宿まで塩尻を経由して鈍行の中央線を走破しました。
 おわり。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gentoo LinuxむけのJubatusパッケージ書いたよ]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2014/09/12/jubatus-in-gentoo/"/>
-    <updated>2014-09-12T12:29:20+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2014/09/12/jubatus-in-gentoo</id>
-    <content type="html"><![CDATA[<p><a href="http://blog.katsyoshi.org/blog/2014/08/20/gentoo-install-battle-part-i/">PC</a>を<a href="http://blog.katsyoshi.org/blog/2014/08/21/gentoo-install-battle-part-ii/">買い替えた</a>ので<a href="http://blog.katsyoshi.org/blog/2014/08/31/gentoo-install-battle-part-iii/">環境構築</a>してます。
-<a href="https://github.com/kazuki/overlay/tree/master/sci-calculators/jubatus">Jubatusのoverlay</a>があったのですが、古かったので新しく<a href="https://github.com/katsyoshi/overlay">Jubatusのoverlay</a>作成しました。</p>
-
-<h2>インストール</h2>
-
-<p>これは、以下のコマンドでインストールができます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># curl https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml &gt; /etc/layman/overlays/katsyoshi.xml</span>
-</span><span class='line'><span class="c"># layman -f -a katsyoshi</span>
-</span><span class='line'><span class="c"># eix-sync</span>
-</span><span class='line'><span class="c"># emerge -av jubatus</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でいけるとおもいます。</p>
-
-<h2>未実装</h2>
-
-<ul>
-<li>jubatus_coreのオプションがはたらいてない(ハズ)</li>
-<li>jubatus_msgpack-rpcの依存パッケージにdev-libs/msgpackをいれていない</li>
-<li>jubatusのオプションを確認していない</li>
-</ul>
-
-
-<p>などなどあるので、PRまってます。</p>
-
-<h2>まとめ</h2>
-
-<p><a href="https://github.com/kazuki/overlay/">よくみたら</a>必要なライブラリのパッケージもあったのでこれのバージョンとjubatus_core追加するだけでよかったかも。</p>
-
-<p>ちゃんちゃん</p>
 ]]></content>
   </entry>
   
