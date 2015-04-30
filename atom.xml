@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-04-30T14:30:14+09:00</updated>
+  <updated>2015-04-30T14:31:29+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -37,8 +37,9 @@ Linuxで使ってみた。</p>
 
 <p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/screenshot/vsc_japanese.png" alt="" /></p>
 
-<p><em>追記</em>
-フォントを変更すると表示できるようになりました。</p>
+<p><em>追記</em></p>
+
+<p>フォントを変更すると表示できるようになりました。</p>
 
 <p><code>File -&gt; Preferences -&gt; User Settings</code> から、 <code>settings.json</code> を開き、
 以下のように追加する</p>
@@ -52,9 +53,9 @@ Linuxで使ってみた。</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><em>追記おわり</em></p>
-
 <p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/screenshot/vsc_settings.png" alt="" /></p>
+
+<p><em>追記おわり</em></p>
 
 <p>デバッガ動かすためにMONOが必要。</p>
 
