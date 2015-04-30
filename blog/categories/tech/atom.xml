@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-04-30T13:44:22+09:00</updated>
+  <updated>2015-04-30T13:49:20+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -26,7 +26,7 @@ Linuxで使ってみた。</p>
 <p>は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
 以下のコマンドで実行できます</p>
 
-<p><code>
+<p><code>sh
 $ ./Code
 </code></p>
 

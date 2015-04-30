@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-04-30T13:44:22+09:00</updated>
+  <updated>2015-04-30T13:49:20+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -26,8 +26,9 @@ Linuxで使ってみた。</p>
 <p>は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
 以下のコマンドで実行できます</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./Code</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>./Code
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>感想</h2>
@@ -768,7 +769,7 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 
 <p>土曜日の夜７時東京出発で夜９時半ころに三島に着き、三島の友人とカレー食べた。</p>
 
-<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/photo/mishima-curry.png%20=%20512x" alt="カレー" /></p>
+<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/photo/mishima-curry.png" width="512" alt="カレー" /></p>
 
 <p>泊まるとこ決めてないので名古屋まで連れてきてもらって、
 ぷらぷらして泊まるところを探してた。
@@ -804,7 +805,7 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 <p>温泉へはとくになにもなく無事に辿りつけました。
 温泉では、入湯以外に昼食もとれるということで、昼食も一緒にとることにしました。
 温泉自体は、眺めが非常によく、天気も大変よく、開放的な気分になりました。
-&ndash;> <img src="http://blog.katsyoshi.org/images/photo/gake-no-yu-akanejuku-nagame.png%20=%20512x" alt="崖の湯" /> &lt;&ndash;</p>
+&ndash;> <img src="http://blog.katsyoshi.org/images/photo/gake-no-yu-akanejuku-nagame.png" width="512" alt="崖の湯" /> &lt;&ndash;</p>
 
 <p>温泉の温度がちょっと低かったのが残念かなという程度で、よかったです。
 温泉あがってから昼食で、天ざるそばを食べたのですが、そばは美味しかったです。</p>
@@ -813,7 +814,7 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 松本城は、石垣の改修中とさらに、三連休の中日ということもあり、入るのに1時間、
 見学1時間という案内がでてたので、外から眺めるだけにしました。
 観光はこれぐらいにして帰ることにしましたが、渋滞が多く結構時間がかかりました。
-&ndash;> <img src="http://blog.katsyoshi.org/images/photo/matsumoto-jo-casle-info.png%20=%20512x" alt="松本城" /> &lt;&ndash;</p>
+&ndash;> <img src="http://blog.katsyoshi.org/images/photo/matsumoto-jo-casle-info.png" width="512" alt="松本城" /> &lt;&ndash;</p>
 
 <p>最後に八王子によって夕飯を食べ、ておくれたと思わせつつも無事帰りつくことができました~。
 塩尻17時前出発して、21時前に八王子に到着しました。</p>
