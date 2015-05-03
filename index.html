@@ -9,10 +9,10 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="Visual Studio Codeというものがでたので普段利用している
-Linuxで使ってみた。 インストール は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
-以下のコマンドで実行できます 1
-$ ./Code 感想 VSC使ってみたけど、 &hellip;">
+  <meta name="description" content="UbuntuにSoftEtherを導入してみた。 マシン構成 1
+2
+OS: Ubuntu Linux 14.4.0.2 LTS
+Machine: SakuraVPS 1GBプラン インストール ここを参考にインストール、設定すればいけます。 嵌ったところ nginx で ssl 動かしてた。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +82,72 @@ $ ./Code 感想 VSC使ってみたけど、 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/03/softether/">Softether</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-03T16:28:42+09:00" pubdate data-updated="true">May 3<span>rd</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ubuntuに<a href="https://www.softether.jp/">SoftEther</a>を導入してみた。</p>
+
+<h2>マシン構成</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>OS: Ubuntu Linux 14.4.0.2 LTS
+</span><span class='line'>Machine: SakuraVPS 1GBプラン</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>インストール</h2>
+
+<p><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">ここ</a>を参考にインストール、設定すればいけます。</p>
+
+<h3>嵌ったところ</h3>
+
+<p><code>nginx</code> で <code>ssl</code> 動かしてた。</p>
+
+<p>設定ができなかったが <code>sudo service nginx stop</code> として、 <code>nginx</code> を止めたあと、 <code>sudo vpncmd</code> とすれば設定できます。</p>
+
+<h2>おわり</h2>
+
+<p>自作のRailsアプリCIを自宅で動かそうと思ってVPN導入してみたが、一人で開発してるしCIに問題がない限り必要ないというのを構築したあと気が付いた。</p>
+
+<h3>参考</h3>
+
+<ol>
+<li><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">http://qiita.com/Makotonton/items/18683a9f1e846433c035</a></li>
+<li><a href="https://www.softether.jp/">https://www.softether.jp/</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -640,55 +706,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/16/setting-xdg-open/">XDGの設定</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-02-16T18:03:16+09:00" pubdate data-updated="true">Feb 16<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>急に <code>xdg-open</code> でブラウザが開かなくなったのでメモ</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>xdg-mime default google-chrome.desktop x-scheme-handler/http
-</span><span class='line'><span class="nv">$ </span>xdg-mime default google-chrome.desktop x-scheme-handler/https
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で設定できます。</p>
-
-<h3>参考</h3>
-
-<p>&lsquo;xdg-open&rsquo;, archlinux wiki, <a href="https://wiki.archlinux.org/index.php/xdg-open,">https://wiki.archlinux.org/index.php/xdg-open,</a> 2015/02/16</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -704,6 +721,10 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/03/softether/">Softether</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/30/use-visual-studio-code/">Visual Studio Codeを使ってみた</a>
       </li>
     
@@ -717,10 +738,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
     
       <li class="post">
         <a href="/blog/2015/04/07/many-ssh-connection/">Known_hostsに載っていないホストに接続確認しないようにする</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/06/careless-miss/">不注意なこと</a>
       </li>
     
   </ul>

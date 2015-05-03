@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-04-30T14:31:29+09:00</updated>
+  <updated>2015-05-03T19:27:15+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Softether]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/05/03/softether/"/>
+    <updated>2015-05-03T16:28:42+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/05/03/softether</id>
+    <content type="html"><![CDATA[<p>Ubuntuに<a href="https://www.softether.jp/">SoftEther</a>を導入してみた。</p>
+
+<h2>マシン構成</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>OS: Ubuntu Linux 14.4.0.2 LTS
+</span><span class='line'>Machine: SakuraVPS 1GBプラン</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>インストール</h2>
+
+<p><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">ここ</a>を参考にインストール、設定すればいけます。</p>
+
+<h3>嵌ったところ</h3>
+
+<p><code>nginx</code> で <code>ssl</code> 動かしてた。</p>
+
+<p>設定ができなかったが <code>sudo service nginx stop</code> として、 <code>nginx</code> を止めたあと、 <code>sudo vpncmd</code> とすれば設定できます。</p>
+
+<h2>おわり</h2>
+
+<p>自作のRailsアプリCIを自宅で動かそうと思ってVPN導入してみたが、一人で開発してるしCIに問題がない限り必要ないというのを構築したあと気が付いた。</p>
+
+<h3>参考</h3>
+
+<ol>
+<li><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">http://qiita.com/Makotonton/items/18683a9f1e846433c035</a></li>
+<li><a href="https://www.softether.jp/">https://www.softether.jp/</a></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Visual Studio Codeを使ってみた]]></title>
@@ -783,72 +822,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 <h2>おわり</h2>
 
 <p>RubyKaigi2014行ってきました。この3日間非常に楽しく過ごせました。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[なごや、ながのに行ってきた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2014/09/15/went-to-nagoya-and-nagano/"/>
-    <updated>2014-09-15T16:33:45+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2014/09/15/went-to-nagoya-and-nagano</id>
-    <content type="html"><![CDATA[<p>友人が車で田舎に帰るということなので勢いで名古屋に連れてきてもらった。</p>
-
-<p>土曜日の夜７時東京出発で夜９時半ころに三島に着き、三島の友人とカレー食べた。</p>
-
-<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/photo/mishima-curry.png" width="512" alt="カレー" /></p>
-
-<p>泊まるとこ決めてないので名古屋まで連れてきてもらって、
-ぷらぷらして泊まるところを探してた。
-三連休の初日のためかネカフェがどこもいっぱいでしかたないので
-カラオケで一泊。</p>
-
-<p>が、実は寝れてなかったです。３０分ほど目を閉じてました。
-ので、退出時間に退出し、名古屋駅６時１２分発の中津川行きに乗り込み、
-中津川乗り換えの塩沢を目指しました。
-ここではなにごともなく乗り換えることができました。
-乗り換えたあとに目の前に座った女の子がかわいかったです。</p>
-
-<p>電車の中で温泉宿に行こうと、募集したら神のようなかたが、</p>
-
-<blockquote class="twitter-tweet" lang="ja"><p><a href="https://twitter.com/katsyoshi">@katsyoshi</a> このあたりからどうぞ。<a href="http://t.co/EEEEXKlTpE">http://t.co/EEEEXKlTpE</a></p>&mdash; 月白（I, bot）瑠璃 (@TsukishiroRuri) <a href="https://twitter.com/TsukishiroRuri/status/510889560532717568">September 13, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>ということだったので、ここの二位だった、<a href="http://www.akanejyku.com">茜宿</a>に行くことにしました。</p>
-
-<p>とはいえぶらりのーぷらんで塩尻に来ているので、どうやって行けばいいのか
-わからないのです。出発前のコミュニティバスの運転手さんに話を聞いたりしたり、
-また、タクシーの料金表があったので、それを見たら、片道4000円弱かかる
-ことがわかったので、レンタカーを借りることにしました。
-ペーパーの状態だったのに、この判断した俺は寝不足の勢いだけだったなと。</p>
-
-<p>借りた車に乗ってすぐに向かうところでしたが、下着をもってきてないことを思いだしたので、
-近くにスーパーマーケットらしきものを発見しすぐに行きました。
-下着類を調達したのでいざ温泉へ。</p>
-
-<p>温泉へはとくになにもなく無事に辿りつけました。
-温泉では、入湯以外に昼食もとれるということで、昼食も一緒にとることにしました。
-温泉自体は、眺めが非常によく、天気も大変よく、開放的な気分になりました。</p>
-
-<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/photo/gake-no-yu-akanejuku-nagame.png" width="512" alt="崖の湯" /></p>
-
-<p>温泉の温度がちょっと低かったのが残念かなという程度で、よかったです。
-温泉あがってから昼食で、天ざるそばを食べたのですが、そばは美味しかったです。</p>
-
-<p>温泉の後は、折角車があるのだし、まだ行ったことのない松本城に行くことにしました。
-松本城は、石垣の改修中とさらに、三連休の中日ということもあり、入るのに1時間、
-見学1時間という案内がでてたので、外から眺めるだけにしました。
-観光はこれぐらいにして帰ることにしましたが、渋滞が多く結構時間がかかりました。</p>
-
-<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/photo/matsumoto-jo-casle-info.png" width="512" alt="松本城" /></p>
-
-<p>最後に八王子によって夕飯を食べ、ておくれたと思わせつつも無事帰りつくことができました~。
-塩尻17時前出発して、21時前に八王子に到着しました。</p>
-
-<p>ということで名古屋から新宿まで塩尻を経由して鈍行の中央線を走破しました。
-おわり。</p>
 ]]></content>
   </entry>
   
