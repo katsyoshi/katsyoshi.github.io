@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-05-03T19:27:15+09:00</updated>
+  <updated>2015-05-10T11:10:48+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[バイバイX240]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/05/10/shred-x240/"/>
+    <updated>2015-05-10T11:05:19+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/05/10/shred-x240</id>
+    <content type="html"><![CDATA[<p>新しく<a href="http://blog.katsyoshi.org/blog/2015/04/15/looks-good-new-machine/">X250</a>を買ったので、X240の中身を削除します。
+以下のコマンドでできるようです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo shred -n 3 -v /dev/sda
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Softether]]></title>
@@ -759,69 +774,6 @@ Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
 <p>再構築したカーネルをインストールしてなかったというオチでした。</p>
 
 <p>ちゃんちゃん</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RubyKaigi2014]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2014/09/22/rubykaigi2014/"/>
-    <updated>2014-09-22T19:10:00+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2014/09/22/rubykaigi2014</id>
-    <content type="html"><![CDATA[<p><a href="http://rubykaigi.org/2014">RubyKaigi2014</a>に行ってきました。
-聞いたもの一覧です。</p>
-
-<h2>1日目</h2>
-
-<ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-KoichiSasada">Building the Ruby interpreter &mdash; What is easy and what is difficult?</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-NarihiroNakamura">Symbol GC</a> <a href="http://www.slideshare.net/authorNari/symbol-gc">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ReiOdaira">Eliminating Giant VM Lock in Ruby through Hardware Transactional Memory</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-SzuKaiHsu">Cores unleashed Part II: Introduction to GobiesVM (and Software Transactional Memory)</a> <a href="https://speakerdeck.com/brucehsu/core-unleashed-part-ii-introduction-to-gobiesvm-and-stm-at-rubykaigi-2014">スライド</a></li>
-<li>Committers vs. the world</li>
-</ul>
-
-
-<p>初日は笹田さんのキーノートを聞いた。あとはなりさんのSymbolをGCする話、HTM、STMの話を聞いていた。
-SymbolをGCする話はいままでGCされないことを知らなかったので便利かなと。
-懇親会では、笹田さんと鳥井さんがペアルックだったので写真撮ったのですが、携帯のカメラアプリで保存できなかったのが心のこりです。</p>
-
-<h2>2日目</h2>
-
-<ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-YukihiroMatzMatsumoto">Comming soon&hellip;</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroIde">A Just in Time compiler for CRuby (CRuby言語処理系向けJITコンパイラ)</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ThiagoScalone-DanielRodriguez">MRuby as Development Platform for Payments</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-TakehikoYOSHIDA">Open the door of embedded systems to IoT! mruby on LEGO Mindstorms EV3®</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ShotaFukumori">Scalable deployments &ndash; How we deploy Rails app to 100+ hosts in a minute</a> <a href="https://speakerdeck.com/sorah/scalable-deployments-how-we-deploy-rails-app-to-150-plus-hosts-in-a-minute">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MATSUMOTORyosuke">Resource Control Architecture scripting with mruby for a Web Server Separating Computer Resources Virtually at Each HTTP Request</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroNakagawa">ServerEngine: a framework for multiprocess servers in Ruby</a> <a href="http://www.slideshare.net/treasure-data/rubykaigi-2014-serverengine">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/LT">Ligthting Talks</a></li>
-</ul>
-
-
-<p>RubyをJIT使って速くしようという話。福盛さんのデプロイを早くするのは面白かった。どこで利用できるのって話はおいておいて。
-松本(り)さんはこのtalkが切っ掛けで<a href="http://hb.matsumoto-r.jp/entry/2014/09/20/003531">就職決まった</a>ようです。LTも面白かったです。</p>
-
-<h2>3日目</h2>
-
-<ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-JonanScheffler">Everything is Broken: A Story of Hope</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-NaotoshiSeo">Fluentd Hacking Guide (Fluentd ソースコード完全解説)</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-PremSichanugrist">The Ruby Challenge</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasatoshiSEKI">Make your own synchronization mechanism.</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-KouheiSutou">Three Ruby usages &ndash; High-level interface, Glue and Embedding &ndash; Inside Droonga</a> <a href="http://speakerdeck.com/u/kou/p/three-ruby-usages">スライド</a></li>
-</ul>
-
-
-<p>3日目はゆっくり来てAaronとか聞こうかとおもってたけど、午前中はロビーでだらだらしすぎてなにもきいていないです。
-午後から、Jonanは2011の最後のRubyKaigiのときに会ってたので今こういうことやってるのだなーと。
-fluentdのプラグイン書いてるけど、なんとなく動いてるし、そのプラグインを利用してて特に問題なかったので、これがあってよかった。
-RubyChallengeはコミッタでも間違えててむずかしい。
-咳さんと須藤さんの話はすごくよかった。</p>
-
-<h2>おわり</h2>
-
-<p>RubyKaigi2014行ってきました。この3日間非常に楽しく過ごせました。</p>
 ]]></content>
   </entry>
   

@@ -9,9 +9,8 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="今日は昨日ビールを飲んだので、日本酒を飲みに行ってきた。 ほんとは、天麩羅食べたかったのだが、天麩羅もうなくなってたらしいので、
-日本酒とそばを食べた。そばを石臼で引いた。 親父さんが江戸っこらしく、「そこのしろいテーブルに座って」っていわれてなんだ？
-っておもったら、広いテーブルだった。 あと、 &hellip;">
+  <meta name="description" content="MacOS XでDockerを動かしてたら嵌ったのでメモ Docker on OS X OS XでもDockerが動かせるようになりました。
+インストールはこことかを参考にしてください。 で嵌ったところ Docker上で動いているアプリケーションとどうしても通信ができない。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/10/pitfall-in-boot2docker/">Docker on OS Xで嵌ったおはなし</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-10T19:52:53+09:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>MacOS XでDockerを動かしてたら嵌ったのでメモ</p>
+
+<h2>Docker on OS X</h2>
+
+<p>OS XでもDockerが<a href="http://docs.docker.com/installation/mac/">動かせるよう</a>になりました。
+インストールは<a href="http://dev.classmethod.jp/tool/docker/getting-started-docker-on-osx/">ここ</a>とかを参考にしてください。</p>
+
+<h2>で嵌ったところ</h2>
+
+<p>Docker上で動いているアプリケーションとどうしても通信ができない。どうやらDockerとアプリケーションは起動はしてるようなんだが、
+どうしても通信できないということがわかりました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ docker run -p 9199:9199 hogehoge
+</span><span class='line'>$ netstat -a | grep 9199</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でも見えない。なんでかなあと思ってたら<a href="https://github.com/dotcloud/docker/issues/4007">こんな</a>ことや<a href="http://k-shogo.github.io/article/2014/02/13/boot2docker-portforward/">こんな</a>ことがわかりました。</p>
+
+<h2>解決策</h2>
+
+<p>VirtualBoxからboot2docker-vmのポートフォワードを設定すればいいです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ netstat -a | grep 9199
+</span><span class='line'>tcp4       0      0  localhost.9199         *.*                    LISTEN</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちゃんちゃん。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -880,6 +945,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/10/shred-x240/">バイバイX240</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/03/softether/">Softether</a>
       </li>
     
@@ -893,10 +962,6 @@
     
       <li class="post">
         <a href="/blog/2015/04/09/file-name-needs-scss-extention/">ファイル名間違えてテスト通らなかった話</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/07/many-ssh-connection/">Known_hostsに載っていないホストに接続確認しないようにする</a>
       </li>
     
   </ul>

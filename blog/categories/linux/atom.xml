@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-05-03T19:27:15+09:00</updated>
+  <updated>2015-05-10T11:10:48+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[バイバイX240]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/05/10/shred-x240/"/>
+    <updated>2015-05-10T11:05:19+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/05/10/shred-x240</id>
+    <content type="html"><![CDATA[<p>新しく<a href="/blog/2015/04/15/looks-good-new-machine/">X250</a>を買ったので、X240の中身を削除します。
+以下のコマンドでできるようです。</p>
+
+<p><code>sh
+$ sudo shred -n 3 -v /dev/sda
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Emerge --syncをgitにかえたはなし]]></title>
@@ -172,58 +186,6 @@ USE=&ldquo;fcitx ${USE}&rdquo;</p>
 <p style="text-align:center;"> <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /></p>
 
 <p>ほんとにちょっとずれて気になる…</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Start Rust by Example]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/01/27/start-rust/"/>
-    <updated>2015-01-27T07:10:29+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/01/27/start-rust</id>
-    <content type="html"><![CDATA[<p>年ぁけたので、新しいプログラミング言語を覚えようと思い<a href="http://www.rust-lang.org">Rust Lang</a>を始めました。</p>
-
-<p>チュートリアルとして<a href="http://rustbyexample.com">Rust bye Example</a>を<a href="https://github.com/katsyoshi/rustbyexamle">やっていって</a>ます。</p>
-
-<h2>気が付いた点</h2>
-
-<p>Rustという言語は変更が多いらしいのでここでは、Chap.1-14(2015/01/25時点)までで気がついた点で書きます。 まず、今回環境を下に示します。</p>
-
-<p><code>sh
-$ rustc --version
-rustc 1.0.0-nightly (29bd9a06e 2015-01-20 23:03:09 +0000)
-</code></p>
-
-<h3>i &ndash;> is</h3>
-
-<p>まず、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/2.FormattedPrint/FormattedPrint.rs#L9">Chap. 2のコード</a>で<code>integer</code>のsuffixが<code>is</code>に変更されています。</p>
-
-<p><code>``sh
-FormattedPrint.rs:9:69: 9:71 warning: the</code>i<code>suffix on integers is deprecated; use</code>is` or one of the fixed-sized suffixes
-FormattedPrint.rs:9     println!(&ldquo;{} of {:b} people know binary, the other half don&rsquo;t&rdquo;, 1i, 2i);</p>
-
-<pre><code>                                                                                    ^~
-</code></pre>
-
-<p>```</p>
-
-<h3>range(a, b) –> (a..b)</h3>
-
-<p>つぎに、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/10.ForAndRange/ForAndRange.rs#L2">Chap. 10のコード</a>で<code>range(a, b)</code>がunstableになっているので<code>(a..b)</code>に変更しました。</p>
-
-<p>```sh
-ForAndRange.rs:2:14: 2:19 warning: use of unstable item: will be replaced by range notation, #[warn(unstable)] on by default
-ForAndRange.rs:2     for n in range(1u32, 101) {</p>
-
-<pre><code>                          ^~~~~
-</code></pre>
-
-<p>```</p>
-
-<h2>おわり</h2>
-
-<p>いま確認してたらそもそもRust by Example自体が変更されてた…</p>
-
-<p>ちゃんちゃん</p>
 ]]></content>
   </entry>
   
