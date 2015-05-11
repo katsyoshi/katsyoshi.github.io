@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-05-10T11:10:48+09:00</updated>
+  <updated>2015-05-11T22:00:42+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ゴールデンウィークのお買いもの]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/05/11/golden-weak/"/>
+    <updated>2015-05-11T21:38:35+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/05/11/golden-weak</id>
+    <content type="html"><![CDATA[<p>GWに勢い余って買いものしたのでそれを。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B00J5ZBVFY" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<p>Roomba買いました。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B00J5ZBVFY" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<p>机買いました。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B00G21MID8" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<p>Kinesis買いました。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B000EVPGTU" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B000P4D5F8" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<p>コーヒーセット買いました。</p>
+
+<p>もともと欲しかったのもあり、勢いで買ってしまいました。</p>
+
+<p>Roombaの方は炬燵をまだ出してるのもあり、動かしていないです。</p>
+
+<p>机は1ヶ月ほど前に椅子を買ったのもあり、買いました。
+足が短いので、椅子を低くしたいのですが、天板が高いので足置き場をつくってそこにのせています。
+それ以外の気になる点としては、角がちょっと痛いというぐらいで今のところ満足しています。</p>
+
+<p>Kinesisは以前仕事で週1日だけ使わせてもらったことがあったので、気に入ったのでそれで買いました。
+赤軸モデルを買ったのですが、カチカチ音がしないのでこれはこれでイイカンジです。</p>
+
+<p>コーヒーセットは、机がきてから買う予定で買いました。このドリッパ用の用紙を見付けるのが大変で、2時間ほど彷徨いました。</p>
+
+<p>これで欲しいものは大体そろったのですが、最近デスクトップPC欲しくなってきたんだよなぁ…</p>
+
+<p>もうしわけねぇ。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[おにゅーな]]></title>
@@ -133,59 +182,6 @@ $ rake deploy
 <li><a href="http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/">http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/</a></li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rictyやめるってよ]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/01/31/emacs-fonts/"/>
-    <updated>2015-01-31T07:10:29+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/01/31/emacs-fonts</id>
-    <content type="html"><![CDATA[<p>普段、emacs上でフォントを <code>Ricty</code> にして使ってたけど、微妙にずれるのを解消できなかったはなし</p>
-
-<h2>症状と設定</h2>
-
-<p>Rictyのときの症状と設定をのせておきます。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/Ricty.png" alt="Ricty" /></p>
-
-<p><code>scheme
-(set-face-attribute 'default nil :family "Ricty" :height 135)
-(set-fontset-font (frame-parameter nil 'font) 'japanese-jisx0208 '("Ricty" . "iso10646-1"))
-(setq face-font-rescale-alist '(("Ricty" . 1.2)))
-</code></p>
-
-<p>で解消できそうにないので DejaVu を用いて表示するように変更しました。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/DejaVu.png" alt="DejaVu" /></p>
-
-<p><code>scheme
-(set-face-attribute 'default nil :family "DejaVu" :height 135)
-</code></p>
-
-<p>こんな感じになりました。</p>
-
-<h2>おわり</h2>
-
-<p>よくわからないので諦めました。ので参考に</p>
-
-<p>最後に引っ越ししました。</p>
-
-<p><a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
-
-<h2>追記</h2>
-
-<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/katsyoshi">@katsyoshi</a> (setq face-font-rescale-alist &#39;((&quot;Ricty&quot; . 1.0))) で常用していてずれないのですが、これだとどうなりますか?</p>&mdash; つまみ (@polamjag) <a href="https://twitter.com/polamjag/status/561875516118949889">February 1, 2015</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>とアドバイスがありましたので、やってみました!!!!!!</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /></p>
-
-<p>ほんとにちょっとずれて気になる…</p>
 ]]></content>
   </entry>
   
