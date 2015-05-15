@@ -9,9 +9,9 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="portageはデフォルトだと rsync を利用しての更新をしているので、
-git を用いた方法に変更します。 準備 portage を 2.2.17 に変更し、USEフラグとして git をつかいます。 1
-# USE=&quot;git ${USE}&quot; emerge -av \= &hellip;">
+  <meta name="description" content="1
+$ git push heroku your-branch:master 参考 http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing
+http://qiita.com/pugiemonn/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,53 @@ git を用いた方法に変更します。 準備 portage を 2.2.17 に変更�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/17/heroku-deploy-anther-branch/">Herokuでmaster以外のブランチを利用してデプロイする方法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-17T12:08:17+09:00" pubdate data-updated="true">Mar 17<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git push heroku your-branch:master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>参考</h3>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing">http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing</a></li>
+<li><a href="http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7">http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -740,45 +787,6 @@ git を用いた方法に変更します。 準備 portage を 2.2.17 に変更�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/04/mikutter-advent-calendar/">Mikutter Advent Calendar</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-04T23:13:40+09:00" pubdate data-updated="true">Nov 4<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>寒くなりはじめましたね。今年も残すところあと二ヶ月ですね。
-先日、浅草浅草寺で、Ingressおじさんに声かけられてイライラしてます。</p>
-
-<p>そういうことで<a href="http://www.adventar.org/calendars/401">mikutterのAdventCalendar</a>を立てましたので参加してくだされ~</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -796,6 +804,10 @@ git を用いた方法に変更します。 準備 portage を 2.2.17 に変更�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/15/screencast-use-gif/">すくりーんきゃすと</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/11/golden-weak/">ゴールデンウィークのお買いもの</a>
       </li>
     
@@ -809,10 +821,6 @@ git を用いた方法に変更します。 準備 portage を 2.2.17 に変更�
     
       <li class="post">
         <a href="/blog/2015/04/30/use-visual-studio-code/">Visual Studio Codeを使ってみた</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/15/looks-good-new-machine/">おにゅーな</a>
       </li>
     
   </ul>
