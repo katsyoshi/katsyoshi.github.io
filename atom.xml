@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-05-16T00:21:15+09:00</updated>
+  <updated>2015-06-26T00:49:00+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Elasticsearchどの〜]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch/"/>
+    <updated>2015-06-26T00:26:10+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch</id>
+    <content type="html"><![CDATA[<p><a href="https://www.elastic.co/products/kibana">kibana</a> で表示しようとしてたら嵌ったのでメモ</p>
+
+<h2>嵌った原因</h2>
+
+<p>数字をElasticsearchに投げているつもりが文字列を投げていた。
+ので対処方法としては、 <code>fluent-plugin-typecast</code> を導入して終了。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;match</span> <span class="err">elasticsearch.**.*</span><span class="nt">&gt;</span>
+</span><span class='line'>  type typecast
+</span><span class='line'>  item_types value:float
+</span><span class='line'>  prefix typed
+</span><span class='line'><span class="nt">&lt;/match&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Elasticsearch</h2>
+
+<p><a href="https://www.fluentd.org">fluentd</a> で集めたデータを <a href="http://www.elasitc.co">Elasticsearch</a> に <a href="https://github.com/uken/fluent-plugin-elasticsearch">fluent-plugin-elastchsearch</a> を利用して入れます。設定は以下のようにします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;match</span> <span class="err">typed.elasticserch.**.*</span><span class="nt">&gt;</span>
+</span><span class='line'>  type elasticsearch
+</span><span class='line'>  type_name hoge
+</span><span class='line'>  host 127.0.0.1
+</span><span class='line'>  port 9200
+</span><span class='line'>  logstash_format true
+</span><span class='line'>  logstash_prefix logstash
+</span><span class='line'>  flash_interval 1s
+</span><span class='line'><span class="nt">&lt;/match&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h3>参考資料</h3>
+
+<ol>
+<li><a href="http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html">http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html</a></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[すくりーんきゃすと]]></title>
@@ -758,30 +822,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 <h2>おわり</h2>
 
 <p>おわりおわり。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Railsで空のテストファイルを削除]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2014/11/21/remove-empty-example-files/"/>
-    <updated>2014-11-21T16:07:38+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2014/11/21/remove-empty-example-files</id>
-    <content type="html"><![CDATA[<p>Ruby on RailsのプロジェクトでGit管理されているTestで空のテストファイルを
-削除するには以下のコマンドを利用することで削除できます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git grep -e it --or -e specify -L -- spec/<span class="o">{</span>model,controller<span class="o">}</span>s | xgrep git rm -f --
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>参考</h3>
-
-<ul>
-<li><a href="https://www.kernel.org/pub/software/scm/git/docs/git-grep.html">man git grep</a></li>
-<li><a href="http://qiita.com/tbaba/items/a67c8d79c6c4d0dc9b73">Git grepを便利に使う-eオプションについて</a></li>
-<li><a href="http://qiita.com/rosylilly/items/9648ad2c8aa53465372b">複数人での Git 開発に便利な 3 つのコマンド</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
