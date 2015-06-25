@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Fluentd | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/fluentd/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-05-16T00:21:15+09:00</updated>
+  <updated>2015-06-26T00:48:33+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Elasticsearchどの〜]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch/"/>
+    <updated>2015-06-26T00:26:10+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch</id>
+    <content type="html"><![CDATA[<p><a href="https://www.elastic.co/products/kibana">kibana</a> で表示しようとしてたら嵌ったのでメモ</p>
+
+<h2>嵌った原因</h2>
+
+<p>数字をElasticsearchに投げているつもりが文字列を投げていた。
+ので対処方法としては、 <code>fluent-plugin-typecast</code> を導入して終了。</p>
+
+<p><code>conf
+&lt;match elasticsearch.**.*&gt;
+  type typecast
+  item_types value:float
+  prefix typed
+&lt;/match&gt;
+</code></p>
+
+<h2>Elasticsearch</h2>
+
+<p><a href="https://www.fluentd.org">fluentd</a> で集めたデータを <a href="http://www.elasitc.co">Elasticsearch</a> に <a href="https://github.com/uken/fluent-plugin-elasticsearch">fluent-plugin-elastchsearch</a> を利用して入れます。設定は以下のようにします。</p>
+
+<p><code>conf
+&lt;match typed.elasticserch.**.*&gt;
+  type elasticsearch
+  type_name hoge
+  host 127.0.0.1
+  port 9200
+  logstash_format true
+  logstash_prefix logstash
+  flash_interval 1s
+&lt;/match&gt;
+</code></p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h3>参考資料</h3>
+
+<ol>
+<li><a href="http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html">http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html</a></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Good-bye Elasticsearch and Jenkins]]></title>
