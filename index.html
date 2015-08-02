@@ -9,13 +9,7 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="kibana で表示しようとしてたら嵌ったのでメモ 嵌った原因 数字をElasticsearchに投げているつもりが文字列を投げていた。
-ので対処方法としては、 fluent-plugin-typecast を導入して終了。 1
-2
-3
-4
-5
-&lt;match elasticsearch &hellip;">
+  <meta name="description" content="rbenv を itamae の プラグイン を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、httpsを指定できるようしてもらいました。 plenv と pyenv また、rbenv のプラグインを参考に plenv と &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +79,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/02/hello-itamae-plugins/">こんにちは、いたまえさん</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-02T21:33:46+09:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/sstephenson/rbenv">rbenv</a> を <a href="https://github.com/itamae-kitchen/itamae">itamae</a> の <a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv">プラグイン</a> を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、<a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv/pull/9">httpsを指定できる</a>ようしてもらいました。</p>
+
+<h2>plenv と pyenv</h2>
+
+<p>また、rbenv のプラグインを参考に <a href="https://github.com/katsyoshi/itamae-plugin-recipe-plenv">plenv</a> と <a href="https://github.com/katsyoshi/itamae-plugin-recipe-pyenv">pyenv</a> を作ってみました。</p>
+
+<p>これらふたつのプラグインはまだgemになっていないので、<code>Gemfile</code> に以下のように追加し、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-plenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-plenv&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-pyenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-pyenv&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>recipeとしては以下のようにしてください。</p>
+
+<figure class='code'><figcaption><span>recipe.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;pyenv::system&#39;</span>
+</span><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;plenv::system&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定例としては、rbenvのプラグインと同じように設定します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;plenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;5.22.0&quot;</span><span class="p">,</span> <span class="s2">&quot;5.20.2&quot;</span><span class="p">],</span>
+</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;5.22.0&quot;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nt">&quot;pyenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3.4.3&quot;</span><span class="p">,</span> <span class="s2">&quot;3.5.0b2&quot;</span><span class="p">],</span>
+</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;3.4.3&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -679,72 +762,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/06/careless-miss/">不注意なこと</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-04-06T22:25:28+09:00" pubdate data-updated="true">Apr 6<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Ubuntuで <code>lxc</code> を利用して、サーバを立ててたときに嵌ったこと</p>
-
-<h2>はじまり</h2>
-
-<p>Proxyを利用してインターネットに接続している。
-このネットワークとして <code>ping</code> はLAN内なら届くが、外(google.com)とかには出ない。
-設定がうまくいってるかどうかの確認する方法として、 <code>apt-get update</code> を利用して確認している。</p>
-
-<p>最初は、 <code>lxc</code> の設定がうまくいっていないと思いなんども見直してたりした。
-それでもWANの方に出ることができなかった。</p>
-
-<p>サーバのネットワーク設定がよくないと思ってなんども見直したけど、問題なさそう。
-最後に <code>sudo -i</code> で root にログインしたあと、 <code>apt-get update</code> したら、
-ダウンロードはじまり、次へ進むことができた。</p>
-
-<h2>原因</h2>
-
-<p>原因としては <code>sudo command</code> で実行しても <code>Defaults reset_env</code> で環境変数がリセットされてたようだった。
-ので、<code>Defaults keep_env+="PATH"</code> とか追加して解決した。</p>
-
-<h2>おわり</h2>
-
-<p>簡単なミスで3時間ほど時間を費したのでなんとかしたい。</p>
-
-<h3>参考URL</h3>
-
-<ol>
-<li><a href="http://www.maepachi.com/blog/entry?id=128">http://www.maepachi.com/blog/entry?id=128</a></li>
-<li><a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv</a></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -760,6 +777,10 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/02/hello-itamae-plugins/">こんにちは、いたまえさん</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/26/sir-elasticsearch/">Elasticsearchどの〜</a>
       </li>
     
@@ -773,10 +794,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
     
       <li class="post">
         <a href="/blog/2015/05/10/shred-x240/">バイバイX240</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/03/softether/">Softether</a>
       </li>
     
   </ul>

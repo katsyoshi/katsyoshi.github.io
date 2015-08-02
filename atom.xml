@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-06-26T00:49:00+09:00</updated>
+  <updated>2015-08-03T00:50:03+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[こんにちは、いたまえさん]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/08/02/hello-itamae-plugins/"/>
+    <updated>2015-08-02T21:33:46+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/08/02/hello-itamae-plugins</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/sstephenson/rbenv">rbenv</a> を <a href="https://github.com/itamae-kitchen/itamae">itamae</a> の <a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv">プラグイン</a> を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、<a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv/pull/9">httpsを指定できる</a>ようしてもらいました。</p>
+
+<h2>plenv と pyenv</h2>
+
+<p>また、rbenv のプラグインを参考に <a href="https://github.com/katsyoshi/itamae-plugin-recipe-plenv">plenv</a> と <a href="https://github.com/katsyoshi/itamae-plugin-recipe-pyenv">pyenv</a> を作ってみました。</p>
+
+<p>これらふたつのプラグインはまだgemになっていないので、<code>Gemfile</code> に以下のように追加し、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-plenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-plenv&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-pyenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-pyenv&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>recipeとしては以下のようにしてください。</p>
+
+<figure class='code'><figcaption><span>recipe.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;pyenv::system&#39;</span>
+</span><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;plenv::system&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定例としては、rbenvのプラグインと同じように設定します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;plenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;5.22.0&quot;</span><span class="p">,</span> <span class="s2">&quot;5.20.2&quot;</span><span class="p">],</span>
+</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;5.22.0&quot;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nt">&quot;pyenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3.4.3&quot;</span><span class="p">,</span> <span class="s2">&quot;3.5.0b2&quot;</span><span class="p">],</span>
+</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;3.4.3&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Elasticsearchどの〜]]></title>
@@ -793,35 +855,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
 <p>でいけますよ。
 が <code>$('#hello').text('hoge');</code> いかねぇ。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mikutter Advent Calendar 1日目]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2014/12/01/mikutter-advent-calendar-1-day/"/>
-    <updated>2014-12-01T23:59:59+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2014/12/01/mikutter-advent-calendar-1-day</id>
-    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendar/401">一日目</a>らしいですね。</p>
-
-<h2>今のmikutter環境</h2>
-
-<p>はGentoo/Linuxで動いています。</p>
-
-<p>よく考えてみたら今の環境になってLinuxでmikutterを使うのははじめてです。 Linuxになって一番感じたのインストールすごく楽になったことです。</p>
-
-<h2>今までのmikutter環境</h2>
-
-<p>今までMacで基本的に利用してたので苦労してた。 Macではとくにインストール、gemのupdateが大変でした。 Macでの環境では、HomebrewのGTK2のせいか、RubyGtk2がまともに動かないことが頻繁におこりました。 あと、最後まで解決できなかったのが特定の文字列がくるとクラッシュするというバグがありました。</p>
-
-<h2>mikutterとの出会い</h2>
-
-<p>出会いとしてはtwitterでTLを眺めてたら、@toshi_a って人がtwitterクライアントをつくってるらしいということで 取り敢えずFreeBSDでインストールしたのがはじめてだったとおもいます。 このときはFreeBSDでインストールして、X転送したものをMacで表示したとおもいます。</p>
-
-<p>それ以降はMacでインストールして、<a href="http://github.com/katsyoshi/fav">mikutterのプラグイン</a>を書いて公開したりしてました。</p>
-
-<h2>おわり</h2>
-
-<p>おわりおわり。</p>
 ]]></content>
   </entry>
   
