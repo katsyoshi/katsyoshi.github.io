@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-08-03T00:50:03+09:00</updated>
+  <updated>2015-08-25T04:16:49+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[YAPC::Asia 2015に参加しました(ボランティアスタッフとして)]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff/"/>
+    <updated>2015-08-25T02:42:48+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff</id>
+    <content type="html"><![CDATA[<p>YAPC::Asia 2015にボランティアスタッフとして参加してきました(申請時に公表しないでってしなのでYAPCのスッタフ一覧にはのってないです)。去年も参加しましたが聴講者として参加しました。</p>
+
+<h2>ボランティアスタッフに応募した理由</h2>
+
+<p>彼女ができるときいて応募しました。また、最後の YAPC::Asia と聞いていたので応募しないとなと思ったのがありました。他の理由としては NEET なのでというのもあります。発表者として参加できればよかったのですが、ネタが応募するには弱いなと思い見送りました。そういうこともありボランティアスタッフとして参加しました。</p>
+
+<h2>個人スポンサー</h2>
+
+<p>実は個人スポンサーもやっていましたが、ボランティアスタッフをやるため、個人スポンサーの分のチケットが余っていました。その分はとある人に譲りました。</p>
+
+<h2>0日目(前夜祭)</h2>
+
+<p>0日目は11時集合になっており、スタッフ作業としてノベルティの詰め込み作業と会場設営を行なっていました。</p>
+
+<p>前夜祭自体は初めてのスタッフ作業でしたので、会場係として設営などをしてました。</p>
+
+<h2>1日目</h2>
+
+<p>1日目は始めに作業としてラリーのセッション前、中で同時通訳のレシーバーを配ってました。その後D会場でずっとタイムキーパーをやっておりました。</p>
+
+<p>この日の印象に残ってるセッションとしては <a href="https://twitter.com/kazuho">@kazuhoさん</a> の <a href="http://yapcasia.org/2015/talk/show/dead6890-09b7-11e5-998a-67dc7d574c3a">HTTP/2時代のウェブサイト設計</a> で、 <code>HTTP2</code> になった理由、そのなかで <a href="https://github.com/h2o/h2o">h2o</a> が優れている点を丁寧に説明されてて、これはすぐに使わねばと思わせてくれた発表でした。</p>
+
+<p>この日は懇親会がありましたので、懇親会会場でうろうろしておりました。
+懇親会では、知り合いと話してたりしてました。最近、 <a href="https://github.com/itamae-kitchen/itamae">itamae</a> を触っているので、プラグインの話を <a href="https://twitter.com/k0kubun">@k0kubunさん</a> としてました。そのときは <code>pip</code> のリソースプラグイン作りたいとか言ったので <a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">今日作成</a> したのですが、よくかんがえてみると、 <code>cpan</code> のリソースプラグインの方が必要だったのを作成後に思い出しました。</p>
+
+<h2>2日目</h2>
+
+<p>2日目も1日目と同様にD会場で全セッションタイムキーパーやっておりました。</p>
+
+<p>印象に残ったセッションとしては、 <a href="https://github.com/kenjiskywalker">@kenjiskywalkerさん</a> の <a href="http://yapcasia.org/2015/talk/show/f2816038-10ec-11e5-89bf-d7f07d574c3a">我々はどのように冗長化を失敗したのか</a> 、 <a href="https://twitter.com/saiken3110">@saiken3110さん</a> の <a href="http://yapcasia.org/2015/talk/show/0af26fe4-0b7b-11e5-a29c-67dc7d574c3a">MySQLで2億件のシリアルデータと格闘したチューニングの話</a> 、 <a href="https://github.com/Jxck">@Jxckさん</a> の <a href="http://yapcasia.org/2015/talk/show/9e9ae188-fb20-11e4-9a97-8ab37d574c3a">HTTP2 時代の Web</a> がありました。</p>
+
+<p>最後に片づけをし、おわった後スタッフ数人とのみくいに行ってきました。そろそろ解散かなってときに、 twitter を眺めてたら、 <a href="https://twitter.com/Jxck_/status/635075234379399168">@Jxckさんが@t_wadaさんを誘ってる</a> を見つけて無理やり参加させて頂きました。</p>
+
+<p>帰りついたのは朝の4時ごろ(だったと思う)でした。</p>
+
+<h2>おわり</h2>
+
+<p>YAPC::Asia 2015 に参加してきました。23日の日曜日は疲れてたのでずっとぐったりしてました。
+楽しい3日間でした!!!!!11</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[こんにちは、いたまえさん]]></title>
@@ -786,75 +833,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 <p>いま確認してたらそもそもRust by Example自体が変更されてた…</p>
 
 <p>ちゃんちゃん</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby on RailsでTypeScriptを使ってみる]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/01/12/typescript-in-rails/"/>
-    <updated>2015-01-12T11:41:25+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/01/12/typescript-in-rails</id>
-    <content type="html"><![CDATA[<p>ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。</p>
-
-<h2>インストール</h2>
-
-<p>これは簡単で <code>Gemfile</code> に <code>typescript-rails</code> を追加すればいけます。ですが、<a href="http://stackoverflow.com/questions/28117786/why-am-i-not-able-to-compile-a-file-that-references-jquery-d-ts">jQueryがTypeScript v1.4以上しかサポートしていないようなので</a>それに対応したものも追加します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;typescript-src&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/typescript-src-ruby&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;typescript-rails&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>インストールはこれだけでOKです。</p>
-
-<h3>jQueryをつかう</h3>
-
-<p>TypeScriptでjQueryを使う場合、TypeScriptの型定義ファイルをインストールする必要があります。
-で、それを自力で作るのは大変なので、 <code>tsd</code> を利用してインストールします。</p>
-
-<h4>tsd をインストール</h4>
-
-<p><code>tsd</code> は <code>npm</code> でインストールできるので、それでインストールします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>npm install tsd -g
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でインストールできたので、この <code>tsd</code> を利用してjQueryの型定義ファイルをインストールします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tsd init
-</span><span class='line'><span class="nv">$ $EDITOR</span> tsd.json
-</span><span class='line'>  path: <span class="s2">&quot;app/assets/javascripts/typings&quot;</span>,
-</span><span class='line'>  bundle: <span class="s2">&quot;app/assets/javascripts/typings/tsd.d.ts&quot;</span>
-</span><span class='line'><span class="nv">$ </span>tsd query jquery -osa install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でjQueryを利用する準備は整いました。</p>
-
-<h2>TypeScriptを書いてみよう</h2>
-
-<p>コンソールに <code>hello, world!</code> を出すだけの例を示します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でいけますよ。
-が <code>$('#hello').text('hoge');</code> いかねぇ。</p>
 ]]></content>
   </entry>
   
