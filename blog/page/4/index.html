@@ -9,9 +9,9 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="ここにThinkPad X240があります。これの中身を Gentoo/Linux にします。 準備 準備として、Gentoo/LinuxのLiveCDを作成、Bootの設定を行います。 イメージ作成 まずLiveCDイメージをダウンロードしUSBフラッシュメモリにコピーします。 1
-2
-$ &hellip;">
+  <meta name="description" content="X240の準備は終ったので、インストールします。基本的にはこの流れです。 USBブート 作成したUSBメモリをX240に差して起動します。
+起動したら、まずパーティションの設定を行います。 1
+$ gpart /dev/sda で不要なパーティションを削除し、必要なパーティションを作成します。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,74 @@ $ &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">Gentoo Install Battle Part II</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-21T20:01:51+09:00" pubdate data-updated="true">Aug 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>X240の準備は終ったので、<a href="http://wiki.gentoo.org/wiki/Quick_install_guide">インストール</a>します。基本的にはこの流れです。</p>
+
+<h2>USBブート</h2>
+
+<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">作成したUSBメモリ</a>をX240に差して起動します。
+起動したら、まずパーティションの設定を行います。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gpart /dev/sda
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で不要なパーティションを削除し、必要なパーティションを作成します。</p>
+
+<h2>無線LAN</h2>
+
+<p>ネットワークを接続しますが、今回は無線LANを利用してインストールを行います。</p>
+
+<p>まず、どこか適当な位置に<a href="http://www.xmisao.com/2014/01/16/how-to-connect-wpa2-wireless-lan-using-wpa-supplicant.html">リンク先</a>のファイルを作成してください。</p>
+
+<p>次に以下のコマンドを実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>実行したら、接続されているのでATL + F2とかでコンソールの表示を変更してください。</p>
+
+<h2>おわり</h2>
+
+<p>有線のLANケーブルがなかったからはまった。
+続きは明日以降に…</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -699,67 +767,6 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus/">Jubatus Handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-21T23:45:43+09:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2><a href="http://connpass.com/event/5641/">Jubatus Handson</a>行ってきました</h2>
-
-<p>行ってきました。</p>
-
-<h2>fluent-plugin-jubatus 0.0.2をリリースしました</h2>
-
-<p>先日<a href="http://regional.rubykaigi.org/oedo04">大江戸Ruby会議04</a>に行ってみたらやる気が湧いてきたので半年ほど寝かせておいた<a href="http://rubygems.org/gems/fluent-plugin-jubatus">fluent-plugin-jubatus</a>をアップデートしました。</p>
-
-<p>大きな変更点としては、異常検知（jubaanomaly）をサポートするようになってます。</p>
-
-<h3>プラグインの今後</h3>
-
-<p>今回も入れなかったのですが、このプラグインでは未だ判定のみのサポートです。
-理由としては</p>
-
-<ul>
-<li>計算量</li>
-<li>メモリ</li>
-</ul>
-
-
-<p>のふたつがあげられます。計算量に関しては以前手元のMacで異常検出を動作させていたときマシンの動作がもっさりになるほどの計算量があったためです。メモリに関しては今のところ不安には感じてはいないですが、データ量(数)が巨大になったときどこまで必要なのかってのがよくわからない。という理由で積極的に導入していないです。</p>
-
-<p>これらを解消する方法としては忘却(<a href="https://github.com/jubatus/jubatus/tree/feature/unlearning">unlearning</a>)が考えられるのですが、じゃぁどの必要のないデータを忘却させるのって問題があります。</p>
-
-<p>とはいえ、そろそろ導入したいので<a href="https://github.com/katsyoshi/fluent-plugin-jubatus">pull req</a>まってます。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -777,6 +784,10 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/08/08/renewal-my-site/">RENEWAL MY SITE!!!</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff/">YAPC::Asia 2015に参加しました(ボランティアスタッフとして)</a>
       </li>
     
@@ -790,10 +801,6 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
     
       <li class="post">
         <a href="/blog/2015/05/15/screencast-use-gif/">すくりーんきゃすと</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/11/golden-weak/">ゴールデンウィークのお買いもの</a>
       </li>
     
   </ul>
@@ -830,7 +837,7 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - katsyoshi -
+  Copyright &copy; 2016 - katsyoshi -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

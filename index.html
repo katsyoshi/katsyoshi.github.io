@@ -9,7 +9,10 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="YAPC::Asia 2015にボランティアスタッフとして参加してきました(申請時に公表しないでってしなのでYAPCのスッタフ一覧にはのってないです)。去年も参加しましたが聴講者として参加しました。 ボランティアスタッフに応募した理由 彼女ができるときいて応募しました。また、最後の YAPC:: &hellip;">
+  <meta name="description" content="ってのは嘘ではないですが、嘘に近いです。
+実はおとといの土曜日に katsyoshi.org をのぞいたら、 nginx の初期ページが表示されたので
+とくにコンテンツはないですが、いそいでサイトの復旧をしました。
+が、もともとあったファイル置場を失念したため似た感じで再構築してました。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +82,175 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/08/renewal-my-site/">RENEWAL MY SITE!!!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-08T21:05:47+09:00" pubdate data-updated="true">Aug 8<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ってのは嘘ではないですが、嘘に近いです。
+実はおとといの土曜日に katsyoshi.org をのぞいたら、 <em>nginx</em> の初期ページが表示されたので
+とくにコンテンツはないですが、いそいでサイトの復旧をしました。
+が、もともとあったファイル置場を失念したため似た感じで再構築してました。
+再構築ついでにssl化、<code>nginx</code> から <code>h2o</code> へのWebサーバー変更しました。
+あと <code>systemd</code> でデーモン化とかも。</p>
+
+<h2>Let&rsquo;s Encrypt</h2>
+
+<p>リリースされてだいぶたつのですが、<a href="https://letsencrypt.org">Let&rsquo;s Encrypt</a>を利用してみました。
+Ubuntu Linux 16.04 では、簡単に導入できます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> sudo apt install letsencrypt
+</span><span class='line'><span class="gp">$</span> sudo letsencrypt certonly
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でいくつかの質問に答えればおわりです。
+ここで、戸惑った場面としては認証を受けたいサーバーの確認があるのですが、
+サーバーポート443を開ける<a href="https://letsencrypt.jp">必要があり</a>、1回失敗しました。</p>
+
+<h2>H2O</h2>
+
+<p>せっかくだし、<a href="https://h2o.examp1e.net/">H2O</a>を使おうと思います。
+インストールはかんたんでいかのようにすればokです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone h2o/h2o
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>h2o
+</span><span class='line'><span class="gp">$</span> cmake -DCMAKE_INSTALL_PREFIX_PATH<span class="o">=</span>/opt/local .
+</span><span class='line'><span class="gp">$</span> make <span class="o">&amp;&amp;</span> make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定は<a href="https://h2o.examp1e.net/configure/quick_start.html">ここ</a>と<a href="https://github.com/h2o/h2o/wiki/redirect-HTTP-to-HTTPS">ここ</a>を参考にして以下にしています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">user: www-data</span>
+</span><span class='line'><span class="go">hosts:</span>
+</span><span class='line'><span class="go">  &quot;katsyoshi.org:80&quot;:</span>
+</span><span class='line'><span class="go">    listen:</span>
+</span><span class='line'><span class="go">      port: 80</span>
+</span><span class='line'><span class="go">    paths:</span>
+</span><span class='line'><span class="go">      /:</span>
+</span><span class='line'><span class="go">        redirect: https://katsyoshi.org</span>
+</span><span class='line'><span class="go">hosts:</span>
+</span><span class='line'><span class="go">  &quot;katsyoshi.org:443&quot;:</span>
+</span><span class='line'><span class="go">    listen:</span>
+</span><span class='line'><span class="go">      port: 443</span>
+</span><span class='line'><span class="go">      ssl:</span>
+</span><span class='line'><span class="go">        certificate-file: /etc/letsencrypt/live/katsyoshi.org/fullchain.pem</span>
+</span><span class='line'><span class="go">        key-file: /etc/letsencrypt/live/katsyoshi.org/privkey.pem</span>
+</span><span class='line'><span class="go">    paths:</span>
+</span><span class='line'><span class="go">      /:</span>
+</span><span class='line'><span class="go">        file.dir: /opt/website/top</span>
+</span><span class='line'><span class="go">access-log: /var/log/h2o/access.log</span>
+</span><span class='line'><span class="go">error-log: /var/log/h2o/error.log</span>
+</span><span class='line'><span class="go">pid-file: /var/run/h2o.pid</span>
+</span><span class='line'><span class="go">http2-reprioritize-blocking-assets: ON</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2><a href="https://negima.mobi/2015/10/2092">h2o.service</a></h2>
+
+<p>さいきんわだいのしすてむでーってやつででーもん？かしようとおもいます</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">[Unit]</span>
+</span><span class='line'><span class="go">Description=H2O the optimized HTTP/1, HTTP/2 server</span>
+</span><span class='line'><span class="go">After=syslog.target network.target remote-fs.target nss-lookup.target</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">[Service]</span>
+</span><span class='line'><span class="go">Type=forking</span>
+</span><span class='line'><span class="go">PIDFile=/var/run/h2o.pid</span>
+</span><span class='line'><span class="go">ExecStartPre=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -t</span>
+</span><span class='line'><span class="go">ExecStart=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -m daemon</span>
+</span><span class='line'><span class="go">ExecReload=/bin/kill -s HUP $MAINPID</span>
+</span><span class='line'><span class="go">ExecStop=/bin/kill -s QUIT $MAINPID</span>
+</span><span class='line'><span class="go">PrivateTmp=true</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">[Install]</span>
+</span><span class='line'><span class="go">WantedBy=multi-user.target</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>いやーしすてむでーってべんりですねー</p>
+
+<h2>owari</h2>
+
+<p>サイトがぶっとんだのでサイトの復旧？と let&rsquo;s encrypt でのSSL化、 h2oへのウェブサーバー変更と <code>systemd</code> でのデーモン化をやりました。</p>
+
+<p>1年ぶりの日記だたので、Markdownどうかくんだっけ？とか、別のところで大変でした。</p>
+
+<h2>参考サイト</h2>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -706,85 +878,6 @@ X250を買った。それ以外にもメガネも一つ買ってみた。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/09/file-name-needs-scss-extention/">ファイル名間違えてテスト通らなかった話</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-04-09T15:38:49+09:00" pubdate data-updated="true">Apr 9<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://rails-assets.org">rails-assets.org</a> から <code>bootstrap-sass-official</code> をインストールし、動かしたら、 test環境でテストが落ちてたのでメモ。</p>
-
-<h2>オチ</h2>
-
-<p>CSSの<a href="https://twitter.com/izumin5210/status/586054782994874368">ファイル名</a>が <code>application.css.scss</code> じゃなかった。</p>
-
-<h2>設定</h2>
-
-<p>まず、<code>Gemfile</code> に以下のように追記をします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s1">&#39;https://rails-assets.org&#39;</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;rails-asstes-bootstrap-sass-official&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>あとはいつも通りにインストールします。
-次に <code>app/assets/javascripts/application.js</code> や <code>app/assets/stylesheets/application.css</code> に必要な読み込みを<a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">設定</a>します。</p>
-
-<h2>問題</h2>
-
-<p>以上の設定が終ったあと、 <code>cucumber</code> でテストを実行すると、</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">File</span> <span class="n">to</span> <span class="n">import</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">or</span> <span class="ss">unreadable</span><span class="p">:</span> <span class="n">bootstrap</span><span class="o">-</span><span class="n">sass</span><span class="o">-</span><span class="n">official</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">sprockets</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>などといわれますのでオチを参考にファイル名変更して終了です。</p>
-
-<h2>おわり</h2>
-
-<p>おわり</p>
-
-<h3>参考</h3>
-
-<ol>
-<li><a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5</a></li>
-<li><a href="https://twitter.com/izumin5210/status/586054782994874368">https://twitter.com/izumin5210/status/586054782994874368</a></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -800,6 +893,10 @@ X250を買った。それ以外にもメガネも一つ買ってみた。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/08/08/renewal-my-site/">RENEWAL MY SITE!!!</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff/">YAPC::Asia 2015に参加しました(ボランティアスタッフとして)</a>
       </li>
     
@@ -813,10 +910,6 @@ X250を買った。それ以外にもメガネも一つ買ってみた。</p>
     
       <li class="post">
         <a href="/blog/2015/05/15/screencast-use-gif/">すくりーんきゃすと</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/11/golden-weak/">ゴールデンウィークのお買いもの</a>
       </li>
     
   </ul>
@@ -853,7 +946,7 @@ X250を買った。それ以外にもメガネも一つ買ってみた。</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - katsyoshi -
+  Copyright &copy; 2016 - katsyoshi -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

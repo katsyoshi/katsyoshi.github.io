@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2015-08-25T04:16:49+09:00</updated>
+  <updated>2016-08-08T22:45:59+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,148 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RENEWAL MY SITE!!!]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/08/08/renewal-my-site/"/>
+    <updated>2016-08-08T21:05:47+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/08/08/renewal-my-site</id>
+    <content type="html"><![CDATA[<p>ってのは嘘ではないですが、嘘に近いです。
+実はおとといの土曜日に katsyoshi.org をのぞいたら、 <em>nginx</em> の初期ページが表示されたので
+とくにコンテンツはないですが、いそいでサイトの復旧をしました。
+が、もともとあったファイル置場を失念したため似た感じで再構築してました。
+再構築ついでにssl化、<code>nginx</code> から <code>h2o</code> へのWebサーバー変更しました。
+あと <code>systemd</code> でデーモン化とかも。</p>
+
+<h2>Let&rsquo;s Encrypt</h2>
+
+<p>リリースされてだいぶたつのですが、<a href="https://letsencrypt.org">Let&rsquo;s Encrypt</a>を利用してみました。
+Ubuntu Linux 16.04 では、簡単に導入できます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> sudo apt install letsencrypt
+</span><span class='line'><span class="gp">$</span> sudo letsencrypt certonly
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でいくつかの質問に答えればおわりです。
+ここで、戸惑った場面としては認証を受けたいサーバーの確認があるのですが、
+サーバーポート443を開ける<a href="https://letsencrypt.jp">必要があり</a>、1回失敗しました。</p>
+
+<h2>H2O</h2>
+
+<p>せっかくだし、<a href="https://h2o.examp1e.net/">H2O</a>を使おうと思います。
+インストールはかんたんでいかのようにすればokです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone h2o/h2o
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>h2o
+</span><span class='line'><span class="gp">$</span> cmake -DCMAKE_INSTALL_PREFIX_PATH<span class="o">=</span>/opt/local .
+</span><span class='line'><span class="gp">$</span> make <span class="o">&amp;&amp;</span> make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定は<a href="https://h2o.examp1e.net/configure/quick_start.html">ここ</a>と<a href="https://github.com/h2o/h2o/wiki/redirect-HTTP-to-HTTPS">ここ</a>を参考にして以下にしています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">user: www-data</span>
+</span><span class='line'><span class="go">hosts:</span>
+</span><span class='line'><span class="go">  &quot;katsyoshi.org:80&quot;:</span>
+</span><span class='line'><span class="go">    listen:</span>
+</span><span class='line'><span class="go">      port: 80</span>
+</span><span class='line'><span class="go">    paths:</span>
+</span><span class='line'><span class="go">      /:</span>
+</span><span class='line'><span class="go">        redirect: https://katsyoshi.org</span>
+</span><span class='line'><span class="go">hosts:</span>
+</span><span class='line'><span class="go">  &quot;katsyoshi.org:443&quot;:</span>
+</span><span class='line'><span class="go">    listen:</span>
+</span><span class='line'><span class="go">      port: 443</span>
+</span><span class='line'><span class="go">      ssl:</span>
+</span><span class='line'><span class="go">        certificate-file: /etc/letsencrypt/live/katsyoshi.org/fullchain.pem</span>
+</span><span class='line'><span class="go">        key-file: /etc/letsencrypt/live/katsyoshi.org/privkey.pem</span>
+</span><span class='line'><span class="go">    paths:</span>
+</span><span class='line'><span class="go">      /:</span>
+</span><span class='line'><span class="go">        file.dir: /opt/website/top</span>
+</span><span class='line'><span class="go">access-log: /var/log/h2o/access.log</span>
+</span><span class='line'><span class="go">error-log: /var/log/h2o/error.log</span>
+</span><span class='line'><span class="go">pid-file: /var/run/h2o.pid</span>
+</span><span class='line'><span class="go">http2-reprioritize-blocking-assets: ON</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2><a href="https://negima.mobi/2015/10/2092">h2o.service</a></h2>
+
+<p>さいきんわだいのしすてむでーってやつででーもん？かしようとおもいます</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">[Unit]</span>
+</span><span class='line'><span class="go">Description=H2O the optimized HTTP/1, HTTP/2 server</span>
+</span><span class='line'><span class="go">After=syslog.target network.target remote-fs.target nss-lookup.target</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">[Service]</span>
+</span><span class='line'><span class="go">Type=forking</span>
+</span><span class='line'><span class="go">PIDFile=/var/run/h2o.pid</span>
+</span><span class='line'><span class="go">ExecStartPre=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -t</span>
+</span><span class='line'><span class="go">ExecStart=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -m daemon</span>
+</span><span class='line'><span class="go">ExecReload=/bin/kill -s HUP $MAINPID</span>
+</span><span class='line'><span class="go">ExecStop=/bin/kill -s QUIT $MAINPID</span>
+</span><span class='line'><span class="go">PrivateTmp=true</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">[Install]</span>
+</span><span class='line'><span class="go">WantedBy=multi-user.target</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>いやーしすてむでーってべんりですねー</p>
+
+<h2>owari</h2>
+
+<p>サイトがぶっとんだのでサイトの復旧？と let&rsquo;s encrypt でのSSL化、 h2oへのウェブサーバー変更と <code>systemd</code> でのデーモン化をやりました。</p>
+
+<p>1年ぶりの日記だたので、Markdownどうかくんだっけ？とか、別のところで大変でした。</p>
+
+<h2>参考サイト</h2>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[YAPC::Asia 2015に参加しました(ボランティアスタッフとして)]]></title>
@@ -779,60 +921,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 <p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /></p>
 
 <p>ほんとにちょっとずれて気になる…</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Start Rust by Example]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/01/27/start-rust/"/>
-    <updated>2015-01-27T07:10:29+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/01/27/start-rust</id>
-    <content type="html"><![CDATA[<p>年ぁけたので、新しいプログラミング言語を覚えようと思い<a href="http://www.rust-lang.org">Rust Lang</a>を始めました。</p>
-
-<p>チュートリアルとして<a href="http://rustbyexample.com">Rust bye Example</a>を<a href="https://github.com/katsyoshi/rustbyexamle">やっていって</a>ます。</p>
-
-<h2>気が付いた点</h2>
-
-<p>Rustという言語は変更が多いらしいのでここでは、Chap.1-14(2015/01/25時点)までで気がついた点で書きます。 まず、今回環境を下に示します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rustc --version
-</span><span class='line'>rustc 1.0.0-nightly <span class="o">(</span>29bd9a06e 2015-01-20 23:03:09 +0000<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>i &ndash;> is</h3>
-
-<p>まず、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/2.FormattedPrint/FormattedPrint.rs#L9">Chap. 2のコード</a>で<code>integer</code>のsuffixが<code>is</code>に変更されています。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>FormattedPrint.rs:9:69: 9:71 warning: the <span class="sb">`</span>i<span class="sb">`</span> suffix on integers is deprecated; use <span class="sb">`</span>is<span class="sb">`</span> or one of the fixed-sized suffixes
-</span><span class='line'>FormattedPrint.rs:9     println!<span class="o">(</span><span class="s2">&quot;{} of {:b} people know binary, the other half don&#39;t&quot;</span>, 1i, 2i<span class="o">)</span>;
-</span><span class='line'>                                                                                        ^~
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>range(a, b) –> (a..b)</h3>
-
-<p>つぎに、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/10.ForAndRange/ForAndRange.rs#L2">Chap. 10のコード</a>で<code>range(a, b)</code>がunstableになっているので<code>(a..b)</code>に変更しました。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>ForAndRange.rs:2:14: 2:19 warning: use of unstable item: will be replaced by range notation, <span class="c">#[warn(unstable)] on by default</span>
-</span><span class='line'>ForAndRange.rs:2     <span class="k">for </span>n in range<span class="o">(</span>1u32, 101<span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>                              ^~~~~
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おわり</h2>
-
-<p>いま確認してたらそもそもRust by Example自体が変更されてた…</p>
-
-<p>ちゃんちゃん</p>
 ]]></content>
   </entry>
   
