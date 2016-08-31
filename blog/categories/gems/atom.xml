@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Gems | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/gems/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2016-08-31T23:05:16+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello Mikutter]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter/"/>
+    <updated>2016-08-31T22:55:03+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter</id>
+    <content type="html"><![CDATA[<p>表題のとおりmikutterをgemでインストールできるようにしてみました。</p>
+
+<h2>どうやって？</h2>
+
+<p><a href="https://rubygems.org">rubygems</a> からはまだインストールはできません。
+ので、以下の様にしてgem packageを作成します。</p>
+
+<p><code>console
+$ git clone github.com/katsyoshi/mikutter.git
+$ cd mikutter
+$ git checkout reokure-ru
+$ bundle install
+$ bundle exec rake build
+$ gem install pkg/mikutter-3.5.0.pre.dev.gem
+$ mikutter
+</code></p>
+
+<p>これでmikutterコマンドで起動できるようになっています
+これすらめんどうな人は<a href="https://katsyoshi.org/mikutter-3.5.0.pre.dev.gem">ここ</a>にあります。
+ダウンロードして <code>gem install mikutter-3.5.0.pre.dev.gem</code> でインストールできます。
+プラグインで起動できないとかあるなら必要なgemをインストールしてください。</p>
+]]></content>
+  </entry>
+  
+</feed>
