@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2016-08-31T23:05:16+09:00</updated>
+  <updated>2016-10-09T17:32:54+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ItamaeつかってOSのインストールをやってみた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae/"/>
+    <updated>2016-10-09T16:43:27+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae</id>
+    <content type="html"><![CDATA[<p>9月はRubyKiagiにいってたりしました。
+そのときに<a href="http://mikutter.blogspot.jp/2016/09/mikutter-3312-343.html">mikutterのコミッター</a>とかになったようです。</p>
+
+<p>シルバーウィークにThinkPadのOS再インストールをしたのでその記録を</p>
+
+<h2>なにやったの？</h2>
+
+<p><a href="https://twitter.com/mtsmfm">@mtsmfm</a> と以前話していたとき、&ldquo;ansibleつかってOSインストールしてるんだけど、完全自動化できないんですよね~&rdquo; みたいな事を聞いたので<a href="https://github.com/itamae-kitchen/itamae">Itamae</a> をつかってやってみました。
+結論から言うと完全自動化は無理だけど、ある程度は自動化できた。</p>
+
+<h3>環境</h3>
+
+<ul>
+<li>machine: ThinkPad X250</li>
+<li>OS: Gentoo Linux</li>
+<li>Provisioning tool: Itamae</li>
+<li>repo: <a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></li>
+</ul>
+
+
+<h2>インストール</h2>
+
+<p>インストールディスクを起動するところはipmiとか搭載していない(しらべていない)し(Ironic)[<a href="https://wiki.openstack.org/wiki/Ironic">https://wiki.openstack.org/wiki/Ironic</a>]はつかいたくないので手動で起動し、
+sshdの起動とrootのパスワードを設定します。起動したら以下の手順でパーティション作成からカーネルのインストールまでします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">git clone https://github.com/katsyoshi/itamae-recipes.git</span>
+</span><span class='line'><span class="go">cd itamae-recipes</span>
+</span><span class='line'><span class="go">bundle install</span>
+</span><span class='line'><span class="go">wget http://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20161006.tar.bz2</span>
+</span><span class='line'><span class="go">cp stage3-amd64-20161006.tar.bz2 cookbook/install/stage3.tar.bz2</span>
+</span><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/gentoo.json</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でOSのインストールまでできるのですが、gentooのインストールメディアだと、diffがインストールされていないのでitamaeからfileのコピーができません。
+都度コピーしてください(というよりgentooインストーラーにdiffを入れたほうが早そう)</p>
+
+<h2>パッケージのインストール</h2>
+
+<p>ここまで終ったら、パッケージのインストールします。これも以下コマンドを実行することで終ります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.json</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>owari</h2>
+
+<p>ItamaeつかってOSのインストールを実行してみました。diffが失いところがとくにつらいですね。
+おわり</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello Mikutter]]></title>
@@ -837,69 +901,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 <h3>参考</h3>
 
 <p>&lsquo;xdg-open&rsquo;, archlinux wiki, <a href="https://wiki.archlinux.org/index.php/xdg-open,">https://wiki.archlinux.org/index.php/xdg-open,</a> 2015/02/16</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[とりあえずibusやめてみた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/02/12/remove-ibus/"/>
-    <updated>2015-02-12T07:10:29+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/02/12/remove-ibus</id>
-    <content type="html"><![CDATA[<p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
-
-<h2>前提条件</h2>
-
-<p>ここでは<a href="http://www.gentoo.org">Gentoo/Linux</a>での導入方法について述べています。
-日本語変換エンジンとしてMozcについて述べています。</p>
-
-<h2>導入</h2>
-
-<p>とりあえずfcitxをインストール、設定します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>emerge -av fcitx
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ $EDITOR</span> .xinitrc
-</span><span class='line'>
-</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'>fcitx
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでインストールはこれでおわりです。</p>
-
-<h2>fcitxでmozc</h2>
-
-<p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ $EDITOR</span> /etc/portage/make.conf
-</span><span class='line'><span class="nv">USE</span><span class="o">=</span><span class="s2">&quot;fcitx ${USE}&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ </span>sudo emerge -av mozc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で、インストールすれば使えるようになります。</p>
-
-<h2>おわり</h2>
-
-<p><a href="http://anond.hatelabo.jp/20150210030728">こういうの</a>があったので、真面目にかこうかと思ったんですがどめんどうなので導入メモになりました。</p>
-
-<p>あと引越ししたので贈っていただいてもいいんですよ？
-<a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
 ]]></content>
   </entry>
   

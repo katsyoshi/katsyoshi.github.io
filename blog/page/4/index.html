@@ -9,7 +9,12 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="これまでの流れで準備が整ったので、Installを始めます。 インストール これはGentoo Wikiを見ながらで大丈夫です。 嵌ったところ 音が鳴らないという問題が発生しました。理由は簡単でしたのですぐに設定しました。 &hellip;">
+  <meta name="description" content="PCを買い替えたので環境構築してます。
+Jubatusのoverlayがあったのですが、古かったので新しくJubatusのoverlay作成しました。 インストール これは、以下のコマンドでインストールができます。 1
+2
+3
+4
+# curl https://raw. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +84,77 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/12/jubatus-in-gentoo/">Gentoo LinuxむけのJubatusパッケージ書いたよ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-12T12:29:20+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">PC</a>を<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">買い替えた</a>ので<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">環境構築</a>してます。
+<a href="https://github.com/kazuki/overlay/tree/master/sci-calculators/jubatus">Jubatusのoverlay</a>があったのですが、古かったので新しく<a href="https://github.com/katsyoshi/overlay">Jubatusのoverlay</a>作成しました。</p>
+
+<h2>インストール</h2>
+
+<p>これは、以下のコマンドでインストールができます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># curl https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml &gt; /etc/layman/overlays/katsyoshi.xml</span>
+</span><span class='line'><span class="c"># layman -f -a katsyoshi</span>
+</span><span class='line'><span class="c"># eix-sync</span>
+</span><span class='line'><span class="c"># emerge -av jubatus</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でいけるとおもいます。</p>
+
+<h2>未実装</h2>
+
+<ul>
+<li>jubatus_coreのオプションがはたらいてない(ハズ)</li>
+<li>jubatus_msgpack-rpcの依存パッケージにdev-libs/msgpackをいれていない</li>
+<li>jubatusのオプションを確認していない</li>
+</ul>
+
+
+<p>などなどあるので、PRまってます。</p>
+
+<h2>まとめ</h2>
+
+<p><a href="https://github.com/kazuki/overlay/">よくみたら</a>必要なライブラリのパッケージもあったのでこれのバージョンとjubatus_core追加するだけでよかったかも。</p>
+
+<p>ちゃんちゃん</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -739,59 +815,6 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/21/new-td-agent-for-mac/">td-agent.pkg</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-21T08:53:46+09:00" pubdate data-updated="true">May 21<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>td-agent2が<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">リリース</a>され、Macへの公式パッケージがでたのでインストールメモ</p>
-
-<h2>Install</h2>
-
-<p><a href="https://s3.amazonaws.com/td-agent-repository/macosx/td-agent2-1.0.0-0.dmg">ダウンロード</a>してダブルクリックでインストールできます。</p>
-
-<h2>設定</h2>
-
-<p>設定ファイル置場は<code>/etc/td-agent/td-agent.conf</code>になります。
-設定ファイルはいままでの設定で使えるようです。
-あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo launchctl load /Library/LaunchDaemon/td-agent.plist
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -809,6 +832,10 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/10/09/hello-gentoo-using-itamae/">ItamaeつかってOSのインストールをやってみた</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/08/31/hello-mikutter/">Hello Mikutter</a>
       </li>
     
@@ -822,10 +849,6 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
     
       <li class="post">
         <a href="/blog/2015/08/02/hello-itamae-plugins/">こんにちは、いたまえさん</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/26/sir-elasticsearch/">Elasticsearchどの〜</a>
       </li>
     
   </ul>

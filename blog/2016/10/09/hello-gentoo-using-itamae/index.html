@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ItamaeつかってOSのインストールをやってみた - katsyoshiのめもみたいなもの</title>
+  <meta name="author" content="katsyoshi">
+
+  
+  <meta name="description" content="9月はRubyKiagiにいってたりしました。
+そのときにmikutterのコミッターとかになったようです。 シルバーウィークにThinkPadのOS再インストールをしたのでその記録を なにやったの？ @mtsmfm と以前話していたとき、&ldquo; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-49549546-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+  
+    <h2>hello, world</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.katsyoshi.org" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://katsyoshi.org" target="_blank">Web Site</a></li>
+  <li><a href="http://suzuri.jp/katsyoshi" target="_blank">Suzuri</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ItamaeつかってOSのインストールをやってみた</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-10-09T16:43:27+09:00" pubdate data-updated="true">Oct 9<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>9月はRubyKiagiにいってたりしました。
+そのときに<a href="http://mikutter.blogspot.jp/2016/09/mikutter-3312-343.html">mikutterのコミッター</a>とかになったようです。</p>
+
+<p>シルバーウィークにThinkPadのOS再インストールをしたのでその記録を</p>
+
+<h2>なにやったの？</h2>
+
+<p><a href="https://twitter.com/mtsmfm">@mtsmfm</a> と以前話していたとき、&ldquo;ansibleつかってOSインストールしてるんだけど、完全自動化できないんですよね~&rdquo; みたいな事を聞いたので<a href="https://github.com/itamae-kitchen/itamae">Itamae</a> をつかってやってみました。
+結論から言うと完全自動化は無理だけど、ある程度は自動化できた。</p>
+
+<h3>環境</h3>
+
+<ul>
+<li>machine: ThinkPad X250</li>
+<li>OS: Gentoo Linux</li>
+<li>Provisioning tool: Itamae</li>
+<li>repo: <a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></li>
+</ul>
+
+
+<h2>インストール</h2>
+
+<p>インストールディスクを起動するところはipmiとか搭載していない(しらべていない)し(Ironic)[<a href="https://wiki.openstack.org/wiki/Ironic">https://wiki.openstack.org/wiki/Ironic</a>]はつかいたくないので手動で起動し、
+sshdの起動とrootのパスワードを設定します。起動したら以下の手順でパーティション作成からカーネルのインストールまでします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">git clone https://github.com/katsyoshi/itamae-recipes.git</span>
+</span><span class='line'><span class="go">cd itamae-recipes</span>
+</span><span class='line'><span class="go">bundle install</span>
+</span><span class='line'><span class="go">wget http://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20161006.tar.bz2</span>
+</span><span class='line'><span class="go">cp stage3-amd64-20161006.tar.bz2 cookbook/install/stage3.tar.bz2</span>
+</span><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/gentoo.json</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でOSのインストールまでできるのですが、gentooのインストールメディアだと、diffがインストールされていないのでitamaeからfileのコピーができません。
+都度コピーしてください(というよりgentooインストーラーにdiffを入れたほうが早そう)</p>
+
+<h2>パッケージのインストール</h2>
+
+<p>ここまで終ったら、パッケージのインストールします。これも以下コマンドを実行することで終ります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.json</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>owari</h2>
+
+<p>ItamaeつかってOSのインストールを実行してみました。diffが失いところがとくにつらいですね。
+おわり</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">katsyoshi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-10-09T16:43:27+09:00" pubdate data-updated="true">Oct 9<span>th</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/gentoo-install-battle/'>gentoo-install-battle</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae/" data-via="" data-counturl="http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/08/31/hello-mikutter/" title="Previous Post: hello mikutter">&laquo; hello mikutter</a>
+      
+      
+    </p>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- blogs -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-3646533193235045"
+         data-ad-slot="7480024812"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/10/09/hello-gentoo-using-itamae/">ItamaeつかってOSのインストールをやってみた</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/08/31/hello-mikutter/">Hello Mikutter</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/08/08/renewal-my-site/">RENEWAL MY SITE!!!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff/">YAPC::Asia 2015に参加しました(ボランティアスタッフとして)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/08/02/hello-itamae-plugins/">こんにちは、いたまえさん</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="well">
+  <ul class="nav">
+    <li class="nav-header">Coderwall Badges</li>
+  </ul>
+  <div id="coderwall_badges"></div>
+  <a href="http://coderwall.com/katsyoshi">@katsyoshi</a> on coderwall
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $.getJSON("http://coderwall.com/katsyoshi.json?callback=?", function(data){
+        for(var i = 0; i < data.data.badges.length ; i++){
+          var badge = data.data.badges[i];
+          var badge_tag = $("<img />");
+          badge_tag.attr("src",badge.badge);
+          badge_tag.css("width","50%");
+          $("#coderwall_badges").append(badge_tag);
+        }
+      });
+    });
+  </script>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - katsyoshi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

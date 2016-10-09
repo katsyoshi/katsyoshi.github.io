@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Itamae | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/itamae/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2016-08-31T23:05:16+09:00</updated>
+  <updated>2016-10-09T17:32:54+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ItamaeつかってOSのインストールをやってみた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae/"/>
+    <updated>2016-10-09T16:43:27+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae</id>
+    <content type="html"><![CDATA[<p>9月はRubyKiagiにいってたりしました。
+そのときに<a href="http://mikutter.blogspot.jp/2016/09/mikutter-3312-343.html">mikutterのコミッター</a>とかになったようです。</p>
+
+<p>シルバーウィークにThinkPadのOS再インストールをしたのでその記録を</p>
+
+<h2>なにやったの？</h2>
+
+<p><a href="https://twitter.com/mtsmfm">@mtsmfm</a> と以前話していたとき、&ldquo;ansibleつかってOSインストールしてるんだけど、完全自動化できないんですよね~&rdquo; みたいな事を聞いたので<a href="https://github.com/itamae-kitchen/itamae">Itamae</a> をつかってやってみました。
+結論から言うと完全自動化は無理だけど、ある程度は自動化できた。</p>
+
+<h3>環境</h3>
+
+<ul>
+<li>machine: ThinkPad X250</li>
+<li>OS: Gentoo Linux</li>
+<li>Provisioning tool: Itamae</li>
+<li>repo: <a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></li>
+</ul>
+
+
+<h2>インストール</h2>
+
+<p>インストールディスクを起動するところはipmiとか搭載していない(しらべていない)し(Ironic)[<a href="https://wiki.openstack.org/wiki/Ironic">https://wiki.openstack.org/wiki/Ironic</a>]はつかいたくないので手動で起動し、
+sshdの起動とrootのパスワードを設定します。起動したら以下の手順でパーティション作成からカーネルのインストールまでします。</p>
+
+<p><code>console
+git clone https://github.com/katsyoshi/itamae-recipes.git
+cd itamae-recipes
+bundle install
+wget http://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20161006.tar.bz2
+cp stage3-amd64-20161006.tar.bz2 cookbook/install/stage3.tar.bz2
+itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/gentoo.json
+</code></p>
+
+<p>でOSのインストールまでできるのですが、gentooのインストールメディアだと、diffがインストールされていないのでitamaeからfileのコピーができません。
+都度コピーしてください(というよりgentooインストーラーにdiffを入れたほうが早そう)</p>
+
+<h2>パッケージのインストール</h2>
+
+<p>ここまで終ったら、パッケージのインストールします。これも以下コマンドを実行することで終ります。</p>
+
+<p><code>console
+itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.json
+</code></p>
+
+<h2>owari</h2>
+
+<p>ItamaeつかってOSのインストールを実行してみました。diffが失いところがとくにつらいですね。
+おわり</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[こんにちは、いたまえさん]]></title>

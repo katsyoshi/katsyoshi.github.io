@@ -9,8 +9,8 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="最近話題のDocker使ってJubatusを動かしてみたのでメモ的なものを 環境 環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作 Vagrant: 1.5.4
-docker: 0.11.1 Dockerfile &hellip;">
+  <meta name="description" content="td-agent2がリリースされ、Macへの公式パッケージがでたのでインストールメモ Install ダウンロードしてダブルクリックでインストールできます。 設定 設定ファイル置場は/etc/td-agent/td-agent.confになります。
+設定ファイルはいままでの設定で使えるようです。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,59 @@ docker: 0.11.1 Dockerfile &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/21/new-td-agent-for-mac/">td-agent.pkg</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-21T08:53:46+09:00" pubdate data-updated="true">May 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>td-agent2が<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">リリース</a>され、Macへの公式パッケージがでたのでインストールメモ</p>
+
+<h2>Install</h2>
+
+<p><a href="https://s3.amazonaws.com/td-agent-repository/macosx/td-agent2-1.0.0-0.dmg">ダウンロード</a>してダブルクリックでインストールできます。</p>
+
+<h2>設定</h2>
+
+<p>設定ファイル置場は<code>/etc/td-agent/td-agent.conf</code>になります。
+設定ファイルはいままでの設定で使えるようです。
+あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo launchctl load /Library/LaunchDaemon/td-agent.plist
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -778,6 +831,10 @@ docker: 0.11.1 Dockerfile &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/10/09/hello-gentoo-using-itamae/">ItamaeつかってOSのインストールをやってみた</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/08/31/hello-mikutter/">Hello Mikutter</a>
       </li>
     
@@ -791,10 +848,6 @@ docker: 0.11.1 Dockerfile &hellip;">
     
       <li class="post">
         <a href="/blog/2015/08/02/hello-itamae-plugins/">こんにちは、いたまえさん</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/26/sir-elasticsearch/">Elasticsearchどの〜</a>
       </li>
     
   </ul>
