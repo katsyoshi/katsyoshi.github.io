@@ -5,16 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>野良Gitサーバにuploadできなかった話 - katsyoshiのめもみたいなもの</title>
+  <title>Ssh Permission - katsyoshiのめもみたいなもの</title>
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="今日もろくでもない理由で嵌った。 嵌った理由 野良Gitサーバを立てているのでそこに新しいリポジトリを作成した。 で、リモートを追加し、ブランチを追加しようとすると 1
-2
-3
-4
-$ git remote add master ssh://myhost/my_project.git
-$ git &hellip;">
+  <meta name="description" content="またやらかしたので 経緯 サーバーにSSHログインが急にできなくなった 対処 1
+chmod 744 ~/.ssh おわり おわり
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +20,7 @@ $ git &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.katsyoshi.org/blog/2014/06/22/fail-git-uploading">
+  <link rel="canonical" href="http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
@@ -87,7 +84,7 @@ $ git &hellip;">
   
   <header>
     
-      <h1 class="entry-title">野良Gitサーバにuploadできなかった話</h1>
+      <h1 class="entry-title">Ssh Permission</h1>
     
     
       <p class="meta">
@@ -103,46 +100,28 @@ $ git &hellip;">
   
 
 
-<time datetime="2014-06-22T22:38:20+09:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2014</time>
+<time datetime="2016-10-10T20:14:30+09:00" pubdate data-updated="true">Oct 10<span>th</span>, 2016</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>今日もろくでもない理由で嵌った。</p>
+<div class="entry-content"><p>またやらかしたので</p>
 
-<h2>嵌った理由</h2>
+<h2>経緯</h2>
 
-<p>野良Gitサーバを立てているのでそこに新しいリポジトリを作成した。</p>
+<p>サーバーにSSHログインが急にできなくなった</p>
 
-<p>で、リモートを追加し、ブランチを追加しようとすると</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add master ssh://myhost/my_project.git
-</span><span class='line'>$ git push origin master -f
-</span><span class='line'>error: src refspec master does not match any.
-</span><span class='line'>error: failed to push some refs to 'ssh://myhost/my_project.git'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>というようなエラーが出てきてアップロードできなかった。
-そのため理由を探ってたら<a href="http://d.hatena.ne.jp/nishiohirokazu/20110304/1299229916">同じ理由</a>があった。</p>
-
-<p>そこで <code>git log</code> としたら何もでてこなかったので</p>
+<h2>対処</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
-</span><span class='line'>$ git commit -m 'first commit'
-</span><span class='line'>$ git push -u origin master</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>chmod 744 ~/.ssh</span></code></pre></td></tr></table></div></figure>
 
 
-<p>リモートリポジトリに追加できました。
-ちゃんちゃん</p>
+<h2>おわり</h2>
+
+<p>おわり</p>
 </div>
 
 
@@ -165,12 +144,12 @@ $ git &hellip;">
   
 
 
-<time datetime="2014-06-22T22:38:20+09:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2014</time>
+<time datetime="2016-10-10T20:14:30+09:00" pubdate data-updated="true">Oct 10<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+    <a class='category' href='/blog/categories/memo/'>memo</a>, <a class='category' href='/blog/categories/ssh/'>ssh</a>
   
 </span>
 
@@ -179,7 +158,7 @@ $ git &hellip;">
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.katsyoshi.org/blog/2014/06/22/fail-git-uploading/" data-via="" data-counturl="http://blog.katsyoshi.org/blog/2014/06/22/fail-git-uploading/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission/" data-via="" data-counturl="http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission/" >Tweet</a>
   
   
   
@@ -190,10 +169,8 @@ $ git &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/06/10/pitfall-in-boot2docker/" title="Previous Post: docker on OS Xで嵌ったおはなし">&laquo; docker on OS Xで嵌ったおはなし</a>
+        <a class="basic-alignment left" href="/blog/2016/10/09/hello-gentoo-using-itamae/" title="Previous Post: ItamaeつかってOSのインストールをやってみた">&laquo; ItamaeつかってOSのインストールをやってみた</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/06/26/use-spdy-in-nginx/" title="Next Post: SPDYをさくっと動かしてみた">SPDYをさくっと動かしてみた &raquo;</a>
       
     </p>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
