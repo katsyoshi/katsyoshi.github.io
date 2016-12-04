@@ -9,8 +9,9 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="とりあえずoctopressで書いていこうかと思います
-">
+  <meta name="description" content="Linux使っててこのソフトが入ってないしsudoも使えないってときありませんか？
+そんなときに好きなソフト(tmux, emacs)をインストールする方法を書いときます。
+ここでは、tmuxとemacsについてインストール方法を書いときます。 方法 方法として以下のふたつがあると思う &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +87,151 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/04/09/how-to-install-applications-non-super-user/">スーパーユーザ権限もたずに好きなソフトをインストール</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-09T20:46:35+09:00" pubdate data-updated="true">Apr 9<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Linux使っててこのソフトが入ってないしsudoも使えないってときありませんか？
+そんなときに好きなソフト(tmux, emacs)をインストールする方法を書いときます。
+ここでは、tmuxとemacsについてインストール方法を書いときます。</p>
+
+<h2>方法</h2>
+
+<p>方法として以下のふたつがあると思う</p>
+
+<ol>
+<li>頑張っていれる</li>
+<li>パッケージマネージャ</li>
+</ol>
+
+
+<h2>頑張って入れる</h2>
+
+<p>この場合はちょっと管理がめんどうかもしれないが書いときます。</p>
+
+<p>前提条件としてgccとwgetがインストールされていることでX11関係のライブラリがインストールされていないこととします。</p>
+
+<h3>emacs</h3>
+
+<p>以下のコマンドでインストールできます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'> <span class="nv">$ </span>wget http://ftp.gnu.org/pub/gnu/emacs/emacs-24.3.tar.xz
+</span><span class='line'> <span class="nv">$ </span>tar xvf emacs-24.3.tar.xz
+</span><span class='line'> <span class="nv">$ </span><span class="nb">cd </span>emacs-24.3
+</span><span class='line'> <span class="nv">$ </span>./configure --prefix<span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/ --without-x --without-dbus --without-gnutls --without-makeinfo
+</span><span class='line'> <span class="nv">$ </span>make -j4 bootstrap
+</span><span class='line'> <span class="nv">$ </span>make install
+</span><span class='line'> <span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>
+</span><span class='line'> <span class="nv">$ </span>emacs
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>tmux</h3>
+
+<p>以下のコマンドで必要ライブラリのncursesをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'> <span class="nv">$ </span>wget http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz
+</span><span class='line'> <span class="nv">$ </span>tar xvf ncurses-5.9.tar.gz
+</span><span class='line'> <span class="nv">$ </span><span class="nb">cd </span>ncurses-5.9
+</span><span class='line'> <span class="nv">$ </span>./configure --prefix<span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local
+</span><span class='line'> <span class="nv">$ </span>make -j4
+</span><span class='line'> <span class="nv">$ </span>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次にlibeventをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'> <span class="nv">$ </span>wget https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
+</span><span class='line'> <span class="nv">$ </span>tar xvf libevent-2.0.21-stable.tar.gz
+</span><span class='line'> <span class="nv">$ </span><span class="nb">cd </span>libevent-2.0.21-stable
+</span><span class='line'> <span class="nv">$ </span>./configure --prefix<span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local
+</span><span class='line'> <span class="nv">$ </span>make -j4
+</span><span class='line'> <span class="nv">$ </span>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後にtmuxをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'> <span class="nv">$ </span>wget http://downloads.sourceforge.net/project/tmux/tmux/tmux-1.9/tmux-1.9a.tar.gz
+</span><span class='line'> <span class="nv">$ </span>tar xvf tmux-1.9a.tar.gz
+</span><span class='line'> <span class="nv">$ </span><span class="nb">cd </span>tmux-1.9a
+</span><span class='line'> <span class="nv">$ CFLAGS</span><span class="o">=</span><span class="s2">&quot;-I${HOME}/.local/include -I${HOME}/.local/include/ncurses&quot;</span> <span class="nv">LDFLAGS</span><span class="o">=</span>-L<span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/lib ./configure --prefix<span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local
+</span><span class='line'> <span class="nv">$ </span>make -j4
+</span><span class='line'> <span class="nv">$ </span>make install
+</span><span class='line'> <span class="nv">$ LD_LIBRARY_PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/lib tmux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>すべてインストール終ったら設定をします</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'> <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export PATH=${HOME}/.local/bin:${PATH}&#39;</span> &gt;&gt; <span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.bashrc
+</span><span class='line'> <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}&#39;</span> &gt;&gt; <span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.bashrc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>パッケージマネージャ</h2>
+
+<p>Gentoo/Prefix使え</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/04/05/hello-world/">Hello, World</a></h1>
     
     
@@ -132,6 +278,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/05/d250g2/">D250g2 Advent Calendar 2016 5日目</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/01/im-rockn-roll-star/">Rock&#8217;n&#8217; Roll Star</a>
       </li>
     
@@ -145,10 +295,6 @@
     
       <li class="post">
         <a href="/blog/2016/11/09/went-to-8-jou-island/">Went to 8 Jou Island</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/10/10/fxxking-ssh-permission/">Ssh Permission</a>
       </li>
     
   </ul>

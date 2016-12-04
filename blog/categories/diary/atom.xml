@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2016-12-01T00:00:12+09:00</updated>
+  <updated>2016-12-05T04:39:20+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[D250g2 Advent Calendar 2016 5日目]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/05/d250g2/"/>
+    <updated>2016-12-05T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/05/d250g2</id>
+    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
+
+<h2>d250g2 について</h2>
+
+<p style="text-align:center;"> <img src="https://dn3pm25xmtlyu.cloudfront.net/photos/large/789653378.jpg?1373590992&amp;Expires=1480965490&amp;Signature=fXjxmRTn2~narufEZbisJVggXWaNaN33bbpReB4mYcmWL0Vwy38WvZUIHUkckSDHTLSOj47eas0LmvFCBxcWZ7mzdKpefjJKxclkDwYUUmVSoaCcL4dkPSUyVWeb4BlPkxukiNp2qG-bbOl7HjWTKdPSyDLpiw5IhbxTJicD4ng_&amp;Key-Pair-Id=APKAIYVGSUJFNRFZBBTA" alt="" /></p>
+
+<h2>d250g2 とは？</h2>
+
+<p>しらん</p>
+
+<h2>KernelVM Camp #4 に行ってきた</h2>
+
+<p>成果物です</p>
+
+<p style="text-align:center;"> <img src="https://dn3pm25xmtlyu.cloudfront.net/photos/large/789653378.jpg?1373590992&amp;Expires=1480965490&amp;Signature=fXjxmRTn2~narufEZbisJVggXWaNaN33bbpReB4mYcmWL0Vwy38WvZUIHUkckSDHTLSOj47eas0LmvFCBxcWZ7mzdKpefjJKxclkDwYUUmVSoaCcL4dkPSUyVWeb4BlPkxukiNp2qG-bbOl7HjWTKdPSyDLpiw5IhbxTJicD4ng_&amp;Key-Pair-Id=APKAIYVGSUJFNRFZBBTA" alt="" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rock'n' Roll Star]]></title>
@@ -235,111 +258,6 @@ GPU: Zotac GeForce GTX 1050
 <h2>おわり</h2>
 
 <p>たのしい一人旅でした。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RENEWAL MY SITE!!!]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/08/08/renewal-my-site/"/>
-    <updated>2016-08-08T21:05:47+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/08/08/renewal-my-site</id>
-    <content type="html"><![CDATA[<p>ってのは嘘ではないですが、嘘に近いです。
-実はおとといの土曜日に katsyoshi.org をのぞいたら、 <em>nginx</em> の初期ページが表示されたので
-とくにコンテンツはないですが、いそいでサイトの復旧をしました。
-が、もともとあったファイル置場を失念したため似た感じで再構築してました。
-再構築ついでにssl化、<code>nginx</code> から <code>h2o</code> へのWebサーバー変更しました。
-あと <code>systemd</code> でデーモン化とかも。</p>
-
-<h2>Let&rsquo;s Encrypt</h2>
-
-<p>リリースされてだいぶたつのですが、<a href="https://letsencrypt.org">Let&rsquo;s Encrypt</a>を利用してみました。
-Ubuntu Linux 16.04 では、簡単に導入できます。</p>
-
-<p><code>console
-$ sudo apt install letsencrypt
-$ sudo letsencrypt certonly
-</code></p>
-
-<p>でいくつかの質問に答えればおわりです。
-ここで、戸惑った場面としては認証を受けたいサーバーの確認があるのですが、
-サーバーポート443を開ける<a href="https://letsencrypt.jp">必要があり</a>、1回失敗しました。</p>
-
-<h2>H2O</h2>
-
-<p>せっかくだし、<a href="https://h2o.examp1e.net/">H2O</a>を使おうと思います。
-インストールはかんたんでいかのようにすればokです。</p>
-
-<p><code>
-$ git clone h2o/h2o
-$ cd h2o
-$ cmake -DCMAKE_INSTALL_PREFIX_PATH=/opt/local .
-$ make &amp;&amp; make install
-</code></p>
-
-<p>設定は<a href="https://h2o.examp1e.net/configure/quick_start.html">ここ</a>と<a href="https://github.com/h2o/h2o/wiki/redirect-HTTP-to-HTTPS">ここ</a>を参考にして以下にしています。</p>
-
-<p>```
-user: www-data
-hosts:
-  &ldquo;katsyoshi.org:80&rdquo;:</p>
-
-<pre><code>listen:
-  port: 80
-paths:
-  /:
-    redirect: https://katsyoshi.org
-</code></pre>
-
-<p>hosts:
-  &ldquo;katsyoshi.org:443&rdquo;:</p>
-
-<pre><code>listen:
-  port: 443
-  ssl:
-    certificate-file: /etc/letsencrypt/live/katsyoshi.org/fullchain.pem
-    key-file: /etc/letsencrypt/live/katsyoshi.org/privkey.pem
-paths:
-  /:
-    file.dir: /opt/website/top
-</code></pre>
-
-<p>access-log: /var/log/h2o/access.log
-error-log: /var/log/h2o/error.log
-pid-file: /var/run/h2o.pid
-http2-reprioritize-blocking-assets: ON
-```</p>
-
-<h2><a href="https://negima.mobi/2015/10/2092">h2o.service</a></h2>
-
-<p>さいきんわだいのしすてむでーってやつででーもん？かしようとおもいます</p>
-
-<p>```
-[Unit]
-Description=H2O the optimized HTTP/1, HTTP/2 server
-After=syslog.target network.target remote-fs.target nss-lookup.target</p>
-
-<p>[Service]
-Type=forking
-PIDFile=/var/run/h2o.pid
-ExecStartPre=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -t
-ExecStart=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -m daemon
-ExecReload=/bin/kill -s HUP $MAINPID
-ExecStop=/bin/kill -s QUIT $MAINPID
-PrivateTmp=true</p>
-
-<p>[Install]
-WantedBy=multi-user.target
-```</p>
-
-<p>いやーしすてむでーってべんりですねー</p>
-
-<h2>owari</h2>
-
-<p>サイトがぶっとんだのでサイトの復旧？と let&rsquo;s encrypt でのSSL化、 h2oへのウェブサーバー変更と <code>systemd</code> でのデーモン化をやりました。</p>
-
-<p>1年ぶりの日記だたので、Markdownどうかくんだっけ？とか、別のところで大変でした。</p>
-
-<h2>参考サイト</h2>
 ]]></content>
   </entry>
   
