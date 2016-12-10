@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2016-12-05T04:39:20+09:00</updated>
+  <updated>2016-12-10T17:06:51+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[板前さんでGentooを管理]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo/"/>
+    <updated>2016-12-10T16:00:38+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo</id>
+    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
+
+<h2>Itamaeでgentoo管理するには？</h2>
+
+<p>そらはー(<a href="https://twitter.com/sora_h">@sora_h</a>)が作ってる <a href="https://github.com/sorah/itamae-plugin-resource-portage">itamae-plugin-resource-portage</a> 使え</p>
+
+<h2>自作のportage管理ソフトの紹介</h2>
+
+<p><a href="https://github.com/katsyoshi/itamae-recipes/tree/master/cookbook/gentoo">ここ</a>にあります。</p>
+
+<h3>使いかた</h3>
+
+<p>簡単な使いかたとしては以下のようになります</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>itamae local gentoo.rb -j package.json</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これだけです。</p>
+
+<h3>パッケージの指定方法</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">packages</span><span class="p-Indicator">:</span>
+</span><span class='line'> <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&#39;category/package&#39;</span>
+</span><span class='line'>   <span class="l-Scalar-Plain">portage</span><span class="p-Indicator">:</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">use</span><span class="p-Indicator">:</span> <span class="s">&#39;package&#39;</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">accept_keywords</span><span class="p-Indicator">:</span> <span class="s">&#39;package&#39;</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="s">&#39;pakcage&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>name</code> で <code>category/package</code> を指定することでインストールすることができます。
+<code>portage</code> では <code>use</code> などのフラグを指定して管理します。
+<code>use</code> ディレクトリを作成してそこにファイルを置く必要があります。
+自動生成したいけど、依存パッケージの指定方法とかまだ考えていないので取り敢えず直接指定です。</p>
+
+<h2>おわり</h2>
+
+<p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
+とおもってたら itamae-plugin-resource-portage みつけてしまったので
+itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使いましょう</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[D250g2 Advent Calendar 2016 5日目]]></title>
@@ -22,7 +77,7 @@
 
 <h2>d250g2 について</h2>
 
-<p style="text-align:center;"> <img src="https://dn3pm25xmtlyu.cloudfront.net/photos/large/789653378.jpg?1373590992&amp;Expires=1480965490&amp;Signature=fXjxmRTn2~narufEZbisJVggXWaNaN33bbpReB4mYcmWL0Vwy38WvZUIHUkckSDHTLSOj47eas0LmvFCBxcWZ7mzdKpefjJKxclkDwYUUmVSoaCcL4dkPSUyVWeb4BlPkxukiNp2qG-bbOl7HjWTKdPSyDLpiw5IhbxTJicD4ng_&amp;Key-Pair-Id=APKAIYVGSUJFNRFZBBTA" alt="" /></p>
+<p style="text-align:center;"> <img src="http://d250g2.com/d250g2.jpg" alt="" /></p>
 
 <h2>d250g2 とは？</h2>
 
@@ -32,7 +87,7 @@
 
 <p>成果物です</p>
 
-<p style="text-align:center;"> <img src="https://dn3pm25xmtlyu.cloudfront.net/photos/large/789653378.jpg?1373590992&amp;Expires=1480965490&amp;Signature=fXjxmRTn2~narufEZbisJVggXWaNaN33bbpReB4mYcmWL0Vwy38WvZUIHUkckSDHTLSOj47eas0LmvFCBxcWZ7mzdKpefjJKxclkDwYUUmVSoaCcL4dkPSUyVWeb4BlPkxukiNp2qG-bbOl7HjWTKdPSyDLpiw5IhbxTJicD4ng_&amp;Key-Pair-Id=APKAIYVGSUJFNRFZBBTA" alt="" /></p>
+<p style="text-align:center;"> <img src="http://d250g2.com/d250g2.jpg" alt="" /></p>
 ]]></content>
   </entry>
   
@@ -1017,30 +1072,6 @@ X250を買った。それ以外にもメガネも一つ買ってみた。</p>
 <li><a href="https://twitter.com/izumin5210/status/586054782994874368">https://twitter.com/izumin5210/status/586054782994874368</a></li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Known_hostsに載っていないホストに接続確認しないようにする]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/"/>
-    <updated>2015-04-07T19:40:03+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection</id>
-    <content type="html"><![CDATA[<p>昨日の<a href="http://blog.katsyoshi.org/blog/2015/04/06/careless-miss/">続き</a>で、 <code>lxc</code> で大量のサーバを立てて、
-SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。</p>
-
-<h2>解決方法</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh -oStrictHostKeyChecking=no anywhere.example.com</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で接続確認の <code>yes or no</code> が出てこなくなります。</p>
-
-<h2>おわり</h2>
-
-<p>おわり。</p>
-
-<p>そのうち <code>lxc</code> で100個ほどのインスタンスのベンチマークとりたい…</p>
 ]]></content>
   </entry>
   

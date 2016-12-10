@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ファイル名間違えてテスト通らなかった話 - katsyoshiのめもみたいなもの</title>
+  <title>板前さんでGentooを管理 - katsyoshiのめもみたいなもの</title>
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="rails-assets.org から bootstrap-sass-official をインストールし、動かしたら、 test環境でテストが落ちてたのでメモ。 オチ CSSのファイル名が application.css.scss じゃなかった。 設定 まず、Gemfile &hellip;">
+  <meta name="description" content="Gentoo Advent Calendar 2016 の10日目の記事です Itamaeでgentoo管理するには？ そらはー(@sora_h)が作ってる itamae-plugin-resource-portage 使え 自作のportage管理ソフトの紹介 ここにあります。 使いかた &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.katsyoshi.org/blog/2015/04/09/file-name-needs-scss-extention">
+  <link rel="canonical" href="http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">ファイル名間違えてテスト通らなかった話</h1>
+      <h1 class="entry-title">板前さんでGentooを管理</h1>
     
     
       <p class="meta">
@@ -98,57 +98,60 @@
   
 
 
-<time datetime="2015-04-09T15:38:49+09:00" pubdate data-updated="true">Apr 9<span>th</span>, 2015</time>
+<time datetime="2016-12-10T16:00:38+09:00" pubdate data-updated="true">Dec 10<span>th</span>, 2016</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="https://rails-assets.org">rails-assets.org</a> から <code>bootstrap-sass-official</code> をインストールし、動かしたら、 test環境でテストが落ちてたのでメモ。</p>
+<div class="entry-content"><p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
 
-<h2>オチ</h2>
+<h2>Itamaeでgentoo管理するには？</h2>
 
-<p>CSSの<a href="https://twitter.com/izumin5210/status/586054782994874368">ファイル名</a>が <code>application.css.scss</code> じゃなかった。</p>
+<p>そらはー(<a href="https://twitter.com/sora_h">@sora_h</a>)が作ってる <a href="https://github.com/sorah/itamae-plugin-resource-portage">itamae-plugin-resource-portage</a> 使え</p>
 
-<h2>設定</h2>
+<h2>自作のportage管理ソフトの紹介</h2>
 
-<p>まず、<code>Gemfile</code> に以下のように追記をします。</p>
+<p><a href="https://github.com/katsyoshi/itamae-recipes/tree/master/cookbook/gentoo">ここ</a>にあります。</p>
+
+<h3>使いかた</h3>
+
+<p>簡単な使いかたとしては以下のようになります</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>itamae local gentoo.rb -j package.json</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これだけです。</p>
+
+<h3>パッケージの指定方法</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s1">&#39;https://rails-assets.org&#39;</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;rails-asstes-bootstrap-sass-official&#39;</span>
-</span><span class='line'><span class="k">end</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">packages</span><span class="p-Indicator">:</span>
+</span><span class='line'> <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&#39;category/package&#39;</span>
+</span><span class='line'>   <span class="l-Scalar-Plain">portage</span><span class="p-Indicator">:</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">use</span><span class="p-Indicator">:</span> <span class="s">&#39;package&#39;</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">accept_keywords</span><span class="p-Indicator">:</span> <span class="s">&#39;package&#39;</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="s">&#39;pakcage&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>あとはいつも通りにインストールします。
-次に <code>app/assets/javascripts/application.js</code> や <code>app/assets/stylesheets/application.css</code> に必要な読み込みを<a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">設定</a>します。</p>
-
-<h2>問題</h2>
-
-<p>以上の設定が終ったあと、 <code>cucumber</code> でテストを実行すると、</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">File</span> <span class="n">to</span> <span class="n">import</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">or</span> <span class="ss">unreadable</span><span class="p">:</span> <span class="n">bootstrap</span><span class="o">-</span><span class="n">sass</span><span class="o">-</span><span class="n">official</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">sprockets</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>などといわれますのでオチを参考にファイル名変更して終了です。</p>
+<p><code>name</code> で <code>category/package</code> を指定することでインストールすることができます。
+<code>portage</code> では <code>use</code> などのフラグを指定して管理します。
+<code>use</code> ディレクトリを作成してそこにファイルを置く必要があります。
+自動生成したいけど、依存パッケージの指定方法とかまだ考えていないので取り敢えず直接指定です。</p>
 
 <h2>おわり</h2>
 
-<p>おわり</p>
-
-<h3>参考</h3>
-
-<ol>
-<li><a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5</a></li>
-<li><a href="https://twitter.com/izumin5210/status/586054782994874368">https://twitter.com/izumin5210/status/586054782994874368</a></li>
-</ol>
-
+<p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
+とおもってたら itamae-plugin-resource-portage みつけてしまったので
+itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使いましょう</p>
 </div>
 
 
@@ -171,12 +174,12 @@
   
 
 
-<time datetime="2015-04-09T15:38:49+09:00" pubdate data-updated="true">Apr 9<span>th</span>, 2015</time>
+<time datetime="2016-12-10T16:00:38+09:00" pubdate data-updated="true">Dec 10<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/twitter-bootstrap/'>twitter-bootstrap</a>
+    <a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -185,7 +188,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.katsyoshi.org/blog/2015/04/09/file-name-needs-scss-extention/" data-via="" data-counturl="http://blog.katsyoshi.org/blog/2015/04/09/file-name-needs-scss-extention/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo/" data-via="" data-counturl="http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo/" >Tweet</a>
   
   
   
@@ -196,10 +199,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/04/07/many-ssh-connection/" title="Previous Post: known_hostsに載っていないホストに接続確認しないようにする">&laquo; known_hostsに載っていないホストに接続確認しないようにする</a>
+        <a class="basic-alignment left" href="/blog/2016/12/05/d250g2/" title="Previous Post: d250g2 advent calendar 2016 5日目">&laquo; d250g2 advent calendar 2016 5日目</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/04/15/looks-good-new-machine/" title="Next Post: おにゅーな">おにゅーな &raquo;</a>
       
     </p>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

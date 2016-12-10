@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gentoo | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/gentoo/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2016-12-05T04:39:20+09:00</updated>
+  <updated>2016-12-10T17:06:51+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[板前さんでGentooを管理]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo/"/>
+    <updated>2016-12-10T16:00:38+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo</id>
+    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
+
+<h2>Itamaeでgentoo管理するには？</h2>
+
+<p>そらはー(<a href="https://twitter.com/sora_h">@sora_h</a>)が作ってる <a href="https://github.com/sorah/itamae-plugin-resource-portage">itamae-plugin-resource-portage</a> 使え</p>
+
+<h2>自作のportage管理ソフトの紹介</h2>
+
+<p><a href="https://github.com/katsyoshi/itamae-recipes/tree/master/cookbook/gentoo">ここ</a>にあります。</p>
+
+<h3>使いかた</h3>
+
+<p>簡単な使いかたとしては以下のようになります</p>
+
+<p><code>
+itamae local gentoo.rb -j package.json
+</code></p>
+
+<p>これだけです。</p>
+
+<h3>パッケージの指定方法</h3>
+
+<p>```yaml
+packages:
+ &ndash; name: &lsquo;category/package&rsquo;
+   portage:</p>
+
+<pre><code> use: 'package'
+ accept_keywords: 'package'
+ license: 'pakcage'
+</code></pre>
+
+<p>```</p>
+
+<p><code>name</code> で <code>category/package</code> を指定することでインストールすることができます。
+<code>portage</code> では <code>use</code> などのフラグを指定して管理します。
+<code>use</code> ディレクトリを作成してそこにファイルを置く必要があります。
+自動生成したいけど、依存パッケージの指定方法とかまだ考えていないので取り敢えず直接指定です。</p>
+
+<h2>おわり</h2>
+
+<p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
+とおもってたら itamae-plugin-resource-portage みつけてしまったので
+itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使いましょう</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ItamaeつかってOSのインストールをやってみた]]></title>
@@ -206,51 +258,6 @@ package not installed
 <h2>追記</h2>
 
 <p>再構築したカーネルをインストールしてなかったというオチでした。</p>
-
-<p>ちゃんちゃん</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gentoo LinuxむけのJubatusパッケージ書いたよ]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2014/09/12/jubatus-in-gentoo/"/>
-    <updated>2014-09-12T12:29:20+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2014/09/12/jubatus-in-gentoo</id>
-    <content type="html"><![CDATA[<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">PC</a>を<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">買い替えた</a>ので<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">環境構築</a>してます。
-<a href="https://github.com/kazuki/overlay/tree/master/sci-calculators/jubatus">Jubatusのoverlay</a>があったのですが、古かったので新しく<a href="https://github.com/katsyoshi/overlay">Jubatusのoverlay</a>作成しました。</p>
-
-<h2>インストール</h2>
-
-<p>これは、以下のコマンドでインストールができます。</p>
-
-<p>```sh</p>
-
-<h1>curl <a href="https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml">https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml</a> > /etc/layman/overlays/katsyoshi.xml</h1>
-
-<h1>layman -f -a katsyoshi</h1>
-
-<h1>eix-sync</h1>
-
-<h1>emerge -av jubatus</h1>
-
-<p>```</p>
-
-<p>でいけるとおもいます。</p>
-
-<h2>未実装</h2>
-
-<ul>
-<li>jubatus_coreのオプションがはたらいてない(ハズ)</li>
-<li>jubatus_msgpack-rpcの依存パッケージにdev-libs/msgpackをいれていない</li>
-<li>jubatusのオプションを確認していない</li>
-</ul>
-
-
-<p>などなどあるので、PRまってます。</p>
-
-<h2>まとめ</h2>
-
-<p><a href="https://github.com/kazuki/overlay/">よくみたら</a>必要なライブラリのパッケージもあったのでこれのバージョンとjubatus_core追加するだけでよかったかも。</p>
 
 <p>ちゃんちゃん</p>
 ]]></content>
