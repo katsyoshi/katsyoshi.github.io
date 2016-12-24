@@ -9,7 +9,9 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="Gentoo Advent Calendar 2016 の10日目の記事です Itamaeでgentoo管理するには？ そらはー(@sora_h)が作ってる itamae-plugin-resource-portage 使え 自作のportage管理ソフトの紹介 ここにあります。 使いかた &hellip;">
+  <meta name="description" content="mikuterでslackや、githubのような絵文字が表示することができるよう
+なプラグインを作成しました。 なんぞそれ？
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +81,103 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-12-17T00:00:00+09:00" pubdate data-updated="true">Dec 17<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>mikuterでslackや、githubのような絵文字が表示することができるよう
+なプラグインを作成しました。</p>
+
+<h2>なんぞそれ？</h2>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-12-17T00:00:00+09:00" pubdate data-updated="true">Dec 17<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
+たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
+
+<h2>なんぞそれ？</h2>
+
+<p><code>:tofu_on_fire:</code> みたいに <code>:</code> で囲われた文字列を絵文字に置換するだけです。</p>
+
+<h2>つかいかた</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
+</span><span class='line'>EDIT ~/.mikutter/plugin/emoji
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>gitでプラグインディレクトリにコピーします。
+コピーしたら、絵文字の設定をemoji.yamlに入れます。
+今は5つしか登録していないので皆で登録しましょう</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -745,238 +844,6 @@ sshdの起動とrootのパスワードを設定します。起動したら以下
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/31/hello-mikutter/">Hello Mikutter</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-08-31T22:55:03+09:00" pubdate data-updated="true">Aug 31<span>st</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>表題のとおりmikutterをgemでインストールできるようにしてみました。</p>
-
-<h2>どうやって？</h2>
-
-<p><a href="https://rubygems.org">rubygems</a> からはまだインストールはできません。
-ので、以下の様にしてgem packageを作成します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone github.com/katsyoshi/mikutter.git
-</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>mikutter
-</span><span class='line'><span class="gp">$</span> git checkout reokure-ru
-</span><span class='line'><span class="gp">$</span> bundle install
-</span><span class='line'><span class="gp">$</span> bundle <span class="nb">exec </span>rake build
-</span><span class='line'><span class="gp">$</span> gem install pkg/mikutter-3.5.0.pre.dev.gem
-</span><span class='line'><span class="gp">$</span> mikutter
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでmikutterコマンドで起動できるようになっています
-これすらめんどうな人は<a href="https://katsyoshi.org/mikutter-3.5.0.pre.dev.gem">ここ</a>にあります。
-ダウンロードして <code>gem install mikutter-3.5.0.pre.dev.gem</code> でインストールできます。
-プラグインで起動できないとかあるなら必要なgemをインストールしてください。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/08/renewal-my-site/">RENEWAL MY SITE!!!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-08-08T21:05:47+09:00" pubdate data-updated="true">Aug 8<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ってのは嘘ではないですが、嘘に近いです。
-実はおとといの土曜日に katsyoshi.org をのぞいたら、 <em>nginx</em> の初期ページが表示されたので
-とくにコンテンツはないですが、いそいでサイトの復旧をしました。
-が、もともとあったファイル置場を失念したため似た感じで再構築してました。
-再構築ついでにssl化、<code>nginx</code> から <code>h2o</code> へのWebサーバー変更しました。
-あと <code>systemd</code> でデーモン化とかも。</p>
-
-<h2>Let&rsquo;s Encrypt</h2>
-
-<p>リリースされてだいぶたつのですが、<a href="https://letsencrypt.org">Let&rsquo;s Encrypt</a>を利用してみました。
-Ubuntu Linux 16.04 では、簡単に導入できます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> sudo apt install letsencrypt
-</span><span class='line'><span class="gp">$</span> sudo letsencrypt certonly
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でいくつかの質問に答えればおわりです。
-ここで、戸惑った場面としては認証を受けたいサーバーの確認があるのですが、
-サーバーポート443を開ける<a href="https://letsencrypt.jp">必要があり</a>、1回失敗しました。</p>
-
-<h2>H2O</h2>
-
-<p>せっかくだし、<a href="https://h2o.examp1e.net/">H2O</a>を使おうと思います。
-インストールはかんたんでいかのようにすればokです。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone h2o/h2o
-</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>h2o
-</span><span class='line'><span class="gp">$</span> cmake -DCMAKE_INSTALL_PREFIX_PATH<span class="o">=</span>/opt/local .
-</span><span class='line'><span class="gp">$</span> make <span class="o">&amp;&amp;</span> make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>設定は<a href="https://h2o.examp1e.net/configure/quick_start.html">ここ</a>と<a href="https://github.com/h2o/h2o/wiki/redirect-HTTP-to-HTTPS">ここ</a>を参考にして以下にしています。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">user: www-data</span>
-</span><span class='line'><span class="go">hosts:</span>
-</span><span class='line'><span class="go">  &quot;katsyoshi.org:80&quot;:</span>
-</span><span class='line'><span class="go">    listen:</span>
-</span><span class='line'><span class="go">      port: 80</span>
-</span><span class='line'><span class="go">    paths:</span>
-</span><span class='line'><span class="go">      /:</span>
-</span><span class='line'><span class="go">        redirect: https://katsyoshi.org</span>
-</span><span class='line'><span class="go">hosts:</span>
-</span><span class='line'><span class="go">  &quot;katsyoshi.org:443&quot;:</span>
-</span><span class='line'><span class="go">    listen:</span>
-</span><span class='line'><span class="go">      port: 443</span>
-</span><span class='line'><span class="go">      ssl:</span>
-</span><span class='line'><span class="go">        certificate-file: /etc/letsencrypt/live/katsyoshi.org/fullchain.pem</span>
-</span><span class='line'><span class="go">        key-file: /etc/letsencrypt/live/katsyoshi.org/privkey.pem</span>
-</span><span class='line'><span class="go">    paths:</span>
-</span><span class='line'><span class="go">      /:</span>
-</span><span class='line'><span class="go">        file.dir: /opt/website/top</span>
-</span><span class='line'><span class="go">access-log: /var/log/h2o/access.log</span>
-</span><span class='line'><span class="go">error-log: /var/log/h2o/error.log</span>
-</span><span class='line'><span class="go">pid-file: /var/run/h2o.pid</span>
-</span><span class='line'><span class="go">http2-reprioritize-blocking-assets: ON</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2><a href="https://negima.mobi/2015/10/2092">h2o.service</a></h2>
-
-<p>さいきんわだいのしすてむでーってやつででーもん？かしようとおもいます</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">[Unit]</span>
-</span><span class='line'><span class="go">Description=H2O the optimized HTTP/1, HTTP/2 server</span>
-</span><span class='line'><span class="go">After=syslog.target network.target remote-fs.target nss-lookup.target</span>
-</span><span class='line'>
-</span><span class='line'><span class="go">[Service]</span>
-</span><span class='line'><span class="go">Type=forking</span>
-</span><span class='line'><span class="go">PIDFile=/var/run/h2o.pid</span>
-</span><span class='line'><span class="go">ExecStartPre=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -t</span>
-</span><span class='line'><span class="go">ExecStart=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -m daemon</span>
-</span><span class='line'><span class="go">ExecReload=/bin/kill -s HUP $MAINPID</span>
-</span><span class='line'><span class="go">ExecStop=/bin/kill -s QUIT $MAINPID</span>
-</span><span class='line'><span class="go">PrivateTmp=true</span>
-</span><span class='line'>
-</span><span class='line'><span class="go">[Install]</span>
-</span><span class='line'><span class="go">WantedBy=multi-user.target</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>いやーしすてむでーってべんりですねー</p>
-
-<h2>owari</h2>
-
-<p>サイトがぶっとんだのでサイトの復旧？と let&rsquo;s encrypt でのSSL化、 h2oへのウェブサーバー変更と <code>systemd</code> でのデーモン化をやりました。</p>
-
-<p>1年ぶりの日記だたので、Markdownどうかくんだっけ？とか、別のところで大変でした。</p>
-
-<h2>参考サイト</h2>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -992,6 +859,14 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/10/itamae-loves-gentoo/">板前さんでGentooを管理</a>
       </li>
     
@@ -1001,14 +876,6 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
     
       <li class="post">
         <a href="/blog/2016/12/01/im-rockn-roll-star/">Rock&#8217;n&#8217; Roll Star</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/29/introduced-cuda/">YARAKASHI CUDA編</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/28/hello/">あったらしーPCかったよー</a>
       </li>
     
   </ul>

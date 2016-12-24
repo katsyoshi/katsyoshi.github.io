@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2016-12-24T13:09:37+09:00</updated>
+  <updated>2016-12-24T13:09:53+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -39,7 +39,7 @@
 
 <h2>つかいかた</h2>
 
-<p><code>shellscript
+<p><code>sh
 git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
 EDIT ~/.mikutter/plugin/emoji
 </code></p>

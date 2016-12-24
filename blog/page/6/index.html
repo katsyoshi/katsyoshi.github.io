@@ -9,8 +9,8 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="いいかげんtreasure dataを使おうかな。
-ということでこの鯖のアクセスログをfluentdを使って保存しようとおもいます。 今回はtd-agentを利用せずにgemからインストールしたfluentdを利用します。 環境 環境としてUbuntu 12.04を利用しています。 準備 &hellip;">
+  <meta name="description" content="最近話題のDocker使ってJubatusを動かしてみたのでメモ的なものを 環境 環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作 Vagrant: 1.5.4
+docker: 0.11.1 Dockerfile &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,130 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/12/jubatus-runs-on-docker/">JubatusをDocker上で動かしてみた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-12T23:50:33+09:00" pubdate data-updated="true">May 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近話題の<a href="https://www.docker.io/">Docker</a>使ってJubatusを動かしてみたのでメモ的なものを</p>
+
+<h2>環境</h2>
+
+<p>環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作</p>
+
+<ul>
+<li>Vagrant: 1.5.4</li>
+<li>docker: 0.11.1</li>
+</ul>
+
+
+<h2>Dockerfile</h2>
+
+<p><a href="https://github.com/katsyoshi/docker-jubatus">リポジトリ</a>を作成しておきましたのでcloneして実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/katsyoshi/docker-jubatus
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>docker-jubatus
+</span><span class='line'><span class="nv">$ </span>docker build .
+</span><span class='line'><span class="nv">$ </span>docker run -p 9199:9199 最後に出てきたハッシュ値
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で動きはじめます。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus/">Jubatus Handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-21T23:45:43+09:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2><a href="http://connpass.com/event/5641/">Jubatus Handson</a>行ってきました</h2>
+
+<p>行ってきました。</p>
+
+<h2>fluent-plugin-jubatus 0.0.2をリリースしました</h2>
+
+<p>先日<a href="http://regional.rubykaigi.org/oedo04">大江戸Ruby会議04</a>に行ってみたらやる気が湧いてきたので半年ほど寝かせておいた<a href="http://rubygems.org/gems/fluent-plugin-jubatus">fluent-plugin-jubatus</a>をアップデートしました。</p>
+
+<p>大きな変更点としては、異常検知（jubaanomaly）をサポートするようになってます。</p>
+
+<h3>プラグインの今後</h3>
+
+<p>今回も入れなかったのですが、このプラグインでは未だ判定のみのサポートです。
+理由としては</p>
+
+<ul>
+<li>計算量</li>
+<li>メモリ</li>
+</ul>
+
+
+<p>のふたつがあげられます。計算量に関しては以前手元のMacで異常検出を動作させていたときマシンの動作がもっさりになるほどの計算量があったためです。メモリに関しては今のところ不安には感じてはいないですが、データ量(数)が巨大になったときどこまで必要なのかってのがよくわからない。という理由で積極的に導入していないです。</p>
+
+<p>これらを解消する方法としては忘却(<a href="https://github.com/jubatus/jubatus/tree/feature/unlearning">unlearning</a>)が考えられるのですが、じゃぁどの必要のないデータを忘却させるのって問題があります。</p>
+
+<p>とはいえ、そろそろ導入したいので<a href="https://github.com/katsyoshi/fluent-plugin-jubatus">pull req</a>まってます。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -654,6 +778,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/10/itamae-loves-gentoo/">板前さんでGentooを管理</a>
       </li>
     
@@ -663,14 +795,6 @@
     
       <li class="post">
         <a href="/blog/2016/12/01/im-rockn-roll-star/">Rock&#8217;n&#8217; Roll Star</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/29/introduced-cuda/">YARAKASHI CUDA編</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/28/hello/">あったらしーPCかったよー</a>
       </li>
     
   </ul>

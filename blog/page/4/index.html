@@ -9,7 +9,10 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。 インストール これは簡単で Gemfile に typescript-rails を追加すればいけます。ですが、jQueryがTypeScript v1. &hellip;">
+  <meta name="description" content="普段、emacs上でフォントを Ricty にして使ってたけど、微妙にずれるのを解消できなかったはなし 症状と設定 Rictyのときの症状と設定をのせておきます。 1
+2
+3
+(set-face-attribute &#39;default nil :family &quot;Ricty&quot &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +82,171 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/31/emacs-fonts/">Rictyやめるってよ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-31T07:10:29+09:00" pubdate data-updated="true">Jan 31<span>st</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>普段、emacs上でフォントを <code>Ricty</code> にして使ってたけど、微妙にずれるのを解消できなかったはなし</p>
+
+<h2>症状と設定</h2>
+
+<p>Rictyのときの症状と設定をのせておきます。</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/Ricty.png" alt="Ricty" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;Ricty&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="nv">nil</span> <span class="ss">&#39;font</span><span class="p">)</span> <span class="ss">&#39;japanese-jisx0208</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="s">&quot;iso10646-1&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nf">setq</span> <span class="nv">face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="mf">1.2</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で解消できそうにないので DejaVu を用いて表示するように変更しました。</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/DejaVu.png" alt="DejaVu" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;DejaVu&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じになりました。</p>
+
+<h2>おわり</h2>
+
+<p>よくわからないので諦めました。ので参考に</p>
+
+<p>最後に引っ越ししました。</p>
+
+<p><a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
+
+<h2>追記</h2>
+
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/katsyoshi">@katsyoshi</a> (setq face-font-rescale-alist &#39;((&quot;Ricty&quot; . 1.0))) で常用していてずれないのですが、これだとどうなりますか?</p>&mdash; つまみ (@polamjag) <a href="https://twitter.com/polamjag/status/561875516118949889">February 1, 2015</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>とアドバイスがありましたので、やってみました!!!!!!</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /></p>
+
+<p>ほんとにちょっとずれて気になる…</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/27/start-rust/">Start Rust by Example</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-27T07:10:29+09:00" pubdate data-updated="true">Jan 27<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>年ぁけたので、新しいプログラミング言語を覚えようと思い<a href="http://www.rust-lang.org">Rust Lang</a>を始めました。</p>
+
+<p>チュートリアルとして<a href="http://rustbyexample.com">Rust bye Example</a>を<a href="https://github.com/katsyoshi/rustbyexamle">やっていって</a>ます。</p>
+
+<h2>気が付いた点</h2>
+
+<p>Rustという言語は変更が多いらしいのでここでは、Chap.1-14(2015/01/25時点)までで気がついた点で書きます。 まず、今回環境を下に示します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rustc --version
+</span><span class='line'>rustc 1.0.0-nightly <span class="o">(</span>29bd9a06e 2015-01-20 23:03:09 +0000<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>i &ndash;> is</h3>
+
+<p>まず、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/2.FormattedPrint/FormattedPrint.rs#L9">Chap. 2のコード</a>で<code>integer</code>のsuffixが<code>is</code>に変更されています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>FormattedPrint.rs:9:69: 9:71 warning: the <span class="sb">`</span>i<span class="sb">`</span> suffix on integers is deprecated; use <span class="sb">`</span>is<span class="sb">`</span> or one of the fixed-sized suffixes
+</span><span class='line'>FormattedPrint.rs:9     println!<span class="o">(</span><span class="s2">&quot;{} of {:b} people know binary, the other half don&#39;t&quot;</span>, 1i, 2i<span class="o">)</span>;
+</span><span class='line'>                                                                                        ^~
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>range(a, b) –> (a..b)</h3>
+
+<p>つぎに、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/10.ForAndRange/ForAndRange.rs#L2">Chap. 10のコード</a>で<code>range(a, b)</code>がunstableになっているので<code>(a..b)</code>に変更しました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ForAndRange.rs:2:14: 2:19 warning: use of unstable item: will be replaced by range notation, <span class="c">#[warn(unstable)] on by default</span>
+</span><span class='line'>ForAndRange.rs:2     <span class="k">for </span>n in range<span class="o">(</span>1u32, 101<span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                              ^~~~~
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>いま確認してたらそもそもRust by Example自体が変更されてた…</p>
+
+<p>ちゃんちゃん</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -669,164 +837,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">Gentoo Install Battle Part III</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-31T10:47:14+09:00" pubdate data-updated="true">Aug 31<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>これ<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">まで</a>の<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">流れ</a>で準備が整ったので、Installを始めます。</p>
-
-<h2>インストール</h2>
-
-<p>これは<a href="http://wiki.gentoo.org/">Gentoo Wiki</a>を見ながらで大丈夫です。</p>
-
-<h3>嵌ったところ</h3>
-
-<p>音が鳴らないという問題が発生しました。<a href="http://pocke.hatenablog.com/entry/2014/02/02/100636">理由</a>は簡単でしたのですぐに設定しました。</p>
-
-<p>つぎにネットワークの設定をnetmountからNetworkManagerに変更しました。
-設定は<a href="http://wiki.gentoo.org/wiki/NetworkManager">ここ</a>で行なえばよいです。</p>
-
-<p>最後にibus-mozcをインストールして終りです。</p>
-
-<h2>mikutter</h2>
-
-<p>GentooInstallBattleはmikutterをインストールしてtweetすることなのでmikutterをインストールします。
-ここではrbenvを利用してmikutterのインストールします。
-まずはrbenvとruby-buildをインストールします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-</span><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>つぎにrbenvの設定を行います。以下の設定を<code>~/.bashrc</code>あたりに追記してください</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/.rbenv/bin:<span class="nv">$PATH</span>
-</span><span class='line'><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Rubyのインストールは<code>rbenv install 2.1.2</code>でインストールします。
-最後にmikutterをダウンロードし、環境を構築します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/mikutter/mikutter.git ~/mikutter
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/mikutter
-</span><span class='line'><span class="nv">$ </span>bundle install
-</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>ruby mikutter.rb
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でインストール終了!!
-これで快適なmikutterライフがておくれますね。</p>
-
-<p><img src="/images/photo/mikutter.png" alt="mikutter" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">Gentoo Install Battle Part II</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-21T20:01:51+09:00" pubdate data-updated="true">Aug 21<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>X240の準備は終ったので、<a href="http://wiki.gentoo.org/wiki/Quick_install_guide">インストール</a>します。基本的にはこの流れです。</p>
-
-<h2>USBブート</h2>
-
-<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">作成したUSBメモリ</a>をX240に差して起動します。
-起動したら、まずパーティションの設定を行います。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gpart /dev/sda
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で不要なパーティションを削除し、必要なパーティションを作成します。</p>
-
-<h2>無線LAN</h2>
-
-<p>ネットワークを接続しますが、今回は無線LANを利用してインストールを行います。</p>
-
-<p>まず、どこか適当な位置に<a href="http://www.xmisao.com/2014/01/16/how-to-connect-wpa2-wireless-lan-using-wpa-supplicant.html">リンク先</a>のファイルを作成してください。</p>
-
-<p>次に以下のコマンドを実行します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>実行したら、接続されているのでATL + F2とかでコンソールの表示を変更してください。</p>
-
-<h2>おわり</h2>
-
-<p>有線のLANケーブルがなかったからはまった。
-続きは明日以降に…</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -844,6 +854,14 @@ RubyChallengeはコミッタでも間違えててむずかしい。
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/10/itamae-loves-gentoo/">板前さんでGentooを管理</a>
       </li>
     
@@ -853,14 +871,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
     
       <li class="post">
         <a href="/blog/2016/12/01/im-rockn-roll-star/">Rock&#8217;n&#8217; Roll Star</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/29/introduced-cuda/">YARAKASHI CUDA編</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/28/hello/">あったらしーPCかったよー</a>
       </li>
     
   </ul>

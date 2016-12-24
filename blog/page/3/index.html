@@ -9,9 +9,9 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="昨日の続きで、 lxc で大量のサーバを立てて、
-SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。 解決方法 1
-$ ssh -oStrictHostKeyChecking=no anywhere.example.com で接続確認の yes or no &hellip;">
+  <meta name="description" content="以前買ったX240があまりにも使い辛いので
+X250を買った。それ以外にもメガネも一つ買ってみた。 あと欲しいのは、ルンバかなあ
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,124 @@ $ ssh -oStrictHostKeyChecking=no anywhere.example.com で接続確認の yes or 
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/15/looks-good-new-machine/">おにゅーな</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-15T01:15:45+09:00" pubdate data-updated="true">Apr 15<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>以前買った<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">X240</a>があまりにも使い辛いので
+X250を買った。それ以外にもメガネも一つ買ってみた。</p>
+
+<p>あと欲しいのは、ルンバかなあ</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/09/file-name-needs-scss-extention/">ファイル名間違えてテスト通らなかった話</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-09T15:38:49+09:00" pubdate data-updated="true">Apr 9<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://rails-assets.org">rails-assets.org</a> から <code>bootstrap-sass-official</code> をインストールし、動かしたら、 test環境でテストが落ちてたのでメモ。</p>
+
+<h2>オチ</h2>
+
+<p>CSSの<a href="https://twitter.com/izumin5210/status/586054782994874368">ファイル名</a>が <code>application.css.scss</code> じゃなかった。</p>
+
+<h2>設定</h2>
+
+<p>まず、<code>Gemfile</code> に以下のように追記をします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s1">&#39;https://rails-assets.org&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;rails-asstes-bootstrap-sass-official&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>あとはいつも通りにインストールします。
+次に <code>app/assets/javascripts/application.js</code> や <code>app/assets/stylesheets/application.css</code> に必要な読み込みを<a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">設定</a>します。</p>
+
+<h2>問題</h2>
+
+<p>以上の設定が終ったあと、 <code>cucumber</code> でテストを実行すると、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">File</span> <span class="n">to</span> <span class="n">import</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">or</span> <span class="ss">unreadable</span><span class="p">:</span> <span class="n">bootstrap</span><span class="o">-</span><span class="n">sass</span><span class="o">-</span><span class="n">official</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">sprockets</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>などといわれますのでオチを参考にファイル名変更して終了です。</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h3>参考</h3>
+
+<ol>
+<li><a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5</a></li>
+<li><a href="https://twitter.com/izumin5210/status/586054782994874368">https://twitter.com/izumin5210/status/586054782994874368</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -575,171 +693,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/31/emacs-fonts/">Rictyやめるってよ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-31T07:10:29+09:00" pubdate data-updated="true">Jan 31<span>st</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>普段、emacs上でフォントを <code>Ricty</code> にして使ってたけど、微妙にずれるのを解消できなかったはなし</p>
-
-<h2>症状と設定</h2>
-
-<p>Rictyのときの症状と設定をのせておきます。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/Ricty.png" alt="Ricty" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;Ricty&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="nv">nil</span> <span class="ss">&#39;font</span><span class="p">)</span> <span class="ss">&#39;japanese-jisx0208</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="s">&quot;iso10646-1&quot;</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="nf">setq</span> <span class="nv">face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="mf">1.2</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で解消できそうにないので DejaVu を用いて表示するように変更しました。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/DejaVu.png" alt="DejaVu" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;DejaVu&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんな感じになりました。</p>
-
-<h2>おわり</h2>
-
-<p>よくわからないので諦めました。ので参考に</p>
-
-<p>最後に引っ越ししました。</p>
-
-<p><a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
-
-<h2>追記</h2>
-
-<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/katsyoshi">@katsyoshi</a> (setq face-font-rescale-alist &#39;((&quot;Ricty&quot; . 1.0))) で常用していてずれないのですが、これだとどうなりますか?</p>&mdash; つまみ (@polamjag) <a href="https://twitter.com/polamjag/status/561875516118949889">February 1, 2015</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>とアドバイスがありましたので、やってみました!!!!!!</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /></p>
-
-<p>ほんとにちょっとずれて気になる…</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/27/start-rust/">Start Rust by Example</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-27T07:10:29+09:00" pubdate data-updated="true">Jan 27<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>年ぁけたので、新しいプログラミング言語を覚えようと思い<a href="http://www.rust-lang.org">Rust Lang</a>を始めました。</p>
-
-<p>チュートリアルとして<a href="http://rustbyexample.com">Rust bye Example</a>を<a href="https://github.com/katsyoshi/rustbyexamle">やっていって</a>ます。</p>
-
-<h2>気が付いた点</h2>
-
-<p>Rustという言語は変更が多いらしいのでここでは、Chap.1-14(2015/01/25時点)までで気がついた点で書きます。 まず、今回環境を下に示します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rustc --version
-</span><span class='line'>rustc 1.0.0-nightly <span class="o">(</span>29bd9a06e 2015-01-20 23:03:09 +0000<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>i &ndash;> is</h3>
-
-<p>まず、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/2.FormattedPrint/FormattedPrint.rs#L9">Chap. 2のコード</a>で<code>integer</code>のsuffixが<code>is</code>に変更されています。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>FormattedPrint.rs:9:69: 9:71 warning: the <span class="sb">`</span>i<span class="sb">`</span> suffix on integers is deprecated; use <span class="sb">`</span>is<span class="sb">`</span> or one of the fixed-sized suffixes
-</span><span class='line'>FormattedPrint.rs:9     println!<span class="o">(</span><span class="s2">&quot;{} of {:b} people know binary, the other half don&#39;t&quot;</span>, 1i, 2i<span class="o">)</span>;
-</span><span class='line'>                                                                                        ^~
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>range(a, b) –> (a..b)</h3>
-
-<p>つぎに、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/10.ForAndRange/ForAndRange.rs#L2">Chap. 10のコード</a>で<code>range(a, b)</code>がunstableになっているので<code>(a..b)</code>に変更しました。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>ForAndRange.rs:2:14: 2:19 warning: use of unstable item: will be replaced by range notation, <span class="c">#[warn(unstable)] on by default</span>
-</span><span class='line'>ForAndRange.rs:2     <span class="k">for </span>n in range<span class="o">(</span>1u32, 101<span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>                              ^~~~~
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おわり</h2>
-
-<p>いま確認してたらそもそもRust by Example自体が変更されてた…</p>
-
-<p>ちゃんちゃん</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -757,6 +710,14 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/10/itamae-loves-gentoo/">板前さんでGentooを管理</a>
       </li>
     
@@ -766,14 +727,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
     
       <li class="post">
         <a href="/blog/2016/12/01/im-rockn-roll-star/">Rock&#8217;n&#8217; Roll Star</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/29/introduced-cuda/">YARAKASHI CUDA編</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/28/hello/">あったらしーPCかったよー</a>
       </li>
     
   </ul>
