@@ -9,9 +9,8 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="mikuterでslackや、githubのような絵文字が表示することができるよう
-なプラグインを作成しました。 なんぞそれ？
-">
+  <meta name="description" content="mikutter advent calenedar 2016 17日目の記事です
+たぶんだれかが作ってた気がするけど、mikuterでslackや、githubのような絵文字を表示するプラグインを作成しました。 なんぞそれ？ :tofu_on_fire: みたいに : &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,45 +109,6 @@
   </header>
 
 
-  <div class="entry-content"><p>mikuterでslackや、githubのような絵文字が表示することができるよう
-なプラグインを作成しました。</p>
-
-<h2>なんぞそれ？</h2>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-12-17T00:00:00+09:00" pubdate data-updated="true">Dec 17<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
   <div class="entry-content"><p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
 たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
 
@@ -161,12 +121,12 @@
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
-</span><span class='line'>EDIT ~/.mikutter/plugin/emoji
+</span><span class='line'>EDIT ~/.mikutter/plugin/emoji/emoji.yml
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>gitでプラグインディレクトリにコピーします。
-コピーしたら、絵文字の設定をemoji.yamlに入れます。
+コピーしたら、絵文字の設定を <code>emoji.yml</code> に入れます。
 今は5つしか登録していないので皆で登録しましょう</p>
 
 <h2>おわり</h2>
@@ -844,6 +804,69 @@ sshdの起動とrootのパスワードを設定します。起動したら以下
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/31/hello-mikutter/">Hello Mikutter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-31T22:55:03+09:00" pubdate data-updated="true">Aug 31<span>st</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>表題のとおりmikutterをgemでインストールできるようにしてみました。</p>
+
+<h2>どうやって？</h2>
+
+<p><a href="https://rubygems.org">rubygems</a> からはまだインストールはできません。
+ので、以下の様にしてgem packageを作成します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone github.com/katsyoshi/mikutter.git
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>mikutter
+</span><span class='line'><span class="gp">$</span> git checkout reokure-ru
+</span><span class='line'><span class="gp">$</span> bundle install
+</span><span class='line'><span class="gp">$</span> bundle <span class="nb">exec </span>rake build
+</span><span class='line'><span class="gp">$</span> gem install pkg/mikutter-3.5.0.pre.dev.gem
+</span><span class='line'><span class="gp">$</span> mikutter
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでmikutterコマンドで起動できるようになっています
+これすらめんどうな人は<a href="https://katsyoshi.org/mikutter-3.5.0.pre.dev.gem">ここ</a>にあります。
+ダウンロードして <code>gem install mikutter-3.5.0.pre.dev.gem</code> でインストールできます。
+プラグインで起動できないとかあるなら必要なgemをインストールしてください。</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -863,10 +886,6 @@ sshdの起動とrootのパスワードを設定します。起動したら以下
       </li>
     
       <li class="post">
-        <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2016/12/10/itamae-loves-gentoo/">板前さんでGentooを管理</a>
       </li>
     
@@ -876,6 +895,10 @@ sshdの起動とrootのパスワードを設定します。起動したら以下
     
       <li class="post">
         <a href="/blog/2016/12/01/im-rockn-roll-star/">Rock&#8217;n&#8217; Roll Star</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/29/introduced-cuda/">YARAKASHI CUDA編</a>
       </li>
     
   </ul>

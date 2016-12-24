@@ -9,10 +9,7 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="普段、emacs上でフォントを Ricty にして使ってたけど、微妙にずれるのを解消できなかったはなし 症状と設定 Rictyのときの症状と設定をのせておきます。 1
-2
-3
-(set-face-attribute &#39;default nil :family &quot;Ricty&quot &hellip;">
+  <meta name="description" content="年ぁけたので、新しいプログラミング言語を覚えようと思いRust Langを始めました。 チュートリアルとしてRust bye Exampleをやっていってます。 気が付いた点 Rustという言語は変更が多いらしいのでここでは、Chap.1-14(2015/01/25時点) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,90 +79,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/31/emacs-fonts/">Rictyやめるってよ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-31T07:10:29+09:00" pubdate data-updated="true">Jan 31<span>st</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>普段、emacs上でフォントを <code>Ricty</code> にして使ってたけど、微妙にずれるのを解消できなかったはなし</p>
-
-<h2>症状と設定</h2>
-
-<p>Rictyのときの症状と設定をのせておきます。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/Ricty.png" alt="Ricty" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;Ricty&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="nv">nil</span> <span class="ss">&#39;font</span><span class="p">)</span> <span class="ss">&#39;japanese-jisx0208</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="s">&quot;iso10646-1&quot;</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="nf">setq</span> <span class="nv">face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="mf">1.2</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で解消できそうにないので DejaVu を用いて表示するように変更しました。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/DejaVu.png" alt="DejaVu" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;DejaVu&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんな感じになりました。</p>
-
-<h2>おわり</h2>
-
-<p>よくわからないので諦めました。ので参考に</p>
-
-<p>最後に引っ越ししました。</p>
-
-<p><a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
-
-<h2>追記</h2>
-
-<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/katsyoshi">@katsyoshi</a> (setq face-font-rescale-alist &#39;((&quot;Ricty&quot; . 1.0))) で常用していてずれないのですが、これだとどうなりますか?</p>&mdash; つまみ (@polamjag) <a href="https://twitter.com/polamjag/status/561875516118949889">February 1, 2015</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>とアドバイスがありましたので、やってみました!!!!!!</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /></p>
-
-<p>ほんとにちょっとずれて気になる…</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -837,6 +750,96 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">Gentoo Install Battle Part III</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-31T10:47:14+09:00" pubdate data-updated="true">Aug 31<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>これ<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">まで</a>の<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">流れ</a>で準備が整ったので、Installを始めます。</p>
+
+<h2>インストール</h2>
+
+<p>これは<a href="http://wiki.gentoo.org/">Gentoo Wiki</a>を見ながらで大丈夫です。</p>
+
+<h3>嵌ったところ</h3>
+
+<p>音が鳴らないという問題が発生しました。<a href="http://pocke.hatenablog.com/entry/2014/02/02/100636">理由</a>は簡単でしたのですぐに設定しました。</p>
+
+<p>つぎにネットワークの設定をnetmountからNetworkManagerに変更しました。
+設定は<a href="http://wiki.gentoo.org/wiki/NetworkManager">ここ</a>で行なえばよいです。</p>
+
+<p>最後にibus-mozcをインストールして終りです。</p>
+
+<h2>mikutter</h2>
+
+<p>GentooInstallBattleはmikutterをインストールしてtweetすることなのでmikutterをインストールします。
+ここではrbenvを利用してmikutterのインストールします。
+まずはrbenvとruby-buildをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+</span><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>つぎにrbenvの設定を行います。以下の設定を<code>~/.bashrc</code>あたりに追記してください</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/.rbenv/bin:<span class="nv">$PATH</span>
+</span><span class='line'><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rubyのインストールは<code>rbenv install 2.1.2</code>でインストールします。
+最後にmikutterをダウンロードし、環境を構築します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/mikutter/mikutter.git ~/mikutter
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/mikutter
+</span><span class='line'><span class="nv">$ </span>bundle install
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>ruby mikutter.rb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でインストール終了!!
+これで快適なmikutterライフがておくれますね。</p>
+
+<p><img src="/images/photo/mikutter.png" alt="mikutter" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -858,10 +861,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
       </li>
     
       <li class="post">
-        <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2016/12/10/itamae-loves-gentoo/">板前さんでGentooを管理</a>
       </li>
     
@@ -871,6 +870,10 @@ RubyChallengeはコミッタでも間違えててむずかしい。
     
       <li class="post">
         <a href="/blog/2016/12/01/im-rockn-roll-star/">Rock&#8217;n&#8217; Roll Star</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/29/introduced-cuda/">YARAKASHI CUDA編</a>
       </li>
     
   </ul>

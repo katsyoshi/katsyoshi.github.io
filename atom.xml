@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2016-12-24T13:09:53+09:00</updated>
+  <updated>2016-12-24T16:08:43+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,18 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[みくったーでえもじ]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter/"/>
-    <updated>2016-12-17T00:00:00+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter</id>
-    <content type="html"><![CDATA[<p>mikuterでslackや、githubのような絵文字が表示することができるよう
-なプラグインを作成しました。</p>
-
-<h2>なんぞそれ？</h2>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[みくったーでえもじ]]></title>
@@ -42,12 +30,12 @@
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
-</span><span class='line'>EDIT ~/.mikutter/plugin/emoji
+</span><span class='line'>EDIT ~/.mikutter/plugin/emoji/emoji.yml
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>gitでプラグインディレクトリにコピーします。
-コピーしたら、絵文字の設定をemoji.yamlに入れます。
+コピーしたら、絵文字の設定を <code>emoji.yml</code> に入れます。
 今は5つしか登録していないので皆で登録しましょう</p>
 
 <h2>おわり</h2>
@@ -1051,6 +1039,18 @@ Linuxで使ってみた。</p>
 <p>などあります。</p>
 
 <p>そのうちなにかこれで書くかなぁ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[おにゅーな]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/04/15/looks-good-new-machine/"/>
+    <updated>2015-04-15T01:15:45+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/04/15/looks-good-new-machine</id>
+    <content type="html"><![CDATA[<p>以前買った<a href="http://blog.katsyoshi.org/blog/2014/08/20/gentoo-install-battle-part-i/">X240</a>があまりにも使い辛いので
+X250を買った。それ以外にもメガネも一つ買ってみた。</p>
+
+<p>あと欲しいのは、ルンバかなあ</p>
 ]]></content>
   </entry>
   
