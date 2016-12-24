@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Advent_calendar | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/advent-calendar/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2016-12-10T17:06:51+09:00</updated>
+  <updated>2016-12-24T13:09:17+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[みくったーでえもじ]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter/"/>
+    <updated>2016-12-17T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter</id>
+    <content type="html"><![CDATA[<p>mikuterでslackや、githubのような絵文字が表示することができるよう
+なプラグインを作成しました。</p>
+
+<h2>なんぞそれ？</h2>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[みくったーでえもじ]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter/"/>
+    <updated>2016-12-17T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter</id>
+    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
+たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
+
+<h2>なんぞそれ？</h2>
+
+<p><code>:tofu_on_fire:</code> みたいに <code>:</code> で囲われた文字列を絵文字に置換するだけです。</p>
+
+<h2>つかいかた</h2>
+
+<p><code>shell
+git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
+EDIT ~/.mikutter/plugin/emoji
+</code></p>
+
+<p>gitでプラグインディレクトリにコピーします。
+コピーしたら、絵文字の設定をemoji.yamlに入れます。
+今は5つしか登録していないので皆で登録しましょう</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[板前さんでGentooを管理]]></title>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2016-12-10T17:06:51+09:00</updated>
+  <updated>2016-12-24T13:09:17+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[みくったーでえもじ]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter/"/>
+    <updated>2016-12-17T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter</id>
+    <content type="html"><![CDATA[<p>mikuterでslackや、githubのような絵文字が表示することができるよう
+なプラグインを作成しました。</p>
+
+<h2>なんぞそれ？</h2>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[みくったーでえもじ]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter/"/>
+    <updated>2016-12-17T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter</id>
+    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
+たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
+
+<h2>なんぞそれ？</h2>
+
+<p><code>:tofu_on_fire:</code> みたいに <code>:</code> で囲われた文字列を絵文字に置換するだけです。</p>
+
+<h2>つかいかた</h2>
+
+<p><code>shell
+git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
+EDIT ~/.mikutter/plugin/emoji
+</code></p>
+
+<p>gitでプラグインディレクトリにコピーします。
+コピーしたら、絵文字の設定をemoji.yamlに入れます。
+今は5つしか登録していないので皆で登録しましょう</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[板前さんでGentooを管理]]></title>
@@ -129,98 +170,6 @@ include_recipe 'plenv::system'
 <p><code>sh
 $ sudo shred -n 3 -v /dev/sda
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Softether]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/05/03/softether/"/>
-    <updated>2015-05-03T16:28:42+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/05/03/softether</id>
-    <content type="html"><![CDATA[<p>Ubuntuに<a href="https://www.softether.jp/">SoftEther</a>を導入してみた。</p>
-
-<h2>マシン構成</h2>
-
-<p><code>
-OS: Ubuntu Linux 14.4.0.2 LTS
-Machine: SakuraVPS 1GBプラン
-</code></p>
-
-<h2>インストール</h2>
-
-<p><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">ここ</a>を参考にインストール、設定すればいけます。</p>
-
-<h3>嵌ったところ</h3>
-
-<p><code>nginx</code> で <code>ssl</code> 動かしてた。</p>
-
-<p>設定ができなかったが <code>sudo service nginx stop</code> として、 <code>nginx</code> を止めたあと、 <code>sudo vpncmd</code> とすれば設定できます。</p>
-
-<h2>おわり</h2>
-
-<p>自作のRailsアプリCIを自宅で動かそうと思ってVPN導入してみたが、一人で開発してるしCIに問題がない限り必要ないというのを構築したあと気が付いた。</p>
-
-<h3>参考</h3>
-
-<ol>
-<li><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">http://qiita.com/Makotonton/items/18683a9f1e846433c035</a></li>
-<li><a href="https://www.softether.jp/">https://www.softether.jp/</a></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Visual Studio Codeを使ってみた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/04/30/use-visual-studio-code/"/>
-    <updated>2015-04-30T13:09:55+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/04/30/use-visual-studio-code</id>
-    <content type="html"><![CDATA[<p><a href="https://code.visualstudio.com/">Visual Studio Code</a>というものがでたので普段利用している
-Linuxで使ってみた。</p>
-
-<h2>インストール</h2>
-
-<p>は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
-以下のコマンドで実行できます</p>
-
-<p><code>sh
-$ ./Code
-</code></p>
-
-<h2>感想</h2>
-
-<p>VSC使ってみたけど、日本語表示がされない。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/vsc_japanese.png" alt="" /></p>
-
-<p><em>追記</em></p>
-
-<p>フォントを変更すると表示できるようになりました。</p>
-
-<p><code>File -&gt; Preferences -&gt; User Settings</code> から、 <code>settings.json</code> を開き、
-以下のように追加する</p>
-
-<p><code>json
-{
-  "editor.fontFamily": "Ricty"
-}
-</code></p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/vsc_settings.png" alt="" /></p>
-
-<p><em>追記おわり</em></p>
-
-<p>デバッガ動かすためにMONOが必要。</p>
-
-<p><img src="/images/screenshot/vsc_debugger_needed_mono.png" alt="" /></p>
-
-<p>補完がよさそう。Rubyでの補完の出かたです。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/vsc_completion.png" alt="" /></p>
-
-<p>などあります。</p>
-
-<p>そのうちなにかこれで書くかなぁ。</p>
 ]]></content>
   </entry>
   
