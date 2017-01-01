@@ -9,10 +9,15 @@
   <meta name="author" content="katsyoshi">
 
   
-  <meta name="description" content="ってのは嘘ではないですが、嘘に近いです。
-実はおとといの土曜日に katsyoshi.org をのぞいたら、 nginx の初期ページが表示されたので
-とくにコンテンツはないですが、いそいでサイトの復旧をしました。
-が、もともとあったファイル置場を失念したため似た感じで再構築してました。 &hellip;">
+  <meta name="description" content="表題のとおりmikutterをgemでインストールできるようにしてみました。 どうやって？ rubygems からはまだインストールはできません。
+ので、以下の様にしてgem packageを作成します。 1
+2
+3
+4
+5
+6
+7
+$ git clone github.com/katsyoshi &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +87,69 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/31/hello-mikutter/">Hello Mikutter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-31T22:55:03+09:00" pubdate data-updated="true">Aug 31<span>st</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>表題のとおりmikutterをgemでインストールできるようにしてみました。</p>
+
+<h2>どうやって？</h2>
+
+<p><a href="https://rubygems.org">rubygems</a> からはまだインストールはできません。
+ので、以下の様にしてgem packageを作成します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone github.com/katsyoshi/mikutter.git
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>mikutter
+</span><span class='line'><span class="gp">$</span> git checkout reokure-ru
+</span><span class='line'><span class="gp">$</span> bundle install
+</span><span class='line'><span class="gp">$</span> bundle <span class="nb">exec </span>rake build
+</span><span class='line'><span class="gp">$</span> gem install pkg/mikutter-3.5.0.pre.dev.gem
+</span><span class='line'><span class="gp">$</span> mikutter
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでmikutterコマンドで起動できるようになっています
+これすらめんどうな人は<a href="https://katsyoshi.org/mikutter-3.5.0.pre.dev.gem">ここ</a>にあります。
+ダウンロードして <code>gem install mikutter-3.5.0.pre.dev.gem</code> でインストールできます。
+プラグインで起動できないとかあるなら必要なgemをインストールしてください。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -839,45 +907,6 @@ Linuxで使ってみた。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/15/looks-good-new-machine/">おにゅーな</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-04-15T01:15:45+09:00" pubdate data-updated="true">Apr 15<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>以前買った<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">X240</a>があまりにも使い辛いので
-X250を買った。それ以外にもメガネも一つ買ってみた。</p>
-
-<p>あと欲しいのは、ルンバかなあ</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -895,6 +924,10 @@ X250を買った。それ以外にもメガネも一つ買ってみた。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/01/01/good-buy-of-2016/">2016年買ってよかったもの</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a>
       </li>
     
@@ -908,10 +941,6 @@ X250を買った。それ以外にもメガネも一つ買ってみた。</p>
     
       <li class="post">
         <a href="/blog/2016/12/01/im-rockn-roll-star/">Rock&#8217;n&#8217; Roll Star</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/11/29/introduced-cuda/">YARAKASHI CUDA編</a>
       </li>
     
   </ul>
@@ -948,7 +977,7 @@ X250を買った。それ以外にもメガネも一つ買ってみた。</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - katsyoshi -
+  Copyright &copy; 2017 - katsyoshi -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
