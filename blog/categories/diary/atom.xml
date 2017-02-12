@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Diary | katsyoshiのめもみたいなもの]]></title>
+  <title><![CDATA[Category: diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-01-01T19:42:12+09:00</updated>
+  <updated>2017-02-12T20:03:15+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -42,7 +42,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[D250g2 Advent Calendar 2016 5日目]]></title>
+    <title type="html"><![CDATA[d250g2 advent calendar 2016 5日目]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/12/05/d250g2/"/>
     <updated>2016-12-05T00:00:00+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/12/05/d250g2</id>

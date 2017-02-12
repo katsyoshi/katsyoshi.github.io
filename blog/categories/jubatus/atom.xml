@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Jubatus | katsyoshiのめもみたいなもの]]></title>
+  <title><![CDATA[Category: jubatus | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/jubatus/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-01-01T19:42:12+09:00</updated>
+  <updated>2017-02-12T20:03:15+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -91,7 +91,7 @@ $ docker run -p 9199:9199 最後に出てきたハッシュ値
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Jubatus Handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ]]></title>
+    <title type="html"><![CDATA[jubatus handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ]]></title>
     <link href="http://blog.katsyoshi.org/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus/"/>
     <updated>2014-04-21T23:45:43+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus</id>

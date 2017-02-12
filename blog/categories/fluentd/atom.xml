@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Fluentd | katsyoshiのめもみたいなもの]]></title>
+  <title><![CDATA[Category: fluentd | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/fluentd/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-01-01T19:42:12+09:00</updated>
+  <updated>2017-02-12T20:03:15+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Elasticsearchどの〜]]></title>
+    <title type="html"><![CDATA[elasticsearchどの〜]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch/"/>
     <updated>2015-06-26T00:26:10+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch</id>
@@ -64,7 +64,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Good-bye Elasticsearch and Jenkins]]></title>
+    <title type="html"><![CDATA[good-bye elasticsearch and jenkins]]></title>
     <link href="http://blog.katsyoshi.org/blog/2014/08/10/good-bye-elasticsearch-and-jenkins/"/>
     <updated>2014-08-10T23:22:55+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2014/08/10/good-bye-elasticsearch-and-jenkins</id>
@@ -138,7 +138,7 @@ $ sudo launchctl load /Library/LaunchDaemon/td-agent.plist
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Jubatus Handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ]]></title>
+    <title type="html"><![CDATA[jubatus handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ]]></title>
     <link href="http://blog.katsyoshi.org/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus/"/>
     <updated>2014-04-21T23:45:43+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus</id>

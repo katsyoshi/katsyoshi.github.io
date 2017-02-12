@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ssh | katsyoshiのめもみたいなもの]]></title>
+  <title><![CDATA[Category: ssh | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/ssh/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-01-01T19:42:12+09:00</updated>
+  <updated>2017-02-12T20:03:15+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Ssh Permission]]></title>
+    <title type="html"><![CDATA[ssh permission]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission/"/>
     <updated>2016-10-10T20:14:30+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission</id>
@@ -37,7 +37,7 @@ chmod 744 ~/.ssh
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Known_hostsに載っていないホストに接続確認しないようにする]]></title>
+    <title type="html"><![CDATA[known_hostsに載っていないホストに接続確認しないようにする]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/"/>
     <updated>2015-04-07T19:40:03+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection</id>

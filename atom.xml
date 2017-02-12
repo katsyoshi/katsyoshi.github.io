@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-01-01T19:42:12+09:00</updated>
+  <updated>2017-02-12T20:03:15+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -129,7 +129,7 @@ itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[D250g2 Advent Calendar 2016 5日目]]></title>
+    <title type="html"><![CDATA[d250g2 advent calendar 2016 5日目]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/12/05/d250g2/"/>
     <updated>2016-12-05T00:00:00+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/12/05/d250g2</id>
@@ -379,7 +379,7 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Went to 8 Jou Island]]></title>
+    <title type="html"><![CDATA[went to 8 jou island]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/11/09/went-to-8-jou-island/"/>
     <updated>2016-11-09T20:13:45+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/11/09/went-to-8-jou-island</id>
@@ -436,7 +436,7 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Ssh Permission]]></title>
+    <title type="html"><![CDATA[ssh permission]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission/"/>
     <updated>2016-10-10T20:14:30+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission</id>
@@ -523,7 +523,7 @@ sshdの起動とrootのパスワードを設定します。起動したら以下
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Hello Mikutter]]></title>
+    <title type="html"><![CDATA[hello mikutter]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter/"/>
     <updated>2016-08-31T22:55:03+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter</id>
@@ -810,7 +810,7 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Elasticsearchどの〜]]></title>
+    <title type="html"><![CDATA[elasticsearchどの〜]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch/"/>
     <updated>2015-06-26T00:26:10+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch</id>
@@ -975,7 +975,7 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Softether]]></title>
+    <title type="html"><![CDATA[softether]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/05/03/softether/"/>
     <updated>2015-05-03T16:28:42+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/05/03/softether</id>
