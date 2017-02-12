@@ -7,15 +7,8 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="表題のとおりmikutterをgemでインストールできるようにしてみました。 どうやって？ rubygems からはまだインストールはできません。
-ので、以下の様にしてgem packageを作成します。 1
-2
-3
-4
-5
-6
-7
-$ git clone github.com/ &hellip;">
+	<meta name="description" content="9月はRubyKiagiにいってたりしました。
+そのときにmikutterのコミッターとかになったようです。 シルバーウィークにThinkPadのOS再インストールをしたのでその記録を なにやったの？ @mtsmfm と以前話していたとき、&ldquo; &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -84,6 +77,95 @@ $ git clone github.com/ &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/10/09/hello-gentoo-using-itamae/">
+		
+			ItamaeつかってOSのインストールをやってみた</a>
+	</h2>
+	<div class="entry-content">
+		<p>9月はRubyKiagiにいってたりしました。
+そのときに<a href="http://mikutter.blogspot.jp/2016/09/mikutter-3312-343.html">mikutterのコミッター</a>とかになったようです。</p>
+
+<p>シルバーウィークにThinkPadのOS再インストールをしたのでその記録を</p>
+
+<h2>なにやったの？</h2>
+
+<p><a href="https://twitter.com/mtsmfm">@mtsmfm</a> と以前話していたとき、&ldquo;ansibleつかってOSインストールしてるんだけど、完全自動化できないんですよね~&rdquo; みたいな事を聞いたので<a href="https://github.com/itamae-kitchen/itamae">Itamae</a> をつかってやってみました。
+結論から言うと完全自動化は無理だけど、ある程度は自動化できた。</p>
+
+<h3>環境</h3>
+
+<ul>
+<li>machine: ThinkPad X250</li>
+<li>OS: Gentoo Linux</li>
+<li>Provisioning tool: Itamae</li>
+<li>repo: <a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></li>
+</ul>
+
+
+<h2>インストール</h2>
+
+<p>インストールディスクを起動するところはipmiとか搭載していない(しらべていない)し<a href="https://wiki.openstack.org/wiki/Ironic">Ironic</a>はつかいたくないので手動で起動し、
+sshdの起動とrootのパスワードを設定します。起動したら以下の手順でパーティション作成からカーネルのインストールまでします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">git clone https://github.com/katsyoshi/itamae-recipes.git</span>
+</span><span class='line'><span class="go">cd itamae-recipes</span>
+</span><span class='line'><span class="go">bundle install</span>
+</span><span class='line'><span class="go">wget http://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20161006.tar.bz2</span>
+</span><span class='line'><span class="go">cp stage3-amd64-20161006.tar.bz2 cookbook/install/stage3.tar.bz2</span>
+</span><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/gentoo.json</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でOSのインストールまでできるのですが、gentooのインストールメディアだと、diffがインストールされていないのでitamaeからfileのコピーができません。
+都度コピーしてください(というよりgentooインストーラーにdiffを入れたほうが早そう)</p>
+
+<h2>パッケージのインストール</h2>
+
+<p>ここまで終ったら、パッケージのインストールします。これも以下コマンドを実行することで終ります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.json</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>owari</h2>
+
+<p>ItamaeつかってOSのインストールを実行してみました。diffが失いところがとくにつらいですね。
+おわり</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/gentoo-install-battle/'>gentoo-install-battle</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -794,89 +876,6 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
 
 
 	<a class='category' href='/blog/categories/network/'>network</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/vpn/'>vpn</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/04/30/use-visual-studio-code/">
-		
-			Visual Studio Codeを使ってみた</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="https://code.visualstudio.com/">Visual Studio Code</a>というものがでたので普段利用している
-Linuxで使ってみた。</p>
-
-<h2>インストール</h2>
-
-<p>は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
-以下のコマンドで実行できます</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>./Code
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>感想</h2>
-
-<p>VSC使ってみたけど、日本語表示がされない。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/vsc_japanese.png" alt="" /></p>
-
-<p><em>追記</em></p>
-
-<p>フォントを変更すると表示できるようになりました。</p>
-
-<p><code>File -&gt; Preferences -&gt; User Settings</code> から、 <code>settings.json</code> を開き、
-以下のように追加する</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;editor.fontFamily&quot;</span><span class="p">:</span> <span class="s2">&quot;Ricty&quot;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p style="text-align:center;"> <img src="/images/screenshot/vsc_settings.png" alt="" /></p>
-
-<p><em>追記おわり</em></p>
-
-<p>デバッガ動かすためにMONOが必要。</p>
-
-<p><img src="/images/screenshot/vsc_debugger_needed_mono.png" alt="" /></p>
-
-<p>補完がよさそう。Rubyでの補完の出かたです。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/vsc_completion.png" alt="" /></p>
-
-<p>などあります。</p>
-
-<p>そのうちなにかこれで書くかなぁ。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>

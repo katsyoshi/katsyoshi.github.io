@@ -7,10 +7,8 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="普段、emacs上でフォントを Ricty にして使ってたけど、微妙にずれるのを解消できなかったはなし 症状と設定 Rictyのときの症状と設定をのせておきます。 1
-2
-3
-(set-face-attribute &#39;default nil :family &quot;Ricty& &hellip;">
+	<meta name="description" content="ibus-1.5からあまり評判がよろしくない(特に不満はない)ので、あたらしくfcitxを導入してみた。 前提条件 ここではGentoo/Linuxでの導入方法について述べています。
+日本語変換エンジンとしてMozcについて述べています。 導入 とりあえずfcitxをインストール、設定します。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -79,6 +77,94 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/02/12/remove-ibus/">
+		
+			とりあえずibusやめてみた</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
+
+<h2>前提条件</h2>
+
+<p>ここでは<a href="http://www.gentoo.org">Gentoo/Linux</a>での導入方法について述べています。
+日本語変換エンジンとしてMozcについて述べています。</p>
+
+<h2>導入</h2>
+
+<p>とりあえずfcitxをインストール、設定します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>emerge -av fcitx
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ $EDITOR</span> .xinitrc
+</span><span class='line'>
+</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'>fcitx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでインストールはこれでおわりです。</p>
+
+<h2>fcitxでmozc</h2>
+
+<p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ $EDITOR</span> /etc/portage/make.conf
+</span><span class='line'><span class="nv">USE</span><span class="o">=</span><span class="s2">&quot;fcitx ${USE}&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>sudo emerge -av mozc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、インストールすれば使えるようになります。</p>
+
+<h2>おわり</h2>
+
+<p><a href="http://anond.hatelabo.jp/20150210030728">こういうの</a>があったので、真面目にかこうかと思ったんですがどめんどうなので導入メモになりました。</p>
+
+<p>あと引越ししたので贈っていただいてもいいんですよ？
+<a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/ime/'>ime</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -738,75 +824,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 
 
 	<a class='category' href='/blog/categories/diary/'>diary</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/09/12/jubatus-in-gentoo/">
-		
-			Gentoo LinuxむけのJubatusパッケージ書いたよ</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">PC</a>を<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">買い替えた</a>ので<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">環境構築</a>してます。
-<a href="https://github.com/kazuki/overlay/tree/master/sci-calculators/jubatus">Jubatusのoverlay</a>があったのですが、古かったので新しく<a href="https://github.com/katsyoshi/overlay">Jubatusのoverlay</a>作成しました。</p>
-
-<h2>インストール</h2>
-
-<p>これは、以下のコマンドでインストールができます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># curl https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml &gt; /etc/layman/overlays/katsyoshi.xml</span>
-</span><span class='line'><span class="c"># layman -f -a katsyoshi</span>
-</span><span class='line'><span class="c"># eix-sync</span>
-</span><span class='line'><span class="c"># emerge -av jubatus</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でいけるとおもいます。</p>
-
-<h2>未実装</h2>
-
-<ul>
-<li>jubatus_coreのオプションがはたらいてない(ハズ)</li>
-<li>jubatus_msgpack-rpcの依存パッケージにdev-libs/msgpackをいれていない</li>
-<li>jubatusのオプションを確認していない</li>
-</ul>
-
-
-<p>などなどあるので、PRまってます。</p>
-
-<h2>まとめ</h2>
-
-<p><a href="https://github.com/kazuki/overlay/">よくみたら</a>必要なライブラリのパッケージもあったのでこれのバージョンとjubatus_core追加するだけでよかったかも。</p>
-
-<p>ちゃんちゃん</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/jubatus/'>jubatus</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/portage/'>portage</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>

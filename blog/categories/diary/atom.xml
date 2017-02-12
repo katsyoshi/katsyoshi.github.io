@@ -4,7 +4,7 @@
   <title><![CDATA[Category: diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-02-12T20:03:15+09:00</updated>
+  <updated>2017-02-12T21:16:31+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Blogのテーマかえた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes/"/>
+    <updated>2017-02-12T20:16:01+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes</id>
+    <content type="html"><![CDATA[<p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
+変更の方法は以下のようになります。</p>
+
+<p><code>sh
+$ cd ~/octopress
+$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+$ bundle exec rake install\['slash'\]
+$ bundle exec rake generate
+$ bundle exec rake preview
+$ bundle exec rake deploy
+</code></p>
+
+<p>ついでにfaviconもかえよう。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2016年買ってよかったもの]]></title>
@@ -204,31 +225,6 @@ Result = PASS
 <h2>おわり</h2>
 
 <p>こんなのに3時間ほど時間を費しましたね。はい。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[あったらしーPCかったよー]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/11/28/hello/"/>
-    <updated>2016-11-28T01:14:21+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/11/28/hello</id>
-    <content type="html"><![CDATA[<h2>あたらしいPC買いました</h2>
-
-<p>先月のおわりに注文し今月頭のOSCあたりに新しいPCを組み立てました。
-先月おわりあたりまではDDR4の32GBメモリーが2万円と安く売っていたので勢いで購入。
-構成は以下のようになっています。</p>
-
-<p><code>
-CPU: XeonE5-2620V4 * 2
-MB: X10PE-D16WS
-DISK: INTEL 600 シリーズ 512GB
-MEM: Crucial [Micron製] DDR4 サーバー用メモリー 32GB ECC Registered * 4
-NIC: X540-T2
-GPU: Zotac GeForce GTX 1050
-</code></p>
-
-<p>というかんじになっています。
-今回はメモリー4枚しか買っていないので安くなったらあと12枚買いたいとおもってます</p>
 ]]></content>
   </entry>
   
