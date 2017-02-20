@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-02-12T21:31:52+09:00</updated>
+  <updated>2017-02-20T23:25:46+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[basic authenticate in h2o]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o/"/>
+    <updated>2017-02-20T21:53:49+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o</id>
+    <content type="html"><![CDATA[<p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="s">&quot;/&quot;</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">mruby.handler</span><span class="p-Indicator">:</span> <span class="p-Indicator">|</span>
+</span><span class='line'>      <span class="no">require &quot;htpasswd.rb&quot;</span>
+</span><span class='line'>      <span class="no">Htpasswd.new(&quot;/etc/h2o/.htpasswd&quot;, &quot;realm-name&quot;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>また、 <code>.htpasswd</code> で plain フォーマットはサポートされていません。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">failed to validate password using file:/etc/h2o/.htpasswd:crypt-style password hash is not supported</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>.htpasswd</code> を手動で作成したい場合は以下の方法でできます<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;digest/sha1&quot;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;base64&quot;</span>
+</span><span class='line'><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/etc/h2o/.htpasswd&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">w</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">w</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;user:{SHA}</span><span class="si">#{</span><span class="no">Base64</span><span class="o">.</span><span class="n">encode64</span><span class="p">(</span><span class="ss">Digest</span><span class="p">:</span><span class="ss">:SHA1</span><span class="o">.</span><span class="n">digest</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Configure > Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Password Formats, The Apache Software Foundation., https://httpd.apache.org/docs/2.4/misc/password_encryptions.html, 2017/02/20 閲覧<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blogのテーマかえた]]></title>
@@ -1005,45 +1061,6 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo shred -n 3 -v /dev/sda
 </span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[softether]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/05/03/softether/"/>
-    <updated>2015-05-03T16:28:42+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/05/03/softether</id>
-    <content type="html"><![CDATA[<p>Ubuntuに<a href="https://www.softether.jp/">SoftEther</a>を導入してみた。</p>
-
-<h2>マシン構成</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>OS: Ubuntu Linux 14.4.0.2 LTS
-</span><span class='line'>Machine: SakuraVPS 1GBプラン</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>インストール</h2>
-
-<p><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">ここ</a>を参考にインストール、設定すればいけます。</p>
-
-<h3>嵌ったところ</h3>
-
-<p><code>nginx</code> で <code>ssl</code> 動かしてた。</p>
-
-<p>設定ができなかったが <code>sudo service nginx stop</code> として、 <code>nginx</code> を止めたあと、 <code>sudo vpncmd</code> とすれば設定できます。</p>
-
-<h2>おわり</h2>
-
-<p>自作のRailsアプリCIを自宅で動かそうと思ってVPN導入してみたが、一人で開発してるしCIに問題がない限り必要ないというのを構築したあと気が付いた。</p>
-
-<h3>参考</h3>
-
-<ol>
-<li><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">http://qiita.com/Makotonton/items/18683a9f1e846433c035</a></li>
-<li><a href="https://www.softether.jp/">https://www.softether.jp/</a></li>
-</ol>
 
 ]]></content>
   </entry>
