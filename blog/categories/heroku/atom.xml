@@ -4,7 +4,7 @@
   <title><![CDATA[Category: heroku | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/heroku/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-02-25T16:27:23+09:00</updated>
+  <updated>2017-04-01T08:10:31+00:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Herokuでmaster以外のブランチを利用してデプロイする方法]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/03/17/heroku-deploy-anther-branch/"/>
-    <updated>2015-03-17T12:08:17+09:00</updated>
+    <updated>2015-03-17T03:08:17+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/03/17/heroku-deploy-anther-branch</id>
     <content type="html"><![CDATA[<p><code>sh
 $ git push heroku your-branch:master

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ime | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/ime/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-02-25T16:27:23+09:00</updated>
+  <updated>2017-04-01T08:10:31+00:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[とりあえずibusやめてみた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/02/12/remove-ibus/"/>
-    <updated>2015-02-12T07:10:29+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/02/12/remove-ibus</id>
+    <link href="http://blog.katsyoshi.org/blog/2015/02/11/remove-ibus/"/>
+    <updated>2015-02-11T22:10:29+00:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/02/11/remove-ibus</id>
     <content type="html"><![CDATA[<p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
 
 <h2>前提条件</h2>

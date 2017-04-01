@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-02-25T16:27:23+09:00</updated>
+  <updated>2017-04-01T08:10:31+00:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -14,9 +14,65 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Elixirのインストール方法]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir/"/>
+    <updated>2017-04-01T00:00:00+00:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir</id>
+    <content type="html"><![CDATA[<p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
+まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
+隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<h2>準備</h2>
+
+<p>ここでは <a href="https://gentoo.org/">Gentoo Linux</a> を前提としております。
+まず、Elixir を動かすために <a href="https://www.erlang.org">Erlang</a> をインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">sudo eix-sync</span>
+</span><span class='line'><span class="go">sudo emerge erlang</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>準備はこれだけです。</p>
+
+<h2>インストール</h2>
+
+<p>次にインストールなのですが、Elixir は Earlang VM 上で動くプログラミング言語のため、コンパイルされたバイナリを置くだけでインストールがおわります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip</span>
+</span><span class='line'><span class="go">unzip Precompiled.zip -d elixir</span>
+</span><span class='line'><span class="go">mv elixir /path/to/elixir</span>
+</span><span class='line'><span class="go">echo &#39;export PATH=/path/to/elixir/bin:$PATH&#39; &gt;&gt; ~/.bashrc</span>
+</span><span class='line'><span class="go">source ~/.bashrc</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>さいごに <code>iex</code> を起動して確認すればおわり</p>
+
+<h3>参考</h3>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[basic authenticate in h2o]]></title>
     <link href="http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o/"/>
-    <updated>2017-02-20T21:53:49+09:00</updated>
+    <updated>2017-02-20T12:53:49+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o</id>
     <content type="html"><![CDATA[<p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
 
@@ -72,7 +128,7 @@
   <entry>
     <title type="html"><![CDATA[Blogのテーマかえた]]></title>
     <link href="http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes/"/>
-    <updated>2017-02-12T20:16:01+09:00</updated>
+    <updated>2017-02-12T11:16:01+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes</id>
     <content type="html"><![CDATA[<p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
 変更の方法は以下のようになります<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
@@ -107,7 +163,7 @@
   <entry>
     <title type="html"><![CDATA[2016年買ってよかったもの]]></title>
     <link href="http://blog.katsyoshi.org/blog/2017/01/01/good-buy-of-2016/"/>
-    <updated>2017-01-01T09:00:00+09:00</updated>
+    <updated>2017-01-01T00:00:00+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2017/01/01/good-buy-of-2016</id>
     <content type="html"><![CDATA[<p>おおきな買いものなかったなぁとおもったが、わりとあったので書きとめておく</p>
 
@@ -134,9 +190,9 @@
   
   <entry>
     <title type="html"><![CDATA[みくったーでえもじ]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter/"/>
-    <updated>2016-12-17T00:00:00+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter</id>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/16/emoji-in-mikutter/"/>
+    <updated>2016-12-16T15:00:00+00:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/16/emoji-in-mikutter</id>
     <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
 たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
 
@@ -167,7 +223,7 @@
   <entry>
     <title type="html"><![CDATA[板前さんでGentooを管理]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo/"/>
-    <updated>2016-12-10T16:00:38+09:00</updated>
+    <updated>2016-12-10T07:00:38+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo</id>
     <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
 
@@ -221,9 +277,9 @@ itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使
   
   <entry>
     <title type="html"><![CDATA[d250g2 advent calendar 2016 5日目]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/12/05/d250g2/"/>
-    <updated>2016-12-05T00:00:00+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/12/05/d250g2</id>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/04/d250g2/"/>
+    <updated>2016-12-04T15:00:00+00:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/04/d250g2</id>
     <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
 
 <h2>d250g2 について</h2>
@@ -292,9 +348,9 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
   
   <entry>
     <title type="html"><![CDATA[YARAKASHI CUDA編]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/11/29/introduced-cuda/"/>
-    <updated>2016-11-29T00:48:15+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/11/29/introduced-cuda</id>
+    <link href="http://blog.katsyoshi.org/blog/2016/11/28/introduced-cuda/"/>
+    <updated>2016-11-28T15:48:15+00:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/11/28/introduced-cuda</id>
     <content type="html"><![CDATA[<p><a href="http://blog.katsyoshi.org/blog/2016/11/28/hello/">昨日</a>かいた奴でGTX 1050があるのでCUDAを導入してみた。</p>
 
 <h2>CUDA導入</h2>
@@ -441,9 +497,9 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
   
   <entry>
     <title type="html"><![CDATA[あったらしーPCかったよー]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/11/28/hello/"/>
-    <updated>2016-11-28T01:14:21+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/11/28/hello</id>
+    <link href="http://blog.katsyoshi.org/blog/2016/11/27/hello/"/>
+    <updated>2016-11-27T16:14:21+00:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/11/27/hello</id>
     <content type="html"><![CDATA[<h2>あたらしいPC買いました</h2>
 
 <p>先月のおわりに注文し今月頭のOSCあたりに新しいPCを組み立てました。
@@ -472,7 +528,7 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
   <entry>
     <title type="html"><![CDATA[went to 8 jou island]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/11/09/went-to-8-jou-island/"/>
-    <updated>2016-11-09T20:13:45+09:00</updated>
+    <updated>2016-11-09T11:13:45+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/11/09/went-to-8-jou-island</id>
     <content type="html"><![CDATA[<p>11/3-11/5 で八丈島にいってきました。
 決めたのは10/28の朝でした。</p>
@@ -529,7 +585,7 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
   <entry>
     <title type="html"><![CDATA[ssh permission]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission/"/>
-    <updated>2016-10-10T20:14:30+09:00</updated>
+    <updated>2016-10-10T11:14:30+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission</id>
     <content type="html"><![CDATA[<p>またやらかしたので</p>
 
@@ -552,7 +608,7 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
   <entry>
     <title type="html"><![CDATA[ItamaeつかってOSのインストールをやってみた]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae/"/>
-    <updated>2016-10-09T16:43:27+09:00</updated>
+    <updated>2016-10-09T07:43:27+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae</id>
     <content type="html"><![CDATA[<p>9月はRubyKiagiにいってたりしました。
 そのときに<a href="http://mikutter.blogspot.jp/2016/09/mikutter-3312-343.html">mikutterのコミッター</a>とかになったようです。</p>
@@ -616,7 +672,7 @@ sshdの起動とrootのパスワードを設定します。起動したら以下
   <entry>
     <title type="html"><![CDATA[hello mikutter]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter/"/>
-    <updated>2016-08-31T22:55:03+09:00</updated>
+    <updated>2016-08-31T13:55:03+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter</id>
     <content type="html"><![CDATA[<p>表題のとおりmikutterをgemでインストールできるようにしてみました。</p>
 
@@ -652,7 +708,7 @@ sshdの起動とrootのパスワードを設定します。起動したら以下
   <entry>
     <title type="html"><![CDATA[RENEWAL MY SITE!!!]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/08/08/renewal-my-site/"/>
-    <updated>2016-08-08T21:05:47+09:00</updated>
+    <updated>2016-08-08T12:05:47+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/08/08/renewal-my-site</id>
     <content type="html"><![CDATA[<p>ってのは嘘ではないですが、嘘に近いです。
 実はおとといの土曜日に katsyoshi.org をのぞいたら、 <em>nginx</em> の初期ページが表示されたので
@@ -793,9 +849,9 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
   
   <entry>
     <title type="html"><![CDATA[YAPC::Asia 2015に参加しました(ボランティアスタッフとして)]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff/"/>
-    <updated>2015-08-25T02:42:48+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff</id>
+    <link href="http://blog.katsyoshi.org/blog/2015/08/24/i-went-to-yapc-asia-as-a-volanteer-staff/"/>
+    <updated>2015-08-24T17:42:48+00:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/08/24/i-went-to-yapc-asia-as-a-volanteer-staff</id>
     <content type="html"><![CDATA[<p>YAPC::Asia 2015にボランティアスタッフとして参加してきました(申請時に公表しないでってしなのでYAPCのスッタフ一覧にはのってないです)。去年も参加しましたが聴講者として参加しました。</p>
 
 <h2>ボランティアスタッフに応募した理由</h2>
@@ -841,7 +897,7 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
   <entry>
     <title type="html"><![CDATA[こんにちは、いたまえさん]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/08/02/hello-itamae-plugins/"/>
-    <updated>2015-08-02T21:33:46+09:00</updated>
+    <updated>2015-08-02T12:33:46+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/08/02/hello-itamae-plugins</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/sstephenson/rbenv">rbenv</a> を <a href="https://github.com/itamae-kitchen/itamae">itamae</a> の <a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv">プラグイン</a> を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、<a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv/pull/9">httpsを指定できる</a>ようしてもらいました。</p>
 
@@ -902,9 +958,9 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
   
   <entry>
     <title type="html"><![CDATA[elasticsearchどの〜]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch/"/>
-    <updated>2015-06-26T00:26:10+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch</id>
+    <link href="http://blog.katsyoshi.org/blog/2015/06/25/sir-elasticsearch/"/>
+    <updated>2015-06-25T15:26:10+00:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/06/25/sir-elasticsearch</id>
     <content type="html"><![CDATA[<p><a href="https://www.elastic.co/products/kibana">kibana</a> で表示しようとしてたら嵌ったのでメモ</p>
 
 <h2>嵌った原因</h2>
@@ -967,7 +1023,7 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
   <entry>
     <title type="html"><![CDATA[すくりーんきゃすと]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/05/15/screencast-use-gif/"/>
-    <updated>2015-05-15T23:47:14+09:00</updated>
+    <updated>2015-05-15T14:47:14+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/05/15/screencast-use-gif</id>
     <content type="html"><![CDATA[<p>LinuxでScreenCast用の環境を整えてみた。</p>
 
@@ -1004,7 +1060,7 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
   <entry>
     <title type="html"><![CDATA[ゴールデンウィークのお買いもの]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/05/11/golden-weak/"/>
-    <updated>2015-05-11T21:38:35+09:00</updated>
+    <updated>2015-05-11T12:38:35+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/05/11/golden-weak</id>
     <content type="html"><![CDATA[<p>GWに勢い余って買いものしたのでそれを。</p>
 
@@ -1047,21 +1103,6 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
 <p>これで欲しいものは大体そろったのですが、最近デスクトップPC欲しくなってきたんだよなぁ…</p>
 
 <p>もうしわけねぇ。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[バイバイX240]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/05/10/shred-x240/"/>
-    <updated>2015-05-10T11:05:19+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/05/10/shred-x240</id>
-    <content type="html"><![CDATA[<p>新しく<a href="http://blog.katsyoshi.org/blog/2015/04/15/looks-good-new-machine/">X250</a>を買ったので、X240の中身を削除します。
-以下のコマンドでできるようです。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo shred -n 3 -v /dev/sda
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

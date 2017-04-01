@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-02-25T16:27:23+09:00</updated>
+  <updated>2017-04-01T08:10:31+00:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Herokuでmaster以外のブランチを利用してデプロイする方法]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/03/17/heroku-deploy-anther-branch/"/>
-    <updated>2015-03-17T12:08:17+09:00</updated>
+    <updated>2015-03-17T03:08:17+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/03/17/heroku-deploy-anther-branch</id>
     <content type="html"><![CDATA[<p><code>sh
 $ git push heroku your-branch:master
@@ -35,7 +35,7 @@ $ git push heroku your-branch:master
   <entry>
     <title type="html"><![CDATA[Railsで空のテストファイルを削除]]></title>
     <link href="http://blog.katsyoshi.org/blog/2014/11/21/remove-empty-example-files/"/>
-    <updated>2014-11-21T16:07:38+09:00</updated>
+    <updated>2014-11-21T07:07:38+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2014/11/21/remove-empty-example-files</id>
     <content type="html"><![CDATA[<p>Ruby on RailsのプロジェクトでGit管理されているTestで空のテストファイルを
 削除するには以下のコマンドを利用することで削除できます。</p>
@@ -58,7 +58,7 @@ $ git grep -e it --or -e specify -L -- spec/{model,controller}s | xgrep git rm -
   <entry>
     <title type="html"><![CDATA[野良Gitサーバにuploadできなかった話]]></title>
     <link href="http://blog.katsyoshi.org/blog/2014/06/22/fail-git-uploading/"/>
-    <updated>2014-06-22T22:38:20+09:00</updated>
+    <updated>2014-06-22T13:38:20+00:00</updated>
     <id>http://blog.katsyoshi.org/blog/2014/06/22/fail-git-uploading</id>
     <content type="html"><![CDATA[<p>今日もろくでもない理由で嵌った。</p>
 
