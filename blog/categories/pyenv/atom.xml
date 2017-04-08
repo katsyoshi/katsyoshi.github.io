@@ -4,7 +4,7 @@
   <title><![CDATA[Category: pyenv | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/pyenv/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-04-01T08:10:31+00:00</updated>
+  <updated>2017-04-09T04:49:09+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[こんにちは、いたまえさん]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/08/02/hello-itamae-plugins/"/>
-    <updated>2015-08-02T12:33:46+00:00</updated>
+    <updated>2015-08-02T21:33:46+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/08/02/hello-itamae-plugins</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/sstephenson/rbenv">rbenv</a> を <a href="https://github.com/itamae-kitchen/itamae">itamae</a> の <a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv">プラグイン</a> を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、<a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv/pull/9">httpsを指定できる</a>ようしてもらいました。</p>
 

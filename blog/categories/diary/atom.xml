@@ -4,7 +4,7 @@
   <title><![CDATA[Category: diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-04-01T08:10:31+00:00</updated>
+  <updated>2017-04-09T04:49:09+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -14,58 +14,62 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Elixirのインストール方法]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir/"/>
-    <updated>2017-04-01T00:00:00+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir</id>
-    <content type="html"><![CDATA[<p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
-まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
-隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+    <title type="html"><![CDATA[raspiでdnsを運用してみはじめた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network/"/>
+    <updated>2017-04-09T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network</id>
+    <content type="html"><![CDATA[<p>RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
+RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code>apt install dnsmasq</code> するだけでおわります。</p>
 
-<h2>準備</h2>
+<h2>はまったところ</h2>
 
-<p>ここでは <a href="https://gentoo.org/">Gentoo Linux</a> を前提としております。
-まず、Elixir を動かすために <a href="https://www.erlang.org">Erlang</a> をインストールします。</p>
+<p>いつもどおりはまりました。今回は以下の二点</p>
 
-<p><code>console
-sudo eix-sync
-sudo emerge erlang
+<ul>
+<li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
+<li>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</li>
+</ul>
+
+
+<h3>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
+
+<p>ログを見ても以下のログしか出ておらず理由の調査に時間がかかった。hosts ファイルは設定ファイルではないため当然といえば当然なのですが…</p>
+
+<p><code>
+Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts
 </code></p>
 
-<p>準備はこれだけです。</p>
+<p>今、<code>/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
 
-<h2>インストール</h2>
-
-<p>次にインストールなのですが、Elixir は Earlang VM 上で動くプログラミング言語のため、コンパイルされたバイナリを置くだけでインストールがおわります。</p>
-
-<p><code>console
-wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip
-unzip Precompiled.zip -d elixir
-mv elixir /path/to/elixir
-echo 'export PATH=/path/to/elixir/bin:$PATH' &gt;&gt; ~/.bashrc
-source ~/.bashrc
+<p><code>
+CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new
 </code></p>
+
+<h3>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</h3>
+
+<p>こちらは上記問題を解決したあと、反映されないのでログを見たときにわかりました。</p>
+
+<p><code>
+Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied
+</code></p>
+
+<p>これの原因は <code>itamae</code> でファイルを送信するときに <code>mode '644'</code> を指定する必要があったのだが、指定せずに
+送信してしまったため発生。</p>
 
 <h2>おわり</h2>
 
-<p>さいごに <code>iex</code> を起動して確認すればおわり</p>
+<p>おわり</p>
 
-<h3>参考</h3>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
+<h3>関連リポジトリ</h3>
 
+<p><a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[basic authenticate in h2o]]></title>
     <link href="http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o/"/>
-    <updated>2017-02-20T12:53:49+00:00</updated>
+    <updated>2017-02-20T21:53:49+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o</id>
     <content type="html"><![CDATA[<p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
 
@@ -111,7 +115,7 @@ end
   <entry>
     <title type="html"><![CDATA[Blogのテーマかえた]]></title>
     <link href="http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes/"/>
-    <updated>2017-02-12T11:16:01+00:00</updated>
+    <updated>2017-02-12T20:16:01+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes</id>
     <content type="html"><![CDATA[<p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
 変更の方法は以下のようになります<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
@@ -140,7 +144,7 @@ $ bundle exec rake deploy
   <entry>
     <title type="html"><![CDATA[2016年買ってよかったもの]]></title>
     <link href="http://blog.katsyoshi.org/blog/2017/01/01/good-buy-of-2016/"/>
-    <updated>2017-01-01T00:00:00+00:00</updated>
+    <updated>2017-01-01T09:00:00+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2017/01/01/good-buy-of-2016</id>
     <content type="html"><![CDATA[<p>おおきな買いものなかったなぁとおもったが、わりとあったので書きとめておく</p>
 
@@ -167,9 +171,9 @@ $ bundle exec rake deploy
   
   <entry>
     <title type="html"><![CDATA[d250g2 advent calendar 2016 5日目]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/12/04/d250g2/"/>
-    <updated>2016-12-04T15:00:00+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/12/04/d250g2</id>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/05/d250g2/"/>
+    <updated>2016-12-05T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/05/d250g2</id>
     <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
 
 <h2>d250g2 について</h2>

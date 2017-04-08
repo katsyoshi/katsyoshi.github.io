@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-04-01T08:10:31+00:00</updated>
+  <updated>2017-04-09T04:49:09+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[hello mikutter]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter/"/>
-    <updated>2016-08-31T13:55:03+00:00</updated>
+    <updated>2016-08-31T22:55:03+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter</id>
     <content type="html"><![CDATA[<p>表題のとおりmikutterをgemでインストールできるようにしてみました。</p>
 
@@ -45,7 +45,7 @@ $ mikutter
   <entry>
     <title type="html"><![CDATA[Ruby on RailsでTypeScriptを使ってみる]]></title>
     <link href="http://blog.katsyoshi.org/blog/2015/01/12/typescript-in-rails/"/>
-    <updated>2015-01-12T02:41:25+00:00</updated>
+    <updated>2015-01-12T11:41:25+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2015/01/12/typescript-in-rails</id>
     <content type="html"><![CDATA[<p>ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。</p>
 
@@ -103,7 +103,7 @@ $(() =&gt; {
   <entry>
     <title type="html"><![CDATA[RubyKaigi2014]]></title>
     <link href="http://blog.katsyoshi.org/blog/2014/09/22/rubykaigi2014/"/>
-    <updated>2014-09-22T10:10:00+00:00</updated>
+    <updated>2014-09-22T19:10:00+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2014/09/22/rubykaigi2014</id>
     <content type="html"><![CDATA[<p><a href="http://rubykaigi.org/2014">RubyKaigi2014</a>に行ってきました。
 聞いたもの一覧です。</p>

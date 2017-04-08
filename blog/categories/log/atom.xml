@@ -4,7 +4,7 @@
   <title><![CDATA[Category: log | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/log/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-04-01T08:10:31+00:00</updated>
+  <updated>2017-04-09T04:49:09+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[アクセスログをTreasureData.comへ]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2014/04/10/post-access-log-to-treasure-data/"/>
-    <updated>2014-04-10T15:50:27+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2014/04/10/post-access-log-to-treasure-data</id>
+    <link href="http://blog.katsyoshi.org/blog/2014/04/11/post-access-log-to-treasure-data/"/>
+    <updated>2014-04-11T00:50:27+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2014/04/11/post-access-log-to-treasure-data</id>
     <content type="html"><![CDATA[<p>いいかげん<a href="http://www.treasuredata.com">treasure data</a>を使おうかな。
 ということでこの鯖のアクセスログをfluentdを使って保存しようとおもいます。</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gentoo | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/gentoo/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-04-01T08:10:31+00:00</updated>
+  <updated>2017-04-09T04:49:09+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[板前さんでGentooを管理]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo/"/>
-    <updated>2016-12-10T07:00:38+00:00</updated>
+    <updated>2016-12-10T16:00:38+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo</id>
     <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
 
@@ -68,7 +68,7 @@ itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使
   <entry>
     <title type="html"><![CDATA[ItamaeつかってOSのインストールをやってみた]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae/"/>
-    <updated>2016-10-09T07:43:27+00:00</updated>
+    <updated>2016-10-09T16:43:27+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae</id>
     <content type="html"><![CDATA[<p>9月はRubyKiagiにいってたりしました。
 そのときに<a href="http://mikutter.blogspot.jp/2016/09/mikutter-3312-343.html">mikutterのコミッター</a>とかになったようです。</p>
@@ -124,9 +124,9 @@ itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.js
   
   <entry>
     <title type="html"><![CDATA[emerge --syncをgitにかえたはなし]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/02/23/portage2git/"/>
-    <updated>2015-02-23T15:13:18+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/02/23/portage2git</id>
+    <link href="http://blog.katsyoshi.org/blog/2015/02/24/portage2git/"/>
+    <updated>2015-02-24T00:13:18+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/02/24/portage2git</id>
     <content type="html"><![CDATA[<p>portageはデフォルトだと <code>rsync</code> を利用しての更新をしているので、
 <code>git</code> を用いた方法に変更します。</p>
 
@@ -162,9 +162,9 @@ itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.js
   
   <entry>
     <title type="html"><![CDATA[とりあえずibusやめてみた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/02/11/remove-ibus/"/>
-    <updated>2015-02-11T22:10:29+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/02/11/remove-ibus</id>
+    <link href="http://blog.katsyoshi.org/blog/2015/02/12/remove-ibus/"/>
+    <updated>2015-02-12T07:10:29+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/02/12/remove-ibus</id>
     <content type="html"><![CDATA[<p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
 
 <h2>前提条件</h2>
@@ -214,7 +214,7 @@ USE=&ldquo;fcitx ${USE}&rdquo;</p>
   <entry>
     <title type="html"><![CDATA[Dockerではまってます]]></title>
     <link href="http://blog.katsyoshi.org/blog/2014/10/01/pitfall-in-docker/"/>
-    <updated>2014-10-01T12:11:04+00:00</updated>
+    <updated>2014-10-01T21:11:04+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2014/10/01/pitfall-in-docker</id>
     <content type="html"><![CDATA[<p>タイトルのとおりです。
 Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
