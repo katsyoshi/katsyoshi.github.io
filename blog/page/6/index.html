@@ -7,8 +7,12 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="MacOS XでDockerを動かしてたら嵌ったのでメモ Docker on OS X OS XでもDockerが動かせるようになりました。
-インストールはこことかを参考にしてください。 で嵌ったところ Docker上で動いているアプリケーションとどうしても通信ができない。 &hellip;">
+	<meta name="description" content="今日もろくでもない理由で嵌った。 嵌った理由 野良Gitサーバを立てているのでそこに新しいリポジトリを作成した。 で、リモートを追加し、ブランチを追加しようとすると 1
+2
+3
+4
+$ git remote add master ssh://myhost/my_project.git
+$ git &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -77,6 +81,72 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/06/22/fail-git-uploading/">
+		
+			野良Gitサーバにuploadできなかった話</a>
+	</h2>
+	<div class="entry-content">
+		<p>今日もろくでもない理由で嵌った。</p>
+
+<h2>嵌った理由</h2>
+
+<p>野良Gitサーバを立てているのでそこに新しいリポジトリを作成した。</p>
+
+<p>で、リモートを追加し、ブランチを追加しようとすると</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add master ssh://myhost/my_project.git
+</span><span class='line'>$ git push origin master -f
+</span><span class='line'>error: src refspec master does not match any.
+</span><span class='line'>error: failed to push some refs to 'ssh://myhost/my_project.git'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というようなエラーが出てきてアップロードできなかった。
+そのため理由を探ってたら<a href="http://d.hatena.ne.jp/nishiohirokazu/20110304/1299229916">同じ理由</a>があった。</p>
+
+<p>そこで <code>git log</code> としたら何もでてこなかったので</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
+</span><span class='line'>$ git commit -m 'first commit'
+</span><span class='line'>$ git push -u origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>リモートリポジトリに追加できました。
+ちゃんちゃん</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: elixir | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/elixir/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2017-04-09T04:52:59+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Elixirのインストール方法]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir/"/>
+    <updated>2017-04-01T09:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir</id>
+    <content type="html"><![CDATA[<p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
+まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
+隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<h2>準備</h2>
+
+<p>ここでは <a href="https://gentoo.org/">Gentoo Linux</a> を前提としております。
+まず、Elixir を動かすために <a href="https://www.erlang.org">Erlang</a> をインストールします。</p>
+
+<p><code>console
+sudo eix-sync
+sudo emerge erlang
+</code></p>
+
+<p>準備はこれだけです。</p>
+
+<h2>インストール</h2>
+
+<p>次にインストールなのですが、Elixir は Earlang VM 上で動くプログラミング言語のため、コンパイルされたバイナリを置くだけでインストールがおわります。</p>
+
+<p><code>console
+wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip
+unzip Precompiled.zip -d elixir
+mv elixir /path/to/elixir
+echo 'export PATH=/path/to/elixir/bin:$PATH' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></p>
+
+<h2>おわり</h2>
+
+<p>さいごに <code>iex</code> を起動して確認すればおわり</p>
+
+<h3>参考</h3>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

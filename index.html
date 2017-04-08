@@ -160,6 +160,87 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code
     <article class="post">
 	<h2 class="title">
 		
+		<a href="/blog/2017/04/01/how-to-install-elixir/">
+		
+			Elixirのインストール方法</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
+まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
+隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<h2>準備</h2>
+
+<p>ここでは <a href="https://gentoo.org/">Gentoo Linux</a> を前提としております。
+まず、Elixir を動かすために <a href="https://www.erlang.org">Erlang</a> をインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">sudo eix-sync</span>
+</span><span class='line'><span class="go">sudo emerge erlang</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>準備はこれだけです。</p>
+
+<h2>インストール</h2>
+
+<p>次にインストールなのですが、Elixir は Earlang VM 上で動くプログラミング言語のため、コンパイルされたバイナリを置くだけでインストールがおわります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip</span>
+</span><span class='line'><span class="go">unzip Precompiled.zip -d elixir</span>
+</span><span class='line'><span class="go">mv elixir /path/to/elixir</span>
+</span><span class='line'><span class="go">echo &#39;export PATH=/path/to/elixir/bin:$PATH&#39; &gt;&gt; ~/.bashrc</span>
+</span><span class='line'><span class="go">source ~/.bashrc</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>さいごに <code>iex</code> を起動して確認すればおわり</p>
+
+<h3>参考</h3>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/elixir/'>elixir</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
 		<a href="/blog/2017/02/20/basic-authenticate-in-h2o/">
 		
 			Basic Authenticate in H2o</a>
@@ -775,61 +856,6 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
 
 
 	<a class='category' href='/blog/categories/cuda/'>cuda</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/gpgpu/'>gpgpu</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/11/28/hello/">
-		
-			あったらしーPCかったよー</a>
-	</h2>
-	<div class="entry-content">
-		<h2>あたらしいPC買いました</h2>
-
-<p>先月のおわりに注文し今月頭のOSCあたりに新しいPCを組み立てました。
-先月おわりあたりまではDDR4の32GBメモリーが2万円と安く売っていたので勢いで購入。
-構成は以下のようになっています。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CPU: XeonE5-2620V4 * 2
-</span><span class='line'>MB: X10PE-D16WS
-</span><span class='line'>DISK: INTEL 600 シリーズ 512GB
-</span><span class='line'>MEM: Crucial [Micron製] DDR4 サーバー用メモリー 32GB ECC Registered * 4
-</span><span class='line'>NIC: X540-T2
-</span><span class='line'>GPU: Zotac GeForce GTX 1050</span></code></pre></td></tr></table></div></figure>
-
-
-<p>というかんじになっています。
-今回はメモリー4枚しか買っていないので安くなったらあと12枚買いたいとおもってます</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>
 
 
 </div>
