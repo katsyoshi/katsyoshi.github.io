@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-04-09T04:52:59+09:00</updated>
+  <updated>2017-05-21T16:03:41+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[start watching dazn]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/05/21/start-watching-dazn/"/>
+    <updated>2017-05-21T14:49:19+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/05/21/start-watching-dazn</id>
+    <content type="html"><![CDATA[<p>タイトルのとおり、DAZNを見はじめた。
+Netflix, Huluを契約してたけど、ぜんぜん見ていなかったので解約した。
+DAZN をみようとおもったきっかけはNBAのカンファレンスファイナルをみようとおもったため。</p>
+
+<p>とりあえず視聴感想ですが、表示は色々なところで言われてるとおもいますが、
+接続開始時にブロックノイズが気になりますが、一旦綺麗に表示されるとそのあとは
+特に気になりません。</p>
+
+<p>肝心の試合内容が現在非常に残念なため試合内の評価はしません。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[raspiでdnsを運用してみはじめた]]></title>
@@ -1068,43 +1085,6 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
 <ol>
 <li><a href="http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html">http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html</a></li>
 <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html</a></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[すくりーんきゃすと]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/05/15/screencast-use-gif/"/>
-    <updated>2015-05-15T23:47:14+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/05/15/screencast-use-gif</id>
-    <content type="html"><![CDATA[<p>LinuxでScreenCast用の環境を整えてみた。</p>
-
-<h2>必要パッケージ</h2>
-
-<ul>
-<li>ffmpeg</li>
-<li>gtk-recordMyDesktop</li>
-</ul>
-
-
-<h2>使いかた</h2>
-
-<p><code>gtk-recordMyDesktop</code> でデスクトップをキャプチャする。
-その後は、 <code>ffmpeg</code> を使って好きな動画形式に変換します。
-ここでは、gif画像に変更しています。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ffmpeg -i ~/screencast.ovg img/screencast.gif
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/screenshot/gtk-recordMyDesktop.gif" width="512" alt="" /></p>
-
-<h3>参考サイト</h3>
-
-<ol>
-<li><a href="http://d.hatena.ne.jp/over80/20080802/1217693705">http://d.hatena.ne.jp/over80/20080802/1217693705</a></li>
 </ol>
 
 ]]></content>
