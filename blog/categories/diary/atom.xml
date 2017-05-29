@@ -4,7 +4,7 @@
   <title><![CDATA[Category: diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-05-21T16:03:41+09:00</updated>
+  <updated>2017-05-29T22:46:42+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[installing apache arrow]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/"/>
+    <updated>2017-05-29T21:45:29+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow</id>
+    <content type="html"><![CDATA[<p><a href="https://slide.rabbit-shocker.org/authors/kou/nagoya-rubykaigi-03/">最近</a><a href="https://github.com/kou">すとうさん</a>が<a href="https://slide.rabbit-shocker.org/authors/kou/data-science-rb/">一押し</a>している<a href="https://arrow.apache.org/">apache arrow</a>をインストールしてみた</p>
+
+<h2>環境</h2>
+
+<p><code>
+$ uname -a
+Linux rin 4.9.10-gentoo #6 SMP Tue Mar 28 01:29:26 JST 2017 x86_64 Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz GenuineIntel GNU/Linux
+$ gcc -v
+組み込み spec を使用しています。
+COLLECT_GCC=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0/gcc
+COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-pc-linux-gnu/5.4.0/lto-wrapper
+ターゲット: x86_64-pc-linux-gnu
+configure 設定: /var/tmp/portage/sys-devel/gcc-5.4.0-r3/work/gcc-5.4.0/configure --host=x86_64-pc-linux-gnu --build=x86_64-pc-linux-gnu --prefix=/usr --bindir=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0 --includedir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include --datadir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0 --mandir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/man --infodir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/info --with-gxx-include-dir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include/g++-v5 --with-python-dir=/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/python --enable-languages=c,c++,fortran --enable-obsolete --enable-secureplt --disable-werror --with-system-zlib --enable-nls --without-included-gettext --enable-checking=release --with-bugurl=https://bugs.gentoo.org/ --with-pkgversion='Gentoo 5.4.0-r3 p1.3, pie-0.6.5' --enable-libstdcxx-time --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-clocale=gnu --enable-multilib --with-multilib-list=m32,m64 --disable-altivec --disable-fixed-point --enable-targets=all --disable-libgcj --enable-libgomp --disable-libmudflap --disable-libssp --disable-libcilkrts --disable-libmpx --enable-vtable-verify --enable-libvtv --enable-lto --without-isl --enable-libsanitizer
+スレッドモデル: posix
+gcc バージョン 5.4.0 (Gentoo 5.4.0-r3 p1.3, pie-0.6.5)
+</code></p>
+
+<h2>いんすとーる</h2>
+
+<p>今回まだGentooにパッケージがないのでgitからインストールします。ほしいのはrubygems.orgに公開されている<a href="https://rubygems.org/gems/red-arrow">red-arrow</a>をコンパイルするためにglibとこれを利用するために必要な依存パッケージとしてcppをインストールします。インストールはかんたんで <code>cmake</code> を実行すればインストールデキルはずです。</p>
+
+<p><code>console
+$ git clone git@github.com:apache/arrow.git
+$ cd arrow/cpp
+$ mkdir release
+$ cd release
+$ cmake .. -DCMAKE_BUILD_TYPE=Release
+</code></p>
+
+<p>でリリース用パッケージがビルドされるはずですが<a href="https://gist.github.com/katsyoshi/4486792ad43feae4d690d589dac1a157">エラー</a>が出ます。
+これはJIRAで<a href="https://issues.apache.org/jira/browse/ARROW-667">検索した結果</a>より <code>gcc</code> のバージョン情報がとれずにエラーをだしているやりとりが発見されたのでわかりました。
+ログを見ると実際に取得できていないことも確認しました。で <code>cpp/cmake_modules/CompilerInfo.cmake</code> をみるとどうやら日本語のバージョン情報は考慮されていないような作りになっていました。
+なので <code>LANG=C</code> をつけて <code>cmake</code> 再びつけて実行します。</p>
+
+<p><code>console
+$ LANG=C cmake .. -DCMAKE_BUILD_TYPE=Release
+$ make
+$ make install
+</code></p>
+
+<p>これでC++のインストールは終了です。続いてglibをインストールします。</p>
+
+<p><code>console
+$ cd ../../c_glib
+$ ./autgen.sh
+$ ./configure
+$ make
+$ make install
+</code></p>
+
+<p>でインストールできます。こちら久々に野良ビルドしたため <code>PKG_CONFIG_PATH</code> や <code>LD_LIBRARY_PATH</code> の設定をわすれてただけなのですんなりいけました。
+で最後に <code>gem install red-arrow</code> を実行して目的を達成しました!!!!11</p>
+
+<h2>おわり</h2>
+
+<p>ほんとうのもくてきは <code>fluentd</code> のぷらぐいんをかくことですがつかれたのできょうはここまで</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[start watching dazn]]></title>
@@ -172,35 +236,6 @@ end
 <p>Configure > Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
 <li id="fn:2">
 <p>Password Formats, The Apache Software Foundation., https://httpd.apache.org/docs/2.4/misc/password_encryptions.html, 2017/02/20 閲覧<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Blogのテーマかえた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes/"/>
-    <updated>2017-02-12T20:16:01+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes</id>
-    <content type="html"><![CDATA[<p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
-変更の方法は以下のようになります<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
-
-<p><code>sh
-$ cd ~/octopress
-$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
-$ bundle exec rake install\['slash'\]
-$ bundle exec rake generate
-$ bundle exec rake preview
-$ bundle exec rake deploy
-</code></p>
-
-<p>ついでにfaviconもかえよう。</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Octopressのテーマを変更してみよう!, facestarbaby, http://qiita.com/fakestarbaby/items/ab532088453105e1bea4, 2017/02/12 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
 </ol>
 </div>
 

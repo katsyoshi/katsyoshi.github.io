@@ -7,10 +7,13 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="LinuxでScreenCast用の環境を整えてみた。 必要パッケージ ffmpeg
-gtk-recordMyDesktop 使いかた gtk-recordMyDesktop でデスクトップをキャプチャする。
-その後は、 ffmpeg を使って好きな動画形式に変換します。
-ここでは、 &hellip;">
+	<meta name="description" content="kibana で表示しようとしてたら嵌ったのでメモ 嵌った原因 数字をElasticsearchに投げているつもりが文字列を投げていた。
+ので対処方法としては、 fluent-plugin-typecast を導入して終了。 1
+2
+3
+4
+5
+&lt;match elasticsearch &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -79,6 +82,95 @@ gtk-recordMyDesktop 使いかた gtk-recordMyDesktop でデスクトップをキ
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/06/26/sir-elasticsearch/">
+		
+			Elasticsearchどの〜</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://www.elastic.co/products/kibana">kibana</a> で表示しようとしてたら嵌ったのでメモ</p>
+
+<h2>嵌った原因</h2>
+
+<p>数字をElasticsearchに投げているつもりが文字列を投げていた。
+ので対処方法としては、 <code>fluent-plugin-typecast</code> を導入して終了。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;match</span> <span class="err">elasticsearch.**.*</span><span class="nt">&gt;</span>
+</span><span class='line'>  type typecast
+</span><span class='line'>  item_types value:float
+</span><span class='line'>  prefix typed
+</span><span class='line'><span class="nt">&lt;/match&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Elasticsearch</h2>
+
+<p><a href="https://www.fluentd.org">fluentd</a> で集めたデータを <a href="http://www.elasitc.co">Elasticsearch</a> に <a href="https://github.com/uken/fluent-plugin-elasticsearch">fluent-plugin-elastchsearch</a> を利用して入れます。設定は以下のようにします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;match</span> <span class="err">typed.elasticserch.**.*</span><span class="nt">&gt;</span>
+</span><span class='line'>  type elasticsearch
+</span><span class='line'>  type_name hoge
+</span><span class='line'>  host 127.0.0.1
+</span><span class='line'>  port 9200
+</span><span class='line'>  logstash_format true
+</span><span class='line'>  logstash_prefix logstash
+</span><span class='line'>  flash_interval 1s
+</span><span class='line'><span class="nt">&lt;/match&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h3>参考資料</h3>
+
+<ol>
+<li><a href="http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html">http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/kibana/'>kibana</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -623,43 +715,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
 
 	<a class='category' href='/blog/categories/sudo/'>sudo</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/03/18/party-of-asakusa-dot-rb-300th/">
-		
-			Asakusa.rbの300回記念パーティに行ってきた</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="https://asakusarb.doorkeeper.jp/events/22018">Asakusa.rbの300回記念パーティ</a>に行ってきた。
-ずーっと、devopsについてちょっと気になることがあったので<a href="https://twitter.com/hsbt">@hsbtさん</a>に聞いてみたりしてた。</p>
-
-<p>あとは終ったあとかなり早い花見してた。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/party/'>party</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
