@@ -7,9 +7,7 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="Ruby on RailsのプロジェクトでGit管理されているTestで空のテストファイルを
-削除するには以下のコマンドを利用することで削除できます。 1
-$ git grep -e it --or -e specify -L -- spec/{model,controller}s | &hellip;">
+	<meta name="description" content="一日目らしいですね。 今のmikutter環境 はGentoo/Linuxで動いています。 よく考えてみたら今の環境になってLinuxでmikutterを使うのははじめてです。 Linuxになって一番感じたのインストールすごく楽になったことです。 今までのmikutter環境 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +76,60 @@ $ git grep -e it --or -e specify -L -- spec/{model,controller}s | &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/12/01/mikutter-advent-calendar-1-day/">
+		
+			Mikutter Advent Calendar 1日目</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://www.adventar.org/calendar/401">一日目</a>らしいですね。</p>
+
+<h2>今のmikutter環境</h2>
+
+<p>はGentoo/Linuxで動いています。</p>
+
+<p>よく考えてみたら今の環境になってLinuxでmikutterを使うのははじめてです。 Linuxになって一番感じたのインストールすごく楽になったことです。</p>
+
+<h2>今までのmikutter環境</h2>
+
+<p>今までMacで基本的に利用してたので苦労してた。 Macではとくにインストール、gemのupdateが大変でした。 Macでの環境では、HomebrewのGTK2のせいか、RubyGtk2がまともに動かないことが頻繁におこりました。 あと、最後まで解決できなかったのが特定の文字列がくるとクラッシュするというバグがありました。</p>
+
+<h2>mikutterとの出会い</h2>
+
+<p>出会いとしてはtwitterでTLを眺めてたら、@toshi_a って人がtwitterクライアントをつくってるらしいということで 取り敢えずFreeBSDでインストールしたのがはじめてだったとおもいます。 このときはFreeBSDでインストールして、X転送したものをMacで表示したとおもいます。</p>
+
+<p>それ以降はMacでインストールして、<a href="http://github.com/katsyoshi/fav">mikutterのプラグイン</a>を書いて公開したりしてました。</p>
+
+<h2>おわり</h2>
+
+<p>おわりおわり。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mikutter/'>mikutter</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -727,85 +779,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 
 
 	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/08/10/good-bye-elasticsearch-and-jenkins/">
-		
-			Good-bye Elasticsearch and Jenkins</a>
-	</h2>
-	<div class="entry-content">
-		<p>この環境では慢性的にメモリが足りなかったのでメモリを大量に使ってる<a href="http://www.elasticsearch.org/">Elasticsearch</a>を削除しました。
-Jenkinsについては利用していなかったので停止してます。ついでに12.04から14.04にupgradeしました。</p>
-
-<h2>削除とUpgrade</h2>
-
-<p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
-Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo apt-get purge elasticsearch
-</span><span class='line'><span class="nv">$ </span>sudo update-rc.d jenkins disable
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>つぎに14.04へupgradeを行ないます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo <span class="k">do</span>-release-upgrade -d
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これで14.04になってます。</p>
-
-<h2>環境</h2>
-
-<ul>
-<li>Machine: さくらVPS</li>
-<li>CPU: Intel Xeon E312xx (SandyBridge) * 2</li>
-<li>MEM: 1GB</li>
-<li>HDD: 100GB</li>
-<li>OS: Ubuntu Linux 12.04</li>
-</ul>
-
-
-<h2>インストール済ソフトウェア（一部）</h2>
-
-<ul>
-<li>Elasticsearch</li>
-<li>fluentd</li>
-<li>Jenkins</li>
-<li>Jubatus</li>
-<li>Norikra</li>
-<li>Nginx</li>
-</ul>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/jenkins/'>jenkins</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
 
 
 </div>
