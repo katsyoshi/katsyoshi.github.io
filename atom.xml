@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-06-01T00:34:08+09:00</updated>
+  <updated>2017-06-04T23:43:34+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[rustful web]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/06/04/rustful-web/"/>
+    <updated>2017-06-04T23:17:45+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/06/04/rustful-web</id>
+    <content type="html"><![CDATA[<p><a href="https://www.rust-lang.org/ja-JP/">rust</a> で Web Application をつくろうと思って <a href="https://github.com/Ogeon/rustful">rustful</a> を使ってやってみてたりした。</p>
+
+<p>ドキュメントと利用しているバージョンのコードが異なり、必要なモジュールが読み込めなかったり、関数の引数が異なったりしてうごかねぇってなったのでHEADを使うことで解決。</p>
+
+<h2>🍻</h2>
+
+<p>とりあえずいつものメンバーで🍻にいってきた。浅草のカンピオンエールという店でのんでそのあと隣の店でお好み焼きをたべてた。お好み焼き屋のあとは河原まであるて吾妻橋からみえる
+やつをながめながらビールのんでた</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[use red-arrow.gem]]></title>
@@ -1093,53 +1109,6 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
 <p>1年ぶりの日記だたので、Markdownどうかくんだっけ？とか、別のところで大変でした。</p>
 
 <h2>参考サイト</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[YAPC::Asia 2015に参加しました(ボランティアスタッフとして)]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff/"/>
-    <updated>2015-08-25T02:42:48+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff</id>
-    <content type="html"><![CDATA[<p>YAPC::Asia 2015にボランティアスタッフとして参加してきました(申請時に公表しないでってしなのでYAPCのスッタフ一覧にはのってないです)。去年も参加しましたが聴講者として参加しました。</p>
-
-<h2>ボランティアスタッフに応募した理由</h2>
-
-<p>彼女ができるときいて応募しました。また、最後の YAPC::Asia と聞いていたので応募しないとなと思ったのがありました。他の理由としては NEET なのでというのもあります。発表者として参加できればよかったのですが、ネタが応募するには弱いなと思い見送りました。そういうこともありボランティアスタッフとして参加しました。</p>
-
-<h2>個人スポンサー</h2>
-
-<p>実は個人スポンサーもやっていましたが、ボランティアスタッフをやるため、個人スポンサーの分のチケットが余っていました。その分はとある人に譲りました。</p>
-
-<h2>0日目(前夜祭)</h2>
-
-<p>0日目は11時集合になっており、スタッフ作業としてノベルティの詰め込み作業と会場設営を行なっていました。</p>
-
-<p>前夜祭自体は初めてのスタッフ作業でしたので、会場係として設営などをしてました。</p>
-
-<h2>1日目</h2>
-
-<p>1日目は始めに作業としてラリーのセッション前、中で同時通訳のレシーバーを配ってました。その後D会場でずっとタイムキーパーをやっておりました。</p>
-
-<p>この日の印象に残ってるセッションとしては <a href="https://twitter.com/kazuho">@kazuhoさん</a> の <a href="http://yapcasia.org/2015/talk/show/dead6890-09b7-11e5-998a-67dc7d574c3a">HTTP/2時代のウェブサイト設計</a> で、 <code>HTTP2</code> になった理由、そのなかで <a href="https://github.com/h2o/h2o">h2o</a> が優れている点を丁寧に説明されてて、これはすぐに使わねばと思わせてくれた発表でした。</p>
-
-<p>この日は懇親会がありましたので、懇親会会場でうろうろしておりました。
-懇親会では、知り合いと話してたりしてました。最近、 <a href="https://github.com/itamae-kitchen/itamae">itamae</a> を触っているので、プラグインの話を <a href="https://twitter.com/k0kubun">@k0kubunさん</a> としてました。そのときは <code>pip</code> のリソースプラグイン作りたいとか言ったので <a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">今日作成</a> したのですが、よくかんがえてみると、 <code>cpan</code> のリソースプラグインの方が必要だったのを作成後に思い出しました。</p>
-
-<h2>2日目</h2>
-
-<p>2日目も1日目と同様にD会場で全セッションタイムキーパーやっておりました。</p>
-
-<p>印象に残ったセッションとしては、 <a href="https://github.com/kenjiskywalker">@kenjiskywalkerさん</a> の <a href="http://yapcasia.org/2015/talk/show/f2816038-10ec-11e5-89bf-d7f07d574c3a">我々はどのように冗長化を失敗したのか</a> 、 <a href="https://twitter.com/saiken3110">@saiken3110さん</a> の <a href="http://yapcasia.org/2015/talk/show/0af26fe4-0b7b-11e5-a29c-67dc7d574c3a">MySQLで2億件のシリアルデータと格闘したチューニングの話</a> 、 <a href="https://github.com/Jxck">@Jxckさん</a> の <a href="http://yapcasia.org/2015/talk/show/9e9ae188-fb20-11e4-9a97-8ab37d574c3a">HTTP2 時代の Web</a> がありました。</p>
-
-<p>最後に片づけをし、おわった後スタッフ数人とのみくいに行ってきました。そろそろ解散かなってときに、 twitter を眺めてたら、 <a href="https://twitter.com/Jxck_/status/635075234379399168">@Jxckさんが@t_wadaさんを誘ってる</a> を見つけて無理やり参加させて頂きました。</p>
-
-<p>帰りついたのは朝の4時ごろ(だったと思う)でした。</p>
-
-<h2>おわり</h2>
-
-<p>YAPC::Asia 2015 に参加してきました。23日の日曜日は疲れてたのでずっとぐったりしてました。
-楽しい3日間でした!!!!!11</p>
 ]]></content>
   </entry>
   
