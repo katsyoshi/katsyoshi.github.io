@@ -4,7 +4,7 @@
   <title><![CDATA[Category: itamae | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/itamae/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-07-01T23:09:58+09:00</updated>
+  <updated>2017-07-01T23:11:55+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -26,7 +26,7 @@
 
 <h2>Itamae de kanri</h2>
 
-<p>gitで管理しているので環境異差ある部分をitamaeで管理するように方針を転換。</p>
+<p>gitで管理しているので環境異差ある部分を<a href="https://github.com/katsyoshi/itamae-recipes">itamae</a>で管理するように方針を転換。</p>
 
 <p>```yaml
 emacs:
