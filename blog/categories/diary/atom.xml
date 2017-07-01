@@ -4,7 +4,7 @@
   <title><![CDATA[Category: diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-06-04T23:43:34+09:00</updated>
+  <updated>2017-07-01T23:09:58+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Emacsの構成管理をitamaeで管理]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/07/01/emacs-config-from-itamae/"/>
+    <updated>2017-07-01T22:59:16+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/07/01/emacs-config-from-itamae</id>
+    <content type="html"><![CDATA[<p>仕事とプライベート環境でemacsのフォント等設定するのがいいかげんダるくなってきたので、Itamaeを流すだけでイイカンジにするようにした</p>
+
+<h2>もともとどうかんりしてたのか</h2>
+
+<p>もともと<a href="https://github.com/katsyoshi/dot.emacs.d">github</a>で管理していたが、さすがにFontの環境異差をちょこちょこ変えるのが面倒になった</p>
+
+<h2>Itamae de kanri</h2>
+
+<p>gitで管理しているので環境異差ある部分をitamaeで管理するように方針を転換。</p>
+
+<p>```yaml
+emacs:
+  font:</p>
+
+<pre><code>family: Ricty
+height: 120
+</code></pre>
+
+<p>  packages:</p>
+
+<pre><code>- auto-complete
+</code></pre>
+
+<p>  settings:</p>
+
+<pre><code>- git
+</code></pre>
+
+<p>```</p>
+
+<p>とか書いてあとはItamaeを実行することで必要なパッケージのインストール、
+必要な設定へのリンク追加などをするようにしました。</p>
+
+<h2>おわり</h2>
+
+<p>これでなにも考えなくてすむようになるのかな？</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[rustful web]]></title>
@@ -172,59 +216,6 @@ DAZN をみようとおもったきっかけはNBAのカンファレンスファ
 特に気になりません。</p>
 
 <p>肝心の試合内容が現在非常に残念なため試合内の評価はしません。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[raspiでdnsを運用してみはじめた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network/"/>
-    <updated>2017-04-09T00:00:00+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network</id>
-    <content type="html"><![CDATA[<p>RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
-RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code>apt install dnsmasq</code> するだけでおわります。</p>
-
-<h2>はまったところ</h2>
-
-<p>いつもどおりはまりました。今回は以下の二点</p>
-
-<ul>
-<li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
-<li>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</li>
-</ul>
-
-
-<h3>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
-
-<p>ログを見ても以下のログしか出ておらず理由の調査に時間がかかった。hosts ファイルは設定ファイルではないため当然といえば当然なのですが…</p>
-
-<p><code>
-Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts
-</code></p>
-
-<p>今、<code>/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
-
-<p><code>
-CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new
-</code></p>
-
-<h3>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</h3>
-
-<p>こちらは上記問題を解決したあと、反映されないのでログを見たときにわかりました。</p>
-
-<p><code>
-Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied
-</code></p>
-
-<p>これの原因は <code>itamae</code> でファイルを送信するときに <code>mode '644'</code> を指定する必要があったのだが、指定せずに
-送信してしまったため発生。</p>
-
-<h2>おわり</h2>
-
-<p>おわり</p>
-
-<h3>関連リポジトリ</h3>
-
-<p><a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></p>
 ]]></content>
   </entry>
   

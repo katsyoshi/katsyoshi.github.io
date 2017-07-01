@@ -7,7 +7,7 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="rust で Web Application をつくろうと思って rustful を使ってやってみてたりした。 ドキュメントと利用しているバージョンのコードが異なり、必要なモジュールが読み込めなかったり、関数の引数が異なったりしてうごかねぇってなったのでHEADを使うことで解決。 🍻 &hellip;">
+	<meta name="description" content="仕事とプライベート環境でemacsのフォント等設定するのがいいかげんダるくなってきたので、Itamaeを流すだけでイイカンジにするようにした もともとどうかんりしてたのか もともとgithubで管理していたが、さすがにFontの環境異差をちょこちょこ変えるのが面倒になった Itamae de &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -76,6 +76,74 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/07/01/emacs-config-from-itamae/">
+		
+			Emacsの構成管理をitamaeで管理</a>
+	</h2>
+	<div class="entry-content">
+		<p>仕事とプライベート環境でemacsのフォント等設定するのがいいかげんダるくなってきたので、Itamaeを流すだけでイイカンジにするようにした</p>
+
+<h2>もともとどうかんりしてたのか</h2>
+
+<p>もともと<a href="https://github.com/katsyoshi/dot.emacs.d">github</a>で管理していたが、さすがにFontの環境異差をちょこちょこ変えるのが面倒になった</p>
+
+<h2>Itamae de kanri</h2>
+
+<p>gitで管理しているので環境異差ある部分をitamaeで管理するように方針を転換。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">emacs</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">font</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">family</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Ricty</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">height</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">120</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">packages</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">auto-complete</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">settings</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とか書いてあとはItamaeを実行することで必要なパッケージのインストール、
+必要な設定へのリンク追加などをするようにしました。</p>
+
+<h2>おわり</h2>
+
+<p>これでなにも考えなくてすむようになるのかな？</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -735,63 +803,6 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code
 
 
 	<a class='category' href='/blog/categories/diary/'>diary</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/12/17/emoji-in-mikutter/">
-		
-			みくったーでえもじ</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
-たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
-
-<h2>なんぞそれ？</h2>
-
-<p>ここにあります。<a href="https://github.com/katsyoshi/mikutter-emoji">mikutter-emoji</a>
-<code>:tofu_on_fire:</code> みたいに <code>:</code> で囲われた文字列を絵文字に置換するだけです。</p>
-
-<h2>つかいかた</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
-</span><span class='line'>EDIT ~/.mikutter/plugin/emoji/emoji.yml
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>gitでプラグインディレクトリにコピーします。
-コピーしたら、絵文字の設定を <code>emoji.yml</code> に入れます。
-今は5つしか登録していないので皆で登録しましょう</p>
-
-<h2>おわり</h2>
-
-<p>おわり</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
