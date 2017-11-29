@@ -7,17 +7,24 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="RubyKaigi2014に行ってきました。
-聞いたもの一覧です。 1日目 Building the Ruby interpreter &mdash; What is easy and what is difficult?
-Symbol GC スライド
-Eliminating Giant VM &hellip;">
+	<meta name="description" content="
+	RubyKaigi2014
+	RubyKaigi2014に行ってきました。
+聞いたもの一覧です。
+
+1日目
+
+
+  Building the Ruby interpreter – What is easy and what is difficult?
+  Symbol GC スライド
+  ...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -25,18 +32,18 @@ Eliminating Giant VM &hellip;">
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -45,7 +52,7 @@ Eliminating Giant VM &hellip;">
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -70,7 +77,7 @@ Eliminating Giant VM &hellip;">
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -83,48 +90,44 @@ Eliminating Giant VM &hellip;">
 	<div class="entry-content"><p><a href="http://rubykaigi.org/2014">RubyKaigi2014</a>に行ってきました。
 聞いたもの一覧です。</p>
 
-<h2>1日目</h2>
+<h2 id="1日目">1日目</h2>
 
 <ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-KoichiSasada">Building the Ruby interpreter &mdash; What is easy and what is difficult?</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-NarihiroNakamura">Symbol GC</a> <a href="http://www.slideshare.net/authorNari/symbol-gc">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ReiOdaira">Eliminating Giant VM Lock in Ruby through Hardware Transactional Memory</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-SzuKaiHsu">Cores unleashed Part II: Introduction to GobiesVM (and Software Transactional Memory)</a> <a href="https://speakerdeck.com/brucehsu/core-unleashed-part-ii-introduction-to-gobiesvm-and-stm-at-rubykaigi-2014">スライド</a></li>
-<li>Committers vs. the world</li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-KoichiSasada">Building the Ruby interpreter – What is easy and what is difficult?</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-NarihiroNakamura">Symbol GC</a> <a href="http://www.slideshare.net/authorNari/symbol-gc">スライド</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-ReiOdaira">Eliminating Giant VM Lock in Ruby through Hardware Transactional Memory</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-SzuKaiHsu">Cores unleashed Part II: Introduction to GobiesVM (and Software Transactional Memory)</a> <a href="https://speakerdeck.com/brucehsu/core-unleashed-part-ii-introduction-to-gobiesvm-and-stm-at-rubykaigi-2014">スライド</a></li>
+  <li>Committers vs. the world</li>
 </ul>
-
 
 <p>初日は笹田さんのキーノートを聞いた。あとはなりさんのSymbolをGCする話、HTM、STMの話を聞いていた。
 SymbolをGCする話はいままでGCされないことを知らなかったので便利かなと。
 懇親会では、笹田さんと鳥井さんがペアルックだったので写真撮ったのですが、携帯のカメラアプリで保存できなかったのが心のこりです。</p>
 
-<h2>2日目</h2>
+<h2 id="2日目">2日目</h2>
 
 <ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-YukihiroMatzMatsumoto">Comming soon&hellip;</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroIde">A Just in Time compiler for CRuby (CRuby言語処理系向けJITコンパイラ)</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ThiagoScalone-DanielRodriguez">MRuby as Development Platform for Payments</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-TakehikoYOSHIDA">Open the door of embedded systems to IoT! mruby on LEGO Mindstorms EV3®</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ShotaFukumori">Scalable deployments &ndash; How we deploy Rails app to 100+ hosts in a minute</a> <a href="https://speakerdeck.com/sorah/scalable-deployments-how-we-deploy-rails-app-to-150-plus-hosts-in-a-minute">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MATSUMOTORyosuke">Resource Control Architecture scripting with mruby for a Web Server Separating Computer Resources Virtually at Each HTTP Request</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroNakagawa">ServerEngine: a framework for multiprocess servers in Ruby</a> <a href="http://www.slideshare.net/treasure-data/rubykaigi-2014-serverengine">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/LT">Ligthting Talks</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-YukihiroMatzMatsumoto">Comming soon…</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroIde">A Just in Time compiler for CRuby (CRuby言語処理系向けJITコンパイラ)</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-ThiagoScalone-DanielRodriguez">MRuby as Development Platform for Payments</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-TakehikoYOSHIDA">Open the door of embedded systems to IoT! mruby on LEGO Mindstorms EV3®</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-ShotaFukumori">Scalable deployments - How we deploy Rails app to 100+ hosts in a minute</a> <a href="https://speakerdeck.com/sorah/scalable-deployments-how-we-deploy-rails-app-to-150-plus-hosts-in-a-minute">スライド</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-MATSUMOTORyosuke">Resource Control Architecture scripting with mruby for a Web Server Separating Computer Resources Virtually at Each HTTP Request</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroNakagawa">ServerEngine: a framework for multiprocess servers in Ruby</a> <a href="http://www.slideshare.net/treasure-data/rubykaigi-2014-serverengine">スライド</a></li>
+  <li><a href="http://rubykaigi.org/2014/LT">Ligthting Talks</a></li>
 </ul>
-
 
 <p>RubyをJIT使って速くしようという話。福盛さんのデプロイを早くするのは面白かった。どこで利用できるのって話はおいておいて。
 松本(り)さんはこのtalkが切っ掛けで<a href="http://hb.matsumoto-r.jp/entry/2014/09/20/003531">就職決まった</a>ようです。LTも面白かったです。</p>
 
-<h2>3日目</h2>
-
+<h2 id="3日目">3日目</h2>
 <ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-JonanScheffler">Everything is Broken: A Story of Hope</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-NaotoshiSeo">Fluentd Hacking Guide (Fluentd ソースコード完全解説)</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-PremSichanugrist">The Ruby Challenge</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasatoshiSEKI">Make your own synchronization mechanism.</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-KouheiSutou">Three Ruby usages &ndash; High-level interface, Glue and Embedding &ndash; Inside Droonga</a> <a href="http://speakerdeck.com/u/kou/p/three-ruby-usages">スライド</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-JonanScheffler">Everything is Broken: A Story of Hope</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-NaotoshiSeo">Fluentd Hacking Guide (Fluentd ソースコード完全解説)</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-PremSichanugrist">The Ruby Challenge</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-MasatoshiSEKI">Make your own synchronization mechanism.</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-KouheiSutou">Three Ruby usages - High-level interface, Glue and Embedding - Inside Droonga</a> <a href="http://speakerdeck.com/u/kou/p/three-ruby-usages">スライド</a></li>
 </ul>
-
 
 <p>3日目はゆっくり来てAaronとか聞こうかとおもってたけど、午前中はロビーでだらだらしすぎてなにもきいていないです。
 午後から、Jonanは2011の最後のRubyKaigiのときに会ってたので今こういうことやってるのだなーと。
@@ -132,9 +135,9 @@ fluentdのプラグイン書いてるけど、なんとなく動いてるし、�
 RubyChallengeはコミッタでも間違えててむずかしい。
 咳さんと須藤さんの話はすごくよかった。</p>
 
-<h2>おわり</h2>
-
+<h2 id="おわり">おわり</h2>
 <p>RubyKaigi2014行ってきました。この3日間非常に楽しく過ごせました。</p>
+
 </div>
 
 
@@ -148,7 +151,7 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+	rubyconferencetech
 
 
 </div>
@@ -177,8 +180,8 @@ RubyChallengeはコミッタでも間違えててむずかしい。
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

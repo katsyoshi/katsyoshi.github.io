@@ -7,17 +7,30 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="UbuntuにSoftEtherを導入してみた。 マシン構成 1
-2
+	<meta name="description" content="
+	softether
+	UbuntuにSoftEtherを導入してみた。
+
+マシン構成
+
 OS: Ubuntu Linux 14.4.0.2 LTS
-Machine: SakuraVPS 1GBプラン インストール ここを参考にインストール、設定すればいけます。 嵌ったところ nginx で ssl 動かしてた。 &hellip;">
+Machine: SakuraVPS 1GBプラン
+
+
+インストール
+
+ここを参考にインストール、設定すればいけます。
+
+嵌ったところ
+
+ng...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -25,18 +38,18 @@ Machine: SakuraVPS 1GBプラン インストール ここを参考にインス�
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -45,7 +58,7 @@ Machine: SakuraVPS 1GBプラン インストール ここを参考にインス�
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -70,7 +83,7 @@ Machine: SakuraVPS 1GBプラン インストール ここを参考にインス�
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -79,36 +92,34 @@ Machine: SakuraVPS 1GBプラン インストール ここを参考にインス�
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Softether</h2>
+	<h2 class="title">softether</h2>
 	<div class="entry-content"><p>Ubuntuに<a href="https://www.softether.jp/">SoftEther</a>を導入してみた。</p>
 
-<h2>マシン構成</h2>
+<h2 id="マシン構成">マシン構成</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>OS: Ubuntu Linux 14.4.0.2 LTS
-</span><span class='line'>Machine: SakuraVPS 1GBプラン</span></code></pre></td></tr></table></div></figure>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OS: Ubuntu Linux 14.4.0.2 LTS
+Machine: SakuraVPS 1GBプラン
+</code></pre></div></div>
 
-
-<h2>インストール</h2>
+<h2 id="インストール">インストール</h2>
 
 <p><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">ここ</a>を参考にインストール、設定すればいけます。</p>
 
-<h3>嵌ったところ</h3>
+<h3 id="嵌ったところ">嵌ったところ</h3>
 
-<p><code>nginx</code> で <code>ssl</code> 動かしてた。</p>
+<p><code class="highlighter-rouge">nginx</code> で <code class="highlighter-rouge">ssl</code> 動かしてた。</p>
 
-<p>設定ができなかったが <code>sudo service nginx stop</code> として、 <code>nginx</code> を止めたあと、 <code>sudo vpncmd</code> とすれば設定できます。</p>
+<p>設定ができなかったが <code class="highlighter-rouge">sudo service nginx stop</code> として、 <code class="highlighter-rouge">nginx</code> を止めたあと、 <code class="highlighter-rouge">sudo vpncmd</code> とすれば設定できます。</p>
 
-<h2>おわり</h2>
+<h2 id="おわり">おわり</h2>
 
 <p>自作のRailsアプリCIを自宅で動かそうと思ってVPN導入してみたが、一人で開発してるしCIに問題がない限り必要ないというのを構築したあと気が付いた。</p>
 
-<h3>参考</h3>
+<h3 id="参考">参考</h3>
 
 <ol>
-<li><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">http://qiita.com/Makotonton/items/18683a9f1e846433c035</a></li>
-<li><a href="https://www.softether.jp/">https://www.softether.jp/</a></li>
+  <li>http://qiita.com/Makotonton/items/18683a9f1e846433c035</li>
+  <li>https://www.softether.jp/</li>
 </ol>
 
 </div>
@@ -124,7 +135,7 @@ Machine: SakuraVPS 1GBプラン インストール ここを参考にインス�
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/network/'>network</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/vpn/'>vpn</a>
+	techvpnnetwork
 
 
 </div>
@@ -153,8 +164,8 @@ Machine: SakuraVPS 1GBプラン インストール ここを参考にインス�
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

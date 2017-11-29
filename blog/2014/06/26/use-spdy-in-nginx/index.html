@@ -7,20 +7,22 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="NGINXでSPDY3.1がサポートされているようなので動かしてみた。 準備 SPDYはSSL必須のようなのでとりあえずOpenSSLで野良証明書を作成します。 1
-2
-3
-4
-5
+	<meta name="description" content="
+	SPDYをさくっと動かしてみた
+	NGINXでSPDY3.1がサポートされているようなので動かしてみた。
+
+準備
+SPDYはSSL必須のようなのでとりあえずOpenSSLで野良証明書を作成します。
+
 $ cd /path/to/cert/dir
-$ openssl genrsa -des3 -out server. &hellip;">
+$ openssl genrsa -des3...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -28,18 +30,18 @@ $ openssl genrsa -des3 -out server. &hellip;">
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -48,7 +50,7 @@ $ openssl genrsa -des3 -out server. &hellip;">
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -73,7 +75,7 @@ $ openssl genrsa -des3 -out server. &hellip;">
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -85,39 +87,26 @@ $ openssl genrsa -des3 -out server. &hellip;">
 	<h2 class="title">SPDYをさくっと動かしてみた</h2>
 	<div class="entry-content"><p>NGINXでSPDY3.1が<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html">サポートされている</a>ようなので動かしてみた。</p>
 
-<h2>準備</h2>
-
+<h2 id="準備">準備</h2>
 <p>SPDYは<a href="http://ja.wikipedia.org/wiki/SPDY#.E6.A6.82.E8.A6.81">SSL必須</a>のようなのでとりあえずOpenSSLで<a href="http://dogmap.jp/2011/05/10/nginx-ssl/">野良証明書を作成</a>します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /path/to/cert/dir
-</span><span class='line'><span class="nv">$ </span>openssl genrsa -des3 -out server.key 2048
-</span><span class='line'><span class="nv">$ </span>openssl req -new -key server.key -out server.csr
-</span><span class='line'><span class="nv">$ </span>openssl rsa -in server.key.org -out server.key
-</span><span class='line'><span class="nv">$ </span>openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-</span></code></pre></td></tr></table></div></figure>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /path/to/cert/dir
+<span class="nv">$ </span>openssl genrsa <span class="nt">-des3</span> <span class="nt">-out</span> server.key 2048
+<span class="nv">$ </span>openssl req <span class="nt">-new</span> <span class="nt">-key</span> server.key <span class="nt">-out</span> server.csr
+<span class="nv">$ </span>openssl rsa <span class="nt">-in</span> server.key.org <span class="nt">-out</span> server.key
+<span class="nv">$ </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 365 <span class="nt">-in</span> server.csr <span class="nt">-signkey</span> server.key <span class="nt">-out</span> server.crt
+</code></pre></div></div>
 
-
-<h2>NGINXの設定</h2>
+<h2 id="nginxの設定">NGINXの設定</h2>
 
 <p>とりあえずNGINXの<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html">設定ファイルを作成</a>します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>server <span class="o">{</span>
-</span><span class='line'>    listen 443 ssl spdy;
-</span><span class='line'>    ssl_certificate server.crt;
-</span><span class='line'>    ssl_certificate_key server.key;
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+    listen 443 ssl spdy;
+    ssl_certificate server.crt;
+    ssl_certificate_key server.key;
+}
+</code></pre></div></div>
 
 <p>と設定したらNGINXを再起動します。
 これでSPDYで動いてます。わいわい。</p>
@@ -138,7 +127,7 @@ $ openssl genrsa -des3 -out server. &hellip;">
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/http2/'>http2</a>, <a class='category' href='/blog/categories/nginx/'>nginx</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+	nginxhttp2tech
 
 
 </div>
@@ -167,8 +156,8 @@ $ openssl genrsa -des3 -out server. &hellip;">
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

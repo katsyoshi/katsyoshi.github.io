@@ -7,19 +7,23 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="自分でblogを管理するのがちょっとだけ面倒になってきたので、
-このblogをgithub.ioに移行した。 手順 github.com に katsyoshi.github.io というリポジトリを作成し、以下のコマンドを実行 1
-2
-3
-4
-$ rake setup_github_pages &hellip;">
+	<meta name="description" content="
+	blogの引越し
+	自分でblogを管理するのがちょっとだけ面倒になってきたので、
+このblogをgithub.ioに移行した。
+
+手順
+
+github.com に katsyoshi.github.io というリポジトリを作成し、以下のコマンドを実行
+
+$ rake setup_gith...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -27,18 +31,18 @@ $ rake setup_github_pages &hellip;">
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -47,7 +51,7 @@ $ rake setup_github_pages &hellip;">
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -72,7 +76,7 @@ $ rake setup_github_pages &hellip;">
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -81,59 +85,46 @@ $ rake setup_github_pages &hellip;">
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Blogの引越し</h2>
+	<h2 class="title">blogの引越し</h2>
 	<div class="entry-content"><p>自分でblogを管理するのがちょっとだけ面倒になってきたので、
 このblogを<a href="katsyoshi.github.io">github.io</a>に移行した。</p>
 
-<h2>手順</h2>
+<h2 id="手順">手順</h2>
 
-<p>github.com に <code>katsyoshi.github.io</code> というリポジトリを作成し、以下のコマンドを実行</p>
+<p>github.com に <code class="highlighter-rouge">katsyoshi.github.io</code> というリポジトリを作成し、以下のコマンドを実行</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rake setup_github_pages
-</span><span class='line'><span class="nb">set </span>your github repogitory
-</span><span class='line'><span class="nv">$ </span>rake generate
-</span><span class='line'><span class="nv">$ </span>rake deploy
-</span></code></pre></td></tr></table></div></figure>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rake setup_github_pages
+<span class="nb">set </span>your github repogitory
+<span class="nv">$ </span>rake generate
+<span class="nv">$ </span>rake deploy
+</code></pre></div></div>
 
+<p>そのあと、DNSでCNAMEに <code class="highlighter-rouge">katsyoshi.github.io</code> を設定し、リポジトリ<del>のトップ</del>に <code class="highlighter-rouge">blog.katsyoshi.org</code> と書いた <code class="highlighter-rouge">source/CNAME</code> ファイルを追加しおわりです。</p>
 
-<p>そのあと、DNSでCNAMEに <code>katsyoshi.github.io</code> を設定し、リポジトリ<del>のトップ</del>に <code>blog.katsyoshi.org</code> と書いた <code>source/CNAME</code> ファイルを追加しおわりです。</p>
-
-<h2>おわり</h2>
+<h2 id="おわり">おわり</h2>
 
 <p>おわり</p>
 
-<h2>追記</h2>
+<h2 id="追記">追記</h2>
+<p>実は記事を追加したあと <code class="highlighter-rouge">rake deploy</code> ができないという問題がありましたが、そのときは、</p>
 
-<p>実は記事を追加したあと <code>rake deploy</code> ができないという問題がありましたが、そのときは、</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rake generate
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>_deploy
-</span><span class='line'><span class="nv">$ </span>git pull origin/master
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ../
-</span><span class='line'><span class="nv">$ </span>rake deploy
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rake generate
+<span class="nv">$ </span><span class="nb">cd </span>_deploy
+<span class="nv">$ </span>git pull origin/master
+<span class="nv">$ </span><span class="nb">cd</span> ../
+<span class="nv">$ </span>rake deploy
+</code></pre></div></div>
 
 <p>で更新されます。</p>
 
-<h3>参考サイト</h3>
+<h3 id="参考サイト">参考サイト</h3>
 
 <ol>
-<li><a href="http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/">http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/</a></li>
-<li><a href="http://blog.textfile.org/20141014/github/">http://blog.textfile.org/20141014/github/</a></li>
-<li><a href="http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress">http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress</a></li>
-<li><a href="http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/">http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/</a></li>
+  <li>http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/</li>
+  <li>http://blog.textfile.org/20141014/github/</li>
+  <li>http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress</li>
+  <li>http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/</li>
 </ol>
-
 </div>
 
 
@@ -147,7 +138,7 @@ $ rake setup_github_pages &hellip;">
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+	techdiarygithub
 
 
 </div>
@@ -176,8 +167,8 @@ $ rake setup_github_pages &hellip;">
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

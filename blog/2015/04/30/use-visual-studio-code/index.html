@@ -7,17 +7,21 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="Visual Studio Codeというものがでたので普段利用している
-Linuxで使ってみた。 インストール は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
-以下のコマンドで実行できます 1
-$ ./Code 感想 VSC使ってみたけど、 &hellip;">
+	<meta name="description" content="
+	Visual Studio Codeを使ってみた
+	Visual Studio Codeというものがでたので普段利用している
+Linuxで使ってみた。
+
+インストール
+は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
+以下のコマンドで実行できま...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -25,18 +29,18 @@ $ ./Code 感想 VSC使ってみたけど、 &hellip;">
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -45,7 +49,7 @@ $ ./Code 感想 VSC使ってみたけど、 &hellip;">
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -70,7 +74,7 @@ $ ./Code 感想 VSC使ってみたけど、 &hellip;">
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -83,39 +87,31 @@ $ ./Code 感想 VSC使ってみたけど、 &hellip;">
 	<div class="entry-content"><p><a href="https://code.visualstudio.com/">Visual Studio Code</a>というものがでたので普段利用している
 Linuxで使ってみた。</p>
 
-<h2>インストール</h2>
-
+<h2 id="インストール">インストール</h2>
 <p>は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
 以下のコマンドで実行できます</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>./Code
-</span></code></pre></td></tr></table></div></figure>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./Code
+</code></pre></div></div>
 
-
-<h2>感想</h2>
-
+<h2 id="感想">感想</h2>
 <p>VSC使ってみたけど、日本語表示がされない。</p>
 
-<p style="text-align:center;"> <img src="/images/screenshot/vsc_japanese.png" alt="" /></p>
+<p>-&gt; <img src="/images/screenshot/vsc_japanese.png" alt="" /> &lt;-</p>
 
 <p><em>追記</em></p>
 
 <p>フォントを変更すると表示できるようになりました。</p>
 
-<p><code>File -&gt; Preferences -&gt; User Settings</code> から、 <code>settings.json</code> を開き、
+<p><code class="highlighter-rouge">File -&gt; Preferences -&gt; User Settings</code> から、 <code class="highlighter-rouge">settings.json</code> を開き、
 以下のように追加する</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;editor.fontFamily&quot;</span><span class="p">:</span> <span class="s2">&quot;Ricty&quot;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"editor.fontFamily"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ricty"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
-
-<p style="text-align:center;"> <img src="/images/screenshot/vsc_settings.png" alt="" /></p>
+<p>-&gt; <img src="/images/screenshot/vsc_settings.png" alt="" /> &lt;-</p>
 
 <p><em>追記おわり</em></p>
 
@@ -125,7 +121,7 @@ Linuxで使ってみた。</p>
 
 <p>補完がよさそう。Rubyでの補完の出かたです。</p>
 
-<p style="text-align:center;"> <img src="/images/screenshot/vsc_completion.png" alt="" /></p>
+<p>-&gt; <img src="/images/screenshot/vsc_completion.png" alt="" /> &lt;-</p>
 
 <p>などあります。</p>
 
@@ -143,7 +139,7 @@ Linuxで使ってみた。</p>
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/tech/'>tech</a>
+	tech
 
 
 </div>
@@ -172,8 +168,8 @@ Linuxで使ってみた。</p>
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

@@ -7,14 +7,21 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="Gentoo Advent Calendar 2016 の10日目の記事です Itamaeでgentoo管理するには？ そらはー(@sora_h)が作ってる itamae-plugin-resource-portage 使え 自作のportage管理ソフトの紹介 ここにあります。 使いかた &hellip;">
+	<meta name="description" content="
+	板前さんでGentooを管理
+	Gentoo Advent Calendar 2016 の10日目の記事です
+
+Itamaeでgentoo管理するには？
+そらはー(@sora_h)が作ってる itamae-plugin-resource-portage 使え
+
+自作のportage管理ソフ...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -22,18 +29,18 @@
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -42,7 +49,7 @@
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -67,7 +74,7 @@
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -79,47 +86,37 @@
 	<h2 class="title">板前さんでGentooを管理</h2>
 	<div class="entry-content"><p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
 
-<h2>Itamaeでgentoo管理するには？</h2>
-
+<h2 id="itamaeでgentoo管理するには">Itamaeでgentoo管理するには？</h2>
 <p>そらはー(<a href="https://twitter.com/sora_h">@sora_h</a>)が作ってる <a href="https://github.com/sorah/itamae-plugin-resource-portage">itamae-plugin-resource-portage</a> 使え</p>
 
-<h2>自作のportage管理ソフトの紹介</h2>
+<h2 id="自作のportage管理ソフトの紹介">自作のportage管理ソフトの紹介</h2>
 
 <p><a href="https://github.com/katsyoshi/itamae-recipes/tree/master/cookbook/gentoo">ここ</a>にあります。</p>
 
-<h3>使いかた</h3>
-
+<h3 id="使いかた">使いかた</h3>
 <p>簡単な使いかたとしては以下のようになります</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>itamae local gentoo.rb -j package.json</span></code></pre></td></tr></table></div></figure>
-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>itamae local gentoo.rb -j package.json
+</code></pre></div></div>
 
 <p>これだけです。</p>
 
-<h3>パッケージの指定方法</h3>
+<h3 id="パッケージの指定方法">パッケージの指定方法</h3>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">packages</span><span class="p-Indicator">:</span>
-</span><span class='line'> <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&#39;category/package&#39;</span>
-</span><span class='line'>   <span class="l-Scalar-Plain">portage</span><span class="p-Indicator">:</span>
-</span><span class='line'>     <span class="l-Scalar-Plain">use</span><span class="p-Indicator">:</span> <span class="s">&#39;package&#39;</span>
-</span><span class='line'>     <span class="l-Scalar-Plain">accept_keywords</span><span class="p-Indicator">:</span> <span class="s">&#39;package&#39;</span>
-</span><span class='line'>     <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="s">&#39;pakcage&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">packages</span><span class="pi">:</span>
+ <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">category/package'</span>
+   <span class="na">portage</span><span class="pi">:</span>
+     <span class="na">use</span><span class="pi">:</span> <span class="s1">'</span><span class="s">package'</span>
+     <span class="na">accept_keywords</span><span class="pi">:</span> <span class="s1">'</span><span class="s">package'</span>
+     <span class="na">license</span><span class="pi">:</span> <span class="s1">'</span><span class="s">pakcage'</span>
+</code></pre></div></div>
 
-
-<p><code>name</code> で <code>category/package</code> を指定することでインストールすることができます。
-<code>portage</code> では <code>use</code> などのフラグを指定して管理します。
-<code>use</code> ディレクトリを作成してそこにファイルを置く必要があります。
+<p><code class="highlighter-rouge">name</code> で <code class="highlighter-rouge">category/package</code> を指定することでインストールすることができます。
+<code class="highlighter-rouge">portage</code> では <code class="highlighter-rouge">use</code> などのフラグを指定して管理します。
+<code class="highlighter-rouge">use</code> ディレクトリを作成してそこにファイルを置く必要があります。
 自動生成したいけど、依存パッケージの指定方法とかまだ考えていないので取り敢えず直接指定です。</p>
 
-<h2>おわり</h2>
+<h2 id="おわり">おわり</h2>
 
 <p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
 とおもってたら itamae-plugin-resource-portage みつけてしまったので
@@ -137,7 +134,7 @@ itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+	itamaegentooadvent_calendartech
 
 
 </div>
@@ -166,8 +163,8 @@ itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

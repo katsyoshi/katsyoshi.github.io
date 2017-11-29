@@ -7,17 +7,21 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="こないだインストール した Apache Arrow がとりあえず Ruby でうごくようになったのでメモ メモ gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。 1
-2
-require &quot;arrow&quot;
-/ &hellip;">
+	<meta name="description" content="
+	use red-arrow.gem
+	こないだインストール した Apache Arrow がとりあえず Ruby でうごくようになったのでメモ
+
+メモ
+gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。
+
+require "...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -25,18 +29,18 @@ require &quot;arrow&quot;
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -45,7 +49,7 @@ require &quot;arrow&quot;
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -70,7 +74,7 @@ require &quot;arrow&quot;
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -79,90 +83,56 @@ require &quot;arrow&quot;
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Use red-arrow.gem</h2>
+	<h2 class="title">use red-arrow.gem</h2>
 	<div class="entry-content"><p><a href="https://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/">こないだインストール</a> した <a href="https://arrow.apache.org/">Apache Arrow</a> がとりあえず <a href="https://github.com/red-data-tools/red-arrow">Ruby</a> でうごくようになったのでメモ</p>
 
-<h2>メモ</h2>
-
+<h2 id="メモ">メモ</h2>
 <p>gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;arrow&quot;</span>
-</span><span class='line'><span class="sr">/home/</span><span class="n">katsu</span><span class="o">/.</span><span class="n">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">/</span><span class="n">loader</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">37</span><span class="ss">:in</span> <span class="sb">`require&#39;:GObjectIntrospection::RepositoryError::TypelibNotFound: Typelib file for namespace &#39;Arrow&#39; (any version) not found</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"arrow"</span>
+<span class="sr">/home/</span><span class="n">katsu</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">-</span><span class="mf">3.1</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">/</span><span class="n">loader</span><span class="p">.</span><span class="nf">rb</span><span class="p">:</span><span class="mi">37</span><span class="ss">:in</span> <span class="sb">`require':GObjectIntrospection::RepositoryError::TypelibNotFound: Typelib file for namespace 'Arrow' (any version) not found
+</span></code></pre></div></div>
 
+<p>これは <code class="highlighter-rouge">GObjectIntrospection</code> の<a href="https://github.com/red-data-tools/red-arrow/blob/master/lib/arrow.rb#L25">ロードに失敗</a>しているようです。
+なので<a href="http://www.clear-code.com/blog/2013/12/16.html">ここ</a>や<a href="http://qiita.com/groonga/items/71b145b37d77bd160bf2">ここ</a>を参考に環境変数 <code class="highlighter-rouge">GI_TYPELIB_PATH</code> を設定すると読み込まれるようになり実行できます。</p>
 
-<p>これは <code>GObjectIntrospection</code> の<a href="https://github.com/red-data-tools/red-arrow/blob/master/lib/arrow.rb#L25">ロードに失敗</a>しているようです。
-なので<a href="http://www.clear-code.com/blog/2013/12/16.html">ここ</a>や<a href="http://qiita.com/groonga/items/71b145b37d77bd160bf2">ここ</a>を参考に環境変数 <code>GI_TYPELIB_PATH</code> を設定すると読み込まれるようになり実行できます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> <span class="nb">export </span><span class="nv">GI_TYPELIB_PATH</span><span class="o">=</span>/path/to/girepository-1.0
-</span><span class='line'><span class="gp">$</span> irb -rarrow
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">export </span><span class="nv">GI_TYPELIB_PATH</span><span class="o">=</span>/path/to/girepository-1.0
+<span class="gp">$</span> irb <span class="nt">-rarrow</span>
+</code></pre></div></div>
 
 <p>とやるとエラーがなくなります。</p>
 
 <p>最後に<a href="https://github.com/red-data-tools/red-arrow/tree/master/example">サンプル</a>を実行して確認しました!</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">%</span> ruby write-file.rb
-</span><span class='line'><span class="gp">%</span> ruby <span class="nb">read</span>-file.rb
-</span><span class='line'><span class="go">========================================</span>
-</span><span class='line'><span class="go">record-batch[0]:</span>
-</span><span class='line'><span class="go">  uint8: [1, 2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint16: [1, 2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint32: [1, 2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint64: [1, 2, 4, 8]</span>
-</span><span class='line'><span class="go">  int8: [1, -2, 4, -8]</span>
-</span><span class='line'><span class="go">  int16: [1, -2, 4, -8]</span>
-</span><span class='line'><span class="go">  int32: [1, -2, 4, -8]</span>
-</span><span class='line'><span class="go">  int64: [1, -2, 4, -8]</span>
-</span><span class='line'><span class="go">  float: [1.100000023841858, -2.200000047683716, 4.400000095367432, -8.800000190734863]</span>
-</span><span class='line'><span class="go">  double: [1.1, -2.2, 4.4, -8.8]</span>
-</span><span class='line'><span class="go">========================================</span>
-</span><span class='line'><span class="go">record-batch[1]:</span>
-</span><span class='line'><span class="go">  uint8: [2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint16: [2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint32: [2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint64: [2, 4, 8]</span>
-</span><span class='line'><span class="go">  int8: [-2, 4, -8]</span>
-</span><span class='line'><span class="go">  int16: [-2, 4, -8]</span>
-</span><span class='line'><span class="go">  int32: [-2, 4, -8]</span>
-</span><span class='line'><span class="go">  int64: [-2, 4, -8]</span>
-</span><span class='line'><span class="go">  float: [-2.200000047683716, 4.400000095367432, -8.800000190734863]</span>
-</span><span class='line'><span class="go">  double: [-2.2, 4.4, -8.8]</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">% ruby write-file.rb
+% ruby read-file.rb
+========================================
+record-batch[0]:
+  uint8: [1, 2, 4, 8]
+  uint16: [1, 2, 4, 8]
+  uint32: [1, 2, 4, 8]
+  uint64: [1, 2, 4, 8]
+  int8: [1, -2, 4, -8]
+  int16: [1, -2, 4, -8]
+  int32: [1, -2, 4, -8]
+  int64: [1, -2, 4, -8]
+  float: [1.100000023841858, -2.200000047683716, 4.400000095367432, -8.800000190734863]
+  double: [1.1, -2.2, 4.4, -8.8]
+========================================
+record-batch[1]:
+  uint8: [2, 4, 8]
+  uint16: [2, 4, 8]
+  uint32: [2, 4, 8]
+  uint64: [2, 4, 8]
+  int8: [-2, 4, -8]
+  int16: [-2, 4, -8]
+  int32: [-2, 4, -8]
+  int64: [-2, 4, -8]
+  float: [-2.200000047683716, 4.400000095367432, -8.800000190734863]
+  double: [-2.2, 4.4, -8.8]
+</span></code></pre></div></div>
 
-
-<h2>おわり</h2>
+<h2 id="おわり">おわり</h2>
 
 <p>最初ろーどえらーでこまってた</p>
 </div>
@@ -178,7 +148,7 @@ require &quot;arrow&quot;
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/arrow/'>arrow</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+	techarrowdiary
 
 
 </div>
@@ -207,8 +177,8 @@ require &quot;arrow&quot;
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

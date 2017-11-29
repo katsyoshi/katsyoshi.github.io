@@ -7,20 +7,22 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="kibana で表示しようとしてたら嵌ったのでメモ 嵌った原因 数字をElasticsearchに投げているつもりが文字列を投げていた。
-ので対処方法としては、 fluent-plugin-typecast を導入して終了。 1
-2
-3
-4
-5
-&lt;match elasticsearch &hellip;">
+	<meta name="description" content="
+	elasticsearchどの〜
+	kibana で表示しようとしてたら嵌ったのでメモ
+
+嵌った原因
+数字をElasticsearchに投げているつもりが文字列を投げていた。
+ので対処方法としては、 fluent-plugin-typecast を導入して終了。
+
+&lt;match el...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -28,18 +30,18 @@
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -48,7 +50,7 @@
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -73,7 +75,7 @@
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -82,63 +84,43 @@
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Elasticsearchどの〜</h2>
+	<h2 class="title">elasticsearchどの〜</h2>
 	<div class="entry-content"><p><a href="https://www.elastic.co/products/kibana">kibana</a> で表示しようとしてたら嵌ったのでメモ</p>
 
-<h2>嵌った原因</h2>
-
+<h2 id="嵌った原因">嵌った原因</h2>
 <p>数字をElasticsearchに投げているつもりが文字列を投げていた。
-ので対処方法としては、 <code>fluent-plugin-typecast</code> を導入して終了。</p>
+ので対処方法としては、 <code class="highlighter-rouge">fluent-plugin-typecast</code> を導入して終了。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;match</span> <span class="err">elasticsearch.**.*</span><span class="nt">&gt;</span>
-</span><span class='line'>  type typecast
-</span><span class='line'>  item_types value:float
-</span><span class='line'>  prefix typed
-</span><span class='line'><span class="nt">&lt;/match&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;match</span> <span class="err">elasticsearch.**.*</span><span class="nt">&gt;</span>
+  type typecast
+  item_types value:float
+  prefix typed
+<span class="nt">&lt;/match&gt;</span>
+</code></pre></div></div>
 
-
-<h2>Elasticsearch</h2>
+<h2 id="elasticsearch">Elasticsearch</h2>
 
 <p><a href="https://www.fluentd.org">fluentd</a> で集めたデータを <a href="http://www.elasitc.co">Elasticsearch</a> に <a href="https://github.com/uken/fluent-plugin-elasticsearch">fluent-plugin-elastchsearch</a> を利用して入れます。設定は以下のようにします。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;match</span> <span class="err">typed.elasticserch.**.*</span><span class="nt">&gt;</span>
-</span><span class='line'>  type elasticsearch
-</span><span class='line'>  type_name hoge
-</span><span class='line'>  host 127.0.0.1
-</span><span class='line'>  port 9200
-</span><span class='line'>  logstash_format true
-</span><span class='line'>  logstash_prefix logstash
-</span><span class='line'>  flash_interval 1s
-</span><span class='line'><span class="nt">&lt;/match&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;match</span> <span class="err">typed.elasticserch.**.*</span><span class="nt">&gt;</span>
+  type elasticsearch
+  type_name hoge
+  host 127.0.0.1
+  port 9200
+  logstash_format true
+  logstash_prefix logstash
+  flash_interval 1s
+<span class="nt">&lt;/match&gt;</span>
+</code></pre></div></div>
 
-
-<h2>おわり</h2>
-
+<h2 id="おわり">おわり</h2>
 <p>おわり</p>
 
-<h3>参考資料</h3>
-
+<h3 id="参考資料">参考資料</h3>
 <ol>
-<li><a href="http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html">http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html</a></li>
+  <li>http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html</li>
+  <li>https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html</li>
 </ol>
-
 </div>
 
 
@@ -152,7 +134,7 @@
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/kibana/'>kibana</a>
+	elasticsearchfluentdkibana
 
 
 </div>
@@ -181,8 +163,8 @@
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

@@ -7,16 +7,22 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="Ubuntuで lxc を利用して、サーバを立ててたときに嵌ったこと はじまり Proxyを利用してインターネットに接続している。
+	<meta name="description" content="
+	不注意なこと
+	Ubuntuで lxc を利用して、サーバを立ててたときに嵌ったこと
+
+はじまり
+
+Proxyを利用してインターネットに接続している。
 このネットワークとして ping はLAN内なら届くが、外(google.com)とかには出ない。
-設定がうまくいってるかどうかの確認する方法として、 apt-get &hellip;">
+設定がうまくいってるかどうかの確認する...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -24,18 +30,18 @@
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -44,7 +50,7 @@
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -69,7 +75,7 @@
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -79,37 +85,34 @@
 	
 	<div id="content" class="inner"><article class="post">
 	<h2 class="title">不注意なこと</h2>
-	<div class="entry-content"><p>Ubuntuで <code>lxc</code> を利用して、サーバを立ててたときに嵌ったこと</p>
+	<div class="entry-content"><p>Ubuntuで <code class="highlighter-rouge">lxc</code> を利用して、サーバを立ててたときに嵌ったこと</p>
 
-<h2>はじまり</h2>
+<h2 id="はじまり">はじまり</h2>
 
 <p>Proxyを利用してインターネットに接続している。
-このネットワークとして <code>ping</code> はLAN内なら届くが、外(google.com)とかには出ない。
-設定がうまくいってるかどうかの確認する方法として、 <code>apt-get update</code> を利用して確認している。</p>
+このネットワークとして <code class="highlighter-rouge">ping</code> はLAN内なら届くが、外(google.com)とかには出ない。
+設定がうまくいってるかどうかの確認する方法として、 <code class="highlighter-rouge">apt-get update</code> を利用して確認している。</p>
 
-<p>最初は、 <code>lxc</code> の設定がうまくいっていないと思いなんども見直してたりした。
+<p>最初は、 <code class="highlighter-rouge">lxc</code> の設定がうまくいっていないと思いなんども見直してたりした。
 それでもWANの方に出ることができなかった。</p>
 
 <p>サーバのネットワーク設定がよくないと思ってなんども見直したけど、問題なさそう。
-最後に <code>sudo -i</code> で root にログインしたあと、 <code>apt-get update</code> したら、
+最後に <code class="highlighter-rouge">sudo -i</code> で root にログインしたあと、 <code class="highlighter-rouge">apt-get update</code> したら、
 ダウンロードはじまり、次へ進むことができた。</p>
 
-<h2>原因</h2>
+<h2 id="原因">原因</h2>
 
-<p>原因としては <code>sudo command</code> で実行しても <code>Defaults reset_env</code> で環境変数がリセットされてたようだった。
-ので、<code>Defaults keep_env+="PATH"</code> とか追加して解決した。</p>
+<p>原因としては <code class="highlighter-rouge">sudo command</code> で実行しても <code class="highlighter-rouge">Defaults reset_env</code> で環境変数がリセットされてたようだった。
+ので、<code class="highlighter-rouge">Defaults keep_env+="PATH"</code> とか追加して解決した。</p>
 
-<h2>おわり</h2>
-
+<h2 id="おわり">おわり</h2>
 <p>簡単なミスで3時間ほど時間を費したのでなんとかしたい。</p>
 
-<h3>参考URL</h3>
-
+<h3 id="参考url">参考URL</h3>
 <ol>
-<li><a href="http://www.maepachi.com/blog/entry?id=128">http://www.maepachi.com/blog/entry?id=128</a></li>
-<li><a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv</a></li>
+  <li>http://www.maepachi.com/blog/entry?id=128</li>
+  <li>http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv</li>
 </ol>
-
 </div>
 
 
@@ -123,7 +126,7 @@
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/sudo/'>sudo</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
+	techubuntusudo
 
 
 </div>
@@ -152,8 +155,8 @@
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

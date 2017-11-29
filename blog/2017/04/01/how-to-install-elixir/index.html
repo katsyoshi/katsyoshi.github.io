@@ -7,16 +7,22 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="Elixir Conf Japan に行きましたが、よく考えてみたら
+	<meta name="description" content="
+	Elixirのインストール方法
+	Elixir Conf Japan に行きましたが、よく考えてみたら
 まだこの PC に Elixir をインストールしていないことに気がついたので
-隣の英語のうまいおじさんにインストール方法を教えてもらいながらインストールしました1 準備 ここでは Gentoo Linux を前提としております &hellip;">
+隣の英語のうまいおじさんにインストール方法を教えてもらいながらインストールしました1
+
+準備
+
+ここでは ...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -24,18 +30,18 @@
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -44,7 +50,7 @@
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -69,7 +75,7 @@
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -81,52 +87,43 @@
 	<h2 class="title">Elixirのインストール方法</h2>
 	<div class="entry-content"><p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
 まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
-隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:zakk"><a href="#fn:zakk" class="footnote">1</a></sup></p>
 
-<h2>準備</h2>
+<h2 id="準備">準備</h2>
 
 <p>ここでは <a href="https://gentoo.org/">Gentoo Linux</a> を前提としております。
 まず、Elixir を動かすために <a href="https://www.erlang.org">Erlang</a> をインストールします。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">sudo eix-sync</span>
-</span><span class='line'><span class="go">sudo emerge erlang</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">sudo eix-sync
+sudo emerge erlang
+</span></code></pre></div></div>
 
 <p>準備はこれだけです。</p>
 
-<h2>インストール</h2>
+<h2 id="インストール">インストール</h2>
 
 <p>次にインストールなのですが、Elixir は Earlang VM 上で動くプログラミング言語のため、コンパイルされたバイナリを置くだけでインストールがおわります。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip</span>
-</span><span class='line'><span class="go">unzip Precompiled.zip -d elixir</span>
-</span><span class='line'><span class="go">mv elixir /path/to/elixir</span>
-</span><span class='line'><span class="go">echo &#39;export PATH=/path/to/elixir/bin:$PATH&#39; &gt;&gt; ~/.bashrc</span>
-</span><span class='line'><span class="go">source ~/.bashrc</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip
+unzip Precompiled.zip -d elixir
+mv elixir /path/to/elixir
+</span><span class="gp">echo 'export PATH=/path/to/elixir/bin:$</span>PATH<span class="s1">' &gt;&gt; ~/.bashrc
+</span><span class="go">source ~/.bashrc
+</span></code></pre></div></div>
 
+<h2 id="おわり">おわり</h2>
 
-<h2>おわり</h2>
+<p>さいごに <code class="highlighter-rouge">iex</code> を起動して確認すればおわり</p>
 
-<p>さいごに <code>iex</code> を起動して確認すればおわり</p>
+<h3 id="参考">参考</h3>
 
-<h3>参考</h3>
 <div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
+  <ol>
+    <li id="fn:zakk">
+      <p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧 <a href="#fnref:zakk" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
 </div>
-
 </div>
 
 
@@ -140,7 +137,7 @@
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/elixir/'>elixir</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+	techelixirdiary
 
 
 </div>
@@ -169,8 +166,8 @@
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

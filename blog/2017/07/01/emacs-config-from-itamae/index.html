@@ -7,14 +7,19 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="仕事とプライベート環境でemacsのフォント等設定するのがいいかげんダるくなってきたので、Itamaeを流すだけでイイカンジにするようにした もともとどうかんりしてたのか もともとgithubで管理していたが、さすがにFontの環境異差をちょこちょこ変えるのが面倒になった Itamae de &hellip;">
+	<meta name="description" content="
+	Emacsの構成管理をitamaeで管理
+	仕事とプライベート環境でemacsのフォント等設定するのがいいかげんダるくなってきたので、Itamaeを流すだけでイイカンジにするようにした
+
+もともとどうかんりしてたのか
+もともとgithubで管理していたが、さすがにFontの環境異差をちょこ...">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -22,18 +27,18 @@
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -42,7 +47,7 @@
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -67,7 +72,7 @@
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -79,38 +84,26 @@
 	<h2 class="title">Emacsの構成管理をitamaeで管理</h2>
 	<div class="entry-content"><p>仕事とプライベート環境でemacsのフォント等設定するのがいいかげんダるくなってきたので、Itamaeを流すだけでイイカンジにするようにした</p>
 
-<h2>もともとどうかんりしてたのか</h2>
-
+<h2 id="もともとどうかんりしてたのか">もともとどうかんりしてたのか</h2>
 <p>もともと<a href="https://github.com/katsyoshi/dot.emacs.d">github</a>で管理していたが、さすがにFontの環境異差をちょこちょこ変えるのが面倒になった</p>
 
-<h2>Itamae de kanri</h2>
-
+<h2 id="itamae-de-kanri">Itamae de kanri</h2>
 <p>gitで管理しているので環境異差ある部分を<a href="https://github.com/katsyoshi/itamae-recipes">itamae</a>で管理するように方針を転換。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">emacs</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">font</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">family</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Ricty</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">height</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">120</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">packages</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">auto-complete</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">settings</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">emacs</span><span class="pi">:</span>
+  <span class="na">font</span><span class="pi">:</span>
+    <span class="na">family</span><span class="pi">:</span> <span class="s">Ricty</span>
+    <span class="na">height</span><span class="pi">:</span> <span class="s">120</span>
+  <span class="na">packages</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">auto-complete</span>
+  <span class="na">settings</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">git</span>
+</code></pre></div></div>
 
 <p>とか書いてあとはItamaeを実行することで必要なパッケージのインストール、
 必要な設定へのリンク追加などをするようにしました。</p>
 
-<h2>おわり</h2>
-
+<h2 id="おわり">おわり</h2>
 <p>これでなにも考えなくてすむようになるのかな？</p>
 </div>
 
@@ -125,7 +118,7 @@
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>
+	diaryitamae
 
 
 </div>
@@ -154,8 +147,8 @@
     katsyoshi
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();
