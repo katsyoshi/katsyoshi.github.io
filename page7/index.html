@@ -1,0 +1,564 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>katsyoshiのめもみたいなもの</title>
+	<meta name="author" content="katsyoshi">
+
+	
+	<meta name="description" content="
+
+
+    
+	
+		
+		
+		
+			jubatus handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ
+	
+	
+		Jubatus Handson行ってきました
+
+行ってきました。
+
+fluent-plugin-jubatus 0.0.2をリリ...">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="//favicon.png" rel="shortcut icon">
+	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="//">Blog</a></li>
+	<li><a href="//blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		<a class="coderwall" href="https://coderwall.com/katsyoshi" title="Coderwall">Coderwall</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus/">
+		
+			jubatus handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ</a>
+	</h2>
+	<div class="entry-content">
+		<h2 id="jubatus-handson行ってきました"><a href="http://connpass.com/event/5641/">Jubatus Handson</a>行ってきました</h2>
+
+<p>行ってきました。</p>
+
+<h2 id="fluent-plugin-jubatus-002をリリースしました">fluent-plugin-jubatus 0.0.2をリリースしました</h2>
+
+<p>先日<a href="http://regional.rubykaigi.org/oedo04">大江戸Ruby会議04</a>に行ってみたらやる気が湧いてきたので半年ほど寝かせておいた<a href="http://rubygems.org/gems/fluent-plugin-jubatus">fluent-plugin-jubatus</a>をアップデートしました。</p>
+
+<p>大きな変更点としては、異常検知（jubaanomaly）をサポートするようになってます。</p>
+
+<h3 id="プラグインの今後">プラグインの今後</h3>
+
+<p>今回も入れなかったのですが、このプラグインでは未だ判定のみのサポートです。
+理由としては</p>
+
+<ul>
+  <li>計算量</li>
+  <li>メモリ</li>
+</ul>
+
+<p>のふたつがあげられます。計算量に関しては以前手元のMacで異常検出を動作させていたときマシンの動作がもっさりになるほどの計算量があったためです。メモリに関しては今のところ不安には感じてはいないですが、データ量(数)が巨大になったときどこまで必要なのかってのがよくわからない。という理由で積極的に導入していないです。</p>
+
+<p>これらを解消する方法としては忘却(<a href="https://github.com/jubatus/jubatus/tree/feature/unlearning">unlearning</a>)が考えられるのですが、じゃぁどの必要のないデータを忘却させるのって問題があります。</p>
+
+<p>とはいえ、そろそろ導入したいので<a href="https://github.com/katsyoshi/fluent-plugin-jubatus">pull req</a>まってます。</p>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	techjubatusfluentdfluent-plugin
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/11/post-access-log-to-treasure-data/">
+		
+			アクセスログをTreasureData.comへ</a>
+	</h2>
+	<div class="entry-content">
+		<p>いいかげん<a href="http://www.treasuredata.com">treasure data</a>を使おうかな。
+ということでこの鯖のアクセスログをfluentdを使って保存しようとおもいます。</p>
+
+<p>今回は<a href="https://github.com/treasure-data/td-agent">td-agent</a>を利用せずにgemからインストールしたfluentdを利用します。</p>
+
+<h2 id="環境">環境</h2>
+<p>環境としてUbuntu 12.04を利用しています。</p>
+
+<h2 id="準備">準備</h2>
+<p>事前準備としてユーザ、グループの作成、rubyのインストールを行ないます。</p>
+
+<h3 id="ユーザグループの作成">ユーザ、グループの作成</h3>
+<p>以下のコマンドでユーザ、グループの作成を行います。</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>adduser fluentd <span class="nt">-s</span> /bin/false
+</code></pre></div></div>
+<p>指示に従って入力するとユーザ、グループが作成されています。
+このユーザは<a href="http://qiita.com/shunichi/items/c7744878f5c02eaab18d#2-5">ログインできません</a>。</p>
+
+<h3 id="rubyのインストール">Rubyのインストール</h3>
+
+<p>以下のコマンドを入力しRubyのインストールを行ないます。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>aptitude build-dep ruby1.9.3
+<span class="nv">$ </span><span class="nb">sudo </span>aptitude install git
+<span class="nv">$ </span><span class="nb">sudo </span>git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
+<span class="nv">$ </span><span class="nb">sudo </span>git clone git://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">RBENV_ROOT</span><span class="o">=</span>/usr/local/rbenv
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">RBENV_ROOT</span><span class="k">}</span>/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>
+<span class="nv">$ </span><span class="nb">eval</span> <span class="s2">"</span><span class="k">$(</span>rbenv init -<span class="k">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>ここまで入力したら<code class="highlighter-rouge">sudo visudo -f /etc/sudoers.d/00_base</code>と入力し、以下を<a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">入力してください</a>。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Defaults <span class="o">!</span>secure_path
+Defaults env_keep +<span class="o">=</span> <span class="s2">"PATH RBENV_ROOT"</span>
+</code></pre></div></div>
+
+<p>入力したらRuby 2.1.1をインストールします。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>rbenv install 2.1.1
+<span class="nv">$ </span><span class="nb">sudo </span>rbenv rehash
+</code></pre></div></div>
+<p>でインストール完了です。次にfluentdをインストールします。</p>
+
+<h3 id="fluentdとプラグインのインストール">fluentdとプラグインのインストール</h3>
+<p>gemでfluentdとtdプラグインのfluent-plugin-tdをインストールします。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>gem install fluentd fluent-plugin-td
+</code></pre></div></div>
+
+<p>つぎに設定ファイル<code class="highlighter-rouge">fluentd.conf</code>を作成します。</p>
+
+<p>```xml fluentd.conf</p>
+<source />
+
+<p>type forward
+&lt;/source&gt;</p>
+
+<source />
+
+<p>type tail
+  path /var/log/nginx/access.log
+  format nginx
+  time_format %d/%b/%Y:%H:%M:%S %z
+  tag td.nginx.main.access
+  pos_file /var/log/fluentd/main_access.pos
+&lt;/source&gt;</p>
+
+<p>&lt;match td.<em>*.</em>&gt;
+  type copy</p>
+<store>
+    type stdout
+  </store>
+<store>
+    type tdlog
+    endpoint api.treasure-data.com
+    apikey ここにtdのAPIキーを入力してね
+    auto_create_table
+    buffer_type file
+    buffer_path /var/log/fluentd/buffer/td
+    use_ssl true
+  </store>
+<p>&lt;/match&gt;</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+作成後起動確認を行なってください `fluentd -c fluentd.conf` 。
+起動確認を行ったら `fluentd.conf` を `/etc/fluentd/fluentd.conf` に移動します。
+これで終了です。
+
+### init.dスクリプトの作成
+まず `/etc/init.d/skelton` を `/etc/init.d/fluentd` にコピーします。
+コピーしたら以下の様にします。
+
+```diff fluentd_diff_skelton
+diff --git a/etc/init.d/skeleton b/fluentd
+old mode 100644
+new mode 100755
+index dac9480..c59505e
+--- a/etc/init.d/skeleton
++++ b/fluentd
+@@ -1,6 +1,6 @@
+ #! /bin/sh
+ ### BEGIN INIT INFO
+-# Provides:          skeleton
++# Provides:          fleuntd
+ # Required-Start:    $remote_fs $syslog
+ # Required-Stop:     $remote_fs $syslog
+ # Default-Start:     2 3 4 5
+@@ -19,19 +19,14 @@
+
+ # PATH should only include /usr/* if it runs after the mountnfs.sh script
+ PATH=/sbin:/usr/sbin:/bin:/usr/bin
+-DESC="Description of the service"
+-NAME=daemonexecutablename
+-DAEMON=/usr/sbin/$NAME
+-DAEMON_ARGS="--options args"
+-PIDFILE=/var/run/$NAME.pid
+-SCRIPTNAME=/etc/init.d/$NAME
+-
+-# Exit if the package is not installed
+-[ -x "$DAEMON" ] || exit 0
++NAME=fluentd
+
+ # Read configuration variable file if it is present
+ [ -r /etc/default/$NAME ] &amp;&amp; . /etc/default/$NAME
+
++# Exit if the package is not installed
++[ -x "$DAEMON" ] || exit 0
++
+ # Load the VERBOSE setting and other rcS variables
+ . /lib/init/vars.sh
+
+@@ -49,10 +44,11 @@ do_start()
+  #   0 if daemon has been started
+  #   1 if daemon was already running
+  #   2 if daemon could not be started
+-    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --test &gt; /dev/null \
++    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON \
++    ${START_STOP_DAEMON_ARGS} --test &gt; /dev/null \
+      || return 1
+-    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- \
+-        $DAEMON_ARGS \
++    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON \
++        ${START_STOP_DAEMON_ARGS} -- $DAEMON_ARGS \
+      || return 2
+  # Add code here, if necessary, that waits for the process to be ready
+  # to handle requests from services started subsequently which depend
+</code></pre></div></div>
+
+<p>このままでは起動しないので <code class="highlighter-rouge">/etc/default/fluentd</code> を作成します。</p>
+
+<p>```sh fluentd.default
+RBENV_ROOT=/usr/local/rbenv
+PATH=${RBENV_ROOT}/bin:${PATH}
+eval “$(rbenv init -)”
+USER=fluentd
+GROUP=fluentd
+DESC=”fluentd”
+PIDFILE=/var/log/$NAME/run.pid
+CONFFILE=/etc/fluentd/fluentd.conf
+DAEMON=/usr/local/rbenv/shims/fluentd
+DAEMON_ARGS=”–daemon $PIDFILE –log /var/log/fluentd/fluentd.log –config $CONFFILE”
+SCRIPTNAME=/etc/init.d/$NAME
+START_STOP_DAEMON_ARGS=””</p>
+
+<p>if [ -n “${USER}” ]; then
+   if ! getent passwd | grep -q “^${USER}:”; then
+      echo “$0: user for running td-agent doesn’t exist: ${USER}” &gt;&amp;2
+      exit 1
+   fi
+   if [ ! -d $(dirname ${PIDFILE}) ]; then
+       mkdir -p $(dirname ${PIDFILE})
+   fi
+   chown -R ${USER} $(dirname ${PIDFILE})
+   START_STOP_DAEMON_ARGS=”${START_STOP_DAEMON_ARGS} -c ${USER}”
+fi</p>
+
+<p>if [ -n “${GROUP}” ]; then
+   if ! getent group | grep -q “^${GROUP}:”; then
+       echo “$0: group for running td-agent doesn’t exist: ${GROUP}” &gt;&amp;2
+       exit 1
+   fi
+   START_STOP_DAEMON_ARGS=”${START_STOP_DAEMON_ARGS} –group ${GROUP}”
+fi</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+としたら、以下のコマンドを入力し、fluentdデーモンを起動します。
+
+```sh
+$ sudo update-rc.d fluentd defaults
+$ sudo mkdir -p /var/log/fluentd
+$ sudo chown fluentd:fluentd /var/log/fluentd
+$ sudo service fluentd start
+</code></pre></div></div>
+
+<p>で起動してるはずでう。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>いくつかアクセスしてみてなげられてるのを確認できたらねます。
+最後に<a href="http://katsyoshi.doorkeeper.jp/events/10420">さけまつり</a>やるかもしれないのできてみてくだしあ。</p>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	linuxtechlogfluentd
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/09/how-to-install-applications-non-super-user/">
+		
+			スーパーユーザ権限もたずに好きなソフトをインストール</a>
+	</h2>
+	<div class="entry-content">
+		<p>Linux使っててこのソフトが入ってないしsudoも使えないってときありませんか？
+そんなときに好きなソフト(tmux, emacs)をインストールする方法を書いときます。
+ここでは、tmuxとemacsについてインストール方法を書いときます。</p>
+
+<h2 id="方法">方法</h2>
+<p>方法として以下のふたつがあると思う</p>
+
+<ol>
+  <li>頑張っていれる</li>
+  <li>パッケージマネージャ</li>
+</ol>
+
+<h2 id="頑張って入れる">頑張って入れる</h2>
+<p>この場合はちょっと管理がめんどうかもしれないが書いときます。</p>
+
+<p>前提条件としてgccとwgetがインストールされていることでX11関係のライブラリがインストールされていないこととします。</p>
+
+<h3 id="emacs">emacs</h3>
+<p>以下のコマンドでインストールできます。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>wget http://ftp.gnu.org/pub/gnu/emacs/emacs-24.3.tar.xz
+ <span class="nv">$ </span><span class="nb">tar </span>xvf emacs-24.3.tar.xz
+ <span class="nv">$ </span><span class="nb">cd </span>emacs-24.3
+ <span class="nv">$ </span>./configure <span class="nt">--prefix</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/ <span class="nt">--without-x</span> <span class="nt">--without-dbus</span> <span class="nt">--without-gnutls</span> <span class="nt">--without-makeinfo</span>
+ <span class="nv">$ </span>make <span class="nt">-j4</span> bootstrap
+ <span class="nv">$ </span>make install
+ <span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>
+ <span class="nv">$ </span>emacs
+</code></pre></div></div>
+
+<h3 id="tmux">tmux</h3>
+<p>以下のコマンドで必要ライブラリのncursesをインストールします。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>wget http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz
+ <span class="nv">$ </span><span class="nb">tar </span>xvf ncurses-5.9.tar.gz
+ <span class="nv">$ </span><span class="nb">cd </span>ncurses-5.9
+ <span class="nv">$ </span>./configure <span class="nt">--prefix</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local
+ <span class="nv">$ </span>make <span class="nt">-j4</span>
+ <span class="nv">$ </span>make install
+</code></pre></div></div>
+
+<p>次にlibeventをインストールします。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>wget https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
+ <span class="nv">$ </span><span class="nb">tar </span>xvf libevent-2.0.21-stable.tar.gz
+ <span class="nv">$ </span><span class="nb">cd </span>libevent-2.0.21-stable
+ <span class="nv">$ </span>./configure <span class="nt">--prefix</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local
+ <span class="nv">$ </span>make <span class="nt">-j4</span>
+ <span class="nv">$ </span>make install
+</code></pre></div></div>
+
+<p>最後にtmuxをインストールします。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>wget http://downloads.sourceforge.net/project/tmux/tmux/tmux-1.9/tmux-1.9a.tar.gz
+ <span class="nv">$ </span><span class="nb">tar </span>xvf tmux-1.9a.tar.gz
+ <span class="nv">$ </span><span class="nb">cd </span>tmux-1.9a
+ <span class="nv">$ CFLAGS</span><span class="o">=</span><span class="s2">"-I</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span><span class="s2">/.local/include -I</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span><span class="s2">/.local/include/ncurses"</span> <span class="nv">LDFLAGS</span><span class="o">=</span><span class="nt">-L</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/lib ./configure <span class="nt">--prefix</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local
+ <span class="nv">$ </span>make <span class="nt">-j4</span>
+ <span class="nv">$ </span>make install
+ <span class="nv">$ LD_LIBRARY_PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/lib tmux
+</code></pre></div></div>
+
+<p>すべてインストール終ったら設定をします</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'export PATH=${HOME}/.local/bin:${PATH}'</span> <span class="o">&gt;&gt;</span> <span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.bashrc
+ <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}'</span> <span class="o">&gt;&gt;</span> <span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.bashrc
+</code></pre></div></div>
+
+<h2 id="パッケージマネージャ">パッケージマネージャ</h2>
+<p>Gentoo/Prefix使え</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	techlinux
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/05/hello-world/">
+		
+			hello, world</a>
+	</h2>
+	<div class="entry-content">
+		<p>とりあえず<a href="http://octopress.org">octopress</a>で書いていこうかと思います</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	diary
+
+
+</div>
+	
+</div>
+</article>
+
+<nav id="pagenavi">
+    
+        
+            <a href="6" class="prev">Prev</a>
+        
+    
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2017
+
+    katsyoshi
+
+</footer>
+	<script src="//javascripts/slash.js"></script>
+<script src="//javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-49549546-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
