@@ -1,0 +1,901 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>katsyoshiのめもみたいなもの</title>
+	<meta name="author" content="katsyoshi">
+
+	
+	<meta name="description" content="ってのは嘘ではないですが、嘘に近いです。
+実はおとといの土曜日に katsyoshi.org をのぞいたら、 nginx の初期ページが表示されたので
+とくにコンテンツはないですが、いそいでサイトの復旧をしました。
+が、もともとあったファイル置場を失念したため似た感じで再構築してました。 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		<a class="coderwall" href="https://coderwall.com/katsyoshi" title="Coderwall">Coderwall</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/08/08/renewal-my-site/">
+		
+			RENEWAL MY SITE!!!</a>
+	</h2>
+	<div class="entry-content">
+		<p>ってのは嘘ではないですが、嘘に近いです。
+実はおとといの土曜日に katsyoshi.org をのぞいたら、 <em>nginx</em> の初期ページが表示されたので
+とくにコンテンツはないですが、いそいでサイトの復旧をしました。
+が、もともとあったファイル置場を失念したため似た感じで再構築してました。
+再構築ついでにssl化、<code>nginx</code> から <code>h2o</code> へのWebサーバー変更しました。
+あと <code>systemd</code> でデーモン化とかも。</p>
+
+<h2>Let&rsquo;s Encrypt</h2>
+
+<p>リリースされてだいぶたつのですが、<a href="https://letsencrypt.org">Let&rsquo;s Encrypt</a>を利用してみました。
+Ubuntu Linux 16.04 では、簡単に導入できます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> sudo apt install letsencrypt
+</span><span class='line'><span class="gp">$</span> sudo letsencrypt certonly
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でいくつかの質問に答えればおわりです。
+ここで、戸惑った場面としては認証を受けたいサーバーの確認があるのですが、
+サーバーポート443を開ける<a href="https://letsencrypt.jp">必要があり</a>、1回失敗しました。</p>
+
+<h2>H2O</h2>
+
+<p>せっかくだし、<a href="https://h2o.examp1e.net/">H2O</a>を使おうと思います。
+インストールはかんたんでいかのようにすればokです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone h2o/h2o
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>h2o
+</span><span class='line'><span class="gp">$</span> cmake -DCMAKE_INSTALL_PREFIX_PATH<span class="o">=</span>/opt/local .
+</span><span class='line'><span class="gp">$</span> make <span class="o">&amp;&amp;</span> make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定は<a href="https://h2o.examp1e.net/configure/quick_start.html">ここ</a>と<a href="https://github.com/h2o/h2o/wiki/redirect-HTTP-to-HTTPS">ここ</a>を参考にして以下にしています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">user: www-data</span>
+</span><span class='line'><span class="go">hosts:</span>
+</span><span class='line'><span class="go">  &quot;katsyoshi.org:80&quot;:</span>
+</span><span class='line'><span class="go">    listen:</span>
+</span><span class='line'><span class="go">      port: 80</span>
+</span><span class='line'><span class="go">    paths:</span>
+</span><span class='line'><span class="go">      /:</span>
+</span><span class='line'><span class="go">        redirect: https://katsyoshi.org</span>
+</span><span class='line'><span class="go">hosts:</span>
+</span><span class='line'><span class="go">  &quot;katsyoshi.org:443&quot;:</span>
+</span><span class='line'><span class="go">    listen:</span>
+</span><span class='line'><span class="go">      port: 443</span>
+</span><span class='line'><span class="go">      ssl:</span>
+</span><span class='line'><span class="go">        certificate-file: /etc/letsencrypt/live/katsyoshi.org/fullchain.pem</span>
+</span><span class='line'><span class="go">        key-file: /etc/letsencrypt/live/katsyoshi.org/privkey.pem</span>
+</span><span class='line'><span class="go">    paths:</span>
+</span><span class='line'><span class="go">      /:</span>
+</span><span class='line'><span class="go">        file.dir: /opt/website/top</span>
+</span><span class='line'><span class="go">access-log: /var/log/h2o/access.log</span>
+</span><span class='line'><span class="go">error-log: /var/log/h2o/error.log</span>
+</span><span class='line'><span class="go">pid-file: /var/run/h2o.pid</span>
+</span><span class='line'><span class="go">http2-reprioritize-blocking-assets: ON</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2><a href="https://negima.mobi/2015/10/2092">h2o.service</a></h2>
+
+<p>さいきんわだいのしすてむでーってやつででーもん？かしようとおもいます</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">[Unit]</span>
+</span><span class='line'><span class="go">Description=H2O the optimized HTTP/1, HTTP/2 server</span>
+</span><span class='line'><span class="go">After=syslog.target network.target remote-fs.target nss-lookup.target</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">[Service]</span>
+</span><span class='line'><span class="go">Type=forking</span>
+</span><span class='line'><span class="go">PIDFile=/var/run/h2o.pid</span>
+</span><span class='line'><span class="go">ExecStartPre=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -t</span>
+</span><span class='line'><span class="go">ExecStart=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -m daemon</span>
+</span><span class='line'><span class="go">ExecReload=/bin/kill -s HUP $MAINPID</span>
+</span><span class='line'><span class="go">ExecStop=/bin/kill -s QUIT $MAINPID</span>
+</span><span class='line'><span class="go">PrivateTmp=true</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">[Install]</span>
+</span><span class='line'><span class="go">WantedBy=multi-user.target</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>いやーしすてむでーってべんりですねー</p>
+
+<h2>owari</h2>
+
+<p>サイトがぶっとんだのでサイトの復旧？と let&rsquo;s encrypt でのSSL化、 h2oへのウェブサーバー変更と <code>systemd</code> でのデーモン化をやりました。</p>
+
+<p>1年ぶりの日記だたので、Markdownどうかくんだっけ？とか、別のところで大変でした。</p>
+
+<h2>参考サイト</h2>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/h2/'>h2</a>, <a class='category' href='/blog/categories/h2o/'>h2o</a>, <a class='category' href='/blog/categories/ssl/'>ssl</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff/">
+		
+			YAPC::Asia 2015に参加しました(ボランティアスタッフとして)</a>
+	</h2>
+	<div class="entry-content">
+		<p>YAPC::Asia 2015にボランティアスタッフとして参加してきました(申請時に公表しないでってしなのでYAPCのスッタフ一覧にはのってないです)。去年も参加しましたが聴講者として参加しました。</p>
+
+<h2>ボランティアスタッフに応募した理由</h2>
+
+<p>彼女ができるときいて応募しました。また、最後の YAPC::Asia と聞いていたので応募しないとなと思ったのがありました。他の理由としては NEET なのでというのもあります。発表者として参加できればよかったのですが、ネタが応募するには弱いなと思い見送りました。そういうこともありボランティアスタッフとして参加しました。</p>
+
+<h2>個人スポンサー</h2>
+
+<p>実は個人スポンサーもやっていましたが、ボランティアスタッフをやるため、個人スポンサーの分のチケットが余っていました。その分はとある人に譲りました。</p>
+
+<h2>0日目(前夜祭)</h2>
+
+<p>0日目は11時集合になっており、スタッフ作業としてノベルティの詰め込み作業と会場設営を行なっていました。</p>
+
+<p>前夜祭自体は初めてのスタッフ作業でしたので、会場係として設営などをしてました。</p>
+
+<h2>1日目</h2>
+
+<p>1日目は始めに作業としてラリーのセッション前、中で同時通訳のレシーバーを配ってました。その後D会場でずっとタイムキーパーをやっておりました。</p>
+
+<p>この日の印象に残ってるセッションとしては <a href="https://twitter.com/kazuho">@kazuhoさん</a> の <a href="http://yapcasia.org/2015/talk/show/dead6890-09b7-11e5-998a-67dc7d574c3a">HTTP/2時代のウェブサイト設計</a> で、 <code>HTTP2</code> になった理由、そのなかで <a href="https://github.com/h2o/h2o">h2o</a> が優れている点を丁寧に説明されてて、これはすぐに使わねばと思わせてくれた発表でした。</p>
+
+<p>この日は懇親会がありましたので、懇親会会場でうろうろしておりました。
+懇親会では、知り合いと話してたりしてました。最近、 <a href="https://github.com/itamae-kitchen/itamae">itamae</a> を触っているので、プラグインの話を <a href="https://twitter.com/k0kubun">@k0kubunさん</a> としてました。そのときは <code>pip</code> のリソースプラグイン作りたいとか言ったので <a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">今日作成</a> したのですが、よくかんがえてみると、 <code>cpan</code> のリソースプラグインの方が必要だったのを作成後に思い出しました。</p>
+
+<h2>2日目</h2>
+
+<p>2日目も1日目と同様にD会場で全セッションタイムキーパーやっておりました。</p>
+
+<p>印象に残ったセッションとしては、 <a href="https://github.com/kenjiskywalker">@kenjiskywalkerさん</a> の <a href="http://yapcasia.org/2015/talk/show/f2816038-10ec-11e5-89bf-d7f07d574c3a">我々はどのように冗長化を失敗したのか</a> 、 <a href="https://twitter.com/saiken3110">@saiken3110さん</a> の <a href="http://yapcasia.org/2015/talk/show/0af26fe4-0b7b-11e5-a29c-67dc7d574c3a">MySQLで2億件のシリアルデータと格闘したチューニングの話</a> 、 <a href="https://github.com/Jxck">@Jxckさん</a> の <a href="http://yapcasia.org/2015/talk/show/9e9ae188-fb20-11e4-9a97-8ab37d574c3a">HTTP2 時代の Web</a> がありました。</p>
+
+<p>最後に片づけをし、おわった後スタッフ数人とのみくいに行ってきました。そろそろ解散かなってときに、 twitter を眺めてたら、 <a href="https://twitter.com/Jxck_/status/635075234379399168">@Jxckさんが@t_wadaさんを誘ってる</a> を見つけて無理やり参加させて頂きました。</p>
+
+<p>帰りついたのは朝の4時ごろ(だったと思う)でした。</p>
+
+<h2>おわり</h2>
+
+<p>YAPC::Asia 2015 に参加してきました。23日の日曜日は疲れてたのでずっとぐったりしてました。
+楽しい3日間でした!!!!!11</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/yapc/'>yapc</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/08/02/hello-itamae-plugins/">
+		
+			こんにちは、いたまえさん</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://github.com/sstephenson/rbenv">rbenv</a> を <a href="https://github.com/itamae-kitchen/itamae">itamae</a> の <a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv">プラグイン</a> を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、<a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv/pull/9">httpsを指定できる</a>ようしてもらいました。</p>
+
+<h2>plenv と pyenv</h2>
+
+<p>また、rbenv のプラグインを参考に <a href="https://github.com/katsyoshi/itamae-plugin-recipe-plenv">plenv</a> と <a href="https://github.com/katsyoshi/itamae-plugin-recipe-pyenv">pyenv</a> を作ってみました。</p>
+
+<p>これらふたつのプラグインはまだgemになっていないので、<code>Gemfile</code> に以下のように追加し、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-plenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-plenv&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-pyenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-pyenv&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>recipeとしては以下のようにしてください。</p>
+
+<figure class='code'><figcaption><span>recipe.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;pyenv::system&#39;</span>
+</span><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;plenv::system&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定例としては、rbenvのプラグインと同じように設定します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;plenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;5.22.0&quot;</span><span class="p">,</span> <span class="s2">&quot;5.20.2&quot;</span><span class="p">],</span>
+</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;5.22.0&quot;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nt">&quot;pyenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3.4.3&quot;</span><span class="p">,</span> <span class="s2">&quot;3.5.0b2&quot;</span><span class="p">],</span>
+</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;3.4.3&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/itamae/'>itamae</a>, <a class='category' href='/blog/categories/plenv/'>plenv</a>, <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/pyenv/'>pyenv</a>, <a class='category' href='/blog/categories/rbenv/'>rbenv</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/06/26/sir-elasticsearch/">
+		
+			Elasticsearchどの〜</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://www.elastic.co/products/kibana">kibana</a> で表示しようとしてたら嵌ったのでメモ</p>
+
+<h2>嵌った原因</h2>
+
+<p>数字をElasticsearchに投げているつもりが文字列を投げていた。
+ので対処方法としては、 <code>fluent-plugin-typecast</code> を導入して終了。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;match</span> <span class="err">elasticsearch.**.*</span><span class="nt">&gt;</span>
+</span><span class='line'>  type typecast
+</span><span class='line'>  item_types value:float
+</span><span class='line'>  prefix typed
+</span><span class='line'><span class="nt">&lt;/match&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Elasticsearch</h2>
+
+<p><a href="https://www.fluentd.org">fluentd</a> で集めたデータを <a href="http://www.elasitc.co">Elasticsearch</a> に <a href="https://github.com/uken/fluent-plugin-elasticsearch">fluent-plugin-elastchsearch</a> を利用して入れます。設定は以下のようにします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;match</span> <span class="err">typed.elasticserch.**.*</span><span class="nt">&gt;</span>
+</span><span class='line'>  type elasticsearch
+</span><span class='line'>  type_name hoge
+</span><span class='line'>  host 127.0.0.1
+</span><span class='line'>  port 9200
+</span><span class='line'>  logstash_format true
+</span><span class='line'>  logstash_prefix logstash
+</span><span class='line'>  flash_interval 1s
+</span><span class='line'><span class="nt">&lt;/match&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h3>参考資料</h3>
+
+<ol>
+<li><a href="http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html">http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/kibana/'>kibana</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/05/15/screencast-use-gif/">
+		
+			すくりーんきゃすと</a>
+	</h2>
+	<div class="entry-content">
+		<p>LinuxでScreenCast用の環境を整えてみた。</p>
+
+<h2>必要パッケージ</h2>
+
+<ul>
+<li>ffmpeg</li>
+<li>gtk-recordMyDesktop</li>
+</ul>
+
+
+<h2>使いかた</h2>
+
+<p><code>gtk-recordMyDesktop</code> でデスクトップをキャプチャする。
+その後は、 <code>ffmpeg</code> を使って好きな動画形式に変換します。
+ここでは、gif画像に変更しています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ffmpeg -i ~/screencast.ovg img/screencast.gif
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p style="text-align:center;"> <img src="/images/screenshot/gtk-recordMyDesktop.gif" width="512" alt="" /></p>
+
+<h3>参考サイト</h3>
+
+<ol>
+<li><a href="http://d.hatena.ne.jp/over80/20080802/1217693705">http://d.hatena.ne.jp/over80/20080802/1217693705</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/movie/'>movie</a>, <a class='category' href='/blog/categories/screencast/'>screencast</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/05/11/golden-weak/">
+		
+			ゴールデンウィークのお買いもの</a>
+	</h2>
+	<div class="entry-content">
+		<p>GWに勢い余って買いものしたのでそれを。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B00J5ZBVFY" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<p>Roomba買いました。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B004N3RQ5W" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<p>机買いました。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B00G21MID8" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<p>Kinesis買いました。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B000EVPGTU" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B000P4D5F8" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<p>コーヒーセット買いました。</p>
+
+<p>もともと欲しかったのもあり、勢いで買ってしまいました。</p>
+
+<p>Roombaの方は炬燵をまだ出してるのもあり、動かしていないです。</p>
+
+<p>机は1ヶ月ほど前に椅子を買ったのもあり、買いました。
+足が短いので、椅子を低くしたいのですが、天板が高いので足置き場をつくってそこにのせています。
+それ以外の気になる点としては、角がちょっと痛いというぐらいで今のところ満足しています。</p>
+
+<p>Kinesisは以前仕事で週1日だけ使わせてもらったことがあったので、気に入ったのでそれで買いました。
+赤軸モデルを買ったのですが、カチカチ音がしないのでこれはこれでイイカンジです。</p>
+
+<p>コーヒーセットは、机がきてから買う予定で買いました。このドリッパ用の用紙を見付けるのが大変で、2時間ほど彷徨いました。</p>
+
+<p>これで欲しいものは大体そろったのですが、最近デスクトップPC欲しくなってきたんだよなぁ…</p>
+
+<p>もうしわけねぇ。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/05/10/shred-x240/">
+		
+			バイバイX240</a>
+	</h2>
+	<div class="entry-content">
+		<p>新しく<a href="/blog/2015/04/15/looks-good-new-machine/">X250</a>を買ったので、X240の中身を削除します。
+以下のコマンドでできるようです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo shred -n 3 -v /dev/sda
+</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/05/03/softether/">
+		
+			Softether</a>
+	</h2>
+	<div class="entry-content">
+		<p>Ubuntuに<a href="https://www.softether.jp/">SoftEther</a>を導入してみた。</p>
+
+<h2>マシン構成</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>OS: Ubuntu Linux 14.4.0.2 LTS
+</span><span class='line'>Machine: SakuraVPS 1GBプラン</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>インストール</h2>
+
+<p><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">ここ</a>を参考にインストール、設定すればいけます。</p>
+
+<h3>嵌ったところ</h3>
+
+<p><code>nginx</code> で <code>ssl</code> 動かしてた。</p>
+
+<p>設定ができなかったが <code>sudo service nginx stop</code> として、 <code>nginx</code> を止めたあと、 <code>sudo vpncmd</code> とすれば設定できます。</p>
+
+<h2>おわり</h2>
+
+<p>自作のRailsアプリCIを自宅で動かそうと思ってVPN導入してみたが、一人で開発してるしCIに問題がない限り必要ないというのを構築したあと気が付いた。</p>
+
+<h3>参考</h3>
+
+<ol>
+<li><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">http://qiita.com/Makotonton/items/18683a9f1e846433c035</a></li>
+<li><a href="https://www.softether.jp/">https://www.softether.jp/</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/network/'>network</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/vpn/'>vpn</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/04/30/use-visual-studio-code/">
+		
+			Visual Studio Codeを使ってみた</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://code.visualstudio.com/">Visual Studio Code</a>というものがでたので普段利用している
+Linuxで使ってみた。</p>
+
+<h2>インストール</h2>
+
+<p>は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
+以下のコマンドで実行できます</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>./Code
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>感想</h2>
+
+<p>VSC使ってみたけど、日本語表示がされない。</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/vsc_japanese.png" alt="" /></p>
+
+<p><em>追記</em></p>
+
+<p>フォントを変更すると表示できるようになりました。</p>
+
+<p><code>File -&gt; Preferences -&gt; User Settings</code> から、 <code>settings.json</code> を開き、
+以下のように追加する</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;editor.fontFamily&quot;</span><span class="p">:</span> <span class="s2">&quot;Ricty&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p style="text-align:center;"> <img src="/images/screenshot/vsc_settings.png" alt="" /></p>
+
+<p><em>追記おわり</em></p>
+
+<p>デバッガ動かすためにMONOが必要。</p>
+
+<p><img src="/images/screenshot/vsc_debugger_needed_mono.png" alt="" /></p>
+
+<p>補完がよさそう。Rubyでの補完の出かたです。</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/vsc_completion.png" alt="" /></p>
+
+<p>などあります。</p>
+
+<p>そのうちなにかこれで書くかなぁ。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/04/15/looks-good-new-machine/">
+		
+			おにゅーな</a>
+	</h2>
+	<div class="entry-content">
+		<p>以前買った<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">X240</a>があまりにも使い辛いので
+X250を買った。それ以外にもメガネも一つ買ってみた。</p>
+
+<p>あと欲しいのは、ルンバかなあ</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
+
+<nav id="pagenavi">
+    
+        
+            <a href="/blog/page/2/" class="prev">Prev</a>
+        
+    
+    
+        <a href="/blog/page/4/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2017
+
+    katsyoshi
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-49549546-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

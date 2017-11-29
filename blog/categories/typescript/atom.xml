@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: typescript | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/typescript/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2017-11-30T07:59:43+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby on RailsでTypeScriptを使ってみる]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/01/12/typescript-in-rails/"/>
+    <updated>2015-01-12T11:41:25+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/01/12/typescript-in-rails</id>
+    <content type="html"><![CDATA[<p>ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。</p>
+
+<h2>インストール</h2>
+
+<p>これは簡単で <code>Gemfile</code> に <code>typescript-rails</code> を追加すればいけます。ですが、<a href="http://stackoverflow.com/questions/28117786/why-am-i-not-able-to-compile-a-file-that-references-jquery-d-ts">jQueryがTypeScript v1.4以上しかサポートしていないようなので</a>それに対応したものも追加します。</p>
+
+<p><code>ruby
+gem 'typescript-src', github: 'katsyoshi/typescript-src-ruby'
+gem 'typescript-rails'
+</code></p>
+
+<p>インストールはこれだけでOKです。</p>
+
+<h3>jQueryをつかう</h3>
+
+<p>TypeScriptでjQueryを使う場合、TypeScriptの型定義ファイルをインストールする必要があります。
+で、それを自力で作るのは大変なので、 <code>tsd</code> を利用してインストールします。</p>
+
+<h4>tsd をインストール</h4>
+
+<p><code>tsd</code> は <code>npm</code> でインストールできるので、それでインストールします。</p>
+
+<p><code>sh
+$ npm install tsd -g
+</code></p>
+
+<p>でインストールできたので、この <code>tsd</code> を利用してjQueryの型定義ファイルをインストールします。</p>
+
+<p><code>sh
+$ tsd init
+$ $EDITOR tsd.json
+  path: "app/assets/javascripts/typings",
+  bundle: "app/assets/javascripts/typings/tsd.d.ts"
+$ tsd query jquery -osa install
+</code></p>
+
+<p>でjQueryを利用する準備は整いました。</p>
+
+<h2>TypeScriptを書いてみよう</h2>
+
+<p>コンソールに <code>hello, world!</code> を出すだけの例を示します。</p>
+
+<p><code>javascript
+$(() =&gt; {
+  console.log("hello, world!");
+});
+</code></p>
+
+<p>でいけますよ。
+が <code>$('#hello').text('hoge');</code> いかねぇ。</p>
+]]></content>
+  </entry>
+  
+</feed>

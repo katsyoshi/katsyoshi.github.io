@@ -7,24 +7,15 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	td-agent.pkg
-	td-agent2がリリースされ、Macへの公式パッケージがでたのでインストールメモ
-
-Install
-
-ダウンロードしてダブルクリックでインストールできます。
-
-設定
-設定ファイル置場は/etc/td-agent/td-agent.confになります。
-設定フ...">
+	<meta name="description" content="td-agent2がリリースされ、Macへの公式パッケージがでたのでインストールメモ Install ダウンロードしてダブルクリックでインストールできます。 設定 設定ファイル置場は/etc/td-agent/td-agent.confになります。
+設定ファイルはいままでの設定で使えるようです。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -32,18 +23,18 @@ Install
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -52,7 +43,7 @@ Install
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -77,7 +68,7 @@ Install
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -89,17 +80,21 @@ Install
 	<h2 class="title">td-agent.pkg</h2>
 	<div class="entry-content"><p>td-agent2が<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">リリース</a>され、Macへの公式パッケージがでたのでインストールメモ</p>
 
-<h2 id="install">Install</h2>
+<h2>Install</h2>
 
 <p><a href="https://s3.amazonaws.com/td-agent-repository/macosx/td-agent2-1.0.0-0.dmg">ダウンロード</a>してダブルクリックでインストールできます。</p>
 
-<h2 id="設定">設定</h2>
-<p>設定ファイル置場は<code class="highlighter-rouge">/etc/td-agent/td-agent.conf</code>になります。
+<h2>設定</h2>
+
+<p>設定ファイル置場は<code>/etc/td-agent/td-agent.conf</code>になります。
 設定ファイルはいままでの設定で使えるようです。
 あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>launchctl load /Library/LaunchDaemon/td-agent.plist
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo launchctl load /Library/LaunchDaemon/td-agent.plist
+</span></code></pre></td></tr></table></div></figure>
+
+
 
 </div>
 
@@ -114,7 +109,7 @@ Install
 	<div class="tags">
 
 
-	fluentdtechmac
+	<a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -143,8 +138,8 @@ Install
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

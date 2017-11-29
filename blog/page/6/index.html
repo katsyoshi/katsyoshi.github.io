@@ -1,0 +1,790 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>katsyoshiのめもみたいなもの</title>
+	<meta name="author" content="katsyoshi">
+
+	
+	<meta name="description" content="X240の準備は終ったので、インストールします。基本的にはこの流れです。 USBブート 作成したUSBメモリをX240に差して起動します。
+起動したら、まずパーティションの設定を行います。 1
+$ gpart /dev/sda で不要なパーティションを削除し、必要なパーティションを作成します。 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		<a class="coderwall" href="https://coderwall.com/katsyoshi" title="Coderwall">Coderwall</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">
+		
+			Gentoo Install Battle Part II</a>
+	</h2>
+	<div class="entry-content">
+		<p>X240の準備は終ったので、<a href="http://wiki.gentoo.org/wiki/Quick_install_guide">インストール</a>します。基本的にはこの流れです。</p>
+
+<h2>USBブート</h2>
+
+<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">作成したUSBメモリ</a>をX240に差して起動します。
+起動したら、まずパーティションの設定を行います。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gpart /dev/sda
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で不要なパーティションを削除し、必要なパーティションを作成します。</p>
+
+<h2>無線LAN</h2>
+
+<p>ネットワークを接続しますが、今回は無線LANを利用してインストールを行います。</p>
+
+<p>まず、どこか適当な位置に<a href="http://www.xmisao.com/2014/01/16/how-to-connect-wpa2-wireless-lan-using-wpa-supplicant.html">リンク先</a>のファイルを作成してください。</p>
+
+<p>次に以下のコマンドを実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>実行したら、接続されているのでATL + F2とかでコンソールの表示を変更してください。</p>
+
+<h2>おわり</h2>
+
+<p>有線のLANケーブルがなかったからはまった。
+続きは明日以降に…</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">
+		
+			Gentoo Install Battle Part I</a>
+	</h2>
+	<div class="entry-content">
+		<p>ここにThinkPad X240があります。これの中身を Gentoo/Linux にします。</p>
+
+<h2>準備</h2>
+
+<p>準備として、Gentoo/LinuxのLiveCDを作成、Bootの設定を行います。</p>
+
+<h3>イメージ作成</h3>
+
+<p>まずLiveCDイメージをダウンロードしUSBフラッシュメモリにコピーします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wget ftp://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140814.iso
+</span><span class='line'><span class="nv">$ </span>dd <span class="nv">of</span><span class="o">=</span>/path/to/disk <span class="k">if</span><span class="o">=</span>install-amd64-minimal-20140814.iso <span class="nv">bs</span><span class="o">=</span>4m
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でイメージの作成終了です。
+次に、X240の設定を行います。</p>
+
+<h3>X240の起動準備</h3>
+
+<p>Windowsを起動し、Shift押しながら再起動します。
+再起動したら、以下の順番でBIOSを起動させます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>トラブルシューティング -&gt; 詳細オプション -&gt; UEFIファームウェアの設定 -&gt; 再起動
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でBIOSがたちあがるので、Secure BootとUEFI BootとBoot順の設定を変更します。</p>
+
+<p>Seucre Bootでは<code>Securety -&gt; Secure Boot -&gt; Secure Boot [Enable]</code>を<code>[Disable]</code>に変更</p>
+
+<p>UEFI Bootでは<code>Startup -&gt; UEFI/Legacy Boot [UEFI only]</code>を<code>[Both]</code>に変更</p>
+
+<p>Boot順の設定では、<code>Startup -&gt; Boot</code>でBootさせたい順番に変更</p>
+
+<p>BIOSを変更したらRestartします。</p>
+
+<h2>まとめ</h2>
+
+<p>とりあえず今日はここで終りです。インストールは明日以降にします。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/08/10/good-bye-elasticsearch-and-jenkins/">
+		
+			Good-bye Elasticsearch and Jenkins</a>
+	</h2>
+	<div class="entry-content">
+		<p>この環境では慢性的にメモリが足りなかったのでメモリを大量に使ってる<a href="http://www.elasticsearch.org/">Elasticsearch</a>を削除しました。
+Jenkinsについては利用していなかったので停止してます。ついでに12.04から14.04にupgradeしました。</p>
+
+<h2>削除とUpgrade</h2>
+
+<p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
+Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo apt-get purge elasticsearch
+</span><span class='line'><span class="nv">$ </span>sudo update-rc.d jenkins disable
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>つぎに14.04へupgradeを行ないます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo <span class="k">do</span>-release-upgrade -d
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで14.04になってます。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Machine: さくらVPS</li>
+<li>CPU: Intel Xeon E312xx (SandyBridge) * 2</li>
+<li>MEM: 1GB</li>
+<li>HDD: 100GB</li>
+<li>OS: Ubuntu Linux 12.04</li>
+</ul>
+
+
+<h2>インストール済ソフトウェア（一部）</h2>
+
+<ul>
+<li>Elasticsearch</li>
+<li>fluentd</li>
+<li>Jenkins</li>
+<li>Jubatus</li>
+<li>Norikra</li>
+<li>Nginx</li>
+</ul>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/jenkins/'>jenkins</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/07/22/akiyamago-hackathon-2014/">
+		
+			秘境でハッカソンがあったので行ってきた</a>
+	</h2>
+	<div class="entry-content">
+		<p>7月19日〜7月21日まで秋山郷の<a href="https://www.google.co.jp/maps/place/%E3%81%8B%E3%81%9F%E3%81%8F%E3%82%8A%E3%81%AE%E5%AE%BF/@36.9184265,138.6375958,18z/data=!4m2!3m1!1s0x0:0xec3b9141469e30fc">かたくりの宿</a>という場所でHackathonがあったので行ってきました。</p>
+
+<h2>1日目</h2>
+
+<p>1日目は仕事があったので仕事を終えてから新幹線で越後湯沢まで出て、<a href="https://twitter.com/m_asama">@m_asama</a>さんと合流して秋山郷へ。</p>
+
+<p>途中、最短経路が<a href="http://www.city.tokamachi.lg.jp/page/10040200057.html">土砂に埋もれて</a>通行できないので<a href="http://www.pref.niigata.lg.jp/tokamachi_seibi/1356771341657.html">迂回</a>して行きました。途中の道は狹く、えっここ通るの？って感じの道を通りました。宿に着いたらもう午後6時ですぐに食事の時間となりました。</p>
+
+<p>夕飯は山菜づくしな夕飯でした。</p>
+
+<p>夕飯終ってハックタイムでしたが、食堂を利用する予定だったので、食堂が空くまで部屋でだべってました。
+午後9時頃からハックタイムが始まりました。その日はとても眠かったので<a href="https://twitter.com/kotatsu_mi">@kotatu_mi</a>に絡んですぐに寝ました。</p>
+
+<h2>2日目</h2>
+
+<p>2日目は宿の人に起こされて起きました。朝食はこんなかんじでした。</p>
+
+<p><img src="/images/photo/akiyamago-2breakfast.png%20=%20256x" alt="二日目朝食" /></p>
+
+<p>朝食後、<a href="https://www.google.co.jp/maps/place/%E8%A6%8B%E5%80%89%E6%A9%8B/@36.91872,138.637115,17z/data=!3m1!4b1!4m2!3m1!1s0x5ff601b97e1ba7bb:0x1577cfb29a624fa7">近くの橋</a>まで散歩しました。軽い散歩だと思ってたら、山道で辛かった。</p>
+
+<p><img src="/images/photo/akiyamago-mikura-hashi.png%20=%20256x" alt="見倉橋" /></p>
+
+<p>そのまま帰るのはもったいないと思って反対側を登りました。登りきったら、近くにcool wind holeがあるらしいのでそこまで行ってみました。</p>
+
+<p><img src="/images/photo/akiyamago-cool-wind-hole.png%20=%20256x" alt="風穴" /></p>
+
+<p>帰りは山道がつらいしつかれたので、周って帰りました。</p>
+
+<p>昼飯は<a href="https://www.google.co.jp/maps/place/%E6%A5%BD%E9%A4%8A%E9%A4%A8/@36.9179309,138.6369755,13z/data=!4m5!1m2!2m1!1z5bCP6LWk5rKi!3m1!1s0x601dff32c6304d99:0xaacce4d76fa870ff">小赤沢</a>まで温泉と熊らーめんを食べました。</p>
+
+<p><img src="/images/photo/akiyamago-kuma-ramen.png%20=%20256x" alt="熊らーめん" /></p>
+
+<p>宿に戻ってからはしばらくはハックタイムでした。夕食後、星を見に外出たらすごく星が綺麗でした。</p>
+
+<p><img src="/images/photo/akiyamago-milkyway.png%20=%20%20256x" alt="星きれい" /></p>
+
+<p>星見に行ったあとにハックタイムがあり、<a href="https://github.com/katsyoshi/mikutter-docker">mikutterでDockerのコントロール</a>をしようとしてました。</p>
+
+<h2>3日目</h2>
+
+<p>午前中は夜の続きをやってました。</p>
+
+<p>帰りは<a href="https://www.google.co.jp/maps/place/%E5%88%87%E6%98%8E%E6%B8%A9%E6%B3%89/@36.8097569,138.6200903,18z/data=!4m7!1m4!3m3!1s0x601dff32c6304d99:0xaacce4d76fa870ff!2z5qW96aSK6aSo!3b1!3m1!1s0x0:0x30280b0e98e9ad4a">切明温泉</a>にたちより、長野回りで帰りました。</p>
+
+<h2>今回の成果</h2>
+
+<p><a href="https://www.google.co.jp/search?q=%E6%88%90%E6%9E%9C%E4%BD%95%E3%82%82%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%E3%81%A7%E3%81%97%E3%81%9F%E3%83%BC&amp;newwindow=1&amp;espv=2&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ei=gmjOU9KXOcne8AXRl4KYCg&amp;ved=0CAYQ_AUoAQ&amp;biw=1166&amp;bih=986#facrc=_&amp;imgdii=_&amp;imgrc=tETgdA-yYjU4tM%253A%3BqWbTS9xBjlMpPM%3Bhttp%253A%252F%252Ftubagra.com%252Ftbg-wp%252Fwp-content%252Fuploads%252F2013%252F06%252F0213.jpg%3Bhttp%253A%252F%252Ftubagra.com%252F16457%252F%3B600%3B490">成果</a>です</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/06/26/use-spdy-in-nginx/">
+		
+			SPDYをさくっと動かしてみた</a>
+	</h2>
+	<div class="entry-content">
+		<p>NGINXでSPDY3.1が<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html">サポートされている</a>ようなので動かしてみた。</p>
+
+<h2>準備</h2>
+
+<p>SPDYは<a href="http://ja.wikipedia.org/wiki/SPDY#.E6.A6.82.E8.A6.81">SSL必須</a>のようなのでとりあえずOpenSSLで<a href="http://dogmap.jp/2011/05/10/nginx-ssl/">野良証明書を作成</a>します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /path/to/cert/dir
+</span><span class='line'><span class="nv">$ </span>openssl genrsa -des3 -out server.key 2048
+</span><span class='line'><span class="nv">$ </span>openssl req -new -key server.key -out server.csr
+</span><span class='line'><span class="nv">$ </span>openssl rsa -in server.key.org -out server.key
+</span><span class='line'><span class="nv">$ </span>openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>NGINXの設定</h2>
+
+<p>とりあえずNGINXの<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html">設定ファイルを作成</a>します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>server <span class="o">{</span>
+</span><span class='line'>    listen 443 ssl spdy;
+</span><span class='line'>    ssl_certificate server.crt;
+</span><span class='line'>    ssl_certificate_key server.key;
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と設定したらNGINXを再起動します。
+これでSPDYで動いてます。わいわい。</p>
+
+<p><img src="/images/photo/spdy.png" alt="SPDY" /></p>
+
+<p>オレオレ証明書なのでそのうちちゃんとした証明書を使いたいですね。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/http2/'>http2</a>, <a class='category' href='/blog/categories/nginx/'>nginx</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/06/22/fail-git-uploading/">
+		
+			野良Gitサーバにuploadできなかった話</a>
+	</h2>
+	<div class="entry-content">
+		<p>今日もろくでもない理由で嵌った。</p>
+
+<h2>嵌った理由</h2>
+
+<p>野良Gitサーバを立てているのでそこに新しいリポジトリを作成した。</p>
+
+<p>で、リモートを追加し、ブランチを追加しようとすると</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add master ssh://myhost/my_project.git
+</span><span class='line'>$ git push origin master -f
+</span><span class='line'>error: src refspec master does not match any.
+</span><span class='line'>error: failed to push some refs to 'ssh://myhost/my_project.git'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というようなエラーが出てきてアップロードできなかった。
+そのため理由を探ってたら<a href="http://d.hatena.ne.jp/nishiohirokazu/20110304/1299229916">同じ理由</a>があった。</p>
+
+<p>そこで <code>git log</code> としたら何もでてこなかったので</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
+</span><span class='line'>$ git commit -m 'first commit'
+</span><span class='line'>$ git push -u origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>リモートリポジトリに追加できました。
+ちゃんちゃん</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/06/10/pitfall-in-boot2docker/">
+		
+			Docker on OS Xで嵌ったおはなし</a>
+	</h2>
+	<div class="entry-content">
+		<p>MacOS XでDockerを動かしてたら嵌ったのでメモ</p>
+
+<h2>Docker on OS X</h2>
+
+<p>OS XでもDockerが<a href="http://docs.docker.com/installation/mac/">動かせるよう</a>になりました。
+インストールは<a href="http://dev.classmethod.jp/tool/docker/getting-started-docker-on-osx/">ここ</a>とかを参考にしてください。</p>
+
+<h2>で嵌ったところ</h2>
+
+<p>Docker上で動いているアプリケーションとどうしても通信ができない。どうやらDockerとアプリケーションは起動はしてるようなんだが、
+どうしても通信できないということがわかりました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ docker run -p 9199:9199 hogehoge
+</span><span class='line'>$ netstat -a | grep 9199</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でも見えない。なんでかなあと思ってたら<a href="https://github.com/dotcloud/docker/issues/4007">こんな</a>ことや<a href="http://k-shogo.github.io/article/2014/02/13/boot2docker-portforward/">こんな</a>ことがわかりました。</p>
+
+<h2>解決策</h2>
+
+<p>VirtualBoxからboot2docker-vmのポートフォワードを設定すればいいです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ netstat -a | grep 9199
+</span><span class='line'>tcp4       0      0  localhost.9199         *.*                    LISTEN</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちゃんちゃん。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/06/02/github-cleanup/">
+		
+			今日の夕飯</a>
+	</h2>
+	<div class="entry-content">
+		<p>今日は昨日ビールを飲んだので、日本酒を飲みに行ってきた。
+<img src="/images/photo/yaesu-beer.jpg" alt="昨日のビール" /></p>
+
+<p>ほんとは、天麩羅食べたかったのだが、天麩羅もうなくなってたらしいので、
+日本酒とそばを食べた。そばを石臼で引いた。</p>
+
+<p><img src="/images/photo/kameari-soba.jpg" alt="石臼" /></p>
+
+<p>親父さんが江戸っこらしく、「そこのしろいテーブルに座って」っていわれてなんだ？
+っておもったら、広いテーブルだった。
+<img src="/images/photo/kameari-miso.jpg" alt="お通し" /></p>
+
+<p>あと、githubにある使ってないリポジトリの整理を行った。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/05/21/new-td-agent-for-mac/">
+		
+			td-agent.pkg</a>
+	</h2>
+	<div class="entry-content">
+		<p>td-agent2が<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">リリース</a>され、Macへの公式パッケージがでたのでインストールメモ</p>
+
+<h2>Install</h2>
+
+<p><a href="https://s3.amazonaws.com/td-agent-repository/macosx/td-agent2-1.0.0-0.dmg">ダウンロード</a>してダブルクリックでインストールできます。</p>
+
+<h2>設定</h2>
+
+<p>設定ファイル置場は<code>/etc/td-agent/td-agent.conf</code>になります。
+設定ファイルはいままでの設定で使えるようです。
+あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo launchctl load /Library/LaunchDaemon/td-agent.plist
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/05/12/jubatus-runs-on-docker/">
+		
+			JubatusをDocker上で動かしてみた</a>
+	</h2>
+	<div class="entry-content">
+		<p>最近話題の<a href="https://www.docker.io/">Docker</a>使ってJubatusを動かしてみたのでメモ的なものを</p>
+
+<h2>環境</h2>
+
+<p>環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作</p>
+
+<ul>
+<li>Vagrant: 1.5.4</li>
+<li>docker: 0.11.1</li>
+</ul>
+
+
+<h2>Dockerfile</h2>
+
+<p><a href="https://github.com/katsyoshi/docker-jubatus">リポジトリ</a>を作成しておきましたのでcloneして実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/katsyoshi/docker-jubatus
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>docker-jubatus
+</span><span class='line'><span class="nv">$ </span>docker build .
+</span><span class='line'><span class="nv">$ </span>docker run -p 9199:9199 最後に出てきたハッシュ値
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で動きはじめます。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/jubatus/'>jubatus</a>
+
+
+</div>
+	
+</div>
+</article>
+
+<nav id="pagenavi">
+    
+        
+            <a href="/blog/page/5/" class="prev">Prev</a>
+        
+    
+    
+        <a href="/blog/page/7/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2017
+
+    katsyoshi
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-49549546-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

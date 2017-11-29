@@ -7,24 +7,17 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	Rictyやめるってよ
-	普段、emacs上でフォントを Ricty にして使ってたけど、微妙にずれるのを解消できなかったはなし
-
-症状と設定
-
-Rictyのときの症状と設定をのせておきます。
-
--&gt;  &lt;-
-
-(set-face-attribute 'default nil ...">
+	<meta name="description" content="普段、emacs上でフォントを Ricty にして使ってたけど、微妙にずれるのを解消できなかったはなし 症状と設定 Rictyのときの症状と設定をのせておきます。 1
+2
+3
+(set-face-attribute &#39;default nil :family &quot;Ricty&quot &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -32,18 +25,18 @@ Rictyのときの症状と設定をのせておきます。
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -52,7 +45,7 @@ Rictyのときの症状と設定をのせておきます。
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -77,7 +70,7 @@ Rictyのときの症状と設定をのせておきます。
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -87,43 +80,53 @@ Rictyのときの症状と設定をのせておきます。
 	
 	<div id="content" class="inner"><article class="post">
 	<h2 class="title">Rictyやめるってよ</h2>
-	<div class="entry-content"><p>普段、emacs上でフォントを <code class="highlighter-rouge">Ricty</code> にして使ってたけど、微妙にずれるのを解消できなかったはなし</p>
+	<div class="entry-content"><p>普段、emacs上でフォントを <code>Ricty</code> にして使ってたけど、微妙にずれるのを解消できなかったはなし</p>
 
-<h2 id="症状と設定">症状と設定</h2>
+<h2>症状と設定</h2>
 
 <p>Rictyのときの症状と設定をのせておきます。</p>
 
-<p>-&gt; <img src="/images/screenshot/Ricty.png" alt="Ricty" /> &lt;-</p>
+<p style="text-align:center;"> <img src="/images/screenshot/Ricty.png" alt="Ricty" /></p>
 
-<div class="language-scheme highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">'default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">"Ricty"</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
-<span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="nv">nil</span> <span class="ss">'font</span><span class="p">)</span> <span class="ss">'japanese-jisx0208</span> <span class="o">'</span><span class="p">(</span><span class="s">"Ricty"</span> <span class="o">.</span> <span class="s">"iso10646-1"</span><span class="p">))</span>
-<span class="p">(</span><span class="nf">setq</span> <span class="nv">face-font-rescale-alist</span> <span class="o">'</span><span class="p">((</span><span class="s">"Ricty"</span> <span class="o">.</span> <span class="mf">1.2</span><span class="p">)))</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;Ricty&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="nv">nil</span> <span class="ss">&#39;font</span><span class="p">)</span> <span class="ss">&#39;japanese-jisx0208</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="s">&quot;iso10646-1&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nf">setq</span> <span class="nv">face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="mf">1.2</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>で解消できそうにないので DejaVu を用いて表示するように変更しました。</p>
 
-<p>-&gt; <img src="/images/screenshot/DejaVu.png" alt="DejaVu" /> &lt;-</p>
+<p style="text-align:center;"> <img src="/images/screenshot/DejaVu.png" alt="DejaVu" /></p>
 
-<div class="language-scheme highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">'default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">"DejaVu"</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;DejaVu&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>こんな感じになりました。</p>
 
-<h2 id="おわり">おわり</h2>
+<h2>おわり</h2>
+
 <p>よくわからないので諦めました。ので参考に</p>
 
 <p>最後に引っ越ししました。</p>
 
-<p>http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</p>
+<p><a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
 
-<h2 id="追記">追記</h2>
+<h2>追記</h2>
 
 <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/katsyoshi">@katsyoshi</a> (setq face-font-rescale-alist &#39;((&quot;Ricty&quot; . 1.0))) で常用していてずれないのですが、これだとどうなりますか?</p>&mdash; つまみ (@polamjag) <a href="https://twitter.com/polamjag/status/561875516118949889">February 1, 2015</a></blockquote>
-<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
 <p>とアドバイスがありましたので、やってみました!!!!!!</p>
 
-<p>-&gt; <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /> &lt;-</p>
+<p style="text-align:center;"> <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /></p>
 
 <p>ほんとにちょっとずれて気になる…</p>
 </div>
@@ -139,7 +142,7 @@ Rictyのときの症状と設定をのせておきます。
 	<div class="tags">
 
 
-	diarytechlinux
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -168,8 +171,8 @@ Rictyのときの症状と設定をのせておきます。
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

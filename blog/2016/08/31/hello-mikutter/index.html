@@ -7,22 +7,22 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	hello mikutter
-	表題のとおりmikutterをgemでインストールできるようにしてみました。
-
-どうやって？
-rubygems からはまだインストールはできません。
-ので、以下の様にしてgem packageを作成します。
-
-$ git clone github.com/k...">
+	<meta name="description" content="表題のとおりmikutterをgemでインストールできるようにしてみました。 どうやって？ rubygems からはまだインストールはできません。
+ので、以下の様にしてgem packageを作成します。 1
+2
+3
+4
+5
+6
+7
+$ git clone github.com/katsyoshi &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -30,18 +30,18 @@ $ git clone github.com/k...">
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -50,7 +50,7 @@ $ git clone github.com/k...">
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -75,7 +75,7 @@ $ git clone github.com/k...">
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -84,25 +84,34 @@ $ git clone github.com/k...">
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">hello mikutter</h2>
+	<h2 class="title">Hello Mikutter</h2>
 	<div class="entry-content"><p>表題のとおりmikutterをgemでインストールできるようにしてみました。</p>
 
-<h2 id="どうやって">どうやって？</h2>
+<h2>どうやって？</h2>
+
 <p><a href="https://rubygems.org">rubygems</a> からはまだインストールはできません。
 ので、以下の様にしてgem packageを作成します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> git clone github.com/katsyoshi/mikutter.git
-<span class="gp">$</span> <span class="nb">cd </span>mikutter
-<span class="gp">$</span> git checkout reokure-ru
-<span class="gp">$</span> bundle install
-<span class="gp">$</span> bundle <span class="nb">exec </span>rake build
-<span class="gp">$</span> gem install pkg/mikutter-3.5.0.pre.dev.gem
-<span class="gp">$</span> mikutter
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone github.com/katsyoshi/mikutter.git
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>mikutter
+</span><span class='line'><span class="gp">$</span> git checkout reokure-ru
+</span><span class='line'><span class="gp">$</span> bundle install
+</span><span class='line'><span class="gp">$</span> bundle <span class="nb">exec </span>rake build
+</span><span class='line'><span class="gp">$</span> gem install pkg/mikutter-3.5.0.pre.dev.gem
+</span><span class='line'><span class="gp">$</span> mikutter
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>これでmikutterコマンドで起動できるようになっています
 これすらめんどうな人は<a href="https://katsyoshi.org/mikutter-3.5.0.pre.dev.gem">ここ</a>にあります。
-ダウンロードして <code class="highlighter-rouge">gem install mikutter-3.5.0.pre.dev.gem</code> でインストールできます。
+ダウンロードして <code>gem install mikutter-3.5.0.pre.dev.gem</code> でインストールできます。
 プラグインで起動できないとかあるなら必要なgemをインストールしてください。</p>
 </div>
 
@@ -117,7 +126,7 @@ $ git clone github.com/k...">
 	<div class="tags">
 
 
-	mikutterrubygems
+	<a class='category' href='/blog/categories/gems/'>gems</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
 
 
 </div>
@@ -146,8 +155,8 @@ $ git clone github.com/k...">
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: streaming | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/streaming/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2017-11-30T07:59:43+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[start watching dazn]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/05/21/start-watching-dazn/"/>
+    <updated>2017-05-21T14:49:19+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/05/21/start-watching-dazn</id>
+    <content type="html"><![CDATA[<p>タイトルのとおり、DAZNを見はじめた。
+Netflix, Huluを契約してたけど、ぜんぜん見ていなかったので解約した。
+DAZN をみようとおもったきっかけはNBAのカンファレンスファイナルをみようとおもったため。</p>
+
+<p>とりあえず視聴感想ですが、表示は色々なところで言われてるとおもいますが、
+接続開始時にブロックノイズが気になりますが、一旦綺麗に表示されるとそのあとは
+特に気になりません。</p>
+
+<p>肝心の試合内容が現在非常に残念なため試合内の評価はしません。</p>
+]]></content>
+  </entry>
+  
+</feed>

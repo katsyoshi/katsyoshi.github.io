@@ -7,22 +7,15 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	アクセスログをTreasureData.comへ
-	いいかげんtreasure dataを使おうかな。
-ということでこの鯖のアクセスログをfluentdを使って保存しようとおもいます。
-
-今回はtd-agentを利用せずにgemからインストールしたfluentdを利用します。
-
-環境
-環境...">
+	<meta name="description" content="いいかげんtreasure dataを使おうかな。
+ということでこの鯖のアクセスログをfluentdを使って保存しようとおもいます。 今回はtd-agentを利用せずにgemからインストールしたfluentdを利用します。 環境 環境としてUbuntu 12.04を利用しています。 準備 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -30,18 +23,18 @@
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -50,7 +43,7 @@
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -75,7 +68,7 @@
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -90,201 +83,343 @@
 
 <p>今回は<a href="https://github.com/treasure-data/td-agent">td-agent</a>を利用せずにgemからインストールしたfluentdを利用します。</p>
 
-<h2 id="環境">環境</h2>
+<h2>環境</h2>
+
 <p>環境としてUbuntu 12.04を利用しています。</p>
 
-<h2 id="準備">準備</h2>
+<h2>準備</h2>
+
 <p>事前準備としてユーザ、グループの作成、rubyのインストールを行ないます。</p>
 
-<h3 id="ユーザグループの作成">ユーザ、グループの作成</h3>
+<h3>ユーザ、グループの作成</h3>
+
 <p>以下のコマンドでユーザ、グループの作成を行います。</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>adduser fluentd <span class="nt">-s</span> /bin/false
-</code></pre></div></div>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo adduser fluentd -s /bin/false
+</span></code></pre></td></tr></table></div></figure>
+
+
 <p>指示に従って入力するとユーザ、グループが作成されています。
 このユーザは<a href="http://qiita.com/shunichi/items/c7744878f5c02eaab18d#2-5">ログインできません</a>。</p>
 
-<h3 id="rubyのインストール">Rubyのインストール</h3>
+<h3>Rubyのインストール</h3>
 
 <p>以下のコマンドを入力しRubyのインストールを行ないます。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>aptitude build-dep ruby1.9.3
-<span class="nv">$ </span><span class="nb">sudo </span>aptitude install git
-<span class="nv">$ </span><span class="nb">sudo </span>git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
-<span class="nv">$ </span><span class="nb">sudo </span>git clone git://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
-<span class="nv">$ </span><span class="nb">export </span><span class="nv">RBENV_ROOT</span><span class="o">=</span>/usr/local/rbenv
-<span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">RBENV_ROOT</span><span class="k">}</span>/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>
-<span class="nv">$ </span><span class="nb">eval</span> <span class="s2">"</span><span class="k">$(</span>rbenv init -<span class="k">)</span><span class="s2">"</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo aptitude build-dep ruby1.9.3
+</span><span class='line'><span class="nv">$ </span>sudo aptitude install git
+</span><span class='line'><span class="nv">$ </span>sudo git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
+</span><span class='line'><span class="nv">$ </span>sudo git clone git://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
+</span><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">RBENV_ROOT</span><span class="o">=</span>/usr/local/rbenv
+</span><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">RBENV_ROOT</span><span class="k">}</span>/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>ここまで入力したら<code class="highlighter-rouge">sudo visudo -f /etc/sudoers.d/00_base</code>と入力し、以下を<a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">入力してください</a>。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Defaults <span class="o">!</span>secure_path
-Defaults env_keep +<span class="o">=</span> <span class="s2">"PATH RBENV_ROOT"</span>
-</code></pre></div></div>
+<p>ここまで入力したら<code>sudo visudo -f /etc/sudoers.d/00_base</code>と入力し、以下を<a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">入力してください</a>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Defaults !secure_path
+</span><span class='line'>Defaults env_keep +<span class="o">=</span> <span class="s2">&quot;PATH RBENV_ROOT&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>入力したらRuby 2.1.1をインストールします。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>rbenv install 2.1.1
-<span class="nv">$ </span><span class="nb">sudo </span>rbenv rehash
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo rbenv install 2.1.1
+</span><span class='line'><span class="nv">$ </span>sudo rbenv rehash
+</span></code></pre></td></tr></table></div></figure>
+
+
 <p>でインストール完了です。次にfluentdをインストールします。</p>
 
-<h3 id="fluentdとプラグインのインストール">fluentdとプラグインのインストール</h3>
+<h3>fluentdとプラグインのインストール</h3>
+
 <p>gemでfluentdとtdプラグインのfluent-plugin-tdをインストールします。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>gem install fluentd fluent-plugin-td
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo gem install fluentd fluent-plugin-td
+</span></code></pre></td></tr></table></div></figure>
 
-<p>つぎに設定ファイル<code class="highlighter-rouge">fluentd.conf</code>を作成します。</p>
 
-<p>```xml fluentd.conf</p>
-<source />
+<p>つぎに設定ファイル<code>fluentd.conf</code>を作成します。</p>
 
-<p>type forward
-&lt;/source&gt;</p>
+<figure class='code'><figcaption><span>fluentd.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;source&gt;</span>
+</span><span class='line'>  type forward
+</span><span class='line'><span class="nt">&lt;/source&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;source&gt;</span>
+</span><span class='line'>  type tail
+</span><span class='line'>  path /var/log/nginx/access.log
+</span><span class='line'>  format nginx
+</span><span class='line'>  time_format %d/%b/%Y:%H:%M:%S %z
+</span><span class='line'>  tag td.nginx.main.access
+</span><span class='line'>  pos_file /var/log/fluentd/main_access.pos
+</span><span class='line'><span class="nt">&lt;/source&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;match</span> <span class="err">td.**.*</span><span class="nt">&gt;</span>
+</span><span class='line'>  type copy
+</span><span class='line'>  <span class="nt">&lt;store&gt;</span>
+</span><span class='line'>    type stdout
+</span><span class='line'>  <span class="nt">&lt;/store&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;store&gt;</span>
+</span><span class='line'>    type tdlog
+</span><span class='line'>    endpoint api.treasure-data.com
+</span><span class='line'>    apikey ここにtdのAPIキーを入力してね
+</span><span class='line'>    auto_create_table
+</span><span class='line'>    buffer_type file
+</span><span class='line'>    buffer_path /var/log/fluentd/buffer/td
+</span><span class='line'>    use_ssl true
+</span><span class='line'>  <span class="nt">&lt;/store&gt;</span>
+</span><span class='line'><span class="nt">&lt;/match&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<source />
 
-<p>type tail
-  path /var/log/nginx/access.log
-  format nginx
-  time_format %d/%b/%Y:%H:%M:%S %z
-  tag td.nginx.main.access
-  pos_file /var/log/fluentd/main_access.pos
-&lt;/source&gt;</p>
+<p>作成後起動確認を行なってください <code>fluentd -c fluentd.conf</code> 。
+起動確認を行ったら <code>fluentd.conf</code> を <code>/etc/fluentd/fluentd.conf</code> に移動します。
+これで終了です。</p>
 
-<p>&lt;match td.<em>*.</em>&gt;
-  type copy</p>
-<store>
-    type stdout
-  </store>
-<store>
-    type tdlog
-    endpoint api.treasure-data.com
-    apikey ここにtdのAPIキーを入力してね
-    auto_create_table
-    buffer_type file
-    buffer_path /var/log/fluentd/buffer/td
-    use_ssl true
-  </store>
-<p>&lt;/match&gt;</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-作成後起動確認を行なってください `fluentd -c fluentd.conf` 。
-起動確認を行ったら `fluentd.conf` を `/etc/fluentd/fluentd.conf` に移動します。
-これで終了です。
+<h3>init.dスクリプトの作成</h3>
 
-### init.dスクリプトの作成
-まず `/etc/init.d/skelton` を `/etc/init.d/fluentd` にコピーします。
-コピーしたら以下の様にします。
+<p>まず <code>/etc/init.d/skelton</code> を <code>/etc/init.d/fluentd</code> にコピーします。
+コピーしたら以下の様にします。</p>
 
-```diff fluentd_diff_skelton
-diff --git a/etc/init.d/skeleton b/fluentd
-old mode 100644
-new mode 100755
-index dac9480..c59505e
---- a/etc/init.d/skeleton
-+++ b/fluentd
-@@ -1,6 +1,6 @@
- #! /bin/sh
- ### BEGIN INIT INFO
--# Provides:          skeleton
-+# Provides:          fleuntd
- # Required-Start:    $remote_fs $syslog
- # Required-Stop:     $remote_fs $syslog
- # Default-Start:     2 3 4 5
-@@ -19,19 +19,14 @@
+<figure class='code'><figcaption><span>fluentd_diff_skelton</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gh">diff --git a/etc/init.d/skeleton b/fluentd</span>
+</span><span class='line'>old mode 100644
+</span><span class='line'>new mode 100755
+</span><span class='line'><span class="gh">index dac9480..c59505e</span>
+</span><span class='line'><span class="gd">--- a/etc/init.d/skeleton</span>
+</span><span class='line'><span class="gi">+++ b/fluentd</span>
+</span><span class='line'><span class="gu">@@ -1,6 +1,6 @@</span>
+</span><span class='line'> #! /bin/sh
+</span><span class='line'> ### BEGIN INIT INFO
+</span><span class='line'><span class="gd">-# Provides:          skeleton</span>
+</span><span class='line'><span class="gi">+# Provides:          fleuntd</span>
+</span><span class='line'> # Required-Start:    $remote_fs $syslog
+</span><span class='line'> # Required-Stop:     $remote_fs $syslog
+</span><span class='line'> # Default-Start:     2 3 4 5
+</span><span class='line'><span class="gu">@@ -19,19 +19,14 @@</span>
+</span><span class='line'>
+</span><span class='line'> # PATH should only include /usr/* if it runs after the mountnfs.sh script
+</span><span class='line'> PATH=/sbin:/usr/sbin:/bin:/usr/bin
+</span><span class='line'><span class="gd">-DESC=&quot;Description of the service&quot;</span>
+</span><span class='line'><span class="gd">-NAME=daemonexecutablename</span>
+</span><span class='line'><span class="gd">-DAEMON=/usr/sbin/$NAME</span>
+</span><span class='line'><span class="gd">-DAEMON_ARGS=&quot;--options args&quot;</span>
+</span><span class='line'><span class="gd">-PIDFILE=/var/run/$NAME.pid</span>
+</span><span class='line'><span class="gd">-SCRIPTNAME=/etc/init.d/$NAME</span>
+</span><span class='line'><span class="gd">-</span>
+</span><span class='line'><span class="gd">-# Exit if the package is not installed</span>
+</span><span class='line'><span class="gd">-[ -x &quot;$DAEMON&quot; ] || exit 0</span>
+</span><span class='line'><span class="gi">+NAME=fluentd</span>
+</span><span class='line'>
+</span><span class='line'> # Read configuration variable file if it is present
+</span><span class='line'> [ -r /etc/default/$NAME ] &amp;&amp; . /etc/default/$NAME
+</span><span class='line'>
+</span><span class='line'><span class="gi">+# Exit if the package is not installed</span>
+</span><span class='line'><span class="gi">+[ -x &quot;$DAEMON&quot; ] || exit 0</span>
+</span><span class='line'><span class="gi">+</span>
+</span><span class='line'> # Load the VERBOSE setting and other rcS variables
+</span><span class='line'> . /lib/init/vars.sh
+</span><span class='line'>
+</span><span class='line'><span class="gu">@@ -49,10 +44,11 @@ do_start()</span>
+</span><span class='line'>  #   0 if daemon has been started
+</span><span class='line'>  #   1 if daemon was already running
+</span><span class='line'>  #   2 if daemon could not be started
+</span><span class='line'><span class="gd">-    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --test &gt; /dev/null \</span>
+</span><span class='line'><span class="gi">+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON \</span>
+</span><span class='line'><span class="gi">+    ${START_STOP_DAEMON_ARGS} --test &gt; /dev/null \</span>
+</span><span class='line'>      || return 1
+</span><span class='line'><span class="gd">-    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- \</span>
+</span><span class='line'><span class="gd">-        $DAEMON_ARGS \</span>
+</span><span class='line'><span class="gi">+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON \</span>
+</span><span class='line'><span class="gi">+        ${START_STOP_DAEMON_ARGS} -- $DAEMON_ARGS \</span>
+</span><span class='line'>      || return 2
+</span><span class='line'>  # Add code here, if necessary, that waits for the process to be ready
+</span><span class='line'>  # to handle requests from services started subsequently which depend
+</span></code></pre></td></tr></table></div></figure>
 
- # PATH should only include /usr/* if it runs after the mountnfs.sh script
- PATH=/sbin:/usr/sbin:/bin:/usr/bin
--DESC="Description of the service"
--NAME=daemonexecutablename
--DAEMON=/usr/sbin/$NAME
--DAEMON_ARGS="--options args"
--PIDFILE=/var/run/$NAME.pid
--SCRIPTNAME=/etc/init.d/$NAME
--
--# Exit if the package is not installed
--[ -x "$DAEMON" ] || exit 0
-+NAME=fluentd
 
- # Read configuration variable file if it is present
- [ -r /etc/default/$NAME ] &amp;&amp; . /etc/default/$NAME
+<p>このままでは起動しないので <code>/etc/default/fluentd</code> を作成します。</p>
 
-+# Exit if the package is not installed
-+[ -x "$DAEMON" ] || exit 0
-+
- # Load the VERBOSE setting and other rcS variables
- . /lib/init/vars.sh
+<figure class='code'><figcaption><span>fluentd.default</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">RBENV_ROOT</span><span class="o">=</span>/usr/local/rbenv
+</span><span class='line'><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">RBENV_ROOT</span><span class="k">}</span>/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>
+</span><span class='line'><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span>
+</span><span class='line'><span class="nv">USER</span><span class="o">=</span>fluentd
+</span><span class='line'><span class="nv">GROUP</span><span class="o">=</span>fluentd
+</span><span class='line'><span class="nv">DESC</span><span class="o">=</span><span class="s2">&quot;fluentd&quot;</span>
+</span><span class='line'><span class="nv">PIDFILE</span><span class="o">=</span>/var/log/<span class="nv">$NAME</span>/run.pid
+</span><span class='line'><span class="nv">CONFFILE</span><span class="o">=</span>/etc/fluentd/fluentd.conf
+</span><span class='line'><span class="nv">DAEMON</span><span class="o">=</span>/usr/local/rbenv/shims/fluentd
+</span><span class='line'><span class="nv">DAEMON_ARGS</span><span class="o">=</span><span class="s2">&quot;--daemon $PIDFILE --log /var/log/fluentd/fluentd.log --config $CONFFILE&quot;</span>
+</span><span class='line'><span class="nv">SCRIPTNAME</span><span class="o">=</span>/etc/init.d/<span class="nv">$NAME</span>
+</span><span class='line'><span class="nv">START_STOP_DAEMON_ARGS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;${USER}&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">   if</span> ! getent passwd | grep -q <span class="s2">&quot;^${USER}:&quot;</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">      </span><span class="nb">echo</span> <span class="s2">&quot;$0: user for running td-agent doesn&#39;t exist: ${USER}&quot;</span> &gt;&amp;2
+</span><span class='line'>      <span class="nb">exit </span>1
+</span><span class='line'>   <span class="k">fi</span>
+</span><span class='line'><span class="k">   if</span> <span class="o">[</span> ! -d <span class="k">$(</span>dirname <span class="k">${</span><span class="nv">PIDFILE</span><span class="k">})</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">       </span>mkdir -p <span class="k">$(</span>dirname <span class="k">${</span><span class="nv">PIDFILE</span><span class="k">})</span>
+</span><span class='line'>   <span class="k">fi</span>
+</span><span class='line'><span class="k">   </span>chown -R <span class="k">${</span><span class="nv">USER</span><span class="k">}</span> <span class="k">$(</span>dirname <span class="k">${</span><span class="nv">PIDFILE</span><span class="k">})</span>
+</span><span class='line'>   <span class="nv">START_STOP_DAEMON_ARGS</span><span class="o">=</span><span class="s2">&quot;${START_STOP_DAEMON_ARGS} -c ${USER}&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;${GROUP}&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">   if</span> ! getent group | grep -q <span class="s2">&quot;^${GROUP}:&quot;</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">       </span><span class="nb">echo</span> <span class="s2">&quot;$0: group for running td-agent doesn&#39;t exist: ${GROUP}&quot;</span> &gt;&amp;2
+</span><span class='line'>       <span class="nb">exit </span>1
+</span><span class='line'>   <span class="k">fi</span>
+</span><span class='line'><span class="k">   </span><span class="nv">START_STOP_DAEMON_ARGS</span><span class="o">=</span><span class="s2">&quot;${START_STOP_DAEMON_ARGS} --group ${GROUP}&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
 
-@@ -49,10 +44,11 @@ do_start()
-  #   0 if daemon has been started
-  #   1 if daemon was already running
-  #   2 if daemon could not be started
--    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --test &gt; /dev/null \
-+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON \
-+    ${START_STOP_DAEMON_ARGS} --test &gt; /dev/null \
-      || return 1
--    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- \
--        $DAEMON_ARGS \
-+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON \
-+        ${START_STOP_DAEMON_ARGS} -- $DAEMON_ARGS \
-      || return 2
-  # Add code here, if necessary, that waits for the process to be ready
-  # to handle requests from services started subsequently which depend
-</code></pre></div></div>
 
-<p>このままでは起動しないので <code class="highlighter-rouge">/etc/default/fluentd</code> を作成します。</p>
+<p>としたら、以下のコマンドを入力し、fluentdデーモンを起動します。</p>
 
-<p>```sh fluentd.default
-RBENV_ROOT=/usr/local/rbenv
-PATH=${RBENV_ROOT}/bin:${PATH}
-eval “$(rbenv init -)”
-USER=fluentd
-GROUP=fluentd
-DESC=”fluentd”
-PIDFILE=/var/log/$NAME/run.pid
-CONFFILE=/etc/fluentd/fluentd.conf
-DAEMON=/usr/local/rbenv/shims/fluentd
-DAEMON_ARGS=”–daemon $PIDFILE –log /var/log/fluentd/fluentd.log –config $CONFFILE”
-SCRIPTNAME=/etc/init.d/$NAME
-START_STOP_DAEMON_ARGS=””</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo update-rc.d fluentd defaults
+</span><span class='line'><span class="nv">$ </span>sudo mkdir -p /var/log/fluentd
+</span><span class='line'><span class="nv">$ </span>sudo chown fluentd:fluentd /var/log/fluentd
+</span><span class='line'><span class="nv">$ </span>sudo service fluentd start
+</span></code></pre></td></tr></table></div></figure>
 
-<p>if [ -n “${USER}” ]; then
-   if ! getent passwd | grep -q “^${USER}:”; then
-      echo “$0: user for running td-agent doesn’t exist: ${USER}” &gt;&amp;2
-      exit 1
-   fi
-   if [ ! -d $(dirname ${PIDFILE}) ]; then
-       mkdir -p $(dirname ${PIDFILE})
-   fi
-   chown -R ${USER} $(dirname ${PIDFILE})
-   START_STOP_DAEMON_ARGS=”${START_STOP_DAEMON_ARGS} -c ${USER}”
-fi</p>
-
-<p>if [ -n “${GROUP}” ]; then
-   if ! getent group | grep -q “^${GROUP}:”; then
-       echo “$0: group for running td-agent doesn’t exist: ${GROUP}” &gt;&amp;2
-       exit 1
-   fi
-   START_STOP_DAEMON_ARGS=”${START_STOP_DAEMON_ARGS} –group ${GROUP}”
-fi</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-としたら、以下のコマンドを入力し、fluentdデーモンを起動します。
-
-```sh
-$ sudo update-rc.d fluentd defaults
-$ sudo mkdir -p /var/log/fluentd
-$ sudo chown fluentd:fluentd /var/log/fluentd
-$ sudo service fluentd start
-</code></pre></div></div>
 
 <p>で起動してるはずでう。</p>
 
-<h2 id="おわり">おわり</h2>
+<h2>おわり</h2>
 
 <p>いくつかアクセスしてみてなげられてるのを確認できたらねます。
 最後に<a href="http://katsyoshi.doorkeeper.jp/events/10420">さけまつり</a>やるかもしれないのできてみてくだしあ。</p>
-
 </div>
 
 
@@ -298,7 +433,7 @@ $ sudo service fluentd start
 	<div class="tags">
 
 
-	linuxtechlogfluentd
+	<a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/log/'>log</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -327,8 +462,8 @@ $ sudo service fluentd start
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

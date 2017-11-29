@@ -7,28 +7,17 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	すくりーんきゃすと
-	LinuxでScreenCast用の環境を整えてみた。
-
-必要パッケージ
-
-
-  ffmpeg
-  gtk-recordMyDesktop
-
-
-使いかた
-
-gtk-recordMyDesktop でデスクトップをキャプチャする。
-その後は、 ffmpeg を使って好き...">
+	<meta name="description" content="LinuxでScreenCast用の環境を整えてみた。 必要パッケージ ffmpeg
+gtk-recordMyDesktop 使いかた gtk-recordMyDesktop でデスクトップをキャプチャする。
+その後は、 ffmpeg を使って好きな動画形式に変換します。
+ここでは、 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -36,18 +25,18 @@ gtk-recordMyDesktop でデスクトップをキャプチャする。
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -56,7 +45,7 @@ gtk-recordMyDesktop でデスクトップをキャプチャする。
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -81,7 +70,7 @@ gtk-recordMyDesktop でデスクトップをキャプチャする。
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -93,28 +82,33 @@ gtk-recordMyDesktop でデスクトップをキャプチャする。
 	<h2 class="title">すくりーんきゃすと</h2>
 	<div class="entry-content"><p>LinuxでScreenCast用の環境を整えてみた。</p>
 
-<h2 id="必要パッケージ">必要パッケージ</h2>
+<h2>必要パッケージ</h2>
 
 <ul>
-  <li>ffmpeg</li>
-  <li>gtk-recordMyDesktop</li>
+<li>ffmpeg</li>
+<li>gtk-recordMyDesktop</li>
 </ul>
 
-<h2 id="使いかた">使いかた</h2>
 
-<p><code class="highlighter-rouge">gtk-recordMyDesktop</code> でデスクトップをキャプチャする。
-その後は、 <code class="highlighter-rouge">ffmpeg</code> を使って好きな動画形式に変換します。
+<h2>使いかた</h2>
+
+<p><code>gtk-recordMyDesktop</code> でデスクトップをキャプチャする。
+その後は、 <code>ffmpeg</code> を使って好きな動画形式に変換します。
 ここでは、gif画像に変更しています。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ffmpeg <span class="nt">-i</span> ~/screencast.ovg img/screencast.gif
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ffmpeg -i ~/screencast.ovg img/screencast.gif
+</span></code></pre></td></tr></table></div></figure>
 
-<p>-&gt; <img src="/images/screenshot/gtk-recordMyDesktop.gif =512x" alt="" /> &lt;-</p>
 
-<h3 id="参考サイト">参考サイト</h3>
+<p style="text-align:center;"> <img src="/images/screenshot/gtk-recordMyDesktop.gif" width="512" alt="" /></p>
+
+<h3>参考サイト</h3>
+
 <ol>
-  <li>http://d.hatena.ne.jp/over80/20080802/1217693705</li>
+<li><a href="http://d.hatena.ne.jp/over80/20080802/1217693705">http://d.hatena.ne.jp/over80/20080802/1217693705</a></li>
 </ol>
+
 </div>
 
 
@@ -128,7 +122,7 @@ gtk-recordMyDesktop でデスクトップをキャプチャする。
 	<div class="tags">
 
 
-	moviescreencastdiary
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/movie/'>movie</a>, <a class='category' href='/blog/categories/screencast/'>screencast</a>
 
 
 </div>
@@ -157,8 +151,8 @@ gtk-recordMyDesktop でデスクトップをキャプチャする。
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

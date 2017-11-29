@@ -7,23 +7,16 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	emerge --syncをgitにかえたはなし
-	portageはデフォルトだと rsync を利用しての更新をしているので、
-git を用いた方法に変更します。
-
-準備
-
-portage を 2.2.17 に変更し、USEフラグとして git をつかいます。
-
-# USE="git $...">
+	<meta name="description" content="portageはデフォルトだと rsync を利用しての更新をしているので、
+git を用いた方法に変更します。 準備 portage を 2.2.17 に変更し、USEフラグとして git をつかいます。 1
+# USE=&quot;git ${USE}&quot; emerge -av \= &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -31,18 +24,18 @@ portage を 2.2.17 に変更し、USEフラグとして git をつかいます�
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -51,7 +44,7 @@ portage を 2.2.17 に変更し、USEフラグとして git をつかいます�
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -76,7 +69,7 @@ portage を 2.2.17 に変更し、USEフラグとして git をつかいます�
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -85,33 +78,36 @@ portage を 2.2.17 に変更し、USEフラグとして git をつかいます�
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">emerge --syncをgitにかえたはなし</h2>
-	<div class="entry-content"><p>portageはデフォルトだと <code class="highlighter-rouge">rsync</code> を利用しての更新をしているので、
-<code class="highlighter-rouge">git</code> を用いた方法に変更します。</p>
+	<h2 class="title">Emerge --syncをgitにかえたはなし</h2>
+	<div class="entry-content"><p>portageはデフォルトだと <code>rsync</code> を利用しての更新をしているので、
+<code>git</code> を用いた方法に変更します。</p>
 
-<h2 id="準備">準備</h2>
+<h2>準備</h2>
 
-<p><code class="highlighter-rouge">portage</code> を <code class="highlighter-rouge">2.2.17</code> に変更し、USEフラグとして <code class="highlighter-rouge">git</code> をつかいます。</p>
+<p><code>portage</code> を <code>2.2.17</code> に変更し、USEフラグとして <code>git</code> をつかいます。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># USE="git ${USE}" emerge -av \=portage-2.2.17</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># USE=&quot;git ${USE}&quot; emerge -av \=portage-2.2.17</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>つぎに、Gitのリポジトリを見に行くように<a href="http://qiita.com/wjn/items/a3b71059211711501e35">設定</a>します。</p>
 
-<p>と設定してあとはいつもどおり <code class="highlighter-rouge">sudo eix-sync</code> させるだけで大丈夫です。</p>
+<p>と設定してあとはいつもどおり <code>sudo eix-sync</code> させるだけで大丈夫です。</p>
 
-<h2 id="おわり">おわり</h2>
+<h2>おわり</h2>
 
 <p>基本的にはリンク先だけ見てればいけると思います。</p>
 
 <p>引越ししてWiMAXの電波の入りがわるくなったので鉄製ボウル買おうかとおもってたら2時間ほど<a href="https://ingress.com">徘徊</a>してました。</p>
 
-<h3 id="参考サイト">参考サイト</h3>
+<h3>参考サイト</h3>
 
 <ol>
-  <li>http://qiita.com/wjn/items/a3b71059211711501e35</li>
-  <li>https://wiki.gentoo.org/wiki/Project:Portage/Sync</li>
+<li><a href="http://qiita.com/wjn/items/a3b71059211711501e35">http://qiita.com/wjn/items/a3b71059211711501e35</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Project:Portage/Sync">https://wiki.gentoo.org/wiki/Project:Portage/Sync</a></li>
 </ol>
+
 </div>
 
 
@@ -125,7 +121,7 @@ portage を 2.2.17 に変更し、USEフラグとして git をつかいます�
 	<div class="tags">
 
 
-	linuxgentootech
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -154,8 +150,8 @@ portage を 2.2.17 に変更し、USEフラグとして git をつかいます�
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

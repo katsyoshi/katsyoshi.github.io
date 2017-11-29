@@ -7,23 +7,15 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	ItamaeつかってOSのインストールをやってみた
-	9月はRubyKiagiにいってたりしました。
-そのときにmikutterのコミッターとかになったようです。
-
-シルバーウィークにThinkPadのOS再インストールをしたのでその記録を
-
-なにやったの？
-
-@mtsmfm と以前話して...">
+	<meta name="description" content="9月はRubyKiagiにいってたりしました。
+そのときにmikutterのコミッターとかになったようです。 シルバーウィークにThinkPadのOS再インストールをしたのでその記録を なにやったの？ @mtsmfm と以前話していたとき、&ldquo; &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -31,18 +23,18 @@
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -51,7 +43,7 @@
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -76,7 +68,7 @@
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -91,41 +83,54 @@
 
 <p>シルバーウィークにThinkPadのOS再インストールをしたのでその記録を</p>
 
-<h2 id="なにやったの">なにやったの？</h2>
+<h2>なにやったの？</h2>
 
-<p><a href="https://twitter.com/mtsmfm">@mtsmfm</a> と以前話していたとき、``ansibleつかってOSインストールしてるんだけど、完全自動化できないんですよね~’’ みたいな事を聞いたので<a href="https://github.com/itamae-kitchen/itamae">Itamae</a> をつかってやってみました。
+<p><a href="https://twitter.com/mtsmfm">@mtsmfm</a> と以前話していたとき、&ldquo;ansibleつかってOSインストールしてるんだけど、完全自動化できないんですよね~&rdquo; みたいな事を聞いたので<a href="https://github.com/itamae-kitchen/itamae">Itamae</a> をつかってやってみました。
 結論から言うと完全自動化は無理だけど、ある程度は自動化できた。</p>
 
-<h3 id="環境">環境</h3>
+<h3>環境</h3>
+
 <ul>
-  <li>machine: ThinkPad X250</li>
-  <li>OS: Gentoo Linux</li>
-  <li>Provisioning tool: Itamae</li>
-  <li>repo: https://github.com/katsyoshi/itamae-recipes</li>
+<li>machine: ThinkPad X250</li>
+<li>OS: Gentoo Linux</li>
+<li>Provisioning tool: Itamae</li>
+<li>repo: <a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></li>
 </ul>
 
-<h2 id="インストール">インストール</h2>
+
+<h2>インストール</h2>
+
 <p>インストールディスクを起動するところはipmiとか搭載していない(しらべていない)し<a href="https://wiki.openstack.org/wiki/Ironic">Ironic</a>はつかいたくないので手動で起動し、
 sshdの起動とrootのパスワードを設定します。起動したら以下の手順でパーティション作成からカーネルのインストールまでします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">git clone https://github.com/katsyoshi/itamae-recipes.git
-cd itamae-recipes
-bundle install
-wget http://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20161006.tar.bz2
-cp stage3-amd64-20161006.tar.bz2 cookbook/install/stage3.tar.bz2
-itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/gentoo.json
-</span></code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">git clone https://github.com/katsyoshi/itamae-recipes.git</span>
+</span><span class='line'><span class="go">cd itamae-recipes</span>
+</span><span class='line'><span class="go">bundle install</span>
+</span><span class='line'><span class="go">wget http://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20161006.tar.bz2</span>
+</span><span class='line'><span class="go">cp stage3-amd64-20161006.tar.bz2 cookbook/install/stage3.tar.bz2</span>
+</span><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/gentoo.json</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>でOSのインストールまでできるのですが、gentooのインストールメディアだと、diffがインストールされていないのでitamaeからfileのコピーができません。
 都度コピーしてください(というよりgentooインストーラーにdiffを入れたほうが早そう)</p>
 
-<h2 id="パッケージのインストール">パッケージのインストール</h2>
+<h2>パッケージのインストール</h2>
+
 <p>ここまで終ったら、パッケージのインストールします。これも以下コマンドを実行することで終ります。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.json
-</span></code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.json</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h2 id="owari">owari</h2>
+
+<h2>owari</h2>
 
 <p>ItamaeつかってOSのインストールを実行してみました。diffが失いところがとくにつらいですね。
 おわり</p>
@@ -142,7 +147,7 @@ itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/
 	<div class="tags">
 
 
-	gentooitamaegentoo-install-battle
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/gentoo-install-battle/'>gentoo-install-battle</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>
 
 
 </div>
@@ -171,8 +176,8 @@ itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

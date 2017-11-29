@@ -7,21 +7,16 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	known_hostsに載っていないホストに接続確認しないようにする
-	昨日の続きで、 lxc で大量のサーバを立てて、
-SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。
-
-解決方法
-
-$ ssh -oStrictHostKeyChecking=no...">
+	<meta name="description" content="昨日の続きで、 lxc で大量のサーバを立てて、
+SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。 解決方法 1
+$ ssh -oStrictHostKeyChecking=no anywhere.example.com で接続確認の yes or no &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -29,18 +24,18 @@ $ ssh -oStrictHostKeyChecking=no...">
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -49,7 +44,7 @@ $ ssh -oStrictHostKeyChecking=no...">
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -74,7 +69,7 @@ $ ssh -oStrictHostKeyChecking=no...">
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -83,21 +78,23 @@ $ ssh -oStrictHostKeyChecking=no...">
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">known_hostsに載っていないホストに接続確認しないようにする</h2>
-	<div class="entry-content"><p>昨日の<a href="/blog/2015/04/06/careless-miss/">続き</a>で、 <code class="highlighter-rouge">lxc</code> で大量のサーバを立てて、
+	<h2 class="title">Known_hostsに載っていないホストに接続確認しないようにする</h2>
+	<div class="entry-content"><p>昨日の<a href="/blog/2015/04/06/careless-miss/">続き</a>で、 <code>lxc</code> で大量のサーバを立てて、
 SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。</p>
 
-<h2 id="解決方法">解決方法</h2>
+<h2>解決方法</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ssh -oStrictHostKeyChecking=no anywhere.example.com
-</code></pre></div></div>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh -oStrictHostKeyChecking=no anywhere.example.com</span></code></pre></td></tr></table></div></figure>
 
-<p>で接続確認の <code class="highlighter-rouge">yes or no</code> が出てこなくなります。</p>
 
-<h2 id="おわり">おわり</h2>
+<p>で接続確認の <code>yes or no</code> が出てこなくなります。</p>
+
+<h2>おわり</h2>
+
 <p>おわり。</p>
 
-<p>そのうち <code class="highlighter-rouge">lxc</code> で100個ほどのインスタンスのベンチマークとりたい…</p>
+<p>そのうち <code>lxc</code> で100個ほどのインスタンスのベンチマークとりたい…</p>
 </div>
 
 
@@ -111,7 +108,7 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 	<div class="tags">
 
 
-	techssh
+	<a class='category' href='/blog/categories/ssh/'>ssh</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -140,8 +137,8 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

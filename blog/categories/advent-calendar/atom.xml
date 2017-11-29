@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: advent_calendar | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/advent-calendar/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2017-11-30T07:59:43+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[みくったーでえもじ]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter/"/>
+    <updated>2016-12-17T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter</id>
+    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
+たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
+
+<h2>なんぞそれ？</h2>
+
+<p>ここにあります。<a href="https://github.com/katsyoshi/mikutter-emoji">mikutter-emoji</a>
+<code>:tofu_on_fire:</code> みたいに <code>:</code> で囲われた文字列を絵文字に置換するだけです。</p>
+
+<h2>つかいかた</h2>
+
+<p><code>sh
+git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
+EDIT ~/.mikutter/plugin/emoji/emoji.yml
+</code></p>
+
+<p>gitでプラグインディレクトリにコピーします。
+コピーしたら、絵文字の設定を <code>emoji.yml</code> に入れます。
+今は5つしか登録していないので皆で登録しましょう</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[板前さんでGentooを管理]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo/"/>
+    <updated>2016-12-10T16:00:38+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo</id>
+    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
+
+<h2>Itamaeでgentoo管理するには？</h2>
+
+<p>そらはー(<a href="https://twitter.com/sora_h">@sora_h</a>)が作ってる <a href="https://github.com/sorah/itamae-plugin-resource-portage">itamae-plugin-resource-portage</a> 使え</p>
+
+<h2>自作のportage管理ソフトの紹介</h2>
+
+<p><a href="https://github.com/katsyoshi/itamae-recipes/tree/master/cookbook/gentoo">ここ</a>にあります。</p>
+
+<h3>使いかた</h3>
+
+<p>簡単な使いかたとしては以下のようになります</p>
+
+<p><code>
+itamae local gentoo.rb -j package.json
+</code></p>
+
+<p>これだけです。</p>
+
+<h3>パッケージの指定方法</h3>
+
+<p>```yaml
+packages:
+ &ndash; name: &lsquo;category/package&rsquo;
+   portage:</p>
+
+<pre><code> use: 'package'
+ accept_keywords: 'package'
+ license: 'pakcage'
+</code></pre>
+
+<p>```</p>
+
+<p><code>name</code> で <code>category/package</code> を指定することでインストールすることができます。
+<code>portage</code> では <code>use</code> などのフラグを指定して管理します。
+<code>use</code> ディレクトリを作成してそこにファイルを置く必要があります。
+自動生成したいけど、依存パッケージの指定方法とかまだ考えていないので取り敢えず直接指定です。</p>
+
+<h2>おわり</h2>
+
+<p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
+とおもってたら itamae-plugin-resource-portage みつけてしまったので
+itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使いましょう</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[d250g2 advent calendar 2016 5日目]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/05/d250g2/"/>
+    <updated>2016-12-05T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/05/d250g2</id>
+    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
+
+<h2>d250g2 について</h2>
+
+<p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
+
+<h2>d250g2 とは？</h2>
+
+<p>しらん</p>
+
+<h2>KernelVM Camp #4 に行ってきた</h2>
+
+<p>成果物です</p>
+
+<p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
+]]></content>
+  </entry>
+  
+</feed>

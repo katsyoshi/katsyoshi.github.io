@@ -7,22 +7,14 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	Start Rust by Example
-	年ぁけたので、新しいプログラミング言語を覚えようと思いRust Langを始めました。
-
-チュートリアルとしてRust bye Exampleをやっていってます。
-
-気が付いた点
-
-Rustという言語は変更が多いらしいのでここでは、Chap.1...">
+	<meta name="description" content="年ぁけたので、新しいプログラミング言語を覚えようと思いRust Langを始めました。 チュートリアルとしてRust bye Exampleをやっていってます。 気が付いた点 Rustという言語は変更が多いらしいのでここでは、Chap.1-14(2015/01/25時点) &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -30,18 +22,18 @@ Rustという言語は変更が多いらしいのでここでは、Chap.1...">
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -50,7 +42,7 @@ Rustという言語は変更が多いらしいのでここでは、Chap.1...">
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -75,7 +67,7 @@ Rustという言語は変更が多いらしいのでここでは、Chap.1...">
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -89,33 +81,44 @@ Rustという言語は変更が多いらしいのでここでは、Chap.1...">
 
 <p>チュートリアルとして<a href="http://rustbyexample.com">Rust bye Example</a>を<a href="https://github.com/katsyoshi/rustbyexamle">やっていって</a>ます。</p>
 
-<h2 id="気が付いた点">気が付いた点</h2>
+<h2>気が付いた点</h2>
 
 <p>Rustという言語は変更が多いらしいのでここでは、Chap.1-14(2015/01/25時点)までで気がついた点で書きます。 まず、今回環境を下に示します。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rustc <span class="nt">--version</span>
-rustc 1.0.0-nightly <span class="o">(</span>29bd9a06e 2015-01-20 23:03:09 +0000<span class="o">)</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rustc --version
+</span><span class='line'>rustc 1.0.0-nightly <span class="o">(</span>29bd9a06e 2015-01-20 23:03:09 +0000<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="i---is">i -&gt; is</h3>
 
-<p>まず、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/2.FormattedPrint/FormattedPrint.rs#L9">Chap. 2のコード</a>で<code class="highlighter-rouge">integer</code>のsuffixが<code class="highlighter-rouge">is</code>に変更されています。</p>
+<h3>i &ndash;> is</h3>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FormattedPrint.rs:9:69: 9:71 warning: the <span class="sb">`</span>i<span class="sb">`</span> suffix on integers is deprecated<span class="p">;</span> use <span class="sb">`</span>is<span class="sb">`</span> or one of the fixed-sized suffixes
-FormattedPrint.rs:9     println!<span class="o">(</span><span class="s2">"{} of {:b} people know binary, the other half don't"</span>, 1i, 2i<span class="o">)</span><span class="p">;</span>
-                                                                                        ^~
-</code></pre></div></div>
+<p>まず、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/2.FormattedPrint/FormattedPrint.rs#L9">Chap. 2のコード</a>で<code>integer</code>のsuffixが<code>is</code>に変更されています。</p>
 
-<h3 id="rangea-b--ab">range(a, b) –&gt; (a..b)</h3>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>FormattedPrint.rs:9:69: 9:71 warning: the <span class="sb">`</span>i<span class="sb">`</span> suffix on integers is deprecated; use <span class="sb">`</span>is<span class="sb">`</span> or one of the fixed-sized suffixes
+</span><span class='line'>FormattedPrint.rs:9     println!<span class="o">(</span><span class="s2">&quot;{} of {:b} people know binary, the other half don&#39;t&quot;</span>, 1i, 2i<span class="o">)</span>;
+</span><span class='line'>                                                                                        ^~
+</span></code></pre></td></tr></table></div></figure>
 
-<p>つぎに、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/10.ForAndRange/ForAndRange.rs#L2">Chap. 10のコード</a>で<code class="highlighter-rouge">range(a, b)</code>がunstableになっているので<code class="highlighter-rouge">(a..b)</code>に変更しました。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ForAndRange.rs:2:14: 2:19 warning: use of unstable item: will be replaced by range notation, <span class="c">#[warn(unstable)] on by default</span>
-ForAndRange.rs:2     <span class="k">for </span>n <span class="k">in </span>range<span class="o">(</span>1u32, 101<span class="o">)</span> <span class="o">{</span>
-                              ^~~~~
-</code></pre></div></div>
+<h3>range(a, b) –> (a..b)</h3>
 
-<h2 id="おわり">おわり</h2>
+<p>つぎに、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/10.ForAndRange/ForAndRange.rs#L2">Chap. 10のコード</a>で<code>range(a, b)</code>がunstableになっているので<code>(a..b)</code>に変更しました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ForAndRange.rs:2:14: 2:19 warning: use of unstable item: will be replaced by range notation, <span class="c">#[warn(unstable)] on by default</span>
+</span><span class='line'>ForAndRange.rs:2     <span class="k">for </span>n in range<span class="o">(</span>1u32, 101<span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                              ^~~~~
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
 
 <p>いま確認してたらそもそもRust by Example自体が変更されてた…</p>
 
@@ -133,7 +136,7 @@ ForAndRange.rs:2     <span class="k">for </span>n <span class="k">in </span>rang
 	<div class="tags">
 
 
-	diarytechlinux
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -162,8 +165,8 @@ ForAndRange.rs:2     <span class="k">for </span>n <span class="k">in </span>rang
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

@@ -7,20 +7,22 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	Blogのテーマかえた
-	表題のとおり、Blog(octopress) のテーマをdefaultの classics から slash に変更した。
-変更の方法は以下のようになります1。
-
+	<meta name="description" content="表題のとおり、Blog(octopress) のテーマをdefaultの classics から slash に変更した。
+変更の方法は以下のようになります1。 1
+2
+3
+4
+5
+6
 $ cd ~/octopress
-$ git clone git://github.com/tomm...">
+$ git clone git://github.com/tommy351/ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -28,18 +30,18 @@ $ git clone git://github.com/tomm...">
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -48,7 +50,7 @@ $ git clone git://github.com/tomm...">
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -73,7 +75,7 @@ $ git clone git://github.com/tomm...">
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -84,25 +86,32 @@ $ git clone git://github.com/tomm...">
 	<div id="content" class="inner"><article class="post">
 	<h2 class="title">Blogのテーマかえた</h2>
 	<div class="entry-content"><p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
-変更の方法は以下のようになります<sup id="fnref:theme"><a href="#fn:theme" class="footnote">1</a></sup>。</p>
+変更の方法は以下のようになります<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ~/octopress
-<span class="nv">$ </span>git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
-<span class="nv">$ </span>bundle <span class="nb">exec </span>rake install<span class="se">\[</span><span class="s1">'slash'</span><span class="se">\]</span>
-<span class="nv">$ </span>bundle <span class="nb">exec </span>rake generate
-<span class="nv">$ </span>bundle <span class="nb">exec </span>rake preview
-<span class="nv">$ </span>bundle <span class="nb">exec </span>rake deploy
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/octopress
+</span><span class='line'><span class="nv">$ </span>git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake install<span class="se">\[</span><span class="s1">&#39;slash&#39;</span><span class="se">\]</span>
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake generate
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake preview
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>ついでにfaviconもかえよう。</p>
-
 <div class="footnotes">
-  <ol>
-    <li id="fn:theme">
-      <p>Octopressのテーマを変更してみよう!, facestarbaby, http://qiita.com/fakestarbaby/items/ab532088453105e1bea4, 2017/02/12 閲覧 <a href="#fnref:theme" class="reversefootnote">&#8617;</a></p>
-    </li>
-  </ol>
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Octopressのテーマを変更してみよう!, facestarbaby, http://qiita.com/fakestarbaby/items/ab532088453105e1bea4, 2017/02/12 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
 </div>
+
 </div>
 
 
@@ -116,7 +125,7 @@ $ git clone git://github.com/tomm...">
 	<div class="tags">
 
 
-	diary
+	<a class='category' href='/blog/categories/diary/'>diary</a>
 
 
 </div>
@@ -145,8 +154,8 @@ $ git clone git://github.com/tomm...">
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

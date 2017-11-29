@@ -7,23 +7,16 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	Gentoo Install Battle Part I
-	ここにThinkPad X240があります。これの中身を Gentoo/Linux にします。
-
-準備
-
-準備として、Gentoo/LinuxのLiveCDを作成、Bootの設定を行います。
-
-イメージ作成
-まずLiveCDイメー...">
+	<meta name="description" content="ここにThinkPad X240があります。これの中身を Gentoo/Linux にします。 準備 準備として、Gentoo/LinuxのLiveCDを作成、Bootの設定を行います。 イメージ作成 まずLiveCDイメージをダウンロードしUSBフラッシュメモリにコピーします。 1
+2
+$ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -31,18 +24,18 @@
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -51,7 +44,7 @@
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -76,7 +69,7 @@
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -88,38 +81,45 @@
 	<h2 class="title">Gentoo Install Battle Part I</h2>
 	<div class="entry-content"><p>ここにThinkPad X240があります。これの中身を Gentoo/Linux にします。</p>
 
-<h2 id="準備">準備</h2>
+<h2>準備</h2>
 
 <p>準備として、Gentoo/LinuxのLiveCDを作成、Bootの設定を行います。</p>
 
-<h3 id="イメージ作成">イメージ作成</h3>
+<h3>イメージ作成</h3>
+
 <p>まずLiveCDイメージをダウンロードしUSBフラッシュメモリにコピーします。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget ftp://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140814.iso
-<span class="nv">$ </span>dd <span class="nv">of</span><span class="o">=</span>/path/to/disk <span class="k">if</span><span class="o">=</span>install-amd64-minimal-20140814.iso <span class="nv">bs</span><span class="o">=</span>4m
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wget ftp://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140814.iso
+</span><span class='line'><span class="nv">$ </span>dd <span class="nv">of</span><span class="o">=</span>/path/to/disk <span class="k">if</span><span class="o">=</span>install-amd64-minimal-20140814.iso <span class="nv">bs</span><span class="o">=</span>4m
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>でイメージの作成終了です。
 次に、X240の設定を行います。</p>
 
-<h3 id="x240の起動準備">X240の起動準備</h3>
+<h3>X240の起動準備</h3>
+
 <p>Windowsを起動し、Shift押しながら再起動します。
 再起動したら、以下の順番でBIOSを起動させます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>トラブルシューティング -&gt; 詳細オプション -&gt; UEFIファームウェアの設定 -&gt; 再起動
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>トラブルシューティング -&gt; 詳細オプション -&gt; UEFIファームウェアの設定 -&gt; 再起動
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>でBIOSがたちあがるので、Secure BootとUEFI BootとBoot順の設定を変更します。</p>
 
-<p>Seucre Bootでは<code class="highlighter-rouge">Securety -&gt; Secure Boot -&gt; Secure Boot [Enable]</code>を<code class="highlighter-rouge">[Disable]</code>に変更</p>
+<p>Seucre Bootでは<code>Securety -&gt; Secure Boot -&gt; Secure Boot [Enable]</code>を<code>[Disable]</code>に変更</p>
 
-<p>UEFI Bootでは<code class="highlighter-rouge">Startup -&gt; UEFI/Legacy Boot [UEFI only]</code>を<code class="highlighter-rouge">[Both]</code>に変更</p>
+<p>UEFI Bootでは<code>Startup -&gt; UEFI/Legacy Boot [UEFI only]</code>を<code>[Both]</code>に変更</p>
 
-<p>Boot順の設定では、<code class="highlighter-rouge">Startup -&gt; Boot</code>でBootさせたい順番に変更</p>
+<p>Boot順の設定では、<code>Startup -&gt; Boot</code>でBootさせたい順番に変更</p>
 
 <p>BIOSを変更したらRestartします。</p>
 
-<h2 id="まとめ">まとめ</h2>
+<h2>まとめ</h2>
 
 <p>とりあえず今日はここで終りです。インストールは明日以降にします。</p>
 </div>
@@ -135,7 +135,7 @@
 	<div class="tags">
 
 
-	techlinuxgentoomikutter
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -164,8 +164,8 @@
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

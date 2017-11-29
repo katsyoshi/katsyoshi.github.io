@@ -7,20 +7,14 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	Ruby on RailsでTypeScriptを使ってみる
-	ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。
-
-インストール
-
-これは簡単で Gemfile に typescript-rails を追加すればいけます。ですが、jQueryが...">
+	<meta name="description" content="ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。 インストール これは簡単で Gemfile に typescript-rails を追加すればいけます。ですが、jQueryがTypeScript v1. &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -28,18 +22,18 @@
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -48,7 +42,7 @@
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -73,7 +67,7 @@
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -85,50 +79,65 @@
 	<h2 class="title">Ruby on RailsでTypeScriptを使ってみる</h2>
 	<div class="entry-content"><p>ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。</p>
 
-<h2 id="インストール">インストール</h2>
+<h2>インストール</h2>
 
-<p>これは簡単で <code class="highlighter-rouge">Gemfile</code> に <code class="highlighter-rouge">typescript-rails</code> を追加すればいけます。ですが、<a href="http://stackoverflow.com/questions/28117786/why-am-i-not-able-to-compile-a-file-that-references-jquery-d-ts">jQueryがTypeScript v1.4以上しかサポートしていないようなので</a>それに対応したものも追加します。</p>
+<p>これは簡単で <code>Gemfile</code> に <code>typescript-rails</code> を追加すればいけます。ですが、<a href="http://stackoverflow.com/questions/28117786/why-am-i-not-able-to-compile-a-file-that-references-jquery-d-ts">jQueryがTypeScript v1.4以上しかサポートしていないようなので</a>それに対応したものも追加します。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s1">'typescript-src'</span><span class="p">,</span> <span class="ss">github: </span><span class="s1">'katsyoshi/typescript-src-ruby'</span>
-<span class="n">gem</span> <span class="s1">'typescript-rails'</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;typescript-src&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/typescript-src-ruby&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;typescript-rails&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>インストールはこれだけでOKです。</p>
 
-<h3 id="jqueryをつかう">jQueryをつかう</h3>
+<h3>jQueryをつかう</h3>
 
 <p>TypeScriptでjQueryを使う場合、TypeScriptの型定義ファイルをインストールする必要があります。
-で、それを自力で作るのは大変なので、 <code class="highlighter-rouge">tsd</code> を利用してインストールします。</p>
+で、それを自力で作るのは大変なので、 <code>tsd</code> を利用してインストールします。</p>
 
-<h4 id="tsd-をインストール">tsd をインストール</h4>
+<h4>tsd をインストール</h4>
 
-<p><code class="highlighter-rouge">tsd</code> は <code class="highlighter-rouge">npm</code> でインストールできるので、それでインストールします。</p>
+<p><code>tsd</code> は <code>npm</code> でインストールできるので、それでインストールします。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm install tsd <span class="nt">-g</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>npm install tsd -g
+</span></code></pre></td></tr></table></div></figure>
 
-<p>でインストールできたので、この <code class="highlighter-rouge">tsd</code> を利用してjQueryの型定義ファイルをインストールします。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>tsd init
-<span class="nv">$ $EDITOR</span> tsd.json
-  path: <span class="s2">"app/assets/javascripts/typings"</span>,
-  bundle: <span class="s2">"app/assets/javascripts/typings/tsd.d.ts"</span>
-<span class="nv">$ </span>tsd query jquery <span class="nt">-osa</span> install
-</code></pre></div></div>
+<p>でインストールできたので、この <code>tsd</code> を利用してjQueryの型定義ファイルをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tsd init
+</span><span class='line'><span class="nv">$ $EDITOR</span> tsd.json
+</span><span class='line'>  path: <span class="s2">&quot;app/assets/javascripts/typings&quot;</span>,
+</span><span class='line'>  bundle: <span class="s2">&quot;app/assets/javascripts/typings/tsd.d.ts&quot;</span>
+</span><span class='line'><span class="nv">$ </span>tsd query jquery -osa install
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>でjQueryを利用する準備は整いました。</p>
 
-<h2 id="typescriptを書いてみよう">TypeScriptを書いてみよう</h2>
+<h2>TypeScriptを書いてみよう</h2>
 
-<p>コンソールに <code class="highlighter-rouge">hello, world!</code> を出すだけの例を示します。</p>
+<p>コンソールに <code>hello, world!</code> を出すだけの例を示します。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"hello, world!"</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hello, world!&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>でいけますよ。
-が <code class="highlighter-rouge">$('#hello').text('hoge');</code> いかねぇ。</p>
+が <code>$('#hello').text('hoge');</code> いかねぇ。</p>
 </div>
 
 
@@ -142,7 +151,7 @@
 	<div class="tags">
 
 
-	techrailsrubyjstypescript
+	<a class='category' href='/blog/categories/js/'>js</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/typescript/'>typescript</a>
 
 
 </div>
@@ -171,8 +180,8 @@
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

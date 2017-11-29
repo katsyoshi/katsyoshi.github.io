@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: basic-authenticate | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/basic-authenticate/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2017-11-30T07:59:43+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[basic authenticate in h2o]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o/"/>
+    <updated>2017-02-20T21:53:49+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o</id>
+    <content type="html"><![CDATA[<p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<p>```yaml
+paths:
+  &ldquo;/&rdquo;:</p>
+
+<pre><code>mruby.handler: |
+  require "htpasswd.rb"
+  Htpasswd.new("/etc/h2o/.htpasswd", "realm-name")
+</code></pre>
+
+<p>```</p>
+
+<p>また、 <code>.htpasswd</code> で plain フォーマットはサポートされていません。</p>
+
+<p><code>console
+failed to validate password using file:/etc/h2o/.htpasswd:crypt-style password hash is not supported
+</code></p>
+
+<p><code>.htpasswd</code> を手動で作成したい場合は以下の方法でできます<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p><code>ruby
+require "digest/sha1"
+require "base64"
+open("/etc/h2o/.htpasswd", "w") do |w|
+  w.write("user:{SHA}#{Base64.encode64(Digest::SHA1.digest("password"))}")
+end
+</code></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Configure > Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Password Formats, The Apache Software Foundation., https://httpd.apache.org/docs/2.4/misc/password_encryptions.html, 2017/02/20 閲覧<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

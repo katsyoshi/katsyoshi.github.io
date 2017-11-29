@@ -7,19 +7,16 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	Railsで空のテストファイルを削除
-	Ruby on RailsのプロジェクトでGit管理されているTestで空のテストファイルを
-削除するには以下のコマンドを利用することで削除できます。
-
-$ git grep -e it --or -e specify -L -- spec/{mod...">
+	<meta name="description" content="Ruby on RailsのプロジェクトでGit管理されているTestで空のテストファイルを
+削除するには以下のコマンドを利用することで削除できます。 1
+$ git grep -e it --or -e specify -L -- spec/{model,controller}s | xgrep &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -27,18 +24,18 @@ $ git grep -e it --or -e specify -L -- spec/{mod...">
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -47,7 +44,7 @@ $ git grep -e it --or -e specify -L -- spec/{mod...">
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -72,7 +69,7 @@ $ git grep -e it --or -e specify -L -- spec/{mod...">
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -85,16 +82,19 @@ $ git grep -e it --or -e specify -L -- spec/{mod...">
 	<div class="entry-content"><p>Ruby on RailsのプロジェクトでGit管理されているTestで空のテストファイルを
 削除するには以下のコマンドを利用することで削除できます。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">grep</span> <span class="nt">-e</span> it <span class="nt">--or</span> <span class="nt">-e</span> specify <span class="nt">-L</span> <span class="nt">--</span> spec/<span class="o">{</span>model,controller<span class="o">}</span>s | xgrep git rm <span class="nt">-f</span> <span class="nt">--</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git grep -e it --or -e specify -L -- spec/<span class="o">{</span>model,controller<span class="o">}</span>s | xgrep git rm -f --
+</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="参考">参考</h3>
+
+<h3>参考</h3>
 
 <ul>
-  <li><a href="https://www.kernel.org/pub/software/scm/git/docs/git-grep.html">man git grep</a></li>
-  <li><a href="http://qiita.com/tbaba/items/a67c8d79c6c4d0dc9b73">Git grepを便利に使う-eオプションについて</a></li>
-  <li><a href="http://qiita.com/rosylilly/items/9648ad2c8aa53465372b">複数人での Git 開発に便利な 3 つのコマンド</a></li>
+<li><a href="https://www.kernel.org/pub/software/scm/git/docs/git-grep.html">man git grep</a></li>
+<li><a href="http://qiita.com/tbaba/items/a67c8d79c6c4d0dc9b73">Git grepを便利に使う-eオプションについて</a></li>
+<li><a href="http://qiita.com/rosylilly/items/9648ad2c8aa53465372b">複数人での Git 開発に便利な 3 つのコマンド</a></li>
 </ul>
+
 </div>
 
 
@@ -108,7 +108,7 @@ $ git grep -e it --or -e specify -L -- spec/{mod...">
 	<div class="tags">
 
 
-	gittechrailsrspectipsmemo
+	<a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/memo/'>memo</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/rspec/'>rspec</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/tips/'>tips</a>
 
 
 </div>
@@ -137,8 +137,8 @@ $ git grep -e it --or -e specify -L -- spec/{mod...">
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

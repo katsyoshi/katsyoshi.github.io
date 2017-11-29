@@ -7,25 +7,15 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	とりあえずibusやめてみた
-	ibus-1.5からあまり評判がよろしくない(特に不満はない)ので、あたらしくfcitxを導入してみた。
-
-前提条件
-
-ここではGentoo/Linuxでの導入方法について述べています。
-日本語変換エンジンとしてMozcについて述べています。
-
-導入
-
-とり...">
+	<meta name="description" content="ibus-1.5からあまり評判がよろしくない(特に不満はない)ので、あたらしくfcitxを導入してみた。 前提条件 ここではGentoo/Linuxでの導入方法について述べています。
+日本語変換エンジンとしてMozcについて述べています。 導入 とりあえずfcitxをインストール、設定します。 1 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -33,18 +23,18 @@
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -53,7 +43,7 @@
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -78,7 +68,7 @@
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -90,45 +80,59 @@
 	<h2 class="title">とりあえずibusやめてみた</h2>
 	<div class="entry-content"><p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
 
-<h2 id="前提条件">前提条件</h2>
+<h2>前提条件</h2>
 
 <p>ここでは<a href="http://www.gentoo.org">Gentoo/Linux</a>での導入方法について述べています。
 日本語変換エンジンとしてMozcについて述べています。</p>
 
-<h2 id="導入">導入</h2>
+<h2>導入</h2>
 
 <p>とりあえずfcitxをインストール、設定します。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>emerge <span class="nt">-av</span> fcitx
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>emerge -av fcitx
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ $EDITOR</span> .xinitrc
+</span><span class='line'>
+</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'>fcitx
+</span></code></pre></td></tr></table></div></figure>
 
-<span class="nv">$ $EDITOR</span> .xinitrc
-
-<span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span><span class="s2">"fcitx"</span>
-<span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s2">"fcitx"</span>
-<span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s2">"fcitx"</span>
-fcitx
-</code></pre></div></div>
 
 <p>これでインストールはこれでおわりです。</p>
 
-<h2 id="fcitxでmozc">fcitxでmozc</h2>
+<h2>fcitxでmozc</h2>
 
 <p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ $EDITOR</span> /etc/portage/make.conf
-<span class="nv">USE</span><span class="o">=</span><span class="s2">"fcitx </span><span class="k">${</span><span class="nv">USE</span><span class="k">}</span><span class="s2">"</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ $EDITOR</span> /etc/portage/make.conf
+</span><span class='line'><span class="nv">USE</span><span class="o">=</span><span class="s2">&quot;fcitx ${USE}&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>sudo emerge -av mozc
+</span></code></pre></td></tr></table></div></figure>
 
-<span class="nv">$ </span><span class="nb">sudo </span>emerge <span class="nt">-av</span> mozc
-</code></pre></div></div>
 
 <p>で、インストールすれば使えるようになります。</p>
 
-<h2 id="おわり">おわり</h2>
+<h2>おわり</h2>
 
 <p><a href="http://anond.hatelabo.jp/20150210030728">こういうの</a>があったので、真面目にかこうかと思ったんですがどめんどうなので導入メモになりました。</p>
 
 <p>あと引越ししたので贈っていただいてもいいんですよ？
-http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</p>
+<a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
 </div>
 
 
@@ -142,7 +146,7 @@ http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</p>
 	<div class="tags">
 
 
-	techgentoolinuxime
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/ime/'>ime</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -171,8 +175,8 @@ http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</p>
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

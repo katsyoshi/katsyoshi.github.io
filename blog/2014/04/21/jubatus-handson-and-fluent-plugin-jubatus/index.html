@@ -7,22 +7,14 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	jubatus handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ
-	Jubatus Handson行ってきました
-
-行ってきました。
-
-fluent-plugin-jubatus 0.0.2をリリースしました
-
-先日大江戸Ruby会議04に行って...">
+	<meta name="description" content="Jubatus Handson行ってきました 行ってきました。 fluent-plugin-jubatus 0.0.2をリリースしました 先日大江戸Ruby会議04に行ってみたらやる気が湧いてきたので半年ほど寝かせておいたfluent-plugin-jubatusをアップデートしました。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -30,18 +22,18 @@ fluent-plugin-jubatus 0.0.2をリリースしました
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -50,7 +42,7 @@ fluent-plugin-jubatus 0.0.2をリリースしました
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -75,7 +67,7 @@ fluent-plugin-jubatus 0.0.2をリリースしました
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -84,33 +76,33 @@ fluent-plugin-jubatus 0.0.2をリリースしました
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">jubatus handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ</h2>
-	<div class="entry-content"><h2 id="jubatus-handson行ってきました"><a href="http://connpass.com/event/5641/">Jubatus Handson</a>行ってきました</h2>
+	<h2 class="title">Jubatus Handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ</h2>
+	<div class="entry-content"><h2><a href="http://connpass.com/event/5641/">Jubatus Handson</a>行ってきました</h2>
 
 <p>行ってきました。</p>
 
-<h2 id="fluent-plugin-jubatus-002をリリースしました">fluent-plugin-jubatus 0.0.2をリリースしました</h2>
+<h2>fluent-plugin-jubatus 0.0.2をリリースしました</h2>
 
 <p>先日<a href="http://regional.rubykaigi.org/oedo04">大江戸Ruby会議04</a>に行ってみたらやる気が湧いてきたので半年ほど寝かせておいた<a href="http://rubygems.org/gems/fluent-plugin-jubatus">fluent-plugin-jubatus</a>をアップデートしました。</p>
 
 <p>大きな変更点としては、異常検知（jubaanomaly）をサポートするようになってます。</p>
 
-<h3 id="プラグインの今後">プラグインの今後</h3>
+<h3>プラグインの今後</h3>
 
 <p>今回も入れなかったのですが、このプラグインでは未だ判定のみのサポートです。
 理由としては</p>
 
 <ul>
-  <li>計算量</li>
-  <li>メモリ</li>
+<li>計算量</li>
+<li>メモリ</li>
 </ul>
+
 
 <p>のふたつがあげられます。計算量に関しては以前手元のMacで異常検出を動作させていたときマシンの動作がもっさりになるほどの計算量があったためです。メモリに関しては今のところ不安には感じてはいないですが、データ量(数)が巨大になったときどこまで必要なのかってのがよくわからない。という理由で積極的に導入していないです。</p>
 
 <p>これらを解消する方法としては忘却(<a href="https://github.com/jubatus/jubatus/tree/feature/unlearning">unlearning</a>)が考えられるのですが、じゃぁどの必要のないデータを忘却させるのって問題があります。</p>
 
 <p>とはいえ、そろそろ導入したいので<a href="https://github.com/katsyoshi/fluent-plugin-jubatus">pull req</a>まってます。</p>
-
 </div>
 
 
@@ -124,7 +116,7 @@ fluent-plugin-jubatus 0.0.2をリリースしました
 	<div class="tags">
 
 
-	techjubatusfluentdfluent-plugin
+	<a class='category' href='/blog/categories/fluent-plugin/'>fluent-plugin</a>, <a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/jubatus/'>jubatus</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -153,8 +145,8 @@ fluent-plugin-jubatus 0.0.2をリリースしました
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

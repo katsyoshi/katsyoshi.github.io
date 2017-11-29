@@ -7,21 +7,15 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	raspiでdnsを運用してみはじめた
-	RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
-RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt install dnsmasq するだけでおわります。
-
-はまったところ
-
-い...">
+	<meta name="description" content="RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
+RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt install dnsmasq するだけでおわります。 はまったところ いつもどおりはまりました。今回は以下の二点 /etc/ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -29,18 +23,18 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt i
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -49,7 +43,7 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt i
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -74,7 +68,7 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt i
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -83,44 +77,52 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt i
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">raspiでdnsを運用してみはじめた</h2>
+	<h2 class="title">Raspiでdnsを運用してみはじめた</h2>
 	<div class="entry-content"><p>RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
-RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code class="highlighter-rouge">apt install dnsmasq</code> するだけでおわります。</p>
+RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code>apt install dnsmasq</code> するだけでおわります。</p>
 
-<h2 id="はまったところ">はまったところ</h2>
+<h2>はまったところ</h2>
 
 <p>いつもどおりはまりました。今回は以下の二点</p>
 
 <ul>
-  <li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
-  <li>/etc/hosts ファイルのパーミッションが <code class="highlighter-rouge">600</code> になっていたためエラー</li>
+<li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
+<li>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</li>
 </ul>
 
-<h3 id="etcdnsmasqd-に-hosts-ファイルを置くとエラー">/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
+
+<h3>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
+
 <p>ログを見ても以下のログしか出ておらず理由の調査に時間がかかった。hosts ファイルは設定ファイルではないため当然といえば当然なのですが…</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts
-</code></pre></div></div>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts</span></code></pre></td></tr></table></div></figure>
 
-<p>今、<code class="highlighter-rouge">/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new
-</code></pre></div></div>
+<p>今、<code>/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
 
-<h3 id="etchosts-ファイルのパーミッションが-600-になっていたためエラー">/etc/hosts ファイルのパーミッションが <code class="highlighter-rouge">600</code> になっていたためエラー</h3>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</h3>
+
 <p>こちらは上記問題を解決したあと、反映されないのでログを見たときにわかりました。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied
-</code></pre></div></div>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied</span></code></pre></td></tr></table></div></figure>
 
-<p>これの原因は <code class="highlighter-rouge">itamae</code> でファイルを送信するときに <code class="highlighter-rouge">mode '644'</code> を指定する必要があったのだが、指定せずに
+
+<p>これの原因は <code>itamae</code> でファイルを送信するときに <code>mode '644'</code> を指定する必要があったのだが、指定せずに
 送信してしまったため発生。</p>
 
-<h2 id="おわり">おわり</h2>
+<h2>おわり</h2>
+
 <p>おわり</p>
 
-<h3 id="関連リポジトリ">関連リポジトリ</h3>
-<p>https://github.com/katsyoshi/itamae-recipes</p>
+<h3>関連リポジトリ</h3>
+
+<p><a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></p>
 </div>
 
 
@@ -134,7 +136,7 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code
 	<div class="tags">
 
 
-	techdnsmasqdiary
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/dnsmasq/'>dnsmasq</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -163,8 +165,8 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

@@ -7,23 +7,20 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	Dockerではまってます
-	タイトルのとおりです。
-Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。
-
-インストール
-dockerのGentooインストールページを参考にoverlayを導入します。
-
+	<meta name="description" content="タイトルのとおりです。
+Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。 インストール dockerのGentooインストールページを参考にoverlayを導入します。 1
+2
+3
 $ sudo layman -a docker
-$ sudo e...">
+$ sudo eix-sync
+$ sudo &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -31,18 +28,18 @@ $ sudo e...">
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -51,7 +48,7 @@ $ sudo e...">
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -76,7 +73,7 @@ $ sudo e...">
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -89,38 +86,57 @@ $ sudo e...">
 	<div class="entry-content"><p>タイトルのとおりです。
 Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
 
-<h2 id="インストール">インストール</h2>
+<h2>インストール</h2>
+
 <p>dockerの<a href="https://docs.docker.com/installation/gentoolinux/">Gentooインストールページ</a>を参考に<a href="https://github.com/tianon/docker-overlay">overlay</a>を導入します。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>layman <span class="nt">-a</span> docker
-<span class="nv">$ </span><span class="nb">sudo </span>eix-sync
-<span class="nv">$ </span><span class="nb">sudo </span>emerge <span class="nt">-av</span> app-emulators/docker
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo layman -a docker
+</span><span class='line'><span class="nv">$ </span>sudo eix-sync
+</span><span class='line'><span class="nv">$ </span>sudo emerge -av app-emulators/docker
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>ここでカーネルオプションの警告が出るのでひとつひとつ潰しておきます。</p>
 
-<h2 id="起動">起動</h2>
+<h2>起動</h2>
+
 <p>インストールおわったら、起動させますが、以下のようなログが出てるので起動できません。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="m">2014</span><span class="p">/</span><span class="m">10</span><span class="p">/</span><span class="m">01</span> <span class="m">18</span><span class="p">:</span><span class="m">39</span><span class="p">:</span><span class="m">17</span> <span class="n">docker</span> <span class="n">daemon</span><span class="p">:</span> <span class="m">1.1.2</span> <span class="n">d84a070</span><span class="p">;</span> <span class="n">execdriver</span><span class="p">:</span> <span class="n">native</span><span class="p">;</span> <span class="n">graphdriver</span><span class="p">:</span>
-<span class="p">[</span><span class="m">6</span><span class="n">c541422</span><span class="p">]</span> <span class="p">+</span><span class="n">job</span> <span class="n">serveapi</span><span class="p">(</span><span class="n">unix</span><span class="p">:///</span><span class="n">var</span><span class="p">/</span><span class="nf">run</span><span class="p">/</span><span class="n">docker</span><span class="p">.</span><span class="n">sock</span><span class="p">)</span>
-<span class="p">[</span><span class="m">6</span><span class="n">c541422</span><span class="p">]</span> <span class="p">+</span><span class="n">job</span> <span class="n">initserver</span><span class="p">()</span>
-<span class="p">[</span><span class="m">6</span><span class="n">c541422</span><span class="p">.</span><span class="n">initserver</span><span class="p">()]</span> <span class="n">Creating</span> <span class="n">server</span>
-<span class="p">[</span><span class="m">6</span><span class="n">c541422</span><span class="p">]</span> <span class="p">+</span><span class="n">job</span> <span class="n">init_networkdriver</span><span class="p">()</span>
-<span class="p">[</span><span class="m">6</span><span class="n">c541422</span><span class="p">.</span><span class="n">init_networkdriver</span><span class="p">()]</span> <span class="n">creating</span> <span class="n">new</span> <span class="n">bridge</span> <span class="n">for</span> <span class="n">docker0</span>
-<span class="k">package</span> <span class="k">not</span> <span class="n">installed</span>
-<span class="p">[</span><span class="m">6</span><span class="n">c541422</span><span class="p">]</span> <span class="p">-</span><span class="n">job</span> <span class="n">init_networkdriver</span><span class="p">()</span> <span class="p">=</span> <span class="n">ERR</span> <span class="p">(</span><span class="m">1</span><span class="p">)</span>
-<span class="k">package</span> <span class="k">not</span> <span class="n">installed</span>
-<span class="p">[</span><span class="m">6</span><span class="n">c541422</span><span class="p">]</span> <span class="p">-</span><span class="n">job</span> <span class="n">initserver</span><span class="p">()</span> <span class="p">=</span> <span class="n">ERR</span> <span class="p">(</span><span class="m">1</span><span class="p">)</span>
-<span class="m">2014</span><span class="p">/</span><span class="m">10</span><span class="p">/</span><span class="m">01</span> <span class="m">18</span><span class="p">:</span><span class="m">39</span><span class="p">:</span><span class="m">17</span> <span class="k">package</span> <span class="k">not</span> <span class="n">installed</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>2014/10/01 18:39:17 docker daemon: 1.1.2 d84a070; execdriver: native; graphdriver:
+</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> +job serveapi<span class="o">(</span>unix:///var/run/docker.sock<span class="o">)</span>
+</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> +job initserver<span class="o">()</span>
+</span><span class='line'><span class="o">[</span>6c541422.initserver<span class="o">()]</span> Creating server
+</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> +job init_networkdriver<span class="o">()</span>
+</span><span class='line'><span class="o">[</span>6c541422.init_networkdriver<span class="o">()]</span> creating new bridge <span class="k">for </span>docker0
+</span><span class='line'>package not installed
+</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> -job init_networkdriver<span class="o">()</span> <span class="o">=</span> ERR <span class="o">(</span>1<span class="o">)</span>
+</span><span class='line'>package not installed
+</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> -job initserver<span class="o">()</span> <span class="o">=</span> ERR <span class="o">(</span>1<span class="o">)</span>
+</span><span class='line'>2014/10/01 18:39:17 package not installed
+</span></code></pre></td></tr></table></div></figure>
 
-<p>このときは <code class="highlighter-rouge">bridge-utils</code> をインストールすればいいのかなと思ってたら、インストールしても解決できないです。</p>
 
-<h2 id="おわり">おわり</h2>
+<p>このときは <code>bridge-utils</code> をインストールすればいいのかなと思ってたら、インストールしても解決できないです。</p>
+
+<h2>おわり</h2>
+
 <p>どなたか助けてくだされ〜</p>
 
-<h2 id="追記">追記</h2>
+<h2>追記</h2>
 
 <p>再構築したカーネルをインストールしてなかったというオチでした。</p>
 
@@ -138,7 +154,7 @@ Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
 	<div class="tags">
 
 
-	techlinuxgentoodocker
+	<a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -167,8 +183,8 @@ Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

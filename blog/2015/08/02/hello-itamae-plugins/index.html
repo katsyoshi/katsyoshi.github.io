@@ -7,19 +7,14 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	こんにちは、いたまえさん
-	rbenv を itamae の プラグイン を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、httpsを指定できるようしてもらいました。
-
-plenv と pyenv
-また、rbenv...">
+	<meta name="description" content="rbenv を itamae の プラグイン を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、httpsを指定できるようしてもらいました。 plenv と pyenv また、rbenv のプラグインを参考に plenv と &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -27,18 +22,18 @@ plenv と pyenv
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -47,7 +42,7 @@ plenv と pyenv
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -72,7 +67,7 @@ plenv と pyenv
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -84,38 +79,56 @@ plenv と pyenv
 	<h2 class="title">こんにちは、いたまえさん</h2>
 	<div class="entry-content"><p><a href="https://github.com/sstephenson/rbenv">rbenv</a> を <a href="https://github.com/itamae-kitchen/itamae">itamae</a> の <a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv">プラグイン</a> を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、<a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv/pull/9">httpsを指定できる</a>ようしてもらいました。</p>
 
-<h2 id="plenv-と-pyenv">plenv と pyenv</h2>
+<h2>plenv と pyenv</h2>
+
 <p>また、rbenv のプラグインを参考に <a href="https://github.com/katsyoshi/itamae-plugin-recipe-plenv">plenv</a> と <a href="https://github.com/katsyoshi/itamae-plugin-recipe-pyenv">pyenv</a> を作ってみました。</p>
 
-<p>これらふたつのプラグインはまだgemになっていないので、<code class="highlighter-rouge">Gemfile</code> に以下のように追加し、</p>
+<p>これらふたつのプラグインはまだgemになっていないので、<code>Gemfile</code> に以下のように追加し、</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s1">'itamae'</span>
-<span class="n">gem</span> <span class="s1">'itamae-plugin-recipe-plenv'</span><span class="p">,</span> <span class="ss">github: </span><span class="s1">'katsyoshi/itamae-plugin-recipe-plenv'</span>
-<span class="n">gem</span> <span class="s1">'itamae-plugin-recipe-pyenv'</span><span class="p">,</span> <span class="ss">github: </span><span class="s1">'katsyoshi/itamae-plugin-recipe-pyenv'</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-plenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-plenv&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-pyenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-pyenv&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>recipeとしては以下のようにしてください。</p>
 
-<p>```ruby recipe.rb
-include_recipe ‘pyenv::system’
-include_recipe ‘plenv::system’</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-設定例としては、rbenvのプラグインと同じように設定します。
+<figure class='code'><figcaption><span>recipe.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;pyenv::system&#39;</span>
+</span><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;plenv::system&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-```json
-{
-  "plenv" : {
-    "versions" : ["5.22.0", "5.20.2"],
-    "global"   : "5.22.0"
-  },
-  "pyenv" : {
-    "versions" : ["3.4.3", "3.5.0b2"],
-    "global"   : "3.4.3"
-  }
-}
-</code></pre></div></div>
 
-<h2 id="おわり">おわり</h2>
+<p>設定例としては、rbenvのプラグインと同じように設定します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;plenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;5.22.0&quot;</span><span class="p">,</span> <span class="s2">&quot;5.20.2&quot;</span><span class="p">],</span>
+</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;5.22.0&quot;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nt">&quot;pyenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3.4.3&quot;</span><span class="p">,</span> <span class="s2">&quot;3.5.0b2&quot;</span><span class="p">],</span>
+</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;3.4.3&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
 
 <p>おわり</p>
 </div>
@@ -131,7 +144,7 @@ include_recipe ‘plenv::system’</p>
 	<div class="tags">
 
 
-	techitamaeproxyrbenvplenvpyenv
+	<a class='category' href='/blog/categories/itamae/'>itamae</a>, <a class='category' href='/blog/categories/plenv/'>plenv</a>, <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/pyenv/'>pyenv</a>, <a class='category' href='/blog/categories/rbenv/'>rbenv</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
@@ -160,8 +173,8 @@ include_recipe ‘plenv::system’</p>
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();

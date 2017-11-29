@@ -1,0 +1,759 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>katsyoshiのめもみたいなもの</title>
+	<meta name="author" content="katsyoshi">
+
+	
+	<meta name="description" content="rails-assets.org から bootstrap-sass-official をインストールし、動かしたら、 test環境でテストが落ちてたのでメモ。 オチ CSSのファイル名が application.css.scss じゃなかった。 設定 まず、Gemfile &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		<a class="coderwall" href="https://coderwall.com/katsyoshi" title="Coderwall">Coderwall</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/04/09/file-name-needs-scss-extention/">
+		
+			ファイル名間違えてテスト通らなかった話</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://rails-assets.org">rails-assets.org</a> から <code>bootstrap-sass-official</code> をインストールし、動かしたら、 test環境でテストが落ちてたのでメモ。</p>
+
+<h2>オチ</h2>
+
+<p>CSSの<a href="https://twitter.com/izumin5210/status/586054782994874368">ファイル名</a>が <code>application.css.scss</code> じゃなかった。</p>
+
+<h2>設定</h2>
+
+<p>まず、<code>Gemfile</code> に以下のように追記をします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s1">&#39;https://rails-assets.org&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;rails-asstes-bootstrap-sass-official&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>あとはいつも通りにインストールします。
+次に <code>app/assets/javascripts/application.js</code> や <code>app/assets/stylesheets/application.css</code> に必要な読み込みを<a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">設定</a>します。</p>
+
+<h2>問題</h2>
+
+<p>以上の設定が終ったあと、 <code>cucumber</code> でテストを実行すると、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">File</span> <span class="n">to</span> <span class="n">import</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">or</span> <span class="ss">unreadable</span><span class="p">:</span> <span class="n">bootstrap</span><span class="o">-</span><span class="n">sass</span><span class="o">-</span><span class="n">official</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">sprockets</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>などといわれますのでオチを参考にファイル名変更して終了です。</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h3>参考</h3>
+
+<ol>
+<li><a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5</a></li>
+<li><a href="https://twitter.com/izumin5210/status/586054782994874368">https://twitter.com/izumin5210/status/586054782994874368</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/twitter-bootstrap/'>twitter-bootstrap</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/04/07/many-ssh-connection/">
+		
+			Known_hostsに載っていないホストに接続確認しないようにする</a>
+	</h2>
+	<div class="entry-content">
+		<p>昨日の<a href="/blog/2015/04/06/careless-miss/">続き</a>で、 <code>lxc</code> で大量のサーバを立てて、
+SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。</p>
+
+<h2>解決方法</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh -oStrictHostKeyChecking=no anywhere.example.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で接続確認の <code>yes or no</code> が出てこなくなります。</p>
+
+<h2>おわり</h2>
+
+<p>おわり。</p>
+
+<p>そのうち <code>lxc</code> で100個ほどのインスタンスのベンチマークとりたい…</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ssh/'>ssh</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/04/06/careless-miss/">
+		
+			不注意なこと</a>
+	</h2>
+	<div class="entry-content">
+		<p>Ubuntuで <code>lxc</code> を利用して、サーバを立ててたときに嵌ったこと</p>
+
+<h2>はじまり</h2>
+
+<p>Proxyを利用してインターネットに接続している。
+このネットワークとして <code>ping</code> はLAN内なら届くが、外(google.com)とかには出ない。
+設定がうまくいってるかどうかの確認する方法として、 <code>apt-get update</code> を利用して確認している。</p>
+
+<p>最初は、 <code>lxc</code> の設定がうまくいっていないと思いなんども見直してたりした。
+それでもWANの方に出ることができなかった。</p>
+
+<p>サーバのネットワーク設定がよくないと思ってなんども見直したけど、問題なさそう。
+最後に <code>sudo -i</code> で root にログインしたあと、 <code>apt-get update</code> したら、
+ダウンロードはじまり、次へ進むことができた。</p>
+
+<h2>原因</h2>
+
+<p>原因としては <code>sudo command</code> で実行しても <code>Defaults reset_env</code> で環境変数がリセットされてたようだった。
+ので、<code>Defaults keep_env+="PATH"</code> とか追加して解決した。</p>
+
+<h2>おわり</h2>
+
+<p>簡単なミスで3時間ほど時間を費したのでなんとかしたい。</p>
+
+<h3>参考URL</h3>
+
+<ol>
+<li><a href="http://www.maepachi.com/blog/entry?id=128">http://www.maepachi.com/blog/entry?id=128</a></li>
+<li><a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/sudo/'>sudo</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/03/18/party-of-asakusa-dot-rb-300th/">
+		
+			Asakusa.rbの300回記念パーティに行ってきた</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://asakusarb.doorkeeper.jp/events/22018">Asakusa.rbの300回記念パーティ</a>に行ってきた。
+ずーっと、devopsについてちょっと気になることがあったので<a href="https://twitter.com/hsbt">@hsbtさん</a>に聞いてみたりしてた。</p>
+
+<p>あとは終ったあとかなり早い花見してた。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/party/'>party</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/03/17/heroku-deploy-anther-branch/">
+		
+			Herokuでmaster以外のブランチを利用してデプロイする方法</a>
+	</h2>
+	<div class="entry-content">
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git push heroku your-branch:master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>参考</h3>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing">http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing</a></li>
+<li><a href="http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7">http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/02/24/portage2git/">
+		
+			Emerge &#8211;syncをgitにかえたはなし</a>
+	</h2>
+	<div class="entry-content">
+		<p>portageはデフォルトだと <code>rsync</code> を利用しての更新をしているので、
+<code>git</code> を用いた方法に変更します。</p>
+
+<h2>準備</h2>
+
+<p><code>portage</code> を <code>2.2.17</code> に変更し、USEフラグとして <code>git</code> をつかいます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># USE=&quot;git ${USE}&quot; emerge -av \=portage-2.2.17</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>つぎに、Gitのリポジトリを見に行くように<a href="http://qiita.com/wjn/items/a3b71059211711501e35">設定</a>します。</p>
+
+<p>と設定してあとはいつもどおり <code>sudo eix-sync</code> させるだけで大丈夫です。</p>
+
+<h2>おわり</h2>
+
+<p>基本的にはリンク先だけ見てればいけると思います。</p>
+
+<p>引越ししてWiMAXの電波の入りがわるくなったので鉄製ボウル買おうかとおもってたら2時間ほど<a href="https://ingress.com">徘徊</a>してました。</p>
+
+<h3>参考サイト</h3>
+
+<ol>
+<li><a href="http://qiita.com/wjn/items/a3b71059211711501e35">http://qiita.com/wjn/items/a3b71059211711501e35</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Project:Portage/Sync">https://wiki.gentoo.org/wiki/Project:Portage/Sync</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/02/22/mv-sakura-github-dot-io/">
+		
+			Blogの引越し</a>
+	</h2>
+	<div class="entry-content">
+		<p>自分でblogを管理するのがちょっとだけ面倒になってきたので、
+このblogを<a href="katsyoshi.github.io">github.io</a>に移行した。</p>
+
+<h2>手順</h2>
+
+<p>github.com に <code>katsyoshi.github.io</code> というリポジトリを作成し、以下のコマンドを実行</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rake setup_github_pages
+</span><span class='line'><span class="nb">set </span>your github repogitory
+</span><span class='line'><span class="nv">$ </span>rake generate
+</span><span class='line'><span class="nv">$ </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そのあと、DNSでCNAMEに <code>katsyoshi.github.io</code> を設定し、リポジトリ<del>のトップ</del>に <code>blog.katsyoshi.org</code> と書いた <code>source/CNAME</code> ファイルを追加しおわりです。</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h2>追記</h2>
+
+<p>実は記事を追加したあと <code>rake deploy</code> ができないという問題がありましたが、そのときは、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rake generate
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>_deploy
+</span><span class='line'><span class="nv">$ </span>git pull origin/master
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ../
+</span><span class='line'><span class="nv">$ </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で更新されます。</p>
+
+<h3>参考サイト</h3>
+
+<ol>
+<li><a href="http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/">http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/</a></li>
+<li><a href="http://blog.textfile.org/20141014/github/">http://blog.textfile.org/20141014/github/</a></li>
+<li><a href="http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress">http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress</a></li>
+<li><a href="http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/">http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/02/16/setting-xdg-open/">
+		
+			XDGの設定</a>
+	</h2>
+	<div class="entry-content">
+		<p>急に <code>xdg-open</code> でブラウザが開かなくなったのでメモ</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>xdg-mime default google-chrome.desktop x-scheme-handler/http
+</span><span class='line'><span class="nv">$ </span>xdg-mime default google-chrome.desktop x-scheme-handler/https
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で設定できます。</p>
+
+<h3>参考</h3>
+
+<p>&lsquo;xdg-open&rsquo;, archlinux wiki, <a href="https://wiki.archlinux.org/index.php/xdg-open,">https://wiki.archlinux.org/index.php/xdg-open,</a> 2015/02/16</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/xorg/'>xorg</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/02/12/remove-ibus/">
+		
+			とりあえずibusやめてみた</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
+
+<h2>前提条件</h2>
+
+<p>ここでは<a href="http://www.gentoo.org">Gentoo/Linux</a>での導入方法について述べています。
+日本語変換エンジンとしてMozcについて述べています。</p>
+
+<h2>導入</h2>
+
+<p>とりあえずfcitxをインストール、設定します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>emerge -av fcitx
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ $EDITOR</span> .xinitrc
+</span><span class='line'>
+</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
+</span><span class='line'>fcitx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでインストールはこれでおわりです。</p>
+
+<h2>fcitxでmozc</h2>
+
+<p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ $EDITOR</span> /etc/portage/make.conf
+</span><span class='line'><span class="nv">USE</span><span class="o">=</span><span class="s2">&quot;fcitx ${USE}&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>sudo emerge -av mozc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、インストールすれば使えるようになります。</p>
+
+<h2>おわり</h2>
+
+<p><a href="http://anond.hatelabo.jp/20150210030728">こういうの</a>があったので、真面目にかこうかと思ったんですがどめんどうなので導入メモになりました。</p>
+
+<p>あと引越ししたので贈っていただいてもいいんですよ？
+<a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/ime/'>ime</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/01/31/emacs-fonts/">
+		
+			Rictyやめるってよ</a>
+	</h2>
+	<div class="entry-content">
+		<p>普段、emacs上でフォントを <code>Ricty</code> にして使ってたけど、微妙にずれるのを解消できなかったはなし</p>
+
+<h2>症状と設定</h2>
+
+<p>Rictyのときの症状と設定をのせておきます。</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/Ricty.png" alt="Ricty" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;Ricty&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="nv">nil</span> <span class="ss">&#39;font</span><span class="p">)</span> <span class="ss">&#39;japanese-jisx0208</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="s">&quot;iso10646-1&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nf">setq</span> <span class="nv">face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="mf">1.2</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で解消できそうにないので DejaVu を用いて表示するように変更しました。</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/DejaVu.png" alt="DejaVu" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;DejaVu&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じになりました。</p>
+
+<h2>おわり</h2>
+
+<p>よくわからないので諦めました。ので参考に</p>
+
+<p>最後に引っ越ししました。</p>
+
+<p><a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
+
+<h2>追記</h2>
+
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/katsyoshi">@katsyoshi</a> (setq face-font-rescale-alist &#39;((&quot;Ricty&quot; . 1.0))) で常用していてずれないのですが、これだとどうなりますか?</p>&mdash; つまみ (@polamjag) <a href="https://twitter.com/polamjag/status/561875516118949889">February 1, 2015</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>とアドバイスがありましたので、やってみました!!!!!!</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /></p>
+
+<p>ほんとにちょっとずれて気になる…</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+<nav id="pagenavi">
+    
+        
+            <a href="/blog/page/3/" class="prev">Prev</a>
+        
+    
+    
+        <a href="/blog/page/5/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2017
+
+    katsyoshi
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-49549546-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

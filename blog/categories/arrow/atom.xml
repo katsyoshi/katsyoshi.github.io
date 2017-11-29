@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: arrow | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/arrow/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2017-11-30T07:59:43+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[use red-arrow.gem]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/05/31/use-red-arrow-dot-gem/"/>
+    <updated>2017-05-31T23:27:57+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/05/31/use-red-arrow-dot-gem</id>
+    <content type="html"><![CDATA[<p><a href="https://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/">こないだインストール</a> した <a href="https://arrow.apache.org/">Apache Arrow</a> がとりあえず <a href="https://github.com/red-data-tools/red-arrow">Ruby</a> でうごくようになったのでメモ</p>
+
+<h2>メモ</h2>
+
+<p>gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。</p>
+
+<p><code>ruby
+require "arrow"
+/home/katsu/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/gobject-introspection-3.1.4/lib/gobject-introspection/loader.rb:37:in `require':GObjectIntrospection::RepositoryError::TypelibNotFound: Typelib file for namespace 'Arrow' (any version) not found
+</code></p>
+
+<p>これは <code>GObjectIntrospection</code> の<a href="https://github.com/red-data-tools/red-arrow/blob/master/lib/arrow.rb#L25">ロードに失敗</a>しているようです。
+なので<a href="http://www.clear-code.com/blog/2013/12/16.html">ここ</a>や<a href="http://qiita.com/groonga/items/71b145b37d77bd160bf2">ここ</a>を参考に環境変数 <code>GI_TYPELIB_PATH</code> を設定すると読み込まれるようになり実行できます。</p>
+
+<p><code>console
+$ export GI_TYPELIB_PATH=/path/to/girepository-1.0
+$ irb -rarrow
+</code></p>
+
+<p>とやるとエラーがなくなります。</p>
+
+<p>最後に<a href="https://github.com/red-data-tools/red-arrow/tree/master/example">サンプル</a>を実行して確認しました!</p>
+
+<p>```console
+% ruby write-file.rb</p>
+
+<h1>% ruby read-file.rb</h1>
+
+<p>record-batch[0]:
+  uint8: [1, 2, 4, 8]
+  uint16: [1, 2, 4, 8]
+  uint32: [1, 2, 4, 8]
+  uint64: [1, 2, 4, 8]
+  int8: [1, -2, 4, -8]
+  int16: [1, -2, 4, -8]
+  int32: [1, -2, 4, -8]
+  int64: [1, -2, 4, -8]
+  float: [1.100000023841858, -2.200000047683716, 4.400000095367432, -8.800000190734863]</p>
+
+<h1>  double: [1.1, -2.2, 4.4, -8.8]</h1>
+
+<p>record-batch[1]:
+  uint8: [2, 4, 8]
+  uint16: [2, 4, 8]
+  uint32: [2, 4, 8]
+  uint64: [2, 4, 8]
+  int8: [-2, 4, -8]
+  int16: [-2, 4, -8]
+  int32: [-2, 4, -8]
+  int64: [-2, 4, -8]
+  float: [-2.200000047683716, 4.400000095367432, -8.800000190734863]
+  double: [-2.2, 4.4, -8.8]
+```</p>
+
+<h2>おわり</h2>
+
+<p>最初ろーどえらーでこまってた</p>
+]]></content>
+  </entry>
+  
+</feed>

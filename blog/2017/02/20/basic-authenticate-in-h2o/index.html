@@ -7,22 +7,19 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="
-	basic authenticate in h2o
-	H2Oでベーシック認証したい場合は以下のようにします1
-
-paths:
-  "/":
-    mruby.handler: |
-      require "htpasswd.rb"
-      Htpasswd.new("/etc/h...">
+	<meta name="description" content="H2Oでベーシック認証したい場合は以下のようにします1 1
+2
+3
+4
+5
+paths: &quot;/&quot;: mruby.handler: | require &quot;htpasswd.rb&quot; Htpasswd.new(&quot;/etc/h2o/.htpasswd& &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
 	<link rel="canonical" href="">
-	<link href="//favicon.png" rel="shortcut icon">
-	<link href="//stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
@@ -30,18 +27,18 @@ paths:
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="//">katsyoshiのめもみたいなもの</a></h1>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
 <nav id="main-nav"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
-	<li><a href="//">Blog</a></li>
-	<li><a href="//blog/archives">Archives</a></li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
 </ul>
 </div>
 	</div>
@@ -50,7 +47,7 @@ paths:
 		<div class="container">
 			<form action="https://www.google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 			</form>
 		</div>
 	</div>
@@ -75,7 +72,7 @@ paths:
 	</div>
 	<form class="search" action="https://www.google.com/search" method="get">
 		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:http://blog.katsyoshi.org">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
 	</form>
 </nav>
 
@@ -84,40 +81,55 @@ paths:
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">basic authenticate in h2o</h2>
-	<div class="entry-content"><p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:h2odoc"><a href="#fn:h2odoc" class="footnote">1</a></sup></p>
+	<h2 class="title">Basic Authenticate in H2o</h2>
+	<div class="entry-content"><p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">paths</span><span class="pi">:</span>
-  <span class="s2">"</span><span class="s">/"</span><span class="pi">:</span>
-    <span class="s">mruby.handler</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="no">require "htpasswd.rb"</span>
-      <span class="no">Htpasswd.new("/etc/h2o/.htpasswd", "realm-name")</span>
-</code></pre></div></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="s">&quot;/&quot;</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">mruby.handler</span><span class="p-Indicator">:</span> <span class="p-Indicator">|</span>
+</span><span class='line'>      <span class="no">require &quot;htpasswd.rb&quot;</span>
+</span><span class='line'>      <span class="no">Htpasswd.new(&quot;/etc/h2o/.htpasswd&quot;, &quot;realm-name&quot;)</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>また、 <code class="highlighter-rouge">.htpasswd</code> で plain フォーマットはサポートされていません。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">failed to validate password using file:/etc/h2o/.htpasswd:crypt-style password hash is not supported
-</span></code></pre></div></div>
+<p>また、 <code>.htpasswd</code> で plain フォーマットはサポートされていません。</p>
 
-<p><code class="highlighter-rouge">.htpasswd</code> を手動で作成したい場合は以下の方法でできます<sup id="fnref:apachdoc"><a href="#fn:apachdoc" class="footnote">2</a></sup></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">failed to validate password using file:/etc/h2o/.htpasswd:crypt-style password hash is not supported</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"digest/sha1"</span>
-<span class="nb">require</span> <span class="s2">"base64"</span>
-<span class="nb">open</span><span class="p">(</span><span class="s2">"/etc/h2o/.htpasswd"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">w</span><span class="o">|</span>
-  <span class="n">w</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s2">"user:{SHA}</span><span class="si">#{</span><span class="no">Base64</span><span class="p">.</span><span class="nf">encode64</span><span class="p">(</span><span class="no">Digest</span><span class="o">::</span><span class="no">SHA1</span><span class="p">.</span><span class="nf">digest</span><span class="p">(</span><span class="s2">"password"</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div></div>
+
+<p><code>.htpasswd</code> を手動で作成したい場合は以下の方法でできます<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;digest/sha1&quot;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;base64&quot;</span>
+</span><span class='line'><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/etc/h2o/.htpasswd&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">w</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">w</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;user:{SHA}</span><span class="si">#{</span><span class="no">Base64</span><span class="o">.</span><span class="n">encode64</span><span class="p">(</span><span class="ss">Digest</span><span class="p">:</span><span class="ss">:SHA1</span><span class="o">.</span><span class="n">digest</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 
 <div class="footnotes">
-  <ol>
-    <li id="fn:h2odoc">
-      <p>Configure &gt; Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧 <a href="#fnref:h2odoc" class="reversefootnote">&#8617;</a></p>
-    </li>
-    <li id="fn:apachdoc">
-      <p>Password Formats, The Apache Software Foundation., https://httpd.apache.org/docs/2.4/misc/password_encryptions.html, 2017/02/20 閲覧 <a href="#fnref:apachdoc" class="reversefootnote">&#8617;</a></p>
-    </li>
-  </ol>
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Configure > Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Password Formats, The Apache Software Foundation., https://httpd.apache.org/docs/2.4/misc/password_encryptions.html, 2017/02/20 閲覧<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
 </div>
+
 </div>
 
 
@@ -131,7 +143,7 @@ paths:
 	<div class="tags">
 
 
-	diaryh2obasic-authenticate
+	<a class='category' href='/blog/categories/basic-authenticate/'>basic-authenticate</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/h2o/'>h2o</a>
 
 
 </div>
@@ -160,8 +172,8 @@ paths:
     katsyoshi
 
 </footer>
-	<script src="//javascripts/slash.js"></script>
-<script src="//javascripts/jquery.fancybox.pack.js"></script>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
 	$('.fancybox').fancybox();
