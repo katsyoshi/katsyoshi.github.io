@@ -7,9 +7,7 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="X240の準備は終ったので、インストールします。基本的にはこの流れです。 USBブート 作成したUSBメモリをX240に差して起動します。
-起動したら、まずパーティションの設定を行います。 1
-$ gpart /dev/sda で不要なパーティションを削除し、必要なパーティションを作成します。 &hellip;">
+	<meta name="description" content="これまでの流れで準備が整ったので、Installを始めます。 インストール これはGentoo Wikiを見ながらで大丈夫です。 嵌ったところ 音が鳴らないという問題が発生しました。理由は簡単でしたのですぐに設定しました。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +76,94 @@ $ gpart /dev/sda で不要なパーティションを削除し、必要なパー
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">
+		
+			Gentoo Install Battle Part III</a>
+	</h2>
+	<div class="entry-content">
+		<p>これ<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">まで</a>の<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">流れ</a>で準備が整ったので、Installを始めます。</p>
+
+<h2>インストール</h2>
+
+<p>これは<a href="http://wiki.gentoo.org/">Gentoo Wiki</a>を見ながらで大丈夫です。</p>
+
+<h3>嵌ったところ</h3>
+
+<p>音が鳴らないという問題が発生しました。<a href="http://pocke.hatenablog.com/entry/2014/02/02/100636">理由</a>は簡単でしたのですぐに設定しました。</p>
+
+<p>つぎにネットワークの設定をnetmountからNetworkManagerに変更しました。
+設定は<a href="http://wiki.gentoo.org/wiki/NetworkManager">ここ</a>で行なえばよいです。</p>
+
+<p>最後にibus-mozcをインストールして終りです。</p>
+
+<h2>mikutter</h2>
+
+<p>GentooInstallBattleはmikutterをインストールしてtweetすることなのでmikutterをインストールします。
+ここではrbenvを利用してmikutterのインストールします。
+まずはrbenvとruby-buildをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+</span><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>つぎにrbenvの設定を行います。以下の設定を<code>~/.bashrc</code>あたりに追記してください</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/.rbenv/bin:<span class="nv">$PATH</span>
+</span><span class='line'><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rubyのインストールは<code>rbenv install 2.1.2</code>でインストールします。
+最後にmikutterをダウンロードし、環境を構築します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/mikutter/mikutter.git ~/mikutter
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/mikutter
+</span><span class='line'><span class="nv">$ </span>bundle install
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>ruby mikutter.rb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でインストール終了!!
+これで快適なmikutterライフがておくれますね。</p>
+
+<p><img src="/images/photo/mikutter.png" alt="mikutter" /></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -676,67 +762,6 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
 
 
 	<a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/05/12/jubatus-runs-on-docker/">
-		
-			JubatusをDocker上で動かしてみた</a>
-	</h2>
-	<div class="entry-content">
-		<p>最近話題の<a href="https://www.docker.io/">Docker</a>使ってJubatusを動かしてみたのでメモ的なものを</p>
-
-<h2>環境</h2>
-
-<p>環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作</p>
-
-<ul>
-<li>Vagrant: 1.5.4</li>
-<li>docker: 0.11.1</li>
-</ul>
-
-
-<h2>Dockerfile</h2>
-
-<p><a href="https://github.com/katsyoshi/docker-jubatus">リポジトリ</a>を作成しておきましたのでcloneして実行します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/katsyoshi/docker-jubatus
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>docker-jubatus
-</span><span class='line'><span class="nv">$ </span>docker build .
-</span><span class='line'><span class="nv">$ </span>docker run -p 9199:9199 最後に出てきたハッシュ値
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で動きはじめます。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/jubatus/'>jubatus</a>
 
 
 </div>

@@ -7,10 +7,15 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="ってのは嘘ではないですが、嘘に近いです。
-実はおとといの土曜日に katsyoshi.org をのぞいたら、 nginx の初期ページが表示されたので
-とくにコンテンツはないですが、いそいでサイトの復旧をしました。
-が、もともとあったファイル置場を失念したため似た感じで再構築してました。 &hellip;">
+	<meta name="description" content="表題のとおりmikutterをgemでインストールできるようにしてみました。 どうやって？ rubygems からはまだインストールはできません。
+ので、以下の様にしてgem packageを作成します。 1
+2
+3
+4
+5
+6
+7
+$ git clone github.com/ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -79,6 +84,67 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/08/31/hello-mikutter/">
+		
+			Hello Mikutter</a>
+	</h2>
+	<div class="entry-content">
+		<p>表題のとおりmikutterをgemでインストールできるようにしてみました。</p>
+
+<h2>どうやって？</h2>
+
+<p><a href="https://rubygems.org">rubygems</a> からはまだインストールはできません。
+ので、以下の様にしてgem packageを作成します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone github.com/katsyoshi/mikutter.git
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>mikutter
+</span><span class='line'><span class="gp">$</span> git checkout reokure-ru
+</span><span class='line'><span class="gp">$</span> bundle install
+</span><span class='line'><span class="gp">$</span> bundle <span class="nb">exec </span>rake build
+</span><span class='line'><span class="gp">$</span> gem install pkg/mikutter-3.5.0.pre.dev.gem
+</span><span class='line'><span class="gp">$</span> mikutter
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでmikutterコマンドで起動できるようになっています
+これすらめんどうな人は<a href="https://katsyoshi.org/mikutter-3.5.0.pre.dev.gem">ここ</a>にあります。
+ダウンロードして <code>gem install mikutter-3.5.0.pre.dev.gem</code> でインストールできます。
+プラグインで起動できないとかあるなら必要なgemをインストールしてください。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gems/'>gems</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -811,43 +877,6 @@ Linuxで使ってみた。</p>
 
 
 	<a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/04/15/looks-good-new-machine/">
-		
-			おにゅーな</a>
-	</h2>
-	<div class="entry-content">
-		<p>以前買った<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">X240</a>があまりにも使い辛いので
-X250を買った。それ以外にもメガネも一つ買ってみた。</p>
-
-<p>あと欲しいのは、ルンバかなあ</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>
 
 
 </div>
