@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-12-01T01:50:42+09:00</updated>
+  <updated>2017-12-02T14:40:44+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ウイスキーアドベントカレンダー2日目]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/12/02/wiskey-advent-calendar/"/>
+    <updated>2017-12-02T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/12/02/wiskey-advent-calendar</id>
+    <content type="html"><![CDATA[<p><a href="https://adventar.org/calendars/2219">ウイスキー Advent Calendar 2017</a> の2日目の記事です。</p>
+
+<p>ウィスキーはピートの香りが強いほうがすきです。</p>
+
+<p>とりあえず蒸留所に行ってきた話を
+以前、<a href="http://www.suntory.co.jp/factory/hakushu/">白州蒸留所</a> と <a href="http://www.suntory.co.jp/factory/yamazaki/">山崎蒸留所</a> に行ったことがあるのでその話を。</p>
+
+<h2>白州蒸留所</h2>
+
+<p>白州へは5年くらい前に5人でわいわいしながら行ってきました。
+ここでは、工場見学のツアーに参加しました。
+また、テイスティングルームですこしウイスキーを試せて良いです。</p>
+
+<h2>山崎蒸留所</h2>
+
+<p>山崎は去年、京都へ行く機会があり、ウイスキーを買うために行きました。
+ここでも工場見学可能だったのですが、事前に予約が必要であるため
+今回はパスして、工場に併設されているウイスキーのテイスティングルーム
+で幾つかのウイスキーをたのしみ、ショップでウイスキーと梅酒を買って
+鴨川へ</p>
+
+<h2>おわり</h2>
+
+<p>日本のウイスキーはあまり得意じゃないのですが、蒸留所に行くのは楽しいし
+楽しみ方を教えてもらえるので近くに蒸留所がある方は一度行ってみるとよいとおもいます</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[mikutter合宿いってきた]]></title>
@@ -950,70 +983,6 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
 <h2>おわり</h2>
 
 <p>おわり</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ItamaeつかってOSのインストールをやってみた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae/"/>
-    <updated>2016-10-09T16:43:27+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae</id>
-    <content type="html"><![CDATA[<p>9月はRubyKiagiにいってたりしました。
-そのときに<a href="http://mikutter.blogspot.jp/2016/09/mikutter-3312-343.html">mikutterのコミッター</a>とかになったようです。</p>
-
-<p>シルバーウィークにThinkPadのOS再インストールをしたのでその記録を</p>
-
-<h2>なにやったの？</h2>
-
-<p><a href="https://twitter.com/mtsmfm">@mtsmfm</a> と以前話していたとき、&ldquo;ansibleつかってOSインストールしてるんだけど、完全自動化できないんですよね~&rdquo; みたいな事を聞いたので<a href="https://github.com/itamae-kitchen/itamae">Itamae</a> をつかってやってみました。
-結論から言うと完全自動化は無理だけど、ある程度は自動化できた。</p>
-
-<h3>環境</h3>
-
-<ul>
-<li>machine: ThinkPad X250</li>
-<li>OS: Gentoo Linux</li>
-<li>Provisioning tool: Itamae</li>
-<li>repo: <a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></li>
-</ul>
-
-
-<h2>インストール</h2>
-
-<p>インストールディスクを起動するところはipmiとか搭載していない(しらべていない)し<a href="https://wiki.openstack.org/wiki/Ironic">Ironic</a>はつかいたくないので手動で起動し、
-sshdの起動とrootのパスワードを設定します。起動したら以下の手順でパーティション作成からカーネルのインストールまでします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">git clone https://github.com/katsyoshi/itamae-recipes.git</span>
-</span><span class='line'><span class="go">cd itamae-recipes</span>
-</span><span class='line'><span class="go">bundle install</span>
-</span><span class='line'><span class="go">wget http://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20161006.tar.bz2</span>
-</span><span class='line'><span class="go">cp stage3-amd64-20161006.tar.bz2 cookbook/install/stage3.tar.bz2</span>
-</span><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/gentoo.json</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でOSのインストールまでできるのですが、gentooのインストールメディアだと、diffがインストールされていないのでitamaeからfileのコピーができません。
-都度コピーしてください(というよりgentooインストーラーにdiffを入れたほうが早そう)</p>
-
-<h2>パッケージのインストール</h2>
-
-<p>ここまで終ったら、パッケージのインストールします。これも以下コマンドを実行することで終ります。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.json</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>owari</h2>
-
-<p>ItamaeつかってOSのインストールを実行してみました。diffが失いところがとくにつらいですね。
-おわり</p>
 ]]></content>
   </entry>
   
