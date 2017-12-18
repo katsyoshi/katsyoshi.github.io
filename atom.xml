@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-04-01T08:10:31+00:00</updated>
+  <updated>2017-12-18T22:54:15+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -14,9 +14,581 @@
 
   
   <entry>
+    <title type="html"><![CDATA[IRubyはじめました]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/12/18/hello/"/>
+    <updated>2017-12-18T21:56:55+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/12/18/hello</id>
+    <content type="html"><![CDATA[<p>表題のとおり、 <a href="https://github.com/SciRuby/iruby">IRuby</a> をはじめてみました</p>
+
+<h3>インストール</h3>
+
+<p>インストールは簡単で <code>gem install iruby</code> でいけますが、私の利用している環境では依存している <a href="https://github.com/zeromq/czmq">czmq</a> が古かったので手動でインストールして回避しています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">git clone https://github.com/zeromq/czmq.git</span>
+</span><span class='line'><span class="go">cd czmq</span>
+</span><span class='line'><span class="go">./autogen</span>
+</span><span class='line'><span class="go">./configure --prefix=${HOME}/.local</span>
+</span><span class='line'><span class="go">make -j4</span>
+</span><span class='line'><span class="go">make install</span>
+</span><span class='line'><span class="go">gem install iruby cztop</span>
+</span><span class='line'><span class="go">LD_LIBRARY_PATH=${HOME}/.local/lib iruby</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でインストールと動作はできます。画像貼るのがメンドイので <code>ipython</code> 貼っておきます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">{</span>
+</span><span class='line'><span class="go"> &quot;cells&quot;: [</span>
+</span><span class='line'><span class="go">  {</span>
+</span><span class='line'><span class="go">   &quot;cell_type&quot;: &quot;code&quot;,</span>
+</span><span class='line'><span class="go">   &quot;execution_count&quot;: 4,</span>
+</span><span class='line'><span class="go">   &quot;metadata&quot;: {},</span>
+</span><span class='line'><span class="go">   &quot;outputs&quot;: [</span>
+</span><span class='line'><span class="go">    {</span>
+</span><span class='line'><span class="go">     &quot;data&quot;: {</span>
+</span><span class='line'><span class="go">      &quot;text/html&quot;: [</span>
+</span><span class='line'><span class="go">       &quot;\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;  &lt;script&gt;\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;  requirejs.config({paths: { &#39;plotly&#39;: [&#39;https://cdn.plot.ly/plotly-latest.min&#39;] }})\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;  &lt;/script&gt;\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;&lt;div id=\&quot;c34db0db-dc37-4ae3-a2b3-33ab99830b89\&quot; style=\&quot;height: 100%; width: 100%;\&quot;&gt;&lt;/div&gt;\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;&lt;script&gt;\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot; require([&#39;plotly&#39;], function(Plotly) { \n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;Plotly.newPlot(\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;  &#39;c34db0db-dc37-4ae3-a2b3-33ab99830b89&#39;,\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;  [{\&quot;x\&quot;:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],\&quot;y\&quot;:[100,81,64,49,36,25,16,9,4,1,0,1,4,9,16,25,36,49,64,81,100],\&quot;type\&quot;:null,\&quot;mode\&quot;:\&quot;\&quot;}],\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;  {\&quot;width\&quot;:1000,\&quot;height\&quot;:500},\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;  {\&quot;linkText\&quot;:\&quot;Export to plot.ly\&quot;,\&quot;showLink\&quot;:true}\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;)\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;window.addEventListener(&#39;resize&#39;, function() {\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;  Plotly.Plots.resize(document.getElementById(&#39;c34db0db-dc37-4ae3-a2b3-33ab99830b89&#39;))\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;})\n&quot;,</span>
+</span><span class='line'><span class="go">       &quot; }) \n&quot;,</span>
+</span><span class='line'><span class="go">       &quot;&lt;/script&gt;&quot;</span>
+</span><span class='line'><span class="go">      ],</span>
+</span><span class='line'><span class="go">      &quot;text/plain&quot;: [</span>
+</span><span class='line'><span class="go">       &quot;#&lt;Plotly::Offline::HTML:0x000056356f14be00 @id=\&quot;c34db0db-dc37-4ae3-a2b3-33ab99830b89\&quot;, @data=[{:x=&gt;[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], :y=&gt;[100, 81, 64, 49, 36, 25, 16, 9, 4, 1, 0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100], :type=&gt;nil, :mode=&gt;\&quot;\&quot;}], @layout={:width=&gt;1000, :height=&gt;500}, @config={:linkText=&gt;\&quot;Export to plot.ly\&quot;, :showLink=&gt;true}, @embedded=true&gt;&quot;</span>
+</span><span class='line'><span class="go">      ]</span>
+</span><span class='line'><span class="go">     },</span>
+</span><span class='line'><span class="go">     &quot;metadata&quot;: {},</span>
+</span><span class='line'><span class="go">     &quot;output_type&quot;: &quot;display_data&quot;</span>
+</span><span class='line'><span class="go">    },</span>
+</span><span class='line'><span class="go">    {</span>
+</span><span class='line'><span class="go">     &quot;data&quot;: {</span>
+</span><span class='line'><span class="go">      &quot;text/plain&quot;: [</span>
+</span><span class='line'><span class="go">       &quot;#&lt;CZTop::Socket::PUB:0x56356e7f3620 last_endpoint=\&quot;tcp://127.0.0.1:45835\&quot;&gt;&quot;</span>
+</span><span class='line'><span class="go">      ]</span>
+</span><span class='line'><span class="go">     },</span>
+</span><span class='line'><span class="go">     &quot;execution_count&quot;: 4,</span>
+</span><span class='line'><span class="go">     &quot;metadata&quot;: {},</span>
+</span><span class='line'><span class="go">     &quot;output_type&quot;: &quot;execute_result&quot;</span>
+</span><span class='line'><span class="go">    }</span>
+</span><span class='line'><span class="go">   ],</span>
+</span><span class='line'><span class="go">   &quot;source&quot;: [</span>
+</span><span class='line'><span class="go">    &quot;require &#39;daru&#39;\n&quot;,</span>
+</span><span class='line'><span class="go">    &quot;require &#39;daru/plotly&#39;\n&quot;,</span>
+</span><span class='line'><span class="go">    &quot;include Daru::Plotly::Methods\n&quot;,</span>
+</span><span class='line'><span class="go">    &quot;\n&quot;,</span>
+</span><span class='line'><span class="go">    &quot;dv = Daru::Vector.new((-10..10).map{|n| n ** 2 })\n&quot;,</span>
+</span><span class='line'><span class="go">    &quot;plot(dv, x: \&quot;x\&quot;, y: \&quot;y\&quot;).show&quot;</span>
+</span><span class='line'><span class="go">   ]</span>
+</span><span class='line'><span class="go">  }</span>
+</span><span class='line'><span class="go"> ],</span>
+</span><span class='line'><span class="go"> &quot;metadata&quot;: {</span>
+</span><span class='line'><span class="go">  &quot;kernelspec&quot;: {</span>
+</span><span class='line'><span class="go">   &quot;display_name&quot;: &quot;Ruby 2.4.2&quot;,</span>
+</span><span class='line'><span class="go">   &quot;language&quot;: &quot;ruby&quot;,</span>
+</span><span class='line'><span class="go">   &quot;name&quot;: &quot;ruby&quot;</span>
+</span><span class='line'><span class="go">  },</span>
+</span><span class='line'><span class="go">  &quot;language_info&quot;: {</span>
+</span><span class='line'><span class="go">   &quot;file_extension&quot;: &quot;.rb&quot;,</span>
+</span><span class='line'><span class="go">   &quot;mimetype&quot;: &quot;application/x-ruby&quot;,</span>
+</span><span class='line'><span class="go">   &quot;name&quot;: &quot;ruby&quot;,</span>
+</span><span class='line'><span class="go">   &quot;version&quot;: &quot;2.4.2&quot;</span>
+</span><span class='line'><span class="go">  }</span>
+</span><span class='line'><span class="go"> },</span>
+</span><span class='line'><span class="go"> &quot;nbformat&quot;: 4,</span>
+</span><span class='line'><span class="go"> &quot;nbformat_minor&quot;: 2</span>
+</span><span class='line'><span class="go">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ウイスキーアドベントカレンダー2日目]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/12/02/wiskey-advent-calendar/"/>
+    <updated>2017-12-02T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/12/02/wiskey-advent-calendar</id>
+    <content type="html"><![CDATA[<p><a href="https://adventar.org/calendars/2219">ウイスキー Advent Calendar 2017</a> の2日目の記事です。</p>
+
+<p>ウィスキーはピートの香りが強いほうがすきです。</p>
+
+<p>とりあえず蒸留所に行ってきた話を
+以前、<a href="http://www.suntory.co.jp/factory/hakushu/">白州蒸留所</a> と <a href="http://www.suntory.co.jp/factory/yamazaki/">山崎蒸留所</a> に行ったことがあるのでその話を。</p>
+
+<h2>白州蒸留所</h2>
+
+<p>白州へは5年くらい前に5人でわいわいしながら行ってきました。
+ここでは、工場見学のツアーに参加しました。
+また、テイスティングルームですこしウイスキーを試せて良いです。</p>
+
+<h2>山崎蒸留所</h2>
+
+<p>山崎は去年、京都へ行く機会があり、ウイスキーを買うために行きました。
+ここでも工場見学可能だったのですが、事前に予約が必要であるため
+今回はパスして、工場に併設されているウイスキーのテイスティングルーム
+で幾つかのウイスキーをたのしみ、ショップでウイスキーと梅酒を買って
+鴨川へ</p>
+
+<h2>おわり</h2>
+
+<p>日本のウイスキーはあまり得意じゃないのですが、蒸留所に行くのは楽しいし
+楽しみ方を教えてもらえるので近くに蒸留所がある方は一度行ってみるとよいとおもいます</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mikutter合宿いってきた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/12/01/went-to-kinosaki-and-amano-hashidate/"/>
+    <updated>2017-12-01T00:58:40+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/12/01/went-to-kinosaki-and-amano-hashidate</id>
+    <content type="html"><![CDATA[<p><a href="https://adventar.org/calendars/2128">mikutter Advent Calendar</a> 1日目のエントリです
+先月の11/23-26に <a href="https://twitter.com/toshi_a">@toshi_a</a> の垢凍結記念の <a href="https://atnd.org/events/90619">mikutter合宿</a> に行ってきた</p>
+
+<h2>なにしにいってきたの？</h2>
+
+<p>リフレッシュ、気分転換、野々村せんせーの気分を味わいに、toshi_aさんをAORIに。
+蟹、但馬牛、温泉を楽しみに。
+くわしくは <a href="https://twitter.com/akkiesoft">@akkiesoft</a> の <a href="http://akkiesoft.hatenablog.jp/entry/20171127/1511763219">ブログエントリ</a> を読んで。
+城崎は温泉もよく、宿も落ち着いており、周りの店が早く閉まる以外の不満はなかったですね。</p>
+
+<h2>でなにやってたの？</h2>
+
+<p>温泉、酒、飯以外なにもやってない。</p>
+
+<p>mikutterのgtk3対応手をつけようかとおもったけど、無理だった。</p>
+
+<h2>ついでに天橋立もいってきた</h2>
+
+<p>室長()が天橋立いくぞっていってたので連れてってもらった。</p>
+
+<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/photo/amano-hashidate.jpg" alt="" /></p>
+
+<h2>酒蔵</h2>
+
+<p>ついでに天橋立近くの酒蔵 <a href="http://kuramoto-mukai.jp/">向井酒造</a> にいってきた。ここは室長が9時までやってるから!
+って5時半くらいに行ったらすでに閉まってて、丁度女将さんが出てきたところだったので開けてもらい酒を買いました。</p>
+
+<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/photo/mukai-sake.jpg" alt="" /></p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacsの構成管理をitamaeで管理]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/07/01/emacs-config-from-itamae/"/>
+    <updated>2017-07-01T22:59:16+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/07/01/emacs-config-from-itamae</id>
+    <content type="html"><![CDATA[<p>仕事とプライベート環境でemacsのフォント等設定するのがいいかげんダるくなってきたので、Itamaeを流すだけでイイカンジにするようにした</p>
+
+<h2>もともとどうかんりしてたのか</h2>
+
+<p>もともと<a href="https://github.com/katsyoshi/dot.emacs.d">github</a>で管理していたが、さすがにFontの環境異差をちょこちょこ変えるのが面倒になった</p>
+
+<h2>Itamae de kanri</h2>
+
+<p>gitで管理しているので環境異差ある部分を<a href="https://github.com/katsyoshi/itamae-recipes">itamae</a>で管理するように方針を転換。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">emacs</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">font</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">family</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Ricty</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">height</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">120</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">packages</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">auto-complete</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">settings</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とか書いてあとはItamaeを実行することで必要なパッケージのインストール、
+必要な設定へのリンク追加などをするようにしました。</p>
+
+<h2>おわり</h2>
+
+<p>これでなにも考えなくてすむようになるのかな？</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[rustful web]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/06/04/rustful-web/"/>
+    <updated>2017-06-04T23:17:45+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/06/04/rustful-web</id>
+    <content type="html"><![CDATA[<p><a href="https://www.rust-lang.org/ja-JP/">rust</a> で Web Application をつくろうと思って <a href="https://github.com/Ogeon/rustful">rustful</a> を使ってやってみてたりした。</p>
+
+<p>ドキュメントと利用しているバージョンのコードが異なり、必要なモジュールが読み込めなかったり、関数の引数が異なったりしてうごかねぇってなったのでHEADを使うことで解決。</p>
+
+<h2>🍻</h2>
+
+<p>とりあえずいつものメンバーで🍻にいってきた。浅草のカンピオンエールという店でのんでそのあと隣の店でお好み焼きをたべてた。お好み焼き屋のあとは河原まであるて吾妻橋からみえる
+やつをながめながらビールのんでた</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[use red-arrow.gem]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/05/31/use-red-arrow-dot-gem/"/>
+    <updated>2017-05-31T23:27:57+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/05/31/use-red-arrow-dot-gem</id>
+    <content type="html"><![CDATA[<p><a href="https://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/">こないだインストール</a> した <a href="https://arrow.apache.org/">Apache Arrow</a> がとりあえず <a href="https://github.com/red-data-tools/red-arrow">Ruby</a> でうごくようになったのでメモ</p>
+
+<h2>メモ</h2>
+
+<p>gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;arrow&quot;</span>
+</span><span class='line'><span class="sr">/home/</span><span class="n">katsu</span><span class="o">/.</span><span class="n">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">/</span><span class="n">loader</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">37</span><span class="ss">:in</span> <span class="sb">`require&#39;:GObjectIntrospection::RepositoryError::TypelibNotFound: Typelib file for namespace &#39;Arrow&#39; (any version) not found</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これは <code>GObjectIntrospection</code> の<a href="https://github.com/red-data-tools/red-arrow/blob/master/lib/arrow.rb#L25">ロードに失敗</a>しているようです。
+なので<a href="http://www.clear-code.com/blog/2013/12/16.html">ここ</a>や<a href="http://qiita.com/groonga/items/71b145b37d77bd160bf2">ここ</a>を参考に環境変数 <code>GI_TYPELIB_PATH</code> を設定すると読み込まれるようになり実行できます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> <span class="nb">export </span><span class="nv">GI_TYPELIB_PATH</span><span class="o">=</span>/path/to/girepository-1.0
+</span><span class='line'><span class="gp">$</span> irb -rarrow
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とやるとエラーがなくなります。</p>
+
+<p>最後に<a href="https://github.com/red-data-tools/red-arrow/tree/master/example">サンプル</a>を実行して確認しました!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">%</span> ruby write-file.rb
+</span><span class='line'><span class="gp">%</span> ruby <span class="nb">read</span>-file.rb
+</span><span class='line'><span class="go">========================================</span>
+</span><span class='line'><span class="go">record-batch[0]:</span>
+</span><span class='line'><span class="go">  uint8: [1, 2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint16: [1, 2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint32: [1, 2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint64: [1, 2, 4, 8]</span>
+</span><span class='line'><span class="go">  int8: [1, -2, 4, -8]</span>
+</span><span class='line'><span class="go">  int16: [1, -2, 4, -8]</span>
+</span><span class='line'><span class="go">  int32: [1, -2, 4, -8]</span>
+</span><span class='line'><span class="go">  int64: [1, -2, 4, -8]</span>
+</span><span class='line'><span class="go">  float: [1.100000023841858, -2.200000047683716, 4.400000095367432, -8.800000190734863]</span>
+</span><span class='line'><span class="go">  double: [1.1, -2.2, 4.4, -8.8]</span>
+</span><span class='line'><span class="go">========================================</span>
+</span><span class='line'><span class="go">record-batch[1]:</span>
+</span><span class='line'><span class="go">  uint8: [2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint16: [2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint32: [2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint64: [2, 4, 8]</span>
+</span><span class='line'><span class="go">  int8: [-2, 4, -8]</span>
+</span><span class='line'><span class="go">  int16: [-2, 4, -8]</span>
+</span><span class='line'><span class="go">  int32: [-2, 4, -8]</span>
+</span><span class='line'><span class="go">  int64: [-2, 4, -8]</span>
+</span><span class='line'><span class="go">  float: [-2.200000047683716, 4.400000095367432, -8.800000190734863]</span>
+</span><span class='line'><span class="go">  double: [-2.2, 4.4, -8.8]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>最初ろーどえらーでこまってた</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[installing apache arrow]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/"/>
+    <updated>2017-05-29T21:45:29+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow</id>
+    <content type="html"><![CDATA[<p><a href="https://slide.rabbit-shocker.org/authors/kou/nagoya-rubykaigi-03/">最近</a><a href="https://github.com/kou">すとうさん</a>が<a href="https://slide.rabbit-shocker.org/authors/kou/data-science-rb/">一押し</a>している<a href="https://arrow.apache.org/">apache arrow</a>をインストールしてみた</p>
+
+<h2>環境</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ uname -a
+</span><span class='line'>Linux rin 4.9.10-gentoo #6 SMP Tue Mar 28 01:29:26 JST 2017 x86_64 Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz GenuineIntel GNU/Linux
+</span><span class='line'>$ gcc -v
+</span><span class='line'>組み込み spec を使用しています。
+</span><span class='line'>COLLECT_GCC=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0/gcc
+</span><span class='line'>COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-pc-linux-gnu/5.4.0/lto-wrapper
+</span><span class='line'>ターゲット: x86_64-pc-linux-gnu
+</span><span class='line'>configure 設定: /var/tmp/portage/sys-devel/gcc-5.4.0-r3/work/gcc-5.4.0/configure --host=x86_64-pc-linux-gnu --build=x86_64-pc-linux-gnu --prefix=/usr --bindir=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0 --includedir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include --datadir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0 --mandir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/man --infodir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/info --with-gxx-include-dir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include/g++-v5 --with-python-dir=/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/python --enable-languages=c,c++,fortran --enable-obsolete --enable-secureplt --disable-werror --with-system-zlib --enable-nls --without-included-gettext --enable-checking=release --with-bugurl=https://bugs.gentoo.org/ --with-pkgversion='Gentoo 5.4.0-r3 p1.3, pie-0.6.5' --enable-libstdcxx-time --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-clocale=gnu --enable-multilib --with-multilib-list=m32,m64 --disable-altivec --disable-fixed-point --enable-targets=all --disable-libgcj --enable-libgomp --disable-libmudflap --disable-libssp --disable-libcilkrts --disable-libmpx --enable-vtable-verify --enable-libvtv --enable-lto --without-isl --enable-libsanitizer
+</span><span class='line'>スレッドモデル: posix
+</span><span class='line'>gcc バージョン 5.4.0 (Gentoo 5.4.0-r3 p1.3, pie-0.6.5)</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>いんすとーる</h2>
+
+<p>今回まだGentooにパッケージがないのでgitからインストールします。ほしいのはrubygems.orgに公開されている<a href="https://rubygems.org/gems/red-arrow">red-arrow</a>をコンパイルするためにglibとこれを利用するために必要な依存パッケージとしてcppをインストールします。インストールはかんたんで <code>cmake</code> を実行すればインストールデキルはずです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone git@github.com:apache/arrow.git
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>arrow/cpp
+</span><span class='line'><span class="gp">$</span> mkdir release
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>release
+</span><span class='line'><span class="gp">$</span> cmake .. -DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でリリース用パッケージがビルドされるはずですが<a href="https://gist.github.com/katsyoshi/4486792ad43feae4d690d589dac1a157">エラー</a>が出ます。
+これはJIRAで<a href="https://issues.apache.org/jira/browse/ARROW-667">検索した結果</a>より <code>gcc</code> のバージョン情報がとれずにエラーをだしているやりとりが発見されたのでわかりました。
+ログを見ると実際に取得できていないことも確認しました。で <code>cpp/cmake_modules/CompilerInfo.cmake</code> をみるとどうやら日本語のバージョン情報は考慮されていないような作りになっていました。
+なので <code>LANG=C</code> をつけて <code>cmake</code> 再びつけて実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> <span class="nv">LANG</span><span class="o">=</span>C cmake .. -DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+</span><span class='line'><span class="gp">$</span> make
+</span><span class='line'><span class="gp">$</span> make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでC++のインストールは終了です。続いてglibをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> <span class="nb">cd</span> ../../c_glib
+</span><span class='line'><span class="gp">$</span> ./autgen.sh
+</span><span class='line'><span class="gp">$</span> ./configure
+</span><span class='line'><span class="gp">$</span> make
+</span><span class='line'><span class="gp">$</span> make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でインストールできます。こちら久々に野良ビルドしたため <code>PKG_CONFIG_PATH</code> や <code>LD_LIBRARY_PATH</code> の設定をわすれてただけなのですんなりいけました。
+で最後に <code>gem install red-arrow</code> を実行して目的を達成しました!!!!11</p>
+
+<h2>おわり</h2>
+
+<p>ほんとうのもくてきは <code>fluentd</code> のぷらぐいんをかくことですがつかれたのできょうはここまで</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[start watching dazn]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/05/21/start-watching-dazn/"/>
+    <updated>2017-05-21T14:49:19+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/05/21/start-watching-dazn</id>
+    <content type="html"><![CDATA[<p>タイトルのとおり、DAZNを見はじめた。
+Netflix, Huluを契約してたけど、ぜんぜん見ていなかったので解約した。
+DAZN をみようとおもったきっかけはNBAのカンファレンスファイナルをみようとおもったため。</p>
+
+<p>とりあえず視聴感想ですが、表示は色々なところで言われてるとおもいますが、
+接続開始時にブロックノイズが気になりますが、一旦綺麗に表示されるとそのあとは
+特に気になりません。</p>
+
+<p>肝心の試合内容が現在非常に残念なため試合内の評価はしません。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[raspiでdnsを運用してみはじめた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network/"/>
+    <updated>2017-04-09T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network</id>
+    <content type="html"><![CDATA[<p>RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
+RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code>apt install dnsmasq</code> するだけでおわります。</p>
+
+<h2>はまったところ</h2>
+
+<p>いつもどおりはまりました。今回は以下の二点</p>
+
+<ul>
+<li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
+<li>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</li>
+</ul>
+
+
+<h3>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
+
+<p>ログを見ても以下のログしか出ておらず理由の調査に時間がかかった。hosts ファイルは設定ファイルではないため当然といえば当然なのですが…</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts</span></code></pre></td></tr></table></div></figure>
+
+
+<p>今、<code>/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</h3>
+
+<p>こちらは上記問題を解決したあと、反映されないのでログを見たときにわかりました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これの原因は <code>itamae</code> でファイルを送信するときに <code>mode '644'</code> を指定する必要があったのだが、指定せずに
+送信してしまったため発生。</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h3>関連リポジトリ</h3>
+
+<p><a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Elixirのインストール方法]]></title>
     <link href="http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir/"/>
-    <updated>2017-04-01T00:00:00+00:00</updated>
+    <updated>2017-04-01T09:00:00+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir</id>
     <content type="html"><![CDATA[<p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
 まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
@@ -72,7 +644,7 @@
   <entry>
     <title type="html"><![CDATA[basic authenticate in h2o]]></title>
     <link href="http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o/"/>
-    <updated>2017-02-20T12:53:49+00:00</updated>
+    <updated>2017-02-20T21:53:49+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o</id>
     <content type="html"><![CDATA[<p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
 
@@ -128,7 +700,7 @@
   <entry>
     <title type="html"><![CDATA[Blogのテーマかえた]]></title>
     <link href="http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes/"/>
-    <updated>2017-02-12T11:16:01+00:00</updated>
+    <updated>2017-02-12T20:16:01+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes</id>
     <content type="html"><![CDATA[<p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
 変更の方法は以下のようになります<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
@@ -163,7 +735,7 @@
   <entry>
     <title type="html"><![CDATA[2016年買ってよかったもの]]></title>
     <link href="http://blog.katsyoshi.org/blog/2017/01/01/good-buy-of-2016/"/>
-    <updated>2017-01-01T00:00:00+00:00</updated>
+    <updated>2017-01-01T09:00:00+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2017/01/01/good-buy-of-2016</id>
     <content type="html"><![CDATA[<p>おおきな買いものなかったなぁとおもったが、わりとあったので書きとめておく</p>
 
@@ -190,9 +762,9 @@
   
   <entry>
     <title type="html"><![CDATA[みくったーでえもじ]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/12/16/emoji-in-mikutter/"/>
-    <updated>2016-12-16T15:00:00+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/12/16/emoji-in-mikutter</id>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter/"/>
+    <updated>2016-12-17T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter</id>
     <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
 たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
 
@@ -223,7 +795,7 @@
   <entry>
     <title type="html"><![CDATA[板前さんでGentooを管理]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo/"/>
-    <updated>2016-12-10T07:00:38+00:00</updated>
+    <updated>2016-12-10T16:00:38+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo</id>
     <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
 
@@ -277,9 +849,9 @@ itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使
   
   <entry>
     <title type="html"><![CDATA[d250g2 advent calendar 2016 5日目]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/12/04/d250g2/"/>
-    <updated>2016-12-04T15:00:00+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/12/04/d250g2</id>
+    <link href="http://blog.katsyoshi.org/blog/2016/12/05/d250g2/"/>
+    <updated>2016-12-05T00:00:00+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/12/05/d250g2</id>
     <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
 
 <h2>d250g2 について</h2>
@@ -348,9 +920,9 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
   
   <entry>
     <title type="html"><![CDATA[YARAKASHI CUDA編]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/11/28/introduced-cuda/"/>
-    <updated>2016-11-28T15:48:15+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/11/28/introduced-cuda</id>
+    <link href="http://blog.katsyoshi.org/blog/2016/11/29/introduced-cuda/"/>
+    <updated>2016-11-29T00:48:15+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/11/29/introduced-cuda</id>
     <content type="html"><![CDATA[<p><a href="http://blog.katsyoshi.org/blog/2016/11/28/hello/">昨日</a>かいた奴でGTX 1050があるのでCUDAを導入してみた。</p>
 
 <h2>CUDA導入</h2>
@@ -497,9 +1069,9 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
   
   <entry>
     <title type="html"><![CDATA[あったらしーPCかったよー]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/11/27/hello/"/>
-    <updated>2016-11-27T16:14:21+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/11/27/hello</id>
+    <link href="http://blog.katsyoshi.org/blog/2016/11/28/hello/"/>
+    <updated>2016-11-28T01:14:21+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2016/11/28/hello</id>
     <content type="html"><![CDATA[<h2>あたらしいPC買いました</h2>
 
 <p>先月のおわりに注文し今月頭のOSCあたりに新しいPCを組み立てました。
@@ -528,7 +1100,7 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
   <entry>
     <title type="html"><![CDATA[went to 8 jou island]]></title>
     <link href="http://blog.katsyoshi.org/blog/2016/11/09/went-to-8-jou-island/"/>
-    <updated>2016-11-09T11:13:45+00:00</updated>
+    <updated>2016-11-09T20:13:45+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2016/11/09/went-to-8-jou-island</id>
     <content type="html"><![CDATA[<p>11/3-11/5 で八丈島にいってきました。
 決めたのは10/28の朝でした。</p>
@@ -579,530 +1151,6 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
 <h2>おわり</h2>
 
 <p>たのしい一人旅でした。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ssh permission]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission/"/>
-    <updated>2016-10-10T11:14:30+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission</id>
-    <content type="html"><![CDATA[<p>またやらかしたので</p>
-
-<h2>経緯</h2>
-
-<p>サーバーにSSHログインが急にできなくなった</p>
-
-<h2>対処</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>chmod 744 ~/.ssh</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おわり</h2>
-
-<p>おわり</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ItamaeつかってOSのインストールをやってみた]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae/"/>
-    <updated>2016-10-09T07:43:27+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae</id>
-    <content type="html"><![CDATA[<p>9月はRubyKiagiにいってたりしました。
-そのときに<a href="http://mikutter.blogspot.jp/2016/09/mikutter-3312-343.html">mikutterのコミッター</a>とかになったようです。</p>
-
-<p>シルバーウィークにThinkPadのOS再インストールをしたのでその記録を</p>
-
-<h2>なにやったの？</h2>
-
-<p><a href="https://twitter.com/mtsmfm">@mtsmfm</a> と以前話していたとき、&ldquo;ansibleつかってOSインストールしてるんだけど、完全自動化できないんですよね~&rdquo; みたいな事を聞いたので<a href="https://github.com/itamae-kitchen/itamae">Itamae</a> をつかってやってみました。
-結論から言うと完全自動化は無理だけど、ある程度は自動化できた。</p>
-
-<h3>環境</h3>
-
-<ul>
-<li>machine: ThinkPad X250</li>
-<li>OS: Gentoo Linux</li>
-<li>Provisioning tool: Itamae</li>
-<li>repo: <a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></li>
-</ul>
-
-
-<h2>インストール</h2>
-
-<p>インストールディスクを起動するところはipmiとか搭載していない(しらべていない)し<a href="https://wiki.openstack.org/wiki/Ironic">Ironic</a>はつかいたくないので手動で起動し、
-sshdの起動とrootのパスワードを設定します。起動したら以下の手順でパーティション作成からカーネルのインストールまでします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">git clone https://github.com/katsyoshi/itamae-recipes.git</span>
-</span><span class='line'><span class="go">cd itamae-recipes</span>
-</span><span class='line'><span class="go">bundle install</span>
-</span><span class='line'><span class="go">wget http://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20161006.tar.bz2</span>
-</span><span class='line'><span class="go">cp stage3-amd64-20161006.tar.bz2 cookbook/install/stage3.tar.bz2</span>
-</span><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/gentoo.json</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でOSのインストールまでできるのですが、gentooのインストールメディアだと、diffがインストールされていないのでitamaeからfileのコピーができません。
-都度コピーしてください(というよりgentooインストーラーにdiffを入れたほうが早そう)</p>
-
-<h2>パッケージのインストール</h2>
-
-<p>ここまで終ったら、パッケージのインストールします。これも以下コマンドを実行することで終ります。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.json</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>owari</h2>
-
-<p>ItamaeつかってOSのインストールを実行してみました。diffが失いところがとくにつらいですね。
-おわり</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[hello mikutter]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter/"/>
-    <updated>2016-08-31T13:55:03+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter</id>
-    <content type="html"><![CDATA[<p>表題のとおりmikutterをgemでインストールできるようにしてみました。</p>
-
-<h2>どうやって？</h2>
-
-<p><a href="https://rubygems.org">rubygems</a> からはまだインストールはできません。
-ので、以下の様にしてgem packageを作成します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone github.com/katsyoshi/mikutter.git
-</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>mikutter
-</span><span class='line'><span class="gp">$</span> git checkout reokure-ru
-</span><span class='line'><span class="gp">$</span> bundle install
-</span><span class='line'><span class="gp">$</span> bundle <span class="nb">exec </span>rake build
-</span><span class='line'><span class="gp">$</span> gem install pkg/mikutter-3.5.0.pre.dev.gem
-</span><span class='line'><span class="gp">$</span> mikutter
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでmikutterコマンドで起動できるようになっています
-これすらめんどうな人は<a href="https://katsyoshi.org/mikutter-3.5.0.pre.dev.gem">ここ</a>にあります。
-ダウンロードして <code>gem install mikutter-3.5.0.pre.dev.gem</code> でインストールできます。
-プラグインで起動できないとかあるなら必要なgemをインストールしてください。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RENEWAL MY SITE!!!]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/08/08/renewal-my-site/"/>
-    <updated>2016-08-08T12:05:47+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/08/08/renewal-my-site</id>
-    <content type="html"><![CDATA[<p>ってのは嘘ではないですが、嘘に近いです。
-実はおとといの土曜日に katsyoshi.org をのぞいたら、 <em>nginx</em> の初期ページが表示されたので
-とくにコンテンツはないですが、いそいでサイトの復旧をしました。
-が、もともとあったファイル置場を失念したため似た感じで再構築してました。
-再構築ついでにssl化、<code>nginx</code> から <code>h2o</code> へのWebサーバー変更しました。
-あと <code>systemd</code> でデーモン化とかも。</p>
-
-<h2>Let&rsquo;s Encrypt</h2>
-
-<p>リリースされてだいぶたつのですが、<a href="https://letsencrypt.org">Let&rsquo;s Encrypt</a>を利用してみました。
-Ubuntu Linux 16.04 では、簡単に導入できます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> sudo apt install letsencrypt
-</span><span class='line'><span class="gp">$</span> sudo letsencrypt certonly
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でいくつかの質問に答えればおわりです。
-ここで、戸惑った場面としては認証を受けたいサーバーの確認があるのですが、
-サーバーポート443を開ける<a href="https://letsencrypt.jp">必要があり</a>、1回失敗しました。</p>
-
-<h2>H2O</h2>
-
-<p>せっかくだし、<a href="https://h2o.examp1e.net/">H2O</a>を使おうと思います。
-インストールはかんたんでいかのようにすればokです。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone h2o/h2o
-</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>h2o
-</span><span class='line'><span class="gp">$</span> cmake -DCMAKE_INSTALL_PREFIX_PATH<span class="o">=</span>/opt/local .
-</span><span class='line'><span class="gp">$</span> make <span class="o">&amp;&amp;</span> make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>設定は<a href="https://h2o.examp1e.net/configure/quick_start.html">ここ</a>と<a href="https://github.com/h2o/h2o/wiki/redirect-HTTP-to-HTTPS">ここ</a>を参考にして以下にしています。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">user: www-data</span>
-</span><span class='line'><span class="go">hosts:</span>
-</span><span class='line'><span class="go">  &quot;katsyoshi.org:80&quot;:</span>
-</span><span class='line'><span class="go">    listen:</span>
-</span><span class='line'><span class="go">      port: 80</span>
-</span><span class='line'><span class="go">    paths:</span>
-</span><span class='line'><span class="go">      /:</span>
-</span><span class='line'><span class="go">        redirect: https://katsyoshi.org</span>
-</span><span class='line'><span class="go">hosts:</span>
-</span><span class='line'><span class="go">  &quot;katsyoshi.org:443&quot;:</span>
-</span><span class='line'><span class="go">    listen:</span>
-</span><span class='line'><span class="go">      port: 443</span>
-</span><span class='line'><span class="go">      ssl:</span>
-</span><span class='line'><span class="go">        certificate-file: /etc/letsencrypt/live/katsyoshi.org/fullchain.pem</span>
-</span><span class='line'><span class="go">        key-file: /etc/letsencrypt/live/katsyoshi.org/privkey.pem</span>
-</span><span class='line'><span class="go">    paths:</span>
-</span><span class='line'><span class="go">      /:</span>
-</span><span class='line'><span class="go">        file.dir: /opt/website/top</span>
-</span><span class='line'><span class="go">access-log: /var/log/h2o/access.log</span>
-</span><span class='line'><span class="go">error-log: /var/log/h2o/error.log</span>
-</span><span class='line'><span class="go">pid-file: /var/run/h2o.pid</span>
-</span><span class='line'><span class="go">http2-reprioritize-blocking-assets: ON</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2><a href="https://negima.mobi/2015/10/2092">h2o.service</a></h2>
-
-<p>さいきんわだいのしすてむでーってやつででーもん？かしようとおもいます</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">[Unit]</span>
-</span><span class='line'><span class="go">Description=H2O the optimized HTTP/1, HTTP/2 server</span>
-</span><span class='line'><span class="go">After=syslog.target network.target remote-fs.target nss-lookup.target</span>
-</span><span class='line'>
-</span><span class='line'><span class="go">[Service]</span>
-</span><span class='line'><span class="go">Type=forking</span>
-</span><span class='line'><span class="go">PIDFile=/var/run/h2o.pid</span>
-</span><span class='line'><span class="go">ExecStartPre=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -t</span>
-</span><span class='line'><span class="go">ExecStart=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -m daemon</span>
-</span><span class='line'><span class="go">ExecReload=/bin/kill -s HUP $MAINPID</span>
-</span><span class='line'><span class="go">ExecStop=/bin/kill -s QUIT $MAINPID</span>
-</span><span class='line'><span class="go">PrivateTmp=true</span>
-</span><span class='line'>
-</span><span class='line'><span class="go">[Install]</span>
-</span><span class='line'><span class="go">WantedBy=multi-user.target</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>いやーしすてむでーってべんりですねー</p>
-
-<h2>owari</h2>
-
-<p>サイトがぶっとんだのでサイトの復旧？と let&rsquo;s encrypt でのSSL化、 h2oへのウェブサーバー変更と <code>systemd</code> でのデーモン化をやりました。</p>
-
-<p>1年ぶりの日記だたので、Markdownどうかくんだっけ？とか、別のところで大変でした。</p>
-
-<h2>参考サイト</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[YAPC::Asia 2015に参加しました(ボランティアスタッフとして)]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/08/24/i-went-to-yapc-asia-as-a-volanteer-staff/"/>
-    <updated>2015-08-24T17:42:48+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/08/24/i-went-to-yapc-asia-as-a-volanteer-staff</id>
-    <content type="html"><![CDATA[<p>YAPC::Asia 2015にボランティアスタッフとして参加してきました(申請時に公表しないでってしなのでYAPCのスッタフ一覧にはのってないです)。去年も参加しましたが聴講者として参加しました。</p>
-
-<h2>ボランティアスタッフに応募した理由</h2>
-
-<p>彼女ができるときいて応募しました。また、最後の YAPC::Asia と聞いていたので応募しないとなと思ったのがありました。他の理由としては NEET なのでというのもあります。発表者として参加できればよかったのですが、ネタが応募するには弱いなと思い見送りました。そういうこともありボランティアスタッフとして参加しました。</p>
-
-<h2>個人スポンサー</h2>
-
-<p>実は個人スポンサーもやっていましたが、ボランティアスタッフをやるため、個人スポンサーの分のチケットが余っていました。その分はとある人に譲りました。</p>
-
-<h2>0日目(前夜祭)</h2>
-
-<p>0日目は11時集合になっており、スタッフ作業としてノベルティの詰め込み作業と会場設営を行なっていました。</p>
-
-<p>前夜祭自体は初めてのスタッフ作業でしたので、会場係として設営などをしてました。</p>
-
-<h2>1日目</h2>
-
-<p>1日目は始めに作業としてラリーのセッション前、中で同時通訳のレシーバーを配ってました。その後D会場でずっとタイムキーパーをやっておりました。</p>
-
-<p>この日の印象に残ってるセッションとしては <a href="https://twitter.com/kazuho">@kazuhoさん</a> の <a href="http://yapcasia.org/2015/talk/show/dead6890-09b7-11e5-998a-67dc7d574c3a">HTTP/2時代のウェブサイト設計</a> で、 <code>HTTP2</code> になった理由、そのなかで <a href="https://github.com/h2o/h2o">h2o</a> が優れている点を丁寧に説明されてて、これはすぐに使わねばと思わせてくれた発表でした。</p>
-
-<p>この日は懇親会がありましたので、懇親会会場でうろうろしておりました。
-懇親会では、知り合いと話してたりしてました。最近、 <a href="https://github.com/itamae-kitchen/itamae">itamae</a> を触っているので、プラグインの話を <a href="https://twitter.com/k0kubun">@k0kubunさん</a> としてました。そのときは <code>pip</code> のリソースプラグイン作りたいとか言ったので <a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">今日作成</a> したのですが、よくかんがえてみると、 <code>cpan</code> のリソースプラグインの方が必要だったのを作成後に思い出しました。</p>
-
-<h2>2日目</h2>
-
-<p>2日目も1日目と同様にD会場で全セッションタイムキーパーやっておりました。</p>
-
-<p>印象に残ったセッションとしては、 <a href="https://github.com/kenjiskywalker">@kenjiskywalkerさん</a> の <a href="http://yapcasia.org/2015/talk/show/f2816038-10ec-11e5-89bf-d7f07d574c3a">我々はどのように冗長化を失敗したのか</a> 、 <a href="https://twitter.com/saiken3110">@saiken3110さん</a> の <a href="http://yapcasia.org/2015/talk/show/0af26fe4-0b7b-11e5-a29c-67dc7d574c3a">MySQLで2億件のシリアルデータと格闘したチューニングの話</a> 、 <a href="https://github.com/Jxck">@Jxckさん</a> の <a href="http://yapcasia.org/2015/talk/show/9e9ae188-fb20-11e4-9a97-8ab37d574c3a">HTTP2 時代の Web</a> がありました。</p>
-
-<p>最後に片づけをし、おわった後スタッフ数人とのみくいに行ってきました。そろそろ解散かなってときに、 twitter を眺めてたら、 <a href="https://twitter.com/Jxck_/status/635075234379399168">@Jxckさんが@t_wadaさんを誘ってる</a> を見つけて無理やり参加させて頂きました。</p>
-
-<p>帰りついたのは朝の4時ごろ(だったと思う)でした。</p>
-
-<h2>おわり</h2>
-
-<p>YAPC::Asia 2015 に参加してきました。23日の日曜日は疲れてたのでずっとぐったりしてました。
-楽しい3日間でした!!!!!11</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[こんにちは、いたまえさん]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/08/02/hello-itamae-plugins/"/>
-    <updated>2015-08-02T12:33:46+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/08/02/hello-itamae-plugins</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/sstephenson/rbenv">rbenv</a> を <a href="https://github.com/itamae-kitchen/itamae">itamae</a> の <a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv">プラグイン</a> を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、<a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv/pull/9">httpsを指定できる</a>ようしてもらいました。</p>
-
-<h2>plenv と pyenv</h2>
-
-<p>また、rbenv のプラグインを参考に <a href="https://github.com/katsyoshi/itamae-plugin-recipe-plenv">plenv</a> と <a href="https://github.com/katsyoshi/itamae-plugin-recipe-pyenv">pyenv</a> を作ってみました。</p>
-
-<p>これらふたつのプラグインはまだgemになっていないので、<code>Gemfile</code> に以下のように追加し、</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-plenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-plenv&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-pyenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-pyenv&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>recipeとしては以下のようにしてください。</p>
-
-<figure class='code'><figcaption><span>recipe.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;pyenv::system&#39;</span>
-</span><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;plenv::system&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>設定例としては、rbenvのプラグインと同じように設定します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;plenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;5.22.0&quot;</span><span class="p">,</span> <span class="s2">&quot;5.20.2&quot;</span><span class="p">],</span>
-</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;5.22.0&quot;</span>
-</span><span class='line'>  <span class="p">},</span>
-</span><span class='line'>  <span class="nt">&quot;pyenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3.4.3&quot;</span><span class="p">,</span> <span class="s2">&quot;3.5.0b2&quot;</span><span class="p">],</span>
-</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;3.4.3&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おわり</h2>
-
-<p>おわり</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[elasticsearchどの〜]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/06/25/sir-elasticsearch/"/>
-    <updated>2015-06-25T15:26:10+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/06/25/sir-elasticsearch</id>
-    <content type="html"><![CDATA[<p><a href="https://www.elastic.co/products/kibana">kibana</a> で表示しようとしてたら嵌ったのでメモ</p>
-
-<h2>嵌った原因</h2>
-
-<p>数字をElasticsearchに投げているつもりが文字列を投げていた。
-ので対処方法としては、 <code>fluent-plugin-typecast</code> を導入して終了。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;match</span> <span class="err">elasticsearch.**.*</span><span class="nt">&gt;</span>
-</span><span class='line'>  type typecast
-</span><span class='line'>  item_types value:float
-</span><span class='line'>  prefix typed
-</span><span class='line'><span class="nt">&lt;/match&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Elasticsearch</h2>
-
-<p><a href="https://www.fluentd.org">fluentd</a> で集めたデータを <a href="http://www.elasitc.co">Elasticsearch</a> に <a href="https://github.com/uken/fluent-plugin-elasticsearch">fluent-plugin-elastchsearch</a> を利用して入れます。設定は以下のようにします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;match</span> <span class="err">typed.elasticserch.**.*</span><span class="nt">&gt;</span>
-</span><span class='line'>  type elasticsearch
-</span><span class='line'>  type_name hoge
-</span><span class='line'>  host 127.0.0.1
-</span><span class='line'>  port 9200
-</span><span class='line'>  logstash_format true
-</span><span class='line'>  logstash_prefix logstash
-</span><span class='line'>  flash_interval 1s
-</span><span class='line'><span class="nt">&lt;/match&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おわり</h2>
-
-<p>おわり</p>
-
-<h3>参考資料</h3>
-
-<ol>
-<li><a href="http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html">http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html</a></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[すくりーんきゃすと]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/05/15/screencast-use-gif/"/>
-    <updated>2015-05-15T14:47:14+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/05/15/screencast-use-gif</id>
-    <content type="html"><![CDATA[<p>LinuxでScreenCast用の環境を整えてみた。</p>
-
-<h2>必要パッケージ</h2>
-
-<ul>
-<li>ffmpeg</li>
-<li>gtk-recordMyDesktop</li>
-</ul>
-
-
-<h2>使いかた</h2>
-
-<p><code>gtk-recordMyDesktop</code> でデスクトップをキャプチャする。
-その後は、 <code>ffmpeg</code> を使って好きな動画形式に変換します。
-ここでは、gif画像に変更しています。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ffmpeg -i ~/screencast.ovg img/screencast.gif
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/screenshot/gtk-recordMyDesktop.gif" width="512" alt="" /></p>
-
-<h3>参考サイト</h3>
-
-<ol>
-<li><a href="http://d.hatena.ne.jp/over80/20080802/1217693705">http://d.hatena.ne.jp/over80/20080802/1217693705</a></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ゴールデンウィークのお買いもの]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2015/05/11/golden-weak/"/>
-    <updated>2015-05-11T12:38:35+00:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2015/05/11/golden-weak</id>
-    <content type="html"><![CDATA[<p>GWに勢い余って買いものしたのでそれを。</p>
-
-<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B00J5ZBVFY" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-
-
-<p>Roomba買いました。</p>
-
-<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B004N3RQ5W" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-
-
-<p>机買いました。</p>
-
-<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B00G21MID8" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-
-
-<p>Kinesis買いました。</p>
-
-<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B000EVPGTU" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-
-
-<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=katsyoshi05-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B000P4D5F8" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-
-
-<p>コーヒーセット買いました。</p>
-
-<p>もともと欲しかったのもあり、勢いで買ってしまいました。</p>
-
-<p>Roombaの方は炬燵をまだ出してるのもあり、動かしていないです。</p>
-
-<p>机は1ヶ月ほど前に椅子を買ったのもあり、買いました。
-足が短いので、椅子を低くしたいのですが、天板が高いので足置き場をつくってそこにのせています。
-それ以外の気になる点としては、角がちょっと痛いというぐらいで今のところ満足しています。</p>
-
-<p>Kinesisは以前仕事で週1日だけ使わせてもらったことがあったので、気に入ったのでそれで買いました。
-赤軸モデルを買ったのですが、カチカチ音がしないのでこれはこれでイイカンジです。</p>
-
-<p>コーヒーセットは、机がきてから買う予定で買いました。このドリッパ用の用紙を見付けるのが大変で、2時間ほど彷徨いました。</p>
-
-<p>これで欲しいものは大体そろったのですが、最近デスクトップPC欲しくなってきたんだよなぁ…</p>
-
-<p>もうしわけねぇ。</p>
 ]]></content>
   </entry>
   
