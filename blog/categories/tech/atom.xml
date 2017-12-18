@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-12-02T14:40:44+09:00</updated>
+  <updated>2017-12-18T22:50:32+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,118 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[IRubyはじめました]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2017/12/18/hello/"/>
+    <updated>2017-12-18T21:56:55+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2017/12/18/hello</id>
+    <content type="html"><![CDATA[<p>表題のとおり、 <a href="https://github.com/SciRuby/iruby">IRuby</a> をはじめてみました</p>
+
+<h3>インストール</h3>
+
+<p>インストールは簡単で <code>gem install iruby</code> でいけますが、私の利用している環境では依存している <a href="https://github.com/zeromq/czmq">czmq</a> が古かったので手動でインストールして回避しています。</p>
+
+<p><code>console
+git clone https://github.com/zeromq/czmq.git
+cd czmq
+./autogen
+./configure --prefix=${HOME}/.local
+make -j4
+make install
+gem install iruby cztop
+LD_LIBRARY_PATH=${HOME}/.local/lib iruby
+</code></p>
+
+<p>でインストールと動作はできます。画像貼るのがメンドイので <code>ipython</code> 貼っておきます。</p>
+
+<p>```
+{
+ &ldquo;cells&rdquo;: [
+  {
+   &ldquo;cell_type&rdquo;: &ldquo;code&rdquo;,
+   &ldquo;execution_count&rdquo;: 4,
+   &ldquo;metadata&rdquo;: {},
+   &ldquo;outputs&rdquo;: [</p>
+
+<pre><code>{
+ "data": {
+  "text/html": [
+   "\n",
+   "  &lt;script&gt;\n",
+   "  requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min'] }})\n",
+   "  &lt;/script&gt;\n",
+   "\n",
+   "\n",
+   "&lt;div id=\"c34db0db-dc37-4ae3-a2b3-33ab99830b89\" style=\"height: 100%; width: 100%;\"&gt;&lt;/div&gt;\n",
+   "\n",
+   "&lt;script&gt;\n",
+   " require(['plotly'], function(Plotly) { \n",
+   "Plotly.newPlot(\n",
+   "  'c34db0db-dc37-4ae3-a2b3-33ab99830b89',\n",
+   "  [{\"x\":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],\"y\":[100,81,64,49,36,25,16,9,4,1,0,1,4,9,16,25,36,49,64,81,100],\"type\":null,\"mode\":\"\"}],\n",
+   "  {\"width\":1000,\"height\":500},\n",
+   "  {\"linkText\":\"Export to plot.ly\",\"showLink\":true}\n",
+   ")\n",
+   "\n",
+   "window.addEventListener('resize', function() {\n",
+   "  Plotly.Plots.resize(document.getElementById('c34db0db-dc37-4ae3-a2b3-33ab99830b89'))\n",
+   "})\n",
+   " }) \n",
+   "&lt;/script&gt;"
+  ],
+  "text/plain": [
+   "#&lt;Plotly::Offline::HTML:0x000056356f14be00 @id=\"c34db0db-dc37-4ae3-a2b3-33ab99830b89\", @data=[{:x=&gt;[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], :y=&gt;[100, 81, 64, 49, 36, 25, 16, 9, 4, 1, 0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100], :type=&gt;nil, :mode=&gt;\"\"}], @layout={:width=&gt;1000, :height=&gt;500}, @config={:linkText=&gt;\"Export to plot.ly\", :showLink=&gt;true}, @embedded=true&gt;"
+  ]
+ },
+ "metadata": {},
+ "output_type": "display_data"
+},
+{
+ "data": {
+  "text/plain": [
+   "#&lt;CZTop::Socket::PUB:0x56356e7f3620 last_endpoint=\"tcp://127.0.0.1:45835\"&gt;"
+  ]
+ },
+ "execution_count": 4,
+ "metadata": {},
+ "output_type": "execute_result"
+}
+</code></pre>
+
+<p>   ],
+   &ldquo;source&rdquo;: [</p>
+
+<pre><code>"require 'daru'\n",
+"require 'daru/plotly'\n",
+"include Daru::Plotly::Methods\n",
+"\n",
+"dv = Daru::Vector.new((-10..10).map{|n| n ** 2 })\n",
+"plot(dv, x: \"x\", y: \"y\").show"
+</code></pre>
+
+<p>   ]
+  }
+ ],
+ &ldquo;metadata&rdquo;: {
+  &ldquo;kernelspec&rdquo;: {
+   &ldquo;display_name&rdquo;: &ldquo;Ruby 2.4.2&rdquo;,
+   &ldquo;language&rdquo;: &ldquo;ruby&rdquo;,
+   &ldquo;name&rdquo;: &ldquo;ruby&rdquo;
+  },
+  &ldquo;language_info&rdquo;: {
+   &ldquo;file_extension&rdquo;: &ldquo;.rb&rdquo;,
+   &ldquo;mimetype&rdquo;: &ldquo;application/x-ruby&rdquo;,
+   &ldquo;name&rdquo;: &ldquo;ruby&rdquo;,
+   &ldquo;version&rdquo;: &ldquo;2.4.2&rdquo;
+  }
+ },
+ &ldquo;nbformat&rdquo;: 4,
+ &ldquo;nbformat_minor&rdquo;: 2
+}
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[use red-arrow.gem]]></title>
@@ -241,36 +353,6 @@ source ~/.bashrc
 </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[みくったーでえもじ]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter/"/>
-    <updated>2016-12-17T00:00:00+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter</id>
-    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
-たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
-
-<h2>なんぞそれ？</h2>
-
-<p>ここにあります。<a href="https://github.com/katsyoshi/mikutter-emoji">mikutter-emoji</a>
-<code>:tofu_on_fire:</code> みたいに <code>:</code> で囲われた文字列を絵文字に置換するだけです。</p>
-
-<h2>つかいかた</h2>
-
-<p><code>sh
-git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
-EDIT ~/.mikutter/plugin/emoji/emoji.yml
-</code></p>
-
-<p>gitでプラグインディレクトリにコピーします。
-コピーしたら、絵文字の設定を <code>emoji.yml</code> に入れます。
-今は5つしか登録していないので皆で登録しましょう</p>
-
-<h2>おわり</h2>
-
-<p>おわり</p>
 ]]></content>
   </entry>
   

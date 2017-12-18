@@ -2,284 +2,288 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/04/05/hello-world/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.katsyoshi.org/blog/2014/04/09/how-to-install-applications-non-super-user/
         </loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/04/11/post-access-log-to-treasure-data/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.katsyoshi.org/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus/
         </loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/05/12/jubatus-runs-on-docker/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/05/21/new-td-agent-for-mac/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/06/02/github-cleanup/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/06/10/pitfall-in-boot2docker/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/06/22/fail-git-uploading/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/06/26/use-spdy-in-nginx/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/07/22/akiyamago-hackathon-2014/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/08/10/good-bye-elasticsearch-and-jenkins/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/08/20/gentoo-install-battle-part-i/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/08/21/gentoo-install-battle-part-ii/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/08/31/gentoo-install-battle-part-iii/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/09/12/jubatus-in-gentoo/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/09/15/went-to-nagoya-and-nagano/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/09/22/rubykaigi2014/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/10/01/pitfall-in-docker/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/11/04/mikutter-advent-calendar/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/11/21/remove-empty-example-files/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2014/12/01/mikutter-advent-calendar-1-day/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/01/12/typescript-in-rails/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/01/27/start-rust/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/01/31/emacs-fonts/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/02/12/remove-ibus/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/02/16/setting-xdg-open/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/02/22/mv-sakura-github-dot-io/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/02/24/portage2git/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/03/17/heroku-deploy-anther-branch/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/03/18/party-of-asakusa-dot-rb-300th/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/04/06/careless-miss/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/04/09/file-name-needs-scss-extention/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/04/15/looks-good-new-machine/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/04/30/use-visual-studio-code/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/05/03/softether/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/05/10/shred-x240/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/05/11/golden-weak/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/05/15/screencast-use-gif/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/06/26/sir-elasticsearch/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2015/08/02/hello-itamae-plugins/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.katsyoshi.org/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff/
         </loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/08/08/renewal-my-site/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/08/31/hello-mikutter/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/10/09/hello-gentoo-using-itamae/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/10/10/fxxking-ssh-permission/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/11/09/went-to-8-jou-island/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/11/28/hello/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/11/29/introduced-cuda/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/12/01/im-rockn-roll-star/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/12/05/d250g2/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/12/10/itamae-loves-gentoo/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2016/12/17/emoji-in-mikutter/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/01/01/good-buy-of-2016/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/02/12/octopress-themes/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/02/20/basic-authenticate-in-h2o/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-04-01T17:05:46+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-06-19T16:53:29+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/05/21/start-watching-dazn/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-06-19T16:53:29+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/</loc>
-        <lastmod>2017-05-30T07:56:14+09:00</lastmod>
+        <lastmod>2017-06-19T16:53:29+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/05/31/use-red-arrow-dot-gem/</loc>
-        <lastmod>2017-06-01T00:33:45+09:00</lastmod>
+        <lastmod>2017-06-19T16:53:29+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/06/04/rustful-web/</loc>
-        <lastmod>2017-06-04T23:43:31+09:00</lastmod>
+        <lastmod>2017-06-19T16:53:29+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/07/01/emacs-config-from-itamae/</loc>
-        <lastmod>2017-07-01T23:11:50+09:00</lastmod>
+        <lastmod>2017-12-11T23:11:12+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/12/01/went-to-kinosaki-and-amano-hashidate/</loc>
-        <lastmod>2017-12-01T01:48:38+09:00</lastmod>
+        <lastmod>2017-12-11T23:11:12+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/2017/12/02/wiskey-advent-calendar/</loc>
-        <lastmod>2017-12-02T14:40:39+09:00</lastmod>
+        <lastmod>2017-12-11T23:11:12+09:00</lastmod>
     </url>
     <url>
-        <loc>http://blog.katsyoshi.org/</loc>
-        <lastmod>2017-12-02T14:40:39+09:00</lastmod>
+        <loc>http://blog.katsyoshi.org/blog/2017/12/18/hello/</loc>
+        <lastmod>2017-12-18T22:50:05+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/blog/archives/</loc>
-        <lastmod>2017-12-02T14:40:39+09:00</lastmod>
+        <lastmod>2017-12-18T22:50:05+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.katsyoshi.org/</loc>
+        <lastmod>2017-12-18T22:50:05+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.katsyoshi.org/robots.txt</loc>
-        <lastmod>2017-11-30T07:58:21+09:00</lastmod>
+        <lastmod>2017-04-01T16:25:49+09:00</lastmod>
     </url>
 </urlset>

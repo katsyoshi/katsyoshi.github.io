@@ -7,12 +7,8 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="PCを買い替えたので環境構築してます。
-Jubatusのoverlayがあったのですが、古かったので新しくJubatusのoverlay作成しました。 インストール これは、以下のコマンドでインストールができます。 1
-2
-3
-4
-# curl https://raw. &hellip;">
+	<meta name="description" content="MacOS XでDockerを動かしてたら嵌ったのでメモ Docker on OS X OS XでもDockerが動かせるようになりました。
+インストールはこことかを参考にしてください。 で嵌ったところ Docker上で動いているアプリケーションとどうしても通信ができない。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -86,606 +82,6 @@ Jubatusのoverlayがあったのですが、古かったので新しくJubatus�
     <article class="post">
 	<h2 class="title">
 		
-		<a href="/blog/2014/09/12/jubatus-in-gentoo/">
-		
-			Gentoo LinuxむけのJubatusパッケージ書いたよ</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">PC</a>を<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">買い替えた</a>ので<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">環境構築</a>してます。
-<a href="https://github.com/kazuki/overlay/tree/master/sci-calculators/jubatus">Jubatusのoverlay</a>があったのですが、古かったので新しく<a href="https://github.com/katsyoshi/overlay">Jubatusのoverlay</a>作成しました。</p>
-
-<h2>インストール</h2>
-
-<p>これは、以下のコマンドでインストールができます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># curl https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml &gt; /etc/layman/overlays/katsyoshi.xml</span>
-</span><span class='line'><span class="c"># layman -f -a katsyoshi</span>
-</span><span class='line'><span class="c"># eix-sync</span>
-</span><span class='line'><span class="c"># emerge -av jubatus</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でいけるとおもいます。</p>
-
-<h2>未実装</h2>
-
-<ul>
-<li>jubatus_coreのオプションがはたらいてない(ハズ)</li>
-<li>jubatus_msgpack-rpcの依存パッケージにdev-libs/msgpackをいれていない</li>
-<li>jubatusのオプションを確認していない</li>
-</ul>
-
-
-<p>などなどあるので、PRまってます。</p>
-
-<h2>まとめ</h2>
-
-<p><a href="https://github.com/kazuki/overlay/">よくみたら</a>必要なライブラリのパッケージもあったのでこれのバージョンとjubatus_core追加するだけでよかったかも。</p>
-
-<p>ちゃんちゃん</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/jubatus/'>jubatus</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/portage/'>portage</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">
-		
-			Gentoo Install Battle Part III</a>
-	</h2>
-	<div class="entry-content">
-		<p>これ<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">まで</a>の<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">流れ</a>で準備が整ったので、Installを始めます。</p>
-
-<h2>インストール</h2>
-
-<p>これは<a href="http://wiki.gentoo.org/">Gentoo Wiki</a>を見ながらで大丈夫です。</p>
-
-<h3>嵌ったところ</h3>
-
-<p>音が鳴らないという問題が発生しました。<a href="http://pocke.hatenablog.com/entry/2014/02/02/100636">理由</a>は簡単でしたのですぐに設定しました。</p>
-
-<p>つぎにネットワークの設定をnetmountからNetworkManagerに変更しました。
-設定は<a href="http://wiki.gentoo.org/wiki/NetworkManager">ここ</a>で行なえばよいです。</p>
-
-<p>最後にibus-mozcをインストールして終りです。</p>
-
-<h2>mikutter</h2>
-
-<p>GentooInstallBattleはmikutterをインストールしてtweetすることなのでmikutterをインストールします。
-ここではrbenvを利用してmikutterのインストールします。
-まずはrbenvとruby-buildをインストールします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-</span><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>つぎにrbenvの設定を行います。以下の設定を<code>~/.bashrc</code>あたりに追記してください</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/.rbenv/bin:<span class="nv">$PATH</span>
-</span><span class='line'><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Rubyのインストールは<code>rbenv install 2.1.2</code>でインストールします。
-最後にmikutterをダウンロードし、環境を構築します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/mikutter/mikutter.git ~/mikutter
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/mikutter
-</span><span class='line'><span class="nv">$ </span>bundle install
-</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>ruby mikutter.rb
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でインストール終了!!
-これで快適なmikutterライフがておくれますね。</p>
-
-<p><img src="/images/photo/mikutter.png" alt="mikutter" /></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">
-		
-			Gentoo Install Battle Part II</a>
-	</h2>
-	<div class="entry-content">
-		<p>X240の準備は終ったので、<a href="http://wiki.gentoo.org/wiki/Quick_install_guide">インストール</a>します。基本的にはこの流れです。</p>
-
-<h2>USBブート</h2>
-
-<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">作成したUSBメモリ</a>をX240に差して起動します。
-起動したら、まずパーティションの設定を行います。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gpart /dev/sda
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で不要なパーティションを削除し、必要なパーティションを作成します。</p>
-
-<h2>無線LAN</h2>
-
-<p>ネットワークを接続しますが、今回は無線LANを利用してインストールを行います。</p>
-
-<p>まず、どこか適当な位置に<a href="http://www.xmisao.com/2014/01/16/how-to-connect-wpa2-wireless-lan-using-wpa-supplicant.html">リンク先</a>のファイルを作成してください。</p>
-
-<p>次に以下のコマンドを実行します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>実行したら、接続されているのでATL + F2とかでコンソールの表示を変更してください。</p>
-
-<h2>おわり</h2>
-
-<p>有線のLANケーブルがなかったからはまった。
-続きは明日以降に…</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">
-		
-			Gentoo Install Battle Part I</a>
-	</h2>
-	<div class="entry-content">
-		<p>ここにThinkPad X240があります。これの中身を Gentoo/Linux にします。</p>
-
-<h2>準備</h2>
-
-<p>準備として、Gentoo/LinuxのLiveCDを作成、Bootの設定を行います。</p>
-
-<h3>イメージ作成</h3>
-
-<p>まずLiveCDイメージをダウンロードしUSBフラッシュメモリにコピーします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wget ftp://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140814.iso
-</span><span class='line'><span class="nv">$ </span>dd <span class="nv">of</span><span class="o">=</span>/path/to/disk <span class="k">if</span><span class="o">=</span>install-amd64-minimal-20140814.iso <span class="nv">bs</span><span class="o">=</span>4m
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でイメージの作成終了です。
-次に、X240の設定を行います。</p>
-
-<h3>X240の起動準備</h3>
-
-<p>Windowsを起動し、Shift押しながら再起動します。
-再起動したら、以下の順番でBIOSを起動させます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>トラブルシューティング -&gt; 詳細オプション -&gt; UEFIファームウェアの設定 -&gt; 再起動
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でBIOSがたちあがるので、Secure BootとUEFI BootとBoot順の設定を変更します。</p>
-
-<p>Seucre Bootでは<code>Securety -&gt; Secure Boot -&gt; Secure Boot [Enable]</code>を<code>[Disable]</code>に変更</p>
-
-<p>UEFI Bootでは<code>Startup -&gt; UEFI/Legacy Boot [UEFI only]</code>を<code>[Both]</code>に変更</p>
-
-<p>Boot順の設定では、<code>Startup -&gt; Boot</code>でBootさせたい順番に変更</p>
-
-<p>BIOSを変更したらRestartします。</p>
-
-<h2>まとめ</h2>
-
-<p>とりあえず今日はここで終りです。インストールは明日以降にします。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/08/10/good-bye-elasticsearch-and-jenkins/">
-		
-			Good-bye Elasticsearch and Jenkins</a>
-	</h2>
-	<div class="entry-content">
-		<p>この環境では慢性的にメモリが足りなかったのでメモリを大量に使ってる<a href="http://www.elasticsearch.org/">Elasticsearch</a>を削除しました。
-Jenkinsについては利用していなかったので停止してます。ついでに12.04から14.04にupgradeしました。</p>
-
-<h2>削除とUpgrade</h2>
-
-<p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
-Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo apt-get purge elasticsearch
-</span><span class='line'><span class="nv">$ </span>sudo update-rc.d jenkins disable
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>つぎに14.04へupgradeを行ないます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo <span class="k">do</span>-release-upgrade -d
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これで14.04になってます。</p>
-
-<h2>環境</h2>
-
-<ul>
-<li>Machine: さくらVPS</li>
-<li>CPU: Intel Xeon E312xx (SandyBridge) * 2</li>
-<li>MEM: 1GB</li>
-<li>HDD: 100GB</li>
-<li>OS: Ubuntu Linux 12.04</li>
-</ul>
-
-
-<h2>インストール済ソフトウェア（一部）</h2>
-
-<ul>
-<li>Elasticsearch</li>
-<li>fluentd</li>
-<li>Jenkins</li>
-<li>Jubatus</li>
-<li>Norikra</li>
-<li>Nginx</li>
-</ul>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/jenkins/'>jenkins</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/07/22/akiyamago-hackathon-2014/">
-		
-			秘境でハッカソンがあったので行ってきた</a>
-	</h2>
-	<div class="entry-content">
-		<p>7月19日〜7月21日まで秋山郷の<a href="https://www.google.co.jp/maps/place/%E3%81%8B%E3%81%9F%E3%81%8F%E3%82%8A%E3%81%AE%E5%AE%BF/@36.9184265,138.6375958,18z/data=!4m2!3m1!1s0x0:0xec3b9141469e30fc">かたくりの宿</a>という場所でHackathonがあったので行ってきました。</p>
-
-<h2>1日目</h2>
-
-<p>1日目は仕事があったので仕事を終えてから新幹線で越後湯沢まで出て、<a href="https://twitter.com/m_asama">@m_asama</a>さんと合流して秋山郷へ。</p>
-
-<p>途中、最短経路が<a href="http://www.city.tokamachi.lg.jp/page/10040200057.html">土砂に埋もれて</a>通行できないので<a href="http://www.pref.niigata.lg.jp/tokamachi_seibi/1356771341657.html">迂回</a>して行きました。途中の道は狹く、えっここ通るの？って感じの道を通りました。宿に着いたらもう午後6時ですぐに食事の時間となりました。</p>
-
-<p>夕飯は山菜づくしな夕飯でした。</p>
-
-<p>夕飯終ってハックタイムでしたが、食堂を利用する予定だったので、食堂が空くまで部屋でだべってました。
-午後9時頃からハックタイムが始まりました。その日はとても眠かったので<a href="https://twitter.com/kotatsu_mi">@kotatu_mi</a>に絡んですぐに寝ました。</p>
-
-<h2>2日目</h2>
-
-<p>2日目は宿の人に起こされて起きました。朝食はこんなかんじでした。</p>
-
-<p><img src="/images/photo/akiyamago-2breakfast.png%20=%20256x" alt="二日目朝食" /></p>
-
-<p>朝食後、<a href="https://www.google.co.jp/maps/place/%E8%A6%8B%E5%80%89%E6%A9%8B/@36.91872,138.637115,17z/data=!3m1!4b1!4m2!3m1!1s0x5ff601b97e1ba7bb:0x1577cfb29a624fa7">近くの橋</a>まで散歩しました。軽い散歩だと思ってたら、山道で辛かった。</p>
-
-<p><img src="/images/photo/akiyamago-mikura-hashi.png%20=%20256x" alt="見倉橋" /></p>
-
-<p>そのまま帰るのはもったいないと思って反対側を登りました。登りきったら、近くにcool wind holeがあるらしいのでそこまで行ってみました。</p>
-
-<p><img src="/images/photo/akiyamago-cool-wind-hole.png%20=%20256x" alt="風穴" /></p>
-
-<p>帰りは山道がつらいしつかれたので、周って帰りました。</p>
-
-<p>昼飯は<a href="https://www.google.co.jp/maps/place/%E6%A5%BD%E9%A4%8A%E9%A4%A8/@36.9179309,138.6369755,13z/data=!4m5!1m2!2m1!1z5bCP6LWk5rKi!3m1!1s0x601dff32c6304d99:0xaacce4d76fa870ff">小赤沢</a>まで温泉と熊らーめんを食べました。</p>
-
-<p><img src="/images/photo/akiyamago-kuma-ramen.png%20=%20256x" alt="熊らーめん" /></p>
-
-<p>宿に戻ってからはしばらくはハックタイムでした。夕食後、星を見に外出たらすごく星が綺麗でした。</p>
-
-<p><img src="/images/photo/akiyamago-milkyway.png%20=%20%20256x" alt="星きれい" /></p>
-
-<p>星見に行ったあとにハックタイムがあり、<a href="https://github.com/katsyoshi/mikutter-docker">mikutterでDockerのコントロール</a>をしようとしてました。</p>
-
-<h2>3日目</h2>
-
-<p>午前中は夜の続きをやってました。</p>
-
-<p>帰りは<a href="https://www.google.co.jp/maps/place/%E5%88%87%E6%98%8E%E6%B8%A9%E6%B3%89/@36.8097569,138.6200903,18z/data=!4m7!1m4!3m3!1s0x601dff32c6304d99:0xaacce4d76fa870ff!2z5qW96aSK6aSo!3b1!3m1!1s0x0:0x30280b0e98e9ad4a">切明温泉</a>にたちより、長野回りで帰りました。</p>
-
-<h2>今回の成果</h2>
-
-<p><a href="https://www.google.co.jp/search?q=%E6%88%90%E6%9E%9C%E4%BD%95%E3%82%82%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%E3%81%A7%E3%81%97%E3%81%9F%E3%83%BC&amp;newwindow=1&amp;espv=2&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ei=gmjOU9KXOcne8AXRl4KYCg&amp;ved=0CAYQ_AUoAQ&amp;biw=1166&amp;bih=986#facrc=_&amp;imgdii=_&amp;imgrc=tETgdA-yYjU4tM%253A%3BqWbTS9xBjlMpPM%3Bhttp%253A%252F%252Ftubagra.com%252Ftbg-wp%252Fwp-content%252Fuploads%252F2013%252F06%252F0213.jpg%3Bhttp%253A%252F%252Ftubagra.com%252F16457%252F%3B600%3B490">成果</a>です</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/06/26/use-spdy-in-nginx/">
-		
-			SPDYをさくっと動かしてみた</a>
-	</h2>
-	<div class="entry-content">
-		<p>NGINXでSPDY3.1が<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html">サポートされている</a>ようなので動かしてみた。</p>
-
-<h2>準備</h2>
-
-<p>SPDYは<a href="http://ja.wikipedia.org/wiki/SPDY#.E6.A6.82.E8.A6.81">SSL必須</a>のようなのでとりあえずOpenSSLで<a href="http://dogmap.jp/2011/05/10/nginx-ssl/">野良証明書を作成</a>します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /path/to/cert/dir
-</span><span class='line'><span class="nv">$ </span>openssl genrsa -des3 -out server.key 2048
-</span><span class='line'><span class="nv">$ </span>openssl req -new -key server.key -out server.csr
-</span><span class='line'><span class="nv">$ </span>openssl rsa -in server.key.org -out server.key
-</span><span class='line'><span class="nv">$ </span>openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>NGINXの設定</h2>
-
-<p>とりあえずNGINXの<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html">設定ファイルを作成</a>します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>server <span class="o">{</span>
-</span><span class='line'>    listen 443 ssl spdy;
-</span><span class='line'>    ssl_certificate server.crt;
-</span><span class='line'>    ssl_certificate_key server.key;
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と設定したらNGINXを再起動します。
-これでSPDYで動いてます。わいわい。</p>
-
-<p><img src="/images/photo/spdy.png" alt="SPDY" /></p>
-
-<p>オレオレ証明書なのでそのうちちゃんとした証明書を使いたいですね。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/http2/'>http2</a>, <a class='category' href='/blog/categories/nginx/'>nginx</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/06/22/fail-git-uploading/">
-		
-			野良Gitサーバにuploadできなかった話</a>
-	</h2>
-	<div class="entry-content">
-		<p>今日もろくでもない理由で嵌った。</p>
-
-<h2>嵌った理由</h2>
-
-<p>野良Gitサーバを立てているのでそこに新しいリポジトリを作成した。</p>
-
-<p>で、リモートを追加し、ブランチを追加しようとすると</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add master ssh://myhost/my_project.git
-</span><span class='line'>$ git push origin master -f
-</span><span class='line'>error: src refspec master does not match any.
-</span><span class='line'>error: failed to push some refs to 'ssh://myhost/my_project.git'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>というようなエラーが出てきてアップロードできなかった。
-そのため理由を探ってたら<a href="http://d.hatena.ne.jp/nishiohirokazu/20110304/1299229916">同じ理由</a>があった。</p>
-
-<p>そこで <code>git log</code> としたら何もでてこなかったので</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
-</span><span class='line'>$ git commit -m 'first commit'
-</span><span class='line'>$ git push -u origin master</span></code></pre></td></tr></table></div></figure>
-
-
-<p>リモートリポジトリに追加できました。
-ちゃんちゃん</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
 		<a href="/blog/2014/06/10/pitfall-in-boot2docker/">
 		
 			Docker on OS Xで嵌ったおはなし</a>
@@ -750,7 +146,7 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
     <article class="post">
 	<h2 class="title">
 		
-		<a href="/blog/2014/06/02/github-cleanup/">
+		<a href="/blog/2014/06/01/github-cleanup/">
 		
 			今日の夕飯</a>
 	</h2>
@@ -792,14 +188,735 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
 </div>
 </article>
 
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/05/20/new-td-agent-for-mac/">
+		
+			td-agent.pkg</a>
+	</h2>
+	<div class="entry-content">
+		<p>td-agent2が<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">リリース</a>され、Macへの公式パッケージがでたのでインストールメモ</p>
+
+<h2>Install</h2>
+
+<p><a href="https://s3.amazonaws.com/td-agent-repository/macosx/td-agent2-1.0.0-0.dmg">ダウンロード</a>してダブルクリックでインストールできます。</p>
+
+<h2>設定</h2>
+
+<p>設定ファイル置場は<code>/etc/td-agent/td-agent.conf</code>になります。
+設定ファイルはいままでの設定で使えるようです。
+あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo launchctl load /Library/LaunchDaemon/td-agent.plist
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/05/12/jubatus-runs-on-docker/">
+		
+			JubatusをDocker上で動かしてみた</a>
+	</h2>
+	<div class="entry-content">
+		<p>最近話題の<a href="https://www.docker.io/">Docker</a>使ってJubatusを動かしてみたのでメモ的なものを</p>
+
+<h2>環境</h2>
+
+<p>環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作</p>
+
+<ul>
+<li>Vagrant: 1.5.4</li>
+<li>docker: 0.11.1</li>
+</ul>
+
+
+<h2>Dockerfile</h2>
+
+<p><a href="https://github.com/katsyoshi/docker-jubatus">リポジトリ</a>を作成しておきましたのでcloneして実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/katsyoshi/docker-jubatus
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>docker-jubatus
+</span><span class='line'><span class="nv">$ </span>docker build .
+</span><span class='line'><span class="nv">$ </span>docker run -p 9199:9199 最後に出てきたハッシュ値
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で動きはじめます。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/jubatus/'>jubatus</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus/">
+		
+			Jubatus Handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ</a>
+	</h2>
+	<div class="entry-content">
+		<h2><a href="http://connpass.com/event/5641/">Jubatus Handson</a>行ってきました</h2>
+
+<p>行ってきました。</p>
+
+<h2>fluent-plugin-jubatus 0.0.2をリリースしました</h2>
+
+<p>先日<a href="http://regional.rubykaigi.org/oedo04">大江戸Ruby会議04</a>に行ってみたらやる気が湧いてきたので半年ほど寝かせておいた<a href="http://rubygems.org/gems/fluent-plugin-jubatus">fluent-plugin-jubatus</a>をアップデートしました。</p>
+
+<p>大きな変更点としては、異常検知（jubaanomaly）をサポートするようになってます。</p>
+
+<h3>プラグインの今後</h3>
+
+<p>今回も入れなかったのですが、このプラグインでは未だ判定のみのサポートです。
+理由としては</p>
+
+<ul>
+<li>計算量</li>
+<li>メモリ</li>
+</ul>
+
+
+<p>のふたつがあげられます。計算量に関しては以前手元のMacで異常検出を動作させていたときマシンの動作がもっさりになるほどの計算量があったためです。メモリに関しては今のところ不安には感じてはいないですが、データ量(数)が巨大になったときどこまで必要なのかってのがよくわからない。という理由で積極的に導入していないです。</p>
+
+<p>これらを解消する方法としては忘却(<a href="https://github.com/jubatus/jubatus/tree/feature/unlearning">unlearning</a>)が考えられるのですが、じゃぁどの必要のないデータを忘却させるのって問題があります。</p>
+
+<p>とはいえ、そろそろ導入したいので<a href="https://github.com/katsyoshi/fluent-plugin-jubatus">pull req</a>まってます。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/fluent-plugin/'>fluent-plugin</a>, <a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/jubatus/'>jubatus</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/10/post-access-log-to-treasure-data/">
+		
+			アクセスログをTreasureData.comへ</a>
+	</h2>
+	<div class="entry-content">
+		<p>いいかげん<a href="http://www.treasuredata.com">treasure data</a>を使おうかな。
+ということでこの鯖のアクセスログをfluentdを使って保存しようとおもいます。</p>
+
+<p>今回は<a href="https://github.com/treasure-data/td-agent">td-agent</a>を利用せずにgemからインストールしたfluentdを利用します。</p>
+
+<h2>環境</h2>
+
+<p>環境としてUbuntu 12.04を利用しています。</p>
+
+<h2>準備</h2>
+
+<p>事前準備としてユーザ、グループの作成、rubyのインストールを行ないます。</p>
+
+<h3>ユーザ、グループの作成</h3>
+
+<p>以下のコマンドでユーザ、グループの作成を行います。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo adduser fluentd -s /bin/false
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指示に従って入力するとユーザ、グループが作成されています。
+このユーザは<a href="http://qiita.com/shunichi/items/c7744878f5c02eaab18d#2-5">ログインできません</a>。</p>
+
+<h3>Rubyのインストール</h3>
+
+<p>以下のコマンドを入力しRubyのインストールを行ないます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo aptitude build-dep ruby1.9.3
+</span><span class='line'><span class="nv">$ </span>sudo aptitude install git
+</span><span class='line'><span class="nv">$ </span>sudo git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
+</span><span class='line'><span class="nv">$ </span>sudo git clone git://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
+</span><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">RBENV_ROOT</span><span class="o">=</span>/usr/local/rbenv
+</span><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">RBENV_ROOT</span><span class="k">}</span>/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここまで入力したら<code>sudo visudo -f /etc/sudoers.d/00_base</code>と入力し、以下を<a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">入力してください</a>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Defaults !secure_path
+</span><span class='line'>Defaults env_keep +<span class="o">=</span> <span class="s2">&quot;PATH RBENV_ROOT&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>入力したらRuby 2.1.1をインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo rbenv install 2.1.1
+</span><span class='line'><span class="nv">$ </span>sudo rbenv rehash
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でインストール完了です。次にfluentdをインストールします。</p>
+
+<h3>fluentdとプラグインのインストール</h3>
+
+<p>gemでfluentdとtdプラグインのfluent-plugin-tdをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo gem install fluentd fluent-plugin-td
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>つぎに設定ファイル<code>fluentd.conf</code>を作成します。</p>
+
+<figure class='code'><figcaption><span>fluentd.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;source&gt;</span>
+</span><span class='line'>  type forward
+</span><span class='line'><span class="nt">&lt;/source&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;source&gt;</span>
+</span><span class='line'>  type tail
+</span><span class='line'>  path /var/log/nginx/access.log
+</span><span class='line'>  format nginx
+</span><span class='line'>  time_format %d/%b/%Y:%H:%M:%S %z
+</span><span class='line'>  tag td.nginx.main.access
+</span><span class='line'>  pos_file /var/log/fluentd/main_access.pos
+</span><span class='line'><span class="nt">&lt;/source&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;match</span> <span class="err">td.**.*</span><span class="nt">&gt;</span>
+</span><span class='line'>  type copy
+</span><span class='line'>  <span class="nt">&lt;store&gt;</span>
+</span><span class='line'>    type stdout
+</span><span class='line'>  <span class="nt">&lt;/store&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;store&gt;</span>
+</span><span class='line'>    type tdlog
+</span><span class='line'>    endpoint api.treasure-data.com
+</span><span class='line'>    apikey ここにtdのAPIキーを入力してね
+</span><span class='line'>    auto_create_table
+</span><span class='line'>    buffer_type file
+</span><span class='line'>    buffer_path /var/log/fluentd/buffer/td
+</span><span class='line'>    use_ssl true
+</span><span class='line'>  <span class="nt">&lt;/store&gt;</span>
+</span><span class='line'><span class="nt">&lt;/match&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>作成後起動確認を行なってください <code>fluentd -c fluentd.conf</code> 。
+起動確認を行ったら <code>fluentd.conf</code> を <code>/etc/fluentd/fluentd.conf</code> に移動します。
+これで終了です。</p>
+
+<h3>init.dスクリプトの作成</h3>
+
+<p>まず <code>/etc/init.d/skelton</code> を <code>/etc/init.d/fluentd</code> にコピーします。
+コピーしたら以下の様にします。</p>
+
+<figure class='code'><figcaption><span>fluentd_diff_skelton</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gh">diff --git a/etc/init.d/skeleton b/fluentd</span>
+</span><span class='line'>old mode 100644
+</span><span class='line'>new mode 100755
+</span><span class='line'><span class="gh">index dac9480..c59505e</span>
+</span><span class='line'><span class="gd">--- a/etc/init.d/skeleton</span>
+</span><span class='line'><span class="gi">+++ b/fluentd</span>
+</span><span class='line'><span class="gu">@@ -1,6 +1,6 @@</span>
+</span><span class='line'> #! /bin/sh
+</span><span class='line'> ### BEGIN INIT INFO
+</span><span class='line'><span class="gd">-# Provides:          skeleton</span>
+</span><span class='line'><span class="gi">+# Provides:          fleuntd</span>
+</span><span class='line'> # Required-Start:    $remote_fs $syslog
+</span><span class='line'> # Required-Stop:     $remote_fs $syslog
+</span><span class='line'> # Default-Start:     2 3 4 5
+</span><span class='line'><span class="gu">@@ -19,19 +19,14 @@</span>
+</span><span class='line'>
+</span><span class='line'> # PATH should only include /usr/* if it runs after the mountnfs.sh script
+</span><span class='line'> PATH=/sbin:/usr/sbin:/bin:/usr/bin
+</span><span class='line'><span class="gd">-DESC=&quot;Description of the service&quot;</span>
+</span><span class='line'><span class="gd">-NAME=daemonexecutablename</span>
+</span><span class='line'><span class="gd">-DAEMON=/usr/sbin/$NAME</span>
+</span><span class='line'><span class="gd">-DAEMON_ARGS=&quot;--options args&quot;</span>
+</span><span class='line'><span class="gd">-PIDFILE=/var/run/$NAME.pid</span>
+</span><span class='line'><span class="gd">-SCRIPTNAME=/etc/init.d/$NAME</span>
+</span><span class='line'><span class="gd">-</span>
+</span><span class='line'><span class="gd">-# Exit if the package is not installed</span>
+</span><span class='line'><span class="gd">-[ -x &quot;$DAEMON&quot; ] || exit 0</span>
+</span><span class='line'><span class="gi">+NAME=fluentd</span>
+</span><span class='line'>
+</span><span class='line'> # Read configuration variable file if it is present
+</span><span class='line'> [ -r /etc/default/$NAME ] &amp;&amp; . /etc/default/$NAME
+</span><span class='line'>
+</span><span class='line'><span class="gi">+# Exit if the package is not installed</span>
+</span><span class='line'><span class="gi">+[ -x &quot;$DAEMON&quot; ] || exit 0</span>
+</span><span class='line'><span class="gi">+</span>
+</span><span class='line'> # Load the VERBOSE setting and other rcS variables
+</span><span class='line'> . /lib/init/vars.sh
+</span><span class='line'>
+</span><span class='line'><span class="gu">@@ -49,10 +44,11 @@ do_start()</span>
+</span><span class='line'>  #   0 if daemon has been started
+</span><span class='line'>  #   1 if daemon was already running
+</span><span class='line'>  #   2 if daemon could not be started
+</span><span class='line'><span class="gd">-    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --test &gt; /dev/null \</span>
+</span><span class='line'><span class="gi">+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON \</span>
+</span><span class='line'><span class="gi">+    ${START_STOP_DAEMON_ARGS} --test &gt; /dev/null \</span>
+</span><span class='line'>      || return 1
+</span><span class='line'><span class="gd">-    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- \</span>
+</span><span class='line'><span class="gd">-        $DAEMON_ARGS \</span>
+</span><span class='line'><span class="gi">+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON \</span>
+</span><span class='line'><span class="gi">+        ${START_STOP_DAEMON_ARGS} -- $DAEMON_ARGS \</span>
+</span><span class='line'>      || return 2
+</span><span class='line'>  # Add code here, if necessary, that waits for the process to be ready
+</span><span class='line'>  # to handle requests from services started subsequently which depend
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このままでは起動しないので <code>/etc/default/fluentd</code> を作成します。</p>
+
+<figure class='code'><figcaption><span>fluentd.default</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">RBENV_ROOT</span><span class="o">=</span>/usr/local/rbenv
+</span><span class='line'><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">RBENV_ROOT</span><span class="k">}</span>/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>
+</span><span class='line'><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span>
+</span><span class='line'><span class="nv">USER</span><span class="o">=</span>fluentd
+</span><span class='line'><span class="nv">GROUP</span><span class="o">=</span>fluentd
+</span><span class='line'><span class="nv">DESC</span><span class="o">=</span><span class="s2">&quot;fluentd&quot;</span>
+</span><span class='line'><span class="nv">PIDFILE</span><span class="o">=</span>/var/log/<span class="nv">$NAME</span>/run.pid
+</span><span class='line'><span class="nv">CONFFILE</span><span class="o">=</span>/etc/fluentd/fluentd.conf
+</span><span class='line'><span class="nv">DAEMON</span><span class="o">=</span>/usr/local/rbenv/shims/fluentd
+</span><span class='line'><span class="nv">DAEMON_ARGS</span><span class="o">=</span><span class="s2">&quot;--daemon $PIDFILE --log /var/log/fluentd/fluentd.log --config $CONFFILE&quot;</span>
+</span><span class='line'><span class="nv">SCRIPTNAME</span><span class="o">=</span>/etc/init.d/<span class="nv">$NAME</span>
+</span><span class='line'><span class="nv">START_STOP_DAEMON_ARGS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;${USER}&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">   if</span> ! getent passwd | grep -q <span class="s2">&quot;^${USER}:&quot;</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">      </span><span class="nb">echo</span> <span class="s2">&quot;$0: user for running td-agent doesn&#39;t exist: ${USER}&quot;</span> &gt;&amp;2
+</span><span class='line'>      <span class="nb">exit </span>1
+</span><span class='line'>   <span class="k">fi</span>
+</span><span class='line'><span class="k">   if</span> <span class="o">[</span> ! -d <span class="k">$(</span>dirname <span class="k">${</span><span class="nv">PIDFILE</span><span class="k">})</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">       </span>mkdir -p <span class="k">$(</span>dirname <span class="k">${</span><span class="nv">PIDFILE</span><span class="k">})</span>
+</span><span class='line'>   <span class="k">fi</span>
+</span><span class='line'><span class="k">   </span>chown -R <span class="k">${</span><span class="nv">USER</span><span class="k">}</span> <span class="k">$(</span>dirname <span class="k">${</span><span class="nv">PIDFILE</span><span class="k">})</span>
+</span><span class='line'>   <span class="nv">START_STOP_DAEMON_ARGS</span><span class="o">=</span><span class="s2">&quot;${START_STOP_DAEMON_ARGS} -c ${USER}&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;${GROUP}&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">   if</span> ! getent group | grep -q <span class="s2">&quot;^${GROUP}:&quot;</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">       </span><span class="nb">echo</span> <span class="s2">&quot;$0: group for running td-agent doesn&#39;t exist: ${GROUP}&quot;</span> &gt;&amp;2
+</span><span class='line'>       <span class="nb">exit </span>1
+</span><span class='line'>   <span class="k">fi</span>
+</span><span class='line'><span class="k">   </span><span class="nv">START_STOP_DAEMON_ARGS</span><span class="o">=</span><span class="s2">&quot;${START_STOP_DAEMON_ARGS} --group ${GROUP}&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としたら、以下のコマンドを入力し、fluentdデーモンを起動します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo update-rc.d fluentd defaults
+</span><span class='line'><span class="nv">$ </span>sudo mkdir -p /var/log/fluentd
+</span><span class='line'><span class="nv">$ </span>sudo chown fluentd:fluentd /var/log/fluentd
+</span><span class='line'><span class="nv">$ </span>sudo service fluentd start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で起動してるはずでう。</p>
+
+<h2>おわり</h2>
+
+<p>いくつかアクセスしてみてなげられてるのを確認できたらねます。
+最後に<a href="http://katsyoshi.doorkeeper.jp/events/10420">さけまつり</a>やるかもしれないのできてみてくだしあ。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/log/'>log</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/09/how-to-install-applications-non-super-user/">
+		
+			スーパーユーザ権限もたずに好きなソフトをインストール</a>
+	</h2>
+	<div class="entry-content">
+		<p>Linux使っててこのソフトが入ってないしsudoも使えないってときありませんか？
+そんなときに好きなソフト(tmux, emacs)をインストールする方法を書いときます。
+ここでは、tmuxとemacsについてインストール方法を書いときます。</p>
+
+<h2>方法</h2>
+
+<p>方法として以下のふたつがあると思う</p>
+
+<ol>
+<li>頑張っていれる</li>
+<li>パッケージマネージャ</li>
+</ol>
+
+
+<h2>頑張って入れる</h2>
+
+<p>この場合はちょっと管理がめんどうかもしれないが書いときます。</p>
+
+<p>前提条件としてgccとwgetがインストールされていることでX11関係のライブラリがインストールされていないこととします。</p>
+
+<h3>emacs</h3>
+
+<p>以下のコマンドでインストールできます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'> <span class="nv">$ </span>wget http://ftp.gnu.org/pub/gnu/emacs/emacs-24.3.tar.xz
+</span><span class='line'> <span class="nv">$ </span>tar xvf emacs-24.3.tar.xz
+</span><span class='line'> <span class="nv">$ </span><span class="nb">cd </span>emacs-24.3
+</span><span class='line'> <span class="nv">$ </span>./configure --prefix<span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/ --without-x --without-dbus --without-gnutls --without-makeinfo
+</span><span class='line'> <span class="nv">$ </span>make -j4 bootstrap
+</span><span class='line'> <span class="nv">$ </span>make install
+</span><span class='line'> <span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>
+</span><span class='line'> <span class="nv">$ </span>emacs
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>tmux</h3>
+
+<p>以下のコマンドで必要ライブラリのncursesをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'> <span class="nv">$ </span>wget http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz
+</span><span class='line'> <span class="nv">$ </span>tar xvf ncurses-5.9.tar.gz
+</span><span class='line'> <span class="nv">$ </span><span class="nb">cd </span>ncurses-5.9
+</span><span class='line'> <span class="nv">$ </span>./configure --prefix<span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local
+</span><span class='line'> <span class="nv">$ </span>make -j4
+</span><span class='line'> <span class="nv">$ </span>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次にlibeventをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'> <span class="nv">$ </span>wget https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
+</span><span class='line'> <span class="nv">$ </span>tar xvf libevent-2.0.21-stable.tar.gz
+</span><span class='line'> <span class="nv">$ </span><span class="nb">cd </span>libevent-2.0.21-stable
+</span><span class='line'> <span class="nv">$ </span>./configure --prefix<span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local
+</span><span class='line'> <span class="nv">$ </span>make -j4
+</span><span class='line'> <span class="nv">$ </span>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後にtmuxをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'> <span class="nv">$ </span>wget http://downloads.sourceforge.net/project/tmux/tmux/tmux-1.9/tmux-1.9a.tar.gz
+</span><span class='line'> <span class="nv">$ </span>tar xvf tmux-1.9a.tar.gz
+</span><span class='line'> <span class="nv">$ </span><span class="nb">cd </span>tmux-1.9a
+</span><span class='line'> <span class="nv">$ CFLAGS</span><span class="o">=</span><span class="s2">&quot;-I${HOME}/.local/include -I${HOME}/.local/include/ncurses&quot;</span> <span class="nv">LDFLAGS</span><span class="o">=</span>-L<span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/lib ./configure --prefix<span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local
+</span><span class='line'> <span class="nv">$ </span>make -j4
+</span><span class='line'> <span class="nv">$ </span>make install
+</span><span class='line'> <span class="nv">$ LD_LIBRARY_PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.local/lib tmux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>すべてインストール終ったら設定をします</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'> <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export PATH=${HOME}/.local/bin:${PATH}&#39;</span> &gt;&gt; <span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.bashrc
+</span><span class='line'> <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}&#39;</span> &gt;&gt; <span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.bashrc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>パッケージマネージャ</h2>
+
+<p>Gentoo/Prefix使え</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/05/hello-world/">
+		
+			Hello, World</a>
+	</h2>
+	<div class="entry-content">
+		<p>とりあえず<a href="http://octopress.org">octopress</a>で書いていこうかと思います</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
+
 <nav id="pagenavi">
     
         
             <a href="/blog/page/5/" class="prev">Prev</a>
         
     
-    
-        <a href="/blog/page/7/" class="next">Next</a>
     
     <div class="center"><a href="/blog/archives">Blog Archives</a></div>
 </nav>
