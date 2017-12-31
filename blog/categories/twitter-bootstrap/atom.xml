@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: twitter-bootstrap | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/twitter-bootstrap/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2017-12-31T19:51:56+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ファイル名間違えてテスト通らなかった話]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/04/09/file-name-needs-scss-extention/"/>
+    <updated>2015-04-09T15:38:49+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/04/09/file-name-needs-scss-extention</id>
+    <content type="html"><![CDATA[<p><a href="https://rails-assets.org">rails-assets.org</a> から <code>bootstrap-sass-official</code> をインストールし、動かしたら、 test環境でテストが落ちてたのでメモ。</p>
+
+<h2>オチ</h2>
+
+<p>CSSの<a href="https://twitter.com/izumin5210/status/586054782994874368">ファイル名</a>が <code>application.css.scss</code> じゃなかった。</p>
+
+<h2>設定</h2>
+
+<p>まず、<code>Gemfile</code> に以下のように追記をします。</p>
+
+<p><code>ruby
+source 'https://rails-assets.org' do
+  gem 'rails-asstes-bootstrap-sass-official'
+end
+</code></p>
+
+<p>あとはいつも通りにインストールします。
+次に <code>app/assets/javascripts/application.js</code> や <code>app/assets/stylesheets/application.css</code> に必要な読み込みを<a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">設定</a>します。</p>
+
+<h2>問題</h2>
+
+<p>以上の設定が終ったあと、 <code>cucumber</code> でテストを実行すると、</p>
+
+<p><code>
+File to import not found or unreadable: bootstrap-sass-official/bootstrap-sprockets.
+</code></p>
+
+<p>などといわれますのでオチを参考にファイル名変更して終了です。</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h3>参考</h3>
+
+<ol>
+<li><a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5</a></li>
+<li><a href="https://twitter.com/izumin5210/status/586054782994874368">https://twitter.com/izumin5210/status/586054782994874368</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,887 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>katsyoshiのめもみたいなもの</title>
+	<meta name="author" content="katsyoshi">
+
+	
+	<meta name="description" content="Elixir Conf Japan に行きましたが、よく考えてみたら
+まだこの PC に Elixir をインストールしていないことに気がついたので
+隣の英語のうまいおじさんにインストール方法を教えてもらいながらインストールしました1 準備 ここでは Gentoo Linux &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		<a class="coderwall" href="https://coderwall.com/katsyoshi" title="Coderwall">Coderwall</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/04/01/how-to-install-elixir/">
+		
+			Elixirのインストール方法</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
+まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
+隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<h2>準備</h2>
+
+<p>ここでは <a href="https://gentoo.org/">Gentoo Linux</a> を前提としております。
+まず、Elixir を動かすために <a href="https://www.erlang.org">Erlang</a> をインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">sudo eix-sync</span>
+</span><span class='line'><span class="go">sudo emerge erlang</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>準備はこれだけです。</p>
+
+<h2>インストール</h2>
+
+<p>次にインストールなのですが、Elixir は Earlang VM 上で動くプログラミング言語のため、コンパイルされたバイナリを置くだけでインストールがおわります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip</span>
+</span><span class='line'><span class="go">unzip Precompiled.zip -d elixir</span>
+</span><span class='line'><span class="go">mv elixir /path/to/elixir</span>
+</span><span class='line'><span class="go">echo &#39;export PATH=/path/to/elixir/bin:$PATH&#39; &gt;&gt; ~/.bashrc</span>
+</span><span class='line'><span class="go">source ~/.bashrc</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>さいごに <code>iex</code> を起動して確認すればおわり</p>
+
+<h3>参考</h3>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/elixir/'>elixir</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/02/20/basic-authenticate-in-h2o/">
+		
+			Basic Authenticate in H2o</a>
+	</h2>
+	<div class="entry-content">
+		<p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="s">&quot;/&quot;</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">mruby.handler</span><span class="p-Indicator">:</span> <span class="p-Indicator">|</span>
+</span><span class='line'>      <span class="no">require &quot;htpasswd.rb&quot;</span>
+</span><span class='line'>      <span class="no">Htpasswd.new(&quot;/etc/h2o/.htpasswd&quot;, &quot;realm-name&quot;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>また、 <code>.htpasswd</code> で plain フォーマットはサポートされていません。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">failed to validate password using file:/etc/h2o/.htpasswd:crypt-style password hash is not supported</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>.htpasswd</code> を手動で作成したい場合は以下の方法でできます<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;digest/sha1&quot;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;base64&quot;</span>
+</span><span class='line'><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/etc/h2o/.htpasswd&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">w</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">w</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;user:{SHA}</span><span class="si">#{</span><span class="no">Base64</span><span class="o">.</span><span class="n">encode64</span><span class="p">(</span><span class="ss">Digest</span><span class="p">:</span><span class="ss">:SHA1</span><span class="o">.</span><span class="n">digest</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Configure > Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Password Formats, The Apache Software Foundation., https://httpd.apache.org/docs/2.4/misc/password_encryptions.html, 2017/02/20 閲覧<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/basic-authenticate/'>basic-authenticate</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/h2o/'>h2o</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/02/12/octopress-themes/">
+		
+			Blogのテーマかえた</a>
+	</h2>
+	<div class="entry-content">
+		<p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
+変更の方法は以下のようになります<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/octopress
+</span><span class='line'><span class="nv">$ </span>git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake install<span class="se">\[</span><span class="s1">&#39;slash&#39;</span><span class="se">\]</span>
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake generate
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake preview
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ついでにfaviconもかえよう。</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Octopressのテーマを変更してみよう!, facestarbaby, http://qiita.com/fakestarbaby/items/ab532088453105e1bea4, 2017/02/12 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/01/01/good-buy-of-2016/">
+		
+			2016年買ってよかったもの</a>
+	</h2>
+	<div class="entry-content">
+		<p>おおきな買いものなかったなぁとおもったが、わりとあったので書きとめておく</p>
+
+<h2><a href="https://www.acer.com/ac/ja/JP/content/model/MR.JFZ11.00G">Acer H6510BD フルHD プロジェクター</a> と <a href="http://jp.yamaha.com/products/audio-visual/hometheater-systems/digital-sound-projector/ysp-1600__j/">YAMAHA YSP-1600</a></h2>
+
+<p>このふたつはもともとホームシアターが欲しいなぁということで買いました。
+プロジェクターは、4Kはまだまだ高いので音がうるさいの気にしないでもいいので FullHD のやつが欲くて購入。スピーカーもBTが利用できればいいなっておもってたのでこいつにしてたら、HDMIのパススルーができると聞いたので購入これも比較的安価だったので購入。
+両方とも割と安く手に入るところが魅力でしたので購入、現在は主にAmazon Prime Videoの鑑賞に利用しています。</p>
+
+<h2><a href="http://www.sony.jp/cyber-shot/products/DSC-RX100M3/">Sony Cyber-shot DCS-RX100M3</a></h2>
+
+<p>携帯をiPhoneからNexusに変更してからずっとカメラに不満だったので購入。これはカメラとの連携アプリがわかりやすいので大変よい買いものでした。</p>
+
+<h2><a href="http://www.philips.co.jp/c-p/HR2365_01/premium-collection-pasta-maker">Philips Noodle Maker</a></h2>
+
+<p>こいつは買ったのではなく、頂きものですが、ずっとwish listに入ってたのでここに。
+まだ1回しか使ってないけど、わいわい製麺できてたのしいので1台あると便利です。</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/12/17/emoji-in-mikutter/">
+		
+			みくったーでえもじ</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
+たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
+
+<h2>なんぞそれ？</h2>
+
+<p>ここにあります。<a href="https://github.com/katsyoshi/mikutter-emoji">mikutter-emoji</a>
+<code>:tofu_on_fire:</code> みたいに <code>:</code> で囲われた文字列を絵文字に置換するだけです。</p>
+
+<h2>つかいかた</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
+</span><span class='line'>EDIT ~/.mikutter/plugin/emoji/emoji.yml
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>gitでプラグインディレクトリにコピーします。
+コピーしたら、絵文字の設定を <code>emoji.yml</code> に入れます。
+今は5つしか登録していないので皆で登録しましょう</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/12/10/itamae-loves-gentoo/">
+		
+			板前さんでGentooを管理</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
+
+<h2>Itamaeでgentoo管理するには？</h2>
+
+<p>そらはー(<a href="https://twitter.com/sora_h">@sora_h</a>)が作ってる <a href="https://github.com/sorah/itamae-plugin-resource-portage">itamae-plugin-resource-portage</a> 使え</p>
+
+<h2>自作のportage管理ソフトの紹介</h2>
+
+<p><a href="https://github.com/katsyoshi/itamae-recipes/tree/master/cookbook/gentoo">ここ</a>にあります。</p>
+
+<h3>使いかた</h3>
+
+<p>簡単な使いかたとしては以下のようになります</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>itamae local gentoo.rb -j package.json</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これだけです。</p>
+
+<h3>パッケージの指定方法</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">packages</span><span class="p-Indicator">:</span>
+</span><span class='line'> <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&#39;category/package&#39;</span>
+</span><span class='line'>   <span class="l-Scalar-Plain">portage</span><span class="p-Indicator">:</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">use</span><span class="p-Indicator">:</span> <span class="s">&#39;package&#39;</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">accept_keywords</span><span class="p-Indicator">:</span> <span class="s">&#39;package&#39;</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="s">&#39;pakcage&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>name</code> で <code>category/package</code> を指定することでインストールすることができます。
+<code>portage</code> では <code>use</code> などのフラグを指定して管理します。
+<code>use</code> ディレクトリを作成してそこにファイルを置く必要があります。
+自動生成したいけど、依存パッケージの指定方法とかまだ考えていないので取り敢えず直接指定です。</p>
+
+<h2>おわり</h2>
+
+<p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
+とおもってたら itamae-plugin-resource-portage みつけてしまったので
+itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使いましょう</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/12/05/d250g2/">
+		
+			D250g2 Advent Calendar 2016 5日目</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
+
+<h2>d250g2 について</h2>
+
+<p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
+
+<h2>d250g2 とは？</h2>
+
+<p>しらん</p>
+
+<h2>KernelVM Camp #4 に行ってきた</h2>
+
+<p>成果物です</p>
+
+<p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/d250g2/'>d250g2</a>, <a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/12/01/im-rockn-roll-star/">
+		
+			Rock&#8217;n&#8217; Roll Star</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://www.adventar.org/calendars/1537">ロックバンド Advent Calendar</a> 1日目です。
+Oasisについて適当に書きます。</p>
+
+<h2>たいとるについて</h2>
+
+<p>はいそうですねみんな大好き Oasis の <a href="https://www.amazon.co.jp/%E3%82%AA%E3%82%A2%E3%82%B7%E3%82%B9-20%E5%91%A8%E5%B9%B4%E8%A8%98%E5%BF%B5%E3%83%87%E3%83%A9%E3%83%83%E3%82%AF%E3%82%B9%E3%83%BB%E3%82%A8%E3%83%87%E3%82%A3%E3%82%B7%E3%83%A7%E3%83%B3-OASIS/dp/B00K2ZK2Y2/ref=ntt_mus_dp_dpt_18">Definitely Maybe</a> の最初にはいってる<a href="https://www.amazon.co.jp/dp/B00K2ZK3UA/ref=dm_ws_tlw_trk1">曲</a>ですね。
+Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=dm_ws_tlw_trk3">Live Forever</a> のほうがすきですが。
+ロックバンド Advent Calendar 2016 ということでこのタイトルにしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
+
+<h2>Oasisについて</h2>
+
+<p>最も好きなロックバンドの一つだった(解散中)ので書いてみることにします。</p>
+
+<p>出会いは高校生だったころ MTV<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> みてたら <a href="https://www.amazon.co.jp/dp/B00FS7WKDK/ref=dm_ws_tlw_trk2">Go Let It Out!</a> が Power Push されてたのではじめて <a href="https://www.amazon.co.jp/%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%83%BB%E3%82%AA%E3%83%B3%E3%83%BB%E3%82%B6%E3%83%BB%E3%82%B7%E3%83%A7%E3%83%AB%E3%83%80%E3%83%BC%E3%83%BB%E3%82%AA%E3%83%96%E3%83%BB%E3%82%B8%E3%83%A3%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%84-OASIS/dp/B00FS7WIKA/ref=pd_sim_sbs_340_1?_encoding=UTF8&amp;psc=1&amp;refRID=CC18CK2V5MCE6YZFAB7H">Standing On Shoulder Of Gaints</a> を買いそこから。このころの曲はあまり好きでないのが多いですね。
+このころも解散でもめてた気がします。そのあと大学でボッチ&amp;&amp;ひきこもりだったのでずっとOasisばっかり聞いてました。
+そのときに買ったのが <a href="https://www.amazon.co.jp/%E3%82%B6%E3%83%BB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%97%E3%83%A9%E3%83%B3-OASIS/dp/B00FS80BTO/ref=pd_sim_340_5?_encoding=UTF8&amp;psc=1&amp;refRID=3BME19Z3FRFP8SCGMPZ4">Master Plan</a>、 <a href="https://www.amazon.co.jp/%E3%83%92%E3%83%BC%E3%82%B6%E3%83%B3%E3%83%BB%E3%82%B1%E3%83%9F%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC-OASIS/dp/B00FXV4YTE/ref=pd_sim_340_5?_encoding=UTF8&amp;psc=1&amp;refRID=0HW35K2Y4M3XGJRH28ZY">Heathen Chemistry</a>、 <a href="https://www.amazon.co.jp/%E3%83%93%E3%82%A3%E3%83%BB%E3%83%92%E3%82%A2%E3%83%BB%E3%83%8A%E3%82%A6-OASIS/dp/B00FUYQG72/ref=pd_sim_340_3?_encoding=UTF8&amp;psc=1&amp;refRID=3BME19Z3FRFP8SCGMPZ4">Be Here Now</a> の3枚で Master Plan はベストアルバム(B面)ってのがすごく好き。</p>
+
+<p>ライブは2度ほど見ました。2005年に2回みてます。<a href="http://www.summersonic.com/05/">Summer Sonic 2005</a> と <a href="http://www.setlist.fm/setlist/oasis/2005/yoyogi-daiichi-taiikukan-tokyo-japan-1bd79964.html">日本ツアー</a> を行ってました。日本ツアーのほうでは、Master Planの曲をやってくれたので本当に満足しました。</p>
+
+<p>そのあとも<a href="https://www.amazon.co.jp/The-Longcut/e/B001LHT232/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">The Longcut</a>、<a href="https://www.amazon.co.jp/The-Music/e/B000APTYQQ/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">The Music</a><sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>、<a href="https://www.amazon.co.jp/Bloc-Party/e/B000APY4UC/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">Bloc Party</a>、<a href="https://www.amazon.co.jp/The-Strokes/e/B000APQBEY/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">The Strokes</a>、<a href="https://www.amazon.co.jp/ASIAN-KUNG-FU-GENERATION/e/B00197HZ7O/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">ASIAN KUNG-FU GENERATION</a>、<a href="https://www.amazon.co.jp/Coldplay/e/B000APPUFK/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">Coldplay</a>とかに浮気しながらもきちんと御布施としてCDは買ってました。最近のリマスターはさすがに買ってないですが…</p>
+
+<h2>解散について</h2>
+
+<p><a href="http://mhnews2504.blog109.fc2.com/blog-entry-1930.html">伝統芸的なこと</a> もあるのでハイハイとしか好きなひとは思ってなかったとおもいます。</p>
+
+<p>で2009年いつも通りまゆげ兄弟(ノエル・ギャラガーとリアム・ギャラガー)の兄弟喧嘩だとおもっていたら本気でまゆげ兄(ノエル)がブチギレて解散したのでそっかーてちょっとショック(ほんとにちょっと)だった<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>。</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>ほんとは<a href="https://ja.wikipedia.org/wiki/%E3%83%8E%E3%82%A8%E3%83%AB%E3%83%BB%E3%82%AE%E3%83%A3%E3%83%A9%E3%82%AC%E3%83%BC#.E7.99.BA.E8.A8.80">ノエルの発言</a>を付けたかったけどさすがにね…<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>だったけなこのころVibeって名前だった気も<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p>そんなことより The Music の<a href="https://www.google.com/trends/explore?geo=JP&amp;q=%2Fm%2F0130zt,%2Fm%2F03d_2z,%2Fm%2F03zgq4,%2Fm%2F0kr_t,%2Fm%2F04zbp3">google trends</a>で熊本が肥ゆいけどなんで？<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+<li id="fn:4">
+<p>このころtwitterでやりとりしてた人とかともオフで解散したねーとか言ってた<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/advent-calendar/'>advent-calendar</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/oasis/'>oasis</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/11/29/introduced-cuda/">
+		
+			YARAKASHI CUDA編</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="/blog/2016/11/28/hello/">昨日</a>かいた奴でGTX 1050があるのでCUDAを導入してみた。</p>
+
+<h2>CUDA導入</h2>
+
+<p>これは簡単で <a href="https://developer.nvidia.com/cuda-downloads">ここ</a> から必要なパッケージをダウンロードしてきます。
+今回は Linux x86_64 Ubuntu 14.04 runfile(local) を順に選択。
+インストールはここでダウンロードしたrunfileを実行して、指示に従うだけです。
+これが終ったら、SampleProjectもインストールされてるとおもうのでこのプロジェクトをコンパイルします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ chmod 555 ./cuda_8.0.44_linux.run
+</span><span class='line'>$ ./cuda_8.0.44_linux.run
+</span><span class='line'>:
+</span><span class='line'>:
+</span><span class='line'>$ cd NVIDIA_CUDA-8.0_Samples
+</span><span class='line'>$ make</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でコンパイルが終了したらサンプルプログラムを実行します。とりあえず <code>deviceQuery</code> を実行します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd bin/x86_64/linux/release
+</span><span class='line'>$ ./deviceQuery
+</span><span class='line'>./deviceQuery Starting...
+</span><span class='line'>
+</span><span class='line'> CUDA Device Query (Runtime API) version (CUDART static linking)
+</span><span class='line'>
+</span><span class='line'>cudaGetDeviceCount returned 38
+</span><span class='line'>-&gt; no CUDA-capable device is detected
+</span><span class='line'>Result = FAIL</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と出ます。どうみてもエラーですね</p>
+
+<p>で、以下のようにrootで実行すると</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo ./deviceQuery
+</span><span class='line'>./deviceQuery Starting...
+</span><span class='line'>
+</span><span class='line'> CUDA Device Query (Runtime API) version (CUDART static linking)
+</span><span class='line'>
+</span><span class='line'>Detected 1 CUDA Capable device(s)
+</span><span class='line'>
+</span><span class='line'>Device 0: "GeForce GTX 1050"
+</span><span class='line'>  CUDA Driver Version / Runtime Version          8.0 / 8.0
+</span><span class='line'>  CUDA Capability Major/Minor version number:    6.1
+</span><span class='line'>  Total amount of global memory:                 1965 MBytes (2060255232 bytes)
+</span><span class='line'>  ( 5) Multiprocessors, (128) CUDA Cores/MP:     640 CUDA Cores
+</span><span class='line'>  GPU Max Clock rate:                            1455 MHz (1.46 GHz)
+</span><span class='line'>  Memory Clock rate:                             3504 Mhz
+</span><span class='line'>  Memory Bus Width:                              128-bit
+</span><span class='line'>  L2 Cache Size:                                 1048576 bytes
+</span><span class='line'>  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
+</span><span class='line'>  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
+</span><span class='line'>  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
+</span><span class='line'>  Total amount of constant memory:               65536 bytes
+</span><span class='line'>  Total amount of shared memory per block:       49152 bytes
+</span><span class='line'>  Total number of registers available per block: 65536
+</span><span class='line'>  Warp size:                                     32
+</span><span class='line'>  Maximum number of threads per multiprocessor:  2048
+</span><span class='line'>  Maximum number of threads per block:           1024
+</span><span class='line'>  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+</span><span class='line'>  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+</span><span class='line'>  Maximum memory pitch:                          2147483647 bytes
+</span><span class='line'>  Texture alignment:                             512 bytes
+</span><span class='line'>  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)
+</span><span class='line'>  Run time limit on kernels:                     Yes
+</span><span class='line'>  Integrated GPU sharing Host Memory:            No
+</span><span class='line'>  Support host page-locked memory mapping:       Yes
+</span><span class='line'>  Alignment requirement for Surfaces:            Yes
+</span><span class='line'>  Device has ECC support:                        Disabled
+</span><span class='line'>  Device supports Unified Addressing (UVA):      Yes
+</span><span class='line'>  Device PCI Domain ID / Bus ID / location ID:   0 / 129 / 0
+</span><span class='line'>  Compute Mode:
+</span><span class='line'>     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
+</span><span class='line'>
+</span><span class='line'>deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 8.0, CUDA Runtime Version = 8.0, NumDevs = 1, Device0 = GeForce GTX 1050
+</span><span class='line'>Result = PASS</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と出てきますので、パーミッションがなかったようです。
+あとは簡単、CUDA使いたいユーザーにパーミッションつけたらおわりです。</p>
+
+<h2>おわり</h2>
+
+<p>こんなのに3時間ほど時間を費しましたね。はい。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/cuda/'>cuda</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/gpgpu/'>gpgpu</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/11/28/hello/">
+		
+			あったらしーPCかったよー</a>
+	</h2>
+	<div class="entry-content">
+		<h2>あたらしいPC買いました</h2>
+
+<p>先月のおわりに注文し今月頭のOSCあたりに新しいPCを組み立てました。
+先月おわりあたりまではDDR4の32GBメモリーが2万円と安く売っていたので勢いで購入。
+構成は以下のようになっています。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CPU: XeonE5-2620V4 * 2
+</span><span class='line'>MB: X10PE-D16WS
+</span><span class='line'>DISK: INTEL 600 シリーズ 512GB
+</span><span class='line'>MEM: Crucial [Micron製] DDR4 サーバー用メモリー 32GB ECC Registered * 4
+</span><span class='line'>NIC: X540-T2
+</span><span class='line'>GPU: Zotac GeForce GTX 1050</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というかんじになっています。
+今回はメモリー4枚しか買っていないので安くなったらあと12枚買いたいとおもってます</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
+
+<nav id="pagenavi">
+    
+        
+            <a href="/" class="prev">Prev</a>
+        
+    
+    
+        <a href="/blog/page/3/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2017
+
+    katsyoshi
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-49549546-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

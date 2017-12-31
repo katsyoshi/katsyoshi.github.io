@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: docker | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/docker/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2017-12-31T19:51:56+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dockerではまってます]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2014/10/01/pitfall-in-docker/"/>
+    <updated>2014-10-01T21:11:04+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2014/10/01/pitfall-in-docker</id>
+    <content type="html"><![CDATA[<p>タイトルのとおりです。
+Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
+
+<h2>インストール</h2>
+
+<p>dockerの<a href="https://docs.docker.com/installation/gentoolinux/">Gentooインストールページ</a>を参考に<a href="https://github.com/tianon/docker-overlay">overlay</a>を導入します。</p>
+
+<p><code>sh
+$ sudo layman -a docker
+$ sudo eix-sync
+$ sudo emerge -av app-emulators/docker
+</code></p>
+
+<p>ここでカーネルオプションの警告が出るのでひとつひとつ潰しておきます。</p>
+
+<h2>起動</h2>
+
+<p>インストールおわったら、起動させますが、以下のようなログが出てるので起動できません。</p>
+
+<p><code>
+2014/10/01 18:39:17 docker daemon: 1.1.2 d84a070; execdriver: native; graphdriver:
+[6c541422] +job serveapi(unix:///var/run/docker.sock)
+[6c541422] +job initserver()
+[6c541422.initserver()] Creating server
+[6c541422] +job init_networkdriver()
+[6c541422.init_networkdriver()] creating new bridge for docker0
+package not installed
+[6c541422] -job init_networkdriver() = ERR (1)
+package not installed
+[6c541422] -job initserver() = ERR (1)
+2014/10/01 18:39:17 package not installed
+</code></p>
+
+<p>このときは <code>bridge-utils</code> をインストールすればいいのかなと思ってたら、インストールしても解決できないです。</p>
+
+<h2>おわり</h2>
+
+<p>どなたか助けてくだされ〜</p>
+
+<h2>追記</h2>
+
+<p>再構築したカーネルをインストールしてなかったというオチでした。</p>
+
+<p>ちゃんちゃん</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[docker on OS Xで嵌ったおはなし]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2014/06/10/pitfall-in-boot2docker/"/>
+    <updated>2014-06-10T19:52:53+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2014/06/10/pitfall-in-boot2docker</id>
+    <content type="html"><![CDATA[<p>MacOS XでDockerを動かしてたら嵌ったのでメモ</p>
+
+<h2>Docker on OS X</h2>
+
+<p>OS XでもDockerが<a href="http://docs.docker.com/installation/mac/">動かせるよう</a>になりました。
+インストールは<a href="http://dev.classmethod.jp/tool/docker/getting-started-docker-on-osx/">ここ</a>とかを参考にしてください。</p>
+
+<h2>で嵌ったところ</h2>
+
+<p>Docker上で動いているアプリケーションとどうしても通信ができない。どうやらDockerとアプリケーションは起動はしてるようなんだが、
+どうしても通信できないということがわかりました。</p>
+
+<p><code>
+$ docker run -p 9199:9199 hogehoge
+$ netstat -a | grep 9199
+</code></p>
+
+<p>でも見えない。なんでかなあと思ってたら<a href="https://github.com/dotcloud/docker/issues/4007">こんな</a>ことや<a href="http://k-shogo.github.io/article/2014/02/13/boot2docker-portforward/">こんな</a>ことがわかりました。</p>
+
+<h2>解決策</h2>
+
+<p>VirtualBoxからboot2docker-vmのポートフォワードを設定すればいいです。</p>
+
+<p><code>
+$ netstat -a | grep 9199
+tcp4       0      0  localhost.9199         *.*                    LISTEN
+</code></p>
+
+<p>ちゃんちゃん。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JubatusをDocker上で動かしてみた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2014/05/12/jubatus-runs-on-docker/"/>
+    <updated>2014-05-12T23:50:33+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2014/05/12/jubatus-runs-on-docker</id>
+    <content type="html"><![CDATA[<p>最近話題の<a href="https://www.docker.io/">Docker</a>使ってJubatusを動かしてみたのでメモ的なものを</p>
+
+<h2>環境</h2>
+
+<p>環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作</p>
+
+<ul>
+<li>Vagrant: 1.5.4</li>
+<li>docker: 0.11.1</li>
+</ul>
+
+
+<h2>Dockerfile</h2>
+
+<p><a href="https://github.com/katsyoshi/docker-jubatus">リポジトリ</a>を作成しておきましたのでcloneして実行します。</p>
+
+<p><code>sh
+$ git clone https://github.com/katsyoshi/docker-jubatus
+$ cd docker-jubatus
+$ docker build .
+$ docker run -p 9199:9199 最後に出てきたハッシュ値
+</code></p>
+
+<p>で動きはじめます。</p>
+]]></content>
+  </entry>
+  
+</feed>

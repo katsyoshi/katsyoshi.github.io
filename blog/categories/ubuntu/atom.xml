@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ubuntu | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2017-12-31T19:51:56+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[不注意なこと]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2015/04/06/careless-miss/"/>
+    <updated>2015-04-06T22:25:28+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2015/04/06/careless-miss</id>
+    <content type="html"><![CDATA[<p>Ubuntuで <code>lxc</code> を利用して、サーバを立ててたときに嵌ったこと</p>
+
+<h2>はじまり</h2>
+
+<p>Proxyを利用してインターネットに接続している。
+このネットワークとして <code>ping</code> はLAN内なら届くが、外(google.com)とかには出ない。
+設定がうまくいってるかどうかの確認する方法として、 <code>apt-get update</code> を利用して確認している。</p>
+
+<p>最初は、 <code>lxc</code> の設定がうまくいっていないと思いなんども見直してたりした。
+それでもWANの方に出ることができなかった。</p>
+
+<p>サーバのネットワーク設定がよくないと思ってなんども見直したけど、問題なさそう。
+最後に <code>sudo -i</code> で root にログインしたあと、 <code>apt-get update</code> したら、
+ダウンロードはじまり、次へ進むことができた。</p>
+
+<h2>原因</h2>
+
+<p>原因としては <code>sudo command</code> で実行しても <code>Defaults reset_env</code> で環境変数がリセットされてたようだった。
+ので、<code>Defaults keep_env+="PATH"</code> とか追加して解決した。</p>
+
+<h2>おわり</h2>
+
+<p>簡単なミスで3時間ほど時間を費したのでなんとかしたい。</p>
+
+<h3>参考URL</h3>
+
+<ol>
+<li><a href="http://www.maepachi.com/blog/entry?id=128">http://www.maepachi.com/blog/entry?id=128</a></li>
+<li><a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[good-bye elasticsearch and jenkins]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2014/08/10/good-bye-elasticsearch-and-jenkins/"/>
+    <updated>2014-08-10T23:22:55+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2014/08/10/good-bye-elasticsearch-and-jenkins</id>
+    <content type="html"><![CDATA[<p>この環境では慢性的にメモリが足りなかったのでメモリを大量に使ってる<a href="http://www.elasticsearch.org/">Elasticsearch</a>を削除しました。
+Jenkinsについては利用していなかったので停止してます。ついでに12.04から14.04にupgradeしました。</p>
+
+<h2>削除とUpgrade</h2>
+
+<p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
+Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
+
+<p><code>sh
+$ sudo apt-get purge elasticsearch
+$ sudo update-rc.d jenkins disable
+</code></p>
+
+<p>つぎに14.04へupgradeを行ないます。</p>
+
+<p><code>sh
+$ sudo do-release-upgrade -d
+</code></p>
+
+<p>これで14.04になってます。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Machine: さくらVPS</li>
+<li>CPU: Intel Xeon E312xx (SandyBridge) * 2</li>
+<li>MEM: 1GB</li>
+<li>HDD: 100GB</li>
+<li>OS: Ubuntu Linux 12.04</li>
+</ul>
+
+
+<h2>インストール済ソフトウェア（一部）</h2>
+
+<ul>
+<li>Elasticsearch</li>
+<li>fluentd</li>
+<li>Jenkins</li>
+<li>Jubatus</li>
+<li>Norikra</li>
+<li>Nginx</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
