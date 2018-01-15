@@ -7,12 +7,9 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="自分でblogを管理するのがちょっとだけ面倒になってきたので、
-このblogをgithub.ioに移行した。 手順 github.com に katsyoshi.github.io というリポジトリを作成し、以下のコマンドを実行 1
-2
-3
-4
-$ rake setup_github_pages &hellip;">
+	<meta name="description" content="portageはデフォルトだと rsync を利用しての更新をしているので、
+git を用いた方法に変更します。 準備 portage を 2.2.17 に変更し、USEフラグとして git をつかいます。 1
+# USE=&quot;git ${USE}&quot; emerge -av \= &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -81,6 +78,68 @@ $ rake setup_github_pages &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/02/24/portage2git/">
+		
+			Emerge &#8211;syncをgitにかえたはなし</a>
+	</h2>
+	<div class="entry-content">
+		<p>portageはデフォルトだと <code>rsync</code> を利用しての更新をしているので、
+<code>git</code> を用いた方法に変更します。</p>
+
+<h2>準備</h2>
+
+<p><code>portage</code> を <code>2.2.17</code> に変更し、USEフラグとして <code>git</code> をつかいます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># USE=&quot;git ${USE}&quot; emerge -av \=portage-2.2.17</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>つぎに、Gitのリポジトリを見に行くように<a href="http://qiita.com/wjn/items/a3b71059211711501e35">設定</a>します。</p>
+
+<p>と設定してあとはいつもどおり <code>sudo eix-sync</code> させるだけで大丈夫です。</p>
+
+<h2>おわり</h2>
+
+<p>基本的にはリンク先だけ見てればいけると思います。</p>
+
+<p>引越ししてWiMAXの電波の入りがわるくなったので鉄製ボウル買おうかとおもってたら2時間ほど<a href="https://ingress.com">徘徊</a>してました。</p>
+
+<h3>参考サイト</h3>
+
+<ol>
+<li><a href="http://qiita.com/wjn/items/a3b71059211711501e35">http://qiita.com/wjn/items/a3b71059211711501e35</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Project:Portage/Sync">https://wiki.gentoo.org/wiki/Project:Portage/Sync</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -697,97 +756,6 @@ $ rake setup_github_pages &hellip;">
 </div>
 </article>
 
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/10/01/pitfall-in-docker/">
-		
-			Dockerではまってます</a>
-	</h2>
-	<div class="entry-content">
-		<p>タイトルのとおりです。
-Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
-
-<h2>インストール</h2>
-
-<p>dockerの<a href="https://docs.docker.com/installation/gentoolinux/">Gentooインストールページ</a>を参考に<a href="https://github.com/tianon/docker-overlay">overlay</a>を導入します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo layman -a docker
-</span><span class='line'><span class="nv">$ </span>sudo eix-sync
-</span><span class='line'><span class="nv">$ </span>sudo emerge -av app-emulators/docker
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ここでカーネルオプションの警告が出るのでひとつひとつ潰しておきます。</p>
-
-<h2>起動</h2>
-
-<p>インストールおわったら、起動させますが、以下のようなログが出てるので起動できません。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>2014/10/01 18:39:17 docker daemon: 1.1.2 d84a070; execdriver: native; graphdriver:
-</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> +job serveapi<span class="o">(</span>unix:///var/run/docker.sock<span class="o">)</span>
-</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> +job initserver<span class="o">()</span>
-</span><span class='line'><span class="o">[</span>6c541422.initserver<span class="o">()]</span> Creating server
-</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> +job init_networkdriver<span class="o">()</span>
-</span><span class='line'><span class="o">[</span>6c541422.init_networkdriver<span class="o">()]</span> creating new bridge <span class="k">for </span>docker0
-</span><span class='line'>package not installed
-</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> -job init_networkdriver<span class="o">()</span> <span class="o">=</span> ERR <span class="o">(</span>1<span class="o">)</span>
-</span><span class='line'>package not installed
-</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> -job initserver<span class="o">()</span> <span class="o">=</span> ERR <span class="o">(</span>1<span class="o">)</span>
-</span><span class='line'>2014/10/01 18:39:17 package not installed
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>このときは <code>bridge-utils</code> をインストールすればいいのかなと思ってたら、インストールしても解決できないです。</p>
-
-<h2>おわり</h2>
-
-<p>どなたか助けてくだされ〜</p>
-
-<h2>追記</h2>
-
-<p>再構築したカーネルをインストールしてなかったというオチでした。</p>
-
-<p>ちゃんちゃん</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
 <nav id="pagenavi">
     
         
@@ -800,7 +768,7 @@ Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
     <div class="center"><a href="/blog/archives">Blog Archives</a></div>
 </nav>
 </div>
-	<footer id="footer" class="inner">Copyright &copy; 2017
+	<footer id="footer" class="inner">Copyright &copy; 2018
 
     katsyoshi
 

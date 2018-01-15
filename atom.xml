@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-12-31T19:51:56+09:00</updated>
+  <updated>2018-01-16T01:37:54+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[happy new year and new language]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/01/16/happy-new-year-and-new-language/"/>
+    <updated>2018-01-16T00:32:16+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/01/16/happy-new-year-and-new-language</id>
+    <content type="html"><![CDATA[<p>いまさらですが、あけましておめでとうございます。</p>
+
+<h2>happy new language</h2>
+
+<p>年開けから新しくプログラミング言語(Rust)始めました。(ってわけでもない)</p>
+
+<p>雑に <a href="https://doc.rust-lang.org/book/second-edition/">rust book 2nd edition</a> を一通り読み終えたので、
+<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> をやりはじめました。
+とりあえず第1章が終ったので、メモとしてのこします。
+基本的に <code>Rust</code> (に限らず)でやりたいことがとくにないので
+<a href="http://yamasy1549.hateblo.jp/entry/2017/12/28/222631">ちょうどよさそうな勉強</a> として自然言語処理を選択しています。</p>
+
+<h2>躓いたところ</h2>
+
+<p>躓いていないところがないです。
+まあやっていくうちに以下二つは常に書いておくと楽になるかなと。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="c1">// 1文字毎</span>
+</span><span class='line'><span class="k">fn</span> <span class="n">chars</span><span class="p">(</span><span class="n">string</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">string</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 1単語毎</span>
+</span><span class='line'><span class="k">fn</span> <span class="n">words</span><span class="p">(</span><span class="n">sentence</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;&amp;</span><span class="n">str</span><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">sentence</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;&amp;</span><span class="n">str</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>00. 文字列の逆順</h3>
+
+<p>これは簡単で(でもなかった)、1文字ずつ分解して<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.rev">反対化</a>したあと <code>String</code> にします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">fn</span> <span class="n">reverse_string</span><span class="p">(</span><span class="n">string</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">rev</span><span class="p">().</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">());</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>01. 「パタトクカシーー」</h3>
+
+<p>これも簡単で、1文字ずつ分解して抜き出します。(絶対違う)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="s">&quot;パタトクカシーー&quot;</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}{}{}{}&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="m">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="m">4</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="m">6</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>とりあえず2問解いてみたけど、自然言語処理 &amp;&amp; <code>Rust</code> 難しい。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今年いったビール屋さん 2017]]></title>
@@ -1135,36 +1212,6 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
 <h2>おわり</h2>
 
 <p>こんなのに3時間ほど時間を費しましたね。はい。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[あったらしーPCかったよー]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/11/28/hello/"/>
-    <updated>2016-11-28T01:14:21+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/11/28/hello</id>
-    <content type="html"><![CDATA[<h2>あたらしいPC買いました</h2>
-
-<p>先月のおわりに注文し今月頭のOSCあたりに新しいPCを組み立てました。
-先月おわりあたりまではDDR4の32GBメモリーが2万円と安く売っていたので勢いで購入。
-構成は以下のようになっています。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CPU: XeonE5-2620V4 * 2
-</span><span class='line'>MB: X10PE-D16WS
-</span><span class='line'>DISK: INTEL 600 シリーズ 512GB
-</span><span class='line'>MEM: Crucial [Micron製] DDR4 サーバー用メモリー 32GB ECC Registered * 4
-</span><span class='line'>NIC: X540-T2
-</span><span class='line'>GPU: Zotac GeForce GTX 1050</span></code></pre></td></tr></table></div></figure>
-
-
-<p>というかんじになっています。
-今回はメモリー4枚しか買っていないので安くなったらあと12枚買いたいとおもってます</p>
 ]]></content>
   </entry>
   

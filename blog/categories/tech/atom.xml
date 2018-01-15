@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-12-31T19:51:56+09:00</updated>
+  <updated>2018-01-16T01:37:54+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[happy new year and new language]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/01/16/happy-new-year-and-new-language/"/>
+    <updated>2018-01-16T00:32:16+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/01/16/happy-new-year-and-new-language</id>
+    <content type="html"><![CDATA[<p>いまさらですが、あけましておめでとうございます。</p>
+
+<h2>happy new language</h2>
+
+<p>年開けから新しくプログラミング言語(Rust)始めました。(ってわけでもない)</p>
+
+<p>雑に <a href="https://doc.rust-lang.org/book/second-edition/">rust book 2nd edition</a> を一通り読み終えたので、
+<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> をやりはじめました。
+とりあえず第1章が終ったので、メモとしてのこします。
+基本的に <code>Rust</code> (に限らず)でやりたいことがとくにないので
+<a href="http://yamasy1549.hateblo.jp/entry/2017/12/28/222631">ちょうどよさそうな勉強</a> として自然言語処理を選択しています。</p>
+
+<h2>躓いたところ</h2>
+
+<p>躓いていないところがないです。
+まあやっていくうちに以下二つは常に書いておくと楽になるかなと。</p>
+
+<p>```rust
+// 1文字毎
+fn chars(string: &amp;str) &ndash;> Vec<char> {</p>
+
+<pre><code>string.chars().collect::&lt;Vec&lt;char&gt;&gt;()
+</code></pre>
+
+<p>}</p>
+
+<p>// 1単語毎
+fn words(sentence: &amp;str) &ndash;> Vec&lt;&amp;str> {</p>
+
+<pre><code>sentence.split(' ').collect::&lt;Vec&lt;&amp;str&gt;&gt;()
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>00. 文字列の逆順</h3>
+
+<p>これは簡単で(でもなかった)、1文字ずつ分解して<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.rev">反対化</a>したあと <code>String</code> にします。</p>
+
+<p>```rust
+fn reverse_string(string: &amp;str) {</p>
+
+<pre><code>println!("{}", string.chars().rev().collect::&lt;String&gt;());
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>01. 「パタトクカシーー」</h3>
+
+<p>これも簡単で、1文字ずつ分解して抜き出します。(絶対違う)</p>
+
+<p>```rust
+fn main() {</p>
+
+<pre><code>let c = "パタトクカシーー".chars().collect::&lt;Vec&lt;char&gt;&gt;();
+println!("{}{}{}{}", c[0], c[2], c[4], c[6]);
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>おわり</h2>
+
+<p>とりあえず2問解いてみたけど、自然言語処理 &amp;&amp; <code>Rust</code> 難しい。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[IRubyはじめました]]></title>
@@ -304,55 +377,6 @@ Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: P
 <h3>関連リポジトリ</h3>
 
 <p><a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Elixirのインストール方法]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir/"/>
-    <updated>2017-04-01T09:00:00+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2017/04/01/how-to-install-elixir</id>
-    <content type="html"><![CDATA[<p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
-まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
-隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
-
-<h2>準備</h2>
-
-<p>ここでは <a href="https://gentoo.org/">Gentoo Linux</a> を前提としております。
-まず、Elixir を動かすために <a href="https://www.erlang.org">Erlang</a> をインストールします。</p>
-
-<p><code>console
-sudo eix-sync
-sudo emerge erlang
-</code></p>
-
-<p>準備はこれだけです。</p>
-
-<h2>インストール</h2>
-
-<p>次にインストールなのですが、Elixir は Earlang VM 上で動くプログラミング言語のため、コンパイルされたバイナリを置くだけでインストールがおわります。</p>
-
-<p><code>console
-wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip
-unzip Precompiled.zip -d elixir
-mv elixir /path/to/elixir
-echo 'export PATH=/path/to/elixir/bin:$PATH' &gt;&gt; ~/.bashrc
-source ~/.bashrc
-</code></p>
-
-<h2>おわり</h2>
-
-<p>さいごに <code>iex</code> を起動して確認すればおわり</p>
-
-<h3>参考</h3>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   

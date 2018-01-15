@@ -4,7 +4,7 @@
   <title><![CDATA[Category: diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2017-12-31T19:51:56+09:00</updated>
+  <updated>2018-01-16T01:37:54+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[happy new year and new language]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/01/16/happy-new-year-and-new-language/"/>
+    <updated>2018-01-16T00:32:16+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/01/16/happy-new-year-and-new-language</id>
+    <content type="html"><![CDATA[<p>いまさらですが、あけましておめでとうございます。</p>
+
+<h2>happy new language</h2>
+
+<p>年開けから新しくプログラミング言語(Rust)始めました。(ってわけでもない)</p>
+
+<p>雑に <a href="https://doc.rust-lang.org/book/second-edition/">rust book 2nd edition</a> を一通り読み終えたので、
+<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> をやりはじめました。
+とりあえず第1章が終ったので、メモとしてのこします。
+基本的に <code>Rust</code> (に限らず)でやりたいことがとくにないので
+<a href="http://yamasy1549.hateblo.jp/entry/2017/12/28/222631">ちょうどよさそうな勉強</a> として自然言語処理を選択しています。</p>
+
+<h2>躓いたところ</h2>
+
+<p>躓いていないところがないです。
+まあやっていくうちに以下二つは常に書いておくと楽になるかなと。</p>
+
+<p>```rust
+// 1文字毎
+fn chars(string: &amp;str) &ndash;> Vec<char> {</p>
+
+<pre><code>string.chars().collect::&lt;Vec&lt;char&gt;&gt;()
+</code></pre>
+
+<p>}</p>
+
+<p>// 1単語毎
+fn words(sentence: &amp;str) &ndash;> Vec&lt;&amp;str> {</p>
+
+<pre><code>sentence.split(' ').collect::&lt;Vec&lt;&amp;str&gt;&gt;()
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>00. 文字列の逆順</h3>
+
+<p>これは簡単で(でもなかった)、1文字ずつ分解して<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.rev">反対化</a>したあと <code>String</code> にします。</p>
+
+<p>```rust
+fn reverse_string(string: &amp;str) {</p>
+
+<pre><code>println!("{}", string.chars().rev().collect::&lt;String&gt;());
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>01. 「パタトクカシーー」</h3>
+
+<p>これも簡単で、1文字ずつ分解して抜き出します。(絶対違う)</p>
+
+<p>```rust
+fn main() {</p>
+
+<pre><code>let c = "パタトクカシーー".chars().collect::&lt;Vec&lt;char&gt;&gt;();
+println!("{}{}{}{}", c[0], c[2], c[4], c[6]);
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>おわり</h2>
+
+<p>とりあえず2問解いてみたけど、自然言語処理 &amp;&amp; <code>Rust</code> 難しい。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[今年いったビール屋さん 2017]]></title>
@@ -270,22 +343,6 @@ height: 120
 <h2>おわり</h2>
 
 <p>これでなにも考えなくてすむようになるのかな？</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[rustful web]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2017/06/04/rustful-web/"/>
-    <updated>2017-06-04T23:17:45+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2017/06/04/rustful-web</id>
-    <content type="html"><![CDATA[<p><a href="https://www.rust-lang.org/ja-JP/">rust</a> で Web Application をつくろうと思って <a href="https://github.com/Ogeon/rustful">rustful</a> を使ってやってみてたりした。</p>
-
-<p>ドキュメントと利用しているバージョンのコードが異なり、必要なモジュールが読み込めなかったり、関数の引数が異なったりしてうごかねぇってなったのでHEADを使うことで解決。</p>
-
-<h2>🍻</h2>
-
-<p>とりあえずいつものメンバーで🍻にいってきた。浅草のカンピオンエールという店でのんでそのあと隣の店でお好み焼きをたべてた。お好み焼き屋のあとは河原まであるて吾妻橋からみえる
-やつをながめながらビールのんでた</p>
 ]]></content>
   </entry>
   
