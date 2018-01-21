@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-01-19T20:54:18+09:00</updated>
+  <updated>2018-01-21T11:28:56+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,339 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[nlp 100 section 1 part 3]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/01/21/nlp-100-section-1-part-3/"/>
+    <updated>2018-01-21T10:23:02+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/01/21/nlp-100-section-1-part-3</id>
+    <content type="html"><![CDATA[<p>前回、<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> の04までやったので05からやります。</p>
+
+<h3>05. ngram</h3>
+
+<p>こいつはbi-gramを単語、文字二つを実装するひつようがあります</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">fn</span> <span class="n">bigram</span><span class="p">(</span><span class="n">words</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">bi</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Vec</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">i</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">loop</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="m">2</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">words</span><span class="p">.</span><span class="n">len</span><span class="p">()</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="n">bi</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">..</span><span class="n">w</span><span class="p">].</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">));</span>
+</span><span class='line'>        <span class="n">i</span> <span class="o">+=</span> <span class="m">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">bi</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">words</span> <span class="o">=</span> <span class="s">&quot;I am an NLPer&quot;</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">===word bi-gram&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">word</span> <span class="n">in</span> <span class="n">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="n">words</span> <span class="o">=</span> <span class="s">&quot;I am an NLPer&quot;</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">word</span> <span class="n">in</span> <span class="n">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>06. 集合</h3>
+
+<p>これは単純に <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html"><code>HashSet</code></a> を利用して、解決します。<code>HashSet</code> の差集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.difference"><code>difference</code></a> を利用し、和集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.union"><code>union</code></a> を、積集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.intersection"><code>intersection</code></a> をそれぞれ利用します。また、特定の要素が含有していることを判定するには <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.contains"><code>contains</code></a> を利用して判定します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">collections</span><span class="o">::</span><span class="n">HashSet</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">bigram</span><span class="p">(</span><span class="n">words</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">bi</span><span class="o">:</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">HashSet</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">i</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">loop</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="m">2</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">words</span><span class="p">.</span><span class="n">len</span><span class="p">()</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="n">bi</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">..</span><span class="n">w</span><span class="p">].</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">));</span>
+</span><span class='line'>        <span class="n">i</span> <span class="o">+=</span> <span class="m">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">bi</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">chars</span><span class="p">(</span><span class="n">s</span><span class="o">:</span> <span class="n">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">s</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">bigram</span><span class="p">(</span><span class="n">chars</span><span class="p">(</span><span class="s">&quot;paraparaparadise&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()));</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">bigram</span><span class="p">(</span><span class="n">chars</span><span class="p">(</span><span class="s">&quot;paragraph&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;===UNION===&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="p">.</span><span class="n">union</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">===DIFF===&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;===s1 - s2===&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="p">.</span><span class="n">difference</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;===s2 - s1===&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s2</span><span class="p">.</span><span class="n">difference</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">===intersection===&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="p">.</span><span class="n">intersection</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">===INCLUDE===&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">se</span> <span class="o">=</span> <span class="s">&quot;se&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;s1: {}&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">se</span><span class="p">));</span>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;s2: {}&quot;</span><span class="p">,</span> <span class="n">s2</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">se</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>07. テンプレートによる文生成</h3>
+
+<p>これは <a href=""><code>format!</code></a> を使えば終りです。(問題意図ほんとこれなんか？)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">fn</span> <span class="n">string_template</span><span class="p">(</span><span class="n">x</span><span class="o">:</span> <span class="k">i8</span><span class="p">,</span> <span class="n">y</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">,</span> <span class="n">z</span><span class="o">:</span> <span class="k">f32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">String</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}時の{}は{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">string</span> <span class="o">=</span> <span class="n">string_template</span><span class="p">(</span><span class="m">12</span><span class="p">,</span> <span class="s">&quot;気温&quot;</span><span class="p">,</span> <span class="m">22.5</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>08. 暗号文</h3>
+
+<p>ASCII以外の判定と、小文字のASCIIが判れば簡単です。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">ascii</span><span class="o">::</span><span class="n">AsciiExt</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">cipher</span><span class="p">(</span><span class="n">src</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">String</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">src</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">result</span><span class="o">:</span> <span class="n">String</span> <span class="o">=</span> <span class="n">String</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="n">chars</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="k">if</span> <span class="n">c</span><span class="p">.</span><span class="n">is_ascii</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">let</span> <span class="n">var</span><span class="o">:</span> <span class="k">u8</span> <span class="o">=</span> <span class="n">c</span> <span class="k">as</span> <span class="k">u8</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">match</span> <span class="n">var</span> <span class="p">{</span>
+</span><span class='line'>                <span class="m">97</span> <span class="p">...</span> <span class="m">122</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="m">219</span> <span class="o">-</span> <span class="p">(</span><span class="n">var</span><span class="p">))</span> <span class="k">as</span> <span class="n">char</span><span class="p">,</span>
+</span><span class='line'>                <span class="n">_</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">,</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">c</span>
+</span><span class='line'>        <span class="p">};</span>
+</span><span class='line'>        <span class="n">result</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">result</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">cipher</span><span class="p">(</span><span class="s">&quot;Today is fine.&quot;</span><span class="p">));</span>
+</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">cipher</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cipher</span><span class="p">(</span><span class="s">&quot;Today is fine.&quot;</span><span class="p">)));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>09. Typoglycemia</h3>
+
+<p>こちらは、 <code>Vec</code> に <code>shuffle</code> 的なものがないので、<a href="https://doc.rust-lang.org/rand"><code>rand</code></a> を呼び出して <a href="https://doc.rust-lang.org/rand/rand/trait.Rng.html#method.shuffle"><code>shuffle</code></a> を使います。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="n">extern</span> <span class="n">crate</span> <span class="n">rand</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">rand</span><span class="o">::</span><span class="n">Rng</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">words</span><span class="p">(</span><span class="n">src</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">result</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Vec</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="n">s</span> <span class="n">in</span> <span class="n">src</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;&amp;</span><span class="n">str</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">let</span> <span class="k">mut</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">chars</span><span class="p">.</span><span class="n">len</span><span class="p">()</span> <span class="o">&lt;</span> <span class="m">5</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">result</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">to_string</span><span class="p">());</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">let</span> <span class="n">last_index</span> <span class="o">=</span> <span class="n">chars</span><span class="p">.</span><span class="n">len</span><span class="p">()</span> <span class="o">-</span> <span class="m">1</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">let</span> <span class="n">first_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="m">0</span><span class="p">];</span>
+</span><span class='line'>            <span class="k">let</span> <span class="n">last_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">last_index</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">let</span> <span class="n">rand_chars</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">chars</span><span class="p">[</span><span class="m">1.</span><span class="p">.</span><span class="n">last_index</span><span class="p">];</span>
+</span><span class='line'>            <span class="n">shuffle</span><span class="p">(</span><span class="n">rand_chars</span><span class="p">);</span>
+</span><span class='line'>            <span class="k">let</span> <span class="k">mut</span> <span class="n">rand_string</span> <span class="o">=</span> <span class="n">String</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
+</span><span class='line'>            <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="n">rand_chars</span> <span class="p">{</span> <span class="n">rand_string</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>            <span class="n">result</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}{}{}&quot;</span><span class="p">,</span> <span class="n">first_char</span><span class="p">,</span> <span class="n">rand_string</span><span class="p">,</span> <span class="n">last_char</span><span class="p">));</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">result</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">chars</span><span class="o">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="p">[</span><span class="n">char</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">rand</span><span class="o">::</span><span class="n">thread_rng</span><span class="p">().</span><span class="n">shuffle</span><span class="p">(</span><span class="n">chars</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">paragraph</span> <span class="o">=</span> <span class="s">&quot;I couldn&#39;t believe that I could actually understand what I was reading : the phenomenal power of the human mind .&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="n">w</span> <span class="n">in</span> <span class="n">words</span><span class="p">(</span><span class="n">paragraph</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>ということで <code>Rust</code> で言語処理100本ノック1章をやってみました。
+最近 <code>Ruby</code> しか書いていなかったので、新鮮で楽しいですね <code>Rust</code> 。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NLP100本ノック section 1 part 2]]></title>
@@ -1141,54 +1474,6 @@ itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使
 <p>成果物です</p>
 
 <p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rock'n' Roll Star]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/12/01/im-rockn-roll-star/"/>
-    <updated>2016-12-01T00:00:00+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/12/01/im-rockn-roll-star</id>
-    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1537">ロックバンド Advent Calendar</a> 1日目です。
-Oasisについて適当に書きます。</p>
-
-<h2>たいとるについて</h2>
-
-<p>はいそうですねみんな大好き Oasis の <a href="https://www.amazon.co.jp/%E3%82%AA%E3%82%A2%E3%82%B7%E3%82%B9-20%E5%91%A8%E5%B9%B4%E8%A8%98%E5%BF%B5%E3%83%87%E3%83%A9%E3%83%83%E3%82%AF%E3%82%B9%E3%83%BB%E3%82%A8%E3%83%87%E3%82%A3%E3%82%B7%E3%83%A7%E3%83%B3-OASIS/dp/B00K2ZK2Y2/ref=ntt_mus_dp_dpt_18">Definitely Maybe</a> の最初にはいってる<a href="https://www.amazon.co.jp/dp/B00K2ZK3UA/ref=dm_ws_tlw_trk1">曲</a>ですね。
-Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=dm_ws_tlw_trk3">Live Forever</a> のほうがすきですが。
-ロックバンド Advent Calendar 2016 ということでこのタイトルにしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
-
-<h2>Oasisについて</h2>
-
-<p>最も好きなロックバンドの一つだった(解散中)ので書いてみることにします。</p>
-
-<p>出会いは高校生だったころ MTV<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> みてたら <a href="https://www.amazon.co.jp/dp/B00FS7WKDK/ref=dm_ws_tlw_trk2">Go Let It Out!</a> が Power Push されてたのではじめて <a href="https://www.amazon.co.jp/%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%83%BB%E3%82%AA%E3%83%B3%E3%83%BB%E3%82%B6%E3%83%BB%E3%82%B7%E3%83%A7%E3%83%AB%E3%83%80%E3%83%BC%E3%83%BB%E3%82%AA%E3%83%96%E3%83%BB%E3%82%B8%E3%83%A3%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%84-OASIS/dp/B00FS7WIKA/ref=pd_sim_sbs_340_1?_encoding=UTF8&amp;psc=1&amp;refRID=CC18CK2V5MCE6YZFAB7H">Standing On Shoulder Of Gaints</a> を買いそこから。このころの曲はあまり好きでないのが多いですね。
-このころも解散でもめてた気がします。そのあと大学でボッチ&amp;&amp;ひきこもりだったのでずっとOasisばっかり聞いてました。
-そのときに買ったのが <a href="https://www.amazon.co.jp/%E3%82%B6%E3%83%BB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%97%E3%83%A9%E3%83%B3-OASIS/dp/B00FS80BTO/ref=pd_sim_340_5?_encoding=UTF8&amp;psc=1&amp;refRID=3BME19Z3FRFP8SCGMPZ4">Master Plan</a>、 <a href="https://www.amazon.co.jp/%E3%83%92%E3%83%BC%E3%82%B6%E3%83%B3%E3%83%BB%E3%82%B1%E3%83%9F%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC-OASIS/dp/B00FXV4YTE/ref=pd_sim_340_5?_encoding=UTF8&amp;psc=1&amp;refRID=0HW35K2Y4M3XGJRH28ZY">Heathen Chemistry</a>、 <a href="https://www.amazon.co.jp/%E3%83%93%E3%82%A3%E3%83%BB%E3%83%92%E3%82%A2%E3%83%BB%E3%83%8A%E3%82%A6-OASIS/dp/B00FUYQG72/ref=pd_sim_340_3?_encoding=UTF8&amp;psc=1&amp;refRID=3BME19Z3FRFP8SCGMPZ4">Be Here Now</a> の3枚で Master Plan はベストアルバム(B面)ってのがすごく好き。</p>
-
-<p>ライブは2度ほど見ました。2005年に2回みてます。<a href="http://www.summersonic.com/05/">Summer Sonic 2005</a> と <a href="http://www.setlist.fm/setlist/oasis/2005/yoyogi-daiichi-taiikukan-tokyo-japan-1bd79964.html">日本ツアー</a> を行ってました。日本ツアーのほうでは、Master Planの曲をやってくれたので本当に満足しました。</p>
-
-<p>そのあとも<a href="https://www.amazon.co.jp/The-Longcut/e/B001LHT232/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">The Longcut</a>、<a href="https://www.amazon.co.jp/The-Music/e/B000APTYQQ/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">The Music</a><sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>、<a href="https://www.amazon.co.jp/Bloc-Party/e/B000APY4UC/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">Bloc Party</a>、<a href="https://www.amazon.co.jp/The-Strokes/e/B000APQBEY/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">The Strokes</a>、<a href="https://www.amazon.co.jp/ASIAN-KUNG-FU-GENERATION/e/B00197HZ7O/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">ASIAN KUNG-FU GENERATION</a>、<a href="https://www.amazon.co.jp/Coldplay/e/B000APPUFK/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">Coldplay</a>とかに浮気しながらもきちんと御布施としてCDは買ってました。最近のリマスターはさすがに買ってないですが…</p>
-
-<h2>解散について</h2>
-
-<p><a href="http://mhnews2504.blog109.fc2.com/blog-entry-1930.html">伝統芸的なこと</a> もあるのでハイハイとしか好きなひとは思ってなかったとおもいます。</p>
-
-<p>で2009年いつも通りまゆげ兄弟(ノエル・ギャラガーとリアム・ギャラガー)の兄弟喧嘩だとおもっていたら本気でまゆげ兄(ノエル)がブチギレて解散したのでそっかーてちょっとショック(ほんとにちょっと)だった<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>。</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>ほんとは<a href="https://ja.wikipedia.org/wiki/%E3%83%8E%E3%82%A8%E3%83%AB%E3%83%BB%E3%82%AE%E3%83%A3%E3%83%A9%E3%82%AC%E3%83%BC#.E7.99.BA.E8.A8.80">ノエルの発言</a>を付けたかったけどさすがにね…<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>だったけなこのころVibeって名前だった気も<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>そんなことより The Music の<a href="https://www.google.com/trends/explore?geo=JP&amp;q=%2Fm%2F0130zt,%2Fm%2F03d_2z,%2Fm%2F03zgq4,%2Fm%2F0kr_t,%2Fm%2F04zbp3">google trends</a>で熊本が肥ゆいけどなんで？<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-<li id="fn:4">
-<p>このころtwitterでやりとりしてた人とかともオフで解散したねーとか言ってた<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   

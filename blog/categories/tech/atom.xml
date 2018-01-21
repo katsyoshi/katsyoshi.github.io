@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-01-19T20:54:18+09:00</updated>
+  <updated>2018-01-21T11:28:56+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,232 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[nlp 100 section 1 part 3]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/01/21/nlp-100-section-1-part-3/"/>
+    <updated>2018-01-21T10:23:02+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/01/21/nlp-100-section-1-part-3</id>
+    <content type="html"><![CDATA[<p>前回、<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> の04までやったので05からやります。</p>
+
+<h3>05. ngram</h3>
+
+<p>こいつはbi-gramを単語、文字二つを実装するひつようがあります</p>
+
+<p>```rust
+fn bigram(words: Vec<String>) &ndash;> Vec<String> {</p>
+
+<pre><code>let mut bi: Vec&lt;String&gt; = Vec::new();
+let mut i = 0;
+
+loop {
+    let w = i + 2;
+    if w &gt; words.len() { break; }
+    bi.push(words[i..w].join(""));
+    i += 1;
+}
+bi
+</code></pre>
+
+<p>}</p>
+
+<p>fn main() {</p>
+
+<pre><code>let words = "I am an NLPer".split(' ').map(|m| m.to_string()).collect::&lt;Vec&lt;String&gt;&gt;();
+println!("\n===word bi-gram");
+for word in bigram(words) {
+    println!("{}", word);
+}
+
+let words = "I am an NLPer".chars().map(|m| m.to_string()).collect::&lt;Vec&lt;String&gt;&gt;();
+for word in bigram(words) {
+    println!("\"{}\"", word);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>06. 集合</h3>
+
+<p>これは単純に <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html"><code>HashSet</code></a> を利用して、解決します。<code>HashSet</code> の差集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.difference"><code>difference</code></a> を利用し、和集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.union"><code>union</code></a> を、積集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.intersection"><code>intersection</code></a> をそれぞれ利用します。また、特定の要素が含有していることを判定するには <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.contains"><code>contains</code></a> を利用して判定します。</p>
+
+<p>```rust
+use std::collections::HashSet;</p>
+
+<p>fn bigram(words: Vec<String>) &ndash;> HashSet<String> {</p>
+
+<pre><code>let mut bi: HashSet&lt;String&gt; = HashSet::new();
+let mut i = 0;
+
+loop {
+    let w = i + 2;
+    if w &gt; words.len() { break; }
+    bi.insert(words[i..w].join(""));
+    i += 1;
+}
+bi
+</code></pre>
+
+<p>}</p>
+
+<p>fn chars(s: String) &ndash;> Vec<String> {</p>
+
+<pre><code>s.chars().map(|m| m.to_string()).collect::&lt;Vec&lt;String&gt;&gt;()
+</code></pre>
+
+<p>}</p>
+
+<p>fn main() {</p>
+
+<pre><code>let s1 = bigram(chars("paraparaparadise".to_string()));
+let s2 = bigram(chars("paragraph".to_string()));
+
+println!("===UNION===");
+for x in s1.union(&amp;s2) {
+    println!("{}", x);
+}
+
+println!("\n===DIFF===");
+println!("===s1 - s2===");
+for x in s1.difference(&amp;s2) {
+    println!("{}", x);
+}
+println!("===s2 - s1===");
+for x in s2.difference(&amp;s1) {
+    println!("{}", x);
+}
+
+println!("\n===intersection===");
+for x in s1.intersection(&amp;s2) {
+    println!("{}", x);
+}
+
+println!("\n===INCLUDE===");
+let se = "se";
+println!("s1: {}", s1.contains(se));
+println!("s2: {}", s2.contains(se));
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>07. テンプレートによる文生成</h3>
+
+<p>これは <a href=""><code>format!</code></a> を使えば終りです。(問題意図ほんとこれなんか？)</p>
+
+<p>```rust
+fn string_template(x: i8, y: &amp;str, z: f32) &ndash;> String {</p>
+
+<pre><code>format!("{}時の{}は{}", x, y, z)
+</code></pre>
+
+<p>}</p>
+
+<p>fn main() {</p>
+
+<pre><code>let string = string_template(12, "気温", 22.5);
+println!("{}", string);
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>08. 暗号文</h3>
+
+<p>ASCII以外の判定と、小文字のASCIIが判れば簡単です。</p>
+
+<p>```rust
+use std::ascii::AsciiExt;</p>
+
+<p>fn cipher(src: &amp;str) &ndash;> String {</p>
+
+<pre><code>let chars = src.chars().collect::&lt;Vec&lt;char&gt;&gt;();
+let mut result: String = String::new();
+for c in chars {
+    let s = if c.is_ascii() {
+        let var: u8 = c as u8;
+        match var {
+            97 ... 122 =&gt; (219 - (var)) as char,
+            _ =&gt; c,
+        }
+    } else {
+        c
+    };
+    result.push(s);
+}
+result
+</code></pre>
+
+<p>}</p>
+
+<p>fn main() {</p>
+
+<pre><code>println!("{}", cipher("Today is fine."));
+println!("{}", cipher(&amp;cipher("Today is fine.")));
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>09. Typoglycemia</h3>
+
+<p>こちらは、 <code>Vec</code> に <code>shuffle</code> 的なものがないので、<a href="https://doc.rust-lang.org/rand"><code>rand</code></a> を呼び出して <a href="https://doc.rust-lang.org/rand/rand/trait.Rng.html#method.shuffle"><code>shuffle</code></a> を使います。</p>
+
+<p>```rust
+extern crate rand;
+use rand::Rng;</p>
+
+<p>fn words(src: &amp;str) &ndash;> Vec<String> {</p>
+
+<pre><code>let mut result: Vec&lt;String&gt; = Vec::new();
+
+for s in src.split(' ').collect::&lt;Vec&lt;&amp;str&gt;&gt;() {
+    let mut chars = s.chars().collect::&lt;Vec&lt;char&gt;&gt;();
+    if chars.len() &lt; 5 {
+        result.push(s.to_string());
+    } else {
+        let last_index = chars.len() - 1;
+        let first_char = chars[0];
+        let last_char = chars[last_index];
+
+        let rand_chars = &amp;mut chars[1..last_index];
+        shuffle(rand_chars);
+        let mut rand_string = String::new();
+        for c in rand_chars { rand_string.push(*c) }
+        result.push(format!("{}{}{}", first_char, rand_string, last_char));
+    }
+}
+result
+</code></pre>
+
+<p>}</p>
+
+<p>fn shuffle(chars: &amp;mut [char]) {</p>
+
+<pre><code>rand::thread_rng().shuffle(chars);
+</code></pre>
+
+<p>}</p>
+
+<p>fn main() {</p>
+
+<pre><code>let paragraph = "I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind .";
+
+for w in words(paragraph) {
+    println!("{}", w);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>おわり</h2>
+
+<p>ということで <code>Rust</code> で言語処理100本ノック1章をやってみました。
+最近 <code>Ruby</code> しか書いていなかったので、新鮮で楽しいですね <code>Rust</code> 。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NLP100本ノック section 1 part 2]]></title>
@@ -358,70 +584,6 @@ $ irb -rarrow
 <h2>おわり</h2>
 
 <p>最初ろーどえらーでこまってた</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[installing apache arrow]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/"/>
-    <updated>2017-05-29T21:45:29+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow</id>
-    <content type="html"><![CDATA[<p><a href="https://slide.rabbit-shocker.org/authors/kou/nagoya-rubykaigi-03/">最近</a><a href="https://github.com/kou">すとうさん</a>が<a href="https://slide.rabbit-shocker.org/authors/kou/data-science-rb/">一押し</a>している<a href="https://arrow.apache.org/">apache arrow</a>をインストールしてみた</p>
-
-<h2>環境</h2>
-
-<p><code>
-$ uname -a
-Linux rin 4.9.10-gentoo #6 SMP Tue Mar 28 01:29:26 JST 2017 x86_64 Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz GenuineIntel GNU/Linux
-$ gcc -v
-組み込み spec を使用しています。
-COLLECT_GCC=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0/gcc
-COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-pc-linux-gnu/5.4.0/lto-wrapper
-ターゲット: x86_64-pc-linux-gnu
-configure 設定: /var/tmp/portage/sys-devel/gcc-5.4.0-r3/work/gcc-5.4.0/configure --host=x86_64-pc-linux-gnu --build=x86_64-pc-linux-gnu --prefix=/usr --bindir=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0 --includedir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include --datadir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0 --mandir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/man --infodir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/info --with-gxx-include-dir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include/g++-v5 --with-python-dir=/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/python --enable-languages=c,c++,fortran --enable-obsolete --enable-secureplt --disable-werror --with-system-zlib --enable-nls --without-included-gettext --enable-checking=release --with-bugurl=https://bugs.gentoo.org/ --with-pkgversion='Gentoo 5.4.0-r3 p1.3, pie-0.6.5' --enable-libstdcxx-time --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-clocale=gnu --enable-multilib --with-multilib-list=m32,m64 --disable-altivec --disable-fixed-point --enable-targets=all --disable-libgcj --enable-libgomp --disable-libmudflap --disable-libssp --disable-libcilkrts --disable-libmpx --enable-vtable-verify --enable-libvtv --enable-lto --without-isl --enable-libsanitizer
-スレッドモデル: posix
-gcc バージョン 5.4.0 (Gentoo 5.4.0-r3 p1.3, pie-0.6.5)
-</code></p>
-
-<h2>いんすとーる</h2>
-
-<p>今回まだGentooにパッケージがないのでgitからインストールします。ほしいのはrubygems.orgに公開されている<a href="https://rubygems.org/gems/red-arrow">red-arrow</a>をコンパイルするためにglibとこれを利用するために必要な依存パッケージとしてcppをインストールします。インストールはかんたんで <code>cmake</code> を実行すればインストールデキルはずです。</p>
-
-<p><code>console
-$ git clone git@github.com:apache/arrow.git
-$ cd arrow/cpp
-$ mkdir release
-$ cd release
-$ cmake .. -DCMAKE_BUILD_TYPE=Release
-</code></p>
-
-<p>でリリース用パッケージがビルドされるはずですが<a href="https://gist.github.com/katsyoshi/4486792ad43feae4d690d589dac1a157">エラー</a>が出ます。
-これはJIRAで<a href="https://issues.apache.org/jira/browse/ARROW-667">検索した結果</a>より <code>gcc</code> のバージョン情報がとれずにエラーをだしているやりとりが発見されたのでわかりました。
-ログを見ると実際に取得できていないことも確認しました。で <code>cpp/cmake_modules/CompilerInfo.cmake</code> をみるとどうやら日本語のバージョン情報は考慮されていないような作りになっていました。
-なので <code>LANG=C</code> をつけて <code>cmake</code> 再びつけて実行します。</p>
-
-<p><code>console
-$ LANG=C cmake .. -DCMAKE_BUILD_TYPE=Release
-$ make
-$ make install
-</code></p>
-
-<p>これでC++のインストールは終了です。続いてglibをインストールします。</p>
-
-<p><code>console
-$ cd ../../c_glib
-$ ./autgen.sh
-$ ./configure
-$ make
-$ make install
-</code></p>
-
-<p>でインストールできます。こちら久々に野良ビルドしたため <code>PKG_CONFIG_PATH</code> や <code>LD_LIBRARY_PATH</code> の設定をわすれてただけなのですんなりいけました。
-で最後に <code>gem install red-arrow</code> を実行して目的を達成しました!!!!11</p>
-
-<h2>おわり</h2>
-
-<p>ほんとうのもくてきは <code>fluentd</code> のぷらぐいんをかくことですがつかれたのできょうはここまで</p>
 ]]></content>
   </entry>
   
