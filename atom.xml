@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-01-21T11:28:56+09:00</updated>
+  <updated>2018-01-27T20:27:37+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,509 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[NLP100ノック第2章]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/01/27/nlp-100-section-2/"/>
+    <updated>2018-01-27T19:46:23+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/01/27/nlp-100-section-2</id>
+    <content type="html"><![CDATA[<p>第2章を一通り終えたので書きます。</p>
+
+<h3>10. 行数のカウント</h3>
+
+<p>タイトルのままです。 <code>Rust</code> では <a href="https://doc.rust-lang.org/std/str/struct.Lines.html"><code>std::str::Lines</code></a> で <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.count"><code>count()</code></a> がありますので利用しておわりです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">env</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">BufReader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">prelude</span><span class="o">::*</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">args</span> <span class="o">=</span> <span class="n">env</span><span class="o">::</span><span class="n">args</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">args</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">path</span> <span class="n">in</span> <span class="n">args</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">br</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">br</span><span class="p">.</span><span class="n">lines</span><span class="p">().</span><span class="n">count</span><span class="p">());</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>11. タブをスペースに置換</h3>
+
+<p>コチラも、<a href="https://doc.rust-lang.org/std/string/struct.String.html#method.replace"><code>std::string::String.replace()</code></a> 利用するだけです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">env</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">BufReader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">prelude</span><span class="o">::*</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">args</span> <span class="o">=</span> <span class="n">env</span><span class="o">::</span><span class="n">args</span><span class="p">();</span>
+</span><span class='line'>    <span class="n">args</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">path</span> <span class="n">in</span> <span class="n">args</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">for</span> <span class="n">line</span> <span class="n">in</span> <span class="n">reader</span><span class="p">.</span><span class="n">lines</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">));</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>12. 1列目をcol1.txtに,2列目をcol2.txtに保存</h3>
+
+<p>こちらは単純にファイルに書き込むのと、分割ができれば問題ないです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">env</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="p">{</span><span class="n">BufReader</span><span class="p">,</span> <span class="n">BufWriter</span><span class="p">,</span> <span class="n">Write</span><span class="p">};</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">prelude</span><span class="o">::*</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">args</span> <span class="o">=</span> <span class="n">env</span><span class="o">::</span><span class="n">args</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">args</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">path</span> <span class="n">in</span> <span class="n">args</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">clone</span><span class="p">().</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">clone</span><span class="p">().</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">br</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">let</span> <span class="k">mut</span> <span class="n">first_column</span> <span class="o">=</span> <span class="n">BufWriter</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}_col1.txt&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">)).</span><span class="n">unwrap</span><span class="p">());</span>
+</span><span class='line'>        <span class="k">let</span> <span class="k">mut</span> <span class="n">second_column</span> <span class="o">=</span> <span class="n">BufWriter</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}_col2.txt&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)).</span><span class="n">unwrap</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">for</span> <span class="n">line</span> <span class="n">in</span> <span class="n">br</span><span class="p">.</span><span class="n">lines</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">let</span> <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>            <span class="n">first_column</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="m">0</span><span class="p">]).</span><span class="n">as_bytes</span><span class="p">()).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>            <span class="n">second_column</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="m">1</span><span class="p">]).</span><span class="n">as_bytes</span><span class="p">()).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>13. col1.txtとcol2.txtをマージ</h3>
+
+<p>こちらは以前利用した、<code>zip</code> があれば問題ないです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">env</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="p">{</span><span class="n">BufReader</span><span class="p">,</span> <span class="n">BufWriter</span><span class="p">,</span> <span class="n">Write</span><span class="p">};</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">prelude</span><span class="o">::*</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">args</span> <span class="o">=</span> <span class="n">env</span><span class="o">::</span><span class="n">args</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">args</span><span class="p">.</span><span class="n">len</span><span class="p">()</span> <span class="o">&lt;</span> <span class="m">2</span> <span class="p">{</span> <span class="n">panic</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;col1.txt col2.txt&quot;</span><span class="p">);</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">args</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="n">first</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="n">next</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">second</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="n">next</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="n">fr</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">first</span><span class="p">).</span><span class="n">unwrap</span><span class="p">()).</span><span class="n">lines</span><span class="p">().</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">second</span><span class="p">).</span><span class="n">unwrap</span><span class="p">()).</span><span class="n">lines</span><span class="p">().</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">merge_file</span> <span class="o">=</span>
+</span><span class='line'>        <span class="n">BufWriter</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;merge.txt&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()).</span><span class="n">unwrap</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="n">in</span> <span class="n">fr</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">zip</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">merge_file</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}</span><span class="se">\t</span><span class="s">{}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">).</span><span class="n">as_bytes</span><span class="p">()).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>14. 先頭からN行を出力</h3>
+
+<p><code>head</code> コマンドですので <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.take"><code>std::iter::Iterator.take()</code></a> を利用するだけです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">env</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">BufReader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">prelude</span><span class="o">::*</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">args</span> <span class="o">=</span> <span class="n">env</span><span class="o">::</span><span class="n">args</span><span class="p">().</span><span class="n">skip</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">]).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="n">br</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="n">lines</span><span class="p">().</span><span class="n">take</span><span class="p">((</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="m">1</span><span class="p">]).</span><span class="n">to_string</span><span class="p">().</span><span class="n">parse</span><span class="o">::&lt;</span><span class="n">usize</span><span class="o">&gt;</span><span class="p">().</span><span class="n">unwrap</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="n">line</span> <span class="n">in</span> <span class="n">br</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>15. 末尾のN行を出力</h3>
+
+<p><code>tail</code> コマンドです。こちらは <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.skip"><code>std::iter::Iterator.skip()</code></a> を利用してやるだけです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">env</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">BufReader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">prelude</span><span class="o">::*</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">args</span> <span class="o">=</span> <span class="n">env</span><span class="o">::</span><span class="n">args</span><span class="p">().</span><span class="n">skip</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">]).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">takes</span> <span class="o">=</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="m">1</span><span class="p">]).</span><span class="n">to_string</span><span class="p">().</span><span class="n">parse</span><span class="o">::&lt;</span><span class="n">usize</span><span class="o">&gt;</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">br</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">file</span><span class="p">).</span><span class="n">lines</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">skips</span> <span class="o">=</span> <span class="n">br</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">-</span> <span class="n">takes</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">]).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">lines</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">file</span><span class="p">).</span><span class="n">lines</span><span class="p">().</span><span class="n">skip</span><span class="p">(</span><span class="n">skips</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="n">line</span> <span class="n">in</span> <span class="n">lines</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">.</span><span class="n">unwrap</span><span class="p">());</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>16. ファイルをN分割する</h3>
+
+<p>こちらの実装は素朴な実装とし、行数で分割しております。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">env</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">BufReader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">BufWriter</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">prelude</span><span class="o">::*</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">args</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">env</span><span class="o">::</span><span class="n">args</span><span class="p">().</span><span class="n">skip</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">collect</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">path</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">to_string</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">count</span><span class="o">:</span> <span class="n">usize</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="n">lines</span><span class="p">().</span><span class="n">count</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">div</span><span class="o">:</span> <span class="n">usize</span> <span class="o">=</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="m">1</span><span class="p">]).</span><span class="n">to_string</span><span class="p">().</span><span class="n">parse</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">br</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="n">lines</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">count</span> <span class="k">as</span> <span class="k">f64</span><span class="o">/</span> <span class="n">div</span> <span class="k">as</span> <span class="k">f64</span><span class="p">).</span><span class="n">ceil</span><span class="p">()</span> <span class="k">as</span> <span class="n">usize</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="m">1</span> <span class="p">..</span> <span class="n">div</span> <span class="o">+</span> <span class="m">1</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">l</span> <span class="o">=</span> <span class="n">br</span><span class="p">.</span><span class="n">by_ref</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}.txt&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">let</span> <span class="k">mut</span> <span class="n">bw</span> <span class="o">=</span> <span class="n">BufWriter</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">y</span> <span class="n">in</span> <span class="n">l</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="n">t</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">bw</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">as_bytes</span><span class="p">()).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>            <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}: {}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>17. 1列目の文字列の異なり</h3>
+
+<p>ファイル読込 + <code>HashSet</code> で実装</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">collections</span><span class="o">::</span><span class="n">HashSet</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">env</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">BufReader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">prelude</span><span class="o">::*</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">extern</span> <span class="n">crate</span> <span class="n">regex</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">regex</span><span class="o">::</span><span class="n">Regex</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">args</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">env</span><span class="o">::</span><span class="n">args</span><span class="p">().</span><span class="n">skip</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">collect</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">path</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">to_string</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">re</span> <span class="o">=</span> <span class="n">Regex</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">r</span><span class="s">&quot;\W+&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">hs</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="n">lines</span><span class="p">().</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span><span class="p">{</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">l</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">clone</span><span class="p">();</span>
+</span><span class='line'>        <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="p">).</span><span class="n">next</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_string</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">}).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">HashSet</span><span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="n">s</span> <span class="n">in</span> <span class="n">hs</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>18. 各行を3コラム目の数値の降順にソート</h3>
+
+<p>こちら、実数の比較を行う必要があり、すこし <a href="https://gist.github.com/katsyoshi/c76c2f782b3edaeff1d328a84dd582a0">めんどう</a> でした。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">env</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">BufReader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">prelude</span><span class="o">::*</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">args</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">env</span><span class="o">::</span><span class="n">args</span><span class="p">().</span><span class="n">skip</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">collect</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">path</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">to_string</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">val</span> <span class="o">=</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="n">lines</span><span class="p">().</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">).</span><span class="n">skip</span><span class="p">(</span><span class="m">2</span><span class="p">).</span><span class="n">next</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">parse</span><span class="o">::&lt;</span><span class="k">f64</span><span class="o">&gt;</span><span class="p">().</span><span class="n">unwrap</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="k">f64</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">val</span><span class="p">.</span><span class="n">sort_by</span><span class="p">(</span><span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span><span class="p">.</span><span class="n">partial_cmp</span><span class="p">(</span><span class="n">b</span><span class="p">).</span><span class="n">unwrap</span><span class="p">());</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">v</span> <span class="n">in</span> <span class="n">val</span> <span class="p">{</span> <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>19. 各行の1コラム目の文字列の出現頻度を求め,出現頻度の高い順に並べる</h3>
+
+<p>18の問題を更にカウントできるように変更した。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">collections</span><span class="o">::</span><span class="n">HashMap</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">env</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">BufReader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">prelude</span><span class="o">::*</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">enum</span> <span class="n">Value</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">USIZE</span><span class="p">(</span><span class="n">usize</span><span class="p">),</span>
+</span><span class='line'>    <span class="n">NONE</span><span class="p">(()),</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">args</span> <span class="o">=</span> <span class="n">env</span><span class="o">::</span><span class="n">args</span><span class="p">().</span><span class="n">skip</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">]).</span><span class="n">unwrap</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">words</span><span class="o">:</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">usize</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">HashMap</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">m</span> <span class="n">in</span> <span class="n">BufReader</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">file</span><span class="p">).</span><span class="n">lines</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_string</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">).</span><span class="n">next</span><span class="p">().</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_string</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="n">match</span> <span class="n">words</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">None</span> <span class="o">=&gt;</span> <span class="m">1</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">Some</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">n</span> <span class="o">+</span> <span class="m">1</span><span class="p">,</span>
+</span><span class='line'>        <span class="p">};</span>
+</span><span class='line'>        <span class="n">words</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">vars</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">String</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">usize</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">words</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">collect</span><span class="p">();</span>
+</span><span class='line'>    <span class="n">vars</span><span class="p">.</span><span class="n">sort_by</span><span class="p">(</span><span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">b</span><span class="p">.</span><span class="m">1.</span><span class="n">cmp</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="m">1</span><span class="p">));</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="n">in</span> <span class="n">vars</span> <span class="p">{</span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}: {}&quot;</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">);}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>この章は慣れてきたのか比較的楽に解けています。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[nlp 100 section 1 part 3]]></title>
@@ -1451,29 +1954,6 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code
 <p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
 とおもってたら itamae-plugin-resource-portage みつけてしまったので
 itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使いましょう</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[d250g2 advent calendar 2016 5日目]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2016/12/05/d250g2/"/>
-    <updated>2016-12-05T00:00:00+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2016/12/05/d250g2</id>
-    <content type="html"><![CDATA[<p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
-
-<h2>d250g2 について</h2>
-
-<p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
-
-<h2>d250g2 とは？</h2>
-
-<p>しらん</p>
-
-<h2>KernelVM Camp #4 に行ってきた</h2>
-
-<p>成果物です</p>
-
-<p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
 ]]></content>
   </entry>
   
