@@ -96,7 +96,7 @@ use &hellip;">
 	<h2 class="title">NLP100ノック第2章</h2>
 	<div class="entry-content"><p>第2章を一通り終えたので書きます。</p>
 
-<h3>10. 行数のカウント</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec10">10. 行数のカウント</a></h3>
 
 <p>タイトルのままです。 <code>Rust</code> では <a href="https://doc.rust-lang.org/std/str/struct.Lines.html"><code>std::str::Lines</code></a> で <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.count"><code>count()</code></a> がありますので利用しておわりです。</p>
 
@@ -135,7 +135,7 @@ use &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>11. タブをスペースに置換</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec11">11. タブをスペースに置換</a></h3>
 
 <p>コチラも、<a href="https://doc.rust-lang.org/std/string/struct.String.html#method.replace"><code>std::string::String.replace()</code></a> 利用するだけです。</p>
 
@@ -176,7 +176,7 @@ use &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>12. 1列目をcol1.txtに,2列目をcol2.txtに保存</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec12">12. 1列目をcol1.txtに,2列目をcol2.txtに保存</a></h3>
 
 <p>こちらは単純にファイルに書き込むのと、分割ができれば問題ないです。</p>
 
@@ -231,7 +231,7 @@ use &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>13. col1.txtとcol2.txtをマージ</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec13">13. col1.txtとcol2.txtをマージ</a></h3>
 
 <p>こちらは以前利用した、<code>zip</code> があれば問題ないです。</p>
 
@@ -288,7 +288,7 @@ use &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>14. 先頭からN行を出力</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec14">14. 先頭からN行を出力</a></h3>
 
 <p><code>head</code> コマンドですので <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.take"><code>std::iter::Iterator.take()</code></a> を利用するだけです。</p>
 
@@ -325,7 +325,7 @@ use &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>15. 末尾のN行を出力</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec15">15. 末尾のN行を出力</a></h3>
 
 <p><code>tail</code> コマンドです。こちらは <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.skip"><code>std::iter::Iterator.skip()</code></a> を利用してやるだけです。</p>
 
@@ -368,7 +368,7 @@ use &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>16. ファイルをN分割する</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec16">16. ファイルをN分割する</a></h3>
 
 <p>こちらの実装は素朴な実装とし、行数で分割しております。</p>
 
@@ -431,7 +431,7 @@ use &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>17. 1列目の文字列の異なり</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec17">17. 1列目の文字列の異なり</a></h3>
 
 <p>ファイル読込 + <code>HashSet</code> で実装</p>
 
@@ -486,7 +486,7 @@ use &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>18. 各行を3コラム目の数値の降順にソート</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec18">18. 各行を3コラム目の数値の降順にソート</a></h3>
 
 <p>こちら、実数の比較を行う必要があり、すこし <a href="https://gist.github.com/katsyoshi/c76c2f782b3edaeff1d328a84dd582a0">めんどう</a> でした。</p>
 
@@ -521,7 +521,7 @@ use &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>19. 各行の1コラム目の文字列の出現頻度を求め,出現頻度の高い順に並べる</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec19">19. 各行の1コラム目の文字列の出現頻度を求め,出現頻度の高い順に並べる</a></h3>
 
 <p>18の問題を更にカウントできるように変更した。</p>
 
@@ -602,7 +602,7 @@ use &hellip;">
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/rust/'>rust</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/nlp100/'>nlp100</a>, <a class='category' href='/blog/categories/rust/'>rust</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
