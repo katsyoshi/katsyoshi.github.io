@@ -4,7 +4,7 @@
   <title><![CDATA[Category: diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-02-10T01:18:31+09:00</updated>
+  <updated>2018-02-13T18:35:49+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -695,7 +695,7 @@ for (w, v) in vars {println!("{}: {}", w, v);}
     <id>http://blog.katsyoshi.org/blog/2018/01/21/nlp-100-section-1-part-3</id>
     <content type="html"><![CDATA[<p>前回、<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> の04までやったので05からやります。</p>
 
-<h3>05. ngram</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec05">05. ngram</a></h3>
 
 <p>こいつはbi-gramを単語、文字二つを実装するひつようがあります</p>
 
@@ -733,7 +733,7 @@ for word in bigram(words) {
 <p>}
 ```</p>
 
-<h3>06. 集合</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec06">06. 集合</a></h3>
 
 <p>これは単純に <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html"><code>HashSet</code></a> を利用して、解決します。<code>HashSet</code> の差集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.difference"><code>difference</code></a> を利用し、和集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.union"><code>union</code></a> を、積集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.intersection"><code>intersection</code></a> をそれぞれ利用します。また、特定の要素が含有していることを判定するには <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.contains"><code>contains</code></a> を利用して判定します。</p>
 
@@ -797,7 +797,7 @@ println!("s2: {}", s2.contains(se));
 <p>}
 ```</p>
 
-<h3>07. テンプレートによる文生成</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec07">07. テンプレートによる文生成</a></h3>
 
 <p>これは <a href=""><code>format!</code></a> を使えば終りです。(問題意図ほんとこれなんか？)</p>
 
@@ -818,7 +818,7 @@ println!("{}", string);
 <p>}
 ```</p>
 
-<h3>08. 暗号文</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec08">08. 暗号文</a></h3>
 
 <p>ASCII以外の判定と、小文字のASCIIが判れば簡単です。</p>
 
@@ -855,7 +855,7 @@ println!("{}", cipher(&amp;cipher("Today is fine.")));
 <p>}
 ```</p>
 
-<h3>09. Typoglycemia</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec09">09. Typoglycemia</a></h3>
 
 <p>こちらは、 <code>Vec</code> に <code>shuffle</code> 的なものがないので、<a href="https://doc.rust-lang.org/rand"><code>rand</code></a> を呼び出して <a href="https://doc.rust-lang.org/rand/rand/trait.Rng.html#method.shuffle"><code>shuffle</code></a> を使います。</p>
 
@@ -928,7 +928,7 @@ for w in words(paragraph) {
 cargo new nlp100
 </code></p>
 
-<h3>02. 「パトカー」+「タクシー」=「パタトクカシーー」</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec02">02. 「パトカー」+「タクシー」=「パタトクカシーー」</a></h3>
 
 <p>これはムズカシイので素直に <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.zip"><code>zip</code></a> を利用する</p>
 
@@ -957,7 +957,7 @@ concat(f);
 <p>}
 ```</p>
 
-<h3>03. 円周率</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec03">03. 円周率</a></h3>
 
 <p>この問題は思い切り勘違いしてたので、「これのどこが円周率なの？」って思ってました。こいつは <a href="https://doc.rust-lang.org/regex/regex/index.html"><code>Regex</code></a> を用いて単語毎に分解、単語毎に文字数数えて解決してます。</p>
 
@@ -978,7 +978,7 @@ println!("{:?}", pi);
 <p>}
 ```</p>
 
-<h3>04. 元素記号</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec04">04. 元素記号</a></h3>
 
 <p>これは、英語版「水兵リーベー僕の船」ですので条件に合うときだけ1文字に変更します。</p>
 
@@ -1052,7 +1052,7 @@ fn words(sentence: &amp;str) &ndash;> Vec&lt;&amp;str> {</p>
 <p>}
 ```</p>
 
-<h3>00. 文字列の逆順</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec00">00. 文字列の逆順</a></h3>
 
 <p>これは簡単で(でもなかった)、1文字ずつ分解して<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.rev">反対化</a>したあと <code>String</code> にします。</p>
 
@@ -1065,7 +1065,7 @@ fn reverse_string(string: &amp;str) {</p>
 <p>}
 ```</p>
 
-<h3>01. 「パタトクカシーー」</h3>
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec01">01. 「パタトクカシーー」</a></h3>
 
 <p>これも簡単で、1文字ずつ分解して抜き出します。(絶対違う)</p>
 
