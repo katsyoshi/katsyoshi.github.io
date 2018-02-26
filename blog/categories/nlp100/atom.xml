@@ -4,7 +4,7 @@
   <title><![CDATA[Category: nlp100 | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/nlp100/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-02-13T18:35:49+09:00</updated>
+  <updated>2018-02-27T00:47:06+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,194 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[NLP100 Knock Section IV]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/02/26/nlp-100-section-4/"/>
+    <updated>2018-02-26T23:45:52+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/02/26/nlp-100-section-4</id>
+    <content type="html"><![CDATA[<p>NLP100本ノック第4節おわりましたのでまとめます</p>
+
+<h2><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#ch4">第4章 形態素解析</a></h2>
+
+<p>形態素解析やからむずいやろとおもってた</p>
+
+<h3>準備</h3>
+
+<p>この章では、形態素解析済ファイルを作成する必要がありますが、毎回対象ファイルをダウンロード、解析して解いています。
+ここではいつもどおり <code>HashMap</code> を利用するため <code>ANALYZED_MECAB_KEYS</code> を作成してこれをキーにします。
+またよく利用する品詞を <code>enum</code> で定義しておき、変換関数 <code>inspect</code> を作成します。</p>
+
+<p>```rust
+const ANALYZED_MECAB_KEYS: [&str; 9] = [&ldquo;pos&rdquo;, &ldquo;pos1&rdquo;, &ldquo;pos2&rdquo;, &ldquo;pos3&rdquo;, &ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;base&rdquo;, &ldquo;read&rdquo;, &ldquo;speech&rdquo;];
+enum PartOfSpeech {</p>
+
+<pre><code>VERB,
+NOUN,
+PARTICLE,
+</code></pre>
+
+<p>}</p>
+
+<p>use PartOfSpeech::*;</p>
+
+<p>fn inspect(val: PartOfSpeech) &ndash;> String {</p>
+
+<pre><code>match val {
+    VERB =&gt; "動詞",
+    NOUN =&gt; "名詞",
+    PARTICLE =&gt; "助詞",
+}.to_string()
+</code></pre>
+
+<p>}
+```</p>
+
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec30">30. 形態素解析結果の読み込み</a></h3>
+
+<p><code>Map</code> を使えと指定があるので素直に利用します</p>
+
+<p>```rust
+fn feature(node: &amp;Node) &ndash;> HashMap&lt;String, String> {</p>
+
+<pre><code>let mut h: HashMap&lt;String, String&gt; = HashMap::new();
+let surface: String = (&amp;(node.surface)[..node.length as usize]).to_string();
+h.insert("surface".to_string(), surface);
+let values: Vec&lt;String&gt; = node.feature.split(",").map(|m| m.to_string()).collect();
+for (a, b) in ANALYZED_MECAB_KEYS.iter().zip(values.iter()) {
+    h.insert(a.to_string(), b.to_string());
+}
+h
+</code></pre>
+
+<p>}</p>
+
+<p>fn main() {</p>
+
+<pre><code>let url = "http://www.cl.ecei.tohoku.ac.jp/nlp100/data/neko.txt".to_string();
+let neco: Vec&lt;String&gt; = NLP100::get(url).split("\n").filter(|f| f.ne(&amp;"")).map(|m| m.to_string()).collect();
+let mut morph = Vec::new();
+
+for line in neco {
+    let mut tagger: Tagger = mecab::Tagger::new("");
+    let nodes: Node = tagger.parse_to_node(line);
+
+    let mut mecabu: Vec&lt;HashMap&lt;String, String&gt;&gt; = Vec::new();
+    for node in nodes.iter_next() {
+        match node.stat as i32 {
+            mecab::MECAB_BOS_NODE =&gt; (),
+            mecab::MECAB_EOS_NODE =&gt; (),
+            _ =&gt; {
+                mecabu.push(feature(&amp;node));
+            }
+        }
+    }
+    morph.push(mecabu);
+}
+for morph in morphs {
+    for mecab in morph {
+        println!("{}", format!("surface: {}, base: {}, pos: {}, pos1: {}", mecab["surface"], mecab["base"], mecab["pos"], mecab["pos1"]));
+    }
+    println!("");
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec31">31. 動詞</a></h3>
+
+<p>動詞だけ抽出するので以下のコードで抽出し、表層形(<code>"surface"</code>)を取得する</p>
+
+<p>```rust
+fn verb(nodes: Vec&lt;HashMap&lt;String, String>>) &ndash;> Vec&lt;HashMap&lt;String, String>> {</p>
+
+<pre><code>nodes.iter().filter(|m| m["pos"] == inspect(VERB)).map(|hm| hm.clone()).collect()
+</code></pre>
+
+<p>}
+```</p>
+
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec32">32. 動詞の原形</a></h3>
+
+<p>動詞だけ抽出するので上記のコードで抽出し、原形(<code>"base"</code>)を取得する</p>
+
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec33">33. サ変名詞</a></h3>
+
+<p>サ変接続を抽出</p>
+
+<p>```rust
+fn sa_noun(nodes: Vec&lt;HashMap&lt;String, String>>) &ndash;> Vec&lt;HashMap&lt;String, String>>{</p>
+
+<pre><code>noun(nodes).iter().filter(|node| node["pos1"] == "サ変接続").map(|hm| hm.clone()).collect()
+</code></pre>
+
+<p>}
+```</p>
+
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec34">34. 「AのB」</a></h3>
+
+<p>「の」を挾んでいる名詞を抽出</p>
+
+<p>```rust
+fn between_noun(node: &amp;Node) &ndash;> Option<String> {</p>
+
+<pre><code>let mecab = feature(node);
+if mecab["surface"] == "の" &amp;&amp; mecab["pos"] == inspect(PARTICLE) &amp;&amp; mecab["pos1"] == "連体化" {
+    let prev = feature(&amp;node.prev().unwrap());
+    let next = feature(&amp;node.next().unwrap());
+
+    Some(format!("{}{}{}", &amp;prev["surface"], &amp;mecab["surface"], &amp;next["surface"]))
+} else {
+    None
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec35">35. 名詞の連接</a></h3>
+
+<p>連続した名詞を抽出するが、<code>mecab</code> でうまく関数化できなかったので割愛(あとでうかんだら追記)します。</p>
+
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec36">36. 単語の出現頻度</a></h3>
+
+<p>単純に頻度をまとめ、 <code>sort</code> するとよい</p>
+
+<p>```rust
+fn word_histgram(nodes: Vec&lt;HashMap&lt;String, String>>) &ndash;> HashMap&lt;String, u64> {</p>
+
+<pre><code>let mut results: HashMap&lt;String, u64&gt; = HashMap::new();
+for node in nodes {
+    let base = &amp;node["base"];
+    *results.entry(base.to_string()).or_insert(0) += 1;
+}
+results
+</code></pre>
+
+<p>}
+```</p>
+
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec37">37. 頻度上位10語</a></h3>
+
+<p>上記の結果より <code>.take(10)</code> するだけです。</p>
+
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec38">38. ヒストグラム</a></h3>
+
+<ol>
+<li>と違いがわからずおわり。</li>
+</ol>
+
+
+<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec39">39. Zipfの法則</a></h3>
+
+<p>単純に両対数グラフ化でおわり。</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NLP 100 Knock section 3]]></title>
