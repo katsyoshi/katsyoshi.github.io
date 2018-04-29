@@ -7,9 +7,7 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="X240の準備は終ったので、インストールします。基本的にはこの流れです。 USBブート 作成したUSBメモリをX240に差して起動します。
-起動したら、まずパーティションの設定を行います。 1
-$ gpart /dev/sda で不要なパーティションを削除し、必要なパーティションを作成します。 &hellip;">
+	<meta name="description" content="これまでの流れで準備が整ったので、Installを始めます。 インストール これはGentoo Wikiを見ながらで大丈夫です。 嵌ったところ 音が鳴らないという問題が発生しました。理由は簡単でしたのですぐに設定しました。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -83,6 +81,91 @@ $ gpart /dev/sda で不要なパーティションを削除し、必要なパー
     <article class="post">
 	<h2 class="title">
 		
+		<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">
+		
+			Gentoo Install Battle Part III</a>
+	</h2>
+	<div class="entry-content">
+		<p>これ<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">まで</a>の<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">流れ</a>で準備が整ったので、Installを始めます。</p>
+
+<h2>インストール</h2>
+
+<p>これは<a href="http://wiki.gentoo.org/">Gentoo Wiki</a>を見ながらで大丈夫です。</p>
+
+<h3>嵌ったところ</h3>
+
+<p>音が鳴らないという問題が発生しました。<a href="http://pocke.hatenablog.com/entry/2014/02/02/100636">理由</a>は簡単でしたのですぐに設定しました。</p>
+
+<p>つぎにネットワークの設定をnetmountからNetworkManagerに変更しました。
+設定は<a href="http://wiki.gentoo.org/wiki/NetworkManager">ここ</a>で行なえばよいです。</p>
+
+<p>最後にibus-mozcをインストールして終りです。</p>
+
+<h2>mikutter</h2>
+
+<p>GentooInstallBattleはmikutterをインストールしてtweetすることなのでmikutterをインストールします。
+ここではrbenvを利用してmikutterのインストールします。
+まずはrbenvとruby-buildをインストールします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+</span><span class='line'>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</span></code></pre></td></tr></table></div></figure>
+
+
+<p>つぎにrbenvの設定を行います。以下の設定を<code>~/.bashrc</code>あたりに追記してください</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=~/.rbenv/bin:$PATH
+</span><span class='line'>eval "$(rbenv init -)"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rubyのインストールは<code>rbenv install 2.1.2</code>でインストールします。
+最後にmikutterをダウンロードし、環境を構築します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/mikutter/mikutter.git ~/mikutter
+</span><span class='line'>$ cd ~/mikutter
+</span><span class='line'>$ bundle install
+</span><span class='line'>$ bundle exec ruby mikutter.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でインストール終了!!
+これで快適なmikutterライフがておくれますね。</p>
+
+<p><img src="/images/photo/mikutter.png" alt="mikutter" /></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mikutter/'>mikutter</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
 		<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">
 		
 			Gentoo Install Battle Part II</a>
@@ -95,9 +178,8 @@ $ gpart /dev/sda で不要なパーティションを削除し、必要なパー
 <p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">作成したUSBメモリ</a>をX240に差して起動します。
 起動したら、まずパーティションの設定を行います。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gpart /dev/sda
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gpart /dev/sda</span></code></pre></td></tr></table></div></figure>
 
 
 <p>で不要なパーティションを削除し、必要なパーティションを作成します。</p>
@@ -110,9 +192,8 @@ $ gpart /dev/sda で不要なパーティションを削除し、必要なパー
 
 <p>次に以下のコマンドを実行します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config</span></code></pre></td></tr></table></div></figure>
 
 
 <p>実行したら、接続されているのでATL + F2とかでコンソールの表示を変更してください。</p>
@@ -164,11 +245,10 @@ $ gpart /dev/sda で不要なパーティションを削除し、必要なパー
 
 <p>まずLiveCDイメージをダウンロードしUSBフラッシュメモリにコピーします。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wget ftp://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140814.iso
-</span><span class='line'><span class="nv">$ </span>dd <span class="nv">of</span><span class="o">=</span>/path/to/disk <span class="k">if</span><span class="o">=</span>install-amd64-minimal-20140814.iso <span class="nv">bs</span><span class="o">=</span>4m
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget ftp://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140814.iso
+</span><span class='line'>$ dd of=/path/to/disk if=install-amd64-minimal-20140814.iso bs=4m</span></code></pre></td></tr></table></div></figure>
 
 
 <p>でイメージの作成終了です。
@@ -179,9 +259,8 @@ $ gpart /dev/sda で不要なパーティションを削除し、必要なパー
 <p>Windowsを起動し、Shift押しながら再起動します。
 再起動したら、以下の順番でBIOSを起動させます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>トラブルシューティング -&gt; 詳細オプション -&gt; UEFIファームウェアの設定 -&gt; 再起動
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>トラブルシューティング -&gt; 詳細オプション -&gt; UEFIファームウェアの設定 -&gt; 再起動</span></code></pre></td></tr></table></div></figure>
 
 
 <p>でBIOSがたちあがるので、Secure BootとUEFI BootとBoot順の設定を変更します。</p>
@@ -238,18 +317,16 @@ Jenkinsについては利用していなかったので停止してます。つ�
 <p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
 Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo apt-get purge elasticsearch
-</span><span class='line'><span class="nv">$ </span>sudo update-rc.d jenkins disable
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get purge elasticsearch
+</span><span class='line'>$ sudo update-rc.d jenkins disable</span></code></pre></td></tr></table></div></figure>
 
 
 <p>つぎに14.04へupgradeを行ないます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo <span class="k">do</span>-release-upgrade -d
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo do-release-upgrade -d</span></code></pre></td></tr></table></div></figure>
 
 
 <p>これで14.04になってます。</p>
@@ -396,34 +473,32 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
 
 <p>SPDYは<a href="http://ja.wikipedia.org/wiki/SPDY#.E6.A6.82.E8.A6.81">SSL必須</a>のようなのでとりあえずOpenSSLで<a href="http://dogmap.jp/2011/05/10/nginx-ssl/">野良証明書を作成</a>します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /path/to/cert/dir
-</span><span class='line'><span class="nv">$ </span>openssl genrsa -des3 -out server.key 2048
-</span><span class='line'><span class="nv">$ </span>openssl req -new -key server.key -out server.csr
-</span><span class='line'><span class="nv">$ </span>openssl rsa -in server.key.org -out server.key
-</span><span class='line'><span class="nv">$ </span>openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /path/to/cert/dir
+</span><span class='line'>$ openssl genrsa -des3 -out server.key 2048
+</span><span class='line'>$ openssl req -new -key server.key -out server.csr
+</span><span class='line'>$ openssl rsa -in server.key.org -out server.key
+</span><span class='line'>$ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>NGINXの設定</h2>
 
 <p>とりあえずNGINXの<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html">設定ファイルを作成</a>します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>server <span class="o">{</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server {
 </span><span class='line'>    listen 443 ssl spdy;
 </span><span class='line'>    ssl_certificate server.crt;
 </span><span class='line'>    ssl_certificate_key server.key;
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
 <p>と設定したらNGINXを再起動します。
@@ -653,9 +728,8 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
 設定ファイルはいままでの設定で使えるようです。
 あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo launchctl load /Library/LaunchDaemon/td-agent.plist
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo launchctl load /Library/LaunchDaemon/td-agent.plist</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -676,67 +750,6 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
 
 
 	<a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/05/12/jubatus-runs-on-docker/">
-		
-			JubatusをDocker上で動かしてみた</a>
-	</h2>
-	<div class="entry-content">
-		<p>最近話題の<a href="https://www.docker.io/">Docker</a>使ってJubatusを動かしてみたのでメモ的なものを</p>
-
-<h2>環境</h2>
-
-<p>環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作</p>
-
-<ul>
-<li>Vagrant: 1.5.4</li>
-<li>docker: 0.11.1</li>
-</ul>
-
-
-<h2>Dockerfile</h2>
-
-<p><a href="https://github.com/katsyoshi/docker-jubatus">リポジトリ</a>を作成しておきましたのでcloneして実行します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/katsyoshi/docker-jubatus
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>docker-jubatus
-</span><span class='line'><span class="nv">$ </span>docker build .
-</span><span class='line'><span class="nv">$ </span>docker run -p 9199:9199 最後に出てきたハッシュ値
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で動きはじめます。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/jubatus/'>jubatus</a>
 
 
 </div>

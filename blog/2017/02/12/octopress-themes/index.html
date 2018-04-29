@@ -88,19 +88,18 @@ $ git clone git://github.com/tommy351/ &hellip;">
 	<div class="entry-content"><p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
 変更の方法は以下のようになります<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/octopress
-</span><span class='line'><span class="nv">$ </span>git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
-</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake install<span class="se">\[</span><span class="s1">&#39;slash&#39;</span><span class="se">\]</span>
-</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake generate
-</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake preview
-</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake deploy
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd ~/octopress
+</span><span class='line'>$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+</span><span class='line'>$ bundle exec rake install\['slash'\]
+</span><span class='line'>$ bundle exec rake generate
+</span><span class='line'>$ bundle exec rake preview
+</span><span class='line'>$ bundle exec rake deploy</span></code></pre></td></tr></table></div></figure>
 
 
 <p>ついでにfaviconもかえよう。</p>

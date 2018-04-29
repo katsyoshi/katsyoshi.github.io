@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fluentd | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/fluentd/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-03-02T00:02:37+09:00</updated>
+  <updated>2018-04-30T02:49:01+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -76,14 +76,14 @@ Jenkinsについては利用していなかったので停止してます。つ�
 <p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
 Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
 
-<p><code>sh
+<p><code>
 $ sudo apt-get purge elasticsearch
 $ sudo update-rc.d jenkins disable
 </code></p>
 
 <p>つぎに14.04へupgradeを行ないます。</p>
 
-<p><code>sh
+<p><code>
 $ sudo do-release-upgrade -d
 </code></p>
 
@@ -131,7 +131,7 @@ $ sudo do-release-upgrade -d
 設定ファイルはいままでの設定で使えるようです。
 あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
 
-<p><code>sh
+<p><code>
 $ sudo launchctl load /Library/LaunchDaemon/td-agent.plist
 </code></p>
 ]]></content>
@@ -192,7 +192,7 @@ $ sudo launchctl load /Library/LaunchDaemon/td-agent.plist
 <h3>ユーザ、グループの作成</h3>
 
 <p>以下のコマンドでユーザ、グループの作成を行います。
-<code>sh
+<code>
 $ sudo adduser fluentd -s /bin/false
 </code>
 指示に従って入力するとユーザ、グループが作成されています。
@@ -202,7 +202,7 @@ $ sudo adduser fluentd -s /bin/false
 
 <p>以下のコマンドを入力しRubyのインストールを行ないます。</p>
 
-<p><code>sh
+<p><code>
 $ sudo aptitude build-dep ruby1.9.3
 $ sudo aptitude install git
 $ sudo git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
@@ -214,14 +214,14 @@ $ eval "$(rbenv init -)"
 
 <p>ここまで入力したら<code>sudo visudo -f /etc/sudoers.d/00_base</code>と入力し、以下を<a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">入力してください</a>。</p>
 
-<p><code>sh
+<p><code>
 Defaults !secure_path
 Defaults env_keep += "PATH RBENV_ROOT"
 </code></p>
 
 <p>入力したらRuby 2.1.1をインストールします。</p>
 
-<p><code>sh
+<p><code>
 $ sudo rbenv install 2.1.1
 $ sudo rbenv rehash
 </code>
@@ -231,7 +231,7 @@ $ sudo rbenv rehash
 
 <p>gemでfluentdとtdプラグインのfluent-plugin-tdをインストールします。</p>
 
-<p><code>sh
+<p><code>
 $ sudo gem install fluentd fluent-plugin-td
 </code></p>
 
@@ -400,7 +400,7 @@ fi
 
 <p>としたら、以下のコマンドを入力し、fluentdデーモンを起動します。</p>
 
-<p><code>sh
+<p><code>
 $ sudo update-rc.d fluentd defaults
 $ sudo mkdir -p /var/log/fluentd
 $ sudo chown fluentd:fluentd /var/log/fluentd

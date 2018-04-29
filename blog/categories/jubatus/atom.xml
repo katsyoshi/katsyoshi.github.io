@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jubatus | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/jubatus/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-03-02T00:02:37+09:00</updated>
+  <updated>2018-04-30T02:49:01+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -25,7 +25,7 @@
 
 <p>これは、以下のコマンドでインストールができます。</p>
 
-<p>```sh</p>
+<p>```</p>
 
 <h1>curl <a href="https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml">https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml</a> > /etc/layman/overlays/katsyoshi.xml</h1>
 
@@ -79,7 +79,7 @@
 
 <p><a href="https://github.com/katsyoshi/docker-jubatus">リポジトリ</a>を作成しておきましたのでcloneして実行します。</p>
 
-<p><code>sh
+<p><code>
 $ git clone https://github.com/katsyoshi/docker-jubatus
 $ cd docker-jubatus
 $ docker build .

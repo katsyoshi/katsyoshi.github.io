@@ -90,13 +90,12 @@ Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
 
 <p>dockerの<a href="https://docs.docker.com/installation/gentoolinux/">Gentooインストールページ</a>を参考に<a href="https://github.com/tianon/docker-overlay">overlay</a>を導入します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo layman -a docker
-</span><span class='line'><span class="nv">$ </span>sudo eix-sync
-</span><span class='line'><span class="nv">$ </span>sudo emerge -av app-emulators/docker
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo layman -a docker
+</span><span class='line'>$ sudo eix-sync
+</span><span class='line'>$ sudo emerge -av app-emulators/docker</span></code></pre></td></tr></table></div></figure>
 
 
 <p>ここでカーネルオプションの警告が出るのでひとつひとつ潰しておきます。</p>
@@ -105,7 +104,7 @@ Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
 
 <p>インストールおわったら、起動させますが、以下のようなログが出てるので起動できません。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -116,18 +115,17 @@ Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>2014/10/01 18:39:17 docker daemon: 1.1.2 d84a070; execdriver: native; graphdriver:
-</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> +job serveapi<span class="o">(</span>unix:///var/run/docker.sock<span class="o">)</span>
-</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> +job initserver<span class="o">()</span>
-</span><span class='line'><span class="o">[</span>6c541422.initserver<span class="o">()]</span> Creating server
-</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> +job init_networkdriver<span class="o">()</span>
-</span><span class='line'><span class="o">[</span>6c541422.init_networkdriver<span class="o">()]</span> creating new bridge <span class="k">for </span>docker0
+</pre></td><td class='code'><pre><code class=''><span class='line'>2014/10/01 18:39:17 docker daemon: 1.1.2 d84a070; execdriver: native; graphdriver:
+</span><span class='line'>[6c541422] +job serveapi(unix:///var/run/docker.sock)
+</span><span class='line'>[6c541422] +job initserver()
+</span><span class='line'>[6c541422.initserver()] Creating server
+</span><span class='line'>[6c541422] +job init_networkdriver()
+</span><span class='line'>[6c541422.init_networkdriver()] creating new bridge for docker0
 </span><span class='line'>package not installed
-</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> -job init_networkdriver<span class="o">()</span> <span class="o">=</span> ERR <span class="o">(</span>1<span class="o">)</span>
+</span><span class='line'>[6c541422] -job init_networkdriver() = ERR (1)
 </span><span class='line'>package not installed
-</span><span class='line'><span class="o">[</span>6c541422<span class="o">]</span> -job initserver<span class="o">()</span> <span class="o">=</span> ERR <span class="o">(</span>1<span class="o">)</span>
-</span><span class='line'>2014/10/01 18:39:17 package not installed
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>[6c541422] -job initserver() = ERR (1)
+</span><span class='line'>2014/10/01 18:39:17 package not installed</span></code></pre></td></tr></table></div></figure>
 
 
 <p>このときは <code>bridge-utils</code> をインストールすればいいのかなと思ってたら、インストールしても解決できないです。</p>

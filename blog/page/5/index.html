@@ -7,7 +7,8 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="rails-assets.org から bootstrap-sass-official をインストールし、動かしたら、 test環境でテストが落ちてたのでメモ。 オチ CSSのファイル名が application.css.scss じゃなかった。 設定 まず、Gemfile &hellip;">
+	<meta name="description" content=" 以前買ったX240があまりにも使い辛いので
+X250を買った。それ以外にもメガネも一つ買ってみた。 あと欲しいのは、ルンバかなあ diary ">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -76,6 +77,43 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/04/15/looks-good-new-machine/">
+		
+			おにゅーな</a>
+	</h2>
+	<div class="entry-content">
+		<p>以前買った<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">X240</a>があまりにも使い辛いので
+X250を買った。それ以外にもメガネも一つ買ってみた。</p>
+
+<p>あと欲しいのは、ルンバかなあ</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -313,9 +351,8 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 			Herokuでmaster以外のブランチを利用してデプロイする方法</a>
 	</h2>
 	<div class="entry-content">
-		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git push heroku your-branch:master
-</span></code></pre></td></tr></table></div></figure>
+		<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push heroku your-branch:master</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>参考</h3>
@@ -365,9 +402,8 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
 <p><code>portage</code> を <code>2.2.17</code> に変更し、USEフラグとして <code>git</code> をつかいます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># USE=&quot;git ${USE}&quot; emerge -av \=portage-2.2.17</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># USE="git ${USE}" emerge -av \=portage-2.2.17</span></code></pre></td></tr></table></div></figure>
 
 
 <p>つぎに、Gitのリポジトリを見に行くように<a href="http://qiita.com/wjn/items/a3b71059211711501e35">設定</a>します。</p>
@@ -427,15 +463,14 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
 <p>github.com に <code>katsyoshi.github.io</code> というリポジトリを作成し、以下のコマンドを実行</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rake setup_github_pages
-</span><span class='line'><span class="nb">set </span>your github repogitory
-</span><span class='line'><span class="nv">$ </span>rake generate
-</span><span class='line'><span class="nv">$ </span>rake deploy
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake setup_github_pages
+</span><span class='line'>set your github repogitory
+</span><span class='line'>$ rake generate
+</span><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
 
 
 <p>そのあと、DNSでCNAMEに <code>katsyoshi.github.io</code> を設定し、リポジトリ<del>のトップ</del>に <code>blog.katsyoshi.org</code> と書いた <code>source/CNAME</code> ファイルを追加しおわりです。</p>
@@ -448,17 +483,16 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
 <p>実は記事を追加したあと <code>rake deploy</code> ができないという問題がありましたが、そのときは、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rake generate
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>_deploy
-</span><span class='line'><span class="nv">$ </span>git pull origin/master
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ../
-</span><span class='line'><span class="nv">$ </span>rake deploy
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake generate
+</span><span class='line'>$ cd _deploy
+</span><span class='line'>$ git pull origin/master
+</span><span class='line'>$ cd ../
+</span><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
 
 
 <p>で更新されます。</p>
@@ -563,7 +597,7 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
 <p>とりあえずfcitxをインストール、設定します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -571,15 +605,14 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>emerge -av fcitx
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ emerge -av fcitx
 </span><span class='line'>
-</span><span class='line'><span class="nv">$ $EDITOR</span> .xinitrc
+</span><span class='line'>$ $EDITOR .xinitrc
 </span><span class='line'>
-</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'>fcitx
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>export XMODIFIERS=@im="fcitx"
+</span><span class='line'>export GTK_IM_MODULE="fcitx"
+</span><span class='line'>export QT_IM_MODULE="fcitx"
+</span><span class='line'>fcitx</span></code></pre></td></tr></table></div></figure>
 
 
 <p>これでインストールはこれでおわりです。</p>
@@ -588,15 +621,14 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
 <p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ $EDITOR</span> /etc/portage/make.conf
-</span><span class='line'><span class="nv">USE</span><span class="o">=</span><span class="s2">&quot;fcitx ${USE}&quot;</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ $EDITOR /etc/portage/make.conf
+</span><span class='line'>USE="fcitx ${USE}"
 </span><span class='line'>
-</span><span class='line'><span class="nv">$ </span>sudo emerge -av mozc
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>$ sudo emerge -av mozc</span></code></pre></td></tr></table></div></figure>
 
 
 <p>で、インストールすれば使えるようになります。</p>
@@ -624,88 +656,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
 
 	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/ime/'>ime</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/01/31/emacs-fonts/">
-		
-			Rictyやめるってよ</a>
-	</h2>
-	<div class="entry-content">
-		<p>普段、emacs上でフォントを <code>Ricty</code> にして使ってたけど、微妙にずれるのを解消できなかったはなし</p>
-
-<h2>症状と設定</h2>
-
-<p>Rictyのときの症状と設定をのせておきます。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/Ricty.png" alt="Ricty" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;Ricty&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="nv">nil</span> <span class="ss">&#39;font</span><span class="p">)</span> <span class="ss">&#39;japanese-jisx0208</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="s">&quot;iso10646-1&quot;</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="nf">setq</span> <span class="nv">face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;Ricty&quot;</span> <span class="o">.</span> <span class="mf">1.2</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で解消できそうにないので DejaVu を用いて表示するように変更しました。</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/DejaVu.png" alt="DejaVu" /></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">&quot;DejaVu&quot;</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんな感じになりました。</p>
-
-<h2>おわり</h2>
-
-<p>よくわからないので諦めました。ので参考に</p>
-
-<p>最後に引っ越ししました。</p>
-
-<p><a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
-
-<h2>追記</h2>
-
-<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/katsyoshi">@katsyoshi</a> (setq face-font-rescale-alist &#39;((&quot;Ricty&quot; . 1.0))) で常用していてずれないのですが、これだとどうなりますか?</p>&mdash; つまみ (@polamjag) <a href="https://twitter.com/polamjag/status/561875516118949889">February 1, 2015</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>とアドバイスがありましたので、やってみました!!!!!!</p>
-
-<p style="text-align:center;"> <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /></p>
-
-<p>ほんとにちょっとずれて気になる…</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>

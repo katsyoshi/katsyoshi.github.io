@@ -82,9 +82,8 @@ $ git grep -e it --or -e specify -L -- spec/{model,controller}s | xgrep &hellip;
 	<div class="entry-content"><p>Ruby on RailsのプロジェクトでGit管理されているTestで空のテストファイルを
 削除するには以下のコマンドを利用することで削除できます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git grep -e it --or -e specify -L -- spec/<span class="o">{</span>model,controller<span class="o">}</span>s | xgrep git rm -f --
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git grep -e it --or -e specify -L -- spec/{model,controller}s | xgrep git rm -f --</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>参考</h3>

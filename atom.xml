@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-03-02T00:02:37+09:00</updated>
+  <updated>2018-04-30T02:49:01+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[1日はやくはじめた]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/04/30/happy-holidays/"/>
+    <updated>2018-04-30T01:02:57+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/04/30/happy-holidays</id>
+    <content type="html"><![CDATA[<p>2018/4/27 に休み入れて一日はやくGWはじめています。</p>
+
+<h3>毎月恒例</h3>
+
+<p>毎月月末金曜に知り合いの <a href="https://twitter.com/n_kane">@n_kane</a> と築地で朝御飯を食べにいってて
+今月はGW直前だし朝からやってる <a href="https://tabelog.com/tokyo/A1311/A131106/13009812/">根津 鷹匠</a> で朝からそばもいこうとなっていってきた。
+そういうわけで休みを入れていた。</p>
+
+<h3>国税局</h3>
+
+<p>前日あたりに <a href="https://instagram.com">instagram</a> で <a href="https://www.instagram.com/ginzabrewery/">ginzabrewery</a> を眺めててどこだろと <em>ggrks</em> してみたら
+<a href="https://www.nta.go.jp/about/organization/tokyo/sake/beer/tokyo/tokyo.htm">ここ</a> の便利ページが出てきた。このページはだいたいブリュワリーとパブが一体化した
+店が掲載されているよう。でよく行く<a href="http://www.campionale.com/jp/">Campion Ale</a> や最近教えてもらった <a href="http://plusplus.suiken.beer/">十条すいけんブルワリー</a>、
+などが掲載されている。</p>
+
+<h3>ガハハハ</h3>
+
+<p>で午後は @n_kane も予定があったらしく、暇だったので上記国税局の便利ページを参考に <a href="https://www.facebook.com/%E3%82%AC%E3%83%8F%E3%83%8F%E3%83%93%E3%83%BC%E3%83%AB-gahahabeer-1639230606096746/">ガハハビール</a> に行ってみた。</p>
+
+<p>流石に平日の午後3時だったので店員さん以外は誰もおらず、一人だけでした。
+とりあえず <a href="https://untappd.com/b/gahaha-beer-danchi-ipa/2502617">Danchi IPA</a> とレバーを頼んでみた。</p>
+
+<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/photo/danchi-ipa.jpg" alt="" /></p>
+
+<p>Danchi IPA は苦味がすくなく美味しいビールでした。</p>
+
+<p>つぎに <a href="https://untappd.com/b/gahaha-beer-marcy-ipa-ipa/2517460">Marcy IPA</a> とライスなしカツカレーを注文。
+こちらは苦味が強くおいしいビールでした。</p>
+
+<p style="text-align:center;"> <img src="http://blog.katsyoshi.org/images/photo/gahaha-marcy-ipa.jpg" alt="" /></p>
+
+<p>そんなことより、謎のメニューが幾つかあり、店員さんに聞いてみたら、「だってお酒のむ人お米とか麺とかあんまりすきじゃないですよね」っていっておりました。
+あと、軟骨バッファローチキンは頼んでないけどとてもよさそうだったので今度いく時に注文しよう。</p>
+
+<h3>おわり</h3>
+
+<p>国税局を調べたおかげで良いビール屋を見付けることができてよかったよかった。</p>
+
+<p>ってガハハビールの情報探してたら老舗クラフトビールの紹介サイトの <a href="http://beer-cruise.net/">ビアクルーズ</a> さんで <a href="http://beer-cruise.net/beer/170922.html">紹介されてた</a> 。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NLP100 Knock Section IV]]></title>
@@ -2608,19 +2655,18 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code
     <content type="html"><![CDATA[<p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
 変更の方法は以下のようになります<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/octopress
-</span><span class='line'><span class="nv">$ </span>git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
-</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake install<span class="se">\[</span><span class="s1">&#39;slash&#39;</span><span class="se">\]</span>
-</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake generate
-</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake preview
-</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>rake deploy
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd ~/octopress
+</span><span class='line'>$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+</span><span class='line'>$ bundle exec rake install\['slash'\]
+</span><span class='line'>$ bundle exec rake generate
+</span><span class='line'>$ bundle exec rake preview
+</span><span class='line'>$ bundle exec rake deploy</span></code></pre></td></tr></table></div></figure>
 
 
 <p>ついでにfaviconもかえよう。</p>
@@ -2632,34 +2678,6 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code
 </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[2016年買ってよかったもの]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2017/01/01/good-buy-of-2016/"/>
-    <updated>2017-01-01T09:00:00+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2017/01/01/good-buy-of-2016</id>
-    <content type="html"><![CDATA[<p>おおきな買いものなかったなぁとおもったが、わりとあったので書きとめておく</p>
-
-<h2><a href="https://www.acer.com/ac/ja/JP/content/model/MR.JFZ11.00G">Acer H6510BD フルHD プロジェクター</a> と <a href="http://jp.yamaha.com/products/audio-visual/hometheater-systems/digital-sound-projector/ysp-1600__j/">YAMAHA YSP-1600</a></h2>
-
-<p>このふたつはもともとホームシアターが欲しいなぁということで買いました。
-プロジェクターは、4Kはまだまだ高いので音がうるさいの気にしないでもいいので FullHD のやつが欲くて購入。スピーカーもBTが利用できればいいなっておもってたのでこいつにしてたら、HDMIのパススルーができると聞いたので購入これも比較的安価だったので購入。
-両方とも割と安く手に入るところが魅力でしたので購入、現在は主にAmazon Prime Videoの鑑賞に利用しています。</p>
-
-<h2><a href="http://www.sony.jp/cyber-shot/products/DSC-RX100M3/">Sony Cyber-shot DCS-RX100M3</a></h2>
-
-<p>携帯をiPhoneからNexusに変更してからずっとカメラに不満だったので購入。これはカメラとの連携アプリがわかりやすいので大変よい買いものでした。</p>
-
-<h2><a href="http://www.philips.co.jp/c-p/HR2365_01/premium-collection-pasta-maker">Philips Noodle Maker</a></h2>
-
-<p>こいつは買ったのではなく、頂きものですが、ずっとwish listに入ってたのでここに。
-まだ1回しか使ってないけど、わいわい製麺できてたのしいので1台あると便利です。</p>
-
-<h2>おわり</h2>
-
-<p>おわり</p>
 ]]></content>
   </entry>
   

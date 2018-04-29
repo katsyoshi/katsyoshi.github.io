@@ -89,7 +89,7 @@
 
 <p>とりあえずfcitxをインストール、設定します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -97,15 +97,14 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>emerge -av fcitx
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ emerge -av fcitx
 </span><span class='line'>
-</span><span class='line'><span class="nv">$ $EDITOR</span> .xinitrc
+</span><span class='line'>$ $EDITOR .xinitrc
 </span><span class='line'>
-</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s2">&quot;fcitx&quot;</span>
-</span><span class='line'>fcitx
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>export XMODIFIERS=@im="fcitx"
+</span><span class='line'>export GTK_IM_MODULE="fcitx"
+</span><span class='line'>export QT_IM_MODULE="fcitx"
+</span><span class='line'>fcitx</span></code></pre></td></tr></table></div></figure>
 
 
 <p>これでインストールはこれでおわりです。</p>
@@ -114,15 +113,14 @@
 
 <p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ $EDITOR</span> /etc/portage/make.conf
-</span><span class='line'><span class="nv">USE</span><span class="o">=</span><span class="s2">&quot;fcitx ${USE}&quot;</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ $EDITOR /etc/portage/make.conf
+</span><span class='line'>USE="fcitx ${USE}"
 </span><span class='line'>
-</span><span class='line'><span class="nv">$ </span>sudo emerge -av mozc
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>$ sudo emerge -av mozc</span></code></pre></td></tr></table></div></figure>
 
 
 <p>で、インストールすれば使えるようになります。</p>

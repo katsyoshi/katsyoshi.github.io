@@ -4,7 +4,7 @@
   <title><![CDATA[Category: memo | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/memo/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-03-02T00:02:37+09:00</updated>
+  <updated>2018-04-30T02:49:01+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -44,7 +44,7 @@ chmod 744 ~/.ssh
     <content type="html"><![CDATA[<p>Ruby on RailsのプロジェクトでGit管理されているTestで空のテストファイルを
 削除するには以下のコマンドを利用することで削除できます。</p>
 
-<p><code>sh
+<p><code>
 $ git grep -e it --or -e specify -L -- spec/{model,controller}s | xgrep git rm -f --
 </code></p>
 

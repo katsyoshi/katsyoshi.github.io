@@ -9,7 +9,7 @@
 	
 	<meta name="description" content="portageはデフォルトだと rsync を利用しての更新をしているので、
 git を用いた方法に変更します。 準備 portage を 2.2.17 に変更し、USEフラグとして git をつかいます。 1
-# USE=&quot;git ${USE}&quot; emerge -av \= &hellip;">
+# USE="git ${USE}" emerge -av \=portage-2.2 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -86,9 +86,8 @@ git を用いた方法に変更します。 準備 portage を 2.2.17 に変更�
 
 <p><code>portage</code> を <code>2.2.17</code> に変更し、USEフラグとして <code>git</code> をつかいます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># USE=&quot;git ${USE}&quot; emerge -av \=portage-2.2.17</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># USE="git ${USE}" emerge -av \=portage-2.2.17</span></code></pre></td></tr></table></div></figure>
 
 
 <p>つぎに、Gitのリポジトリを見に行くように<a href="http://qiita.com/wjn/items/a3b71059211711501e35">設定</a>します。</p>

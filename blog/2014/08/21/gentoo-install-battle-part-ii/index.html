@@ -86,9 +86,8 @@ $ gpart /dev/sda で不要なパーティションを削除し、必要なパー
 <p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">作成したUSBメモリ</a>をX240に差して起動します。
 起動したら、まずパーティションの設定を行います。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gpart /dev/sda
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gpart /dev/sda</span></code></pre></td></tr></table></div></figure>
 
 
 <p>で不要なパーティションを削除し、必要なパーティションを作成します。</p>
@@ -101,9 +100,8 @@ $ gpart /dev/sda で不要なパーティションを削除し、必要なパー
 
 <p>次に以下のコマンドを実行します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config</span></code></pre></td></tr></table></div></figure>
 
 
 <p>実行したら、接続されているのでATL + F2とかでコンソールの表示を変更してください。</p>

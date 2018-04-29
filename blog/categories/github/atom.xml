@@ -4,7 +4,7 @@
   <title><![CDATA[Category: github | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-03-02T00:02:37+09:00</updated>
+  <updated>2018-04-30T02:49:01+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -25,7 +25,7 @@
 
 <p>github.com に <code>katsyoshi.github.io</code> というリポジトリを作成し、以下のコマンドを実行</p>
 
-<p><code>sh
+<p><code>
 $ rake setup_github_pages
 set your github repogitory
 $ rake generate
@@ -42,7 +42,7 @@ $ rake deploy
 
 <p>実は記事を追加したあと <code>rake deploy</code> ができないという問題がありましたが、そのときは、</p>
 
-<p><code>sh
+<p><code>
 $ rake generate
 $ cd _deploy
 $ git pull origin/master

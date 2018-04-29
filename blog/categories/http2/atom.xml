@@ -4,7 +4,7 @@
   <title><![CDATA[Category: http2 | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/http2/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-03-02T00:02:37+09:00</updated>
+  <updated>2018-04-30T02:49:01+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -24,7 +24,7 @@
 
 <p>SPDYは<a href="http://ja.wikipedia.org/wiki/SPDY#.E6.A6.82.E8.A6.81">SSL必須</a>のようなのでとりあえずOpenSSLで<a href="http://dogmap.jp/2011/05/10/nginx-ssl/">野良証明書を作成</a>します。</p>
 
-<p><code>sh
+<p><code>
 $ cd /path/to/cert/dir
 $ openssl genrsa -des3 -out server.key 2048
 $ openssl req -new -key server.key -out server.csr

@@ -95,9 +95,8 @@
 
 <p>以下のコマンドでユーザ、グループの作成を行います。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo adduser fluentd -s /bin/false
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo adduser fluentd -s /bin/false</span></code></pre></td></tr></table></div></figure>
 
 
 <p>指示に従って入力するとユーザ、グループが作成されています。
@@ -107,39 +106,36 @@
 
 <p>以下のコマンドを入力しRubyのインストールを行ないます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo aptitude build-dep ruby1.9.3
-</span><span class='line'><span class="nv">$ </span>sudo aptitude install git
-</span><span class='line'><span class="nv">$ </span>sudo git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
-</span><span class='line'><span class="nv">$ </span>sudo git clone git://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
-</span><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">RBENV_ROOT</span><span class="o">=</span>/usr/local/rbenv
-</span><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">RBENV_ROOT</span><span class="k">}</span>/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>
-</span><span class='line'><span class="nv">$ </span><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo aptitude build-dep ruby1.9.3
+</span><span class='line'>$ sudo aptitude install git
+</span><span class='line'>$ sudo git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
+</span><span class='line'>$ sudo git clone git://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
+</span><span class='line'>$ export RBENV_ROOT=/usr/local/rbenv
+</span><span class='line'>$ export PATH=${RBENV_ROOT}/bin:${PATH}
+</span><span class='line'>$ eval "$(rbenv init -)"</span></code></pre></td></tr></table></div></figure>
 
 
 <p>ここまで入力したら<code>sudo visudo -f /etc/sudoers.d/00_base</code>と入力し、以下を<a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">入力してください</a>。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>Defaults !secure_path
-</span><span class='line'>Defaults env_keep +<span class="o">=</span> <span class="s2">&quot;PATH RBENV_ROOT&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Defaults !secure_path
+</span><span class='line'>Defaults env_keep += "PATH RBENV_ROOT"</span></code></pre></td></tr></table></div></figure>
 
 
 <p>入力したらRuby 2.1.1をインストールします。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo rbenv install 2.1.1
-</span><span class='line'><span class="nv">$ </span>sudo rbenv rehash
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo rbenv install 2.1.1
+</span><span class='line'>$ sudo rbenv rehash</span></code></pre></td></tr></table></div></figure>
 
 
 <p>でインストール完了です。次にfluentdをインストールします。</p>
@@ -148,9 +144,8 @@
 
 <p>gemでfluentdとtdプラグインのfluent-plugin-tdをインストールします。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo gem install fluentd fluent-plugin-td
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo gem install fluentd fluent-plugin-td</span></code></pre></td></tr></table></div></figure>
 
 
 <p>つぎに設定ファイル<code>fluentd.conf</code>を作成します。</p>
@@ -403,7 +398,7 @@
 
 <p>としたら、以下のコマンドを入力し、fluentdデーモンを起動します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>fluentd.default</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>

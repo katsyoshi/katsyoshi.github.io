@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ubuntu | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-03-02T00:02:37+09:00</updated>
+  <updated>2018-04-30T02:49:01+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -65,14 +65,14 @@ Jenkinsについては利用していなかったので停止してます。つ�
 <p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
 Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
 
-<p><code>sh
+<p><code>
 $ sudo apt-get purge elasticsearch
 $ sudo update-rc.d jenkins disable
 </code></p>
 
 <p>つぎに14.04へupgradeを行ないます。</p>
 
-<p><code>sh
+<p><code>
 $ sudo do-release-upgrade -d
 </code></p>
 

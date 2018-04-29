@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gentoo | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/gentoo/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-03-02T00:02:37+09:00</updated>
+  <updated>2018-04-30T02:49:01+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -134,7 +134,7 @@ itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.js
 
 <p><code>portage</code> を <code>2.2.17</code> に変更し、USEフラグとして <code>git</code> をつかいます。</p>
 
-<p>```sh</p>
+<p>```</p>
 
 <h1>USE=&ldquo;git ${USE}&rdquo; emerge -av \=portage-2.2.17</h1>
 
@@ -176,7 +176,7 @@ itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.js
 
 <p>とりあえずfcitxをインストール、設定します。</p>
 
-<p>```sh
+<p>```
 $ emerge -av fcitx</p>
 
 <p>$ $EDITOR .xinitrc</p>
@@ -193,7 +193,7 @@ fcitx
 
 <p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
 
-<p>```sh
+<p>```
 $ $EDITOR /etc/portage/make.conf
 USE=&ldquo;fcitx ${USE}&rdquo;</p>
 
@@ -223,7 +223,7 @@ Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
 
 <p>dockerの<a href="https://docs.docker.com/installation/gentoolinux/">Gentooインストールページ</a>を参考に<a href="https://github.com/tianon/docker-overlay">overlay</a>を導入します。</p>
 
-<p><code>sh
+<p><code>
 $ sudo layman -a docker
 $ sudo eix-sync
 $ sudo emerge -av app-emulators/docker

@@ -86,18 +86,16 @@ Jenkinsについては利用していなかったので停止してます。つ�
 <p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
 Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo apt-get purge elasticsearch
-</span><span class='line'><span class="nv">$ </span>sudo update-rc.d jenkins disable
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get purge elasticsearch
+</span><span class='line'>$ sudo update-rc.d jenkins disable</span></code></pre></td></tr></table></div></figure>
 
 
 <p>つぎに14.04へupgradeを行ないます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo <span class="k">do</span>-release-upgrade -d
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo do-release-upgrade -d</span></code></pre></td></tr></table></div></figure>
 
 
 <p>これで14.04になってます。</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ime | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/ime/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-03-02T00:02:37+09:00</updated>
+  <updated>2018-04-30T02:49:01+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -29,7 +29,7 @@
 
 <p>とりあえずfcitxをインストール、設定します。</p>
 
-<p>```sh
+<p>```
 $ emerge -av fcitx</p>
 
 <p>$ $EDITOR .xinitrc</p>
@@ -46,7 +46,7 @@ fcitx
 
 <p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
 
-<p>```sh
+<p>```
 $ $EDITOR /etc/portage/make.conf
 USE=&ldquo;fcitx ${USE}&rdquo;</p>
 
