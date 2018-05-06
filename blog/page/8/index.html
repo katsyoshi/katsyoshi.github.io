@@ -7,8 +7,8 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="最近話題のDocker使ってJubatusを動かしてみたのでメモ的なものを 環境 環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作 Vagrant: 1.5.4
-docker: 0.11.1 Dockerfile &hellip;">
+	<meta name="description" content="td-agent2がリリースされ、Macへの公式パッケージがでたのでインストールメモ Install ダウンロードしてダブルクリックでインストールできます。 設定 設定ファイル置場は/etc/td-agent/td-agent.confになります。
+設定ファイルはいままでの設定で使えるようです &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -77,6 +77,56 @@ docker: 0.11.1 Dockerfile &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/05/21/new-td-agent-for-mac/">
+		
+			td-agent.pkg</a>
+	</h2>
+	<div class="entry-content">
+		<p>td-agent2が<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">リリース</a>され、Macへの公式パッケージがでたのでインストールメモ</p>
+
+<h2>Install</h2>
+
+<p><a href="https://s3.amazonaws.com/td-agent-repository/macosx/td-agent2-1.0.0-0.dmg">ダウンロード</a>してダブルクリックでインストールできます。</p>
+
+<h2>設定</h2>
+
+<p>設定ファイル置場は<code>/etc/td-agent/td-agent.conf</code>になります。
+設定ファイルはいままでの設定で使えるようです。
+あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo launchctl load /Library/LaunchDaemon/td-agent.plist</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">

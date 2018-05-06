@@ -7,8 +7,10 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content=" 以前買ったX240があまりにも使い辛いので
-X250を買った。それ以外にもメガネも一つ買ってみた。 あと欲しいのは、ルンバかなあ diary ">
+	<meta name="description" content="Visual Studio Codeというものがでたので普段利用している
+Linuxで使ってみた。 インストール は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
+以下のコマンドで実行できます 1
+$ ./Code 感想 VSC使ってみたけど、 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -77,6 +79,88 @@ X250を買った。それ以外にもメガネも一つ買ってみた。 あと
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/04/30/use-visual-studio-code/">
+		
+			Visual Studio Codeを使ってみた</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://code.visualstudio.com/">Visual Studio Code</a>というものがでたので普段利用している
+Linuxで使ってみた。</p>
+
+<h2>インストール</h2>
+
+<p>は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
+以下のコマンドで実行できます</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./Code</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>感想</h2>
+
+<p>VSC使ってみたけど、日本語表示がされない。</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/vsc_japanese.png" alt="" /></p>
+
+<p><em>追記</em></p>
+
+<p>フォントを変更すると表示できるようになりました。</p>
+
+<p><code>File -&gt; Preferences -&gt; User Settings</code> から、 <code>settings.json</code> を開き、
+以下のように追加する</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;editor.fontFamily&quot;</span><span class="p">:</span> <span class="s2">&quot;Ricty&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p style="text-align:center;"> <img src="/images/screenshot/vsc_settings.png" alt="" /></p>
+
+<p><em>追記おわり</em></p>
+
+<p>デバッガ動かすためにMONOが必要。</p>
+
+<p><img src="/images/screenshot/vsc_debugger_needed_mono.png" alt="" /></p>
+
+<p>補完がよさそう。Rubyでの補完の出かたです。</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/vsc_completion.png" alt="" /></p>
+
+<p>などあります。</p>
+
+<p>そのうちなにかこれで書くかなぁ。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -570,92 +654,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
 
 	<a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/xorg/'>xorg</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/02/12/remove-ibus/">
-		
-			とりあえずibusやめてみた</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
-
-<h2>前提条件</h2>
-
-<p>ここでは<a href="http://www.gentoo.org">Gentoo/Linux</a>での導入方法について述べています。
-日本語変換エンジンとしてMozcについて述べています。</p>
-
-<h2>導入</h2>
-
-<p>とりあえずfcitxをインストール、設定します。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ emerge -av fcitx
-</span><span class='line'>
-</span><span class='line'>$ $EDITOR .xinitrc
-</span><span class='line'>
-</span><span class='line'>export XMODIFIERS=@im="fcitx"
-</span><span class='line'>export GTK_IM_MODULE="fcitx"
-</span><span class='line'>export QT_IM_MODULE="fcitx"
-</span><span class='line'>fcitx</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでインストールはこれでおわりです。</p>
-
-<h2>fcitxでmozc</h2>
-
-<p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ $EDITOR /etc/portage/make.conf
-</span><span class='line'>USE="fcitx ${USE}"
-</span><span class='line'>
-</span><span class='line'>$ sudo emerge -av mozc</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で、インストールすれば使えるようになります。</p>
-
-<h2>おわり</h2>
-
-<p><a href="http://anond.hatelabo.jp/20150210030728">こういうの</a>があったので、真面目にかこうかと思ったんですがどめんどうなので導入メモになりました。</p>
-
-<p>あと引越ししたので贈っていただいてもいいんですよ？
-<a href="http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/">http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</a></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/ime/'>ime</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>

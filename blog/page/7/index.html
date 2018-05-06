@@ -7,7 +7,12 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="これまでの流れで準備が整ったので、Installを始めます。 インストール これはGentoo Wikiを見ながらで大丈夫です。 嵌ったところ 音が鳴らないという問題が発生しました。理由は簡単でしたのですぐに設定しました。 &hellip;">
+	<meta name="description" content="PCを買い替えたので環境構築してます。
+Jubatusのoverlayがあったのですが、古かったので新しくJubatusのoverlay作成しました。 インストール これは、以下のコマンドでインストールができます。 1
+2
+3
+4
+# curl https://raw. &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -76,6 +81,74 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/09/12/jubatus-in-gentoo/">
+		
+			Gentoo LinuxむけのJubatusパッケージ書いたよ</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">PC</a>を<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">買い替えた</a>ので<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">環境構築</a>してます。
+<a href="https://github.com/kazuki/overlay/tree/master/sci-calculators/jubatus">Jubatusのoverlay</a>があったのですが、古かったので新しく<a href="https://github.com/katsyoshi/overlay">Jubatusのoverlay</a>作成しました。</p>
+
+<h2>インストール</h2>
+
+<p>これは、以下のコマンドでインストールができます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># curl https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml &gt; /etc/layman/overlays/katsyoshi.xml
+</span><span class='line'># layman -f -a katsyoshi
+</span><span class='line'># eix-sync
+</span><span class='line'># emerge -av jubatus</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でいけるとおもいます。</p>
+
+<h2>未実装</h2>
+
+<ul>
+<li>jubatus_coreのオプションがはたらいてない(ハズ)</li>
+<li>jubatus_msgpack-rpcの依存パッケージにdev-libs/msgpackをいれていない</li>
+<li>jubatusのオプションを確認していない</li>
+</ul>
+
+
+<p>などなどあるので、PRまってます。</p>
+
+<h2>まとめ</h2>
+
+<p><a href="https://github.com/kazuki/overlay/">よくみたら</a>必要なライブラリのパッケージもあったのでこれのバージョンとjubatus_core追加するだけでよかったかも。</p>
+
+<p>ちゃんちゃん</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/jubatus/'>jubatus</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/portage/'>portage</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -700,56 +773,6 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
 
 
 	<a class='category' href='/blog/categories/diary/'>diary</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/05/21/new-td-agent-for-mac/">
-		
-			td-agent.pkg</a>
-	</h2>
-	<div class="entry-content">
-		<p>td-agent2が<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">リリース</a>され、Macへの公式パッケージがでたのでインストールメモ</p>
-
-<h2>Install</h2>
-
-<p><a href="https://s3.amazonaws.com/td-agent-repository/macosx/td-agent2-1.0.0-0.dmg">ダウンロード</a>してダブルクリックでインストールできます。</p>
-
-<h2>設定</h2>
-
-<p>設定ファイル置場は<code>/etc/td-agent/td-agent.conf</code>になります。
-設定ファイルはいままでの設定で使えるようです。
-あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo launchctl load /Library/LaunchDaemon/td-agent.plist</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/fluentd/'>fluentd</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
