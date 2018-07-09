@@ -7,9 +7,8 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="今日は昨日ビールを飲んだので、日本酒を飲みに行ってきた。 ほんとは、天麩羅食べたかったのだが、天麩羅もうなくなってたらしいので、
-日本酒とそばを食べた。そばを石臼で引いた。 親父さんが江戸っこらしく、「そこのしろいテーブルに座って」っていわれてなんだ？
-っておもったら、広いテーブルだった。 あと &hellip;">
+	<meta name="description" content="MacOS XでDockerを動かしてたら嵌ったのでメモ Docker on OS X OS XでもDockerが動かせるようになりました。
+インストールはこことかを参考にしてください。 で嵌ったところ Docker上で動いているアプリケーションとどうしても通信ができない。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -83,6 +82,70 @@
     <article class="post">
 	<h2 class="title">
 		
+		<a href="/blog/2014/06/10/pitfall-in-boot2docker/">
+		
+			Docker on OS Xで嵌ったおはなし</a>
+	</h2>
+	<div class="entry-content">
+		<p>MacOS XでDockerを動かしてたら嵌ったのでメモ</p>
+
+<h2>Docker on OS X</h2>
+
+<p>OS XでもDockerが<a href="http://docs.docker.com/installation/mac/">動かせるよう</a>になりました。
+インストールは<a href="http://dev.classmethod.jp/tool/docker/getting-started-docker-on-osx/">ここ</a>とかを参考にしてください。</p>
+
+<h2>で嵌ったところ</h2>
+
+<p>Docker上で動いているアプリケーションとどうしても通信ができない。どうやらDockerとアプリケーションは起動はしてるようなんだが、
+どうしても通信できないということがわかりました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ docker run -p 9199:9199 hogehoge
+</span><span class='line'>$ netstat -a | grep 9199</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でも見えない。なんでかなあと思ってたら<a href="https://github.com/dotcloud/docker/issues/4007">こんな</a>ことや<a href="http://k-shogo.github.io/article/2014/02/13/boot2docker-portforward/">こんな</a>ことがわかりました。</p>
+
+<h2>解決策</h2>
+
+<p>VirtualBoxからboot2docker-vmのポートフォワードを設定すればいいです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ netstat -a | grep 9199
+</span><span class='line'>tcp4       0      0  localhost.9199         *.*                    LISTEN</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちゃんちゃん。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
 		<a href="/blog/2014/06/02/github-cleanup/">
 		
 			今日の夕飯</a>
@@ -148,8 +211,6 @@
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo launchctl load /Library/LaunchDaemon/td-agent.plist</span></code></pre></td></tr></table></div></figure>
-
-
 
 
 		

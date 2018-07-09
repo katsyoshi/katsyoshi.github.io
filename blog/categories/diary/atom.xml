@@ -4,7 +4,7 @@
   <title><![CDATA[Category: diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-06-06T18:57:25+09:00</updated>
+  <updated>2018-07-10T01:05:28+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hello, Itamae from docker!!]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/07/09/hello/"/>
+    <updated>2018-07-09T22:54:12+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/07/09/hello</id>
+    <content type="html"><![CDATA[<p><a href="https://itamae.kitchen/">Itamae</a> の plugin 書いててそろそろ test 欲しいなあとおもって2年くらいたちましたが、
+ようやく <a href="https://www.docker.com/">Docker</a> 使って test 書きました。</p>
+
+<h3>方向性</h3>
+
+<p>ここでテストを実施するとして何に対しておこなうのかというのを考えましたが、E2Eのテストだけで良いだろうという方向でテストを書くようにしています。
+VMを立てて実行することにはチョット大袈裟だろうということでもっと簡単に、楽にということで <code>docker</code> を選択しています。</p>
+
+<p>itamae で E2E のテストなのでここでは <a href="https://serverspec.org/">serverspec</a> を利用してテストを行います。
+E2E のテスト準備として <code>docker</code> 内で最初に目的のレシピを実施し、そのレシピが正しく動作しているかをテストしています。</p>
+
+<h3>準備とテスト実施</h3>
+
+<p>準備として以下の <code>gem</code> を追加しますが、 <a href="https://github.com/swipely/docker-api">docker-api.gem</a> の方はなくてもとくに問題ないです。
+<code>serverspec</code> の対象バックエンドで <code>docker</code> が<a href="https://tsub.hatenablog.com/entry/2016/06/25/222508">指定できるようになります</a>が、 <code>docker</code> 内 (<code>docker run -t hoge bundle exec serverspec</code> など) で <code>serverspec</code> を実施すれば実行できますので、好みで追加しましょう。</p>
+
+<p><code>
+spec.add_development_dependency "docker-api"
+spec.add_development_dependency "serverspec"
+</code></p>
+
+<p>次に <code>Dockerfile</code> を作成します。ここでは単純に必要な準備を実施、テストしたいディレクトリの追加、 <code>bundler</code> を利用して <code>gem</code> のインストールを実施してから、対象のディレクトリで <code>itamae</code> の <code>local</code> を指定して対象の <code>docker</code> にレシピ適用します。そのあと <code>docker run</code> や <code>serverspec</code> を実施することでテストをすることが可能となります。</p>
+
+<p><code>
+FROM ruby
+RUN echo "gem: --no-rdoc --no-ri" &gt;&gt; /.gemrc
+RUN gem install bundler
+ADD . /app
+WORKDIR /app
+RUN bundle install
+RUN bundle exec itamae local samples/recipe.rb
+CMD bundle exec rake
+</code></p>
+
+<h3><a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">itamae-plugin-resource-pip</a></h3>
+
+<p><a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">itamae-plugin-resource-pip</a> でできるようになってます。
+とくに <a href="https://docker.io">docker.io</a> とかで公開していませんので、以下に例を</p>
+
+<p><code>
+cd /path/to/itamae-plugin-resource-pip
+docker build -t katsyoshi/itamae-plugin-resource-pip .
+docker run -t katsyoshi/itamae-plugin-resource-pip bundle exec rake
+</code></p>
+
+<h3>おわり</h3>
+
+<p>これやろうと思って調べてたらみつからずに <code>Dockerfile</code> 書き終えて、<a href="https://travis.org">travis</a> を追加しようとしたときに、<a href="https://twitter.com/sue445">@sue445</a> さんが<a href="https://sue445.hatenablog.com/entry/2018/05/01/115522">やってた</a>のをみつけてしまった。。。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NLP100 Knock Section IV]]></title>
@@ -1096,104 +1152,6 @@ for w in words(paragraph) {
 
 <p>ということで <code>Rust</code> で言語処理100本ノック1章をやってみました。
 最近 <code>Ruby</code> しか書いていなかったので、新鮮で楽しいですね <code>Rust</code> 。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[NLP100本ノック section 1 part 2]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2018/01/19/nlp-100-section-1-part-2/"/>
-    <updated>2018-01-19T20:05:49+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2018/01/19/nlp-100-section-1-part-2</id>
-    <content type="html"><![CDATA[<p>前回、<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> の01までやったので02からやっていきます。</p>
-
-<h2><code>extern crate nlp100;</code></h2>
-
-<p>ってやれるように <a href="https://github.com/katsyoshi/zatsu/tree/master/rust/nlp100"><code>Cargo</code></a> を作成
-<code>
-cargo new nlp100
-</code></p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec02">02. 「パトカー」+「タクシー」=「パタトクカシーー」</a></h3>
-
-<p>これはムズカシイので素直に <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.zip"><code>zip</code></a> を利用する</p>
-
-<p>```rust
-fn concat(t: (Vec<char>, Vec<char>)) {</p>
-
-<pre><code>let (f, s) = t;
-let mut r = String::new();
-
-for (x, y) in f.iter().zip(s.iter()) {
-    r.push_str(&amp;format!("{}{}", x, y));
-}
-println!("{}", r);
-</code></pre>
-
-<p>}</p>
-
-<p>fn main() {</p>
-
-<pre><code>let p: Vec&lt;char&gt; = String::from("パトカー").chars().collect();
-let t: Vec&lt;char&gt; = String::from("タクシー").chars().collect();
-let f = (p, t);
-concat(f);
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec03">03. 円周率</a></h3>
-
-<p>この問題は思い切り勘違いしてたので、「これのどこが円周率なの？」って思ってました。こいつは <a href="https://doc.rust-lang.org/regex/regex/index.html"><code>Regex</code></a> を用いて単語毎に分解、単語毎に文字数数えて解決してます。</p>
-
-<p>```rust
-fn char_count_list(w: &amp;str) &ndash;> Vec<usize> {</p>
-
-<pre><code>Regex::new(r"\W+").unwrap().split(w).map(|m| m.len()).collect()
-</code></pre>
-
-<p>}</p>
-
-<p>fn main() {</p>
-
-<pre><code>let pi = char_count_list("Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics.");
-println!("{:?}", pi);
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec04">04. 元素記号</a></h3>
-
-<p>これは、英語版「水兵リーベー僕の船」ですので条件に合うときだけ1文字に変更します。</p>
-
-<p>```rust
-use std::collections::HashMap;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let atomic_words: Vec&lt;&amp;str&gt; = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can.".split(' ').collect();
-let mut atomic_table = HashMap::new();
-for (i, a) in atomic_words.iter().enumerate() {
-    let chars = a.chars().map(|v| v.to_string()).collect::&lt;Vec&lt;String&gt;&gt;();
-    let r = match i {
-        0 | 4...8 | 14...15 | 18 =&gt; chars[0].to_string(),
-        _ =&gt; chars[0..2].join(""),
-    };
-    atomic_table.insert(r, i + 1);
-}
-
-for (k, v) in &amp;atomic_table {
-    println!("{}: {}", k, v);
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h2>おわり</h2>
-
-<p>やっぱり難しいのを実感</p>
 ]]></content>
   </entry>
   

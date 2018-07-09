@@ -7,12 +7,9 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="H2Oでベーシック認証したい場合は以下のようにします1 1
-2
-3
-4
-5
-paths: &quot;/&quot;: mruby.handler: | require &quot;htpasswd.rb&quot; Htpasswd.new(&quot;/etc/h2o/.htpasswd& &hellip;">
+	<meta name="description" content="Elixir Conf Japan に行きましたが、よく考えてみたら
+まだこの PC に Elixir をインストールしていないことに気がついたので
+隣の英語のうまいおじさんにインストール方法を教えてもらいながらインストールしました1 準備 ここでは Gentoo Linux &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -81,6 +78,87 @@ paths: &quot;/&quot;: mruby.handler: | require &quot;htpasswd.rb&quot; Htpasswd.
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/04/01/how-to-install-elixir/">
+		
+			Elixirのインストール方法</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
+まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
+隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<h2>準備</h2>
+
+<p>ここでは <a href="https://gentoo.org/">Gentoo Linux</a> を前提としております。
+まず、Elixir を動かすために <a href="https://www.erlang.org">Erlang</a> をインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">sudo eix-sync</span>
+</span><span class='line'><span class="go">sudo emerge erlang</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>準備はこれだけです。</p>
+
+<h2>インストール</h2>
+
+<p>次にインストールなのですが、Elixir は Earlang VM 上で動くプログラミング言語のため、コンパイルされたバイナリを置くだけでインストールがおわります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip</span>
+</span><span class='line'><span class="go">unzip Precompiled.zip -d elixir</span>
+</span><span class='line'><span class="go">mv elixir /path/to/elixir</span>
+</span><span class='line'><span class="go">echo &#39;export PATH=/path/to/elixir/bin:$PATH&#39; &gt;&gt; ~/.bashrc</span>
+</span><span class='line'><span class="go">source ~/.bashrc</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>さいごに <code>iex</code> を起動して確認すればおわり</p>
+
+<h3>参考</h3>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/elixir/'>elixir</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -754,88 +832,6 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
 
 
 	<a class='category' href='/blog/categories/diary/'>diary</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/11/09/went-to-8-jou-island/">
-		
-			Went to 8 Jou Island</a>
-	</h2>
-	<div class="entry-content">
-		<p>11/3-11/5 で八丈島にいってきました。
-決めたのは10/28の朝でした。</p>
-
-<h2>出発</h2>
-
-<p>は竹橋桟橋から船が出ているのでそこからのっていきます。
-船は11/2 22:30(JST)からでていますのでそれでいきました。</p>
-
-<h2>到着</h2>
-
-<p>は11/3 の朝8時ころに底土港に到着します。</p>
-
-<h2>島一周</h2>
-
-<p>朝到着し、やることないので宿に荷物を置いて自轉車を借ります。
-この自轉車がブレーキ効かないのであきらめてスクーターを借りました。
-滞在時間ずっと使えるように二日借りることにしました。</p>
-
-<p>スクーターかりたあとは島観光として一周まわることにしました。
-途中いくつか良いポイントがあったので写真をとったりしましたが、
-だいたい2時間ぐらいで島一周できました。</p>
-
-<p>一周してひまだったので、昼飯を宿のちかくで</p>
-
-<h2>釣り 1日目</h2>
-
-<p>やることないなどうしようかなとおもってたら、宿の部屋に入れるようになったので、PCの充電と携帯の充電を
-そんなこんなしてたら、時間が16時ごろになったので釣りへ。
-この日は釣る気があまりなかったので坊主で終了。
-飯は島の適当なラーメン屋で。</p>
-
-<h2>釣り 2日目</h2>
-
-<p>この日は起きてすぐに温泉に行ってみたら、温泉施設自体がどこ行ってもだめで一番遠いとこは、朝10時からでした。
-ので温泉は諦めて釣りへ行ってみた。</p>
-
-<p>釣りはじめて30分ぐらいで釣れたし、一人で刺身にして食べるには十分な大きさだしで、あとは昼ごろまで適当に釣ってました。</p>
-
-<p style="text-align:center;"> <img src="/images/photo/hachijo-ipara.jpg" alt="アイッパラ" /></p>
-
-<h2>温泉</h2>
-
-<p>釣りおわったあとは温泉でまったり2時間ほど時間をつぶしてあとは夕日を見にいきました。</p>
-
-<p style="text-align:center;"> <img src="/images/photo/hachijo-sunset.jpg" alt="サンセット" /></p>
-
-<h2>おわり</h2>
-
-<p>たのしい一人旅でした。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/fishing/'>fishing</a>
 
 
 </div>

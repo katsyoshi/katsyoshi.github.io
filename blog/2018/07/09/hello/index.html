@@ -1,0 +1,207 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hello, Itamae from docker!! - katsyoshiのめもみたいなもの</title>
+	<meta name="author" content="katsyoshi">
+
+	
+	<meta name="description" content="Itamae の plugin 書いててそろそろ test 欲しいなあとおもって2年くらいたちましたが、
+ようやく Docker 使って test 書きました。 方向性 ここでテストを実施するとして何に対しておこなうのかというのを考えましたが、 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		<a class="coderwall" href="https://coderwall.com/katsyoshi" title="Coderwall">Coderwall</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Hello, Itamae From Docker!!</h2>
+	<div class="entry-content"><p><a href="https://itamae.kitchen/">Itamae</a> の plugin 書いててそろそろ test 欲しいなあとおもって2年くらいたちましたが、
+ようやく <a href="https://www.docker.com/">Docker</a> 使って test 書きました。</p>
+
+<h3>方向性</h3>
+
+<p>ここでテストを実施するとして何に対しておこなうのかというのを考えましたが、E2Eのテストだけで良いだろうという方向でテストを書くようにしています。
+VMを立てて実行することにはチョット大袈裟だろうということでもっと簡単に、楽にということで <code>docker</code> を選択しています。</p>
+
+<p>itamae で E2E のテストなのでここでは <a href="https://serverspec.org/">serverspec</a> を利用してテストを行います。
+E2E のテスト準備として <code>docker</code> 内で最初に目的のレシピを実施し、そのレシピが正しく動作しているかをテストしています。</p>
+
+<h3>準備とテスト実施</h3>
+
+<p>準備として以下の <code>gem</code> を追加しますが、 <a href="https://github.com/swipely/docker-api">docker-api.gem</a> の方はなくてもとくに問題ないです。
+<code>serverspec</code> の対象バックエンドで <code>docker</code> が<a href="https://tsub.hatenablog.com/entry/2016/06/25/222508">指定できるようになります</a>が、 <code>docker</code> 内 (<code>docker run -t hoge bundle exec serverspec</code> など) で <code>serverspec</code> を実施すれば実行できますので、好みで追加しましょう。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>spec.add_development_dependency "docker-api"
+</span><span class='line'>spec.add_development_dependency "serverspec"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次に <code>Dockerfile</code> を作成します。ここでは単純に必要な準備を実施、テストしたいディレクトリの追加、 <code>bundler</code> を利用して <code>gem</code> のインストールを実施してから、対象のディレクトリで <code>itamae</code> の <code>local</code> を指定して対象の <code>docker</code> にレシピ適用します。そのあと <code>docker run</code> や <code>serverspec</code> を実施することでテストをすることが可能となります。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FROM ruby
+</span><span class='line'>RUN echo "gem: --no-rdoc --no-ri" &gt;&gt; /.gemrc
+</span><span class='line'>RUN gem install bundler
+</span><span class='line'>ADD . /app
+</span><span class='line'>WORKDIR /app
+</span><span class='line'>RUN bundle install
+</span><span class='line'>RUN bundle exec itamae local samples/recipe.rb
+</span><span class='line'>CMD bundle exec rake</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">itamae-plugin-resource-pip</a></h3>
+
+<p><a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">itamae-plugin-resource-pip</a> でできるようになってます。
+とくに <a href="https://docker.io">docker.io</a> とかで公開していませんので、以下に例を</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /path/to/itamae-plugin-resource-pip
+</span><span class='line'>docker build -t katsyoshi/itamae-plugin-resource-pip .
+</span><span class='line'>docker run -t katsyoshi/itamae-plugin-resource-pip bundle exec rake</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>おわり</h3>
+
+<p>これやろうと思って調べてたらみつからずに <code>Dockerfile</code> 書き終えて、<a href="https://travis.org">travis</a> を追加しようとしたときに、<a href="https://twitter.com/sue445">@sue445</a> さんが<a href="https://sue445.hatenablog.com/entry/2018/05/01/115522">やってた</a>のをみつけてしまった。。。</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2018
+
+    katsyoshi
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-49549546-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
