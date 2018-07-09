@@ -4,7 +4,7 @@
   <title><![CDATA[Category: docker | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/docker/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-07-10T01:05:28+09:00</updated>
+  <updated>2018-07-10T01:10:59+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -65,7 +65,7 @@ docker run -t katsyoshi/itamae-plugin-resource-pip bundle exec rake
 
 <h3>おわり</h3>
 
-<p>これやろうと思って調べてたらみつからずに <code>Dockerfile</code> 書き終えて、<a href="https://travis.org">travis</a> を追加しようとしたときに、<a href="https://twitter.com/sue445">@sue445</a> さんが<a href="https://sue445.hatenablog.com/entry/2018/05/01/115522">やってた</a>のをみつけてしまった。。。</p>
+<p>これやろうと思って調べてたらみつからずに <code>Dockerfile</code> 書き終えて、<a href="https://travis-ci.org">travis</a> を追加しようとしたときに、<a href="https://twitter.com/sue445">@sue445</a> さんが<a href="https://sue445.hatenablog.com/entry/2018/05/01/115522">やってた</a>のをみつけてしまった。。。</p>
 ]]></content>
   </entry>
   
