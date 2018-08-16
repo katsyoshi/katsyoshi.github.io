@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-08-17T00:54:37+09:00</updated>
+  <updated>2018-08-17T00:56:54+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.katsyoshi.org/blog/2018/08/17/wireguard-hajimemashita/"/>
     <updated>2018-08-17T00:38:12+09:00</updated>
     <id>http://blog.katsyoshi.org/blog/2018/08/17/wireguard-hajimemashita</id>
-    <content type="html"><![CDATA[<p>title 通り、 <a href="https://www.wireguard.com/"><code>wiregaurd</code></a> を家と <a href="https://vps.sakura.ad.jp/">さくらのVPS</a> にあるサーバーを繋いでみました</p>
+    <content type="html"><![CDATA[<p>title 通り、 <a href="https://www.wireguard.com/"><code>wiregaurd</code></a> で家と <a href="https://vps.sakura.ad.jp/">さくらのVPS</a> にあるサーバーを繋いでみました</p>
 
 <h2>install</h2>
 
