@@ -7,9 +7,8 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="Elixir Conf Japan に行きましたが、よく考えてみたら
-まだこの PC に Elixir をインストールしていないことに気がついたので
-隣の英語のうまいおじさんにインストール方法を教えてもらいながらインストールしました1 準備 ここでは Gentoo Linux &hellip;">
+	<meta name="description" content="RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
+RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt install dnsmasq するだけでおわります。 はまったところ いつもどおりはまりました。今回は以下の二点 /etc/ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +77,84 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/04/09/use-dnsmasq-for-domestic-network/">
+		
+			Raspiでdnsを運用してみはじめた</a>
+	</h2>
+	<div class="entry-content">
+		<p>RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
+RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code>apt install dnsmasq</code> するだけでおわります。</p>
+
+<h2>はまったところ</h2>
+
+<p>いつもどおりはまりました。今回は以下の二点</p>
+
+<ul>
+<li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
+<li>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</li>
+</ul>
+
+
+<h3>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
+
+<p>ログを見ても以下のログしか出ておらず理由の調査に時間がかかった。hosts ファイルは設定ファイルではないため当然といえば当然なのですが…</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts</span></code></pre></td></tr></table></div></figure>
+
+
+<p>今、<code>/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</h3>
+
+<p>こちらは上記問題を解決したあと、反映されないのでログを見たときにわかりました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これの原因は <code>itamae</code> でファイルを送信するときに <code>mode '644'</code> を指定する必要があったのだが、指定せずに
+送信してしまったため発生。</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h3>関連リポジトリ</h3>
+
+<p><a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/dnsmasq/'>dnsmasq</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -777,61 +854,6 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
 
 
 	<a class='category' href='/blog/categories/cuda/'>cuda</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/gpgpu/'>gpgpu</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/11/28/hello/">
-		
-			あったらしーPCかったよー</a>
-	</h2>
-	<div class="entry-content">
-		<h2>あたらしいPC買いました</h2>
-
-<p>先月のおわりに注文し今月頭のOSCあたりに新しいPCを組み立てました。
-先月おわりあたりまではDDR4の32GBメモリーが2万円と安く売っていたので勢いで購入。
-構成は以下のようになっています。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CPU: XeonE5-2620V4 * 2
-</span><span class='line'>MB: X10PE-D16WS
-</span><span class='line'>DISK: INTEL 600 シリーズ 512GB
-</span><span class='line'>MEM: Crucial [Micron製] DDR4 サーバー用メモリー 32GB ECC Registered * 4
-</span><span class='line'>NIC: X540-T2
-</span><span class='line'>GPU: Zotac GeForce GTX 1050</span></code></pre></td></tr></table></div></figure>
-
-
-<p>というかんじになっています。
-今回はメモリー4枚しか買っていないので安くなったらあと12枚買いたいとおもってます</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>
 
 
 </div>

@@ -3,11 +3,12 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Category: vpn - katsyoshiのめもみたいなもの</title>
+	<title>wireguardをはじめました - katsyoshiのめもみたいなもの</title>
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="Category: vpn">
+	<meta name="description" content="title 通り、 wiregaurd を家と さくらのVPS にあるサーバーを繋いでみました install 導入は簡単で gentoo は公式にあるので 1
+sudo emerge wireguard だけで、 ubuntu の場合もインストールガイドがあるため簡単にインストールできます 1 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -75,56 +76,73 @@
 	
 		
 	
-	<div id="content" class="inner">
-	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Wireguardをはじめました</h2>
+	<div class="entry-content"><p>title 通り、 <a href="https://www.wireguard.com/"><code>wiregaurd</code></a> を家と <a href="https://vps.sakura.ad.jp/">さくらのVPS</a> にあるサーバーを繋いでみました</p>
+
+<h2>install</h2>
+
+<p>導入は簡単で <code>gentoo</code> は公式にあるので</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo emerge wireguard</span></code></pre></td></tr></table></div></figure>
 
 
-	
-	
-	<section class="archives"><h1 class="year">2018</h1>
+<p>だけで、 <code>ubuntu</code> の場合も<a href="https://www.wireguard.com/install/#packages">インストールガイド</a>があるため簡単にインストールできます</p>
 
-<article>
-	<h2 class="title"><a href="/blog/2018/08/17/wireguard-hajimemashita/">wireguardをはじめました</a></h2>
-	<div class="meta">
-		<div class="date">Aug 17</div>
-		<div class="tags">
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt install software-properties-common
+</span><span class='line'>sudo add-apt-repository ppa:wireguard/wireguard
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install wireguard</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>引込</h2>
+
+<p>あとは<a href="https://speakerdeck.com/fadis/zuo-tuteli-jie-suruwireguard">非常にかんたん</a>で<a href="https://wiki.archlinux.jp/index.php/WireGuard">ここ</a>を適宜読み替えることで
+接続できます。</p>
+
+<h2>おわり</h2>
+
+<p>あとは、再起動時に自動で接続するように変更する必要がありそうですがつながったし、おそいのでこれでおわり</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
 
 
 	<a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/vpn/'>vpn</a>
 
 
 </div>
-	    
-	</div>
-</article>
 	
-
-	
-
-
-	
-	
-		</section>
-	
-	<section class="archives"><h1 class="year">2015</h1>
-
-<article>
-	<h2 class="title"><a href="/blog/2015/05/03/softether/">softether</a></h2>
-	<div class="meta">
-		<div class="date">May  3</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/network/'>network</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/vpn/'>vpn</a>
-
-
 </div>
-	    
-	</div>
 </article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
 	
-	</section>
-	
+</div>
+
 
 </div>
 	<footer id="footer" class="inner">Copyright &copy; 2018

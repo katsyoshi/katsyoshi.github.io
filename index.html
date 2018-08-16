@@ -7,8 +7,8 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="Itamae の plugin 書いててそろそろ test 欲しいなあとおもって2年くらいたちましたが、
-ようやく Docker 使って test 書きました。 方向性 ここでテストを実施するとして何に対しておこなうのかというのを考えましたが、 &hellip;">
+	<meta name="description" content="title 通り、 wiregaurd を家と さくらのVPS にあるサーバーを繋いでみました install 導入は簡単で gentoo は公式にあるので 1
+sudo emerge wireguard だけで、 ubuntu の場合もインストールガイドがあるため簡単にインストールできます 1 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -77,6 +77,69 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2018/08/17/wireguard-hajimemashita/">
+		
+			Wireguardをはじめました</a>
+	</h2>
+	<div class="entry-content">
+		<p>title 通り、 <a href="https://www.wireguard.com/"><code>wiregaurd</code></a> を家と <a href="https://vps.sakura.ad.jp/">さくらのVPS</a> にあるサーバーを繋いでみました</p>
+
+<h2>install</h2>
+
+<p>導入は簡単で <code>gentoo</code> は公式にあるので</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo emerge wireguard</span></code></pre></td></tr></table></div></figure>
+
+
+<p>だけで、 <code>ubuntu</code> の場合も<a href="https://www.wireguard.com/install/#packages">インストールガイド</a>があるため簡単にインストールできます</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt install software-properties-common
+</span><span class='line'>sudo add-apt-repository ppa:wireguard/wireguard
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install wireguard</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>引込</h2>
+
+<p>あとは<a href="https://speakerdeck.com/fadis/zuo-tuteli-jie-suruwireguard">非常にかんたん</a>で<a href="https://wiki.archlinux.jp/index.php/WireGuard">ここ</a>を適宜読み替えることで
+接続できます。</p>
+
+<h2>おわり</h2>
+
+<p>あとは、再起動時に自動で接続するように変更する必要がありそうですがつながったし、おそいのでこれでおわり</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/vpn/'>vpn</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -2343,108 +2406,6 @@ LTはどれもよくて <code>rib</code> も面白いし、 csvの高速化の�
 
 
 	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/rust/'>rust</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2018/01/16/happy-new-year-and-new-language/">
-		
-			Happy New Year and New Language</a>
-	</h2>
-	<div class="entry-content">
-		<p>いまさらですが、あけましておめでとうございます。</p>
-
-<h2>happy new language</h2>
-
-<p>年開けから新しくプログラミング言語(Rust)始めました。(ってわけでもない)</p>
-
-<p>雑に <a href="https://doc.rust-lang.org/book/second-edition/">rust book 2nd edition</a> を一通り読み終えたので、
-<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> をやりはじめました。
-とりあえず第1章が終ったので、メモとしてのこします。
-基本的に <code>Rust</code> (に限らず)でやりたいことがとくにないので
-<a href="http://yamasy1549.hateblo.jp/entry/2017/12/28/222631">ちょうどよさそうな勉強</a> として自然言語処理を選択しています。</p>
-
-<h2>躓いたところ</h2>
-
-<p>躓いていないところがないです。
-まあやっていくうちに以下二つは常に書いておくと楽になるかなと。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="c1">// 1文字毎</span>
-</span><span class='line'><span class="k">fn</span> <span class="n">chars</span><span class="p">(</span><span class="n">string</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">string</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;&gt;</span><span class="p">()</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// 1単語毎</span>
-</span><span class='line'><span class="k">fn</span> <span class="n">words</span><span class="p">(</span><span class="n">sentence</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;&amp;</span><span class="n">str</span><span class="o">&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">sentence</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;&amp;</span><span class="n">str</span><span class="o">&gt;&gt;</span><span class="p">()</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec00">00. 文字列の逆順</a></h3>
-
-<p>これは簡単で(でもなかった)、1文字ずつ分解して<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.rev">反対化</a>したあと <code>String</code> にします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">fn</span> <span class="n">reverse_string</span><span class="p">(</span><span class="n">string</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">rev</span><span class="p">().</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">());</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec01">01. 「パタトクカシーー」</a></h3>
-
-<p>これも簡単で、1文字ずつ分解して抜き出します。(絶対違う)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="s">&quot;パタトクカシーー&quot;</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}{}{}{}&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="m">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="m">4</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="m">6</span><span class="p">]);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おわり</h2>
-
-<p>とりあえず2問解いてみたけど、自然言語処理 &amp;&amp; <code>Rust</code> 難しい。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>

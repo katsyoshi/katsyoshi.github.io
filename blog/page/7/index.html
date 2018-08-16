@@ -7,10 +7,13 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="RubyKaigi2014に行ってきました。
-聞いたもの一覧です。 1日目 Building the Ruby interpreter &mdash; What is easy and what is difficult?
-Symbol GC スライド
-Eliminating Giant VM &hellip;">
+	<meta name="description" content="タイトルのとおりです。
+Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。 インストール dockerのGentooインストールページを参考にoverlayを導入します。 1
+2
+3
+$ sudo layman -a docker
+$ sudo eix-sync
+$ sudo &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -79,6 +82,95 @@ Eliminating Giant VM &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/10/01/pitfall-in-docker/">
+		
+			Dockerではまってます</a>
+	</h2>
+	<div class="entry-content">
+		<p>タイトルのとおりです。
+Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
+
+<h2>インストール</h2>
+
+<p>dockerの<a href="https://docs.docker.com/installation/gentoolinux/">Gentooインストールページ</a>を参考に<a href="https://github.com/tianon/docker-overlay">overlay</a>を導入します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo layman -a docker
+</span><span class='line'>$ sudo eix-sync
+</span><span class='line'>$ sudo emerge -av app-emulators/docker</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここでカーネルオプションの警告が出るのでひとつひとつ潰しておきます。</p>
+
+<h2>起動</h2>
+
+<p>インストールおわったら、起動させますが、以下のようなログが出てるので起動できません。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2014/10/01 18:39:17 docker daemon: 1.1.2 d84a070; execdriver: native; graphdriver:
+</span><span class='line'>[6c541422] +job serveapi(unix:///var/run/docker.sock)
+</span><span class='line'>[6c541422] +job initserver()
+</span><span class='line'>[6c541422.initserver()] Creating server
+</span><span class='line'>[6c541422] +job init_networkdriver()
+</span><span class='line'>[6c541422.init_networkdriver()] creating new bridge for docker0
+</span><span class='line'>package not installed
+</span><span class='line'>[6c541422] -job init_networkdriver() = ERR (1)
+</span><span class='line'>package not installed
+</span><span class='line'>[6c541422] -job initserver() = ERR (1)
+</span><span class='line'>2014/10/01 18:39:17 package not installed</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このときは <code>bridge-utils</code> をインストールすればいいのかなと思ってたら、インストールしても解決できないです。</p>
+
+<h2>おわり</h2>
+
+<p>どなたか助けてくだされ〜</p>
+
+<h2>追記</h2>
+
+<p>再構築したカーネルをインストールしてなかったというオチでした。</p>
+
+<p>ちゃんちゃん</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -774,72 +866,6 @@ Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないま
 
 
 	<a class='category' href='/blog/categories/http2/'>http2</a>, <a class='category' href='/blog/categories/nginx/'>nginx</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/06/22/fail-git-uploading/">
-		
-			野良Gitサーバにuploadできなかった話</a>
-	</h2>
-	<div class="entry-content">
-		<p>今日もろくでもない理由で嵌った。</p>
-
-<h2>嵌った理由</h2>
-
-<p>野良Gitサーバを立てているのでそこに新しいリポジトリを作成した。</p>
-
-<p>で、リモートを追加し、ブランチを追加しようとすると</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add master ssh://myhost/my_project.git
-</span><span class='line'>$ git push origin master -f
-</span><span class='line'>error: src refspec master does not match any.
-</span><span class='line'>error: failed to push some refs to 'ssh://myhost/my_project.git'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>というようなエラーが出てきてアップロードできなかった。
-そのため理由を探ってたら<a href="http://d.hatena.ne.jp/nishiohirokazu/20110304/1299229916">同じ理由</a>があった。</p>
-
-<p>そこで <code>git log</code> としたら何もでてこなかったので</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
-</span><span class='line'>$ git commit -m 'first commit'
-</span><span class='line'>$ git push -u origin master</span></code></pre></td></tr></table></div></figure>
-
-
-<p>リモートリポジトリに追加できました。
-ちゃんちゃん</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>

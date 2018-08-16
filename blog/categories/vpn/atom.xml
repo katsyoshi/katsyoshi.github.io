@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vpn | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/vpn/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-07-10T01:10:59+09:00</updated>
+  <updated>2018-08-17T00:54:37+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[wireguardをはじめました]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/08/17/wireguard-hajimemashita/"/>
+    <updated>2018-08-17T00:38:12+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/08/17/wireguard-hajimemashita</id>
+    <content type="html"><![CDATA[<p>title 通り、 <a href="https://www.wireguard.com/"><code>wiregaurd</code></a> を家と <a href="https://vps.sakura.ad.jp/">さくらのVPS</a> にあるサーバーを繋いでみました</p>
+
+<h2>install</h2>
+
+<p>導入は簡単で <code>gentoo</code> は公式にあるので</p>
+
+<p><code>
+sudo emerge wireguard
+</code></p>
+
+<p>だけで、 <code>ubuntu</code> の場合も<a href="https://www.wireguard.com/install/#packages">インストールガイド</a>があるため簡単にインストールできます</p>
+
+<p><code>
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:wireguard/wireguard
+sudo apt-get update
+sudo apt-get install wireguard
+</code></p>
+
+<h2>引込</h2>
+
+<p>あとは<a href="https://speakerdeck.com/fadis/zuo-tuteli-jie-suruwireguard">非常にかんたん</a>で<a href="https://wiki.archlinux.jp/index.php/WireGuard">ここ</a>を適宜読み替えることで
+接続できます。</p>
+
+<h2>おわり</h2>
+
+<p>あとは、再起動時に自動で接続するように変更する必要がありそうですがつながったし、おそいのでこれでおわり</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[softether]]></title>
