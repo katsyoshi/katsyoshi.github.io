@@ -7,8 +7,8 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="title 通り、 wiregaurd で家と さくらのVPS にあるサーバーを繋いでみました install 導入は簡単で gentoo は公式にあるので 1
-sudo emerge wireguard だけで、 ubuntu の場合もインストールガイドがあるため簡単にインストールできます 1 &hellip;">
+	<meta name="description" content="技術書典5出しますので、それを書くために OCaml で作成された SATySFi を使いはじめました。 インストール 今回は OPAM を利用してインストールをしています。まあ単純にパッケージが今普段使いしてるOSにないだけなんですけどね。
+インストール手順は 公式のREADME.md &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -77,6 +77,105 @@ sudo emerge wireguard だけで、 ubuntu の場合もインストールガイ�
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2018/09/09/satysfi/">
+		
+			SATySFi使って本書いてみてる</a>
+	</h2>
+	<div class="entry-content">
+		<p>技術書典5出しますので、それを書くために <a href="https://ocaml.org/">OCaml</a> で作成された <a href="https://github.com/gfngfn/SATySFi">SATySFi</a> を使いはじめました。</p>
+
+<h2>インストール</h2>
+
+<p>今回は <a href="https://opam.ocaml.org">OPAM</a> を利用してインストールをしています。まあ単純にパッケージが今普段使いしてるOSにないだけなんですけどね。
+インストール手順は <a href="https://github.com/gfngfn/SATySFi/blob/master/README-ja.md">公式のREADME.md</a> を参考にしています。</p>
+
+<h3>OPAM</h3>
+
+<p>OCaml Package Manager の略らしいです。
+こいつは <code>OCaml</code> のインストールもしてくれるのでこれを利用します。
+<code>OPAM</code> のインストールは簡単で以下の<a href="https://opam.ocaml.org/doc/Install.html">スクリプトを実行する</a>だけです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>OCaml</h3>
+
+<p><code>OPAM</code> のインストールが終ったら、 <code>OCaml</code> をインストールします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>opam switch 4.06.0
+</span><span class='line'>eval `opam config env`</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>SATySFi</h3>
+
+<p><code>OPAM</code> の準備が整ったら <code>SATySFi</code> の準備、インストールをします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>opam repository satysfi-external https://github.com/gfngfn/satysfi-external-repo.git
+</span><span class='line'>opam update
+</span><span class='line'>git clone https://github.com/gfngfn/SATySFi.git
+</span><span class='line'>cd SATiSFi
+</span><span class='line'>
+</span><span class='line'>opam pin add satysfi .
+</span><span class='line'>opam install satysfi</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>compile!!!!</h2>
+
+<p>これでインストールされたのでとりあえずリポジトリにある <code>demo/demo.saty</code> をコンパイルしてみましょう。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd demo
+</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
+
+
+<p>なにも準備していないといきなりエラーがでますのでそれを<a href="https://github.com/gfngfn/SATySFi/blob/master/memo-ja-how-to-use.md">公式を参考にして</a>解消します。
+解消できたら <code>demo.pdf</code> ができますのでこれでつかえるようになります。</p>
+
+<h2>おわり</h2>
+
+<p>ちょっと簡単でしたが、 <code>satysfi</code> の導入日記でした。</p>
+
+<p>そんなことより<a href="https://techbookfest.org/event/tbf05">技術書典5</a>に出します。ネタは酒に関するネタでやっていく予定です。
+仕上がっていれば <code>え37</code> に居るとおもわれます。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -2238,157 +2337,6 @@ LTはどれもよくて <code>rib</code> も面白いし、 csvの高速化の�
 
 <p>ということで <code>Rust</code> で言語処理100本ノック1章をやってみました。
 最近 <code>Ruby</code> しか書いていなかったので、新鮮で楽しいですね <code>Rust</code> 。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/rust/'>rust</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2018/01/19/nlp-100-section-1-part-2/">
-		
-			NLP100本ノック Section 1 Part 2</a>
-	</h2>
-	<div class="entry-content">
-		<p>前回、<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> の01までやったので02からやっていきます。</p>
-
-<h2><code>extern crate nlp100;</code></h2>
-
-<p>ってやれるように <a href="https://github.com/katsyoshi/zatsu/tree/master/rust/nlp100"><code>Cargo</code></a> を作成</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cargo new nlp100</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec02">02. 「パトカー」+「タクシー」=「パタトクカシーー」</a></h3>
-
-<p>これはムズカシイので素直に <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.zip"><code>zip</code></a> を利用する</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">fn</span> <span class="n">concat</span><span class="p">(</span><span class="n">t</span><span class="o">:</span> <span class="p">(</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">r</span> <span class="o">=</span> <span class="n">String</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="n">in</span> <span class="n">f</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">zip</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">iter</span><span class="p">())</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">r</span><span class="p">.</span><span class="n">push_str</span><span class="p">(</span><span class="o">&amp;</span><span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">));</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">p</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">String</span><span class="o">::</span><span class="n">from</span><span class="p">(</span><span class="s">&quot;パトカー&quot;</span><span class="p">).</span><span class="n">chars</span><span class="p">().</span><span class="n">collect</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">t</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">String</span><span class="o">::</span><span class="n">from</span><span class="p">(</span><span class="s">&quot;タクシー&quot;</span><span class="p">).</span><span class="n">chars</span><span class="p">().</span><span class="n">collect</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">concat</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec03">03. 円周率</a></h3>
-
-<p>この問題は思い切り勘違いしてたので、「これのどこが円周率なの？」って思ってました。こいつは <a href="https://doc.rust-lang.org/regex/regex/index.html"><code>Regex</code></a> を用いて単語毎に分解、単語毎に文字数数えて解決してます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">fn</span> <span class="n">char_count_list</span><span class="p">(</span><span class="n">w</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">usize</span><span class="o">&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">Regex</span><span class="o">::</span><span class="n">new</span><span class="p">(</span><span class="n">r</span><span class="s">&quot;\W+&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="n">w</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">len</span><span class="p">()).</span><span class="n">collect</span><span class="p">()</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">char_count_list</span><span class="p">(</span><span class="s">&quot;Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics.&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{:?}&quot;</span><span class="p">,</span> <span class="n">pi</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec04">04. 元素記号</a></h3>
-
-<p>これは、英語版「水兵リーベー僕の船」ですので条件に合うときだけ1文字に変更します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">collections</span><span class="o">::</span><span class="n">HashMap</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">atomic_words</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;&amp;</span><span class="n">str</span><span class="o">&gt;</span> <span class="o">=</span> <span class="s">&quot;Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can.&quot;</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">).</span><span class="n">collect</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">atomic_table</span> <span class="o">=</span> <span class="n">HashMap</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="n">in</span> <span class="n">atomic_words</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">enumerate</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">let</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">v</span><span class="o">|</span> <span class="n">v</span><span class="p">.</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
-</span><span class='line'>        <span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="n">match</span> <span class="n">i</span> <span class="p">{</span>
-</span><span class='line'>            <span class="m">0</span> <span class="o">|</span> <span class="m">4.</span><span class="p">..</span><span class="m">8</span> <span class="o">|</span> <span class="m">14.</span><span class="p">..</span><span class="m">15</span> <span class="o">|</span> <span class="m">18</span> <span class="o">=&gt;</span> <span class="n">chars</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">to_string</span><span class="p">(),</span>
-</span><span class='line'>            <span class="n">_</span> <span class="o">=&gt;</span> <span class="n">chars</span><span class="p">[</span><span class="m">0.</span><span class="p">.</span><span class="m">2</span><span class="p">].</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">),</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>        <span class="n">atomic_table</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="m">1</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="n">in</span> <span class="o">&amp;</span><span class="n">atomic_table</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}: {}&quot;</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おわり</h2>
-
-<p>やっぱり難しいのを実感</p>
 
 		
 		

@@ -7,8 +7,9 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
-RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt install dnsmasq するだけでおわります。 はまったところ いつもどおりはまりました。今回は以下の二点 /etc/ &hellip;">
+	<meta name="description" content="タイトルのとおり、DAZNを見はじめた。
+Netflix, Huluを契約してたけど、ぜんぜん見ていなかったので解約した。
+DAZN をみようとおもったきっかけはNBAのカンファレンスファイナルをみようとおもったため。 とりあえず視聴感想ですが、表示は色々なところで言われてるとおもいますが、 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -77,6 +78,48 @@ RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt i
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/05/21/start-watching-dazn/">
+		
+			Start Watching Dazn</a>
+	</h2>
+	<div class="entry-content">
+		<p>タイトルのとおり、DAZNを見はじめた。
+Netflix, Huluを契約してたけど、ぜんぜん見ていなかったので解約した。
+DAZN をみようとおもったきっかけはNBAのカンファレンスファイナルをみようとおもったため。</p>
+
+<p>とりあえず視聴感想ですが、表示は色々なところで言われてるとおもいますが、
+接続開始時にブロックノイズが気になりますが、一旦綺麗に表示されるとそのあとは
+特に気になりません。</p>
+
+<p>肝心の試合内容が現在非常に残念なため試合内の評価はしません。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/j-league/'>j-league</a>, <a class='category' href='/blog/categories/streaming/'>streaming</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -680,180 +723,6 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
 
 
 	<a class='category' href='/blog/categories/advent-calendar/'>advent-calendar</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/oasis/'>oasis</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/11/29/introduced-cuda/">
-		
-			YARAKASHI CUDA編</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="/blog/2016/11/28/hello/">昨日</a>かいた奴でGTX 1050があるのでCUDAを導入してみた。</p>
-
-<h2>CUDA導入</h2>
-
-<p>これは簡単で <a href="https://developer.nvidia.com/cuda-downloads">ここ</a> から必要なパッケージをダウンロードしてきます。
-今回は Linux x86_64 Ubuntu 14.04 runfile(local) を順に選択。
-インストールはここでダウンロードしたrunfileを実行して、指示に従うだけです。
-これが終ったら、SampleProjectもインストールされてるとおもうのでこのプロジェクトをコンパイルします。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ chmod 555 ./cuda_8.0.44_linux.run
-</span><span class='line'>$ ./cuda_8.0.44_linux.run
-</span><span class='line'>:
-</span><span class='line'>:
-</span><span class='line'>$ cd NVIDIA_CUDA-8.0_Samples
-</span><span class='line'>$ make</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でコンパイルが終了したらサンプルプログラムを実行します。とりあえず <code>deviceQuery</code> を実行します。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd bin/x86_64/linux/release
-</span><span class='line'>$ ./deviceQuery
-</span><span class='line'>./deviceQuery Starting...
-</span><span class='line'>
-</span><span class='line'> CUDA Device Query (Runtime API) version (CUDART static linking)
-</span><span class='line'>
-</span><span class='line'>cudaGetDeviceCount returned 38
-</span><span class='line'>-&gt; no CUDA-capable device is detected
-</span><span class='line'>Result = FAIL</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と出ます。どうみてもエラーですね</p>
-
-<p>で、以下のようにrootで実行すると</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo ./deviceQuery
-</span><span class='line'>./deviceQuery Starting...
-</span><span class='line'>
-</span><span class='line'> CUDA Device Query (Runtime API) version (CUDART static linking)
-</span><span class='line'>
-</span><span class='line'>Detected 1 CUDA Capable device(s)
-</span><span class='line'>
-</span><span class='line'>Device 0: "GeForce GTX 1050"
-</span><span class='line'>  CUDA Driver Version / Runtime Version          8.0 / 8.0
-</span><span class='line'>  CUDA Capability Major/Minor version number:    6.1
-</span><span class='line'>  Total amount of global memory:                 1965 MBytes (2060255232 bytes)
-</span><span class='line'>  ( 5) Multiprocessors, (128) CUDA Cores/MP:     640 CUDA Cores
-</span><span class='line'>  GPU Max Clock rate:                            1455 MHz (1.46 GHz)
-</span><span class='line'>  Memory Clock rate:                             3504 Mhz
-</span><span class='line'>  Memory Bus Width:                              128-bit
-</span><span class='line'>  L2 Cache Size:                                 1048576 bytes
-</span><span class='line'>  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
-</span><span class='line'>  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
-</span><span class='line'>  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
-</span><span class='line'>  Total amount of constant memory:               65536 bytes
-</span><span class='line'>  Total amount of shared memory per block:       49152 bytes
-</span><span class='line'>  Total number of registers available per block: 65536
-</span><span class='line'>  Warp size:                                     32
-</span><span class='line'>  Maximum number of threads per multiprocessor:  2048
-</span><span class='line'>  Maximum number of threads per block:           1024
-</span><span class='line'>  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
-</span><span class='line'>  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
-</span><span class='line'>  Maximum memory pitch:                          2147483647 bytes
-</span><span class='line'>  Texture alignment:                             512 bytes
-</span><span class='line'>  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)
-</span><span class='line'>  Run time limit on kernels:                     Yes
-</span><span class='line'>  Integrated GPU sharing Host Memory:            No
-</span><span class='line'>  Support host page-locked memory mapping:       Yes
-</span><span class='line'>  Alignment requirement for Surfaces:            Yes
-</span><span class='line'>  Device has ECC support:                        Disabled
-</span><span class='line'>  Device supports Unified Addressing (UVA):      Yes
-</span><span class='line'>  Device PCI Domain ID / Bus ID / location ID:   0 / 129 / 0
-</span><span class='line'>  Compute Mode:
-</span><span class='line'>     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
-</span><span class='line'>
-</span><span class='line'>deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 8.0, CUDA Runtime Version = 8.0, NumDevs = 1, Device0 = GeForce GTX 1050
-</span><span class='line'>Result = PASS</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と出てきますので、パーミッションがなかったようです。
-あとは簡単、CUDA使いたいユーザーにパーミッションつけたらおわりです。</p>
-
-<h2>おわり</h2>
-
-<p>こんなのに3時間ほど時間を費しましたね。はい。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/cuda/'>cuda</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/gpgpu/'>gpgpu</a>
 
 
 </div>

@@ -7,7 +7,10 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="GWに勢い余って買いものしたのでそれを。 Roomba買いました。 机買いました。 Kinesis買いました。 コーヒーセット買いました。 もともと欲しかったのもあり、勢いで買ってしまいました。 Roombaの方は炬燵をまだ出してるのもあり、動かしていないです。 &hellip;">
+	<meta name="description" content="LinuxでScreenCast用の環境を整えてみた。 必要パッケージ ffmpeg
+gtk-recordMyDesktop 使いかた gtk-recordMyDesktop でデスクトップをキャプチャする。
+その後は、 ffmpeg を使って好きな動画形式に変換します。
+ここでは、 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -76,6 +79,67 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/05/15/screencast-use-gif/">
+		
+			すくりーんきゃすと</a>
+	</h2>
+	<div class="entry-content">
+		<p>LinuxでScreenCast用の環境を整えてみた。</p>
+
+<h2>必要パッケージ</h2>
+
+<ul>
+<li>ffmpeg</li>
+<li>gtk-recordMyDesktop</li>
+</ul>
+
+
+<h2>使いかた</h2>
+
+<p><code>gtk-recordMyDesktop</code> でデスクトップをキャプチャする。
+その後は、 <code>ffmpeg</code> を使って好きな動画形式に変換します。
+ここでは、gif画像に変更しています。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ffmpeg -i ~/screencast.ovg img/screencast.gif</span></code></pre></td></tr></table></div></figure>
+
+
+<p style="text-align:center;"> <img src="/images/screenshot/gtk-recordMyDesktop.gif" width="512" alt="" /></p>
+
+<h3>参考サイト</h3>
+
+<ol>
+<li><a href="http://d.hatena.ne.jp/over80/20080802/1217693705">http://d.hatena.ne.jp/over80/20080802/1217693705</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/movie/'>movie</a>, <a class='category' href='/blog/categories/screencast/'>screencast</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -593,50 +657,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
 
 	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/party/'>party</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/03/17/heroku-deploy-anther-branch/">
-		
-			Herokuでmaster以外のブランチを利用してデプロイする方法</a>
-	</h2>
-	<div class="entry-content">
-		<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push heroku your-branch:master</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>参考</h3>
-
-<ol>
-<li><a href="http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing">http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing</a></li>
-<li><a href="http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7">http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7</a></li>
-</ol>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>

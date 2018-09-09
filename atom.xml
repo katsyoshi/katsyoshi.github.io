@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-08-17T00:56:54+09:00</updated>
+  <updated>2018-09-09T15:17:08+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,80 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SATySFi使って本書いてみてる]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/09/09/satysfi/"/>
+    <updated>2018-09-09T14:29:46+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/09/09/satysfi</id>
+    <content type="html"><![CDATA[<p>技術書典5出しますので、それを書くために <a href="https://ocaml.org/">OCaml</a> で作成された <a href="https://github.com/gfngfn/SATySFi">SATySFi</a> を使いはじめました。</p>
+
+<h2>インストール</h2>
+
+<p>今回は <a href="https://opam.ocaml.org">OPAM</a> を利用してインストールをしています。まあ単純にパッケージが今普段使いしてるOSにないだけなんですけどね。
+インストール手順は <a href="https://github.com/gfngfn/SATySFi/blob/master/README-ja.md">公式のREADME.md</a> を参考にしています。</p>
+
+<h3>OPAM</h3>
+
+<p>OCaml Package Manager の略らしいです。
+こいつは <code>OCaml</code> のインストールもしてくれるのでこれを利用します。
+<code>OPAM</code> のインストールは簡単で以下の<a href="https://opam.ocaml.org/doc/Install.html">スクリプトを実行する</a>だけです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>OCaml</h3>
+
+<p><code>OPAM</code> のインストールが終ったら、 <code>OCaml</code> をインストールします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>opam switch 4.06.0
+</span><span class='line'>eval `opam config env`</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>SATySFi</h3>
+
+<p><code>OPAM</code> の準備が整ったら <code>SATySFi</code> の準備、インストールをします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>opam repository satysfi-external https://github.com/gfngfn/satysfi-external-repo.git
+</span><span class='line'>opam update
+</span><span class='line'>git clone https://github.com/gfngfn/SATySFi.git
+</span><span class='line'>cd SATiSFi
+</span><span class='line'>
+</span><span class='line'>opam pin add satysfi .
+</span><span class='line'>opam install satysfi</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>compile!!!!</h2>
+
+<p>これでインストールされたのでとりあえずリポジトリにある <code>demo/demo.saty</code> をコンパイルしてみましょう。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd demo
+</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
+
+
+<p>なにも準備していないといきなりエラーがでますのでそれを<a href="https://github.com/gfngfn/SATySFi/blob/master/memo-ja-how-to-use.md">公式を参考にして</a>解消します。
+解消できたら <code>demo.pdf</code> ができますのでこれでつかえるようになります。</p>
+
+<h2>おわり</h2>
+
+<p>ちょっと簡単でしたが、 <code>satysfi</code> の導入日記でした。</p>
+
+<p>そんなことより<a href="https://techbookfest.org/event/tbf05">技術書典5</a>に出します。ネタは酒に関するネタでやっていく予定です。
+仕上がっていれば <code>え37</code> に居るとおもわれます。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[wireguardをはじめました]]></title>
@@ -2745,23 +2819,6 @@ LTはどれもよくて <code>rib</code> も面白いし、 csvの高速化の�
 <h2>おわり</h2>
 
 <p>ほんとうのもくてきは <code>fluentd</code> のぷらぐいんをかくことですがつかれたのできょうはここまで</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[start watching dazn]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2017/05/21/start-watching-dazn/"/>
-    <updated>2017-05-21T14:49:19+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2017/05/21/start-watching-dazn</id>
-    <content type="html"><![CDATA[<p>タイトルのとおり、DAZNを見はじめた。
-Netflix, Huluを契約してたけど、ぜんぜん見ていなかったので解約した。
-DAZN をみようとおもったきっかけはNBAのカンファレンスファイナルをみようとおもったため。</p>
-
-<p>とりあえず視聴感想ですが、表示は色々なところで言われてるとおもいますが、
-接続開始時にブロックノイズが気になりますが、一旦綺麗に表示されるとそのあとは
-特に気になりません。</p>
-
-<p>肝心の試合内容が現在非常に残念なため試合内の評価はしません。</p>
 ]]></content>
   </entry>
   
