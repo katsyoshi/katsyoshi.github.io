@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-09-09T15:18:43+09:00</updated>
+  <updated>2018-09-11T00:43:16+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[くーも]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/09/11/cumo/"/>
+    <updated>2018-09-11T00:13:45+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/09/11/cumo</id>
+    <content type="html"><![CDATA[<p>Rubyで <a href="https://developer.nvidia.com/cuda-downloads"><code>cuda</code></a> を利用して GPGPU 使いたいの
+で <a href="https://github.com/sonots/cumo"><code>cumo</code></a> を導入してみた。</p>
+
+<h2>install</h2>
+
+<p>はじめに <code>cuda</code> をインストールしておきます。
+<code>gem</code> に登録されているので、雑に <code>gem install</code> 実施してみます。</p>
+
+<p><code>
+export CUDA_PATH="/opt/cuda"
+export CPATH="$CUDA_PATH/include:$CPATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+export PATH="$CUDA_PATH/bin:$PATH"
+export LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LIBRARY_PATH"
+gem install cumo
+</code></p>
+
+<p>とすると以下のようなエラーが出てだめです。</p>
+
+<p>```
+gcc -I. -Iinclude -Inarray -Icuda -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0/x86_64-linux -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0/ruby/backward -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0 -I. -I/home/katsyoshi/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/numo-narray-0.9.1.3/ext/numo/narray -DHAVE_NUMO_NARRAY_H -DHAVE_DLFCN_H -DHAVE_DLOPEN -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_TYPE_BOOL -DHAVE_TYPE_U_INT8_T -DHAVE_TYPE_U_INT16_T -DHAVE_TYPE_INT32_T -DHAVE_TYPE_U_INT32_T -DHAVE_TYPE_INT64_T -DHAVE_TYPE_U_INT64_T -DHAVE_EXP10 -DHAVE_RB_CCOMPLEX -DHAVE_RB_THREAD_CALL_WITHOUT_GVL -I/opt/cuda/include -I/home/katsyoshi/.rbenv/versions/2.5.1/include -fPIC -O3 -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wno-tautological-compare -Wno-parentheses-equality -Wno-constant-logical-operand -Wno-self-assign -Wunused-variable -Wimplicit-int -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wmisleading-indentation -Wno-packed-bitfield-compat -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wduplicated-cond -Wno-maybe-uninitialized -o narray/types/bit.o -c narray/types/bit.c
+narray/gen/tmpl/lib.c:22:7: エラー: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘<strong>attribute</strong>’ before ‘/’ token
+ #define m_map(x) m_num_to_data(rb_yield(m_data_to_num(x)))</p>
+
+<pre><code>   ^
+</code></pre>
+
+<p>narray/gen/tmpl/lib.c:23:29: エラー: 終端する > 文字がありません</p>
+
+<pre><code>                         ^
+</code></pre>
+
+<p>narray/gen/tmpl/lib.c:23:29: 致命的エラー: static ID id_cast;: そのようなファイルやディレクトリはありません
+コンパイルを停止しました。
+make: *** [Makefile:453: narray/types/bit.o] エラー 1
+```</p>
+
+<p>公式リポジトリ覗いてもとくに問題なさそうなので <code>gem</code> からのインストールは一旦おいてソースからインストールします。</p>
+
+<h3>build</h3>
+
+<p>公式リポジトリからダウンロードしてコンパイルをはじめます。</p>
+
+<p><code>
+git clone https://github.com/sonotz/cumo.git
+cd cumo
+export CUDA_PATH="/usr/local/cuda"
+export CPATH="$CUDA_PATH/include:$CPATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+export PATH="$CUDA_PATH/bin:$PATH"
+export LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LIBRARY_PATH"
+bundle install
+rake compile
+rake install
+</code></p>
+
+<p>ってインストールできますが、その前に僕の環境が <code>gcc-8.2.0</code> だったりして、これを <code>gcc-6.4.0</code> に戻したりしてインストールしました。</p>
+
+<h2>run</h2>
+
+<p>これでインストール終わりましたので、 <code>irb</code> で確認してみようと思います。</p>
+
+<p><code>
+irb(main):001:0&gt; require 'cumo/narray'
+=&gt; true
+irb(main):002:0&gt; Cumo::Int32.new(3, 3).fill(0)
+=&gt; Cumo::Int32#shape=[3,3]
+[[0, 0, 0],
+ [0, 0, 0],
+ [0, 0, 0]]
+</code></p>
+
+<p>とこれで実行されたことを確認できます。</p>
+
+<p>と簡単に書きましたが、インストール後にGPUへのアクセス権が無いユーザーで実行したためエラーが出ます(エビデンス取得忘れ)。
+手元のPCではGPUにアクセス権がvideo groupにもあるので利用ユーザーをvideo groupへ追加して再起動することでようやく動作確認ができます。</p>
+
+<h2>おわり</h2>
+
+<p>簡単にGPGPUを利用したプログラムが書けるようになりましたのでおわりです。
+技術書典5はこれを使ったはなしを出展しますのできてみてくださいな。</p>
+
+<p>え37でまってます</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SATySFi使って本書いてみてる]]></title>
@@ -238,75 +329,6 @@ LTはどれもよくて <code>rib</code> も面白いし、 csvの高速化の�
 <p>RubyKaigi 2018に行ってきてたいへんたのしいイベントでした。</p>
 
 <p>(型のはなしはやはり興味がないというかまだまだ理解が浅いのでTaPL読むべきだな)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[API キーが凍結されてら]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2018/05/06/teokure/"/>
-    <updated>2018-05-06T23:33:23+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2018/05/06/teokure</id>
-    <content type="html"><![CDATA[<p>mikutter の <a href="http://mikutter.hatenablog.com/entry/2018/05/05/164014">Twitter API キーが凍結された</a> ようです。</p>
-
-<h2>回避方法</h2>
-
-<p>とりあず、twitter の <a href="https://developer.twitter.com/en.html">開発者ページ</a> から API キーを生成してください。
-あとは以下の様に編集してください</p>
-
-<p>```diff
-diff &mdash;git a/Gemfile b/Gemfile
-index 0a88a191..cb48cd4f 100644
-&mdash;&ndash; a/Gemfile
-+++ b/Gemfile
-@@ -21,6 +21,7 @@ group :default do
-   gem &lsquo;pluggaloid&rsquo;, &lsquo;>= 1.1.1&rsquo;, &lsquo;&lt; 2.0&rsquo;
-   gem &lsquo;delayer-deferred&rsquo;, &lsquo;>= 2.0&rsquo;, &lsquo;&lt; 3.0&rsquo;
-   gem &lsquo;twitter-text&rsquo;, &lsquo;>= 2.1.0&rsquo;
-+  gem &lsquo;dotenv&rsquo;
- end</p>
-
-<p> group :test do
-diff &mdash;git a/core/config.rb b/core/config.rb
-index 6e3d95ba..455e3083 100644
-&mdash;&ndash; a/core/config.rb
-+++ b/core/config.rb
-@@ -14,8 +14,8 @@ module CHIConfig
-   ACRO = &ldquo;mikutter&rdquo;</p>
-
-<p>   # 下の２行は馬鹿にしか見えない
-&ndash;  TWITTER_CONSUMER_KEY = &ldquo;AmDS1hCCXWstbss5624kVw&rdquo;
-&ndash;  TWITTER_CONSUMER_SECRET = &ldquo;KOPOooopg9Scu7gJUBHBWjwkXz9xgPJxnhnhO55VQ&rdquo;
-+  TWITTER_CONSUMER_KEY = ENV[&ldquo;TWITTER_CONSUMER_KEY&rdquo;]
-+  TWITTER_CONSUMER_SECRET = ENV[&ldquo;TWITTER_SECRET_KEY&rdquo;]
-   TWITTER_AUTHENTICATE_REVISION = 1</p>
-
-<p>   # pidファイル
-diff &mdash;git a/mikutter.rb b/mikutter.rb
-index da302ca1..94025817 100755
-&mdash;&ndash; a/mikutter.rb
-+++ b/mikutter.rb
-@@ -32,6 +32,8 @@ require &lsquo;benchmark&rsquo;
- require &lsquo;webrick&rsquo;
- require &lsquo;thread&rsquo;
- require &lsquo;fileutils&rsquo;
-+require &lsquo;dotenv&rsquo;
-+Dotenv.load(&ldquo;.env&rdquo;)</p>
-
-<p> require_relative &lsquo;core/utils&rsquo;
-```</p>
-
-<p>あとは環境変数<code>TWITTER_CONSUMER_KEY</code> と <code>TWITTER_SECRET_KEY</code> を設定してあげると起動できるようになります</p>
-
-<h3>dotenv</h3>
-
-<p>環境変数を指定して毎回起動したくない、とか <code>.bashrc</code> に書きたくない、とかある場合は
-<a href="https://github.com/bkeepers/dotenv"><code>dotenv.gem</code> </a> を使うことで良いかんじに読みとってくれるようになります。
-つかいかたは <code>Dotenv.load(file_name)</code> で <code>file_name</code> にあるファイルのなかに環境変数を書けばよいです。</p>
-
-<h2>おわり</h2>
-
-<p>おわり。
-別に <code>dotenv.gem</code> いらんなこれ</p>
 ]]></content>
   </entry>
   

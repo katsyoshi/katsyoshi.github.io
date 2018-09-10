@@ -7,9 +7,18 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="タイトルのとおり、DAZNを見はじめた。
-Netflix, Huluを契約してたけど、ぜんぜん見ていなかったので解約した。
-DAZN をみようとおもったきっかけはNBAのカンファレンスファイナルをみようとおもったため。 とりあえず視聴感想ですが、表示は色々なところで言われてるとおもいますが、 &hellip;">
+	<meta name="description" content="最近すとうさんが一押ししているapache arrowをインストールしてみた 環境 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+$ uname -a
+Linux rin 4.9.10-gentoo #6 SMP Tue Mar 28 01:29:26 JST 2017 x86_64 Intel(R &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +87,117 @@ DAZN をみようとおもったきっかけはNBAのカンファレンスファ
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/05/29/installing-apache-arrow/">
+		
+			Installing Apache Arrow</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://slide.rabbit-shocker.org/authors/kou/nagoya-rubykaigi-03/">最近</a><a href="https://github.com/kou">すとうさん</a>が<a href="https://slide.rabbit-shocker.org/authors/kou/data-science-rb/">一押し</a>している<a href="https://arrow.apache.org/">apache arrow</a>をインストールしてみた</p>
+
+<h2>環境</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ uname -a
+</span><span class='line'>Linux rin 4.9.10-gentoo #6 SMP Tue Mar 28 01:29:26 JST 2017 x86_64 Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz GenuineIntel GNU/Linux
+</span><span class='line'>$ gcc -v
+</span><span class='line'>組み込み spec を使用しています。
+</span><span class='line'>COLLECT_GCC=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0/gcc
+</span><span class='line'>COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-pc-linux-gnu/5.4.0/lto-wrapper
+</span><span class='line'>ターゲット: x86_64-pc-linux-gnu
+</span><span class='line'>configure 設定: /var/tmp/portage/sys-devel/gcc-5.4.0-r3/work/gcc-5.4.0/configure --host=x86_64-pc-linux-gnu --build=x86_64-pc-linux-gnu --prefix=/usr --bindir=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0 --includedir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include --datadir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0 --mandir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/man --infodir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/info --with-gxx-include-dir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include/g++-v5 --with-python-dir=/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/python --enable-languages=c,c++,fortran --enable-obsolete --enable-secureplt --disable-werror --with-system-zlib --enable-nls --without-included-gettext --enable-checking=release --with-bugurl=https://bugs.gentoo.org/ --with-pkgversion='Gentoo 5.4.0-r3 p1.3, pie-0.6.5' --enable-libstdcxx-time --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-clocale=gnu --enable-multilib --with-multilib-list=m32,m64 --disable-altivec --disable-fixed-point --enable-targets=all --disable-libgcj --enable-libgomp --disable-libmudflap --disable-libssp --disable-libcilkrts --disable-libmpx --enable-vtable-verify --enable-libvtv --enable-lto --without-isl --enable-libsanitizer
+</span><span class='line'>スレッドモデル: posix
+</span><span class='line'>gcc バージョン 5.4.0 (Gentoo 5.4.0-r3 p1.3, pie-0.6.5)</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>いんすとーる</h2>
+
+<p>今回まだGentooにパッケージがないのでgitからインストールします。ほしいのはrubygems.orgに公開されている<a href="https://rubygems.org/gems/red-arrow">red-arrow</a>をコンパイルするためにglibとこれを利用するために必要な依存パッケージとしてcppをインストールします。インストールはかんたんで <code>cmake</code> を実行すればインストールデキルはずです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone git@github.com:apache/arrow.git
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>arrow/cpp
+</span><span class='line'><span class="gp">$</span> mkdir release
+</span><span class='line'><span class="gp">$</span> <span class="nb">cd </span>release
+</span><span class='line'><span class="gp">$</span> cmake .. -DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でリリース用パッケージがビルドされるはずですが<a href="https://gist.github.com/katsyoshi/4486792ad43feae4d690d589dac1a157">エラー</a>が出ます。
+これはJIRAで<a href="https://issues.apache.org/jira/browse/ARROW-667">検索した結果</a>より <code>gcc</code> のバージョン情報がとれずにエラーをだしているやりとりが発見されたのでわかりました。
+ログを見ると実際に取得できていないことも確認しました。で <code>cpp/cmake_modules/CompilerInfo.cmake</code> をみるとどうやら日本語のバージョン情報は考慮されていないような作りになっていました。
+なので <code>LANG=C</code> をつけて <code>cmake</code> 再びつけて実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> <span class="nv">LANG</span><span class="o">=</span>C cmake .. -DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+</span><span class='line'><span class="gp">$</span> make
+</span><span class='line'><span class="gp">$</span> make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでC++のインストールは終了です。続いてglibをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> <span class="nb">cd</span> ../../c_glib
+</span><span class='line'><span class="gp">$</span> ./autgen.sh
+</span><span class='line'><span class="gp">$</span> ./configure
+</span><span class='line'><span class="gp">$</span> make
+</span><span class='line'><span class="gp">$</span> make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でインストールできます。こちら久々に野良ビルドしたため <code>PKG_CONFIG_PATH</code> や <code>LD_LIBRARY_PATH</code> の設定をわすれてただけなのですんなりいけました。
+で最後に <code>gem install red-arrow</code> を実行して目的を達成しました!!!!11</p>
+
+<h2>おわり</h2>
+
+<p>ほんとうのもくてきは <code>fluentd</code> のぷらぐいんをかくことですがつかれたのできょうはここまで</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -650,79 +770,6 @@ itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使
 
 
 	<a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/d250g2/'>d250g2</a>, <a class='category' href='/blog/categories/diary/'>diary</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/12/01/im-rockn-roll-star/">
-		
-			Rock&#8217;n&#8217; Roll Star</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="http://www.adventar.org/calendars/1537">ロックバンド Advent Calendar</a> 1日目です。
-Oasisについて適当に書きます。</p>
-
-<h2>たいとるについて</h2>
-
-<p>はいそうですねみんな大好き Oasis の <a href="https://www.amazon.co.jp/%E3%82%AA%E3%82%A2%E3%82%B7%E3%82%B9-20%E5%91%A8%E5%B9%B4%E8%A8%98%E5%BF%B5%E3%83%87%E3%83%A9%E3%83%83%E3%82%AF%E3%82%B9%E3%83%BB%E3%82%A8%E3%83%87%E3%82%A3%E3%82%B7%E3%83%A7%E3%83%B3-OASIS/dp/B00K2ZK2Y2/ref=ntt_mus_dp_dpt_18">Definitely Maybe</a> の最初にはいってる<a href="https://www.amazon.co.jp/dp/B00K2ZK3UA/ref=dm_ws_tlw_trk1">曲</a>ですね。
-Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=dm_ws_tlw_trk3">Live Forever</a> のほうがすきですが。
-ロックバンド Advent Calendar 2016 ということでこのタイトルにしました<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
-
-<h2>Oasisについて</h2>
-
-<p>最も好きなロックバンドの一つだった(解散中)ので書いてみることにします。</p>
-
-<p>出会いは高校生だったころ MTV<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> みてたら <a href="https://www.amazon.co.jp/dp/B00FS7WKDK/ref=dm_ws_tlw_trk2">Go Let It Out!</a> が Power Push されてたのではじめて <a href="https://www.amazon.co.jp/%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%83%BB%E3%82%AA%E3%83%B3%E3%83%BB%E3%82%B6%E3%83%BB%E3%82%B7%E3%83%A7%E3%83%AB%E3%83%80%E3%83%BC%E3%83%BB%E3%82%AA%E3%83%96%E3%83%BB%E3%82%B8%E3%83%A3%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%84-OASIS/dp/B00FS7WIKA/ref=pd_sim_sbs_340_1?_encoding=UTF8&amp;psc=1&amp;refRID=CC18CK2V5MCE6YZFAB7H">Standing On Shoulder Of Gaints</a> を買いそこから。このころの曲はあまり好きでないのが多いですね。
-このころも解散でもめてた気がします。そのあと大学でボッチ&amp;&amp;ひきこもりだったのでずっとOasisばっかり聞いてました。
-そのときに買ったのが <a href="https://www.amazon.co.jp/%E3%82%B6%E3%83%BB%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%97%E3%83%A9%E3%83%B3-OASIS/dp/B00FS80BTO/ref=pd_sim_340_5?_encoding=UTF8&amp;psc=1&amp;refRID=3BME19Z3FRFP8SCGMPZ4">Master Plan</a>、 <a href="https://www.amazon.co.jp/%E3%83%92%E3%83%BC%E3%82%B6%E3%83%B3%E3%83%BB%E3%82%B1%E3%83%9F%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC-OASIS/dp/B00FXV4YTE/ref=pd_sim_340_5?_encoding=UTF8&amp;psc=1&amp;refRID=0HW35K2Y4M3XGJRH28ZY">Heathen Chemistry</a>、 <a href="https://www.amazon.co.jp/%E3%83%93%E3%82%A3%E3%83%BB%E3%83%92%E3%82%A2%E3%83%BB%E3%83%8A%E3%82%A6-OASIS/dp/B00FUYQG72/ref=pd_sim_340_3?_encoding=UTF8&amp;psc=1&amp;refRID=3BME19Z3FRFP8SCGMPZ4">Be Here Now</a> の3枚で Master Plan はベストアルバム(B面)ってのがすごく好き。</p>
-
-<p>ライブは2度ほど見ました。2005年に2回みてます。<a href="http://www.summersonic.com/05/">Summer Sonic 2005</a> と <a href="http://www.setlist.fm/setlist/oasis/2005/yoyogi-daiichi-taiikukan-tokyo-japan-1bd79964.html">日本ツアー</a> を行ってました。日本ツアーのほうでは、Master Planの曲をやってくれたので本当に満足しました。</p>
-
-<p>そのあとも<a href="https://www.amazon.co.jp/The-Longcut/e/B001LHT232/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">The Longcut</a>、<a href="https://www.amazon.co.jp/The-Music/e/B000APTYQQ/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">The Music</a><sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>、<a href="https://www.amazon.co.jp/Bloc-Party/e/B000APY4UC/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">Bloc Party</a>、<a href="https://www.amazon.co.jp/The-Strokes/e/B000APQBEY/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">The Strokes</a>、<a href="https://www.amazon.co.jp/ASIAN-KUNG-FU-GENERATION/e/B00197HZ7O/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">ASIAN KUNG-FU GENERATION</a>、<a href="https://www.amazon.co.jp/Coldplay/e/B000APPUFK/digital/ref=ntt_mp3_rdr?_encoding=UTF8&amp;sn=d">Coldplay</a>とかに浮気しながらもきちんと御布施としてCDは買ってました。最近のリマスターはさすがに買ってないですが…</p>
-
-<h2>解散について</h2>
-
-<p><a href="http://mhnews2504.blog109.fc2.com/blog-entry-1930.html">伝統芸的なこと</a> もあるのでハイハイとしか好きなひとは思ってなかったとおもいます。</p>
-
-<p>で2009年いつも通りまゆげ兄弟(ノエル・ギャラガーとリアム・ギャラガー)の兄弟喧嘩だとおもっていたら本気でまゆげ兄(ノエル)がブチギレて解散したのでそっかーてちょっとショック(ほんとにちょっと)だった<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>。</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>ほんとは<a href="https://ja.wikipedia.org/wiki/%E3%83%8E%E3%82%A8%E3%83%AB%E3%83%BB%E3%82%AE%E3%83%A3%E3%83%A9%E3%82%AC%E3%83%BC#.E7.99.BA.E8.A8.80">ノエルの発言</a>を付けたかったけどさすがにね…<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>だったけなこのころVibeって名前だった気も<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>そんなことより The Music の<a href="https://www.google.com/trends/explore?geo=JP&amp;q=%2Fm%2F0130zt,%2Fm%2F03d_2z,%2Fm%2F03zgq4,%2Fm%2F0kr_t,%2Fm%2F04zbp3">google trends</a>で熊本が肥ゆいけどなんで？<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-<li id="fn:4">
-<p>このころtwitterでやりとりしてた人とかともオフで解散したねーとか言ってた<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/advent-calendar/'>advent-calendar</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/oasis/'>oasis</a>
 
 
 </div>

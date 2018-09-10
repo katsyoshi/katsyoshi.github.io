@@ -7,8 +7,15 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="技術書典5出しますので、それを書くために OCaml で作成された SATySFi を使いはじめました。 インストール 今回は OPAM を利用してインストールをしています。まあ単純にパッケージが今普段使いしてるOSにないだけなんですけどね。
-インストール手順は 公式のREADME.md &hellip;">
+	<meta name="description" content="Rubyで cuda を利用して GPGPU 使いたいの
+で cumo を導入してみた。 install はじめに cuda をインストールしておきます。
+gem に登録されているので、雑に gem install 実施してみます。 1
+2
+3
+4
+5
+6
+export CUDA_PATH="/ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -77,6 +84,146 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2018/09/11/cumo/">
+		
+			くーも</a>
+	</h2>
+	<div class="entry-content">
+		<p>Rubyで <a href="https://developer.nvidia.com/cuda-downloads"><code>cuda</code></a> を利用して GPGPU 使いたいの
+で <a href="https://github.com/sonots/cumo"><code>cumo</code></a> を導入してみた。</p>
+
+<h2>install</h2>
+
+<p>はじめに <code>cuda</code> をインストールしておきます。
+<code>gem</code> に登録されているので、雑に <code>gem install</code> 実施してみます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export CUDA_PATH="/opt/cuda"
+</span><span class='line'>export CPATH="$CUDA_PATH/include:$CPATH"
+</span><span class='line'>export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+</span><span class='line'>export PATH="$CUDA_PATH/bin:$PATH"
+</span><span class='line'>export LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LIBRARY_PATH"
+</span><span class='line'>gem install cumo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とすると以下のようなエラーが出てだめです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gcc -I. -Iinclude -Inarray -Icuda -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0/x86_64-linux -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0/ruby/backward -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0 -I. -I/home/katsyoshi/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/numo-narray-0.9.1.3/ext/numo/narray -DHAVE_NUMO_NARRAY_H -DHAVE_DLFCN_H -DHAVE_DLOPEN -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_TYPE_BOOL -DHAVE_TYPE_U_INT8_T -DHAVE_TYPE_U_INT16_T -DHAVE_TYPE_INT32_T -DHAVE_TYPE_U_INT32_T -DHAVE_TYPE_INT64_T -DHAVE_TYPE_U_INT64_T -DHAVE_EXP10 -DHAVE_RB_CCOMPLEX -DHAVE_RB_THREAD_CALL_WITHOUT_GVL -I/opt/cuda/include -I/home/katsyoshi/.rbenv/versions/2.5.1/include -fPIC -O3 -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wno-tautological-compare -Wno-parentheses-equality -Wno-constant-logical-operand -Wno-self-assign -Wunused-variable -Wimplicit-int -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wmisleading-indentation -Wno-packed-bitfield-compat -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wduplicated-cond -Wno-maybe-uninitialized -o narray/types/bit.o -c narray/types/bit.c
+</span><span class='line'>narray/gen/tmpl/lib.c:22:7: エラー: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘/’ token
+</span><span class='line'> #define m_map(x) m_num_to_data(rb_yield(m_data_to_num(x)))
+</span><span class='line'>       ^
+</span><span class='line'>narray/gen/tmpl/lib.c:23:29: エラー: 終端する &gt; 文字がありません
+</span><span class='line'>
+</span><span class='line'>                             ^
+</span><span class='line'>narray/gen/tmpl/lib.c:23:29: 致命的エラー: static ID id_cast;: そのようなファイルやディレクトリはありません
+</span><span class='line'>コンパイルを停止しました。
+</span><span class='line'>make: *** [Makefile:453: narray/types/bit.o] エラー 1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>公式リポジトリ覗いてもとくに問題なさそうなので <code>gem</code> からのインストールは一旦おいてソースからインストールします。</p>
+
+<h3>build</h3>
+
+<p>公式リポジトリからダウンロードしてコンパイルをはじめます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/sonotz/cumo.git
+</span><span class='line'>cd cumo
+</span><span class='line'>export CUDA_PATH="/usr/local/cuda"
+</span><span class='line'>export CPATH="$CUDA_PATH/include:$CPATH"
+</span><span class='line'>export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+</span><span class='line'>export PATH="$CUDA_PATH/bin:$PATH"
+</span><span class='line'>export LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LIBRARY_PATH"
+</span><span class='line'>bundle install
+</span><span class='line'>rake compile
+</span><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ってインストールできますが、その前に僕の環境が <code>gcc-8.2.0</code> だったりして、これを <code>gcc-6.4.0</code> に戻したりしてインストールしました。</p>
+
+<h2>run</h2>
+
+<p>これでインストール終わりましたので、 <code>irb</code> で確認してみようと思います。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):001:0&gt; require 'cumo/narray'
+</span><span class='line'>=&gt; true
+</span><span class='line'>irb(main):002:0&gt; Cumo::Int32.new(3, 3).fill(0)
+</span><span class='line'>=&gt; Cumo::Int32#shape=[3,3]
+</span><span class='line'>[[0, 0, 0],
+</span><span class='line'> [0, 0, 0],
+</span><span class='line'> [0, 0, 0]]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とこれで実行されたことを確認できます。</p>
+
+<p>と簡単に書きましたが、インストール後にGPUへのアクセス権が無いユーザーで実行したためエラーが出ます(エビデンス取得忘れ)。
+手元のPCではGPUにアクセス権がvideo groupにもあるので利用ユーザーをvideo groupへ追加して再起動することでようやく動作確認ができます。</p>
+
+<h2>おわり</h2>
+
+<p>簡単にGPGPUを利用したプログラムが書けるようになりましたのでおわりです。
+技術書典5はこれを使ったはなしを出展しますのできてみてくださいな。</p>
+
+<p>え37でまってます</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/cuda/'>cuda</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/gpgpu/'>gpgpu</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -1996,364 +2143,6 @@ LTはどれもよくて <code>rib</code> も面白いし、 csvの高速化の�
 
 
 	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/nlp100/'>nlp100</a>, <a class='category' href='/blog/categories/rust/'>rust</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2018/01/21/nlp-100-section-1-part-3/">
-		
-			Nlp 100 Section 1 Part 3</a>
-	</h2>
-	<div class="entry-content">
-		<p>前回、<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> の04までやったので05からやります。</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec05">05. ngram</a></h3>
-
-<p>こいつはbi-gramを単語、文字二つを実装するひつようがあります</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">fn</span> <span class="n">bigram</span><span class="p">(</span><span class="n">words</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">bi</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Vec</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">i</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">loop</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="m">2</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">if</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">words</span><span class="p">.</span><span class="n">len</span><span class="p">()</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>        <span class="n">bi</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">..</span><span class="n">w</span><span class="p">].</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">));</span>
-</span><span class='line'>        <span class="n">i</span> <span class="o">+=</span> <span class="m">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="n">bi</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">words</span> <span class="o">=</span> <span class="s">&quot;I am an NLPer&quot;</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">===word bi-gram&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">for</span> <span class="n">word</span> <span class="n">in</span> <span class="n">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">let</span> <span class="n">words</span> <span class="o">=</span> <span class="s">&quot;I am an NLPer&quot;</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">for</span> <span class="n">word</span> <span class="n">in</span> <span class="n">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec06">06. 集合</a></h3>
-
-<p>これは単純に <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html"><code>HashSet</code></a> を利用して、解決します。<code>HashSet</code> の差集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.difference"><code>difference</code></a> を利用し、和集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.union"><code>union</code></a> を、積集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.intersection"><code>intersection</code></a> をそれぞれ利用します。また、特定の要素が含有していることを判定するには <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.contains"><code>contains</code></a> を利用して判定します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">collections</span><span class="o">::</span><span class="n">HashSet</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">bigram</span><span class="p">(</span><span class="n">words</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">bi</span><span class="o">:</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">HashSet</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">i</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">loop</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="m">2</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">if</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">words</span><span class="p">.</span><span class="n">len</span><span class="p">()</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>        <span class="n">bi</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">..</span><span class="n">w</span><span class="p">].</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">));</span>
-</span><span class='line'>        <span class="n">i</span> <span class="o">+=</span> <span class="m">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="n">bi</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">chars</span><span class="p">(</span><span class="n">s</span><span class="o">:</span> <span class="n">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">s</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="n">to_string</span><span class="p">()).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">()</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">bigram</span><span class="p">(</span><span class="n">chars</span><span class="p">(</span><span class="s">&quot;paraparaparadise&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()));</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">bigram</span><span class="p">(</span><span class="n">chars</span><span class="p">(</span><span class="s">&quot;paragraph&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()));</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;===UNION===&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="p">.</span><span class="n">union</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">===DIFF===&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;===s1 - s2===&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="p">.</span><span class="n">difference</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;===s2 - s1===&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s2</span><span class="p">.</span><span class="n">difference</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s1</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">===intersection===&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="p">.</span><span class="n">intersection</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">===INCLUDE===&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">se</span> <span class="o">=</span> <span class="s">&quot;se&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;s1: {}&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">se</span><span class="p">));</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;s2: {}&quot;</span><span class="p">,</span> <span class="n">s2</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">se</span><span class="p">));</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec07">07. テンプレートによる文生成</a></h3>
-
-<p>これは <a href=""><code>format!</code></a> を使えば終りです。(問題意図ほんとこれなんか？)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">fn</span> <span class="n">string_template</span><span class="p">(</span><span class="n">x</span><span class="o">:</span> <span class="k">i8</span><span class="p">,</span> <span class="n">y</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">,</span> <span class="n">z</span><span class="o">:</span> <span class="k">f32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">String</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}時の{}は{}&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">string</span> <span class="o">=</span> <span class="n">string_template</span><span class="p">(</span><span class="m">12</span><span class="p">,</span> <span class="s">&quot;気温&quot;</span><span class="p">,</span> <span class="m">22.5</span><span class="p">);</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec08">08. 暗号文</a></h3>
-
-<p>ASCII以外の判定と、小文字のASCIIが判れば簡単です。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="k">use</span> <span class="n">std</span><span class="o">::</span><span class="n">ascii</span><span class="o">::</span><span class="n">AsciiExt</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">cipher</span><span class="p">(</span><span class="n">src</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">String</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">src</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">result</span><span class="o">:</span> <span class="n">String</span> <span class="o">=</span> <span class="n">String</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="n">chars</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="k">if</span> <span class="n">c</span><span class="p">.</span><span class="n">is_ascii</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">let</span> <span class="n">var</span><span class="o">:</span> <span class="k">u8</span> <span class="o">=</span> <span class="n">c</span> <span class="k">as</span> <span class="k">u8</span><span class="p">;</span>
-</span><span class='line'>            <span class="n">match</span> <span class="n">var</span> <span class="p">{</span>
-</span><span class='line'>                <span class="m">97</span> <span class="p">...</span> <span class="m">122</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="m">219</span> <span class="o">-</span> <span class="p">(</span><span class="n">var</span><span class="p">))</span> <span class="k">as</span> <span class="n">char</span><span class="p">,</span>
-</span><span class='line'>                <span class="n">_</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">,</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">c</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>        <span class="n">result</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="n">result</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">cipher</span><span class="p">(</span><span class="s">&quot;Today is fine.&quot;</span><span class="p">));</span>
-</span><span class='line'>    <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">cipher</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cipher</span><span class="p">(</span><span class="s">&quot;Today is fine.&quot;</span><span class="p">)));</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec09">09. Typoglycemia</a></h3>
-
-<p>こちらは、 <code>Vec</code> に <code>shuffle</code> 的なものがないので、<a href="https://doc.rust-lang.org/rand"><code>rand</code></a> を呼び出して <a href="https://doc.rust-lang.org/rand/rand/trait.Rng.html#method.shuffle"><code>shuffle</code></a> を使います。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='rust'><span class='line'><span class="n">extern</span> <span class="n">crate</span> <span class="n">rand</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">rand</span><span class="o">::</span><span class="n">Rng</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">words</span><span class="p">(</span><span class="n">src</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="k">mut</span> <span class="n">result</span><span class="o">:</span> <span class="n">Vec</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Vec</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">for</span> <span class="n">s</span> <span class="n">in</span> <span class="n">src</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">).</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;&amp;</span><span class="n">str</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">let</span> <span class="k">mut</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">chars</span><span class="p">().</span><span class="n">collect</span><span class="o">::&lt;</span><span class="n">Vec</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
-</span><span class='line'>        <span class="k">if</span> <span class="n">chars</span><span class="p">.</span><span class="n">len</span><span class="p">()</span> <span class="o">&lt;</span> <span class="m">5</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">result</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">to_string</span><span class="p">());</span>
-</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">let</span> <span class="n">last_index</span> <span class="o">=</span> <span class="n">chars</span><span class="p">.</span><span class="n">len</span><span class="p">()</span> <span class="o">-</span> <span class="m">1</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">let</span> <span class="n">first_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="m">0</span><span class="p">];</span>
-</span><span class='line'>            <span class="k">let</span> <span class="n">last_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">last_index</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="k">let</span> <span class="n">rand_chars</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">chars</span><span class="p">[</span><span class="m">1.</span><span class="p">.</span><span class="n">last_index</span><span class="p">];</span>
-</span><span class='line'>            <span class="n">shuffle</span><span class="p">(</span><span class="n">rand_chars</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">let</span> <span class="k">mut</span> <span class="n">rand_string</span> <span class="o">=</span> <span class="n">String</span><span class="o">::</span><span class="n">new</span><span class="p">();</span>
-</span><span class='line'>            <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="n">rand_chars</span> <span class="p">{</span> <span class="n">rand_string</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">}</span>
-</span><span class='line'>            <span class="n">result</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">format</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}{}{}&quot;</span><span class="p">,</span> <span class="n">first_char</span><span class="p">,</span> <span class="n">rand_string</span><span class="p">,</span> <span class="n">last_char</span><span class="p">));</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="n">result</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">chars</span><span class="o">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="p">[</span><span class="n">char</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">rand</span><span class="o">::</span><span class="n">thread_rng</span><span class="p">().</span><span class="n">shuffle</span><span class="p">(</span><span class="n">chars</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">paragraph</span> <span class="o">=</span> <span class="s">&quot;I couldn&#39;t believe that I could actually understand what I was reading : the phenomenal power of the human mind .&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">for</span> <span class="n">w</span> <span class="n">in</span> <span class="n">words</span><span class="p">(</span><span class="n">paragraph</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おわり</h2>
-
-<p>ということで <code>Rust</code> で言語処理100本ノック1章をやってみました。
-最近 <code>Ruby</code> しか書いていなかったので、新鮮で楽しいですね <code>Rust</code> 。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/rust/'>rust</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>

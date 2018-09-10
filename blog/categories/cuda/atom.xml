@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cuda | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/cuda/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-09-09T15:18:43+09:00</updated>
+  <updated>2018-09-11T00:43:16+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[くーも]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/09/11/cumo/"/>
+    <updated>2018-09-11T00:13:45+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/09/11/cumo</id>
+    <content type="html"><![CDATA[<p>Rubyで <a href="https://developer.nvidia.com/cuda-downloads"><code>cuda</code></a> を利用して GPGPU 使いたいの
+で <a href="https://github.com/sonots/cumo"><code>cumo</code></a> を導入してみた。</p>
+
+<h2>install</h2>
+
+<p>はじめに <code>cuda</code> をインストールしておきます。
+<code>gem</code> に登録されているので、雑に <code>gem install</code> 実施してみます。</p>
+
+<p><code>
+export CUDA_PATH="/opt/cuda"
+export CPATH="$CUDA_PATH/include:$CPATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+export PATH="$CUDA_PATH/bin:$PATH"
+export LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LIBRARY_PATH"
+gem install cumo
+</code></p>
+
+<p>とすると以下のようなエラーが出てだめです。</p>
+
+<p>```
+gcc -I. -Iinclude -Inarray -Icuda -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0/x86_64-linux -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0/ruby/backward -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0 -I. -I/home/katsyoshi/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/numo-narray-0.9.1.3/ext/numo/narray -DHAVE_NUMO_NARRAY_H -DHAVE_DLFCN_H -DHAVE_DLOPEN -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_TYPE_BOOL -DHAVE_TYPE_U_INT8_T -DHAVE_TYPE_U_INT16_T -DHAVE_TYPE_INT32_T -DHAVE_TYPE_U_INT32_T -DHAVE_TYPE_INT64_T -DHAVE_TYPE_U_INT64_T -DHAVE_EXP10 -DHAVE_RB_CCOMPLEX -DHAVE_RB_THREAD_CALL_WITHOUT_GVL -I/opt/cuda/include -I/home/katsyoshi/.rbenv/versions/2.5.1/include -fPIC -O3 -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wno-tautological-compare -Wno-parentheses-equality -Wno-constant-logical-operand -Wno-self-assign -Wunused-variable -Wimplicit-int -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wmisleading-indentation -Wno-packed-bitfield-compat -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wduplicated-cond -Wno-maybe-uninitialized -o narray/types/bit.o -c narray/types/bit.c
+narray/gen/tmpl/lib.c:22:7: エラー: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘<strong>attribute</strong>’ before ‘/’ token
+ #define m_map(x) m_num_to_data(rb_yield(m_data_to_num(x)))</p>
+
+<pre><code>   ^
+</code></pre>
+
+<p>narray/gen/tmpl/lib.c:23:29: エラー: 終端する > 文字がありません</p>
+
+<pre><code>                         ^
+</code></pre>
+
+<p>narray/gen/tmpl/lib.c:23:29: 致命的エラー: static ID id_cast;: そのようなファイルやディレクトリはありません
+コンパイルを停止しました。
+make: *** [Makefile:453: narray/types/bit.o] エラー 1
+```</p>
+
+<p>公式リポジトリ覗いてもとくに問題なさそうなので <code>gem</code> からのインストールは一旦おいてソースからインストールします。</p>
+
+<h3>build</h3>
+
+<p>公式リポジトリからダウンロードしてコンパイルをはじめます。</p>
+
+<p><code>
+git clone https://github.com/sonotz/cumo.git
+cd cumo
+export CUDA_PATH="/usr/local/cuda"
+export CPATH="$CUDA_PATH/include:$CPATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+export PATH="$CUDA_PATH/bin:$PATH"
+export LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LIBRARY_PATH"
+bundle install
+rake compile
+rake install
+</code></p>
+
+<p>ってインストールできますが、その前に僕の環境が <code>gcc-8.2.0</code> だったりして、これを <code>gcc-6.4.0</code> に戻したりしてインストールしました。</p>
+
+<h2>run</h2>
+
+<p>これでインストール終わりましたので、 <code>irb</code> で確認してみようと思います。</p>
+
+<p><code>
+irb(main):001:0&gt; require 'cumo/narray'
+=&gt; true
+irb(main):002:0&gt; Cumo::Int32.new(3, 3).fill(0)
+=&gt; Cumo::Int32#shape=[3,3]
+[[0, 0, 0],
+ [0, 0, 0],
+ [0, 0, 0]]
+</code></p>
+
+<p>とこれで実行されたことを確認できます。</p>
+
+<p>と簡単に書きましたが、インストール後にGPUへのアクセス権が無いユーザーで実行したためエラーが出ます(エビデンス取得忘れ)。
+手元のPCではGPUにアクセス権がvideo groupにもあるので利用ユーザーをvideo groupへ追加して再起動することでようやく動作確認ができます。</p>
+
+<h2>おわり</h2>
+
+<p>簡単にGPGPUを利用したプログラムが書けるようになりましたのでおわりです。
+技術書典5はこれを使ったはなしを出展しますのできてみてくださいな。</p>
+
+<p>え37でまってます</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[YARAKASHI CUDA編]]></title>

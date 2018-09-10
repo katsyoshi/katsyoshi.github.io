@@ -4,7 +4,7 @@
   <title><![CDATA[Category: diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-09-09T15:18:43+09:00</updated>
+  <updated>2018-09-11T00:43:16+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[くーも]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/09/11/cumo/"/>
+    <updated>2018-09-11T00:13:45+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/09/11/cumo</id>
+    <content type="html"><![CDATA[<p>Rubyで <a href="https://developer.nvidia.com/cuda-downloads"><code>cuda</code></a> を利用して GPGPU 使いたいの
+で <a href="https://github.com/sonots/cumo"><code>cumo</code></a> を導入してみた。</p>
+
+<h2>install</h2>
+
+<p>はじめに <code>cuda</code> をインストールしておきます。
+<code>gem</code> に登録されているので、雑に <code>gem install</code> 実施してみます。</p>
+
+<p><code>
+export CUDA_PATH="/opt/cuda"
+export CPATH="$CUDA_PATH/include:$CPATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+export PATH="$CUDA_PATH/bin:$PATH"
+export LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LIBRARY_PATH"
+gem install cumo
+</code></p>
+
+<p>とすると以下のようなエラーが出てだめです。</p>
+
+<p>```
+gcc -I. -Iinclude -Inarray -Icuda -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0/x86_64-linux -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0/ruby/backward -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0 -I. -I/home/katsyoshi/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/numo-narray-0.9.1.3/ext/numo/narray -DHAVE_NUMO_NARRAY_H -DHAVE_DLFCN_H -DHAVE_DLOPEN -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_TYPE_BOOL -DHAVE_TYPE_U_INT8_T -DHAVE_TYPE_U_INT16_T -DHAVE_TYPE_INT32_T -DHAVE_TYPE_U_INT32_T -DHAVE_TYPE_INT64_T -DHAVE_TYPE_U_INT64_T -DHAVE_EXP10 -DHAVE_RB_CCOMPLEX -DHAVE_RB_THREAD_CALL_WITHOUT_GVL -I/opt/cuda/include -I/home/katsyoshi/.rbenv/versions/2.5.1/include -fPIC -O3 -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wno-tautological-compare -Wno-parentheses-equality -Wno-constant-logical-operand -Wno-self-assign -Wunused-variable -Wimplicit-int -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wmisleading-indentation -Wno-packed-bitfield-compat -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wduplicated-cond -Wno-maybe-uninitialized -o narray/types/bit.o -c narray/types/bit.c
+narray/gen/tmpl/lib.c:22:7: エラー: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘<strong>attribute</strong>’ before ‘/’ token
+ #define m_map(x) m_num_to_data(rb_yield(m_data_to_num(x)))</p>
+
+<pre><code>   ^
+</code></pre>
+
+<p>narray/gen/tmpl/lib.c:23:29: エラー: 終端する > 文字がありません</p>
+
+<pre><code>                         ^
+</code></pre>
+
+<p>narray/gen/tmpl/lib.c:23:29: 致命的エラー: static ID id_cast;: そのようなファイルやディレクトリはありません
+コンパイルを停止しました。
+make: *** [Makefile:453: narray/types/bit.o] エラー 1
+```</p>
+
+<p>公式リポジトリ覗いてもとくに問題なさそうなので <code>gem</code> からのインストールは一旦おいてソースからインストールします。</p>
+
+<h3>build</h3>
+
+<p>公式リポジトリからダウンロードしてコンパイルをはじめます。</p>
+
+<p><code>
+git clone https://github.com/sonotz/cumo.git
+cd cumo
+export CUDA_PATH="/usr/local/cuda"
+export CPATH="$CUDA_PATH/include:$CPATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+export PATH="$CUDA_PATH/bin:$PATH"
+export LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LIBRARY_PATH"
+bundle install
+rake compile
+rake install
+</code></p>
+
+<p>ってインストールできますが、その前に僕の環境が <code>gcc-8.2.0</code> だったりして、これを <code>gcc-6.4.0</code> に戻したりしてインストールしました。</p>
+
+<h2>run</h2>
+
+<p>これでインストール終わりましたので、 <code>irb</code> で確認してみようと思います。</p>
+
+<p><code>
+irb(main):001:0&gt; require 'cumo/narray'
+=&gt; true
+irb(main):002:0&gt; Cumo::Int32.new(3, 3).fill(0)
+=&gt; Cumo::Int32#shape=[3,3]
+[[0, 0, 0],
+ [0, 0, 0],
+ [0, 0, 0]]
+</code></p>
+
+<p>とこれで実行されたことを確認できます。</p>
+
+<p>と簡単に書きましたが、インストール後にGPUへのアクセス権が無いユーザーで実行したためエラーが出ます(エビデンス取得忘れ)。
+手元のPCではGPUにアクセス権がvideo groupにもあるので利用ユーザーをvideo groupへ追加して再起動することでようやく動作確認ができます。</p>
+
+<h2>おわり</h2>
+
+<p>簡単にGPGPUを利用したプログラムが書けるようになりましたのでおわりです。
+技術書典5はこれを使ったはなしを出展しますのできてみてくださいな。</p>
+
+<p>え37でまってます</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SATySFi使って本書いてみてる]]></title>
@@ -669,329 +760,6 @@ for l in lines {
 </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[NLP100ノック第2章]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2018/01/27/nlp-100-section-2/"/>
-    <updated>2018-01-27T19:46:23+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2018/01/27/nlp-100-section-2</id>
-    <content type="html"><![CDATA[<p>第2章を一通り終えたので書きます。</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec10">10. 行数のカウント</a></h3>
-
-<p>タイトルのままです。 <code>Rust</code> では <a href="https://doc.rust-lang.org/std/str/struct.Lines.html"><code>std::str::Lines</code></a> で <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.count"><code>count()</code></a> がありますので利用しておわりです。</p>
-
-<p>```rust
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let mut args = env::args();
-
-args.next();
-for path in args {
-    let f = File::open(path).unwrap();
-    let br = BufReader::new(f);
-
-    println!("{}", br.lines().count());
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec11">11. タブをスペースに置換</a></h3>
-
-<p>コチラも、<a href="https://doc.rust-lang.org/std/string/struct.String.html#method.replace"><code>std::string::String.replace()</code></a> 利用するだけです。</p>
-
-<p>```rust
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let mut args = env::args();
-args.next();
-for path in args {
-    let file = File::open(path).unwrap();
-    let reader = BufReader::new(file);
-
-    for line in reader.lines() {
-        println!("{}", line.unwrap().replace("\t", " "));
-    }
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec12">12. 1列目をcol1.txtに,2列目をcol2.txtに保存</a></h3>
-
-<p>こちらは単純にファイルに書き込むのと、分割ができれば問題ないです。</p>
-
-<p>```rust
-use std::env;
-use std::fs::File;
-use std::io::{BufReader, BufWriter, Write};
-use std::io::prelude::*;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let mut args = env::args();
-
-args.next();
-for path in args {
-    let f = path.clone().replace(".txt", "");
-    let s = path.clone().replace(".txt", "");
-    let file = File::open(path).unwrap();
-    let br = BufReader::new(file);
-    let mut first_column = BufWriter::new(File::create(format!("{}_col1.txt", f)).unwrap());
-    let mut second_column = BufWriter::new(File::create(format!("{}_col2.txt", s)).unwrap());
-
-    for line in br.lines() {
-        let words = line.unwrap().split("\t").map(|m| m.to_string()).collect::&lt;Vec&lt;String&gt;&gt;();
-        first_column.write(format!("{}\n", words[0]).as_bytes()).unwrap();
-        second_column.write(format!("{}\n", words[1]).as_bytes()).unwrap();
-    }
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec13">13. col1.txtとcol2.txtをマージ</a></h3>
-
-<p>こちらは以前利用した、<code>zip</code> があれば問題ないです。</p>
-
-<p>```rust
-use std::env;
-use std::fs::File;
-use std::io::{BufReader, BufWriter, Write};
-use std::io::prelude::*;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let mut args = env::args();
-if args.len() &lt; 2 { panic!("col1.txt col2.txt"); }
-
-args.next();
-
-let first = args.next().unwrap();
-let second = args.next().unwrap();
-
-let fr = BufReader::new(File::open(first).unwrap()).lines().map(|m| m.unwrap().to_string()).collect::&lt;Vec&lt;String&gt;&gt;();
-
-let sr = BufReader::new(File::open(second).unwrap()).lines().map(|m| m.unwrap().to_string()).collect::&lt;Vec&lt;String&gt;&gt;();
-let mut merge_file =
-    BufWriter::new(File::create("merge.txt".to_string()).unwrap());
-
-for (x, y) in fr.iter().zip(&amp;sr) {
-    merge_file.write(format!("{}\t{}\n", x, y).as_bytes()).unwrap();
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec14">14. 先頭からN行を出力</a></h3>
-
-<p><code>head</code> コマンドですので <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.take"><code>std::iter::Iterator.take()</code></a> を利用するだけです。</p>
-
-<p>```rust
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let args = env::args().skip(1).collect::&lt;Vec&lt;String&gt;&gt;();
-let file = File::open(&amp;args[0]).unwrap();
-
-let br = BufReader::new(file).lines().take((&amp;args[1]).to_string().parse::&lt;usize&gt;().unwrap());
-
-for line in br.map(|m| m.unwrap().to_string()).collect::&lt;Vec&lt;String&gt;&gt;() {
-    println!("{}", line);
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec15">15. 末尾のN行を出力</a></h3>
-
-<p><code>tail</code> コマンドです。こちらは <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.skip"><code>std::iter::Iterator.skip()</code></a> を利用してやるだけです。</p>
-
-<p>```rust
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let args = env::args().skip(1).collect::&lt;Vec&lt;String&gt;&gt;();
-let file = File::open(&amp;args[0]).unwrap();
-let takes = (&amp;args[1]).to_string().parse::&lt;usize&gt;().unwrap();
-let br = BufReader::new(&amp;file).lines();
-let skips = br.count() - takes;
-let file = File::open(&amp;args[0]).unwrap();
-let lines = BufReader::new(&amp;file).lines().skip(skips);
-
-for line in lines {
-    println!("{}", line.unwrap());
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec16">16. ファイルをN分割する</a></h3>
-
-<p>こちらの実装は素朴な実装とし、行数で分割しております。</p>
-
-<p>```rust
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::BufWriter;
-use std::io::prelude::*;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let args: Vec&lt;String&gt; = env::args().skip(1).collect();
-let path = &amp;args[0].to_string();
-let file = File::open(path).unwrap();
-let count: usize = BufReader::new(file).lines().count();
-let div: usize = (&amp;args[1]).to_string().parse().unwrap();
-let file = File::open(path).unwrap();
-let mut br = BufReader::new(file).lines();
-
-let t = (count as f64/ div as f64).ceil() as usize;
-
-for x in 1 .. div + 1 {
-    let l = br.by_ref();
-    let file = File::create(format!("{}.txt",x)).unwrap();
-    let mut bw = BufWriter::new(file);
-    for y in l.take(t).map(|m| m.unwrap().to_string()).collect::&lt;Vec&lt;String&gt;&gt;() {
-        let a = format!("{}\n", y);
-        bw.write(a.as_bytes()).unwrap();
-        println!("{}: {}", x, y);
-    }
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec17">17. 1列目の文字列の異なり</a></h3>
-
-<p>ファイル読込 + <code>HashSet</code> で実装</p>
-
-<p>```rust
-use std::collections::HashSet;
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;</p>
-
-<p>extern crate regex;
-use regex::Regex;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let args: Vec&lt;String&gt; = env::args().skip(1).collect();
-let path = &amp;args[0].to_string();
-let file = File::open(path).unwrap();
-let re = Regex::new(r"\W+").unwrap();
-let hs = BufReader::new(file).lines().map(|m|{
-    let l = m.unwrap().clone();
-    re.split(&amp;l).next().unwrap().to_string()
-}).collect::&lt;HashSet&lt;_&gt;&gt;();
-
-for s in hs {
-    println!("{}", s);
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec18">18. 各行を3コラム目の数値の降順にソート</a></h3>
-
-<p>こちら、実数の比較を行う必要があり、すこし <a href="https://gist.github.com/katsyoshi/c76c2f782b3edaeff1d328a84dd582a0">めんどう</a> でした。</p>
-
-<p>```rust
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let args: Vec&lt;String&gt; = env::args().skip(1).collect();
-let path = &amp;args[0].to_string();
-let file = File::open(path).unwrap();
-let mut val = BufReader::new(file).lines().map(|m| m.unwrap().split("\t").skip(2).next().unwrap().parse::&lt;f64&gt;().unwrap()).collect::&lt;Vec&lt;f64&gt;&gt;();
-
-val.sort_by(|a, b| a.partial_cmp(b).unwrap());
-for v in val { println!("{}", v); }
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec19">19. 各行の1コラム目の文字列の出現頻度を求め,出現頻度の高い順に並べる</a></h3>
-
-<p>18の問題を更にカウントできるように変更した。</p>
-
-<p>```rust
-use std::collections::HashMap;
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;</p>
-
-<p>enum Value {</p>
-
-<pre><code>USIZE(usize),
-NONE(()),
-</code></pre>
-
-<p>}</p>
-
-<p>fn main() {</p>
-
-<pre><code>let args = env::args().skip(1).collect::&lt;Vec&lt;String&gt;&gt;();
-let file = File::open(&amp;args[0]).unwrap();
-let mut words: HashMap&lt;String, usize&gt; = HashMap::new();
-for m in BufReader::new(&amp;file).lines() {
-    let w = m.unwrap().to_string().split("\t").next().unwrap().to_string();
-    let v = match words.get(&amp;w) {
-        None =&gt; 1,
-        Some(n) =&gt; n + 1,
-    };
-    words.insert(w, v);
-}
-
-let mut vars: Vec&lt;(&amp;String, &amp;usize)&gt; = words.iter().collect();
-vars.sort_by(|a, b| b.1.cmp(a.1));
-for (w, v) in vars {println!("{}: {}", w, v);}
-</code></pre>
-
-<p>}
-```</p>
-
-<h2>おわり</h2>
-
-<p>この章は慣れてきたのか比較的楽に解けています。</p>
 ]]></content>
   </entry>
   
