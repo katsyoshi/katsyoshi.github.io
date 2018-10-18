@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-09-11T00:43:16+09:00</updated>
+  <updated>2018-10-19T00:33:17+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[new keyboard]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/10/18/new-keyboard/"/>
+    <updated>2018-10-18T23:45:09+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/10/18/new-keyboard</id>
+    <content type="html"><![CDATA[<p>タイトルのとおり家のキーボードを新調しました。</p>
+
+<h2>Iris</h2>
+
+<p>機械学習でよく<a href="https://archive.ics.uci.edu/ml/datasets/iris">評価されるやつ</a>じゃなくてキーボードであるやつです。</p>
+
+<p><a href="https://keeb.io/">keeb.io</a> で売ってます。</p>
+
+<h3>購入</h3>
+
+<p>欲しい欲しいといってたらいつのまにか復活したのでケースとセットで購入。</p>
+
+<h3>組み立て</h3>
+
+<p>公式やASCIIにあるのでそれに従い組み立てハンダ付します。特に言うことはないです。</p>
+
+<p>ハンダ付ミスっても近所に電子工作の得意なお兄さんに工具を借りれたのですぐに解決です。</p>
+
+<h3>完成</h3>
+
+<p>はい。</p>
+
+<p style="text-align:center;"> <img src="images/photo/iris-keyboard.jpg" alt="" /></p>
+
+<h2>おわり</h2>
+
+<p>この記事は新しいキーボードに慣れるため書いています。</p>
+
+<p>今まで利用していた Kinesis のやつは仕事場に持っていってます。</p>
+
+<p><a href="https://github.com/katsyoshi/qmk_firmware">配列</a>を Kinesis で利用してた時と似せていますが、少し違うのでまだ打ちにくいです。</p>
+
+<p>あと、技術書典5来てくださいた皆さまありがとうございました。
+次回も出そうという気が湧いてきましたので次回もよろしくお願いします。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[くーも]]></title>
@@ -2755,99 +2797,6 @@ LTはどれもよくて <code>rib</code> も面白いし、 csvの高速化の�
 
 <p>とりあえずいつものメンバーで🍻にいってきた。浅草のカンピオンエールという店でのんでそのあと隣の店でお好み焼きをたべてた。お好み焼き屋のあとは河原まであるて吾妻橋からみえる
 やつをながめながらビールのんでた</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[use red-arrow.gem]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2017/05/31/use-red-arrow-dot-gem/"/>
-    <updated>2017-05-31T23:27:57+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2017/05/31/use-red-arrow-dot-gem</id>
-    <content type="html"><![CDATA[<p><a href="https://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/">こないだインストール</a> した <a href="https://arrow.apache.org/">Apache Arrow</a> がとりあえず <a href="https://github.com/red-data-tools/red-arrow">Ruby</a> でうごくようになったのでメモ</p>
-
-<h2>メモ</h2>
-
-<p>gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;arrow&quot;</span>
-</span><span class='line'><span class="sr">/home/</span><span class="n">katsu</span><span class="o">/.</span><span class="n">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">/</span><span class="n">loader</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">37</span><span class="ss">:in</span> <span class="sb">`require&#39;:GObjectIntrospection::RepositoryError::TypelibNotFound: Typelib file for namespace &#39;Arrow&#39; (any version) not found</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これは <code>GObjectIntrospection</code> の<a href="https://github.com/red-data-tools/red-arrow/blob/master/lib/arrow.rb#L25">ロードに失敗</a>しているようです。
-なので<a href="http://www.clear-code.com/blog/2013/12/16.html">ここ</a>や<a href="http://qiita.com/groonga/items/71b145b37d77bd160bf2">ここ</a>を参考に環境変数 <code>GI_TYPELIB_PATH</code> を設定すると読み込まれるようになり実行できます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> <span class="nb">export </span><span class="nv">GI_TYPELIB_PATH</span><span class="o">=</span>/path/to/girepository-1.0
-</span><span class='line'><span class="gp">$</span> irb -rarrow
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>とやるとエラーがなくなります。</p>
-
-<p>最後に<a href="https://github.com/red-data-tools/red-arrow/tree/master/example">サンプル</a>を実行して確認しました!</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">%</span> ruby write-file.rb
-</span><span class='line'><span class="gp">%</span> ruby <span class="nb">read</span>-file.rb
-</span><span class='line'><span class="go">========================================</span>
-</span><span class='line'><span class="go">record-batch[0]:</span>
-</span><span class='line'><span class="go">  uint8: [1, 2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint16: [1, 2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint32: [1, 2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint64: [1, 2, 4, 8]</span>
-</span><span class='line'><span class="go">  int8: [1, -2, 4, -8]</span>
-</span><span class='line'><span class="go">  int16: [1, -2, 4, -8]</span>
-</span><span class='line'><span class="go">  int32: [1, -2, 4, -8]</span>
-</span><span class='line'><span class="go">  int64: [1, -2, 4, -8]</span>
-</span><span class='line'><span class="go">  float: [1.100000023841858, -2.200000047683716, 4.400000095367432, -8.800000190734863]</span>
-</span><span class='line'><span class="go">  double: [1.1, -2.2, 4.4, -8.8]</span>
-</span><span class='line'><span class="go">========================================</span>
-</span><span class='line'><span class="go">record-batch[1]:</span>
-</span><span class='line'><span class="go">  uint8: [2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint16: [2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint32: [2, 4, 8]</span>
-</span><span class='line'><span class="go">  uint64: [2, 4, 8]</span>
-</span><span class='line'><span class="go">  int8: [-2, 4, -8]</span>
-</span><span class='line'><span class="go">  int16: [-2, 4, -8]</span>
-</span><span class='line'><span class="go">  int32: [-2, 4, -8]</span>
-</span><span class='line'><span class="go">  int64: [-2, 4, -8]</span>
-</span><span class='line'><span class="go">  float: [-2.200000047683716, 4.400000095367432, -8.800000190734863]</span>
-</span><span class='line'><span class="go">  double: [-2.2, 4.4, -8.8]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おわり</h2>
-
-<p>最初ろーどえらーでこまってた</p>
 ]]></content>
   </entry>
   

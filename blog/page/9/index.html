@@ -7,7 +7,9 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content=" とりあえずoctopressで書いていこうかと思います diary ">
+	<meta name="description" content="Linux使っててこのソフトが入ってないしsudoも使えないってときありませんか？
+そんなときに好きなソフト(tmux, emacs)をインストールする方法を書いときます。
+ここでは、tmuxとemacsについてインストール方法を書いときます。 方法 方法として以下のふたつがあると思う &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -76,6 +78,144 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/09/how-to-install-applications-non-super-user/">
+		
+			スーパーユーザ権限もたずに好きなソフトをインストール</a>
+	</h2>
+	<div class="entry-content">
+		<p>Linux使っててこのソフトが入ってないしsudoも使えないってときありませんか？
+そんなときに好きなソフト(tmux, emacs)をインストールする方法を書いときます。
+ここでは、tmuxとemacsについてインストール方法を書いときます。</p>
+
+<h2>方法</h2>
+
+<p>方法として以下のふたつがあると思う</p>
+
+<ol>
+<li>頑張っていれる</li>
+<li>パッケージマネージャ</li>
+</ol>
+
+
+<h2>頑張って入れる</h2>
+
+<p>この場合はちょっと管理がめんどうかもしれないが書いときます。</p>
+
+<p>前提条件としてgccとwgetがインストールされていることでX11関係のライブラリがインストールされていないこととします。</p>
+
+<h3>emacs</h3>
+
+<p>以下のコマンドでインストールできます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> $ wget http://ftp.gnu.org/pub/gnu/emacs/emacs-24.3.tar.xz
+</span><span class='line'> $ tar xvf emacs-24.3.tar.xz
+</span><span class='line'> $ cd emacs-24.3
+</span><span class='line'> $ ./configure --prefix=${HOME}/.local/ --without-x --without-dbus --without-gnutls --without-makeinfo
+</span><span class='line'> $ make -j4 bootstrap
+</span><span class='line'> $ make install
+</span><span class='line'> $ export PATH=${HOME}/.local/bin:${PATH}
+</span><span class='line'> $ emacs</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>tmux</h3>
+
+<p>以下のコマンドで必要ライブラリのncursesをインストールします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> $ wget http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz
+</span><span class='line'> $ tar xvf ncurses-5.9.tar.gz
+</span><span class='line'> $ cd ncurses-5.9
+</span><span class='line'> $ ./configure --prefix=${HOME}/.local
+</span><span class='line'> $ make -j4
+</span><span class='line'> $ make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次にlibeventをインストールします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> $ wget https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
+</span><span class='line'> $ tar xvf libevent-2.0.21-stable.tar.gz
+</span><span class='line'> $ cd libevent-2.0.21-stable
+</span><span class='line'> $ ./configure --prefix=${HOME}/.local
+</span><span class='line'> $ make -j4
+</span><span class='line'> $ make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後にtmuxをインストールします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> $ wget http://downloads.sourceforge.net/project/tmux/tmux/tmux-1.9/tmux-1.9a.tar.gz
+</span><span class='line'> $ tar xvf tmux-1.9a.tar.gz
+</span><span class='line'> $ cd tmux-1.9a
+</span><span class='line'> $ CFLAGS="-I${HOME}/.local/include -I${HOME}/.local/include/ncurses" LDFLAGS=-L${HOME}/.local/lib ./configure --prefix=${HOME}/.local
+</span><span class='line'> $ make -j4
+</span><span class='line'> $ make install
+</span><span class='line'> $ LD_LIBRARY_PATH=${HOME}/.local/lib tmux</span></code></pre></td></tr></table></div></figure>
+
+
+<p>すべてインストール終ったら設定をします</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> $ echo 'export PATH=${HOME}/.local/bin:${PATH}' &gt;&gt; ${HOME}/.bashrc
+</span><span class='line'> $ echo 'export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}' &gt;&gt; ${HOME}/.bashrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>パッケージマネージャ</h2>
+
+<p>Gentoo/Prefix使え</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">

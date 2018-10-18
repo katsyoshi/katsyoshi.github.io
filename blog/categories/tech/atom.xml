@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-09-11T00:43:16+09:00</updated>
+  <updated>2018-10-19T00:33:17+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[new keyboard]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/10/18/new-keyboard/"/>
+    <updated>2018-10-18T23:45:09+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/10/18/new-keyboard</id>
+    <content type="html"><![CDATA[<p>タイトルのとおり家のキーボードを新調しました。</p>
+
+<h2>Iris</h2>
+
+<p>機械学習でよく<a href="https://archive.ics.uci.edu/ml/datasets/iris">評価されるやつ</a>じゃなくてキーボードであるやつです。</p>
+
+<p><a href="https://keeb.io/">keeb.io</a> で売ってます。</p>
+
+<h3>購入</h3>
+
+<p>欲しい欲しいといってたらいつのまにか復活したのでケースとセットで購入。</p>
+
+<h3>組み立て</h3>
+
+<p>公式やASCIIにあるのでそれに従い組み立てハンダ付します。特に言うことはないです。</p>
+
+<p>ハンダ付ミスっても近所に電子工作の得意なお兄さんに工具を借りれたのですぐに解決です。</p>
+
+<h3>完成</h3>
+
+<p>はい。</p>
+
+<p style="text-align:center;"> <img src="images/photo/iris-keyboard.jpg" alt="" /></p>
+
+<h2>おわり</h2>
+
+<p>この記事は新しいキーボードに慣れるため書いています。</p>
+
+<p>今まで利用していた Kinesis のやつは仕事場に持っていってます。</p>
+
+<p><a href="https://github.com/katsyoshi/qmk_firmware">配列</a>を Kinesis で利用してた時と似せていますが、少し違うのでまだ打ちにくいです。</p>
+
+<p>あと、技術書典5来てくださいた皆さまありがとうございました。
+次回も出そうという気が湧いてきましたので次回もよろしくお願いします。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[くーも]]></title>
@@ -258,77 +300,6 @@ docker run -t katsyoshi/itamae-plugin-resource-pip bundle exec rake
 <h3>おわり</h3>
 
 <p>これやろうと思って調べてたらみつからずに <code>Dockerfile</code> 書き終えて、<a href="https://travis-ci.org">travis</a> を追加しようとしたときに、<a href="https://twitter.com/sue445">@sue445</a> さんが<a href="https://sue445.hatenablog.com/entry/2018/05/01/115522">やってた</a>のをみつけてしまった。。。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RubyKaigi2018]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2018/06/03/rubykaigi2018/"/>
-    <updated>2018-06-03T23:44:28+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2018/06/03/rubykaigi2018</id>
-    <content type="html"><![CDATA[<p>RubyKaigi2018 に行ってきた</p>
-
-<h2>1日目</h2>
-
-<p>1日目は、 ずっと会場Aにいました。</p>
-
-<ol>
-<li>Matz: <a href="http://rubykaigi.org/2018/presentations/yukihiro_matz.html#may31">Keynote</a></li>
-<li>Aaron Patterson: <a href="http://rubykaigi.org/2018/presentations/tenderlove.html#may31">Analyzing and Reducing Ruby Memory Usage</a></li>
-<li>Kenta Murata, and Yusaku Hatanaka: <a href="http://rubykaigi.org/2018/presentations/mrkn.html#may31">Deep Learning Programming on Ruby</a></li>
-<li>Bozhidar Batsov: <a href="http://rubykaigi.org/2018/presentations/bbatsov.html#may31">All About RuboCop</a></li>
-<li>Naotoshi Seo: <a href="http://rubykaigi.org/2018/presentations/sonots.html#may31">Fast Numerical Computing and Deep Learning in Ruby with Cumo</a></li>
-<li>Emma Haruka Iwao: <a href="http://rubykaigi.org/2018/presentations/Yuryu.html#may31">Exploring Internal Ruby Through C Extensions</a></li>
-<li><a href="http://rubykaigi.org/2018/presentations/lt/">Lightning Talks</a></li>
-</ol>
-
-
-<p>この日、今年の RubyKaigi 2018 で最も楽しみにしてたのが <code>rubocop</code> の作者のトークで、彼のプロダクト(<code>rubocop</code>, <code>flycheck-ruby</code>)を利用してる身としては非常に楽しみでした。
-DLと数値計算のやつは進捗が聞けてよかったっていうのとDeep Learningに関していうと難しいのかなあという感想が…
-Haruka さんのやつは、やっぱり今の実装十分に速いってのがわかって、これ以上速くするには非常に大変だなってのがよかったですね。
-LTはどれもよくて <code>rib</code> も面白いし、 csvの高速化の話が特に好きでした。</p>
-
-<h2>2日目</h2>
-
-<p>2日目もほとんどA会場できいていたのと、GitHubの電源スペースにいました。</p>
-
-<ol>
-<li>Kouhei Sutou: <a href="http://rubykaigi.org/2018/presentations/ktou.html#jun01">My way with Ruby</a></li>
-<li>Kouichi Sasada: <a href="http://rubykaigi.org/2018/presentations/ko1.html#jun01">Guild Prototype</a></li>
-<li>Yuichiro Kaneko: <a href="http://rubykaigi.org/2018/presentations/spikeolaf.html#jun01">RNode with code positions</a></li>
-<li>Yusuke Endo: <a href="http://rubykaigi.org/2018/presentations/mametter.html#jun01">Type Profiler: An analysis to guess type signatures</a></li>
-<li><a href="http://rubykaigi.org/2018/presentations/rubylangorg.html#jun01">Ruby Commiters vs. the World</a></li>
-</ol>
-
-
-<p>この日のトークは特に楽しみにしていたのはなかったのですが、ここ最近毎年聞いていた <a href="http://rubykaigi.org/2018/presentations/v0dro.html#jun01">@v0dro</a> の発表を聞いていなかった。
-金子さんの発表がわりとたのしく聞けて、「あーやっぱり型のはなしは興味ないな」って感じで遠藤さんの発表聞いてました。
-この日の懇親会で飲みすぎた。</p>
-
-<h2>3日目</h2>
-
-<p>3日目はパフォーマンス改善を中心として聞いてました。</p>
-
-<ol>
-<li>Benoit Daloze: <a href="http://rubykaigi.org/2018/presentations/eregontp.html#jun02">Parallel and Thread-Safe Ruby at High-Speed with TruffleRuby</a></li>
-<li>Takashi Kokubun: <a href="http://rubykaigi.org/2018/presentations/k0kubun.html#jun02">The Method JIT Compiler for Ruby 2.6</a></li>
-<li>Takeshi Watanabe: <a href="http://rubykaigi.org/2018/presentations/take-cheeze.html#jun02">LuaJIT as a Ruby backend.</a></li>
-<li>Prasun Anand: <a href="http://rubykaigi.org/2018/presentations/prasun_anand.html#jun02">High Performance GPU computing with Ruby</a></li>
-<li>Vladimir Makarov: <a href="http://rubykaigi.org/2018/presentations/vnmakarov.html#jun02">Three Ruby performance projects</a></li>
-<li><a href="http://rubykaigi.org/2018/presentations/tric.html#jun02">TRICK 2018 (FINAL)</a></li>
-</ol>
-
-
-<p>TuffleRubyとはやくてとてもよさそう。
-国分さん、Vladimirの話はいつもどおりで安心した。</p>
-
-<p>TRICK、どうしてこんなプログラムが思いつくのかさっぱりわからんがとにかく凄い以上の感想がうかんでこない。</p>
-
-<h2>おわり</h2>
-
-<p>RubyKaigi 2018に行ってきてたいへんたのしいイベントでした。</p>
-
-<p>(型のはなしはやはり興味がないというかまだまだ理解が浅いのでTaPL読むべきだな)</p>
 ]]></content>
   </entry>
   

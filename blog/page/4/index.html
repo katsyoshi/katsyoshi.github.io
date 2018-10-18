@@ -7,9 +7,7 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="ロックバンド Advent Calendar 1日目です。
-Oasisについて適当に書きます。 たいとるについて はいそうですねみんな大好き Oasis の Definitely Maybe の最初にはいってる曲ですね。
-Firstはこの曲よりも Live Forever のほうがすきですが。 &hellip;">
+	<meta name="description" content=" d250g2 Advent Calendar 5日目の記事です d250g2 について d250g2 とは？ しらん KernelVM Camp #4 に行ってきた 成果物です advent_calendar, d250g2, diary ">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +76,54 @@ Firstはこの曲よりも Live Forever のほうがすきですが。 &hellip;"
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/12/05/d250g2/">
+		
+			D250g2 Advent Calendar 2016 5日目</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
+
+<h2>d250g2 について</h2>
+
+<p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
+
+<h2>d250g2 とは？</h2>
+
+<p>しらん</p>
+
+<h2>KernelVM Camp #4 に行ってきた</h2>
+
+<p>成果物です</p>
+
+<p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/d250g2/'>d250g2</a>, <a class='category' href='/blog/categories/diary/'>diary</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -893,93 +939,6 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
 
 
 	<a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/yapc/'>yapc</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/08/02/hello-itamae-plugins/">
-		
-			こんにちは、いたまえさん</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="https://github.com/sstephenson/rbenv">rbenv</a> を <a href="https://github.com/itamae-kitchen/itamae">itamae</a> の <a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv">プラグイン</a> を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、<a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv/pull/9">httpsを指定できる</a>ようしてもらいました。</p>
-
-<h2>plenv と pyenv</h2>
-
-<p>また、rbenv のプラグインを参考に <a href="https://github.com/katsyoshi/itamae-plugin-recipe-plenv">plenv</a> と <a href="https://github.com/katsyoshi/itamae-plugin-recipe-pyenv">pyenv</a> を作ってみました。</p>
-
-<p>これらふたつのプラグインはまだgemになっていないので、<code>Gemfile</code> に以下のように追加し、</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-plenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-plenv&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;itamae-plugin-recipe-pyenv&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;katsyoshi/itamae-plugin-recipe-pyenv&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>recipeとしては以下のようにしてください。</p>
-
-<figure class='code'><figcaption><span>recipe.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;pyenv::system&#39;</span>
-</span><span class='line'><span class="n">include_recipe</span> <span class="s1">&#39;plenv::system&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>設定例としては、rbenvのプラグインと同じように設定します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;plenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;5.22.0&quot;</span><span class="p">,</span> <span class="s2">&quot;5.20.2&quot;</span><span class="p">],</span>
-</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;5.22.0&quot;</span>
-</span><span class='line'>  <span class="p">},</span>
-</span><span class='line'>  <span class="nt">&quot;pyenv&quot;</span> <span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;versions&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3.4.3&quot;</span><span class="p">,</span> <span class="s2">&quot;3.5.0b2&quot;</span><span class="p">],</span>
-</span><span class='line'>    <span class="nt">&quot;global&quot;</span>   <span class="p">:</span> <span class="s2">&quot;3.4.3&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おわり</h2>
-
-<p>おわり</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/itamae/'>itamae</a>, <a class='category' href='/blog/categories/plenv/'>plenv</a>, <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/pyenv/'>pyenv</a>, <a class='category' href='/blog/categories/rbenv/'>rbenv</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>

@@ -7,18 +7,10 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="最近すとうさんが一押ししているapache arrowをインストールしてみた 環境 1
+	<meta name="description" content="こないだインストール した Apache Arrow がとりあえず Ruby でうごくようになったのでメモ メモ gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。 1
 2
-3
-4
-5
-6
-7
-8
-9
-10
-$ uname -a
-Linux rin 4.9.10-gentoo #6 SMP Tue Mar 28 01:29:26 JST 2017 x86_64 Intel(R &hellip;">
+require &quot;arrow&quot;
+/ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -87,6 +79,124 @@ Linux rin 4.9.10-gentoo #6 SMP Tue Mar 28 01:29:26 JST 2017 x86_64 Intel(R &hell
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/05/31/use-red-arrow-dot-gem/">
+		
+			Use red-arrow.gem</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="https://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/">こないだインストール</a> した <a href="https://arrow.apache.org/">Apache Arrow</a> がとりあえず <a href="https://github.com/red-data-tools/red-arrow">Ruby</a> でうごくようになったのでメモ</p>
+
+<h2>メモ</h2>
+
+<p>gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;arrow&quot;</span>
+</span><span class='line'><span class="sr">/home/</span><span class="n">katsu</span><span class="o">/.</span><span class="n">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">/</span><span class="n">loader</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">37</span><span class="ss">:in</span> <span class="sb">`require&#39;:GObjectIntrospection::RepositoryError::TypelibNotFound: Typelib file for namespace &#39;Arrow&#39; (any version) not found</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これは <code>GObjectIntrospection</code> の<a href="https://github.com/red-data-tools/red-arrow/blob/master/lib/arrow.rb#L25">ロードに失敗</a>しているようです。
+なので<a href="http://www.clear-code.com/blog/2013/12/16.html">ここ</a>や<a href="http://qiita.com/groonga/items/71b145b37d77bd160bf2">ここ</a>を参考に環境変数 <code>GI_TYPELIB_PATH</code> を設定すると読み込まれるようになり実行できます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> <span class="nb">export </span><span class="nv">GI_TYPELIB_PATH</span><span class="o">=</span>/path/to/girepository-1.0
+</span><span class='line'><span class="gp">$</span> irb -rarrow
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とやるとエラーがなくなります。</p>
+
+<p>最後に<a href="https://github.com/red-data-tools/red-arrow/tree/master/example">サンプル</a>を実行して確認しました!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">%</span> ruby write-file.rb
+</span><span class='line'><span class="gp">%</span> ruby <span class="nb">read</span>-file.rb
+</span><span class='line'><span class="go">========================================</span>
+</span><span class='line'><span class="go">record-batch[0]:</span>
+</span><span class='line'><span class="go">  uint8: [1, 2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint16: [1, 2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint32: [1, 2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint64: [1, 2, 4, 8]</span>
+</span><span class='line'><span class="go">  int8: [1, -2, 4, -8]</span>
+</span><span class='line'><span class="go">  int16: [1, -2, 4, -8]</span>
+</span><span class='line'><span class="go">  int32: [1, -2, 4, -8]</span>
+</span><span class='line'><span class="go">  int64: [1, -2, 4, -8]</span>
+</span><span class='line'><span class="go">  float: [1.100000023841858, -2.200000047683716, 4.400000095367432, -8.800000190734863]</span>
+</span><span class='line'><span class="go">  double: [1.1, -2.2, 4.4, -8.8]</span>
+</span><span class='line'><span class="go">========================================</span>
+</span><span class='line'><span class="go">record-batch[1]:</span>
+</span><span class='line'><span class="go">  uint8: [2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint16: [2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint32: [2, 4, 8]</span>
+</span><span class='line'><span class="go">  uint64: [2, 4, 8]</span>
+</span><span class='line'><span class="go">  int8: [-2, 4, -8]</span>
+</span><span class='line'><span class="go">  int16: [-2, 4, -8]</span>
+</span><span class='line'><span class="go">  int32: [-2, 4, -8]</span>
+</span><span class='line'><span class="go">  int64: [-2, 4, -8]</span>
+</span><span class='line'><span class="go">  float: [-2.200000047683716, 4.400000095367432, -8.800000190734863]</span>
+</span><span class='line'><span class="go">  double: [-2.2, 4.4, -8.8]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>おわり</h2>
+
+<p>最初ろーどえらーでこまってた</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/arrow/'>arrow</a>, <a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -722,54 +832,6 @@ itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使
 
 
 	<a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/12/05/d250g2/">
-		
-			D250g2 Advent Calendar 2016 5日目</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
-
-<h2>d250g2 について</h2>
-
-<p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
-
-<h2>d250g2 とは？</h2>
-
-<p>しらん</p>
-
-<h2>KernelVM Camp #4 に行ってきた</h2>
-
-<p>成果物です</p>
-
-<p style="text-align:center;"> <img src="https://d250g2.com/d250g2.jpg" alt="" /></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/d250g2/'>d250g2</a>, <a class='category' href='/blog/categories/diary/'>diary</a>
 
 
 </div>

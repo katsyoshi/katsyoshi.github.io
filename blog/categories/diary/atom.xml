@@ -4,7 +4,7 @@
   <title><![CDATA[Category: diary | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/diary/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-09-11T00:43:16+09:00</updated>
+  <updated>2018-10-19T00:33:17+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[new keyboard]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/10/18/new-keyboard/"/>
+    <updated>2018-10-18T23:45:09+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/10/18/new-keyboard</id>
+    <content type="html"><![CDATA[<p>タイトルのとおり家のキーボードを新調しました。</p>
+
+<h2>Iris</h2>
+
+<p>機械学習でよく<a href="https://archive.ics.uci.edu/ml/datasets/iris">評価されるやつ</a>じゃなくてキーボードであるやつです。</p>
+
+<p><a href="https://keeb.io/">keeb.io</a> で売ってます。</p>
+
+<h3>購入</h3>
+
+<p>欲しい欲しいといってたらいつのまにか復活したのでケースとセットで購入。</p>
+
+<h3>組み立て</h3>
+
+<p>公式やASCIIにあるのでそれに従い組み立てハンダ付します。特に言うことはないです。</p>
+
+<p>ハンダ付ミスっても近所に電子工作の得意なお兄さんに工具を借りれたのですぐに解決です。</p>
+
+<h3>完成</h3>
+
+<p>はい。</p>
+
+<p style="text-align:center;"> <img src="images/photo/iris-keyboard.jpg" alt="" /></p>
+
+<h2>おわり</h2>
+
+<p>この記事は新しいキーボードに慣れるため書いています。</p>
+
+<p>今まで利用していた Kinesis のやつは仕事場に持っていってます。</p>
+
+<p><a href="https://github.com/katsyoshi/qmk_firmware">配列</a>を Kinesis で利用してた時と似せていますが、少し違うのでまだ打ちにくいです。</p>
+
+<p>あと、技術書典5来てくださいた皆さまありがとうございました。
+次回も出そうという気が湧いてきましたので次回もよろしくお願いします。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[くーも]]></title>
@@ -408,358 +450,6 @@ results
 <h2>おわり</h2>
 
 <p>おわり</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[NLP 100 Knock section 3]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2018/02/09/nlp-100-section-3/"/>
-    <updated>2018-02-09T23:53:24+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2018/02/09/nlp-100-section-3</id>
-    <content type="html"><![CDATA[<p>正規表現苦手なようでだいぶ時間がかかりました。</p>
-
-<h2><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#ch3">第3章 正規表現</a></h2>
-
-<p>正規表現ときいて楽勝やろと思ってた時期もあったんですが・・・</p>
-
-<h3>準備</h3>
-
-<p>この章では、gzファイルに入ったJSONをパースする必要があるのでさきにgzファイルから読み込むようにします。</p>
-
-<p>```rust
-fn read_gzip(path: String) &ndash;> Vec<String> {</p>
-
-<pre><code>let mut file = File::open(path).unwrap();
-let mut string = String::new();
-Decoder::new(&amp;mut file).unwrap().read_to_string(&amp;mut string).unwrap();
-string.split("\n").filter(|m| m.ne(&amp;"")).map(|m| m.to_string()).collect::&lt;Vec&lt;String&gt;&gt;()
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec20">20. JSONデータの読み込み</a></h3>
-
-<p>こいつは、<a href="https://docs.serde.rs/serde/"><code>serde</code></a> の <a href="https://docs.serde.rs/serde_json/index.html"><code>serde_json</code></a> を利用して <a href="https://docs.serde.rs/serde_json/fn.from_str.html"><code>from_str</code></a> で読み込むだけです。</p>
-
-<p>```rust
-let v: Value = match serde_json::from_str(&amp;l.as_str()) {</p>
-
-<pre><code> Ok(v) =&gt; v,
- Err(_) =&gt; { continue; },
-</code></pre>
-
-<p>};
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec21">21. カテゴリ名を含む行を抽出</a> &amp;&amp; <a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec22">22. カテゴリ名の抽出</a></h3>
-
-<p><a href="https://ja.wikipedia.org/wiki/Help:%E6%97%A9%E8%A6%8B%E8%A1%A8">早見表</a> を参考に <a href="https://ja.wikipedia.org/wiki/Help:%E6%97%A9%E8%A6%8B%E8%A1%A8">Regex::captures</a> で抽出することで解決。</p>
-
-<p>```rust
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;</p>
-
-<p>extern crate regex;
-extern crate serde_json;</p>
-
-<p>use serde_json::Value;
-use regex::Regex;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let args: Vec&lt;String&gt; = env::args().skip(1).collect();
-let path = &amp;args[0].to_string();
-let keywords = &amp;args[1..];
-let file = File::open(path).unwrap();
-let lines = BufReader::new(file).lines();
-let re = Regex::new(r"\[\[Category:.+\]\]").unwrap();
-let cap = Regex::new(r"\[\[Category:(?P&lt;name&gt;.+?)(?:\|.*)*\]\]").unwrap();
-
-for l in lines {
-    let v: Value = serde_json::from_str(&amp;l.unwrap()).unwrap();
-
-    let title = &amp;v["title"].as_str().unwrap().to_string();
-    if keywords.contains(title) {
-        for content in v["text"].as_str().unwrap().to_string().split("\n").filter(|m| re.is_match(m)) {
-            for c in cap.captures_iter(content) {
-                println!("{}", &amp;c["name"]);
-            }
-        }
-    }
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec23">23. セクション構造</a></h3>
-
-<p>こちらは前節の問題と同様に解けばよいですが、<code>=の数 - 1</code> という罠があります。
-```rust
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;</p>
-
-<p>extern crate regex;
-extern crate serde_json;</p>
-
-<p>use serde_json::Value;
-use regex::Regex;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let args: Vec&lt;String&gt; = env::args().skip(1).collect();
-let path = &amp;args[0].to_string();
-let keywords = &amp;args[1..];
-let file = File::open(path).unwrap();
-let lines = BufReader::new(file).lines();
-let re = Regex::new(r"(?P&lt;level&gt;==+)(?P&lt;headline&gt;.+?)(?:=+)").unwrap();
-
-for l in lines {
-    let v: Value = serde_json::from_str(&amp;l.unwrap()).unwrap();
-
-    let title = &amp;v["title"].as_str().unwrap().to_string();
-    if keywords.contains(title) {
-        for content in v["text"].as_str().unwrap().to_string().split("\n").filter(|m| re.is_match(m)) {
-            for caps in re.captures_iter(content) {
-                println!("level: {}, headline: {}", &amp;caps["level"].len() - 1, &amp;caps["headline"]);
-            }
-        }
-    }
-}
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec24">24. ファイル参照の抽出</a></h3>
-
-<p>このあたりは問題ないとおもいます。</p>
-
-<p>```rust
-use std::env;
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;</p>
-
-<p>extern crate regex;
-extern crate serde_json;</p>
-
-<p>use serde_json::Value;
-use regex::Regex;</p>
-
-<p>fn main() {</p>
-
-<pre><code>let args: Vec&lt;String&gt; = env::args().skip(1).collect();
-let path = &amp;args[0].to_string();
-let keywords = &amp;args[1..];
-let file = File::open(path).unwrap();
-let lines = BufReader::new(file).lines();
-let re = Regex::new(r"\[\[(File|ファイル):(?P&lt;filename&gt;.+?)(?:\|.*)*(?:\|.*)*\]\]").unwrap();
-
-for l in lines {
-    let v: Value = serde_json::from_str(&amp;l.unwrap()).unwrap();
-
-    let title = &amp;v["title"].as_str().unwrap().to_string();
-    if keywords.contains(title) {
-        for content in v["text"].as_str().unwrap().to_string().split("\n").filter(|m| re.is_match(m)) {
-            for caps in re.captures_iter(content) {
-                println!("filename: {}", &amp;caps["filename"]);
-            }
-        }
-    }
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec25">25. テンプレートの抽出</a></h3>
-
-<p>こいつは大変でしたので参考サイト<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> を参考に以下の正規表現でとりあえず抽出しています。</p>
-
-<p><code>rust
-let re = Regex::new(r"(?ms)(?:^\{\{基礎情報.*?$)(?P&lt;dict&gt;.+?)(?:^\}\}$)").unwrap();
-</code></p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec26">26. 強調マークアップの除去</a></h3>
-
-<p>こちらも同様に参考サイト<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>を参考に以下の正規表現で</p>
-
-<p><code>rust
-let strong = Regex::new(r"'{2,5}").unwrap();
-</code></p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec27">27. 内部リンクの除去</a></h3>
-
-<p>こちらも同様に参考サイト<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>を参考に以下の正規表現で
-<code>rust
-let link = Regex::new(r"(?:\[{1,2})(?P&lt;link&gt;.+?)(?:\|.+)?(?:\]{1,2})").unwrap();
-</code></p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec28">28. MediaWikiマークアップの除去</a></h3>
-
-<p>どうよう<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup> (ry</p>
-
-<p><code>
-let link = Regex::new(r"(?:\[{1,2})(?P&lt;link&gt;.+?)(?:\|.+)?(?:\]{1,2})").unwrap();
-let lang = Regex::new(r"(?:\{\{lang\|.+?\|)(?P&lt;lang&gt;.+?)(?:\}\})").unwrap();
-let markup = Regex::new(r"&lt;/*.+?&gt;").unwrap();
-</code></p>
-
-<h3><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec29">29. 国旗画像のURLを取得する</a></h3>
-
-<p>こちらもさんこおおう<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup>にしてますが、主にURL部分だけです。
-こちらは <a href="https://hyper.rs/">Hyper</a> を利用することで解決しています。</p>
-
-<p>```rust
-extern crate futures;
-extern crate hyper;
-extern crate hyper_tls;
-extern crate libflate;
-extern crate regex;
-extern crate serde_json;
-extern crate tokio_core;</p>
-
-<p>use futures::{Future, Stream};
-use hyper::Client;
-use hyper_tls::HttpsConnector;
-use libflate::gzip::Decoder;
-use regex::Regex;
-use serde_json::Value;
-use std::collections::HashMap;
-use std::env;
-use std::fs::File;
-use std::io::Read;
-use tokio_core::reactor::Core;</p>
-
-<p>fn get_image(query: String) &ndash;> String {</p>
-
-<pre><code>let re = Regex::new(r" ").unwrap();
-let uri = format!("https://en.wikipedia.org/w/api.php?action=query&amp;titles=File:{}&amp;format=json&amp;prop=imageinfo&amp;iiprop=url", re.replace_all(&amp;query, "%20"));
-let uri = uri.parse().unwrap();
-let mut core = Core::new().unwrap();
-let handle = core.handle();
-let client = Client::configure()
-    .connector(HttpsConnector::new(4, &amp;handle).unwrap())
-    .build(&amp;handle);
-let work = client.get(uri).and_then(|res| {
-    res.body().concat2().and_then(move |body| {
-        let v: Value = serde_json::from_slice(&amp;body).unwrap();
-        let page_ids = v["query"]["pages"].as_object().unwrap().keys().map(|m| m.to_string()).collect::&lt;Vec&lt;String&gt;&gt;();
-        let imageinfo = &amp;v["query"]["pages"][&amp;page_ids[0]]["imageinfo"];
-        let r = format!("{}", imageinfo[0]["url"].as_str().unwrap());
-        Ok(r)
-    })
-});
-core.run(work).unwrap()
-</code></pre>
-
-<p>}</p>
-
-<p>fn read_gzip(path: String) &ndash;> Vec<String> {</p>
-
-<pre><code>let mut file = File::open(path).unwrap();
-let mut string = String::new();
-Decoder::new(&amp;mut file).unwrap().read_to_string(&amp;mut string).unwrap();
-string.split("\n").filter(|m| m.ne(&amp;"")).map(|m| m.to_string()).collect::&lt;Vec&lt;String&gt;&gt;()
-</code></pre>
-
-<p>}</p>
-
-<p>fn main() {</p>
-
-<pre><code>let args: Vec&lt;String&gt; = env::args().skip(1).collect();
-let path = &amp;args[0].to_string();
-let keywords = &amp;args[1..];
-let lines = read_gzip(path.to_string());
-let re = Regex::new(r"(?ms)(?:^\{\{基礎情報.*?$)(?P&lt;dict&gt;.+?)(?:^\}\}$)").unwrap();
-let bar_hat = Regex::new(r"(?ms)(?:^\|)").unwrap();
-let dict = Regex::new(r"(?P&lt;key&gt;.+?)\s*=\s*(?P&lt;val&gt;.+)").unwrap();
-let media = Regex::new(r"\[\[(File|ファイル):(?P&lt;filename&gt;.+?)(?:\|.*)*(?:\|.*)*\]\]").unwrap();
-let strong = Regex::new(r"'{2,5}").unwrap();
-let link = Regex::new(r"(?:\[{1,2})(?P&lt;link&gt;.+?)(?:\|.+)?(?:\]{1,2})").unwrap();
-let lang = Regex::new(r"(?:\{\{lang\|.+?\|)(?P&lt;lang&gt;.+?)(?:\}\})").unwrap();
-let markup = Regex::new(r"&lt;/*.+?&gt;").unwrap();
-
-for l in lines {
-    let v: Value = match serde_json::from_str(&amp;l.as_str()) {
-        Ok(v) =&gt; v,
-        Err(_) =&gt; { continue; },
-    };
-    let text: String = match v["text"].as_str() {
-        Some(x) =&gt; x.to_string(),
-        None =&gt; { continue; },
-    };
-    let title: String = match v["title"].as_str() {
-        Some(x) =&gt; x.to_string(),
-        None =&gt; { continue; },
-    };
-
-    if keywords.contains(&amp;title) {
-        let mut results: HashMap&lt;String, String&gt; = HashMap::new();
-        let re: String = match re.captures(&amp;text) {
-            Some(caps) =&gt; caps["dict"].to_string(),
-            None =&gt; {
-                println!("cannot capture dict!!");
-                continue;
-            },
-        };
-        for line in bar_hat.split(&amp;re).filter(|f| f.ne(&amp;"")).map(|m| m.to_string()) {
-            let line = line.replace("\n", "");
-            let dict = match dict.captures(&amp;line) {
-                Some(x) =&gt; x,
-                None =&gt; {continue;},
-            };
-
-            let val = dict["val"].to_string();
-            let key = dict["key"].to_string();
-            let file: String = media.replace_all(&amp;val, "$filename").trim().to_string();
-            let strong: String = strong.replace_all(&amp;file, "").trim().to_string();
-            let link: String = link.replace_all(&amp;strong, "$link").trim().to_string();
-            let markup: String = markup.replace_all(&amp;link, "").trim().to_string();
-            let val: String = match key.as_ref() {
-                "国旗画像" =&gt; get_image(markup.to_string()),
-                _ =&gt; lang.replace_all(&amp;markup, "$lang").trim().to_string(),
-            };
-            results.insert(key, val);
-        }
-        for (k, v) in results {
-            println!("{}: {}", k, v);
-        }
-    }
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<h2>おわり</h2>
-
-<p>とりあえず3章まで終わらせましたので形態素解析へと進みたいとおもいます(思っているだけ)</p>
-
-<h2>参考資料</h2>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>素人の言語処理100本ノック:25, segavvy, <a href="https://qiita.com/segavvy/items/e402ad0a5b0f52453d7f">https://qiita.com/segavvy/items/e402ad0a5b0f52453d7f</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>素人の言語処理100本ノック:26, segavvy, <a href="https://qiita.com/segavvy/items/f6d0f3d6eee5acc33c58">https://qiita.com/segavvy/items/f6d0f3d6eee5acc33c58</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>素人の言語処理100本ノック:27, segavvy, <a href="https://qiita.com/segavvy/items/9a8137f045852bc299d6">https://qiita.com/segavvy/items/9a8137f045852bc299d6</a><a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-<li id="fn:4">
-<p>素人の言語処理100本ノック:28, segavvy, <a href="https://qiita.com/segavvy/items/8c4567ec1124320d3354">https://qiita.com/segavvy/items/8c4567ec1124320d3354</a><a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
-<li id="fn:5">
-<p>素人の言語処理100本ノック:29, segavvy, <a href="https://qiita.com/segavvy/items/fc7257012d8a590185e5">https://qiita.com/segavvy/items/fc7257012d8a590185e5</a><a href="#fnref:5" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   
