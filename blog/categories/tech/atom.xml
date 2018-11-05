@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-11-06T01:03:37+09:00</updated>
+  <updated>2018-11-06T01:04:46+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -35,7 +35,7 @@ rails s
 
 <p>インストールが終了し、railsを起動したら必要な情報(<a href="https://blog.zerokol.com/2018/06/ruby-on-rails-yarn-font-awesome-in.html">font-awesome</a>, <a href="https://qiita.com/fuqda/items/c5756b8f56dcc238c110">bootstrap</a>) を <code>app/assets/{javascripts,stylesheets}</code> に記載。</p>
 
-<p>```js:app/assets/javascripts/application.js</p>
+<p>```javascript:app/assets/javascripts/application.js</p>
 
 <p>//= require rails-ujs
 //= require turbolinks
