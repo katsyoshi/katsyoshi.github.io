@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-10-19T00:48:06+09:00</updated>
+  <updated>2018-11-06T01:03:03+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[remove rails assets]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets/"/>
+    <updated>2018-11-06T00:40:32+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets</id>
+    <content type="html"><![CDATA[<p>ひさびさに <code>Ruby on Rails</code> の話で、自作の rails application で <code>rails-assets</code> というところからいくつか gem を利用してたので
+それを <code>Yarn</code> で同様のパッケージをインストールするように変更した。</p>
+
+<h2>なにをやったのか？</h2>
+
+<p>単純に一旦 <code>rails-assets</code> からインストールしている gem を <code>Gemfile</code> から削除します。</p>
+
+<p>そのあと、 <code>yarn add</code> で <code>package.json</code> を生成し <code>node_modules</code> にインストールします。</p>
+
+<p><code>shellscript
+yarn add bootstrap@3 font-awesome jquery
+yarn install
+rails s
+</code></p>
+
+<p>インストールが終了し、railsを起動したら必要な情報(<a href="https://blog.zerokol.com/2018/06/ruby-on-rails-yarn-font-awesome-in.html">font-awesome</a>, <a href="https://qiita.com/fuqda/items/c5756b8f56dcc238c110">bootstrap</a>) を <code>app/assets/{javascripts,stylesheets}</code> に記載。</p>
+
+<p>```js:app/assets/javascripts/application.js</p>
+
+<p>//= require rails-ujs
+//= require turbolinks
+//= require jquery/dist/jquery.js
+//= require bootstrap-sass/assets/javascripts/bootstrap
+//= require_tree .
+```</p>
+
+<p>```css:app/assets/stylesheets/application.scss
+@import &lsquo;bootstrap-sass/assets/stylesheets/bootstrap&rsquo;;
+@import &ldquo;font-awesome/scss/variables&rdquo;;
+$fa-font-path: &ldquo;font-awesome/fonts/&rdquo;;
+@import &ldquo;font-awesome/scss/mixins&rdquo;;
+@font-face {
+  font-family: &lsquo;FontAwesome&rsquo;;
+  src: font-url(&lsquo;#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}&rsquo;);
+  src: font-url(&lsquo;#{$fa-font-path}/fontawesome-webfont.eot?#iefix&amp;v=#{$fa-version}&rsquo;) format(&lsquo;embedded-opentype&rsquo;),</p>
+
+<pre><code>font-url('#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
+font-url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
+font-url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
+font-url('#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
+</code></pre>
+
+<p>  font-weight: normal;
+  font-style: normal;
+}
+@import &ldquo;font-awesome/scss/core&rdquo;;
+@import &ldquo;font-awesome/scss/larger&rdquo;;
+@import &ldquo;font-awesome/scss/fixed-width&rdquo;;
+@import &ldquo;font-awesome/scss/list&rdquo;;
+@import &ldquo;font-awesome/scss/bordered-pulled&rdquo;;
+@import &ldquo;font-awesome/scss/animated&rdquo;;
+@import &ldquo;font-awesome/scss/rotated-flipped&rdquo;;
+@import &ldquo;font-awesome/scss/stacked&rdquo;;
+@import &ldquo;font-awesome/scss/icons&rdquo;;
+@import &ldquo;font-awesome/scss/screen-reader&rdquo;;
+$icon-font-path: &ldquo;bootstrap-sass/assets/fonts/bootstrap&rdquo;;
+```</p>
+
+<p>ってかいたら使えるようになっています!</p>
+
+<h2>おわり</h2>
+
+<p>ということで <em>IMASARA</em> ですが <code>rails-assets</code> からの脱却ついでに簡単に <code>yarn</code> を利用した assets の導入をやってみました!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ファイル名間違えてテスト通らなかった話]]></title>

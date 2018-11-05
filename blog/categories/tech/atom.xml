@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-10-19T00:48:06+09:00</updated>
+  <updated>2018-11-06T01:03:03+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[remove rails assets]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets/"/>
+    <updated>2018-11-06T00:40:32+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets</id>
+    <content type="html"><![CDATA[<p>ひさびさに <code>Ruby on Rails</code> の話で、自作の rails application で <code>rails-assets</code> というところからいくつか gem を利用してたので
+それを <code>Yarn</code> で同様のパッケージをインストールするように変更した。</p>
+
+<h2>なにをやったのか？</h2>
+
+<p>単純に一旦 <code>rails-assets</code> からインストールしている gem を <code>Gemfile</code> から削除します。</p>
+
+<p>そのあと、 <code>yarn add</code> で <code>package.json</code> を生成し <code>node_modules</code> にインストールします。</p>
+
+<p><code>shellscript
+yarn add bootstrap@3 font-awesome jquery
+yarn install
+rails s
+</code></p>
+
+<p>インストールが終了し、railsを起動したら必要な情報(<a href="https://blog.zerokol.com/2018/06/ruby-on-rails-yarn-font-awesome-in.html">font-awesome</a>, <a href="https://qiita.com/fuqda/items/c5756b8f56dcc238c110">bootstrap</a>) を <code>app/assets/{javascripts,stylesheets}</code> に記載。</p>
+
+<p>```js:app/assets/javascripts/application.js</p>
+
+<p>//= require rails-ujs
+//= require turbolinks
+//= require jquery/dist/jquery.js
+//= require bootstrap-sass/assets/javascripts/bootstrap
+//= require_tree .
+```</p>
+
+<p>```css:app/assets/stylesheets/application.scss
+@import &lsquo;bootstrap-sass/assets/stylesheets/bootstrap&rsquo;;
+@import &ldquo;font-awesome/scss/variables&rdquo;;
+$fa-font-path: &ldquo;font-awesome/fonts/&rdquo;;
+@import &ldquo;font-awesome/scss/mixins&rdquo;;
+@font-face {
+  font-family: &lsquo;FontAwesome&rsquo;;
+  src: font-url(&lsquo;#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}&rsquo;);
+  src: font-url(&lsquo;#{$fa-font-path}/fontawesome-webfont.eot?#iefix&amp;v=#{$fa-version}&rsquo;) format(&lsquo;embedded-opentype&rsquo;),</p>
+
+<pre><code>font-url('#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
+font-url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
+font-url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
+font-url('#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
+</code></pre>
+
+<p>  font-weight: normal;
+  font-style: normal;
+}
+@import &ldquo;font-awesome/scss/core&rdquo;;
+@import &ldquo;font-awesome/scss/larger&rdquo;;
+@import &ldquo;font-awesome/scss/fixed-width&rdquo;;
+@import &ldquo;font-awesome/scss/list&rdquo;;
+@import &ldquo;font-awesome/scss/bordered-pulled&rdquo;;
+@import &ldquo;font-awesome/scss/animated&rdquo;;
+@import &ldquo;font-awesome/scss/rotated-flipped&rdquo;;
+@import &ldquo;font-awesome/scss/stacked&rdquo;;
+@import &ldquo;font-awesome/scss/icons&rdquo;;
+@import &ldquo;font-awesome/scss/screen-reader&rdquo;;
+$icon-font-path: &ldquo;bootstrap-sass/assets/fonts/bootstrap&rdquo;;
+```</p>
+
+<p>ってかいたら使えるようになっています!</p>
+
+<h2>おわり</h2>
+
+<p>ということで <em>IMASARA</em> ですが <code>rails-assets</code> からの脱却ついでに簡単に <code>yarn</code> を利用した assets の導入をやってみました!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[new keyboard]]></title>
@@ -244,62 +315,6 @@ sudo apt-get install wireguard
 <h2>おわり</h2>
 
 <p>あとは、再起動時に自動で接続するように変更する必要がありそうですがつながったし、おそいのでこれでおわり</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hello, Itamae from docker!!]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2018/07/09/hello/"/>
-    <updated>2018-07-09T22:54:12+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2018/07/09/hello</id>
-    <content type="html"><![CDATA[<p><a href="https://itamae.kitchen/">Itamae</a> の plugin 書いててそろそろ test 欲しいなあとおもって2年くらいたちましたが、
-ようやく <a href="https://www.docker.com/">Docker</a> 使って test 書きました。</p>
-
-<h3>方向性</h3>
-
-<p>ここでテストを実施するとして何に対しておこなうのかというのを考えましたが、E2Eのテストだけで良いだろうという方向でテストを書くようにしています。
-VMを立てて実行することにはチョット大袈裟だろうということでもっと簡単に、楽にということで <code>docker</code> を選択しています。</p>
-
-<p>itamae で E2E のテストなのでここでは <a href="https://serverspec.org/">serverspec</a> を利用してテストを行います。
-E2E のテスト準備として <code>docker</code> 内で最初に目的のレシピを実施し、そのレシピが正しく動作しているかをテストしています。</p>
-
-<h3>準備とテスト実施</h3>
-
-<p>準備として以下の <code>gem</code> を追加しますが、 <a href="https://github.com/swipely/docker-api">docker-api.gem</a> の方はなくてもとくに問題ないです。
-<code>serverspec</code> の対象バックエンドで <code>docker</code> が<a href="https://tsub.hatenablog.com/entry/2016/06/25/222508">指定できるようになります</a>が、 <code>docker</code> 内 (<code>docker run -t hoge bundle exec serverspec</code> など) で <code>serverspec</code> を実施すれば実行できますので、好みで追加しましょう。</p>
-
-<p><code>
-spec.add_development_dependency "docker-api"
-spec.add_development_dependency "serverspec"
-</code></p>
-
-<p>次に <code>Dockerfile</code> を作成します。ここでは単純に必要な準備を実施、テストしたいディレクトリの追加、 <code>bundler</code> を利用して <code>gem</code> のインストールを実施してから、対象のディレクトリで <code>itamae</code> の <code>local</code> を指定して対象の <code>docker</code> にレシピ適用します。そのあと <code>docker run</code> や <code>serverspec</code> を実施することでテストをすることが可能となります。</p>
-
-<p><code>
-FROM ruby
-RUN echo "gem: --no-rdoc --no-ri" &gt;&gt; /.gemrc
-RUN gem install bundler
-ADD . /app
-WORKDIR /app
-RUN bundle install
-RUN bundle exec itamae local samples/recipe.rb
-CMD bundle exec rake
-</code></p>
-
-<h3><a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">itamae-plugin-resource-pip</a></h3>
-
-<p><a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">itamae-plugin-resource-pip</a> でできるようになってます。
-とくに <a href="https://docker.io">docker.io</a> とかで公開していませんので、以下に例を</p>
-
-<p><code>
-cd /path/to/itamae-plugin-resource-pip
-docker build -t katsyoshi/itamae-plugin-resource-pip .
-docker run -t katsyoshi/itamae-plugin-resource-pip bundle exec rake
-</code></p>
-
-<h3>おわり</h3>
-
-<p>これやろうと思って調べてたらみつからずに <code>Dockerfile</code> 書き終えて、<a href="https://travis-ci.org">travis</a> を追加しようとしたときに、<a href="https://twitter.com/sue445">@sue445</a> さんが<a href="https://sue445.hatenablog.com/entry/2018/05/01/115522">やってた</a>のをみつけてしまった。。。</p>
 ]]></content>
   </entry>
   
