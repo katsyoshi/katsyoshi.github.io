@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-11-06T01:03:03+09:00</updated>
+  <updated>2018-11-06T01:03:37+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -27,7 +27,7 @@
 
 <p>そのあと、 <code>yarn add</code> で <code>package.json</code> を生成し <code>node_modules</code> にインストールします。</p>
 
-<p><code>shellscript
+<p><code>console
 yarn add bootstrap@3 font-awesome jquery
 yarn install
 rails s
