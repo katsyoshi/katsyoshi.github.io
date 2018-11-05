@@ -7,7 +7,7 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content=" d250g2 Advent Calendar 5日目の記事です d250g2 について d250g2 とは？ しらん KernelVM Camp #4 に行ってきた 成果物です advent_calendar, d250g2, diary ">
+	<meta name="description" content="Gentoo Advent Calendar 2016 の10日目の記事です Itamaeでgentoo管理するには？ そらはー(@sora_h)が作ってる itamae-plugin-resource-portage 使え 自作のportage管理ソフトの紹介 ここにあります。 使いかた &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -76,6 +76,86 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/12/10/itamae-loves-gentoo/">
+		
+			板前さんでGentooを管理</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
+
+<h2>Itamaeでgentoo管理するには？</h2>
+
+<p>そらはー(<a href="https://twitter.com/sora_h">@sora_h</a>)が作ってる <a href="https://github.com/sorah/itamae-plugin-resource-portage">itamae-plugin-resource-portage</a> 使え</p>
+
+<h2>自作のportage管理ソフトの紹介</h2>
+
+<p><a href="https://github.com/katsyoshi/itamae-recipes/tree/master/cookbook/gentoo">ここ</a>にあります。</p>
+
+<h3>使いかた</h3>
+
+<p>簡単な使いかたとしては以下のようになります</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>itamae local gentoo.rb -j package.json</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これだけです。</p>
+
+<h3>パッケージの指定方法</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">packages</span><span class="p-Indicator">:</span>
+</span><span class='line'> <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&#39;category/package&#39;</span>
+</span><span class='line'>   <span class="l-Scalar-Plain">portage</span><span class="p-Indicator">:</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">use</span><span class="p-Indicator">:</span> <span class="s">&#39;package&#39;</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">accept_keywords</span><span class="p-Indicator">:</span> <span class="s">&#39;package&#39;</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">license</span><span class="p-Indicator">:</span> <span class="s">&#39;pakcage&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>name</code> で <code>category/package</code> を指定することでインストールすることができます。
+<code>portage</code> では <code>use</code> などのフラグを指定して管理します。
+<code>use</code> ディレクトリを作成してそこにファイルを置く必要があります。
+自動生成したいけど、依存パッケージの指定方法とかまだ考えていないので取り敢えず直接指定です。</p>
+
+<h2>おわり</h2>
+
+<p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
+とおもってたら itamae-plugin-resource-portage みつけてしまったので
+itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使いましょう</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/advent-calendar/'>advent_calendar</a>, <a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/itamae/'>itamae</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -867,78 +947,6 @@ Ubuntu Linux 16.04 では、簡単に導入できます。</p>
 
 
 	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/h2/'>h2</a>, <a class='category' href='/blog/categories/h2o/'>h2o</a>, <a class='category' href='/blog/categories/ssl/'>ssl</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff/">
-		
-			YAPC::Asia 2015に参加しました(ボランティアスタッフとして)</a>
-	</h2>
-	<div class="entry-content">
-		<p>YAPC::Asia 2015にボランティアスタッフとして参加してきました(申請時に公表しないでってしなのでYAPCのスッタフ一覧にはのってないです)。去年も参加しましたが聴講者として参加しました。</p>
-
-<h2>ボランティアスタッフに応募した理由</h2>
-
-<p>彼女ができるときいて応募しました。また、最後の YAPC::Asia と聞いていたので応募しないとなと思ったのがありました。他の理由としては NEET なのでというのもあります。発表者として参加できればよかったのですが、ネタが応募するには弱いなと思い見送りました。そういうこともありボランティアスタッフとして参加しました。</p>
-
-<h2>個人スポンサー</h2>
-
-<p>実は個人スポンサーもやっていましたが、ボランティアスタッフをやるため、個人スポンサーの分のチケットが余っていました。その分はとある人に譲りました。</p>
-
-<h2>0日目(前夜祭)</h2>
-
-<p>0日目は11時集合になっており、スタッフ作業としてノベルティの詰め込み作業と会場設営を行なっていました。</p>
-
-<p>前夜祭自体は初めてのスタッフ作業でしたので、会場係として設営などをしてました。</p>
-
-<h2>1日目</h2>
-
-<p>1日目は始めに作業としてラリーのセッション前、中で同時通訳のレシーバーを配ってました。その後D会場でずっとタイムキーパーをやっておりました。</p>
-
-<p>この日の印象に残ってるセッションとしては <a href="https://twitter.com/kazuho">@kazuhoさん</a> の <a href="http://yapcasia.org/2015/talk/show/dead6890-09b7-11e5-998a-67dc7d574c3a">HTTP/2時代のウェブサイト設計</a> で、 <code>HTTP2</code> になった理由、そのなかで <a href="https://github.com/h2o/h2o">h2o</a> が優れている点を丁寧に説明されてて、これはすぐに使わねばと思わせてくれた発表でした。</p>
-
-<p>この日は懇親会がありましたので、懇親会会場でうろうろしておりました。
-懇親会では、知り合いと話してたりしてました。最近、 <a href="https://github.com/itamae-kitchen/itamae">itamae</a> を触っているので、プラグインの話を <a href="https://twitter.com/k0kubun">@k0kubunさん</a> としてました。そのときは <code>pip</code> のリソースプラグイン作りたいとか言ったので <a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">今日作成</a> したのですが、よくかんがえてみると、 <code>cpan</code> のリソースプラグインの方が必要だったのを作成後に思い出しました。</p>
-
-<h2>2日目</h2>
-
-<p>2日目も1日目と同様にD会場で全セッションタイムキーパーやっておりました。</p>
-
-<p>印象に残ったセッションとしては、 <a href="https://github.com/kenjiskywalker">@kenjiskywalkerさん</a> の <a href="http://yapcasia.org/2015/talk/show/f2816038-10ec-11e5-89bf-d7f07d574c3a">我々はどのように冗長化を失敗したのか</a> 、 <a href="https://twitter.com/saiken3110">@saiken3110さん</a> の <a href="http://yapcasia.org/2015/talk/show/0af26fe4-0b7b-11e5-a29c-67dc7d574c3a">MySQLで2億件のシリアルデータと格闘したチューニングの話</a> 、 <a href="https://github.com/Jxck">@Jxckさん</a> の <a href="http://yapcasia.org/2015/talk/show/9e9ae188-fb20-11e4-9a97-8ab37d574c3a">HTTP2 時代の Web</a> がありました。</p>
-
-<p>最後に片づけをし、おわった後スタッフ数人とのみくいに行ってきました。そろそろ解散かなってときに、 twitter を眺めてたら、 <a href="https://twitter.com/Jxck_/status/635075234379399168">@Jxckさんが@t_wadaさんを誘ってる</a> を見つけて無理やり参加させて頂きました。</p>
-
-<p>帰りついたのは朝の4時ごろ(だったと思う)でした。</p>
-
-<h2>おわり</h2>
-
-<p>YAPC::Asia 2015 に参加してきました。23日の日曜日は疲れてたのでずっとぐったりしてました。
-楽しい3日間でした!!!!!11</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/yapc/'>yapc</a>
 
 
 </div>

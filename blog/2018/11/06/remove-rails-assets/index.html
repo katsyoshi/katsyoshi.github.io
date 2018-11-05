@@ -1,0 +1,248 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>remove rails assets - katsyoshiのめもみたいなもの</title>
+	<meta name="author" content="katsyoshi">
+
+	
+	<meta name="description" content="ひさびさに Ruby on Rails の話で、自作の rails application で rails-assets というところからいくつか gem を利用してたので
+それを Yarn で同様のパッケージをインストールするように変更した。 なにをやったのか？ 単純に一旦 rails- &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		<a class="coderwall" href="https://coderwall.com/katsyoshi" title="Coderwall">Coderwall</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Remove Rails Assets</h2>
+	<div class="entry-content"><p>ひさびさに <code>Ruby on Rails</code> の話で、自作の rails application で <code>rails-assets</code> というところからいくつか gem を利用してたので
+それを <code>Yarn</code> で同様のパッケージをインストールするように変更した。</p>
+
+<h2>なにをやったのか？</h2>
+
+<p>単純に一旦 <code>rails-assets</code> からインストールしている gem を <code>Gemfile</code> から削除します。</p>
+
+<p>そのあと、 <code>yarn add</code> で <code>package.json</code> を生成し <code>node_modules</code> にインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">yarn add bootstrap@3 font-awesome jquery</span>
+</span><span class='line'><span class="go">yarn install</span>
+</span><span class='line'><span class="go">rails s</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>インストールが終了し、railsを起動したら必要な情報(<a href="https://blog.zerokol.com/2018/06/ruby-on-rails-yarn-font-awesome-in.html">font-awesome</a>, <a href="https://qiita.com/fuqda/items/c5756b8f56dcc238c110">bootstrap</a>) を <code>app/assets/{javascripts,stylesheets}</code> に記載。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// app/assets/javascripts/application.js</span>
+</span><span class='line'><span class="c1">//= require rails-ujs</span>
+</span><span class='line'><span class="c1">//= require turbolinks</span>
+</span><span class='line'><span class="c1">//= require jquery/dist/jquery.js</span>
+</span><span class='line'><span class="c1">//= require bootstrap-sass/assets/javascripts/bootstrap</span>
+</span><span class='line'><span class="c1">//= require_tree .</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="err">#</span> <span class="nt">app</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">application</span><span class="nc">.scss</span>
+</span><span class='line'><span class="k">@import</span> <span class="s1">&#39;bootstrap-sass/assets/stylesheets/bootstrap&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/variables&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="err">$</span><span class="nt">fa-font-path</span><span class="o">:</span> <span class="s2">&quot;font-awesome/fonts/&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/mixins&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@font-face</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">font-family</span><span class="o">:</span> <span class="s1">&#39;FontAwesome&#39;</span><span class="o">;</span>
+</span><span class='line'>  <span class="nt">src</span><span class="o">:</span> <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}&#39;</span><span class="o">);</span>
+</span><span class='line'>  <span class="nt">src</span><span class="o">:</span> <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.eot?#iefix&amp;v=#{$fa-version}&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;embedded-opentype&#39;</span><span class="o">),</span>
+</span><span class='line'>    <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;woff2&#39;</span><span class="o">),</span>
+</span><span class='line'>    <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;woff&#39;</span><span class="o">),</span>
+</span><span class='line'>    <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;truetype&#39;</span><span class="o">),</span>
+</span><span class='line'>    <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;svg&#39;</span><span class="o">);</span>
+</span><span class='line'>  <span class="nt">font-weight</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+</span><span class='line'>  <span class="nt">font-style</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/core&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/larger&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/fixed-width&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/list&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/bordered-pulled&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/animated&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/rotated-flipped&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/stacked&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/icons&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/screen-reader&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="err">$</span><span class="nt">icon-font-path</span><span class="o">:</span> <span class="s2">&quot;bootstrap-sass/assets/fonts/bootstrap&quot;</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ってかいたら使えるようになっています!</p>
+
+<h2>おわり</h2>
+
+<p>ということで <em>IMASARA</em> ですが <code>rails-assets</code> からの脱却ついでに簡単に <code>yarn</code> を利用した assets の導入をやってみました!</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2018
+
+    katsyoshi
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-49549546-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

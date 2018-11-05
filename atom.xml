@@ -4,7 +4,7 @@
   <title><![CDATA[katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-10-19T00:48:06+09:00</updated>
+  <updated>2018-11-06T01:07:53+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[remove rails assets]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets/"/>
+    <updated>2018-11-06T00:40:32+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets</id>
+    <content type="html"><![CDATA[<p>ひさびさに <code>Ruby on Rails</code> の話で、自作の rails application で <code>rails-assets</code> というところからいくつか gem を利用してたので
+それを <code>Yarn</code> で同様のパッケージをインストールするように変更した。</p>
+
+<h2>なにをやったのか？</h2>
+
+<p>単純に一旦 <code>rails-assets</code> からインストールしている gem を <code>Gemfile</code> から削除します。</p>
+
+<p>そのあと、 <code>yarn add</code> で <code>package.json</code> を生成し <code>node_modules</code> にインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">yarn add bootstrap@3 font-awesome jquery</span>
+</span><span class='line'><span class="go">yarn install</span>
+</span><span class='line'><span class="go">rails s</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>インストールが終了し、railsを起動したら必要な情報(<a href="https://blog.zerokol.com/2018/06/ruby-on-rails-yarn-font-awesome-in.html">font-awesome</a>, <a href="https://qiita.com/fuqda/items/c5756b8f56dcc238c110">bootstrap</a>) を <code>app/assets/{javascripts,stylesheets}</code> に記載。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// app/assets/javascripts/application.js</span>
+</span><span class='line'><span class="c1">//= require rails-ujs</span>
+</span><span class='line'><span class="c1">//= require turbolinks</span>
+</span><span class='line'><span class="c1">//= require jquery/dist/jquery.js</span>
+</span><span class='line'><span class="c1">//= require bootstrap-sass/assets/javascripts/bootstrap</span>
+</span><span class='line'><span class="c1">//= require_tree .</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="err">#</span> <span class="nt">app</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">application</span><span class="nc">.scss</span>
+</span><span class='line'><span class="k">@import</span> <span class="s1">&#39;bootstrap-sass/assets/stylesheets/bootstrap&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/variables&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="err">$</span><span class="nt">fa-font-path</span><span class="o">:</span> <span class="s2">&quot;font-awesome/fonts/&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/mixins&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@font-face</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">font-family</span><span class="o">:</span> <span class="s1">&#39;FontAwesome&#39;</span><span class="o">;</span>
+</span><span class='line'>  <span class="nt">src</span><span class="o">:</span> <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}&#39;</span><span class="o">);</span>
+</span><span class='line'>  <span class="nt">src</span><span class="o">:</span> <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.eot?#iefix&amp;v=#{$fa-version}&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;embedded-opentype&#39;</span><span class="o">),</span>
+</span><span class='line'>    <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;woff2&#39;</span><span class="o">),</span>
+</span><span class='line'>    <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;woff&#39;</span><span class="o">),</span>
+</span><span class='line'>    <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;truetype&#39;</span><span class="o">),</span>
+</span><span class='line'>    <span class="nt">font-url</span><span class="o">(</span><span class="s1">&#39;#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;svg&#39;</span><span class="o">);</span>
+</span><span class='line'>  <span class="nt">font-weight</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+</span><span class='line'>  <span class="nt">font-style</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/core&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/larger&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/fixed-width&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/list&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/bordered-pulled&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/animated&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/rotated-flipped&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/stacked&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/icons&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;font-awesome/scss/screen-reader&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="err">$</span><span class="nt">icon-font-path</span><span class="o">:</span> <span class="s2">&quot;bootstrap-sass/assets/fonts/bootstrap&quot;</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ってかいたら使えるようになっています!</p>
+
+<h2>おわり</h2>
+
+<p>ということで <em>IMASARA</em> ですが <code>rails-assets</code> からの脱却ついでに簡単に <code>yarn</code> を利用した assets の導入をやってみました!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[new keyboard]]></title>
@@ -2781,22 +2888,6 @@ LTはどれもよくて <code>rib</code> も面白いし、 csvの高速化の�
 <h2>おわり</h2>
 
 <p>これでなにも考えなくてすむようになるのかな？</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[rustful web]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2017/06/04/rustful-web/"/>
-    <updated>2017-06-04T23:17:45+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2017/06/04/rustful-web</id>
-    <content type="html"><![CDATA[<p><a href="https://www.rust-lang.org/ja-JP/">rust</a> で Web Application をつくろうと思って <a href="https://github.com/Ogeon/rustful">rustful</a> を使ってやってみてたりした。</p>
-
-<p>ドキュメントと利用しているバージョンのコードが異なり、必要なモジュールが読み込めなかったり、関数の引数が異なったりしてうごかねぇってなったのでHEADを使うことで解決。</p>
-
-<h2>🍻</h2>
-
-<p>とりあえずいつものメンバーで🍻にいってきた。浅草のカンピオンエールという店でのんでそのあと隣の店でお好み焼きをたべてた。お好み焼き屋のあとは河原まであるて吾妻橋からみえる
-やつをながめながらビールのんでた</p>
 ]]></content>
   </entry>
   
