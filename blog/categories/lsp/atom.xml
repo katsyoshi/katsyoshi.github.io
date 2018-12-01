@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: lsp | katsyoshiのめもみたいなもの]]></title>
+  <link href="http://blog.katsyoshi.org/blog/categories/lsp/atom.xml" rel="self"/>
+  <link href="http://blog.katsyoshi.org/"/>
+  <updated>2018-12-01T19:57:16+09:00</updated>
+  <id>http://blog.katsyoshi.org/</id>
+  <author>
+    <name><![CDATA[katsyoshi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[hello language server]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/"/>
+    <updated>2018-12-01T13:00:59+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/12/01/hello-language-server</id>
+    <content type="html"><![CDATA[<p>ここ1、2週間、 emacs で <code>lsp-emacs</code> を使いはじめたのでそのメモ</p>
+
+<p><a href="https://langserver.org/">Language Server</a> と <a href="https://microsoft.github.io/language-server-protocol/specification">Language Server Protocol</a> ってなによ？って人はリンクをみてください。</p>
+
+<h2>導入</h2>
+
+<p>導入は簡単で以下の3つをpackage-installでインストールしてしまえば OK です。</p>
+
+<p><code>
+lsp-mode
+lsp-ui
+lsp-ruby
+</code></p>
+
+<p>インストール後は <code>.emacs.d/init.el</code> あたりに、</p>
+
+<p><code>
+(require 'lsp-mode)
+(require 'lsp-ui)
+(require 'lsp-ruby)
+(add-hook 'ruby-mode-hook #'lsp-ruby-enable)
+</code></p>
+
+<p>を追記すると emacs 側の設定はできました。</p>
+
+<p><code>lsp-ruby</code>(emacs) を起動する前に <code>gem install solargraph</code> で <code>solargraph</code> をインストールしておきましょう。</p>
+
+<h2>利用開始!</h2>
+
+<p>利用開始するときは利用したいファイルのトップディレクトリ(プロジェクトディレクトリ)に、 <code>Gemfile</code> が必要です。</p>
+
+<p>でこんなかんじに表示してくれます。</p>
+
+<p style="text-align:center;"> <img src="/images/screenshot/lsp-ruby.png" alt="" /></p>
+
+<h2>matome</h2>
+
+<p><code>lsp-ruby</code> を導入したけど、<code>solargraph</code> だとちょっとあれな表示が出て残念な気分に。
+また <code>rubocop</code> も基本的に要求されるようで…</p>
+]]></content>
+  </entry>
+  
+</feed>
