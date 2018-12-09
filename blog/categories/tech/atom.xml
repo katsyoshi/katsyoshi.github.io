@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-12-01T19:57:16+09:00</updated>
+  <updated>2018-12-09T21:46:17+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[docker-composeを利用してRailsアプリ開発を楽にしよう]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose/"/>
+    <updated>2018-12-09T21:11:56+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose</id>
+    <content type="html"><![CDATA[<p>ていうのを<a href="https://twitter.com/yu_suke1994">うなすけさん</a>に相談したら、<a href="https://blog.unasuke.com/2018/run-rails-test-on-docker-compose/">解決策を示してくれた</a>のでそれを開発向けに変えてみた。
+Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。</p>
+
+<h2>はじめに</h2>
+
+<p>Railsアプリ用 Dockerfile を準備します。こちらは、元記事と同じで良いとおもいますが、元記事ではすべての条件を満たすために、不要な <code>DB</code> やミドルウェアのライブライをインストールしてますので必要なものだけにします。
+このRailsアプリでは、<code>DB</code> として <code>postgres</code> を利用していますので関連のライブラリをインストールします。</p>
+
+<p>```
+FROM ruby:2.5.3-stretch</p>
+
+<p>ARG NODE_MAJOR_VER=11
+ARG BUNDLER_JOBS=4</p>
+
+<p>RUN curl -sL <a href="https://deb.nodesource.com/setup_$">https://deb.nodesource.com/setup_$</a>{NODE_MAJOR_VER}.x | bash &ndash; \
+  &amp;&amp; curl -sS <a href="https://dl.yarnpkg.com/debian/pubkey.gpg">https://dl.yarnpkg.com/debian/pubkey.gpg</a> | apt-key add &ndash; \
+  &amp;&amp; echo &ldquo;deb <a href="https://dl.yarnpkg.com/debian/">https://dl.yarnpkg.com/debian/</a> stable main&rdquo; | tee /etc/apt/sources.list.d/yarn.list \
+  &amp;&amp; apt update &amp;&amp; apt install &mdash;assume-yes \</p>
+
+<pre><code>postgresql-contrib \
+libpq-dev \
+libxml2 \
+libxml2-dev \
+libxslt1-dev \
+git \
+make \
+nodejs \
+yarn \
+</code></pre>
+
+<p> &amp;&amp; apt-get clean \
+ &amp;&amp; rm -rf /var/lib/apt/lists/*</p>
+
+<p>WORKDIR /rails
+COPY . .
+RUN bundle install &mdash;jobs=${BUNDLER_JOBS}
+RUN yarn install
+```</p>
+
+<p>同様に <code>docker-compose.yml</code> を必要なものだけにします。</p>
+
+<p>```
+version: &lsquo;3&rsquo;
+services:
+  rails:</p>
+
+<pre><code>build: .
+command: /bin/bash
+environment:
+  - NODE_MAJAR_VER=11
+  - BUNDLER_JOBS=4
+  - DB_HOST=postgres
+volumes:
+  - ".:/rails"
+links:
+  - postgres
+command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
+ports:
+  - "3000:3000"
+</code></pre>
+
+<p>  postgres:</p>
+
+<pre><code>image: postgres:11.1-alpine
+ports:
+  - "5432:5432"
+</code></pre>
+
+<p>```</p>
+
+<p>こちらも <code>postgres</code> だけにします。</p>
+
+<h2>おわり</h2>
+
+<p>あとは <code>docker-compose up rails</code> とし、実行することで見れるようになっています。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[hello language server]]></title>
@@ -264,72 +347,6 @@ irb(main):002:0&gt; Cumo::Int32.new(3, 3).fill(0)
 技術書典5はこれを使ったはなしを出展しますのできてみてくださいな。</p>
 
 <p>え37でまってます</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SATySFi使って本書いてみてる]]></title>
-    <link href="http://blog.katsyoshi.org/blog/2018/09/09/satysfi/"/>
-    <updated>2018-09-09T14:29:46+09:00</updated>
-    <id>http://blog.katsyoshi.org/blog/2018/09/09/satysfi</id>
-    <content type="html"><![CDATA[<p>技術書典5出しますので、それを書くために <a href="https://ocaml.org/">OCaml</a> で作成された <a href="https://github.com/gfngfn/SATySFi">SATySFi</a> を使いはじめました。</p>
-
-<h2>インストール</h2>
-
-<p>今回は <a href="https://opam.ocaml.org">OPAM</a> を利用してインストールをしています。まあ単純にパッケージが今普段使いしてるOSにないだけなんですけどね。
-インストール手順は <a href="https://github.com/gfngfn/SATySFi/blob/master/README-ja.md">公式のREADME.md</a> を参考にしています。</p>
-
-<h3>OPAM</h3>
-
-<p>OCaml Package Manager の略らしいです。
-こいつは <code>OCaml</code> のインストールもしてくれるのでこれを利用します。
-<code>OPAM</code> のインストールは簡単で以下の<a href="https://opam.ocaml.org/doc/Install.html">スクリプトを実行する</a>だけです。</p>
-
-<p><code>
-wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin
-</code></p>
-
-<h3>OCaml</h3>
-
-<p><code>OPAM</code> のインストールが終ったら、 <code>OCaml</code> をインストールします。</p>
-
-<p><code>
-opam switch 4.06.0
-eval `opam config env`
-</code></p>
-
-<h3>SATySFi</h3>
-
-<p><code>OPAM</code> の準備が整ったら <code>SATySFi</code> の準備、インストールをします。</p>
-
-<p>```
-opam repository satysfi-external <a href="https://github.com/gfngfn/satysfi-external-repo.git">https://github.com/gfngfn/satysfi-external-repo.git</a>
-opam update
-git clone <a href="https://github.com/gfngfn/SATySFi.git">https://github.com/gfngfn/SATySFi.git</a>
-cd SATiSFi</p>
-
-<p>opam pin add satysfi .
-opam install satysfi
-```</p>
-
-<h2>compile!!!!</h2>
-
-<p>これでインストールされたのでとりあえずリポジトリにある <code>demo/demo.saty</code> をコンパイルしてみましょう。</p>
-
-<p><code>
-cd demo
-make
-</code></p>
-
-<p>なにも準備していないといきなりエラーがでますのでそれを<a href="https://github.com/gfngfn/SATySFi/blob/master/memo-ja-how-to-use.md">公式を参考にして</a>解消します。
-解消できたら <code>demo.pdf</code> ができますのでこれでつかえるようになります。</p>
-
-<h2>おわり</h2>
-
-<p>ちょっと簡単でしたが、 <code>satysfi</code> の導入日記でした。</p>
-
-<p>そんなことより<a href="https://techbookfest.org/event/tbf05">技術書典5</a>に出します。ネタは酒に関するネタでやっていく予定です。
-仕上がっていれば <code>え37</code> に居るとおもわれます。</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2018-12-01T19:57:16+09:00</updated>
+  <updated>2018-12-09T21:46:17+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[docker-composeを利用してRailsアプリ開発を楽にしよう]]></title>
+    <link href="http://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose/"/>
+    <updated>2018-12-09T21:11:56+09:00</updated>
+    <id>http://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose</id>
+    <content type="html"><![CDATA[<p>ていうのを<a href="https://twitter.com/yu_suke1994">うなすけさん</a>に相談したら、<a href="https://blog.unasuke.com/2018/run-rails-test-on-docker-compose/">解決策を示してくれた</a>のでそれを開発向けに変えてみた。
+Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。</p>
+
+<h2>はじめに</h2>
+
+<p>Railsアプリ用 Dockerfile を準備します。こちらは、元記事と同じで良いとおもいますが、元記事ではすべての条件を満たすために、不要な <code>DB</code> やミドルウェアのライブライをインストールしてますので必要なものだけにします。
+このRailsアプリでは、<code>DB</code> として <code>postgres</code> を利用していますので関連のライブラリをインストールします。</p>
+
+<p>```
+FROM ruby:2.5.3-stretch</p>
+
+<p>ARG NODE_MAJOR_VER=11
+ARG BUNDLER_JOBS=4</p>
+
+<p>RUN curl -sL <a href="https://deb.nodesource.com/setup_$">https://deb.nodesource.com/setup_$</a>{NODE_MAJOR_VER}.x | bash &ndash; \
+  &amp;&amp; curl -sS <a href="https://dl.yarnpkg.com/debian/pubkey.gpg">https://dl.yarnpkg.com/debian/pubkey.gpg</a> | apt-key add &ndash; \
+  &amp;&amp; echo &ldquo;deb <a href="https://dl.yarnpkg.com/debian/">https://dl.yarnpkg.com/debian/</a> stable main&rdquo; | tee /etc/apt/sources.list.d/yarn.list \
+  &amp;&amp; apt update &amp;&amp; apt install &mdash;assume-yes \</p>
+
+<pre><code>postgresql-contrib \
+libpq-dev \
+libxml2 \
+libxml2-dev \
+libxslt1-dev \
+git \
+make \
+nodejs \
+yarn \
+</code></pre>
+
+<p> &amp;&amp; apt-get clean \
+ &amp;&amp; rm -rf /var/lib/apt/lists/*</p>
+
+<p>WORKDIR /rails
+COPY . .
+RUN bundle install &mdash;jobs=${BUNDLER_JOBS}
+RUN yarn install
+```</p>
+
+<p>同様に <code>docker-compose.yml</code> を必要なものだけにします。</p>
+
+<p>```
+version: &lsquo;3&rsquo;
+services:
+  rails:</p>
+
+<pre><code>build: .
+command: /bin/bash
+environment:
+  - NODE_MAJAR_VER=11
+  - BUNDLER_JOBS=4
+  - DB_HOST=postgres
+volumes:
+  - ".:/rails"
+links:
+  - postgres
+command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
+ports:
+  - "3000:3000"
+</code></pre>
+
+<p>  postgres:</p>
+
+<pre><code>image: postgres:11.1-alpine
+ports:
+  - "5432:5432"
+</code></pre>
+
+<p>```</p>
+
+<p>こちらも <code>postgres</code> だけにします。</p>
+
+<h2>おわり</h2>
+
+<p>あとは <code>docker-compose up rails</code> とし、実行することで見れるようになっています。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[remove rails assets]]></title>
