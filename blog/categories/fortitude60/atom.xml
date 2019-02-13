@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fortitude60 | katsyoshiのめもみたいなもの]]></title>
   <link href="http://blog.katsyoshi.org/blog/categories/fortitude60/atom.xml" rel="self"/>
   <link href="http://blog.katsyoshi.org/"/>
-  <updated>2019-02-13T23:39:08+09:00</updated>
+  <updated>2019-02-13T23:39:59+09:00</updated>
   <id>http://blog.katsyoshi.org/</id>
   <author>
     <name><![CDATA[katsyoshi]]></name>
@@ -31,26 +31,67 @@
 <p>今回は、 LED をキー毎に光らせる方向ですすめてみました。</p>
 
 <ol>
-<li>基板にダイオードつけます。
-<img src="/images/photo/fortitude60-diode.jpg" alt="" /></li>
-<li>基板にLED 用に抵抗(470Ω)をスイッチ毎につけます。制御用の抵抗(1kΩ)と FET を各ボード毎につけます。
-<img src="/images/photo/fortitude60-fet-resister.jpg" alt="" /></li>
-<li>スイッチをプレートにはめます。
-<img src="/images/photo/fortitude60-switch-in-plate.jpg" alt="" /></li>
-<li>基板とスイッチをはめたプレートを合体させます
-<img src="/images/photo/fortitude60-docking-switch.jpg" alt="" /></li>
-<li>LED をスイッチに刺します。
-<img src="/images/photo/fortitude60-led-in-switch.jpg" alt="" /></li>
-<li>半田付します。
-<img src="/images/photo/fortitude60-soldering-switch.jpg" alt="" /></li>
-<li>MCU を基板に接続
-<img src="/images/photo/fortitude60-mcu-on-keyboard.jpg" alt="" /></li>
-<li>通電確認!
-<img src="/images/photo/fortitude60-lighting-keyboard.jpg" alt="" /></li>
-<li>keycap まうんと!
-<img src="/images/photo/fortitude60-completing.jpg" alt="" /></li>
+<li>基板にダイオードつけます。</li>
 </ol>
 
+
+<p><img src="/images/photo/fortitude60-diode.jpg" alt="" /></p>
+
+<ol>
+<li>基板にLED 用に抵抗(470Ω)をスイッチ毎につけます。制御用の抵抗(1kΩ)と FET を各ボード毎につけます。</li>
+</ol>
+
+
+<p><img src="/images/photo/fortitude60-fet-resister.jpg" alt="" /></p>
+
+<ol>
+<li>スイッチをプレートにはめます。</li>
+</ol>
+
+
+<p><img src="/images/photo/fortitude60-switch-in-plate.jpg" alt="" /></p>
+
+<ol>
+<li>基板とスイッチをはめたプレートを合体させます</li>
+</ol>
+
+
+<p><img src="/images/photo/fortitude60-docking-switch.jpg" alt="" /></p>
+
+<ol>
+<li>LED をスイッチに刺します。</li>
+</ol>
+
+
+<p><img src="/images/photo/fortitude60-led-in-switch.jpg" alt="" /></p>
+
+<ol>
+<li>半田付します。</li>
+</ol>
+
+
+<p><img src="/images/photo/fortitude60-soldering-switch.jpg" alt="" /></p>
+
+<ol>
+<li>MCU を基板に接続</li>
+</ol>
+
+
+<p><img src="/images/photo/fortitude60-mcu-on-keyboard.jpg" alt="" /></p>
+
+<ol>
+<li>通電確認!</li>
+</ol>
+
+
+<p><img src="/images/photo/fortitude60-lighting-keyboard.jpg" alt="" /></p>
+
+<ol>
+<li>keycap まうんと!</li>
+</ol>
+
+
+<p><img src="/images/photo/fortitude60-completing.jpg" alt="" /></p>
 
 <h2>おわり</h2>
 
