@@ -1,0 +1,232 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>RubyKaigi 2019 - katsyoshiのめもみたいなもの</title>
+	<meta name="author" content="katsyoshi">
+
+	
+	<meta name="description" content="RubyKaigi2019 があったので行ってきました。
+既に様々な人 が書いていますのでここでは気になった、よかったというセッションについて書きます。
+聴講選択基準としてよく asakusa.rb に来ているひとは外すことにしました。 0日目 前日入りしましたのでプレパーティ前に 秒速さん &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		<a class="coderwall" href="https://coderwall.com/katsyoshi" title="Coderwall">Coderwall</a>
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">RubyKaigi 2019</h2>
+	<div class="entry-content"><p><a href="https://rubykagi.org/2019">RubyKaigi2019</a> があったので行ってきました。
+<a href="http://b.hatena.ne.jp/search/text?q=rubykaigi2019">既に様々な人</a> が書いていますのでここでは気になった、よかったというセッションについて書きます。
+聴講選択基準としてよく <a href="https://asakusarb.esa.io">asakusa.rb</a> に来ているひとは外すことにしました。</p>
+
+<h2>0日目</h2>
+
+<p>前日入りしましたのでプレパーティ前に <a href="https://twitter.com/284km">秒速さん</a> と福岡のイカを食べに
+<a href="https://tabelog.com/fukuoka/A4001/A400104/40015417/">第三共進丸</a> へ行ってイカとゴマサバを食べました。</p>
+
+<p>今回の RubyKaigi では <a href="https://rubykaigi.org/2019/parties">複数プレパーティ</a> があり、 <a href="https://pepabo.connpass.com/event/124168/">プレパーティ</a> は <a href="https://pepabo.com/">GMO Pepabo</a> の <a href="https://www.ippudo.com/store/nishidori_stand/">一風堂スタンド</a> に行きました。
+ここで LT が3件あり、福岡市役所、ペパボ、<a href="https://twitter.com/yugui">Yuguiさん</a> が話してくれました。
+特に福岡市役所の方が直々に来て如何に自治体が本気を出して企業誘致をするか、しているかを話してくれていました。
+Yugui さんの LT は地図の話するということでしたので、地図をどう見せるかの話をしてくれました。</p>
+
+<h2>1日目</h2>
+
+<p>初日に見たリストは以下になります。</p>
+
+<ol>
+<li>matz キーノート</li>
+<li>Ruby3 Progress</li>
+<li>How to take over a Ruby gem</li>
+<li>Determing Ruby Process Counts: Theory and Practice</li>
+<li>Compiling Ruby to idimomatic code in static language</li>
+<li>Fiber Are the Right Solution</li>
+<li>Compacting GC for MRI v2</li>
+</ol>
+
+
+<p>このなかで期待したのが <strong>Compling Ruby to idimomatic code in static language</strong> でした。
+こちらは基本 Ruby のコードを <a href="https://nim-lang.org/">Nim</a> へ変換するためにやったことをはなししていました。
+<strong>Fiber</strong> のやつは非同期すると速くなるかもねって感じでおわらせています。
+<a href="https://github.com/tenderlove">Aaron</a> は Aaron だなーとおもいながら聴いていました。</p>
+
+<p>後で聞いて失敗したなってやつが、 Matz と Ruby3 progress の間にトイレをガマンしてたので走ってトイレに行ってたら、
+福岡県知事が出てきて <strong>RubyKaigi</strong> めっちゃ楽しみにしてたっていう話をされていたというのを
+聴き逃がしたのがかなりの後悔点です。</p>
+
+<h2>2日目</h2>
+
+<ol>
+<li>All bugfix are incompatibilities</li>
+<li>Pratical mruby/c firmware development with CRuby</li>
+<li>RubyData Workshop</li>
+<li>A light weight JIT compiler project for CRuby</li>
+<li>What is Domain Specific Language?</li>
+<li>LT</li>
+</ol>
+
+
+<p>この日一番の衝撃的なできごととしては RubyData Workshop で
+最近 <a href="https://github.com/sonots/cumo"><strong>Cumo</strong></a> でも動くようにちょっとずつ対応している、
+<a href="https://github.com/yoshoku/rumale"><strong>Rumale</strong></a> の読みが <code>ルメール</code> ではなく <code>ラムエール</code> だったことです(この場で発表された)。</p>
+
+<h2>3日目</h2>
+
+<ol>
+<li>Fuzzing native Ruby code with Kisaten</li>
+<li>Running Ruby on Apple II</li>
+<li>Performance Optimization Techniques of MessagePack-Ruby</li>
+<li>Timezone API</li>
+<li>The send-pop optimization</li>
+<li>Optimization Techniques Used by the Benchmark Winners</li>
+</ol>
+
+
+<p>この日は <strong>Fuzzing</strong> という文字列を見かけたのでこちらを聴講。
+<code>Gem</code> をリリースしているみたいで使ってみようかとおもった。</p>
+
+<h2>おわり</h2>
+
+<p>今回は全セッション聴講しました。このなかで一番すきな発表としては
+Ruby on Apple II のやつがぶっとんでてよかったですね。
+最後のキーノートは疲れながらも聴いていたが、
+ネルネルネルーとおもった瞬間に「お前はなにを言っているんだ？」っていう
+スライドが表れて大変よかった。</p>
+
+<p>来年の RubyKaigi 2020 はMatz本なのでまた参加しますねこれは。</p>
+
+<p>今年の RubyKaigi 飯の写真は以下になります。</p>
+
+<p><a href="https://www.amazon.co.jp/photos/share/JMFkdlomW29NdLar2a5tFydS6PjEMlkp5mLDO6dcVjn">RubyKaigi 2019</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/rubykaigi/'>rubykaigi</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2019
+
+    katsyoshi
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-49549546-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

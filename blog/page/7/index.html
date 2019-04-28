@@ -7,10 +7,12 @@
 	<meta name="author" content="katsyoshi">
 
 	
-	<meta name="description" content="急に xdg-open でブラウザが開かなくなったのでメモ 1
+	<meta name="description" content="自分でblogを管理するのがちょっとだけ面倒になってきたので、
+このblogをgithub.ioに移行した。 手順 github.com に katsyoshi.github.io というリポジトリを作成し、以下のコマンドを実行 1
 2
-$ xdg-mime default google-chrome.desktop x-scheme-handler/http
-$ xdg-mime default google-chrome.desktop x-scheme- &hellip;">
+3
+4
+$ rake setup_github_pages &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -79,6 +81,89 @@ $ xdg-mime default google-chrome.desktop x-scheme- &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2015/02/22/mv-sakura-github-dot-io/">
+		
+			Blogの引越し</a>
+	</h2>
+	<div class="entry-content">
+		<p>自分でblogを管理するのがちょっとだけ面倒になってきたので、
+このblogを<a href="katsyoshi.github.io">github.io</a>に移行した。</p>
+
+<h2>手順</h2>
+
+<p>github.com に <code>katsyoshi.github.io</code> というリポジトリを作成し、以下のコマンドを実行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake setup_github_pages
+</span><span class='line'>set your github repogitory
+</span><span class='line'>$ rake generate
+</span><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そのあと、DNSでCNAMEに <code>katsyoshi.github.io</code> を設定し、リポジトリ<del>のトップ</del>に <code>blog.katsyoshi.org</code> と書いた <code>source/CNAME</code> ファイルを追加しおわりです。</p>
+
+<h2>おわり</h2>
+
+<p>おわり</p>
+
+<h2>追記</h2>
+
+<p>実は記事を追加したあと <code>rake deploy</code> ができないという問題がありましたが、そのときは、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake generate
+</span><span class='line'>$ cd _deploy
+</span><span class='line'>$ git pull origin/master
+</span><span class='line'>$ cd ../
+</span><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で更新されます。</p>
+
+<h3>参考サイト</h3>
+
+<ol>
+<li><a href="http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/">http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/</a></li>
+<li><a href="http://blog.textfile.org/20141014/github/">http://blog.textfile.org/20141014/github/</a></li>
+<li><a href="http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress">http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress</a></li>
+<li><a href="http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/">http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/</a></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+</div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -686,94 +771,6 @@ Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
 
 
 	<a class='category' href='/blog/categories/docker/'>docker</a>, <a class='category' href='/blog/categories/gentoo/'>gentoo</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/09/22/rubykaigi2014/">
-		
-			RubyKaigi2014</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="http://rubykaigi.org/2014">RubyKaigi2014</a>に行ってきました。
-聞いたもの一覧です。</p>
-
-<h2>1日目</h2>
-
-<ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-KoichiSasada">Building the Ruby interpreter &mdash; What is easy and what is difficult?</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-NarihiroNakamura">Symbol GC</a> <a href="http://www.slideshare.net/authorNari/symbol-gc">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ReiOdaira">Eliminating Giant VM Lock in Ruby through Hardware Transactional Memory</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-SzuKaiHsu">Cores unleashed Part II: Introduction to GobiesVM (and Software Transactional Memory)</a> <a href="https://speakerdeck.com/brucehsu/core-unleashed-part-ii-introduction-to-gobiesvm-and-stm-at-rubykaigi-2014">スライド</a></li>
-<li>Committers vs. the world</li>
-</ul>
-
-
-<p>初日は笹田さんのキーノートを聞いた。あとはなりさんのSymbolをGCする話、HTM、STMの話を聞いていた。
-SymbolをGCする話はいままでGCされないことを知らなかったので便利かなと。
-懇親会では、笹田さんと鳥井さんがペアルックだったので写真撮ったのですが、携帯のカメラアプリで保存できなかったのが心のこりです。</p>
-
-<h2>2日目</h2>
-
-<ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-YukihiroMatzMatsumoto">Comming soon&hellip;</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroIde">A Just in Time compiler for CRuby (CRuby言語処理系向けJITコンパイラ)</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ThiagoScalone-DanielRodriguez">MRuby as Development Platform for Payments</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-TakehikoYOSHIDA">Open the door of embedded systems to IoT! mruby on LEGO Mindstorms EV3®</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-ShotaFukumori">Scalable deployments &ndash; How we deploy Rails app to 100+ hosts in a minute</a> <a href="https://speakerdeck.com/sorah/scalable-deployments-how-we-deploy-rails-app-to-150-plus-hosts-in-a-minute">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MATSUMOTORyosuke">Resource Control Architecture scripting with mruby for a Web Server Separating Computer Resources Virtually at Each HTTP Request</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroNakagawa">ServerEngine: a framework for multiprocess servers in Ruby</a> <a href="http://www.slideshare.net/treasure-data/rubykaigi-2014-serverengine">スライド</a></li>
-<li><a href="http://rubykaigi.org/2014/LT">Ligthting Talks</a></li>
-</ul>
-
-
-<p>RubyをJIT使って速くしようという話。福盛さんのデプロイを早くするのは面白かった。どこで利用できるのって話はおいておいて。
-松本(り)さんはこのtalkが切っ掛けで<a href="http://hb.matsumoto-r.jp/entry/2014/09/20/003531">就職決まった</a>ようです。LTも面白かったです。</p>
-
-<h2>3日目</h2>
-
-<ul>
-<li><a href="http://rubykaigi.org/2014/presentation/S-JonanScheffler">Everything is Broken: A Story of Hope</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-NaotoshiSeo">Fluentd Hacking Guide (Fluentd ソースコード完全解説)</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-PremSichanugrist">The Ruby Challenge</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-MasatoshiSEKI">Make your own synchronization mechanism.</a></li>
-<li><a href="http://rubykaigi.org/2014/presentation/S-KouheiSutou">Three Ruby usages &ndash; High-level interface, Glue and Embedding &ndash; Inside Droonga</a> <a href="http://speakerdeck.com/u/kou/p/three-ruby-usages">スライド</a></li>
-</ul>
-
-
-<p>3日目はゆっくり来てAaronとか聞こうかとおもってたけど、午前中はロビーでだらだらしすぎてなにもきいていないです。
-午後から、Jonanは2011の最後のRubyKaigiのときに会ってたので今こういうことやってるのだなーと。
-fluentdのプラグイン書いてるけど、なんとなく動いてるし、そのプラグインを利用してて特に問題なかったので、これがあってよかった。
-RubyChallengeはコミッタでも間違えててむずかしい。
-咳さんと須藤さんの話はすごくよかった。</p>
-
-<h2>おわり</h2>
-
-<p>RubyKaigi2014行ってきました。この3日間非常に楽しく過ごせました。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
 
 
 </div>
