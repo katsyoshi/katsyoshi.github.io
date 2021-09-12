@@ -44,6 +44,42 @@
 
 
 
+  <h1><a href="/blog/2015/04/06/careless-miss/">不注意なこと</a></h1>
+  <p class="author">
+    <span class="date">2015-04-06 22:25:28 +0900</span>
+  </p>
+  <div class="content">
+    <p>Ubuntuで <code class="language-plaintext highlighter-rouge">lxc</code> を利用して、サーバを立ててたときに嵌ったこと</p>
+
+<h2 id="はじまり">はじまり</h2>
+
+<p>Proxyを利用してインターネットに接続している。
+このネットワークとして <code class="language-plaintext highlighter-rouge">ping</code> はLAN内なら届くが、外(google.com)とかには出ない。
+設定がうまくいってるかどうかの確認する方法として、 <code class="language-plaintext highlighter-rouge">apt-get update</code> を利用して確認している。</p>
+
+<p>最初は、 <code class="language-plaintext highlighter-rouge">lxc</code> の設定がうまくいっていないと思いなんども見直してたりした。
+それでもWANの方に出ることができなかった。</p>
+
+<p>サーバのネットワーク設定がよくないと思ってなんども見直したけど、問題なさそう。
+最後に <code class="language-plaintext highlighter-rouge">sudo -i</code> で root にログインしたあと、 <code class="language-plaintext highlighter-rouge">apt-get update</code> したら、
+ダウンロードはじまり、次へ進むことができた。</p>
+
+<h2 id="原因">原因</h2>
+
+<p>原因としては <code class="language-plaintext highlighter-rouge">sudo command</code> で実行しても <code class="language-plaintext highlighter-rouge">Defaults reset_env</code> で環境変数がリセットされてたようだった。
+ので、<code class="language-plaintext highlighter-rouge">Defaults keep_env+="PATH"</code> とか追加して解決した。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>簡単なミスで3時間ほど時間を費したのでなんとかしたい。</p>
+
+<h3 id="参考url">参考URL</h3>
+<ol>
+  <li>http://www.maepachi.com/blog/entry?id=128</li>
+  <li>http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv</li>
+</ol>
+
+  </div>
+
   <h1><a href="/blog/2015/03/18/party-of-asakusa-dot-rb-300th/">Asakusa.rbの300回記念パーティに行ってきた</a></h1>
   <p class="author">
     <span class="date">2015-03-18 01:26:33 +0900</span>
@@ -365,36 +401,6 @@ $ tsd query jquery -osa install
 
 <p>でいけますよ。
 が <code class="language-plaintext highlighter-rouge">$('#hello').text('hoge');</code> いかねぇ。</p>
-
-  </div>
-
-  <h1><a href="/blog/2014/12/01/mikutter-advent-calendar-1-day/">mikutter advent calendar 1日目</a></h1>
-  <p class="author">
-    <span class="date">2014-12-01 23:59:59 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="http://www.adventar.org/calendar/401">一日目</a>らしいですね。</p>
-
-<h2 id="今のmikutter環境">今のmikutter環境</h2>
-
-<p>はGentoo/Linuxで動いています。</p>
-
-<p>よく考えてみたら今の環境になってLinuxでmikutterを使うのははじめてです。 Linuxになって一番感じたのインストールすごく楽になったことです。</p>
-
-<h2 id="今までのmikutter環境">今までのmikutter環境</h2>
-
-<p>今までMacで基本的に利用してたので苦労してた。 Macではとくにインストール、gemのupdateが大変でした。 Macでの環境では、HomebrewのGTK2のせいか、RubyGtk2がまともに動かないことが頻繁におこりました。 あと、最後まで解決できなかったのが特定の文字列がくるとクラッシュするというバグがありました。</p>
-
-<h2 id="mikutterとの出会い">mikutterとの出会い</h2>
-
-<p>出会いとしてはtwitterでTLを眺めてたら、@toshi_a って人がtwitterクライアントをつくってるらしいということで 取り敢えずFreeBSDでインストールしたのがはじめてだったとおもいます。 このときはFreeBSDでインストールして、X転送したものをMacで表示したとおもいます。</p>
-
-<p>それ以降はMacでインストールして、<a href="http://github.com/katsyoshi/fav">mikutterのプラグイン</a>を書いて公開したりしてました。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>おわりおわり。</p>
-
 
   </div>
 
