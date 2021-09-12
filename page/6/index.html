@@ -44,50 +44,6 @@
 
 
 
-  <h1><a href="/blog/2015/08/02/hello-itamae-plugins/">こんにちは、いたまえさん</a></h1>
-  <p class="author">
-    <span class="date">2015-08-02 21:33:46 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="https://github.com/sstephenson/rbenv">rbenv</a> を <a href="https://github.com/itamae-kitchen/itamae">itamae</a> の <a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv">プラグイン</a> を利用してインストールしようとしたら、対象サーバがプロキシーのあるネットワークであり、gitでダウンロードできなかったので、<a href="https://github.com/k0kubun/itamae-plugin-recipe-rbenv/pull/9">httpsを指定できる</a>ようしてもらいました。</p>
-
-<h2 id="plenv-と-pyenv">plenv と pyenv</h2>
-<p>また、rbenv のプラグインを参考に <a href="https://github.com/katsyoshi/itamae-plugin-recipe-plenv">plenv</a> と <a href="https://github.com/katsyoshi/itamae-plugin-recipe-pyenv">pyenv</a> を作ってみました。</p>
-
-<p>これらふたつのプラグインはまだgemになっていないので、<code class="language-plaintext highlighter-rouge">Gemfile</code> に以下のように追加し、</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s1">'itamae'</span>
-<span class="n">gem</span> <span class="s1">'itamae-plugin-recipe-plenv'</span><span class="p">,</span> <span class="ss">github: </span><span class="s1">'katsyoshi/itamae-plugin-recipe-plenv'</span>
-<span class="n">gem</span> <span class="s1">'itamae-plugin-recipe-pyenv'</span><span class="p">,</span> <span class="ss">github: </span><span class="s1">'katsyoshi/itamae-plugin-recipe-pyenv'</span>
-</code></pre></div></div>
-
-<p>recipeとしては以下のようにしてください。</p>
-
-<p>```ruby recipe.rb
-include_recipe ‘pyenv::system’
-include_recipe ‘plenv::system’</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-設定例としては、rbenvのプラグインと同じように設定します。
-
-```json
-{
-  "plenv" : {
-    "versions" : ["5.22.0", "5.20.2"],
-    "global"   : "5.22.0"
-  },
-  "pyenv" : {
-    "versions" : ["3.4.3", "3.5.0b2"],
-    "global"   : "3.4.3"
-  }
-}
-</code></pre></div></div>
-
-<h2 id="おわり">おわり</h2>
-
-<p>おわり</p>
-
-  </div>
-
   <h1><a href="/blog/2015/06/26/sir-elasticsearch/">elasticsearchどの〜</a></h1>
   <p class="author">
     <span class="date">2015-06-26 00:26:10 +0900</span>
@@ -383,6 +339,42 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 <p>おわり。</p>
 
 <p>そのうち <code class="language-plaintext highlighter-rouge">lxc</code> で100個ほどのインスタンスのベンチマークとりたい…</p>
+
+  </div>
+
+  <h1><a href="/blog/2015/04/06/careless-miss/">不注意なこと</a></h1>
+  <p class="author">
+    <span class="date">2015-04-06 22:25:28 +0900</span>
+  </p>
+  <div class="content">
+    <p>Ubuntuで <code class="language-plaintext highlighter-rouge">lxc</code> を利用して、サーバを立ててたときに嵌ったこと</p>
+
+<h2 id="はじまり">はじまり</h2>
+
+<p>Proxyを利用してインターネットに接続している。
+このネットワークとして <code class="language-plaintext highlighter-rouge">ping</code> はLAN内なら届くが、外(google.com)とかには出ない。
+設定がうまくいってるかどうかの確認する方法として、 <code class="language-plaintext highlighter-rouge">apt-get update</code> を利用して確認している。</p>
+
+<p>最初は、 <code class="language-plaintext highlighter-rouge">lxc</code> の設定がうまくいっていないと思いなんども見直してたりした。
+それでもWANの方に出ることができなかった。</p>
+
+<p>サーバのネットワーク設定がよくないと思ってなんども見直したけど、問題なさそう。
+最後に <code class="language-plaintext highlighter-rouge">sudo -i</code> で root にログインしたあと、 <code class="language-plaintext highlighter-rouge">apt-get update</code> したら、
+ダウンロードはじまり、次へ進むことができた。</p>
+
+<h2 id="原因">原因</h2>
+
+<p>原因としては <code class="language-plaintext highlighter-rouge">sudo command</code> で実行しても <code class="language-plaintext highlighter-rouge">Defaults reset_env</code> で環境変数がリセットされてたようだった。
+ので、<code class="language-plaintext highlighter-rouge">Defaults keep_env+="PATH"</code> とか追加して解決した。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>簡単なミスで3時間ほど時間を費したのでなんとかしたい。</p>
+
+<h3 id="参考url">参考URL</h3>
+<ol>
+  <li>http://www.maepachi.com/blog/entry?id=128</li>
+  <li>http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv</li>
+</ol>
 
   </div>
 

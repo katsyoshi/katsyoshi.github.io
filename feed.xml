@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2021-09-13T02:18:15+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">2021.takout.rubykaigi.org</title><link href="https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/" rel="alternate" type="text/html" title="2021.takout.rubykaigi.org" /><published>2021-09-12T00:00:00+09:00</published><updated>2021-09-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">&lt;p&gt;今年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で &lt;a href=&quot;https://rubykaigi.org&quot;&gt;RubyKaigi&lt;/a&gt; のオンラインイベント化された &lt;a href=&quot;https://rubykaigi.org/2021-takeout&quot;&gt;RubyKaigi Takeout 2021&lt;/a&gt; に行ってきた。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2021-09-13T02:19:36+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">2021.takeout.rubykaigi.org</title><link href="https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/" rel="alternate" type="text/html" title="2021.takeout.rubykaigi.org" /><published>2021-09-12T00:00:00+09:00</published><updated>2021-09-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">&lt;p&gt;今年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で &lt;a href=&quot;https://rubykaigi.org&quot;&gt;RubyKaigi&lt;/a&gt; のオンラインイベント化された &lt;a href=&quot;https://rubykaigi.org/2021-takeout&quot;&gt;RubyKaigi Takeout 2021&lt;/a&gt; に行ってきた。&lt;/p&gt;
 
 &lt;p&gt;去年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で takeout をやっていたがすっかり忘れてたので参加していなかった。ので 2 年ぶりの参加である。&lt;/p&gt;
 
@@ -69,78 +69,7 @@
 
 &lt;h2 id=&quot;matome&quot;&gt;matome&lt;/h2&gt;
 
-&lt;p&gt;久しぶりの RubyKaigi 参加で大変たのしく、興奮した3日間でした!!!&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="rubykaigi" /><summary type="html">今年も COVID-19 の影響で RubyKaigi のオンラインイベント化された RubyKaigi Takeout 2021 に行ってきた。</summary></entry><entry><title type="html">2021.takeout.rubykaigi.org</title><link href="https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/" rel="alternate" type="text/html" title="2021.takeout.rubykaigi.org" /><published>2021-09-12T00:00:00+09:00</published><updated>2021-09-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">&lt;p&gt;今年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で &lt;a href=&quot;https://rubykaigi.org&quot;&gt;RubyKaigi&lt;/a&gt; のオンラインイベント化された &lt;a href=&quot;https://rubykaigi.org/2021-takeout&quot;&gt;RubyKaigi Takeout 2021&lt;/a&gt; に行ってきた。&lt;/p&gt;
-
-&lt;p&gt;去年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で takeout をやっていたがすっかり忘れてたので参加していなかった。ので 2 年ぶりの参加である。&lt;/p&gt;
-
-&lt;p&gt;見たセッションは開催日毎に以下のようになった。&lt;/p&gt;
-
-&lt;h2 id=&quot;day-1&quot;&gt;day: 1&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Yusuke Endo, “TypeProf for IDE: Enrich Dev-Experience without Annotations,” https://rubykaigi.org/2021-takeout/presentations/mametter.html&lt;/li&gt;
-  &lt;li&gt;Takeshi Kokubun, “Why Ruby’s JIT was slow,” https://rubykaigi.org/2021-takeout/presentations/k0kubun.html&lt;/li&gt;
-  &lt;li&gt;Jeremy Evance, “Optimizing Partial Backtraces in Ruby 3,” https://rubykaigi.org/2021-takeout/presentations/jeremyevans0.html&lt;/li&gt;
-  &lt;li&gt;Nick Schwaderer, “Ruby Archaeology,” https://rubykaigi.org/2021-takeout/presentations/schwad4hd14.html&lt;/li&gt;
-  &lt;li&gt;Masaki Shioi, “Toycol: Define your own application protocol,” https://rubykaigi.org/2021-takeout/presentations/coe401_.html&lt;/li&gt;
-  &lt;li&gt;Masatoshi Seki, and Tatsuya Sonokawa, “dRuby in the real-world embedded systems.,” https://rubykaigi.org/2021-takeout/presentations/m_seki.html&lt;/li&gt;
-  &lt;li&gt;Uchio Kondo, “Story of Rucy - How to &quot;compile&quot; a BPF binary from Ruby,” https://rubykaigi.org/2021-takeout/presentations/udzura.html&lt;/li&gt;
-  &lt;li&gt;Ufuk Kayserilioglu, “ Demystifying DSLs for better analysis and understanding,” https://rubykaigi.org/2021-takeout/presentations/paracycle.html&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;day-2&quot;&gt;day: 2&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Chris Seaton, “The Future Shape of Ruby Objects,” https://rubykaigi.org/2021-takeout/presentations/chrisgseaton.html&lt;/li&gt;
-  &lt;li&gt;Hitoshi HASUMI, “PRK Firmware: Keyboard is Essentially Ruby,” https://rubykaigi.org/2021-takeout/presentations/hasumikin.html&lt;/li&gt;
-  &lt;li&gt;Maxime Chevalier-Boisvert, “YJIT - Building a new JIT Compiler inside CRuby,” https://rubykaigi.org/2021-takeout/presentations/maximecb.html&lt;/li&gt;
-  &lt;li&gt;Shugo Maeda, “include/prepend in refinements should be prohibited,” https://rubykaigi.org/2021-takeout/presentations/shugomaeda.html&lt;/li&gt;
-  &lt;li&gt;Satoshi “moris” Tagomori, “Ractor’s speed is not light-speed,” https://rubykaigi.org/2021-takeout/presentations/tagomoris.html&lt;/li&gt;
-  &lt;li&gt;CRuby Committers, “Ruby Commiters vs. the World,” https://rubykaigi.org/2021-takeout/presentations/rubylangorg.html&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;day-3&quot;&gt;day: 3&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;osyo, “Use Macro all the time ~ マクロを使いまくろ ~,” https://rubykaigi.org/2021-takeout/presentations/pink_bangbi.html&lt;/li&gt;
-  &lt;li&gt;Mauro Eldritch, “Crafting exploits, tools and havoc with Ruby,” https://rubykaigi.org/2021-takeout/presentations/MauroEldritch.html&lt;/li&gt;
-  &lt;li&gt;Mike Dalessio, “Building Native Extensions. This Could Take A While…,” https://rubykaigi.org/2021-takeout/presentations/flavorjones.html&lt;/li&gt;
-  &lt;li&gt;Richard Schneeman, “Beware the Dead End!!,” https://rubykaigi.org/2021-takeout/presentations/schneems.html&lt;/li&gt;
-  &lt;li&gt;Yusuke Nakamura, “Ruby, Ractor, QUIC,” https://rubykaigi.org/2021-takeout/presentations/yu_suke1994.html&lt;/li&gt;
-  &lt;li&gt;Mat Schaffer, “10 years of Ruby-powered citizen science,” https://rubykaigi.org/2021-takeout/presentations/matschaffer.html&lt;/li&gt;
-  &lt;li&gt;Yukihiro “Matz” Matsumoto, “Matz Keynote,” https://rubykaigi.org/2021-takeout/presentations/yukihiro_matz.html&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;セッションへの感想&quot;&gt;セッションへの感想&lt;/h2&gt;
-
-&lt;p&gt;印象に残ったセッションとしては、 2 日目の PRK, 3 日目 のマクロ, 3 日目の deadend, あたりが強烈に残っています。&lt;/p&gt;
-
-&lt;p&gt;PRK に関しては、 &lt;em&gt;&lt;a href=&quot;https://www.switch-science.com/catalog/3914/&quot;&gt;Promiro&lt;/a&gt;&lt;/em&gt; 互換 &lt;em&gt;&lt;a href=&quot;https://www.sparkfun.com/rp2040#boards&quot;&gt;RP2040&lt;/a&gt;&lt;/em&gt; で Ruby を使って firmware(keymap) を書けるところがとてもイイ!&lt;/p&gt;
-
-&lt;p&gt;マクロに関しては &lt;em&gt;&lt;a href=&quot;https://docs.ruby-lang.org/ja/latest/class/RubyVM=3a=3aAbstractSyntaxTree.html&quot;&gt;AST&lt;/a&gt;&lt;/em&gt; を利用したマクロでこれなら自分でも使えそうだしだなあ。(最近さわってる Rust にも macro あるけど、書くのは一見むずかしそう)。とりあえず後で触ってみるかという気分にさせてくれる発表内容でした。以下の2つのgemから利用できるようです。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;kenma: https://rubygems.org/gems/kenma&lt;/li&gt;
-  &lt;li&gt;rensei: https://rubygems.org/gems/rensei&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;最後に &lt;em&gt;&lt;a href=&quot;https://rubygems.org/gems/dead_end&quot;&gt;dead_end&lt;/a&gt;&lt;/em&gt; は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby -w&lt;/code&gt; でも同じようなことができそうだけど、 &lt;em&gt;&lt;a href=&quot;https://docs.ruby-lang.org/ja/latest/class/SyntaxError.html&quot;&gt;syntax error&lt;/a&gt;&lt;/em&gt; を早めに分かるための Gem でした。印象としてはメッチャ便利!と思ってたら&lt;a href=&quot;https://bugs.ruby-lang.org/issues/18159&quot;&gt;本体に入れる提案&lt;/a&gt;が走ってるようです。&lt;/p&gt;
-
-&lt;h2 id=&quot;感想戦の感想&quot;&gt;感想戦の感想&lt;/h2&gt;
-&lt;p&gt;2 日目、 3 日目の最終セッション後に zoom などで笹田さんを中心に感想戦が行なわれていました。
-2 日目は&lt;a href=&quot;https://bugs.ruby-lang.org/issues/12075&quot;&gt;最近話題になっていた議論&lt;/a&gt;を進めていたようです(この日はチョット疲れたので17:00頃に上ったけど、19:00頃までやっていたようです)。
-3 日目は Matz の振り返りを中心に感想戦が行なわれて印象に残った発表を聞いたりしてました。他にも&lt;a href=&quot;https://bugs.ruby-lang.org/issues/14579&quot;&gt;昔から要望してた機能&lt;/a&gt;の取り込みが行なわれてました。&lt;/p&gt;
-
-&lt;h2 id=&quot;takeout-全体の感想&quot;&gt;Takeout 全体の感想&lt;/h2&gt;
-
-&lt;p&gt;全体通しての感想としては、配信は開始直後にちょっとしたトラブルがあった以外は非常に快適でした。
-あとこの配信サービス自体も&lt;a href=&quot;https://github.com/ruby-no-kai/takeout-app&quot;&gt;自前で開発&lt;/a&gt;されたようで大変感謝しています。&lt;/p&gt;
-
-&lt;p&gt;折角なので他の人と感想話したいなーとおもったのでなんどか twitter spaces を開いてみたけど(当然)誰も参加してくれなかったのがちょっとさみしかったけど、mitaka-rb のみなさんが &lt;a href=&quot;https://spatial.chat/s/spatial-mitaka&quot;&gt;spatialchat&lt;/a&gt;  を立ててくれてたので雑談を毎回2時間ほどしてました。&lt;/p&gt;
-
-&lt;h2 id=&quot;matome&quot;&gt;matome&lt;/h2&gt;
-
-&lt;p&gt;久しぶりの RubyKaigi 参加で大変たのしく、興奮した3日間でした!!!&lt;/p&gt;</content><author><name></name></author><category term="source" /><category term="diary" /><category term="rubykaigi" /><summary type="html">今年も COVID-19 の影響で RubyKaigi のオンラインイベント化された RubyKaigi Takeout 2021 に行ってきた。</summary></entry><entry><title type="html">2020 買ってよかったものたち</title><link href="https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020/" rel="alternate" type="text/html" title="2020 買ってよかったものたち" /><published>2020-12-31T23:59:59+09:00</published><updated>2020-12-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020/">&lt;p&gt;今年は &lt;strong&gt;COVID-19&lt;/strong&gt; のためどこにも行けていないので買ってよかったものをあげていきます。
+&lt;p&gt;久しぶりの RubyKaigi 参加で大変たのしく、興奮した3日間でした!!!&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="rubykaigi" /><summary type="html">今年も COVID-19 の影響で RubyKaigi のオンラインイベント化された RubyKaigi Takeout 2021 に行ってきた。</summary></entry><entry><title type="html">2020 買ってよかったものたち</title><link href="https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020/" rel="alternate" type="text/html" title="2020 買ってよかったものたち" /><published>2020-12-31T23:59:59+09:00</published><updated>2020-12-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020/">&lt;p&gt;今年は &lt;strong&gt;COVID-19&lt;/strong&gt; のためどこにも行けていないので買ってよかったものをあげていきます。
 買ったものとしてあげないのは本や消耗品は載せないです。&lt;/p&gt;
 
 &lt;h2 id=&quot;アマゾンから-yodobashi-へ&quot;&gt;アマゾンから YODOBASHI へ&lt;/h2&gt;
@@ -607,4 +536,37 @@ rails s
 
 &lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
 
-&lt;p&gt;ということで &lt;em&gt;IMASARA&lt;/em&gt; ですが &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; からの脱却ついでに簡単に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn&lt;/code&gt; を利用した assets の導入をやってみました!&lt;/p&gt;</content><author><name></name></author><category term="tech" /><category term="rails" /><summary type="html">ひさびさに Ruby on Rails の話で、自作の rails application で rails-assets というところからいくつか gem を利用してたので それを Yarn で同様のパッケージをインストールするように変更した。</summary></entry></feed>
+&lt;p&gt;ということで &lt;em&gt;IMASARA&lt;/em&gt; ですが &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; からの脱却ついでに簡単に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn&lt;/code&gt; を利用した assets の導入をやってみました!&lt;/p&gt;</content><author><name></name></author><category term="tech" /><category term="rails" /><summary type="html">ひさびさに Ruby on Rails の話で、自作の rails application で rails-assets というところからいくつか gem を利用してたので それを Yarn で同様のパッケージをインストールするように変更した。</summary></entry><entry><title type="html">new keyboard</title><link href="https://blog.katsyoshi.org/blog/2018/10/18/new-keyboard/" rel="alternate" type="text/html" title="new keyboard" /><published>2018-10-18T23:45:09+09:00</published><updated>2018-10-18T23:45:09+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/10/18/new-keyboard</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/10/18/new-keyboard/">&lt;p&gt;タイトルのとおり家のキーボードを新調しました。&lt;/p&gt;
+
+&lt;h2 id=&quot;iris&quot;&gt;Iris&lt;/h2&gt;
+
+&lt;p&gt;機械学習でよく&lt;a href=&quot;https://archive.ics.uci.edu/ml/datasets/iris&quot;&gt;評価されるやつ&lt;/a&gt;じゃなくてキーボードであるやつです。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://keeb.io/&quot;&gt;keeb.io&lt;/a&gt; で売ってます。&lt;/p&gt;
+
+&lt;h3 id=&quot;購入&quot;&gt;購入&lt;/h3&gt;
+
+&lt;p&gt;欲しい欲しいといってたらいつのまにか復活したのでケースとセットで購入。&lt;/p&gt;
+
+&lt;h3 id=&quot;組み立て&quot;&gt;組み立て&lt;/h3&gt;
+
+&lt;p&gt;公式やASCIIにあるのでそれに従い組み立てハンダ付します。特に言うことはないです。&lt;/p&gt;
+
+&lt;p&gt;ハンダ付ミスっても近所に電子工作の得意なお兄さんに工具を借りれたのですぐに解決です。&lt;/p&gt;
+
+&lt;h3 id=&quot;完成&quot;&gt;完成&lt;/h3&gt;
+
+&lt;p&gt;はい。&lt;/p&gt;
+
+&lt;p&gt;-&amp;gt; &lt;img src=&quot;/images/photo/iris-keyboard.jpg&quot; alt=&quot;&quot; /&gt; &amp;lt;-&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+
+&lt;p&gt;この記事は新しいキーボードに慣れるため書いています。&lt;/p&gt;
+
+&lt;p&gt;今まで利用していた Kinesis のやつは仕事場に持っていってます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/katsyoshi/qmk_firmware&quot;&gt;配列&lt;/a&gt;を Kinesis で利用してた時と似せていますが、少し違うのでまだ打ちにくいです。&lt;/p&gt;
+
+&lt;p&gt;あと、技術書典5来てくださいた皆さまありがとうございました。
+次回も出そうという気が湧いてきましたので次回もよろしくお願いします。&lt;/p&gt;</content><author><name></name></author><category term="tech" /><category term="diary" /><category term="keyboard" /><summary type="html">タイトルのとおり家のキーボードを新調しました。</summary></entry></feed>
