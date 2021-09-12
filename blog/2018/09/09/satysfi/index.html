@@ -1,215 +1,125 @@
-
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>SATySFi使って本書いてみてる - katsyoshiのめもみたいなもの</title>
-	<meta name="author" content="katsyoshi">
-
-	
-	<meta name="description" content="技術書典5出しますので、それを書くために OCaml で作成された SATySFi を使いはじめました。 インストール 今回は OPAM を利用してインストールをしています。まあ単純にパッケージが今普段使いしてるOSにないだけなんですけどね。
-インストール手順は 公式のREADME.md &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	
-</head>
-
-
-<body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
-<nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
-</ul>
-</nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
-</ul>
-</div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="https://www.google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
-			</form>
-		</div>
-	</div>
-</nav>
-<nav id="sub-nav" class="alignright">
-	<div class="social">
-		
-		
-		
-		
-    
-		
-		<a class="coderwall" href="https://coderwall.com/katsyoshi" title="Coderwall">Coderwall</a>
-		
-		
-		
-		
-		
-		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
-		
-    
-	</div>
-	<form class="search" action="https://www.google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
-	</form>
-</nav>
-
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>SATySFi使って本書いてみてる | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="SATySFi使って本書いてみてる" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="技術書典5出しますので、それを書くために OCaml で作成された SATySFi を使いはじめました。" />
+<meta property="og:description" content="技術書典5出しますので、それを書くために OCaml で作成された SATySFi を使いはじめました。" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2018/09/09/satysfi/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2018/09/09/satysfi/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-09-09T14:29:46+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="SATySFi使って本書いてみてる" />
+<script type="application/ld+json">
+{"url":"https://blog.katsyoshi.org/blog/2018/09/09/satysfi/","headline":"SATySFi使って本書いてみてる","dateModified":"2018-09-09T14:29:46+09:00","datePublished":"2018-09-09T14:29:46+09:00","description":"技術書典5出しますので、それを書くために OCaml で作成された SATySFi を使いはじめました。","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2018/09/09/satysfi/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
 </header>
-	
-		
-	
-	<div id="content" class="inner"><article class="post">
-	<h2 class="title">SATySFi使って本書いてみてる</h2>
-	<div class="entry-content"><p>技術書典5出しますので、それを書くために <a href="https://ocaml.org/">OCaml</a> で作成された <a href="https://github.com/gfngfn/SATySFi">SATySFi</a> を使いはじめました。</p>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-<h2>インストール</h2>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">SATySFi使って本書いてみてる</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-09-09T14:29:46+09:00" itemprop="datePublished">Sep 9, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>技術書典5出しますので、それを書くために <a href="https://ocaml.org/">OCaml</a> で作成された <a href="https://github.com/gfngfn/SATySFi">SATySFi</a> を使いはじめました。</p>
+
+<h2 id="インストール">インストール</h2>
 
 <p>今回は <a href="https://opam.ocaml.org">OPAM</a> を利用してインストールをしています。まあ単純にパッケージが今普段使いしてるOSにないだけなんですけどね。
 インストール手順は <a href="https://github.com/gfngfn/SATySFi/blob/master/README-ja.md">公式のREADME.md</a> を参考にしています。</p>
 
-<h3>OPAM</h3>
+<h3 id="opam">OPAM</h3>
 
 <p>OCaml Package Manager の略らしいです。
-こいつは <code>OCaml</code> のインストールもしてくれるのでこれを利用します。
-<code>OPAM</code> のインストールは簡単で以下の<a href="https://opam.ocaml.org/doc/Install.html">スクリプトを実行する</a>だけです。</p>
+こいつは <code class="language-plaintext highlighter-rouge">OCaml</code> のインストールもしてくれるのでこれを利用します。
+<code class="language-plaintext highlighter-rouge">OPAM</code> のインストールは簡単で以下の<a href="https://opam.ocaml.org/doc/Install.html">スクリプトを実行する</a>だけです。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin</span></code></pre></td></tr></table></div></figure>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin
+</code></pre></div></div>
 
+<h3 id="ocaml">OCaml</h3>
 
-<h3>OCaml</h3>
+<p><code class="language-plaintext highlighter-rouge">OPAM</code> のインストールが終ったら、 <code class="language-plaintext highlighter-rouge">OCaml</code> をインストールします。</p>
 
-<p><code>OPAM</code> のインストールが終ったら、 <code>OCaml</code> をインストールします。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opam switch 4.06.0
+eval `opam config env`
+</code></pre></div></div>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>opam switch 4.06.0
-</span><span class='line'>eval `opam config env`</span></code></pre></td></tr></table></div></figure>
+<h3 id="satysfi">SATySFi</h3>
 
+<p><code class="language-plaintext highlighter-rouge">OPAM</code> の準備が整ったら <code class="language-plaintext highlighter-rouge">SATySFi</code> の準備、インストールをします。</p>
 
-<h3>SATySFi</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opam repository satysfi-external https://github.com/gfngfn/satysfi-external-repo.git
+opam update
+git clone https://github.com/gfngfn/SATySFi.git
+cd SATiSFi
 
-<p><code>OPAM</code> の準備が整ったら <code>SATySFi</code> の準備、インストールをします。</p>
+opam pin add satysfi .
+opam install satysfi
+</code></pre></div></div>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>opam repository satysfi-external https://github.com/gfngfn/satysfi-external-repo.git
-</span><span class='line'>opam update
-</span><span class='line'>git clone https://github.com/gfngfn/SATySFi.git
-</span><span class='line'>cd SATiSFi
-</span><span class='line'>
-</span><span class='line'>opam pin add satysfi .
-</span><span class='line'>opam install satysfi</span></code></pre></td></tr></table></div></figure>
+<h2 id="compile">compile!!!!</h2>
 
+<p>これでインストールされたのでとりあえずリポジトリにある <code class="language-plaintext highlighter-rouge">demo/demo.saty</code> をコンパイルしてみましょう。</p>
 
-<h2>compile!!!!</h2>
-
-<p>これでインストールされたのでとりあえずリポジトリにある <code>demo/demo.saty</code> をコンパイルしてみましょう。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd demo
-</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
-
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd demo
+make
+</code></pre></div></div>
 
 <p>なにも準備していないといきなりエラーがでますのでそれを<a href="https://github.com/gfngfn/SATySFi/blob/master/memo-ja-how-to-use.md">公式を参考にして</a>解消します。
-解消できたら <code>demo.pdf</code> ができますのでこれでつかえるようになります。</p>
+解消できたら <code class="language-plaintext highlighter-rouge">demo.pdf</code> ができますのでこれでつかえるようになります。</p>
 
-<h2>おわり</h2>
+<h2 id="おわり">おわり</h2>
 
-<p>ちょっと簡単でしたが、 <code>satysfi</code> の導入日記でした。</p>
+<p>ちょっと簡単でしたが、 <code class="language-plaintext highlighter-rouge">satysfi</code> の導入日記でした。</p>
 
 <p>そんなことより<a href="https://techbookfest.org/event/tbf05">技術書典5</a>に出します。ネタは酒に関するネタでやっていく予定です。
-仕上がっていれば <code>え37</code> に居るとおもわれます。</p>
-</div>
+仕上がっていれば <code class="language-plaintext highlighter-rouge">え37</code> に居るとおもわれます。</p>
 
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
+  </div><a class="u-url" href="/blog/2018/09/09/satysfi/" hidden></a>
 </article>
 
-	<div class="share">
-	<div class="addthis_toolbox addthis_default_style ">
-		
-		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-		
-		
-		<a class="addthis_button_tweet"></a>
-		
-		
-		
-	</div>
-	
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
 </div>
 
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
 
-</div>
-	<footer id="footer" class="inner">Copyright &copy; 2018
-
-    katsyoshi
+  </div>
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-	$('.fancybox').fancybox();
-})(jQuery);
-</script> <!-- Delete or comment this line to disable Fancybox -->
-
-
-
-
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-49549546-1']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-
-
-
 </body>
+
 </html>

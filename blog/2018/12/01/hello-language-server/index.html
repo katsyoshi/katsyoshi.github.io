@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>hello language server | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="hello language server" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="ここ1、2週間、 emacs で lsp-emacs を使いはじめたのでそのメモ" />
+<meta property="og:description" content="ここ1、2週間、 emacs で lsp-emacs を使いはじめたのでそのメモ" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-12-01T13:00:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="hello language server" />
+<script type="application/ld+json">
+{"url":"https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/","headline":"hello language server","dateModified":"2018-12-01T13:00:59+09:00","datePublished":"2018-12-01T13:00:59+09:00","description":"ここ1、2週間、 emacs で lsp-emacs を使いはじめたのでそのメモ","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">hello language server</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-12-01T13:00:59+09:00" itemprop="datePublished">Dec 1, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>ここ1、2週間、 emacs で <code class="language-plaintext highlighter-rouge">lsp-emacs</code> を使いはじめたのでそのメモ</p>
+
+<p><a href="https://langserver.org/">Language Server</a> と <a href="https://microsoft.github.io/language-server-protocol/specification">Language Server Protocol</a> ってなによ？って人はリンクをみてください。</p>
+
+<h2 id="導入">導入</h2>
+
+<p>導入は簡単で以下の3つをpackage-installでインストールしてしまえば OK です。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lsp-mode
+lsp-ui
+lsp-ruby
+</code></pre></div></div>
+
+<p>インストール後は <code class="language-plaintext highlighter-rouge">.emacs.d/init.el</code> あたりに、</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(require 'lsp-mode)
+(require 'lsp-ui)
+(require 'lsp-ruby)
+(add-hook 'ruby-mode-hook #'lsp-ruby-enable)
+</code></pre></div></div>
+
+<p>を追記すると emacs 側の設定はできました。</p>
+
+<p><code class="language-plaintext highlighter-rouge">lsp-ruby</code>(emacs) を起動する前に <code class="language-plaintext highlighter-rouge">gem install solargraph</code> で <code class="language-plaintext highlighter-rouge">solargraph</code> をインストールしておきましょう。</p>
+
+<h2 id="利用開始">利用開始!</h2>
+
+<p>利用開始するときは利用したいファイルのトップディレクトリ(プロジェクトディレクトリ)に、 <code class="language-plaintext highlighter-rouge">Gemfile</code> が必要です。</p>
+
+<p>でこんなかんじに表示してくれます。</p>
+
+<p>-&gt; <img src="/images/screenshot/lsp-ruby.png" alt="" /> &lt;-</p>
+
+<h2 id="matome">matome</h2>
+
+<p><code class="language-plaintext highlighter-rouge">lsp-ruby</code> を導入したけど、<code class="language-plaintext highlighter-rouge">solargraph</code> だとちょっとあれな表示が出て残念な気分に。
+また <code class="language-plaintext highlighter-rouge">rubocop</code> も基本的に要求されるようで…</p>
+
+  </div><a class="u-url" href="/blog/2018/12/01/hello-language-server/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

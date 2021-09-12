@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Page 8 of 10 for katsyoshi のめもみたいなの - page 8 | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="katsyoshi のめもみたいなの - page 8" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<link rel="canonical" href="https://blog.katsyoshi.org/page/8/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/page/8/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<link rel="prev" href="https://blog.katsyoshi.org/page/7/" />
+<link rel="next" href="https://blog.katsyoshi.org/page/9/" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="katsyoshi のめもみたいなの - page 8" />
+<script type="application/ld+json">
+{"url":"https://blog.katsyoshi.org/page/8/","headline":"katsyoshi のめもみたいなの - page 8","description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Pagination links -->
+<div class="pagination">
+  
+    <a href="/page/7/" class="previous">
+      Previous
+    </a>
+  
+  <span class="page_number ">
+    Page: 8 of 10
+  </span>
+  
+    <a href="/page/9/" class="next">Next</a>
+  
+</div>
+
+
+
+  <h1><a href="/blog/2014/11/21/remove-empty-example-files/">Railsで空のテストファイルを削除</a></h1>
+  <p class="author">
+    <span class="date">2014-11-21 16:07:38 +0900</span>
+  </p>
+  <div class="content">
+    <p>Ruby on RailsのプロジェクトでGit管理されているTestで空のテストファイルを
+削除するには以下のコマンドを利用することで削除できます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git grep -e it --or -e specify -L -- spec/{model,controller}s | xgrep git rm -f --
+</code></pre></div></div>
+
+<h3 id="参考">参考</h3>
+
+<ul>
+  <li><a href="https://www.kernel.org/pub/software/scm/git/docs/git-grep.html">man git grep</a></li>
+  <li><a href="http://qiita.com/tbaba/items/a67c8d79c6c4d0dc9b73">Git grepを便利に使う-eオプションについて</a></li>
+  <li><a href="http://qiita.com/rosylilly/items/9648ad2c8aa53465372b">複数人での Git 開発に便利な 3 つのコマンド</a></li>
+</ul>
+
+  </div>
+
+  <h1><a href="/blog/2014/11/04/mikutter-advent-calendar/">mikutter advent calendar</a></h1>
+  <p class="author">
+    <span class="date">2014-11-04 23:13:40 +0900</span>
+  </p>
+  <div class="content">
+    <p>寒くなりはじめましたね。今年も残すところあと二ヶ月ですね。
+先日、浅草浅草寺で、Ingressおじさんに声かけられてイライラしてます。</p>
+
+<p>そういうことで<a href="http://www.adventar.org/calendars/401">mikutterのAdventCalendar</a>を立てましたので参加してくだされ~</p>
+
+
+  </div>
+
+  <h1><a href="/blog/2014/10/01/pitfall-in-docker/">Dockerではまってます</a></h1>
+  <p class="author">
+    <span class="date">2014-10-01 21:11:04 +0900</span>
+  </p>
+  <div class="content">
+    <p>タイトルのとおりです。
+Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
+
+<h2 id="インストール">インストール</h2>
+<p>dockerの<a href="https://docs.docker.com/installation/gentoolinux/">Gentooインストールページ</a>を参考に<a href="https://github.com/tianon/docker-overlay">overlay</a>を導入します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo layman -a docker
+$ sudo eix-sync
+$ sudo emerge -av app-emulators/docker
+</code></pre></div></div>
+
+<p>ここでカーネルオプションの警告が出るのでひとつひとつ潰しておきます。</p>
+
+<h2 id="起動">起動</h2>
+<p>インストールおわったら、起動させますが、以下のようなログが出てるので起動できません。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2014/10/01 18:39:17 docker daemon: 1.1.2 d84a070; execdriver: native; graphdriver:
+[6c541422] +job serveapi(unix:///var/run/docker.sock)
+[6c541422] +job initserver()
+[6c541422.initserver()] Creating server
+[6c541422] +job init_networkdriver()
+[6c541422.init_networkdriver()] creating new bridge for docker0
+package not installed
+[6c541422] -job init_networkdriver() = ERR (1)
+package not installed
+[6c541422] -job initserver() = ERR (1)
+2014/10/01 18:39:17 package not installed
+</code></pre></div></div>
+
+<p>このときは <code class="language-plaintext highlighter-rouge">bridge-utils</code> をインストールすればいいのかなと思ってたら、インストールしても解決できないです。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>どなたか助けてくだされ〜</p>
+
+<h2 id="追記">追記</h2>
+
+<p>再構築したカーネルをインストールしてなかったというオチでした。</p>
+
+<p>ちゃんちゃん</p>
+
+  </div>
+
+  <h1><a href="/blog/2014/09/22/rubykaigi2014/">RubyKaigi2014</a></h1>
+  <p class="author">
+    <span class="date">2014-09-22 19:10:00 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="http://rubykaigi.org/2014">RubyKaigi2014</a>に行ってきました。
+聞いたもの一覧です。</p>
+
+<h2 id="1日目">1日目</h2>
+
+<ul>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-KoichiSasada">Building the Ruby interpreter – What is easy and what is difficult?</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-NarihiroNakamura">Symbol GC</a> <a href="http://www.slideshare.net/authorNari/symbol-gc">スライド</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-ReiOdaira">Eliminating Giant VM Lock in Ruby through Hardware Transactional Memory</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-SzuKaiHsu">Cores unleashed Part II: Introduction to GobiesVM (and Software Transactional Memory)</a> <a href="https://speakerdeck.com/brucehsu/core-unleashed-part-ii-introduction-to-gobiesvm-and-stm-at-rubykaigi-2014">スライド</a></li>
+  <li>Committers vs. the world</li>
+</ul>
+
+<p>初日は笹田さんのキーノートを聞いた。あとはなりさんのSymbolをGCする話、HTM、STMの話を聞いていた。
+SymbolをGCする話はいままでGCされないことを知らなかったので便利かなと。
+懇親会では、笹田さんと鳥井さんがペアルックだったので写真撮ったのですが、携帯のカメラアプリで保存できなかったのが心のこりです。</p>
+
+<h2 id="2日目">2日目</h2>
+
+<ul>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-YukihiroMatzMatsumoto">Comming soon…</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroIde">A Just in Time compiler for CRuby (CRuby言語処理系向けJITコンパイラ)</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-ThiagoScalone-DanielRodriguez">MRuby as Development Platform for Payments</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-TakehikoYOSHIDA">Open the door of embedded systems to IoT! mruby on LEGO Mindstorms EV3®</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-ShotaFukumori">Scalable deployments - How we deploy Rails app to 100+ hosts in a minute</a> <a href="https://speakerdeck.com/sorah/scalable-deployments-how-we-deploy-rails-app-to-150-plus-hosts-in-a-minute">スライド</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-MATSUMOTORyosuke">Resource Control Architecture scripting with mruby for a Web Server Separating Computer Resources Virtually at Each HTTP Request</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-MasahiroNakagawa">ServerEngine: a framework for multiprocess servers in Ruby</a> <a href="http://www.slideshare.net/treasure-data/rubykaigi-2014-serverengine">スライド</a></li>
+  <li><a href="http://rubykaigi.org/2014/LT">Ligthting Talks</a></li>
+</ul>
+
+<p>RubyをJIT使って速くしようという話。福盛さんのデプロイを早くするのは面白かった。どこで利用できるのって話はおいておいて。
+松本(り)さんはこのtalkが切っ掛けで<a href="http://hb.matsumoto-r.jp/entry/2014/09/20/003531">就職決まった</a>ようです。LTも面白かったです。</p>
+
+<h2 id="3日目">3日目</h2>
+<ul>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-JonanScheffler">Everything is Broken: A Story of Hope</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-NaotoshiSeo">Fluentd Hacking Guide (Fluentd ソースコード完全解説)</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-PremSichanugrist">The Ruby Challenge</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-MasatoshiSEKI">Make your own synchronization mechanism.</a></li>
+  <li><a href="http://rubykaigi.org/2014/presentation/S-KouheiSutou">Three Ruby usages - High-level interface, Glue and Embedding - Inside Droonga</a> <a href="http://speakerdeck.com/u/kou/p/three-ruby-usages">スライド</a></li>
+</ul>
+
+<p>3日目はゆっくり来てAaronとか聞こうかとおもってたけど、午前中はロビーでだらだらしすぎてなにもきいていないです。
+午後から、Jonanは2011の最後のRubyKaigiのときに会ってたので今こういうことやってるのだなーと。
+fluentdのプラグイン書いてるけど、なんとなく動いてるし、そのプラグインを利用してて特に問題なかったので、これがあってよかった。
+RubyChallengeはコミッタでも間違えててむずかしい。
+咳さんと須藤さんの話はすごくよかった。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>RubyKaigi2014行ってきました。この3日間非常に楽しく過ごせました。</p>
+
+
+  </div>
+
+  <h1><a href="/blog/2014/09/15/went-to-nagoya-and-nagano/">なごや、ながのに行ってきた</a></h1>
+  <p class="author">
+    <span class="date">2014-09-15 16:33:45 +0900</span>
+  </p>
+  <div class="content">
+    <p>友人が車で田舎に帰るということなので勢いで名古屋に連れてきてもらった。</p>
+
+<p>土曜日の夜７時東京出発で夜９時半ころに三島に着き、三島の友人とカレー食べた。</p>
+
+<p><img src="/images/photo/mishima-curry.jpg" alt="カレー" /></p>
+
+<p>泊まるとこ決めてないので名古屋まで連れてきてもらって、
+ぷらぷらして泊まるところを探してた。
+三連休の初日のためかネカフェがどこもいっぱいでしかたないので
+カラオケで一泊。</p>
+
+<p>が、実は寝れてなかったです。３０分ほど目を閉じてました。
+ので、退出時間に退出し、名古屋駅６時１２分発の中津川行きに乗り込み、
+中津川乗り換えの塩沢を目指しました。
+ここではなにごともなく乗り換えることができました。
+乗り換えたあとに目の前に座った女の子がかわいかったです。</p>
+
+<p>電車の中で温泉宿に行こうと、募集したら神のようなかたが、</p>
+
+<blockquote class="twitter-tweet" lang="ja"><p><a href="https://twitter.com/katsyoshi">@katsyoshi</a> このあたりからどうぞ。<a href="http://t.co/EEEEXKlTpE">http://t.co/EEEEXKlTpE</a></p>&mdash; 月白（I, bot）瑠璃 (@TsukishiroRuri) <a href="https://twitter.com/TsukishiroRuri/status/510889560532717568">September 13, 2014</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>ということだったので、ここの二位だった、<a href="http://www.akanejyku.com">茜宿</a>に行くことにしました。</p>
+
+<p>とはいえぶらりのーぷらんで塩尻に来ているので、どうやって行けばいいのか
+わからないのです。出発前のコミュニティバスの運転手さんに話を聞いたりしたり、
+また、タクシーの料金表があったので、それを見たら、片道4000円弱かかる
+ことがわかったので、レンタカーを借りることにしました。
+ペーパーの状態だったのに、この判断した俺は寝不足の勢いだけだったなと。</p>
+
+<p>借りた車に乗ってすぐに向かうところでしたが、下着をもってきてないことを思いだしたので、
+近くにスーパーマーケットらしきものを発見しすぐに行きました。
+下着類を調達したのでいざ温泉へ。</p>
+
+<p>温泉へはとくになにもなく無事に辿りつけました。
+温泉では、入湯以外に昼食もとれるということで、昼食も一緒にとることにしました。
+温泉自体は、眺めが非常によく、天気も大変よく、開放的な気分になりました。</p>
+
+<p><img src="/images/photo/gake-no-yu-akanejuku-nagame.jpg" alt="崖の湯" /></p>
+
+<p>温泉の温度がちょっと低かったのが残念かなという程度で、よかったです。
+温泉あがってから昼食で、天ざるそばを食べたのですが、そばは美味しかったです。</p>
+
+<p>温泉の後は、折角車があるのだし、まだ行ったことのない松本城に行くことにしました。
+松本城は、石垣の改修中とさらに、三連休の中日ということもあり、入るのに1時間、
+見学1時間という案内がでてたので、外から眺めるだけにしました。
+観光はこれぐらいにして帰ることにしましたが、渋滞が多く結構時間がかかりました。</p>
+
+<p><img src="/images/photo/matsumoto-jo-casle-info.jpg" alt="松本城" /></p>
+
+<p>最後に八王子によって夕飯を食べ、ておくれたと思わせつつも無事帰りつくことができました~。
+塩尻17時前出発して、21時前に八王子に到着しました。</p>
+
+<p>ということで名古屋から新宿まで塩尻を経由して鈍行の中央線を走破しました。
+おわり。</p>
+
+  </div>
+
+  <h1><a href="/blog/2014/09/12/jubatus-in-gentoo/">Gentoo LinuxむけのJubatusパッケージ書いたよ</a></h1>
+  <p class="author">
+    <span class="date">2014-09-12 12:29:20 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">PC</a>を<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">買い替えた</a>ので<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">環境構築</a>してます。
+<a href="https://github.com/kazuki/overlay/tree/master/sci-calculators/jubatus">Jubatusのoverlay</a>があったのですが、古かったので新しく<a href="https://github.com/katsyoshi/overlay">Jubatusのoverlay</a>作成しました。</p>
+
+<h2 id="インストール">インストール</h2>
+
+<p>これは、以下のコマンドでインストールができます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># curl https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml &gt; /etc/layman/overlays/katsyoshi.xml
+# layman -f -a katsyoshi
+# eix-sync
+# emerge -av jubatus
+</code></pre></div></div>
+
+<p>でいけるとおもいます。</p>
+
+<h2 id="未実装">未実装</h2>
+<ul>
+  <li>jubatus_coreのオプションがはたらいてない(ハズ)</li>
+  <li>jubatus_msgpack-rpcの依存パッケージにdev-libs/msgpackをいれていない</li>
+  <li>jubatusのオプションを確認していない</li>
+</ul>
+
+<p>などなどあるので、PRまってます。</p>
+
+<h2 id="まとめ">まとめ</h2>
+<p><a href="https://github.com/kazuki/overlay/">よくみたら</a>必要なライブラリのパッケージもあったのでこれのバージョンとjubatus_core追加するだけでよかったかも。</p>
+
+<p>ちゃんちゃん</p>
+
+
+  </div>
+
+  <h1><a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">Gentoo Install Battle Part III</a></h1>
+  <p class="author">
+    <span class="date">2014-08-31 10:47:14 +0900</span>
+  </p>
+  <div class="content">
+    <p>これ<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">まで</a>の<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">流れ</a>で準備が整ったので、Installを始めます。</p>
+
+<h2 id="インストール">インストール</h2>
+
+<p>これは<a href="http://wiki.gentoo.org/">Gentoo Wiki</a>を見ながらで大丈夫です。</p>
+
+<h3 id="嵌ったところ">嵌ったところ</h3>
+
+<p>音が鳴らないという問題が発生しました。<a href="http://pocke.hatenablog.com/entry/2014/02/02/100636">理由</a>は簡単でしたのですぐに設定しました。</p>
+
+<p>つぎにネットワークの設定をnetmountからNetworkManagerに変更しました。
+設定は<a href="http://wiki.gentoo.org/wiki/NetworkManager">ここ</a>で行なえばよいです。</p>
+
+<p>最後にibus-mozcをインストールして終りです。</p>
+
+<h2 id="mikutter">mikutter</h2>
+
+<p>GentooInstallBattleはmikutterをインストールしてtweetすることなのでmikutterをインストールします。
+ここではrbenvを利用してmikutterのインストールします。
+まずはrbenvとruby-buildをインストールします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</code></pre></div></div>
+
+<p>つぎにrbenvの設定を行います。以下の設定を<code class="language-plaintext highlighter-rouge">~/.bashrc</code>あたりに追記してください</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH=~/.rbenv/bin:$PATH
+eval "$(rbenv init -)"
+</code></pre></div></div>
+
+<p>Rubyのインストールは<code class="language-plaintext highlighter-rouge">rbenv install 2.1.2</code>でインストールします。
+最後にmikutterをダウンロードし、環境を構築します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/mikutter/mikutter.git ~/mikutter
+$ cd ~/mikutter
+$ bundle install
+$ bundle exec ruby mikutter.rb
+</code></pre></div></div>
+
+<p>でインストール終了!!
+これで快適なmikutterライフがておくれますね。</p>
+
+<p><img src="/images/photo/mikutter.png" alt="mikutter" /></p>
+
+
+  </div>
+
+  <h1><a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">Gentoo Install Battle Part II</a></h1>
+  <p class="author">
+    <span class="date">2014-08-21 20:01:51 +0900</span>
+  </p>
+  <div class="content">
+    <p>X240の準備は終ったので、<a href="http://wiki.gentoo.org/wiki/Quick_install_guide">インストール</a>します。基本的にはこの流れです。</p>
+
+<h2 id="usbブート">USBブート</h2>
+
+<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">作成したUSBメモリ</a>をX240に差して起動します。
+起動したら、まずパーティションの設定を行います。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gpart /dev/sda
+</code></pre></div></div>
+
+<p>で不要なパーティションを削除し、必要なパーティションを作成します。</p>
+
+<h2 id="無線lan">無線LAN</h2>
+
+<p>ネットワークを接続しますが、今回は無線LANを利用してインストールを行います。</p>
+
+<p>まず、どこか適当な位置に<a href="http://www.xmisao.com/2014/01/16/how-to-connect-wpa2-wireless-lan-using-wpa-supplicant.html">リンク先</a>のファイルを作成してください。</p>
+
+<p>次に以下のコマンドを実行します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config
+</code></pre></div></div>
+
+<p>実行したら、接続されているのでATL + F2とかでコンソールの表示を変更してください。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>有線のLANケーブルがなかったからはまった。
+続きは明日以降に…</p>
+
+  </div>
+
+  <h1><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">Gentoo Install Battle Part I</a></h1>
+  <p class="author">
+    <span class="date">2014-08-20 23:48:45 +0900</span>
+  </p>
+  <div class="content">
+    <p>ここにThinkPad X240があります。これの中身を Gentoo/Linux にします。</p>
+
+<h2 id="準備">準備</h2>
+
+<p>準備として、Gentoo/LinuxのLiveCDを作成、Bootの設定を行います。</p>
+
+<h3 id="イメージ作成">イメージ作成</h3>
+<p>まずLiveCDイメージをダウンロードしUSBフラッシュメモリにコピーします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wget ftp://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140814.iso
+$ dd of=/path/to/disk if=install-amd64-minimal-20140814.iso bs=4m
+</code></pre></div></div>
+
+<p>でイメージの作成終了です。
+次に、X240の設定を行います。</p>
+
+<h3 id="x240の起動準備">X240の起動準備</h3>
+<p>Windowsを起動し、Shift押しながら再起動します。
+再起動したら、以下の順番でBIOSを起動させます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>トラブルシューティング -&gt; 詳細オプション -&gt; UEFIファームウェアの設定 -&gt; 再起動
+</code></pre></div></div>
+
+<p>でBIOSがたちあがるので、Secure BootとUEFI BootとBoot順の設定を変更します。</p>
+
+<p>Seucre Bootでは<code class="language-plaintext highlighter-rouge">Securety -&gt; Secure Boot -&gt; Secure Boot [Enable]</code>を<code class="language-plaintext highlighter-rouge">[Disable]</code>に変更</p>
+
+<p>UEFI Bootでは<code class="language-plaintext highlighter-rouge">Startup -&gt; UEFI/Legacy Boot [UEFI only]</code>を<code class="language-plaintext highlighter-rouge">[Both]</code>に変更</p>
+
+<p>Boot順の設定では、<code class="language-plaintext highlighter-rouge">Startup -&gt; Boot</code>でBootさせたい順番に変更</p>
+
+<p>BIOSを変更したらRestartします。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>とりあえず今日はここで終りです。インストールは明日以降にします。</p>
+
+  </div>
+
+  <h1><a href="/blog/2014/08/10/good-bye-elasticsearch-and-jenkins/">good-bye elasticsearch and jenkins</a></h1>
+  <p class="author">
+    <span class="date">2014-08-10 23:22:55 +0900</span>
+  </p>
+  <div class="content">
+    <p>この環境では慢性的にメモリが足りなかったのでメモリを大量に使ってる<a href="http://www.elasticsearch.org/">Elasticsearch</a>を削除しました。
+Jenkinsについては利用していなかったので停止してます。ついでに12.04から14.04にupgradeしました。</p>
+
+<h2 id="削除とupgrade">削除とUpgrade</h2>
+<p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
+Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt-get purge elasticsearch
+$ sudo update-rc.d jenkins disable
+</code></pre></div></div>
+
+<p>つぎに14.04へupgradeを行ないます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo do-release-upgrade -d
+</code></pre></div></div>
+
+<p>これで14.04になってます。</p>
+
+<h2 id="環境">環境</h2>
+<ul>
+  <li>Machine: さくらVPS</li>
+  <li>CPU: Intel Xeon E312xx (SandyBridge) * 2</li>
+  <li>MEM: 1GB</li>
+  <li>HDD: 100GB</li>
+  <li>OS: Ubuntu Linux 12.04</li>
+</ul>
+
+<h2 id="インストール済ソフトウェア一部">インストール済ソフトウェア（一部）</h2>
+<ul>
+  <li>Elasticsearch</li>
+  <li>fluentd</li>
+  <li>Jenkins</li>
+  <li>Jubatus</li>
+  <li>Norikra</li>
+  <li>Nginx</li>
+</ul>
+
+  </div>
+
+
+<!-- Pagination links -->
+<div class="pagination">
+  
+    <a href="/page/7/" class="previous">
+      Previous
+    </a>
+  
+  <span class="page_number ">
+    Page: 8 of 10
+  </span>
+  
+    <a href="/page/9/" class="next">Next</a>
+  
+</div>
+
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

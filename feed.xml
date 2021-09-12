@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2021-09-13T02:00:55+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">2021.takout.rubykaigi.org</title><link href="https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/" rel="alternate" type="text/html" title="2021.takout.rubykaigi.org" /><published>2021-09-12T00:00:00+09:00</published><updated>2021-09-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">&lt;p&gt;今年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で &lt;a href=&quot;https://rubykaigi.org&quot;&gt;RubyKaigi&lt;/a&gt; のオンラインイベント化された &lt;a href=&quot;https://rubykaigi.org/2021-takeout&quot;&gt;RubyKaigi Takeout 2021&lt;/a&gt; に行ってきた。&lt;/p&gt;
+
+&lt;p&gt;去年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で takeout をやっていたがすっかり忘れてたので参加していなかった。ので 2 年ぶりの参加である。&lt;/p&gt;
+
+&lt;p&gt;見たセッションは開催日毎に以下のようになった。&lt;/p&gt;
+
+&lt;h2 id=&quot;day-1&quot;&gt;day: 1&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Yusuke Endo, “TypeProf for IDE: Enrich Dev-Experience without Annotations,” https://rubykaigi.org/2021-takeout/presentations/mametter.html&lt;/li&gt;
+  &lt;li&gt;Takeshi Kokubun, “Why Ruby’s JIT was slow,” https://rubykaigi.org/2021-takeout/presentations/k0kubun.html&lt;/li&gt;
+  &lt;li&gt;Jeremy Evance, “Optimizing Partial Backtraces in Ruby 3,” https://rubykaigi.org/2021-takeout/presentations/jeremyevans0.html&lt;/li&gt;
+  &lt;li&gt;Nick Schwaderer, “Ruby Archaeology,” https://rubykaigi.org/2021-takeout/presentations/schwad4hd14.html&lt;/li&gt;
+  &lt;li&gt;Masaki Shioi, “Toycol: Define your own application protocol,” https://rubykaigi.org/2021-takeout/presentations/coe401_.html&lt;/li&gt;
+  &lt;li&gt;Masatoshi Seki, and Tatsuya Sonokawa, “dRuby in the real-world embedded systems.,” https://rubykaigi.org/2021-takeout/presentations/m_seki.html&lt;/li&gt;
+  &lt;li&gt;Uchio Kondo, “Story of Rucy - How to &quot;compile&quot; a BPF binary from Ruby,” https://rubykaigi.org/2021-takeout/presentations/udzura.html&lt;/li&gt;
+  &lt;li&gt;Ufuk Kayserilioglu, “ Demystifying DSLs for better analysis and understanding,” https://rubykaigi.org/2021-takeout/presentations/paracycle.html&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;day-2&quot;&gt;day: 2&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Chris Seaton, “The Future Shape of Ruby Objects,” https://rubykaigi.org/2021-takeout/presentations/chrisgseaton.html&lt;/li&gt;
+  &lt;li&gt;Hitoshi HASUMI, “PRK Firmware: Keyboard is Essentially Ruby,” https://rubykaigi.org/2021-takeout/presentations/hasumikin.html&lt;/li&gt;
+  &lt;li&gt;Maxime Chevalier-Boisvert, “YJIT - Building a new JIT Compiler inside CRuby,” https://rubykaigi.org/2021-takeout/presentations/maximecb.html&lt;/li&gt;
+  &lt;li&gt;Shugo Maeda, “include/prepend in refinements should be prohibited,” https://rubykaigi.org/2021-takeout/presentations/shugomaeda.html&lt;/li&gt;
+  &lt;li&gt;Satoshi “moris” Tagomori, “Ractor’s speed is not light-speed,” https://rubykaigi.org/2021-takeout/presentations/tagomoris.html&lt;/li&gt;
+  &lt;li&gt;CRuby Committers, “Ruby Commiters vs. the World,” https://rubykaigi.org/2021-takeout/presentations/rubylangorg.html&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;day-3&quot;&gt;day: 3&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;osyo, “Use Macro all the time ~ マクロを使いまくろ ~,” https://rubykaigi.org/2021-takeout/presentations/pink_bangbi.html&lt;/li&gt;
+  &lt;li&gt;Mauro Eldritch, “Crafting exploits, tools and havoc with Ruby,” https://rubykaigi.org/2021-takeout/presentations/MauroEldritch.html&lt;/li&gt;
+  &lt;li&gt;Mike Dalessio, “Building Native Extensions. This Could Take A While…,” https://rubykaigi.org/2021-takeout/presentations/flavorjones.html&lt;/li&gt;
+  &lt;li&gt;Richard Schneeman, “Beware the Dead End!!,” https://rubykaigi.org/2021-takeout/presentations/schneems.html&lt;/li&gt;
+  &lt;li&gt;Yusuke Nakamura, “Ruby, Ractor, QUIC,” https://rubykaigi.org/2021-takeout/presentations/yu_suke1994.html&lt;/li&gt;
+  &lt;li&gt;Mat Schaffer, “10 years of Ruby-powered citizen science,” https://rubykaigi.org/2021-takeout/presentations/matschaffer.html&lt;/li&gt;
+  &lt;li&gt;Yukihiro “Matz” Matsumoto, “Matz Keynote,” https://rubykaigi.org/2021-takeout/presentations/yukihiro_matz.html&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;セッションへの感想&quot;&gt;セッションへの感想&lt;/h2&gt;
+
+&lt;p&gt;印象に残ったセッションとしては、 2 日目の PRK, 3 日目 のマクロ, 3 日目の deadend, あたりが強烈に残っています。&lt;/p&gt;
+
+&lt;p&gt;PRK に関しては、 &lt;em&gt;&lt;a href=&quot;https://www.switch-science.com/catalog/3914/&quot;&gt;Promiro&lt;/a&gt;&lt;/em&gt; 互換 &lt;em&gt;&lt;a href=&quot;https://www.sparkfun.com/rp2040#boards&quot;&gt;RP2040&lt;/a&gt;&lt;/em&gt; で Ruby を使って firmware(keymap) を書けるところがとてもイイ!&lt;/p&gt;
+
+&lt;p&gt;マクロに関しては &lt;em&gt;&lt;a href=&quot;https://docs.ruby-lang.org/ja/latest/class/RubyVM=3a=3aAbstractSyntaxTree.html&quot;&gt;AST&lt;/a&gt;&lt;/em&gt; を利用したマクロでこれなら自分でも使えそうだしだなあ。(最近さわってる Rust にも macro あるけど、書くのは一見むずかしそう)。とりあえず後で触ってみるかという気分にさせてくれる発表内容でした。以下の2つのgemから利用できるようです。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;kenma: https://rubygems.org/gems/kenma&lt;/li&gt;
+  &lt;li&gt;rensei: https://rubygems.org/gems/rensei&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最後に &lt;em&gt;&lt;a href=&quot;https://rubygems.org/gems/dead_end&quot;&gt;dead_end&lt;/a&gt;&lt;/em&gt; は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby -w&lt;/code&gt; でも同じようなことができそうだけど、 &lt;em&gt;&lt;a href=&quot;https://docs.ruby-lang.org/ja/latest/class/SyntaxError.html&quot;&gt;syntax error&lt;/a&gt;&lt;/em&gt; を早めに分かるための Gem でした。印象としてはメッチャ便利!と思ってたら&lt;a href=&quot;https://bugs.ruby-lang.org/issues/18159&quot;&gt;本体に入れる提案&lt;/a&gt;が走ってるようです。&lt;/p&gt;
+
+&lt;h2 id=&quot;感想戦の感想&quot;&gt;感想戦の感想&lt;/h2&gt;
+&lt;p&gt;2 日目、 3 日目の最終セッション後に zoom などで笹田さんを中心に感想戦が行なわれていました。
+2 日目は&lt;a href=&quot;https://bugs.ruby-lang.org/issues/12075&quot;&gt;最近話題になっていた議論&lt;/a&gt;を進めていたようです(この日はチョット疲れたので17:00頃に上ったけど、19:00頃までやっていたようです)。
+3 日目は Matz の振り返りを中心に感想戦が行なわれて印象に残った発表を聞いたりしてました。他にも&lt;a href=&quot;https://bugs.ruby-lang.org/issues/14579&quot;&gt;昔から要望してた機能&lt;/a&gt;の取り込みが行なわれてました。&lt;/p&gt;
+
+&lt;h2 id=&quot;takeout-全体の感想&quot;&gt;Takeout 全体の感想&lt;/h2&gt;
+
+&lt;p&gt;全体通しての感想としては、配信は開始直後にちょっとしたトラブルがあった以外は非常に快適でした。
+あとこの配信サービス自体も&lt;a href=&quot;https://github.com/ruby-no-kai/takeout-app&quot;&gt;自前で開発&lt;/a&gt;されたようで大変感謝しています。&lt;/p&gt;
+
+&lt;p&gt;折角なので他の人と感想話したいなーとおもったのでなんどか twitter spaces を開いてみたけど(当然)誰も参加してくれなかったのがちょっとさみしかったけど、mitaka-rb のみなさんが &lt;a href=&quot;https://spatial.chat/s/spatial-mitaka&quot;&gt;spatialchat&lt;/a&gt;  を立ててくれてたので雑談を毎回2時間ほどしてました。&lt;/p&gt;
+
+&lt;h2 id=&quot;matome&quot;&gt;matome&lt;/h2&gt;
+
+&lt;p&gt;久しぶりの RubyKaigi 参加で大変たのしく、興奮した3日間でした!!!&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="rubykaigi" /><summary type="html">今年も COVID-19 の影響で RubyKaigi のオンラインイベント化された RubyKaigi Takeout 2021 に行ってきた。</summary></entry><entry><title type="html">2020 買ってよかったものたち</title><link href="https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020/" rel="alternate" type="text/html" title="2020 買ってよかったものたち" /><published>2020-12-31T23:59:59+09:00</published><updated>2020-12-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020/">&lt;p&gt;今年は &lt;strong&gt;COVID-19&lt;/strong&gt; のためどこにも行けていないので買ってよかったものをあげていきます。
+買ったものとしてあげないのは本や消耗品は載せないです。&lt;/p&gt;
+
+&lt;h2 id=&quot;アマゾンから-yodobashi-へ&quot;&gt;アマゾンから YODOBASHI へ&lt;/h2&gt;
+
+&lt;p&gt;今年変わったこととしては、買うのが &lt;a href=&quot;https://www.amazon.co.jp&quot;&gt;Amazon.co.jp&lt;/a&gt; から &lt;a href=&quot;https://www.yodobashi.com&quot;&gt;ヨドバシドットコム&lt;/a&gt; で買うことが多くなっています。&lt;/p&gt;
+
+&lt;h2 id=&quot;今年買ったもの&quot;&gt;今年買ったもの&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;抗菌防臭・防ダニ敷布団 セミダブル(SD) (掲載終了)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.nitori-net.jp/ec/product/5652818/&quot;&gt;ホワイトダックダウン85%羽毛布団(ムーンシャンテン3 セミダブル IV)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.nitori-net.jp/ec/product/5650120/&quot;&gt;総檜すのこベッドフレーム(SD)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001001416854/&quot;&gt;アイリスオーヤマ IRISOHYAMA MR-1215DJ メタルラック（ポール直径25mm） 幅120cm×奥行61cm 棚板4枚&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001004140773/&quot;&gt;アイリスオーヤマ IRISOHYAMA DSI-356 ペアー/シルバー サイドテーブル&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001004140747/&quot;&gt;アイリスオーヤマ IRISOHYAMA KBD-500 オフホワイト キッチンボード&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001004139973/&quot;&gt;アイリスオーヤマ IRISOHYAMA SWR-6280 ブラウン スチールウッドラック&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.co.jp/gp/product/B07Z5482Y6&quot;&gt;アイリスオーヤマ 低温調理器 真空調理器 スロークッカー IPX7防水 低温調理器具 防水機能搭載 レシピブック付き ブラック LTC-01&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001004098394/&quot;&gt;ガーミン GARMIN 010-01995-64 vivosmart 4 Blue Silver レギュラー (ヴィヴォスマート 4 ブルーシルバー) アクティビティトラッカー&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.co.jp/gp/product/B088T5M7GX&quot;&gt;Y&amp;amp;H HDMIキャプチャカード HD 1080P 録画 配信用、HDMI キャプチャー、ビデオキャプチャ DSLR ビデオカメラ ミラーレス Xbox 360 One PS4 Wii U Switch 対応 HDVC2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001004239528/&quot;&gt;STANLEY スタンレー 01941-078 クラシック真空グロウラー1.9L ロイヤルブルー&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001003817244/&quot;&gt;タニタ TANITA KJ-114-WH デジタルクッキングスケール&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001002989474/&quot;&gt;ハリオ HARIO MSS-1TB コーヒーミル・セラミックスリム&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001002595751/&quot;&gt;山下工業研究所 Ko-ken コーケン 2400MZ7 1/4 6.35mm差込 Z-EAL 6角スタンダードソケット 7mm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001001770635/&quot;&gt;マンフロット Manfrotto MTPIXI-B PIXI ミニ三脚 ブラック&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001005568352/&quot;&gt;ソニー SONY KJ-75X9500H BRAVIA（ブラビア） X9500Hシリーズ 75V型 地上・BS・110度CSデジタル液晶テレビ 4K対応/4Kダブルチューナー内蔵&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.co.jp/gp/product/B0145YLQ2C&quot;&gt;山善 ミニマット 40×40cm ホットマット YMM-K404 メーカー保証1年 ベージュ&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001002232784/&quot;&gt;ベルモント Belmont 679013 H-027 鉄製 燻製鍋 27cm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001002990844/&quot;&gt;コールマン Coleman 2000027863 ホイールクーラー 60QT ブルー/ホワイト&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yodobashi.com/product-detail/100000001003589327/&quot;&gt;パール金属 PEARL HB-3295 プレミアムクイックエコ 3層底切り替え式圧力鍋 5.0L&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;家具&quot;&gt;家具&lt;/h2&gt;
+
+&lt;p&gt;幸い今年の頭は寒くなかったので古く、薄い布団でも耐えれてたのですがさすがにこの布団じゃだめだろうと思い敷布団と羽毛布団を買いました。
+その際にマットレス床に直敷きじゃなくしようとしたのでベッドもついでに買っています。&lt;/p&gt;
+
+&lt;p&gt;今の部屋に丸5年住んでいたのですが、作業用机と椅子、食事用こたつ以外の家具をまったくおいていなかったので家具をいまさらながら購入。
+サイドテーブルは寝室で携帯充電するために買ってとても便利だった。&lt;/p&gt;
+
+&lt;h2 id=&quot;covid-19のせい&quot;&gt;COVID-19のせい&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;COVID-19&lt;/strong&gt; の影響は自炊するように圧力がかかってしまったので料理道具も買っています。低温調理器具はたいへん便利で、利用しまくってたのですが、途中からめんどうになって最近の利用回数はへってきています。
+安く肉塊が買える機会があればなにか低温調理しようかと。
+12月はいってから圧力鍋を購入。おかゆ作るのに大活躍しております。この鍋がくる前のおかゆは2日くらい時間をかけて作ってたので大変べんりになった。今は白米+押し麦のおかゆなので玄米+押し麦のおかゆを試したいと考えています。&lt;/p&gt;
+
+&lt;p&gt;ひきこもり生活を捗らせるためにコーヒーミルも買った。コーヒーミルが手動だったんで電動ドリルで挽けるようにビット買って便利になった。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;COVID-19&lt;/strong&gt; の影響を考えると、旅するにはキャンプした方がよさそうということによりキャンプ用品として、でかいクーラーボックスを購入しています。
+最近釣り欲が高まっていたのもありこれも便利に利用しています。&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+
+&lt;p&gt;今年は &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で出歩くことも減りひきこもる機会も増えた1年でした。
+来年はもう少し出歩けるようになったらいいなあ。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><summary type="html">今年は COVID-19 のためどこにも行けていないので買ってよかったものをあげていきます。 買ったものとしてあげないのは本や消耗品は載せないです。</summary></entry><entry><title type="html">Favorite Beer House 2019</title><link href="https://blog.katsyoshi.org/blog/2019/12/31/favorite-beer-house-2019/" rel="alternate" type="text/html" title="Favorite Beer House 2019" /><published>2019-12-31T23:59:59+09:00</published><updated>2019-12-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2019/12/31/favorite-beer-house-2019</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2019/12/31/favorite-beer-house-2019/">&lt;p&gt;年末になったので今年行ったビール屋さんをまとめてみます。&lt;/p&gt;
+
+&lt;h2 id=&quot;spot&quot;&gt;Spot&lt;/h2&gt;
+
+&lt;iframe src=&quot;https://www.google.com/maps/d/u/0/embed?mid=1zPHCWSOnz860vvp5ZPUHGPaist8lPDWO&quot; width=&quot;640&quot; height=&quot;480&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.katsyoshi.org/blog/2017/12/30/favorite-beer-house/&quot;&gt;2017年&lt;/a&gt;と比較して倍くらい行ってますね…&lt;/p&gt;
+
+&lt;h2 id=&quot;行ってよかった店&quot;&gt;行ってよかった店&lt;/h2&gt;
+
+&lt;p&gt;はじめに2017年に行ってなくて新しい店でよかた店をあげてみたいとです。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.pdxtap.com/&quot;&gt;PDX Taproom&lt;/a&gt;
+ここはオレゴンのクラフトビールを中心に生で飲めます。海外のビールが多くおもしろいです。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.facebook.com/goldengate01/&quot;&gt;Golden Gate&lt;/a&gt;
+ここも名前のとおり、海外のビールが中心です。つながっているのは 4 tap ですがよいです。駅近でハンバーガーが夜おそくても食べれるので便利。
+いちおう朝2畤までやってるけど、大人数で行けばもっと遅くまでやってくれる感じでもある。
+&lt;del&gt;いつもすくないのでみんないって&lt;/del&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://granzoo-beer.com/&quot;&gt;Granzoo&lt;/a&gt;
+ここはビールの醸造所(Kanpai Brewing)が併設されてるタイプの店でビールが美味しいです。神田川目の前で桜の時期とてもよさそう。まだ出来たばかりなので桜の時期は行けてないです。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.miyatabeer.com/&quot;&gt;Miyatabeer&lt;/a&gt;
+ここも &lt;strong&gt;Granzoo&lt;/strong&gt; と同様に醸造所が併設されている店です。ビール以外にもブランデーやシードルが置いてあるのでビールが苦手な人でもイケますね。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.brewinbar.com/&quot;&gt;Bewin’ Bar 主水&lt;/a&gt;
+ここもブリュパブ(醸造所が併設されているパブ)です。もともとはここのInstagramをフォローしてて気にはなっていましたが、なかなか行ける機会がなかったのですが、2018年に初めていけてからすごくよかったです。
+食事がたいへんよく、普通の居酒屋メニューにアレンジが加えられたタンドリー鯖が気に入ってます。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.facebook.com/sakaduki/&quot;&gt;さかずき Brewing&lt;/a&gt;
+ここもブリュパブです。行ったときにはお腹いっぱいだったので…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;いつもどおり安心できるお店&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://goodsleepbaker.com/&quot;&gt;Good Sleep Baker&lt;/a&gt;
+いつもパンがおいしい。バインミーが好き。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.lares.dti.ne.jp/~ppy/&quot;&gt;Popeye&lt;/a&gt;
+老舗。タップが多くてすごい。あとエミューが食べられるのはここだけ(たぶん)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ban-kan.com/&quot;&gt;萬感&lt;/a&gt;
+ここもポパイほどではないが、クラフトビール出してくれる店として老舗。店員さんがボウズから金髪になってた。Minou の W山椒IPA がいつも置いてあって便利。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;今年いってないけど、なくなったお店&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.facebook.com/kurakura.kanda&quot;&gt;蔵くら&lt;/a&gt;
+鳥のたたきとかおいしかった。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sylvans.jp/topics/beer-bar-%E5%AF%8C%E5%A3%AB%E6%A1%9C%E9%96%89%E5%BA%97%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.html&quot;&gt;Beer Bar 富士桜&lt;/a&gt;
+とある会合のあとでよくいってて、ソーセージとかおいしかった。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;今年行ったビールをまとめてみましたが、今年はあまりビールのんでないなーとおもってたら40軒ぐらい行ってた。
+来年は日本酒まとめますね。&lt;/p&gt;</content><author><name></name></author><category term="beer" /><summary type="html">年末になったので今年行ったビール屋さんをまとめてみます。</summary></entry><entry><title type="html">RubyKaigi 2019</title><link href="https://blog.katsyoshi.org/blog/2019/04/27/rubykaigi2019/" rel="alternate" type="text/html" title="RubyKaigi 2019" /><published>2019-04-27T19:53:31+09:00</published><updated>2019-04-27T19:53:31+09:00</updated><id>https://blog.katsyoshi.org/blog/2019/04/27/rubykaigi2019</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2019/04/27/rubykaigi2019/">&lt;p&gt;&lt;a href=&quot;https://rubykagi.org/2019&quot;&gt;RubyKaigi2019&lt;/a&gt; があったので行ってきました。
+&lt;a href=&quot;http://b.hatena.ne.jp/search/text?q=rubykaigi2019&quot;&gt;既に様々な人&lt;/a&gt; が書いていますのでここでは気になった、よかったというセッションについて書きます。
+聴講選択基準としてよく &lt;a href=&quot;https://asakusarb.esa.io&quot;&gt;asakusa.rb&lt;/a&gt; に来ているひとは外すことにしました。&lt;/p&gt;
+
+&lt;h2 id=&quot;0日目&quot;&gt;0日目&lt;/h2&gt;
+
+&lt;p&gt;前日入りしましたのでプレパーティ前に &lt;a href=&quot;https://twitter.com/284km&quot;&gt;秒速さん&lt;/a&gt; と福岡のイカを食べに
+&lt;a href=&quot;https://tabelog.com/fukuoka/A4001/A400104/40015417/&quot;&gt;第三共進丸&lt;/a&gt; へ行ってイカとゴマサバを食べました。&lt;/p&gt;
+
+&lt;p&gt;今回の RubyKaigi では &lt;a href=&quot;https://rubykaigi.org/2019/parties&quot;&gt;複数プレパーティ&lt;/a&gt; があり、 &lt;a href=&quot;https://pepabo.connpass.com/event/124168/&quot;&gt;プレパーティ&lt;/a&gt; は &lt;a href=&quot;https://pepabo.com/&quot;&gt;GMO Pepabo&lt;/a&gt; の &lt;a href=&quot;https://www.ippudo.com/store/nishidori_stand/&quot;&gt;一風堂スタンド&lt;/a&gt; に行きました。
+ここで LT が3件あり、福岡市役所、ペパボ、&lt;a href=&quot;https://twitter.com/yugui&quot;&gt;Yuguiさん&lt;/a&gt; が話してくれました。
+特に福岡市役所の方が直々に来て如何に自治体が本気を出して企業誘致をするか、しているかを話してくれていました。
+Yugui さんの LT は地図の話するということでしたので、地図をどう見せるかの話をしてくれました。&lt;/p&gt;
+
+&lt;h2 id=&quot;1日目&quot;&gt;1日目&lt;/h2&gt;
+&lt;p&gt;初日に見たリストは以下になります。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;matz キーノート&lt;/li&gt;
+  &lt;li&gt;Ruby3 Progress&lt;/li&gt;
+  &lt;li&gt;How to take over a Ruby gem&lt;/li&gt;
+  &lt;li&gt;Determing Ruby Process Counts: Theory and Practice&lt;/li&gt;
+  &lt;li&gt;Compiling Ruby to idimomatic code in static language&lt;/li&gt;
+  &lt;li&gt;Fiber Are the Right Solution&lt;/li&gt;
+  &lt;li&gt;Compacting GC for MRI v2&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;このなかで期待したのが &lt;strong&gt;Compling Ruby to idimomatic code in static language&lt;/strong&gt; でした。
+こちらは基本 Ruby のコードを &lt;a href=&quot;https://nim-lang.org/&quot;&gt;Nim&lt;/a&gt; へ変換するためにやったことをはなししていました。
+&lt;strong&gt;Fiber&lt;/strong&gt; のやつは非同期すると速くなるかもねって感じでおわらせています。
+&lt;a href=&quot;https://github.com/tenderlove&quot;&gt;Aaron&lt;/a&gt; は Aaron だなーとおもいながら聴いていました。&lt;/p&gt;
+
+&lt;p&gt;後で聞いて失敗したなってやつが、 Matz と Ruby3 progress の間にトイレをガマンしてたので走ってトイレに行ってたら、
+福岡県知事が出てきて &lt;strong&gt;RubyKaigi&lt;/strong&gt; めっちゃ楽しみにしてたっていう話をされていたというのを
+聴き逃がしたのがかなりの後悔点です。&lt;/p&gt;
+
+&lt;h2 id=&quot;2日目&quot;&gt;2日目&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;All bugfix are incompatibilities&lt;/li&gt;
+  &lt;li&gt;Pratical mruby/c firmware development with CRuby&lt;/li&gt;
+  &lt;li&gt;RubyData Workshop&lt;/li&gt;
+  &lt;li&gt;A light weight JIT compiler project for CRuby&lt;/li&gt;
+  &lt;li&gt;What is Domain Specific Language?&lt;/li&gt;
+  &lt;li&gt;LT&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;この日一番の衝撃的なできごととしては RubyData Workshop で
+最近 &lt;a href=&quot;https://github.com/sonots/cumo&quot;&gt;&lt;strong&gt;Cumo&lt;/strong&gt;&lt;/a&gt; でも動くようにちょっとずつ対応している、
+&lt;a href=&quot;https://github.com/yoshoku/rumale&quot;&gt;&lt;strong&gt;Rumale&lt;/strong&gt;&lt;/a&gt; の読みが &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ルメール&lt;/code&gt; ではなく &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ラムエール&lt;/code&gt; だったことです(この場で発表された)。&lt;/p&gt;
+
+&lt;h2 id=&quot;3日目&quot;&gt;3日目&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Fuzzing native Ruby code with Kisaten&lt;/li&gt;
+  &lt;li&gt;Running Ruby on Apple II&lt;/li&gt;
+  &lt;li&gt;Performance Optimization Techniques of MessagePack-Ruby&lt;/li&gt;
+  &lt;li&gt;Timezone API&lt;/li&gt;
+  &lt;li&gt;The send-pop optimization&lt;/li&gt;
+  &lt;li&gt;Optimization Techniques Used by the Benchmark Winners&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;この日は &lt;strong&gt;Fuzzing&lt;/strong&gt; という文字列を見かけたのでこちらを聴講。
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gem&lt;/code&gt; をリリースしているみたいで使ってみようかとおもった。&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+
+&lt;p&gt;今回は全セッション聴講しました。このなかで一番すきな発表としては
+Ruby on Apple II のやつがぶっとんでてよかったですね。
+最後のキーノートは疲れながらも聴いていたが、
+ネルネルネルーとおもった瞬間に「お前はなにを言っているんだ？」っていう
+スライドが表れて大変よかった。&lt;/p&gt;
+
+&lt;p&gt;来年の RubyKaigi 2020 はMatz本なのでまた参加しますねこれは。&lt;/p&gt;
+
+&lt;p&gt;今年の RubyKaigi 飯の写真は以下になります。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.amazon.co.jp/photos/share/JMFkdlomW29NdLar2a5tFydS6PjEMlkp5mLDO6dcVjn&quot;&gt;RubyKaigi 2019&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="rubykaigi" /><category term="ruby" /><category term="tech" /><category term="diary" /><summary type="html">RubyKaigi2019 があったので行ってきました。 既に様々な人 が書いていますのでここでは気になった、よかったというセッションについて書きます。 聴講選択基準としてよく asakusa.rb に来ているひとは外すことにしました。</summary></entry><entry><title type="html">endgame keyboard…</title><link href="https://blog.katsyoshi.org/blog/2019/02/11/endgame-keyboard-dot-dot-dot/" rel="alternate" type="text/html" title="endgame keyboard…" /><published>2019-02-11T22:48:24+09:00</published><updated>2019-02-11T22:48:24+09:00</updated><id>https://blog.katsyoshi.org/blog/2019/02/11/endgame-keyboard-dot-dot-dot</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2019/02/11/endgame-keyboard-dot-dot-dot/">&lt;p&gt;新しいキーボードを作りました!&lt;/p&gt;
+
+&lt;h2 id=&quot;fortitude60&quot;&gt;&lt;a href=&quot;https://github.com/Pekaso/fortitude60&quot;&gt;Fortitude60&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;去年の9月頃に &lt;strong&gt;Group Buy&lt;/strong&gt; の募集があったので応募して購入。&lt;/p&gt;
+
+&lt;h2 id=&quot;くみたて&quot;&gt;くみたて&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/Pekaso/fortitude60/blob/master/Documents/buildguide_jp_v1.0.md&quot;&gt;ビルドガイド&lt;/a&gt; に沿って組み立てていけば問題ないです。&lt;/p&gt;
+
+&lt;p&gt;今回は、 LED をキー毎に光らせる方向ですすめてみました。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;基板にダイオードつけます。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/photo/fortitude60-diode.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;基板にLED 用に抵抗(470Ω)をスイッチ毎につけます。制御用の抵抗(1kΩ)と FET を各ボード毎につけます。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/photo/fortitude60-fet-resister.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;スイッチをプレートにはめます。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/photo/fortitude60-switch-in-plate.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;基板とスイッチをはめたプレートを合体させます&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/photo/fortitude60-docking-switch.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;LED をスイッチに刺します。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/photo/fortitude60-led-in-switch.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;半田付します。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/photo/fortitude60-soldering-switch.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;MCU を基板に接続&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/photo/fortitude60-mcu-on-keyboard.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;通電確認!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/photo/fortitude60-lighting-keyboard.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;keycap まうんと!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/photo/fortitude60-completing.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+
+&lt;p&gt;という漢字になりました。
+さすがに透過キーキャップだと部屋が明るくなりすぎるので不透明キーキャップに変更していまはつかってますので、大分おちつています。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="tech" /><category term="keyboard" /><category term="fortitude60" /><summary type="html">新しいキーボードを作りました!</summary></entry><entry><title type="html">今年いった日本酒が飲める店 2018</title><link href="https://blog.katsyoshi.org/blog/2018/12/31/good-sake-restaurant-2018/" rel="alternate" type="text/html" title="今年いった日本酒が飲める店 2018" /><published>2018-12-31T23:59:59+09:00</published><updated>2018-12-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/12/31/good-sake-restaurant-2018</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/12/31/good-sake-restaurant-2018/">&lt;p&gt;去年は &lt;a href=&quot;http://blog.katsyoshi.org/blog/2017/12/30/favorite-beer-house/&quot;&gt;ビール屋さん&lt;/a&gt; でしたので今年は日本酒をまとめてみます。&lt;/p&gt;
+
+&lt;h2 id=&quot;何軒いった&quot;&gt;何軒いった？&lt;/h2&gt;
+
+&lt;p&gt;まず、今年行ったお店を列挙してみます。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1311/A131106/13009812/&quot;&gt;鷹匠&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1311/A131106/13187564/&quot;&gt;多田&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1311/A131101/13146616/&quot;&gt;かず味家&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1314/A131403/13145814/&quot;&gt;喜楽&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/yamanashi/A1905/A190501/19006029/&quot;&gt;笹一酒造 酒遊館&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1311/A131101/13016778/&quot;&gt;絵馬亭&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1309/A130905/13196674/&quot;&gt;オトナリ&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/miyagi/A0401/A040101/4019381/&quot;&gt;まぼ屋&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/miyagi/A0401/A040101/4010195/&quot;&gt;勘助&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1323/A132302/13113345/&quot;&gt;大塚はなおか&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1310/A131002/13169654/&quot;&gt;KURARA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1309/A130906/13029173/&quot;&gt;うお座&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/kumamoto/A4301/A430101/43013344/&quot;&gt;うしじま酒店&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1310/A131002/13177769/&quot;&gt;福33&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1307/A130701/13094750/&quot;&gt;魚屋 がぶ&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1311/A131102/13216303/&quot;&gt;ずぶ六&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1311/A131106/13174819/&quot;&gt;酒壺しずく&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1311/A131106/13227775/&quot;&gt;坂ノ下ノオリゼ&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1311/A131106/13020252/&quot;&gt;釜竹&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1301/A130103/13141421/&quot;&gt;立ち呑み 庫裏&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tabelog.com/tokyo/A1303/A130301/13158104/&quot;&gt;いまここ&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;とりあえず挙げてみました。&lt;/p&gt;
+
+&lt;h2 id=&quot;どこがよかった&quot;&gt;どこがよかった？&lt;/h2&gt;
+
+&lt;p&gt;ここに書いてあるところはどこもよかったですよ&lt;/p&gt;
+
+&lt;h3 id=&quot;特に気に入ったお店&quot;&gt;特に気に入ったお店&lt;/h3&gt;
+
+&lt;p&gt;今年はじめて行ったなかでは、多田、はなおか、しずく、ずぶ六が特に好きでした。&lt;/p&gt;
+
+&lt;p&gt;多田とはなおかは、ミシュランのビブグルマンにのっているらしいです。料理がとてもおいしく、うめぇうめぇ言いながらたべてました。
+多田は、日本酒が選択できますが、はなおかは料理にあわせたお酒をだしてくれます。
+どちらのお店も日本料理となります。&lt;/p&gt;
+
+&lt;p&gt;季節によりますが、多田は季節にあわせた肴を出してくれて冬は牡蠣の塩辛？(失念)や夏ですと、鱧のお吸い物を出してくれました。&lt;/p&gt;
+
+&lt;h3 id=&quot;今年行っていない店&quot;&gt;今年行っていない店&lt;/h3&gt;
+
+&lt;p&gt;今年行っていない店としては、29rotiと壺中が行けていないですね。&lt;/p&gt;
+
+&lt;p&gt;29rotiは生ハムとチーズが大変美味しく、熱燗や常温のお酒とよい感じに合います。要予約のお店ですので今年は行けなかったです。&lt;/p&gt;
+
+&lt;p&gt;壺中は熱燗専門のお店で予約とかなく入れますので、そのうち行こうと思い行かずにおわってしまた。&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+
+&lt;p&gt;いかがでしたでしょうか？来年はまたビールをまとめたいとおもいますのでよろしくおねがいします。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://drive.google.com/open?id=1NjNMxM0HM_mpi_gccWQyeSy-d3RXCAiF&amp;amp;usp=sharing&quot;&gt;sake 2018&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="sake" /><category term="delicious" /><summary type="html">去年は ビール屋さん でしたので今年は日本酒をまとめてみます。</summary></entry><entry><title type="html">docker-composeを利用してRailsアプリ開発を楽にしよう</title><link href="https://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose/" rel="alternate" type="text/html" title="docker-composeを利用してRailsアプリ開発を楽にしよう" /><published>2018-12-09T21:11:56+09:00</published><updated>2018-12-09T21:11:56+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose/">&lt;p&gt;ていうのを&lt;a href=&quot;https://twitter.com/yu_suke1994&quot;&gt;うなすけさん&lt;/a&gt;に相談したら、&lt;a href=&quot;https://blog.unasuke.com/2018/run-rails-test-on-docker-compose/&quot;&gt;解決策を示してくれた&lt;/a&gt;のでそれを開発向けに変えてみた。
+Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。&lt;/p&gt;
+
+&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+
+&lt;p&gt;Railsアプリ用 Dockerfile を準備します。こちらは、元記事と同じで良いとおもいますが、元記事ではすべての条件を満たすために、不要な &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DB&lt;/code&gt; やミドルウェアのライブライをインストールしてますので必要なものだけにします。
+このRailsアプリでは、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DB&lt;/code&gt; として &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;postgres&lt;/code&gt; を利用していますので関連のライブラリをインストールします。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ruby:2.5.3-stretch
+
+ARG NODE_MAJOR_VER=11
+ARG BUNDLER_JOBS=4
+
+RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VER}.x | bash - \
+  &amp;amp;&amp;amp; curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  &amp;amp;&amp;amp; echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | tee /etc/apt/sources.list.d/yarn.list \
+  &amp;amp;&amp;amp; apt update &amp;amp;&amp;amp; apt install --assume-yes \
+    postgresql-contrib \
+    libpq-dev \
+    libxml2 \
+    libxml2-dev \
+    libxslt1-dev \
+    git \
+    make \
+    nodejs \
+    yarn \
+ &amp;amp;&amp;amp; apt-get clean \
+ &amp;amp;&amp;amp; rm -rf /var/lib/apt/lists/*
+
+WORKDIR /rails
+COPY . .
+RUN bundle install --jobs=${BUNDLER_JOBS}
+RUN yarn install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;同様に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; を必要なものだけにします。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: &apos;3&apos;
+services:
+  rails:
+    build: .
+    command: /bin/bash
+    environment:
+      - NODE_MAJAR_VER=11
+      - BUNDLER_JOBS=4
+      - DB_HOST=postgres
+    volumes:
+      - &quot;.:/rails&quot;
+    links:
+      - postgres
+    command: [&quot;bundle&quot;, &quot;exec&quot;, &quot;rails&quot;, &quot;s&quot;, &quot;-b&quot;, &quot;0.0.0.0&quot;]
+    ports:
+      - &quot;3000:3000&quot;
+  postgres:
+    image: postgres:11.1-alpine
+    ports:
+      - &quot;5432:5432&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;こちらも &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;postgres&lt;/code&gt; だけにします。&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+
+&lt;p&gt;あとは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up rails&lt;/code&gt; とし、実行することで見れるようになっています。&lt;/p&gt;</content><author><name></name></author><category term="rails" /><category term="tech" /><category term="docker" /><summary type="html">ていうのをうなすけさんに相談したら、解決策を示してくれたのでそれを開発向けに変えてみた。 Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。</summary></entry><entry><title type="html">hello language server</title><link href="https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/" rel="alternate" type="text/html" title="hello language server" /><published>2018-12-01T13:00:59+09:00</published><updated>2018-12-01T13:00:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/">&lt;p&gt;ここ1、2週間、 emacs で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsp-emacs&lt;/code&gt; を使いはじめたのでそのメモ&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://langserver.org/&quot;&gt;Language Server&lt;/a&gt; と &lt;a href=&quot;https://microsoft.github.io/language-server-protocol/specification&quot;&gt;Language Server Protocol&lt;/a&gt; ってなによ？って人はリンクをみてください。&lt;/p&gt;
+
+&lt;h2 id=&quot;導入&quot;&gt;導入&lt;/h2&gt;
+
+&lt;p&gt;導入は簡単で以下の3つをpackage-installでインストールしてしまえば OK です。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lsp-mode
+lsp-ui
+lsp-ruby
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;インストール後は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.emacs.d/init.el&lt;/code&gt; あたりに、&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(require &apos;lsp-mode)
+(require &apos;lsp-ui)
+(require &apos;lsp-ruby)
+(add-hook &apos;ruby-mode-hook #&apos;lsp-ruby-enable)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;を追記すると emacs 側の設定はできました。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsp-ruby&lt;/code&gt;(emacs) を起動する前に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install solargraph&lt;/code&gt; で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;solargraph&lt;/code&gt; をインストールしておきましょう。&lt;/p&gt;
+
+&lt;h2 id=&quot;利用開始&quot;&gt;利用開始!&lt;/h2&gt;
+
+&lt;p&gt;利用開始するときは利用したいファイルのトップディレクトリ(プロジェクトディレクトリ)に、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; が必要です。&lt;/p&gt;
+
+&lt;p&gt;でこんなかんじに表示してくれます。&lt;/p&gt;
+
+&lt;p&gt;-&amp;gt; &lt;img src=&quot;/images/screenshot/lsp-ruby.png&quot; alt=&quot;&quot; /&gt; &amp;lt;-&lt;/p&gt;
+
+&lt;h2 id=&quot;matome&quot;&gt;matome&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsp-ruby&lt;/code&gt; を導入したけど、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;solargraph&lt;/code&gt; だとちょっとあれな表示が出て残念な気分に。
+また &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rubocop&lt;/code&gt; も基本的に要求されるようで…&lt;/p&gt;</content><author><name></name></author><category term="lsp" /><category term="emacs" /><category term="tech" /><category term="diary" /><summary type="html">ここ1、2週間、 emacs で lsp-emacs を使いはじめたのでそのメモ</summary></entry><entry><title type="html">remove rails assets</title><link href="https://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets/" rel="alternate" type="text/html" title="remove rails assets" /><published>2018-11-06T00:40:32+09:00</published><updated>2018-11-06T00:40:32+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets/">&lt;p&gt;ひさびさに &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ruby on Rails&lt;/code&gt; の話で、自作の rails application で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; というところからいくつか gem を利用してたので
+それを &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Yarn&lt;/code&gt; で同様のパッケージをインストールするように変更した。&lt;/p&gt;
+
+&lt;h2 id=&quot;なにをやったのか&quot;&gt;なにをやったのか？&lt;/h2&gt;
+
+&lt;p&gt;単純に一旦 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; からインストールしている gem を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; から削除します。&lt;/p&gt;
+
+&lt;p&gt;そのあと、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn add&lt;/code&gt; で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt; を生成し &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; にインストールします。&lt;/p&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;go&quot;&gt;yarn add bootstrap@3 font-awesome jquery
+yarn install
+rails s
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;インストールが終了し、railsを起動したら必要な情報(&lt;a href=&quot;https://blog.zerokol.com/2018/06/ruby-on-rails-yarn-font-awesome-in.html&quot;&gt;font-awesome&lt;/a&gt;, &lt;a href=&quot;https://qiita.com/fuqda/items/c5756b8f56dcc238c110&quot;&gt;bootstrap&lt;/a&gt;) を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app/assets/{javascripts,stylesheets}&lt;/code&gt; に記載。&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// app/assets/javascripts/application.js&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//= require rails-ujs&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//= require turbolinks&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//= require jquery/dist/jquery.js&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//= require bootstrap-sass/assets/javascripts/bootstrap&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//= require_tree .&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;assets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;stylesheets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.scss&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&apos;bootstrap-sass/assets/stylesheets/bootstrap&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/variables&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;fa-font-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/fonts/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/mixins&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@font-face&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-family&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&apos;FontAwesome&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.eot?#iefix&amp;amp;v=#{$fa-version}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;embedded-opentype&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;woff2&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;woff&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;truetype&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;svg&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/core&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/larger&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/fixed-width&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/list&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/bordered-pulled&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/animated&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/rotated-flipped&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/stacked&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/icons&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/screen-reader&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;icon-font-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;bootstrap-sass/assets/fonts/bootstrap&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ってかいたら使えるようになっています!&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+
+&lt;p&gt;ということで &lt;em&gt;IMASARA&lt;/em&gt; ですが &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; からの脱却ついでに簡単に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn&lt;/code&gt; を利用した assets の導入をやってみました!&lt;/p&gt;</content><author><name></name></author><category term="tech" /><category term="rails" /><summary type="html">ひさびさに Ruby on Rails の話で、自作の rails application で rails-assets というところからいくつか gem を利用してたので それを Yarn で同様のパッケージをインストールするように変更した。</summary></entry><entry><title type="html">new keyboard</title><link href="https://blog.katsyoshi.org/blog/2018/10/18/new-keyboard/" rel="alternate" type="text/html" title="new keyboard" /><published>2018-10-18T23:45:09+09:00</published><updated>2018-10-18T23:45:09+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/10/18/new-keyboard</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/10/18/new-keyboard/">&lt;p&gt;タイトルのとおり家のキーボードを新調しました。&lt;/p&gt;
+
+&lt;h2 id=&quot;iris&quot;&gt;Iris&lt;/h2&gt;
+
+&lt;p&gt;機械学習でよく&lt;a href=&quot;https://archive.ics.uci.edu/ml/datasets/iris&quot;&gt;評価されるやつ&lt;/a&gt;じゃなくてキーボードであるやつです。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://keeb.io/&quot;&gt;keeb.io&lt;/a&gt; で売ってます。&lt;/p&gt;
+
+&lt;h3 id=&quot;購入&quot;&gt;購入&lt;/h3&gt;
+
+&lt;p&gt;欲しい欲しいといってたらいつのまにか復活したのでケースとセットで購入。&lt;/p&gt;
+
+&lt;h3 id=&quot;組み立て&quot;&gt;組み立て&lt;/h3&gt;
+
+&lt;p&gt;公式やASCIIにあるのでそれに従い組み立てハンダ付します。特に言うことはないです。&lt;/p&gt;
+
+&lt;p&gt;ハンダ付ミスっても近所に電子工作の得意なお兄さんに工具を借りれたのですぐに解決です。&lt;/p&gt;
+
+&lt;h3 id=&quot;完成&quot;&gt;完成&lt;/h3&gt;
+
+&lt;p&gt;はい。&lt;/p&gt;
+
+&lt;p&gt;-&amp;gt; &lt;img src=&quot;/images/photo/iris-keyboard.jpg&quot; alt=&quot;&quot; /&gt; &amp;lt;-&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+
+&lt;p&gt;この記事は新しいキーボードに慣れるため書いています。&lt;/p&gt;
+
+&lt;p&gt;今まで利用していた Kinesis のやつは仕事場に持っていってます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/katsyoshi/qmk_firmware&quot;&gt;配列&lt;/a&gt;を Kinesis で利用してた時と似せていますが、少し違うのでまだ打ちにくいです。&lt;/p&gt;
+
+&lt;p&gt;あと、技術書典5来てくださいた皆さまありがとうございました。
+次回も出そうという気が湧いてきましたので次回もよろしくお願いします。&lt;/p&gt;</content><author><name></name></author><category term="tech" /><category term="diary" /><category term="keyboard" /><summary type="html">タイトルのとおり家のキーボードを新調しました。</summary></entry></feed>

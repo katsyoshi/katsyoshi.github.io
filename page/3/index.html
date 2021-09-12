@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Page 3 of 10 for katsyoshi のめもみたいなの - page 3 | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="katsyoshi のめもみたいなの - page 3" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<link rel="canonical" href="https://blog.katsyoshi.org/page/3/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/page/3/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<link rel="prev" href="https://blog.katsyoshi.org/page/2/" />
+<link rel="next" href="https://blog.katsyoshi.org/page/4/" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="katsyoshi のめもみたいなの - page 3" />
+<script type="application/ld+json">
+{"url":"https://blog.katsyoshi.org/page/3/","headline":"katsyoshi のめもみたいなの - page 3","description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Pagination links -->
+<div class="pagination">
+  
+    <a href="/page/2/" class="previous">
+      Previous
+    </a>
+  
+  <span class="page_number ">
+    Page: 3 of 10
+  </span>
+  
+    <a href="/page/4/" class="next">Next</a>
+  
+</div>
+
+
+
+  <h1><a href="/blog/2018/01/21/nlp-100-section-1-part-3/">nlp 100 section 1 part 3</a></h1>
+  <p class="author">
+    <span class="date">2018-01-21 10:23:02 +0900</span>
+  </p>
+  <div class="content">
+    <p>前回、<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> の04までやったので05からやります。</p>
+
+<h3 id="05-ngram"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec05">05. ngram</a></h3>
+<p>こいつはbi-gramを単語、文字二つを実装するひつようがあります</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">bi</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">loop</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">words</span><span class="nf">.len</span><span class="p">()</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">bi</span><span class="nf">.push</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="o">..</span><span class="n">w</span><span class="p">]</span><span class="nf">.join</span><span class="p">(</span><span class="s">""</span><span class="p">));</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">bi</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">words</span> <span class="o">=</span> <span class="s">"I am an NLPer"</span><span class="nf">.split</span><span class="p">(</span><span class="sc">' '</span><span class="p">)</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">===word bi-gram"</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="n">in</span> <span class="nf">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">let</span> <span class="n">words</span> <span class="o">=</span> <span class="s">"I am an NLPer"</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="n">in</span> <span class="nf">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\"</span><span class="s">{}</span><span class="se">\"</span><span class="s">"</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="06-集合"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec06">06. 集合</a></h3>
+
+<p>これは単純に <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html"><code class="language-plaintext highlighter-rouge">HashSet</code></a> を利用して、解決します。<code class="language-plaintext highlighter-rouge">HashSet</code> の差集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.difference"><code class="language-plaintext highlighter-rouge">difference</code></a> を利用し、和集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.union"><code class="language-plaintext highlighter-rouge">union</code></a> を、積集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.intersection"><code class="language-plaintext highlighter-rouge">intersection</code></a> をそれぞれ利用します。また、特定の要素が含有していることを判定するには <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.contains"><code class="language-plaintext highlighter-rouge">contains</code></a> を利用して判定します。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">collections</span><span class="p">::</span><span class="n">HashSet</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">bi</span><span class="p">:</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">HashSet</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">loop</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">words</span><span class="nf">.len</span><span class="p">()</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">bi</span><span class="nf">.insert</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="o">..</span><span class="n">w</span><span class="p">]</span><span class="nf">.join</span><span class="p">(</span><span class="s">""</span><span class="p">));</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">bi</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">chars</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">s</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">s1</span> <span class="o">=</span> <span class="nf">bigram</span><span class="p">(</span><span class="nf">chars</span><span class="p">(</span><span class="s">"paraparaparadise"</span><span class="nf">.to_string</span><span class="p">()));</span>
+    <span class="k">let</span> <span class="n">s2</span> <span class="o">=</span> <span class="nf">bigram</span><span class="p">(</span><span class="nf">chars</span><span class="p">(</span><span class="s">"paragraph"</span><span class="nf">.to_string</span><span class="p">()));</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"===UNION==="</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="nf">.union</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">===DIFF==="</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"===s1 - s2==="</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="nf">.difference</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"===s2 - s1==="</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s2</span><span class="nf">.difference</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">===intersection==="</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="nf">.intersection</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">===INCLUDE==="</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">se</span> <span class="o">=</span> <span class="s">"se"</span><span class="p">;</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"s1: {}"</span><span class="p">,</span> <span class="n">s1</span><span class="nf">.contains</span><span class="p">(</span><span class="n">se</span><span class="p">));</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"s2: {}"</span><span class="p">,</span> <span class="n">s2</span><span class="nf">.contains</span><span class="p">(</span><span class="n">se</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="07-テンプレートによる文生成"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec07">07. テンプレートによる文生成</a></h3>
+
+<p>これは <a href=""><code class="language-plaintext highlighter-rouge">format!</code></a> を使えば終りです。(問題意図ほんとこれなんか？)</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">string_template</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">i8</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">f32</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+    <span class="nd">format!</span><span class="p">(</span><span class="s">"{}時の{}は{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">string</span> <span class="o">=</span> <span class="nf">string_template</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="s">"気温"</span><span class="p">,</span> <span class="mf">22.5</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">string</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="08-暗号文"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec08">08. 暗号文</a></h3>
+<p>ASCII以外の判定と、小文字のASCIIが判れば簡単です。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">ascii</span><span class="p">::</span><span class="n">AsciiExt</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">cipher</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">src</span><span class="nf">.chars</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">result</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="n">chars</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="k">if</span> <span class="n">c</span><span class="nf">.is_ascii</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">var</span><span class="p">:</span> <span class="nb">u8</span> <span class="o">=</span> <span class="n">c</span> <span class="k">as</span> <span class="nb">u8</span><span class="p">;</span>
+            <span class="k">match</span> <span class="n">var</span> <span class="p">{</span>
+                <span class="mi">97</span> <span class="o">...</span> <span class="mi">122</span> <span class="k">=&gt;</span> <span class="p">(</span><span class="mi">219</span> <span class="o">-</span> <span class="p">(</span><span class="n">var</span><span class="p">))</span> <span class="k">as</span> <span class="nb">char</span><span class="p">,</span>
+                <span class="mi">_</span> <span class="k">=&gt;</span> <span class="n">c</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">c</span>
+        <span class="p">};</span>
+        <span class="n">result</span><span class="nf">.push</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">result</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="nf">cipher</span><span class="p">(</span><span class="s">"Today is fine."</span><span class="p">));</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="nf">cipher</span><span class="p">(</span><span class="o">&amp;</span><span class="nf">cipher</span><span class="p">(</span><span class="s">"Today is fine."</span><span class="p">)));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="09-typoglycemia"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec09">09. Typoglycemia</a></h3>
+
+<p>こちらは、 <code class="language-plaintext highlighter-rouge">Vec</code> に <code class="language-plaintext highlighter-rouge">shuffle</code> 的なものがないので、<a href="https://doc.rust-lang.org/rand"><code class="language-plaintext highlighter-rouge">rand</code></a> を呼び出して <a href="https://doc.rust-lang.org/rand/rand/trait.Rng.html#method.shuffle"><code class="language-plaintext highlighter-rouge">shuffle</code></a> を使います。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">extern</span> <span class="n">crate</span> <span class="n">rand</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">rand</span><span class="p">::</span><span class="n">Rng</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">words</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">result</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="n">s</span> <span class="n">in</span> <span class="n">src</span><span class="nf">.split</span><span class="p">(</span><span class="sc">' '</span><span class="p">)</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">str</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">s</span><span class="nf">.chars</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+        <span class="k">if</span> <span class="n">chars</span><span class="nf">.len</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="p">{</span>
+            <span class="n">result</span><span class="nf">.push</span><span class="p">(</span><span class="n">s</span><span class="nf">.to_string</span><span class="p">());</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">last_index</span> <span class="o">=</span> <span class="n">chars</span><span class="nf">.len</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">first_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="k">let</span> <span class="n">last_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">last_index</span><span class="p">];</span>
+
+            <span class="k">let</span> <span class="n">rand_chars</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">chars</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">last_index</span><span class="p">];</span>
+            <span class="nf">shuffle</span><span class="p">(</span><span class="n">rand_chars</span><span class="p">);</span>
+            <span class="k">let</span> <span class="k">mut</span> <span class="n">rand_string</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="n">rand_chars</span> <span class="p">{</span> <span class="n">rand_string</span><span class="nf">.push</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">}</span>
+            <span class="n">result</span><span class="nf">.push</span><span class="p">(</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}{}{}"</span><span class="p">,</span> <span class="n">first_char</span><span class="p">,</span> <span class="n">rand_string</span><span class="p">,</span> <span class="n">last_char</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">result</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">shuffle</span><span class="p">(</span><span class="n">chars</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="p">[</span><span class="nb">char</span><span class="p">])</span> <span class="p">{</span>
+    <span class="nn">rand</span><span class="p">::</span><span class="nf">thread_rng</span><span class="p">()</span><span class="nf">.shuffle</span><span class="p">(</span><span class="n">chars</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">paragraph</span> <span class="o">=</span> <span class="s">"I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind ."</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="n">w</span> <span class="n">in</span> <span class="nf">words</span><span class="p">(</span><span class="n">paragraph</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+
+<p>ということで <code class="language-plaintext highlighter-rouge">Rust</code> で言語処理100本ノック1章をやってみました。
+最近 <code class="language-plaintext highlighter-rouge">Ruby</code> しか書いていなかったので、新鮮で楽しいですね <code class="language-plaintext highlighter-rouge">Rust</code> 。</p>
+
+  </div>
+
+  <h1><a href="/blog/2018/01/19/nlp-100-section-1-part-2/">NLP100本ノック section 1 part 2</a></h1>
+  <p class="author">
+    <span class="date">2018-01-19 20:05:49 +0900</span>
+  </p>
+  <div class="content">
+    <p>前回、<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> の01までやったので02からやっていきます。</p>
+<h2 id="extern-crate-nlp100"><code class="language-plaintext highlighter-rouge">extern crate nlp100;</code></h2>
+<p>ってやれるように <a href="https://github.com/katsyoshi/zatsu/tree/master/rust/nlp100"><code class="language-plaintext highlighter-rouge">Cargo</code></a> を作成</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cargo new nlp100
+</code></pre></div></div>
+
+<h3 id="02-パトカータクシーパタトクカシーー"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec02">02. 「パトカー」+「タクシー」=「パタトクカシーー」</a></h3>
+<p>これはムズカシイので素直に <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.zip"><code class="language-plaintext highlighter-rouge">zip</code></a> を利用する</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">concat</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span><span class="p">,</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">r</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="n">in</span> <span class="n">f</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.zip</span><span class="p">(</span><span class="n">s</span><span class="nf">.iter</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">r</span><span class="nf">.push_str</span><span class="p">(</span><span class="o">&amp;</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">p</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"パトカー"</span><span class="p">)</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">t</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"タクシー"</span><span class="p">)</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+    <span class="nf">concat</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="03-円周率"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec03">03. 円周率</a></h3>
+<p>この問題は思い切り勘違いしてたので、「これのどこが円周率なの？」って思ってました。こいつは <a href="https://doc.rust-lang.org/regex/regex/index.html"><code class="language-plaintext highlighter-rouge">Regex</code></a> を用いて単語毎に分解、単語毎に文字数数えて解決してます。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">char_count_list</span><span class="p">(</span><span class="n">w</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">usize</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"\W+"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.split</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.len</span><span class="p">())</span><span class="nf">.collect</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">pi</span> <span class="o">=</span> <span class="nf">char_count_list</span><span class="p">(</span><span class="s">"Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">pi</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="04-元素記号"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec04">04. 元素記号</a></h3>
+<p>これは、英語版「水兵リーベー僕の船」ですので条件に合うときだけ1文字に変更します。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">collections</span><span class="p">::</span><span class="n">HashMap</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">atomic_words</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">str</span><span class="o">&gt;</span> <span class="o">=</span> <span class="s">"Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."</span><span class="nf">.split</span><span class="p">(</span><span class="sc">' '</span><span class="p">)</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">atomic_table</span> <span class="o">=</span> <span class="nn">HashMap</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="n">in</span> <span class="n">atomic_words</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.enumerate</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">a</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">v</span><span class="p">|</span> <span class="n">v</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+        <span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="k">match</span> <span class="n">i</span> <span class="p">{</span>
+            <span class="mi">0</span> <span class="p">|</span> <span class="mi">4</span><span class="o">...</span><span class="mi">8</span> <span class="p">|</span> <span class="mi">14</span><span class="o">...</span><span class="mi">15</span> <span class="p">|</span> <span class="mi">18</span> <span class="k">=&gt;</span> <span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">(),</span>
+            <span class="mi">_</span> <span class="k">=&gt;</span> <span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">]</span><span class="nf">.join</span><span class="p">(</span><span class="s">""</span><span class="p">),</span>
+        <span class="p">};</span>
+        <span class="n">atomic_table</span><span class="nf">.insert</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="n">in</span> <span class="o">&amp;</span><span class="n">atomic_table</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}: {}"</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+
+<p>やっぱり難しいのを実感</p>
+
+  </div>
+
+  <h1><a href="/blog/2018/01/16/happy-new-year-and-new-language/">happy new year and new language</a></h1>
+  <p class="author">
+    <span class="date">2018-01-16 00:32:16 +0900</span>
+  </p>
+  <div class="content">
+    <p>いまさらですが、あけましておめでとうございます。</p>
+
+<h2 id="happy-new-language">happy new language</h2>
+
+<p>年開けから新しくプログラミング言語(Rust)始めました。(ってわけでもない)</p>
+
+<p>雑に <a href="https://doc.rust-lang.org/book/second-edition/">rust book 2nd edition</a> を一通り読み終えたので、
+<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> をやりはじめました。
+とりあえず第1章が終ったので、メモとしてのこします。
+基本的に <code class="language-plaintext highlighter-rouge">Rust</code> (に限らず)でやりたいことがとくにないので
+<a href="http://yamasy1549.hateblo.jp/entry/2017/12/28/222631">ちょうどよさそうな勉強</a> として自然言語処理を選択しています。</p>
+
+<h2 id="躓いたところ">躓いたところ</h2>
+
+<p>躓いていないところがないです。
+まあやっていくうちに以下二つは常に書いておくと楽になるかなと。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// 1文字毎</span>
+<span class="k">fn</span> <span class="nf">chars</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">string</span><span class="nf">.chars</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c">// 1単語毎</span>
+<span class="k">fn</span> <span class="nf">words</span><span class="p">(</span><span class="n">sentence</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">str</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">sentence</span><span class="nf">.split</span><span class="p">(</span><span class="sc">' '</span><span class="p">)</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">str</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="00-文字列の逆順"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec00">00. 文字列の逆順</a></h3>
+<p>これは簡単で(でもなかった)、1文字ずつ分解して<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.rev">反対化</a>したあと <code class="language-plaintext highlighter-rouge">String</code> にします。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">reverse_string</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">string</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.rev</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="01-パタトクカシーー"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec01">01. 「パタトクカシーー」</a></h3>
+<p>これも簡単で、1文字ずつ分解して抜き出します。(絶対違う)</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="s">"パタトクカシーー"</span><span class="nf">.chars</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}{}{}{}"</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+<p>とりあえず2問解いてみたけど、自然言語処理 &amp;&amp; <code class="language-plaintext highlighter-rouge">Rust</code> 難しい。</p>
+
+  </div>
+
+  <h1><a href="/blog/2017/12/30/favorite-beer-house/">今年いったビール屋さん 2017</a></h1>
+  <p class="author">
+    <span class="date">2017-12-30 17:01:14 +0900</span>
+  </p>
+  <div class="content">
+    <p>今年行ってよかったビアバー、ビアパブをまとめてみようとおもいます。</p>
+
+<h2 id="何軒いった">何軒いった?</h2>
+
+<p>まず、今年何軒いったのか確認します。</p>
+
+<ol>
+  <li><a href="https://tabelog.com/tokyo/A1311/A131102/13095482/">浅草ビアホール D’s diner</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1323/A132302/13199539/">Titans</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1310/A131003/13000242/">ブラッセルズ</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1314/A131403/13202319/">アンテナアメリカ</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1310/A131002/13184169/">WIZ CRAFT BEER and FOOD</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1311/A131106/13168688/">Bon Fire</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1311/A131105/13180065/">谷中ビアホール</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1303/A130301/13130658/">アボットチョイス 渋谷店</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1317/A131709/13195653/">グッド スリープ ベーカー</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1303/A130301/13208803/">Mikkeller Tokyo</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1316/A131603/13197463/">デビルクラフト 五反田店</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1307/A130701/13165318/">BrewDog Roppongi</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1301/A130101/13142917/">Craft Beer Bar iBREW</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1311/A131102/13163537/">カンピオンエール</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1301/A130102/13200310/">シェイク シャック 東京国際フォーラム店</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1304/A130403/13142430/">Watering Hole</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1309/A130905/13135158/">ザロイヤルスコッツマン</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1313/A131307/13034571/">Belg Aube</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1324/A132402/13200541/">びあマ &amp; Beer-Ma BAR</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1310/A131004/13056128/">Tail’s Ale House 本郷店</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1310/A131004/13199373/">クラフト ワークス</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1310/A131002/13009331/">地ビールハウス 蔵くら</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1303/A130301/13053765/">BEER DINING The Griffon</a></li>
+  <li><a href="https://tabelog.com/tokyo/A1314/A131402/13194636/">SWANLAKE Pub Edo 田町店</a></li>
+</ol>
+
+<p>24軒、大分いってますね・・・</p>
+
+<h2 id="どこがよかった">どこがよかった?</h2>
+
+<p>だいたいよいですね。Mikkeller, BrewDog, Swanlakeなどの直営店、Watering Hole, 蔵くら, Devil Craftの有名店は説明不要だとおもうんでパスします</p>
+
+<h3 id="特に気に入ったお店">特に気に入ったお店</h3>
+
+<p>北千住のびあマと大塚のTitansがとくによく、
+両店ともボトルビールが充実しています。</p>
+
+<p>びあマのほうはボトルビール選べるお店とタップや角打ちができる複合タイプのお店です。
+近くに<a href="https://www.google.co.jp/search?newwindow=1&amp;client=firefox-b-ab&amp;dcr=0&amp;q=%E8%99%B9%E3%81%AE%E5%BA%83%E5%A0%B4&amp;spell=1&amp;sa=X&amp;ved=0ahUKEwjB4NCmsbHYAhUIUZQKHVycCa8QvS4IRDAA&amp;biw=1918&amp;bih=981&amp;npsic=0&amp;rflfq=1&amp;rlha=0&amp;rllag=35709023,139831431,5842&amp;tbm=lcl&amp;rldimm=12406913573681279321&amp;rldoc=1&amp;tbs=lrf:!2m1!1e2!2m1!1e3!3sIAE,lf:1,lf_ui:1#rlfi=hd:;si:12406913573681279321;mv:!1m3!1d76559.41565753905!2d139.78141775!3d35.6865969!2m3!1f0!2f0!3f0!3m2!1i497!2i567!4f13.1;tbs:lrf:!2m1!1e2!2m1!1e3!3sIAE,lf:1,lf_ui:1">大きな公園</a>があり、ここでビールを買ってわいわいしながら公園で飲むのがよいかんじです。店のなかで飲むのもよいです。</p>
+
+<p>Titans は持ち込みありのお店で、近くに商店街があり、そこに有名なたこ焼き屋の<a href="https://tabelog.com/tokyo/A1323/A132302/13132934/">はち八</a>があるのでここで買ってきて飲むのもいいですし、
+鍋持ち込んで鍋するのもよいですね。</p>
+
+<p>あと、いいかんじの雰囲気で住宅街にある店でGood Sleep Bakerが好きです。
+ここは Tap 数が少ないですが、パンがとてもおいしいです。
+おすすめのメニューとしてはバインミーがとくにおすすめです。</p>
+
+<h3 id="今年行ってない店">今年行ってない店</h3>
+
+<p>意外でポパイ、萬感今年行ってないようでびっくりしてます。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>こうやってみると24軒(重複してるのは数えていない)とほぼ毎週行ってるようで、それはお金がなくなるよね
+今年、広島、兵庫行きましたが、どちらも日本酒しか飲まなかったので来年は、東京(関東)以外でも行こうとおもってます。</p>
+
+  </div>
+
+  <h1><a href="/blog/2017/12/18/hello/">IRubyはじめました</a></h1>
+  <p class="author">
+    <span class="date">2017-12-18 21:56:55 +0900</span>
+  </p>
+  <div class="content">
+    <p>表題のとおり、 <a href="https://github.com/SciRuby/iruby">IRuby</a> をはじめてみました</p>
+
+<h3 id="インストール">インストール</h3>
+
+<p>インストールは簡単で <code class="language-plaintext highlighter-rouge">gem install iruby</code> でいけますが、私の利用している環境では依存している <a href="https://github.com/zeromq/czmq">czmq</a> が古かったので手動でインストールして回避しています。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">git clone https://github.com/zeromq/czmq.git
+cd czmq
+./autogen
+</span><span class="gp">./configure --prefix=$</span><span class="o">{</span>HOME<span class="o">}</span>/.local
+<span class="go">make -j4
+make install
+gem install iruby cztop
+</span><span class="gp">LD_LIBRARY_PATH=$</span><span class="o">{</span>HOME<span class="o">}</span>/.local/lib iruby
+</code></pre></div></div>
+
+<p>でインストールと動作はできます。画像貼るのがメンドイので <code class="language-plaintext highlighter-rouge">ipython</code> 貼っておきます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "\n",
+       "  &lt;script&gt;\n",
+       "  requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min'] }})\n",
+       "  &lt;/script&gt;\n",
+       "\n",
+       "\n",
+       "&lt;div id=\"c34db0db-dc37-4ae3-a2b3-33ab99830b89\" style=\"height: 100%; width: 100%;\"&gt;&lt;/div&gt;\n",
+       "\n",
+       "&lt;script&gt;\n",
+       " require(['plotly'], function(Plotly) { \n",
+       "Plotly.newPlot(\n",
+       "  'c34db0db-dc37-4ae3-a2b3-33ab99830b89',\n",
+       "  [{\"x\":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],\"y\":[100,81,64,49,36,25,16,9,4,1,0,1,4,9,16,25,36,49,64,81,100],\"type\":null,\"mode\":\"\"}],\n",
+       "  {\"width\":1000,\"height\":500},\n",
+       "  {\"linkText\":\"Export to plot.ly\",\"showLink\":true}\n",
+       ")\n",
+       "\n",
+       "window.addEventListener('resize', function() {\n",
+       "  Plotly.Plots.resize(document.getElementById('c34db0db-dc37-4ae3-a2b3-33ab99830b89'))\n",
+       "})\n",
+       " }) \n",
+       "&lt;/script&gt;"
+      ],
+      "text/plain": [
+       "#&lt;Plotly::Offline::HTML:0x000056356f14be00 @id=\"c34db0db-dc37-4ae3-a2b3-33ab99830b89\", @data=[{:x=&gt;[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], :y=&gt;[100, 81, 64, 49, 36, 25, 16, 9, 4, 1, 0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100], :type=&gt;nil, :mode=&gt;\"\"}], @layout={:width=&gt;1000, :height=&gt;500}, @config={:linkText=&gt;\"Export to plot.ly\", :showLink=&gt;true}, @embedded=true&gt;"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/plain": [
+       "#&lt;CZTop::Socket::PUB:0x56356e7f3620 last_endpoint=\"tcp://127.0.0.1:45835\"&gt;"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "require 'daru'\n",
+    "require 'daru/plotly'\n",
+    "include Daru::Plotly::Methods\n",
+    "\n",
+    "dv = Daru::Vector.new((-10..10).map{|n| n ** 2 })\n",
+    "plot(dv, x: \"x\", y: \"y\").show"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Ruby 2.4.2",
+   "language": "ruby",
+   "name": "ruby"
+  },
+  "language_info": {
+   "file_extension": ".rb",
+   "mimetype": "application/x-ruby",
+   "name": "ruby",
+   "version": "2.4.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
+</code></pre></div></div>
+
+  </div>
+
+  <h1><a href="/blog/2017/12/02/wiskey-advent-calendar/">ウイスキーアドベントカレンダー2日目</a></h1>
+  <p class="author">
+    <span class="date">2017-12-02 00:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://adventar.org/calendars/2219">ウイスキー Advent Calendar 2017</a> の2日目の記事です。</p>
+
+<p>ウィスキーはピートの香りが強いほうがすきです。</p>
+
+<p>とりあえず蒸留所に行ってきた話を
+以前、<a href="http://www.suntory.co.jp/factory/hakushu/">白州蒸留所</a> と <a href="http://www.suntory.co.jp/factory/yamazaki/">山崎蒸留所</a> に行ったことがあるのでその話を。</p>
+
+<h2 id="白州蒸留所">白州蒸留所</h2>
+
+<p>白州へは5年くらい前に5人でわいわいしながら行ってきました。
+ここでは、工場見学のツアーに参加しました。
+また、テイスティングルームですこしウイスキーを試せて良いです。</p>
+
+<h2 id="山崎蒸留所">山崎蒸留所</h2>
+
+<p>山崎は去年、京都へ行く機会があり、ウイスキーを買うために行きました。
+ここでも工場見学可能だったのですが、事前に予約が必要であるため
+今回はパスして、工場に併設されているウイスキーのテイスティングルーム
+で幾つかのウイスキーをたのしみ、ショップでウイスキーと梅酒を買って
+鴨川へ</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>日本のウイスキーはあまり得意じゃないのですが、蒸留所に行くのは楽しいし
+楽しみ方を教えてもらえるので近くに蒸留所がある方は一度行ってみるとよいとおもいます</p>
+
+
+  </div>
+
+  <h1><a href="/blog/2017/12/01/went-to-kinosaki-and-amano-hashidate/">mikutter合宿いってきた</a></h1>
+  <p class="author">
+    <span class="date">2017-12-01 00:58:40 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://adventar.org/calendars/2128">mikutter Advent Calendar</a> 1日目のエントリです
+先月の11/23-26に <a href="https://twitter.com/toshi_a">@toshi_a</a> の垢凍結記念の <a href="https://atnd.org/events/90619">mikutter合宿</a> に行ってきた</p>
+
+<h2 id="なにしにいってきたの">なにしにいってきたの？</h2>
+
+<p>リフレッシュ、気分転換、野々村せんせーの気分を味わいに、toshi_aさんをAORIに。
+蟹、但馬牛、温泉を楽しみに。
+くわしくは <a href="https://twitter.com/akkiesoft">@akkiesoft</a> の <a href="http://akkiesoft.hatenablog.jp/entry/20171127/1511763219">ブログエントリ</a> を読んで。
+城崎は温泉もよく、宿も落ち着いており、周りの店が早く閉まる以外の不満はなかったですね。</p>
+
+<h2 id="でなにやってたの">でなにやってたの？</h2>
+
+<p>温泉、酒、飯以外なにもやってない。</p>
+
+<p>mikutterのgtk3対応手をつけようかとおもったけど、無理だった。</p>
+
+<h2 id="ついでに天橋立もいってきた">ついでに天橋立もいってきた</h2>
+
+<p>室長()が天橋立いくぞっていってたので連れてってもらった。</p>
+
+<p>-&gt; <img src="/images/photo/amano-hashidate.jpg" alt="" /> &lt;-</p>
+
+<h2 id="酒蔵">酒蔵</h2>
+
+<p>ついでに天橋立近くの酒蔵 <a href="http://kuramoto-mukai.jp/">向井酒造</a> にいってきた。ここは室長が9時までやってるから!
+って5時半くらいに行ったらすでに閉まってて、丁度女将さんが出てきたところだったので開けてもらい酒を買いました。</p>
+
+<p>-&gt; <img src="/images/photo/mukai-sake.jpg" alt="" /> &lt;-</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>おわり</p>
+
+  </div>
+
+  <h1><a href="/blog/2017/07/01/emacs-config-from-itamae/">Emacsの構成管理をitamaeで管理</a></h1>
+  <p class="author">
+    <span class="date">2017-07-01 22:59:16 +0900</span>
+  </p>
+  <div class="content">
+    <p>仕事とプライベート環境でemacsのフォント等設定するのがいいかげんダるくなってきたので、Itamaeを流すだけでイイカンジにするようにした</p>
+
+<h2 id="もともとどうかんりしてたのか">もともとどうかんりしてたのか</h2>
+<p>もともと<a href="https://github.com/katsyoshi/dot.emacs.d">github</a>で管理していたが、さすがにFontの環境異差をちょこちょこ変えるのが面倒になった</p>
+
+<h2 id="itamae-de-kanri">Itamae de kanri</h2>
+<p>gitで管理しているので環境異差ある部分を<a href="https://github.com/katsyoshi/itamae-recipes">itamae</a>で管理するように方針を転換。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">emacs</span><span class="pi">:</span>
+  <span class="na">font</span><span class="pi">:</span>
+    <span class="na">family</span><span class="pi">:</span> <span class="s">Ricty</span>
+    <span class="na">height</span><span class="pi">:</span> <span class="m">120</span>
+  <span class="na">packages</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">auto-complete</span>
+  <span class="na">settings</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">git</span>
+</code></pre></div></div>
+
+<p>とか書いてあとはItamaeを実行することで必要なパッケージのインストール、
+必要な設定へのリンク追加などをするようにしました。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>これでなにも考えなくてすむようになるのかな？</p>
+
+  </div>
+
+  <h1><a href="/blog/2017/06/04/rustful-web/">rustful web</a></h1>
+  <p class="author">
+    <span class="date">2017-06-04 23:17:45 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://www.rust-lang.org/ja-JP/">rust</a> で Web Application をつくろうと思って <a href="https://github.com/Ogeon/rustful">rustful</a> を使ってやってみてたりした。</p>
+
+<p>ドキュメントと利用しているバージョンのコードが異なり、必要なモジュールが読み込めなかったり、関数の引数が異なったりしてうごかねぇってなったのでHEADを使うことで解決。</p>
+
+<h2>🍻</h2>
+<p>とりあえずいつものメンバーで🍻にいってきた。浅草のカンピオンエールという店でのんでそのあと隣の店でお好み焼きをたべてた。お好み焼き屋のあとは河原まであるて吾妻橋からみえる
+やつをながめながらビールのんでた</p>
+
+  </div>
+
+  <h1><a href="/blog/2017/05/31/use-red-arrow-dot-gem/">use red-arrow.gem</a></h1>
+  <p class="author">
+    <span class="date">2017-05-31 23:27:57 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/">こないだインストール</a> した <a href="https://arrow.apache.org/">Apache Arrow</a> がとりあえず <a href="https://github.com/red-data-tools/red-arrow">Ruby</a> でうごくようになったのでメモ</p>
+
+<h2 id="メモ">メモ</h2>
+<p>gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"arrow"</span>
+<span class="sr">/home/</span><span class="n">katsu</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">-</span><span class="mf">3.1</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">/</span><span class="n">loader</span><span class="p">.</span><span class="nf">rb</span><span class="p">:</span><span class="mi">37</span><span class="ss">:in</span> <span class="sb">`require':GObjectIntrospection::RepositoryError::TypelibNotFound: Typelib file for namespace 'Arrow' (any version) not found
+</span></code></pre></div></div>
+
+<p>これは <code class="language-plaintext highlighter-rouge">GObjectIntrospection</code> の<a href="https://github.com/red-data-tools/red-arrow/blob/master/lib/arrow.rb#L25">ロードに失敗</a>しているようです。
+なので<a href="http://www.clear-code.com/blog/2013/12/16.html">ここ</a>や<a href="http://qiita.com/groonga/items/71b145b37d77bd160bf2">ここ</a>を参考に環境変数 <code class="language-plaintext highlighter-rouge">GI_TYPELIB_PATH</code> を設定すると読み込まれるようになり実行できます。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">GI_TYPELIB_PATH</span><span class="o">=</span>/path/to/girepository-1.0
+<span class="gp">$</span><span class="w"> </span>irb <span class="nt">-rarrow</span>
+</code></pre></div></div>
+
+<p>とやるとエラーがなくなります。</p>
+
+<p>最後に<a href="https://github.com/red-data-tools/red-arrow/tree/master/example">サンプル</a>を実行して確認しました!</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">% ruby write-file.rb
+% ruby read-file.rb
+========================================
+record-batch[0]:
+  uint8: [1, 2, 4, 8]
+  uint16: [1, 2, 4, 8]
+  uint32: [1, 2, 4, 8]
+  uint64: [1, 2, 4, 8]
+  int8: [1, -2, 4, -8]
+  int16: [1, -2, 4, -8]
+  int32: [1, -2, 4, -8]
+  int64: [1, -2, 4, -8]
+  float: [1.100000023841858, -2.200000047683716, 4.400000095367432, -8.800000190734863]
+  double: [1.1, -2.2, 4.4, -8.8]
+========================================
+record-batch[1]:
+  uint8: [2, 4, 8]
+  uint16: [2, 4, 8]
+  uint32: [2, 4, 8]
+  uint64: [2, 4, 8]
+  int8: [-2, 4, -8]
+  int16: [-2, 4, -8]
+  int32: [-2, 4, -8]
+  int64: [-2, 4, -8]
+  float: [-2.200000047683716, 4.400000095367432, -8.800000190734863]
+  double: [-2.2, 4.4, -8.8]
+</span></code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+
+<p>最初ろーどえらーでこまってた</p>
+
+  </div>
+
+
+<!-- Pagination links -->
+<div class="pagination">
+  
+    <a href="/page/2/" class="previous">
+      Previous
+    </a>
+  
+  <span class="page_number ">
+    Page: 3 of 10
+  </span>
+  
+    <a href="/page/4/" class="next">Next</a>
+  
+</div>
+
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

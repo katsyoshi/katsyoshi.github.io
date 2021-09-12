@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Page 4 of 10 for katsyoshi のめもみたいなの - page 4 | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="katsyoshi のめもみたいなの - page 4" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<link rel="canonical" href="https://blog.katsyoshi.org/page/4/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/page/4/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<link rel="prev" href="https://blog.katsyoshi.org/page/3/" />
+<link rel="next" href="https://blog.katsyoshi.org/page/5/" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="katsyoshi のめもみたいなの - page 4" />
+<script type="application/ld+json">
+{"url":"https://blog.katsyoshi.org/page/4/","headline":"katsyoshi のめもみたいなの - page 4","description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Pagination links -->
+<div class="pagination">
+  
+    <a href="/page/3/" class="previous">
+      Previous
+    </a>
+  
+  <span class="page_number ">
+    Page: 4 of 10
+  </span>
+  
+    <a href="/page/5/" class="next">Next</a>
+  
+</div>
+
+
+
+  <h1><a href="/blog/2017/05/29/installing-apache-arrow/">installing apache arrow</a></h1>
+  <p class="author">
+    <span class="date">2017-05-29 21:45:29 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://slide.rabbit-shocker.org/authors/kou/nagoya-rubykaigi-03/">最近</a><a href="https://github.com/kou">すとうさん</a>が<a href="https://slide.rabbit-shocker.org/authors/kou/data-science-rb/">一押し</a>している<a href="https://arrow.apache.org/">apache arrow</a>をインストールしてみた</p>
+
+<h2 id="環境">環境</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ uname -a
+Linux rin 4.9.10-gentoo #6 SMP Tue Mar 28 01:29:26 JST 2017 x86_64 Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz GenuineIntel GNU/Linux
+$ gcc -v
+組み込み spec を使用しています。
+COLLECT_GCC=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0/gcc
+COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-pc-linux-gnu/5.4.0/lto-wrapper
+ターゲット: x86_64-pc-linux-gnu
+configure 設定: /var/tmp/portage/sys-devel/gcc-5.4.0-r3/work/gcc-5.4.0/configure --host=x86_64-pc-linux-gnu --build=x86_64-pc-linux-gnu --prefix=/usr --bindir=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0 --includedir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include --datadir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0 --mandir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/man --infodir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/info --with-gxx-include-dir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include/g++-v5 --with-python-dir=/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/python --enable-languages=c,c++,fortran --enable-obsolete --enable-secureplt --disable-werror --with-system-zlib --enable-nls --without-included-gettext --enable-checking=release --with-bugurl=https://bugs.gentoo.org/ --with-pkgversion='Gentoo 5.4.0-r3 p1.3, pie-0.6.5' --enable-libstdcxx-time --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-clocale=gnu --enable-multilib --with-multilib-list=m32,m64 --disable-altivec --disable-fixed-point --enable-targets=all --disable-libgcj --enable-libgomp --disable-libmudflap --disable-libssp --disable-libcilkrts --disable-libmpx --enable-vtable-verify --enable-libvtv --enable-lto --without-isl --enable-libsanitizer
+スレッドモデル: posix
+gcc バージョン 5.4.0 (Gentoo 5.4.0-r3 p1.3, pie-0.6.5)
+</code></pre></div></div>
+
+<h2 id="いんすとーる">いんすとーる</h2>
+
+<p>今回まだGentooにパッケージがないのでgitからインストールします。ほしいのはrubygems.orgに公開されている<a href="https://rubygems.org/gems/red-arrow">red-arrow</a>をコンパイルするためにglibとこれを利用するために必要な依存パッケージとしてcppをインストールします。インストールはかんたんで <code class="language-plaintext highlighter-rouge">cmake</code> を実行すればインストールデキルはずです。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git clone git@github.com:apache/arrow.git
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>arrow/cpp
+<span class="gp">$</span><span class="w"> </span><span class="nb">mkdir </span>release
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>release
+<span class="gp">$</span><span class="w"> </span>cmake .. <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Release
+</code></pre></div></div>
+
+<p>でリリース用パッケージがビルドされるはずですが<a href="https://gist.github.com/katsyoshi/4486792ad43feae4d690d589dac1a157">エラー</a>が出ます。
+これはJIRAで<a href="https://issues.apache.org/jira/browse/ARROW-667">検索した結果</a>より <code class="language-plaintext highlighter-rouge">gcc</code> のバージョン情報がとれずにエラーをだしているやりとりが発見されたのでわかりました。
+ログを見ると実際に取得できていないことも確認しました。で <code class="language-plaintext highlighter-rouge">cpp/cmake_modules/CompilerInfo.cmake</code> をみるとどうやら日本語のバージョン情報は考慮されていないような作りになっていました。
+なので <code class="language-plaintext highlighter-rouge">LANG=C</code> をつけて <code class="language-plaintext highlighter-rouge">cmake</code> 再びつけて実行します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">LANG</span><span class="o">=</span>C cmake .. <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Release
+<span class="gp">$</span><span class="w"> </span>make
+<span class="gp">$</span><span class="w"> </span>make <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>これでC++のインストールは終了です。続いてglibをインストールします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> ../../c_glib
+<span class="gp">$</span><span class="w"> </span>./autgen.sh
+<span class="gp">$</span><span class="w"> </span>./configure
+<span class="gp">$</span><span class="w"> </span>make
+<span class="gp">$</span><span class="w"> </span>make <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>でインストールできます。こちら久々に野良ビルドしたため <code class="language-plaintext highlighter-rouge">PKG_CONFIG_PATH</code> や <code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code> の設定をわすれてただけなのですんなりいけました。
+で最後に <code class="language-plaintext highlighter-rouge">gem install red-arrow</code> を実行して目的を達成しました!!!!11</p>
+
+<h2 id="おわり">おわり</h2>
+<p>ほんとうのもくてきは <code class="language-plaintext highlighter-rouge">fluentd</code> のぷらぐいんをかくことですがつかれたのできょうはここまで</p>
+
+  </div>
+
+  <h1><a href="/blog/2017/05/21/start-watching-dazn/">start watching dazn</a></h1>
+  <p class="author">
+    <span class="date">2017-05-21 14:49:19 +0900</span>
+  </p>
+  <div class="content">
+    <p>タイトルのとおり、DAZNを見はじめた。
+Netflix, Huluを契約してたけど、ぜんぜん見ていなかったので解約した。
+DAZN をみようとおもったきっかけはNBAのカンファレンスファイナルをみようとおもったため。</p>
+
+<p>とりあえず視聴感想ですが、表示は色々なところで言われてるとおもいますが、
+接続開始時にブロックノイズが気になりますが、一旦綺麗に表示されるとそのあとは
+特に気になりません。</p>
+
+<p>肝心の試合内容が現在非常に残念なため試合内の評価はしません。</p>
+
+  </div>
+
+  <h1><a href="/blog/2017/04/09/use-dnsmasq-for-domestic-network/">raspiでdnsを運用してみはじめた</a></h1>
+  <p class="author">
+    <span class="date">2017-04-09 00:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p>RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
+RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code class="language-plaintext highlighter-rouge">apt install dnsmasq</code> するだけでおわります。</p>
+
+<h2 id="はまったところ">はまったところ</h2>
+
+<p>いつもどおりはまりました。今回は以下の二点</p>
+
+<ul>
+  <li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
+  <li>/etc/hosts ファイルのパーミッションが <code class="language-plaintext highlighter-rouge">600</code> になっていたためエラー</li>
+</ul>
+
+<h3 id="etcdnsmasqd-に-hosts-ファイルを置くとエラー">/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
+<p>ログを見ても以下のログしか出ておらず理由の調査に時間がかかった。hosts ファイルは設定ファイルではないため当然といえば当然なのですが…</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts
+</code></pre></div></div>
+
+<p>今、<code class="language-plaintext highlighter-rouge">/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new
+</code></pre></div></div>
+
+<h3 id="etchosts-ファイルのパーミッションが-600-になっていたためエラー">/etc/hosts ファイルのパーミッションが <code class="language-plaintext highlighter-rouge">600</code> になっていたためエラー</h3>
+<p>こちらは上記問題を解決したあと、反映されないのでログを見たときにわかりました。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied
+</code></pre></div></div>
+
+<p>これの原因は <code class="language-plaintext highlighter-rouge">itamae</code> でファイルを送信するときに <code class="language-plaintext highlighter-rouge">mode '644'</code> を指定する必要があったのだが、指定せずに
+送信してしまったため発生。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>おわり</p>
+
+<h3 id="関連リポジトリ">関連リポジトリ</h3>
+<p>https://github.com/katsyoshi/itamae-recipes</p>
+
+  </div>
+
+  <h1><a href="/blog/2017/04/01/how-to-install-elixir/">Elixirのインストール方法</a></h1>
+  <p class="author">
+    <span class="date">2017-04-01 09:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
+まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
+隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:zakk" role="doc-noteref"><a href="#fn:zakk" class="footnote" rel="footnote">1</a></sup></p>
+
+<h2 id="準備">準備</h2>
+
+<p>ここでは <a href="https://gentoo.org/">Gentoo Linux</a> を前提としております。
+まず、Elixir を動かすために <a href="https://www.erlang.org">Erlang</a> をインストールします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">sudo eix-sync
+sudo emerge erlang
+</span></code></pre></div></div>
+
+<p>準備はこれだけです。</p>
+
+<h2 id="インストール">インストール</h2>
+
+<p>次にインストールなのですが、Elixir は Earlang VM 上で動くプログラミング言語のため、コンパイルされたバイナリを置くだけでインストールがおわります。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip
+unzip Precompiled.zip -d elixir
+mv elixir /path/to/elixir
+</span><span class="gp">echo 'export PATH=/path/to/elixir/bin:$</span>PATH<span class="s1">' &gt;&gt; ~/.bashrc
+</span><span class="go">source ~/.bashrc
+</span></code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+
+<p>さいごに <code class="language-plaintext highlighter-rouge">iex</code> を起動して確認すればおわり</p>
+
+<h3 id="参考">参考</h3>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:zakk" role="doc-endnote">
+      <p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧 <a href="#fnref:zakk" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  <h1><a href="/blog/2017/02/20/basic-authenticate-in-h2o/">basic authenticate in h2o</a></h1>
+  <p class="author">
+    <span class="date">2017-02-20 21:53:49 +0900</span>
+  </p>
+  <div class="content">
+    <p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:h2odoc" role="doc-noteref"><a href="#fn:h2odoc" class="footnote" rel="footnote">1</a></sup></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">paths</span><span class="pi">:</span>
+  <span class="s2">"</span><span class="s">/"</span><span class="pi">:</span>
+    <span class="s">mruby.handler</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">require "htpasswd.rb"</span>
+      <span class="s">Htpasswd.new("/etc/h2o/.htpasswd", "realm-name")</span>
+</code></pre></div></div>
+
+<p>また、 <code class="language-plaintext highlighter-rouge">.htpasswd</code> で plain フォーマットはサポートされていません。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">failed to validate password using file:/etc/h2o/.htpasswd:crypt-style password hash is not supported
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">.htpasswd</code> を手動で作成したい場合は以下の方法でできます<sup id="fnref:apachdoc" role="doc-noteref"><a href="#fn:apachdoc" class="footnote" rel="footnote">2</a></sup></p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"digest/sha1"</span>
+<span class="nb">require</span> <span class="s2">"base64"</span>
+<span class="nb">open</span><span class="p">(</span><span class="s2">"/etc/h2o/.htpasswd"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">w</span><span class="o">|</span>
+  <span class="n">w</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s2">"user:{SHA}</span><span class="si">#{</span><span class="no">Base64</span><span class="p">.</span><span class="nf">encode64</span><span class="p">(</span><span class="no">Digest</span><span class="o">::</span><span class="no">SHA1</span><span class="p">.</span><span class="nf">digest</span><span class="p">(</span><span class="s2">"password"</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:h2odoc" role="doc-endnote">
+      <p>Configure &gt; Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧 <a href="#fnref:h2odoc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:apachdoc" role="doc-endnote">
+      <p>Password Formats, The Apache Software Foundation., https://httpd.apache.org/docs/2.4/misc/password_encryptions.html, 2017/02/20 閲覧 <a href="#fnref:apachdoc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  <h1><a href="/blog/2017/02/12/octopress-themes/">Blogのテーマかえた</a></h1>
+  <p class="author">
+    <span class="date">2017-02-12 20:16:01 +0900</span>
+  </p>
+  <div class="content">
+    <p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
+変更の方法は以下のようになります<sup id="fnref:theme" role="doc-noteref"><a href="#fn:theme" class="footnote" rel="footnote">1</a></sup>。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~/octopress
+$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+$ bundle exec rake install\['slash'\]
+$ bundle exec rake generate
+$ bundle exec rake preview
+$ bundle exec rake deploy
+</code></pre></div></div>
+
+<p>ついでにfaviconもかえよう。</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:theme" role="doc-endnote">
+      <p>Octopressのテーマを変更してみよう!, facestarbaby, http://qiita.com/fakestarbaby/items/ab532088453105e1bea4, 2017/02/12 閲覧 <a href="#fnref:theme" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  <h1><a href="/blog/2017/01/01/good-buy-of-2016/">2016年買ってよかったもの</a></h1>
+  <p class="author">
+    <span class="date">2017-01-01 08:59:59 +0900</span>
+  </p>
+  <div class="content">
+    <p>おおきな買いものなかったなぁとおもったが、わりとあったので書きとめておく</p>
+
+<h2 id="acer-h6510bd-フルhd-プロジェクター-と-yamaha-ysp-1600"><a href="https://www.acer.com/ac/ja/JP/content/model/MR.JFZ11.00G">Acer H6510BD フルHD プロジェクター</a> と <a href="http://jp.yamaha.com/products/audio-visual/hometheater-systems/digital-sound-projector/ysp-1600__j/">YAMAHA YSP-1600</a></h2>
+
+<p>このふたつはもともとホームシアターが欲しいなぁということで買いました。
+プロジェクターは、4Kはまだまだ高いので音がうるさいの気にしないでもいいので FullHD のやつが欲くて購入。スピーカーもBTが利用できればいいなっておもってたのでこいつにしてたら、HDMIのパススルーができると聞いたので購入これも比較的安価だったので購入。
+両方とも割と安く手に入るところが魅力でしたので購入、現在は主にAmazon Prime Videoの鑑賞に利用しています。</p>
+
+<h2 id="sony-cyber-shot-dcs-rx100m3"><a href="http://www.sony.jp/cyber-shot/products/DSC-RX100M3/">Sony Cyber-shot DCS-RX100M3</a></h2>
+
+<p>携帯をiPhoneからNexusに変更してからずっとカメラに不満だったので購入。これはカメラとの連携アプリがわかりやすいので大変よい買いものでした。</p>
+
+<h2 id="philips-noodle-maker"><a href="http://www.philips.co.jp/c-p/HR2365_01/premium-collection-pasta-maker">Philips Noodle Maker</a></h2>
+
+<p>こいつは買ったのではなく、頂きものですが、ずっとwish listに入ってたのでここに。
+まだ1回しか使ってないけど、わいわい製麺できてたのしいので1台あると便利です。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>おわり</p>
+
+  </div>
+
+  <h1><a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a></h1>
+  <p class="author">
+    <span class="date">2016-12-17 00:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
+たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
+
+<h2 id="なんぞそれ">なんぞそれ？</h2>
+<p>ここにあります。<a href="https://github.com/katsyoshi/mikutter-emoji">mikutter-emoji</a>
+<code class="language-plaintext highlighter-rouge">:tofu_on_fire:</code> みたいに <code class="language-plaintext highlighter-rouge">:</code> で囲われた文字列を絵文字に置換するだけです。</p>
+
+<h2 id="つかいかた">つかいかた</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
+EDIT ~/.mikutter/plugin/emoji/emoji.yml
+</code></pre></div></div>
+
+<p>gitでプラグインディレクトリにコピーします。
+コピーしたら、絵文字の設定を <code class="language-plaintext highlighter-rouge">emoji.yml</code> に入れます。
+今は5つしか登録していないので皆で登録しましょう</p>
+
+<h2 id="おわり">おわり</h2>
+<p>おわり</p>
+
+
+  </div>
+
+  <h1><a href="/blog/2016/12/10/itamae-loves-gentoo/">板前さんでGentooを管理</a></h1>
+  <p class="author">
+    <span class="date">2016-12-10 16:00:38 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
+
+<h2 id="itamaeでgentoo管理するには">Itamaeでgentoo管理するには？</h2>
+<p>そらはー(<a href="https://twitter.com/sora_h">@sora_h</a>)が作ってる <a href="https://github.com/sorah/itamae-plugin-resource-portage">itamae-plugin-resource-portage</a> 使え</p>
+
+<h2 id="自作のportage管理ソフトの紹介">自作のportage管理ソフトの紹介</h2>
+
+<p><a href="https://github.com/katsyoshi/itamae-recipes/tree/master/cookbook/gentoo">ここ</a>にあります。</p>
+
+<h3 id="使いかた">使いかた</h3>
+<p>簡単な使いかたとしては以下のようになります</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>itamae local gentoo.rb -j package.json
+</code></pre></div></div>
+
+<p>これだけです。</p>
+
+<h3 id="パッケージの指定方法">パッケージの指定方法</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">packages</span><span class="pi">:</span>
+ <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">category/package'</span>
+   <span class="na">portage</span><span class="pi">:</span>
+     <span class="na">use</span><span class="pi">:</span> <span class="s1">'</span><span class="s">package'</span>
+     <span class="na">accept_keywords</span><span class="pi">:</span> <span class="s1">'</span><span class="s">package'</span>
+     <span class="na">license</span><span class="pi">:</span> <span class="s1">'</span><span class="s">pakcage'</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">name</code> で <code class="language-plaintext highlighter-rouge">category/package</code> を指定することでインストールすることができます。
+<code class="language-plaintext highlighter-rouge">portage</code> では <code class="language-plaintext highlighter-rouge">use</code> などのフラグを指定して管理します。
+<code class="language-plaintext highlighter-rouge">use</code> ディレクトリを作成してそこにファイルを置く必要があります。
+自動生成したいけど、依存パッケージの指定方法とかまだ考えていないので取り敢えず直接指定です。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
+とおもってたら itamae-plugin-resource-portage みつけてしまったので
+itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使いましょう</p>
+
+  </div>
+
+  <h1><a href="/blog/2016/12/05/d250g2/">d250g2 advent calendar 2016 5日目</a></h1>
+  <p class="author">
+    <span class="date">2016-12-05 00:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
+
+<h2 id="d250g2-について">d250g2 について</h2>
+
+<p>-&gt; <img src="https://d250g2.com/d250g2.jpg" alt="" /> &lt;-</p>
+
+<h2 id="d250g2-とは">d250g2 とは？</h2>
+<p>しらん</p>
+
+<h2 id="kernelvm-camp-4-に行ってきた">KernelVM Camp #4 に行ってきた</h2>
+
+<p>成果物です</p>
+
+<p>-&gt; <img src="https://d250g2.com/d250g2.jpg" alt="" /> &lt;-</p>
+
+  </div>
+
+
+<!-- Pagination links -->
+<div class="pagination">
+  
+    <a href="/page/3/" class="previous">
+      Previous
+    </a>
+  
+  <span class="page_number ">
+    Page: 4 of 10
+  </span>
+  
+    <a href="/page/5/" class="next">Next</a>
+  
+</div>
+
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

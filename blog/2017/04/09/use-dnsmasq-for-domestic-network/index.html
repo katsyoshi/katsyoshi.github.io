@@ -1,194 +1,108 @@
-
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>raspiでdnsを運用してみはじめた - katsyoshiのめもみたいなもの</title>
-	<meta name="author" content="katsyoshi">
-
-	
-	<meta name="description" content="RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
-RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt install dnsmasq するだけでおわります。 はまったところ いつもどおりはまりました。今回は以下の二点 /etc/ &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="katsyoshiのめもみたいなもの" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	
-</head>
-
-
-<body>
-	<header id="header" class="inner"><h1><a href="/">katsyoshiのめもみたいなもの</a></h1>
-<nav id="main-nav"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
-</ul>
-</nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><ul class="main">
-	<li><a href="/">Blog</a></li>
-	<li><a href="/blog/archives">Archives</a></li>
-</ul>
-</div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="https://www.google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:blog.katsyoshi.org">
-			</form>
-		</div>
-	</div>
-</nav>
-<nav id="sub-nav" class="alignright">
-	<div class="social">
-		
-		
-		
-		
-    
-		
-		<a class="coderwall" href="https://coderwall.com/katsyoshi" title="Coderwall">Coderwall</a>
-		
-		
-		
-		
-		
-		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
-		
-    
-	</div>
-	<form class="search" action="https://www.google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:blog.katsyoshi.org">
-	</form>
-</nav>
-
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>raspiでdnsを運用してみはじめた | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="raspiでdnsを運用してみはじめた" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。 RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt install dnsmasq するだけでおわります。" />
+<meta property="og:description" content="RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。 RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt install dnsmasq するだけでおわります。" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-04-09T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="raspiでdnsを運用してみはじめた" />
+<script type="application/ld+json">
+{"url":"https://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network/","headline":"raspiでdnsを運用してみはじめた","dateModified":"2017-04-09T00:00:00+09:00","datePublished":"2017-04-09T00:00:00+09:00","description":"RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。 RasPi とはいえ中身は Ubuntu Linux なのでのインストールは apt install dnsmasq するだけでおわります。","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2017/04/09/use-dnsmasq-for-domestic-network/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
 </header>
-	
-		
-	
-	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Raspiでdnsを運用してみはじめた</h2>
-	<div class="entry-content"><p>RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
-RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code>apt install dnsmasq</code> するだけでおわります。</p>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-<h2>はまったところ</h2>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">raspiでdnsを運用してみはじめた</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-04-09T00:00:00+09:00" itemprop="datePublished">Apr 9, 2017
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
+RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code class="language-plaintext highlighter-rouge">apt install dnsmasq</code> するだけでおわります。</p>
+
+<h2 id="はまったところ">はまったところ</h2>
 
 <p>いつもどおりはまりました。今回は以下の二点</p>
 
 <ul>
-<li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
-<li>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</li>
+  <li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
+  <li>/etc/hosts ファイルのパーミッションが <code class="language-plaintext highlighter-rouge">600</code> になっていたためエラー</li>
 </ul>
 
-
-<h3>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
-
+<h3 id="etcdnsmasqd-に-hosts-ファイルを置くとエラー">/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
 <p>ログを見ても以下のログしか出ておらず理由の調査に時間がかかった。hosts ファイルは設定ファイルではないため当然といえば当然なのですが…</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts</span></code></pre></td></tr></table></div></figure>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts
+</code></pre></div></div>
 
+<p>今、<code class="language-plaintext highlighter-rouge">/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
 
-<p>今、<code>/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new
+</code></pre></div></div>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>/etc/hosts ファイルのパーミッションが <code>600</code> になっていたためエラー</h3>
-
+<h3 id="etchosts-ファイルのパーミッションが-600-になっていたためエラー">/etc/hosts ファイルのパーミッションが <code class="language-plaintext highlighter-rouge">600</code> になっていたためエラー</h3>
 <p>こちらは上記問題を解決したあと、反映されないのでログを見たときにわかりました。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied</span></code></pre></td></tr></table></div></figure>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied
+</code></pre></div></div>
 
-
-<p>これの原因は <code>itamae</code> でファイルを送信するときに <code>mode '644'</code> を指定する必要があったのだが、指定せずに
+<p>これの原因は <code class="language-plaintext highlighter-rouge">itamae</code> でファイルを送信するときに <code class="language-plaintext highlighter-rouge">mode '644'</code> を指定する必要があったのだが、指定せずに
 送信してしまったため発生。</p>
 
-<h2>おわり</h2>
-
+<h2 id="おわり">おわり</h2>
 <p>おわり</p>
 
-<h3>関連リポジトリ</h3>
+<h3 id="関連リポジトリ">関連リポジトリ</h3>
+<p>https://github.com/katsyoshi/itamae-recipes</p>
 
-<p><a href="https://github.com/katsyoshi/itamae-recipes">https://github.com/katsyoshi/itamae-recipes</a></p>
-</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-</div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/diary/'>diary</a>, <a class='category' href='/blog/categories/dnsmasq/'>dnsmasq</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-
-
-</div>
-	
-</div>
+  </div><a class="u-url" href="/blog/2017/04/09/use-dnsmasq-for-domestic-network/" hidden></a>
 </article>
 
-	<div class="share">
-	<div class="addthis_toolbox addthis_default_style ">
-		
-		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-		
-		
-		<a class="addthis_button_tweet"></a>
-		
-		
-		
-	</div>
-	
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
 </div>
 
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
 
-</div>
-	<footer id="footer" class="inner">Copyright &copy; 2018
-
-    katsyoshi
+  </div>
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-	$('.fancybox').fancybox();
-})(jQuery);
-</script> <!-- Delete or comment this line to disable Fancybox -->
-
-
-
-
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-49549546-1']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-
-
-
 </body>
+
 </html>
