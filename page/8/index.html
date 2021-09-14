@@ -9,17 +9,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/8/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/8/" />
+<link rel="canonical" href="http://localhost:3000/page/8/" />
+<meta property="og:url" content="http://localhost:3000/page/8/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/7/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/9/" />
+<link rel="prev" href="http://localhost:3000/page/7/" />
+<link rel="next" href="http://localhost:3000/page/9/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 8" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/8/","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 8","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"http://localhost:3000/page/8/","headline":"katsyoshi のめもみたいなの - page 8","description":"It’s a memos.","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -43,6 +43,36 @@
 </div>
 
 
+
+  <h1><a href="/blog/2014/12/01/mikutter-advent-calendar-1-day/">mikutter advent calendar 1日目</a></h1>
+  <p class="author">
+    <span class="date">2014-12-01 23:59:59 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="http://www.adventar.org/calendar/401">一日目</a>らしいですね。</p>
+
+<h2 id="今のmikutter環境">今のmikutter環境</h2>
+
+<p>はGentoo/Linuxで動いています。</p>
+
+<p>よく考えてみたら今の環境になってLinuxでmikutterを使うのははじめてです。 Linuxになって一番感じたのインストールすごく楽になったことです。</p>
+
+<h2 id="今までのmikutter環境">今までのmikutter環境</h2>
+
+<p>今までMacで基本的に利用してたので苦労してた。 Macではとくにインストール、gemのupdateが大変でした。 Macでの環境では、HomebrewのGTK2のせいか、RubyGtk2がまともに動かないことが頻繁におこりました。 あと、最後まで解決できなかったのが特定の文字列がくるとクラッシュするというバグがありました。</p>
+
+<h2 id="mikutterとの出会い">mikutterとの出会い</h2>
+
+<p>出会いとしてはtwitterでTLを眺めてたら、@toshi_a って人がtwitterクライアントをつくってるらしいということで 取り敢えずFreeBSDでインストールしたのがはじめてだったとおもいます。 このときはFreeBSDでインストールして、X転送したものをMacで表示したとおもいます。</p>
+
+<p>それ以降はMacでインストールして、<a href="http://github.com/katsyoshi/fav">mikutterのプラグイン</a>を書いて公開したりしてました。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>おわりおわり。</p>
+
+
+  </div>
 
   <h1><a href="/blog/2014/11/21/remove-empty-example-files/">Railsで空のテストファイルを削除</a></h1>
   <p class="author">
@@ -415,50 +445,6 @@ $ dd of=/path/to/disk if=install-amd64-minimal-20140814.iso bs=4m
 <h2 id="まとめ">まとめ</h2>
 
 <p>とりあえず今日はここで終りです。インストールは明日以降にします。</p>
-
-  </div>
-
-  <h1><a href="/blog/2014/08/10/good-bye-elasticsearch-and-jenkins/">good-bye elasticsearch and jenkins</a></h1>
-  <p class="author">
-    <span class="date">2014-08-10 23:22:55 +0900</span>
-  </p>
-  <div class="content">
-    <p>この環境では慢性的にメモリが足りなかったのでメモリを大量に使ってる<a href="http://www.elasticsearch.org/">Elasticsearch</a>を削除しました。
-Jenkinsについては利用していなかったので停止してます。ついでに12.04から14.04にupgradeしました。</p>
-
-<h2 id="削除とupgrade">削除とUpgrade</h2>
-<p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
-Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt-get purge elasticsearch
-$ sudo update-rc.d jenkins disable
-</code></pre></div></div>
-
-<p>つぎに14.04へupgradeを行ないます。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo do-release-upgrade -d
-</code></pre></div></div>
-
-<p>これで14.04になってます。</p>
-
-<h2 id="環境">環境</h2>
-<ul>
-  <li>Machine: さくらVPS</li>
-  <li>CPU: Intel Xeon E312xx (SandyBridge) * 2</li>
-  <li>MEM: 1GB</li>
-  <li>HDD: 100GB</li>
-  <li>OS: Ubuntu Linux 12.04</li>
-</ul>
-
-<h2 id="インストール済ソフトウェア一部">インストール済ソフトウェア（一部）</h2>
-<ul>
-  <li>Elasticsearch</li>
-  <li>fluentd</li>
-  <li>Jenkins</li>
-  <li>Jubatus</li>
-  <li>Norikra</li>
-  <li>Nginx</li>
-</ul>
 
   </div>
 

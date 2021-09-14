@@ -9,17 +9,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/9/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/9/" />
+<link rel="canonical" href="http://localhost:3000/page/9/" />
+<meta property="og:url" content="http://localhost:3000/page/9/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/8/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/10/" />
+<link rel="prev" href="http://localhost:3000/page/8/" />
+<link rel="next" href="http://localhost:3000/page/10/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 9" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/9/","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 9","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"http://localhost:3000/page/9/","headline":"katsyoshi のめもみたいなの - page 9","description":"It’s a memos.","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -43,6 +43,50 @@
 </div>
 
 
+
+  <h1><a href="/blog/2014/08/10/good-bye-elasticsearch-and-jenkins/">good-bye elasticsearch and jenkins</a></h1>
+  <p class="author">
+    <span class="date">2014-08-10 23:22:55 +0900</span>
+  </p>
+  <div class="content">
+    <p>この環境では慢性的にメモリが足りなかったのでメモリを大量に使ってる<a href="http://www.elasticsearch.org/">Elasticsearch</a>を削除しました。
+Jenkinsについては利用していなかったので停止してます。ついでに12.04から14.04にupgradeしました。</p>
+
+<h2 id="削除とupgrade">削除とUpgrade</h2>
+<p>削除する前に<a href="https://mackerel.io">Mackerel</a>を導入したので、fluentd + Elasticsearch + Kibanaな構成にする必要がなくなりました。
+Elasticsearchの削除とJenkinsの停止は以下のコマンドで行ないます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt-get purge elasticsearch
+$ sudo update-rc.d jenkins disable
+</code></pre></div></div>
+
+<p>つぎに14.04へupgradeを行ないます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo do-release-upgrade -d
+</code></pre></div></div>
+
+<p>これで14.04になってます。</p>
+
+<h2 id="環境">環境</h2>
+<ul>
+  <li>Machine: さくらVPS</li>
+  <li>CPU: Intel Xeon E312xx (SandyBridge) * 2</li>
+  <li>MEM: 1GB</li>
+  <li>HDD: 100GB</li>
+  <li>OS: Ubuntu Linux 12.04</li>
+</ul>
+
+<h2 id="インストール済ソフトウェア一部">インストール済ソフトウェア（一部）</h2>
+<ul>
+  <li>Elasticsearch</li>
+  <li>fluentd</li>
+  <li>Jenkins</li>
+  <li>Jubatus</li>
+  <li>Norikra</li>
+  <li>Nginx</li>
+</ul>
+
+  </div>
 
   <h1><a href="/blog/2014/07/22/akiyamago-hackathon-2014/">秘境でハッカソンがあったので行ってきた</a></h1>
   <p class="author">
@@ -509,83 +553,6 @@ $ sudo service fluentd start
 
 <p>いくつかアクセスしてみてなげられてるのを確認できたらねます。
 最後に<a href="http://katsyoshi.doorkeeper.jp/events/10420">さけまつり</a>やるかもしれないのできてみてくだしあ。</p>
-
-  </div>
-
-  <h1><a href="/blog/2014/04/09/how-to-install-applications-non-super-user/">スーパーユーザ権限もたずに好きなソフトをインストール</a></h1>
-  <p class="author">
-    <span class="date">2014-04-09 20:46:35 +0900</span>
-  </p>
-  <div class="content">
-    <p>Linux使っててこのソフトが入ってないしsudoも使えないってときありませんか？
-そんなときに好きなソフト(tmux, emacs)をインストールする方法を書いときます。
-ここでは、tmuxとemacsについてインストール方法を書いときます。</p>
-
-<h2 id="方法">方法</h2>
-<p>方法として以下のふたつがあると思う</p>
-
-<ol>
-  <li>頑張っていれる</li>
-  <li>パッケージマネージャ</li>
-</ol>
-
-<h2 id="頑張って入れる">頑張って入れる</h2>
-<p>この場合はちょっと管理がめんどうかもしれないが書いときます。</p>
-
-<p>前提条件としてgccとwgetがインストールされていることでX11関係のライブラリがインストールされていないこととします。</p>
-
-<h3 id="emacs">emacs</h3>
-<p>以下のコマンドでインストールできます。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ wget http://ftp.gnu.org/pub/gnu/emacs/emacs-24.3.tar.xz
- $ tar xvf emacs-24.3.tar.xz
- $ cd emacs-24.3
- $ ./configure --prefix=${HOME}/.local/ --without-x --without-dbus --without-gnutls --without-makeinfo
- $ make -j4 bootstrap
- $ make install
- $ export PATH=${HOME}/.local/bin:${PATH}
- $ emacs
-</code></pre></div></div>
-
-<h3 id="tmux">tmux</h3>
-<p>以下のコマンドで必要ライブラリのncursesをインストールします。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ wget http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz
- $ tar xvf ncurses-5.9.tar.gz
- $ cd ncurses-5.9
- $ ./configure --prefix=${HOME}/.local
- $ make -j4
- $ make install
-</code></pre></div></div>
-
-<p>次にlibeventをインストールします。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ wget https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
- $ tar xvf libevent-2.0.21-stable.tar.gz
- $ cd libevent-2.0.21-stable
- $ ./configure --prefix=${HOME}/.local
- $ make -j4
- $ make install
-</code></pre></div></div>
-
-<p>最後にtmuxをインストールします。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ wget http://downloads.sourceforge.net/project/tmux/tmux/tmux-1.9/tmux-1.9a.tar.gz
- $ tar xvf tmux-1.9a.tar.gz
- $ cd tmux-1.9a
- $ CFLAGS="-I${HOME}/.local/include -I${HOME}/.local/include/ncurses" LDFLAGS=-L${HOME}/.local/lib ./configure --prefix=${HOME}/.local
- $ make -j4
- $ make install
- $ LD_LIBRARY_PATH=${HOME}/.local/lib tmux
-</code></pre></div></div>
-
-<p>すべてインストール終ったら設定をします</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ echo 'export PATH=${HOME}/.local/bin:${PATH}' &gt;&gt; ${HOME}/.bashrc
- $ echo 'export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}' &gt;&gt; ${HOME}/.bashrc
-</code></pre></div></div>
-
-<h2 id="パッケージマネージャ">パッケージマネージャ</h2>
-<p>Gentoo/Prefix使え</p>
 
   </div>
 

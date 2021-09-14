@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Octopress 脱出 | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Octopress 脱出" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="長年利用してた Octopress がずいぶん前にサポート外になってたので Jekyll へ変更することにした。" />
+<meta property="og:description" content="長年利用してた Octopress がずいぶん前にサポート外になってたので Jekyll へ変更することにした。" />
+<link rel="canonical" href="http://localhost:3000/blog/2021/09/13/good-bye-octopress/" />
+<meta property="og:url" content="http://localhost:3000/blog/2021/09/13/good-bye-octopress/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-13T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Octopress 脱出" />
+<script type="application/ld+json">
+{"url":"http://localhost:3000/blog/2021/09/13/good-bye-octopress/","headline":"Octopress 脱出","dateModified":"2021-09-13T00:00:00+09:00","datePublished":"2021-09-13T00:00:00+09:00","description":"長年利用してた Octopress がずいぶん前にサポート外になってたので Jekyll へ変更することにした。","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:3000/blog/2021/09/13/good-bye-octopress/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Octopress 脱出</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-13T00:00:00+09:00" itemprop="datePublished">Sep 13, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>長年利用してた <a href="https://github.com/octopress/octopress">Octopress</a> がずいぶん前にサポート外になってたので <a href="https://github.com/jekyll/jekyll">Jekyll</a> へ変更することにした。</p>
+
+<h2 id="問題点">問題点</h2>
+
+<p>サポート外になったことによる問題点があり、その問題によって変更することになった。
+問題点としては、 <em><a href="https://rubygems.org/gems/pygments.rb">Pygments.rb</a></em> と <em><a href="https://rubygems.org/gems/compass">Compass</a></em> と利用している <em><a href="https://ruby-lang.org/">Ruby</a></em> のバージョンが 2.3.7 というのが主であった。</p>
+
+<h2 id="変更">変更</h2>
+<p>やったことは以下のとおり。</p>
+
+<ol>
+  <li>gem の整理
+    <ul>
+      <li>最初に不要な <em>gem</em> を削除。特に消したいのは <em>Pygments.rb</em> と <em>Compass</em> それ以外にも不要なものがあるので消す。</li>
+    </ul>
+  </li>
+  <li>ディレクトリの整理
+    <ul>
+      <li>posts は元々の設定が <code class="language-plaintext highlighter-rouge">source/_posts</code> に入れていたが、 <code class="language-plaintext highlighter-rouge">_posts</code> に変更</li>
+      <li>画像も同様に <code class="language-plaintext highlighter-rouge">source/images</code> だったものを <code class="language-plaintext highlighter-rouge">images</code> に変更</li>
+    </ul>
+  </li>
+  <li>テンプレートの整理
+    <ul>
+      <li>テンプレート <em><a href="https://rubygems.org/gems/minima">minima</a></em> を利用するにあたり <code class="language-plaintext highlighter-rouge">_includes</code> などの中身を整理</li>
+    </ul>
+  </li>
+  <li>プラグインの整理
+    <ul>
+      <li>いまのところ <em><a href="https://rubygems.org/gems/jekyll-paginate-v2">jekyll-paginate-v2</a></em> のみ変更で他は入れていない。</li>
+    </ul>
+    <ul>
+      <li>そのうち theme も含めて検討したい</li>
+    </ul>
+  </li>
+  <li><a href="https://rubygems.org/gems/rake">Rake コマンド</a> の整理
+    <ul>
+      <li>とりあえず octopress で利用してた <em>Rakefile</em> から必要最低限の変更のみ実行。</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>日曜日の夜中 <strong><a href="/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">RubyKaigi の日記</a></strong> をポストしてからこのリポジトリを <em>jekyll</em> にしようと <strong>雑に</strong> 弄ってたら、 <code class="language-plaintext highlighter-rouge">rake generate</code> が <code class="language-plaintext highlighter-rouge">Unknown language: xml</code> という謎の <em>Pygments</em> エラーが出てしまった。
+このエラーを修正しようとしがんばってみたが、失敗して修正できなかったので <em>jekyll</em> に変更したものでデプロイした。</p>
+
+<p>そんなこんなあって <em>Octopress</em> はやめて <em>jekyll</em> に変更しました。</p>
+
+  </div><a class="u-url" href="/blog/2021/09/13/good-bye-octopress/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,4 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2021-09-13T10:44:40+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">2021.takeout.rubykaigi.org</title><link href="https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/" rel="alternate" type="text/html" title="2021.takeout.rubykaigi.org" /><published>2021-09-12T00:00:00+09:00</published><updated>2021-09-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">&lt;p&gt;今年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で &lt;a href=&quot;https://rubykaigi.org&quot;&gt;RubyKaigi&lt;/a&gt; のオンラインイベント化された &lt;a href=&quot;https://rubykaigi.org/2021-takeout&quot;&gt;RubyKaigi Takeout 2021&lt;/a&gt; に行ってきた。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://localhost:3000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:3000/" rel="alternate" type="text/html" /><updated>2021-09-14T22:38:28+09:00</updated><id>http://localhost:3000/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Octopress 脱出</title><link href="http://localhost:3000/blog/2021/09/13/good-bye-octopress/" rel="alternate" type="text/html" title="Octopress 脱出" /><published>2021-09-13T00:00:00+09:00</published><updated>2021-09-13T00:00:00+09:00</updated><id>http://localhost:3000/blog/2021/09/13/good-bye-octopress</id><content type="html" xml:base="http://localhost:3000/blog/2021/09/13/good-bye-octopress/">&lt;p&gt;長年利用してた &lt;a href=&quot;https://github.com/octopress/octopress&quot;&gt;Octopress&lt;/a&gt; がずいぶん前にサポート外になってたので &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll&lt;/a&gt; へ変更することにした。&lt;/p&gt;
+
+&lt;h2 id=&quot;問題点&quot;&gt;問題点&lt;/h2&gt;
+
+&lt;p&gt;サポート外になったことによる問題点があり、その問題によって変更することになった。
+問題点としては、 &lt;em&gt;&lt;a href=&quot;https://rubygems.org/gems/pygments.rb&quot;&gt;Pygments.rb&lt;/a&gt;&lt;/em&gt; と &lt;em&gt;&lt;a href=&quot;https://rubygems.org/gems/compass&quot;&gt;Compass&lt;/a&gt;&lt;/em&gt; と利用している &lt;em&gt;&lt;a href=&quot;https://ruby-lang.org/&quot;&gt;Ruby&lt;/a&gt;&lt;/em&gt; のバージョンが 2.3.7 というのが主であった。&lt;/p&gt;
+
+&lt;h2 id=&quot;変更&quot;&gt;変更&lt;/h2&gt;
+&lt;p&gt;やったことは以下のとおり。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;gem の整理
+    &lt;ul&gt;
+      &lt;li&gt;最初に不要な &lt;em&gt;gem&lt;/em&gt; を削除。特に消したいのは &lt;em&gt;Pygments.rb&lt;/em&gt; と &lt;em&gt;Compass&lt;/em&gt; それ以外にも不要なものがあるので消す。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;ディレクトリの整理
+    &lt;ul&gt;
+      &lt;li&gt;posts は元々の設定が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source/_posts&lt;/code&gt; に入れていたが、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; に変更&lt;/li&gt;
+      &lt;li&gt;画像も同様に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source/images&lt;/code&gt; だったものを &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;images&lt;/code&gt; に変更&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;テンプレートの整理
+    &lt;ul&gt;
+      &lt;li&gt;テンプレート &lt;em&gt;&lt;a href=&quot;https://rubygems.org/gems/minima&quot;&gt;minima&lt;/a&gt;&lt;/em&gt; を利用するにあたり &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes&lt;/code&gt; などの中身を整理&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;プラグインの整理
+    &lt;ul&gt;
+      &lt;li&gt;いまのところ &lt;em&gt;&lt;a href=&quot;https://rubygems.org/gems/jekyll-paginate-v2&quot;&gt;jekyll-paginate-v2&lt;/a&gt;&lt;/em&gt; のみ変更で他は入れていない。&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+      &lt;li&gt;そのうち theme も含めて検討したい&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rubygems.org/gems/rake&quot;&gt;Rake コマンド&lt;/a&gt; の整理
+    &lt;ul&gt;
+      &lt;li&gt;とりあえず octopress で利用してた &lt;em&gt;Rakefile&lt;/em&gt; から必要最低限の変更のみ実行。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;日曜日の夜中 &lt;strong&gt;&lt;a href=&quot;/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/&quot;&gt;RubyKaigi の日記&lt;/a&gt;&lt;/strong&gt; をポストしてからこのリポジトリを &lt;em&gt;jekyll&lt;/em&gt; にしようと &lt;strong&gt;雑に&lt;/strong&gt; 弄ってたら、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rake generate&lt;/code&gt; が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Unknown language: xml&lt;/code&gt; という謎の &lt;em&gt;Pygments&lt;/em&gt; エラーが出てしまった。
+このエラーを修正しようとしがんばってみたが、失敗して修正できなかったので &lt;em&gt;jekyll&lt;/em&gt; に変更したものでデプロイした。&lt;/p&gt;
+
+&lt;p&gt;そんなこんなあって &lt;em&gt;Octopress&lt;/em&gt; はやめて &lt;em&gt;jekyll&lt;/em&gt; に変更しました。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><summary type="html">長年利用してた Octopress がずいぶん前にサポート外になってたので Jekyll へ変更することにした。</summary></entry><entry><title type="html">2021.takeout.rubykaigi.org</title><link href="http://localhost:3000/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/" rel="alternate" type="text/html" title="2021.takeout.rubykaigi.org" /><published>2021-09-12T00:00:00+09:00</published><updated>2021-09-12T00:00:00+09:00</updated><id>http://localhost:3000/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021</id><content type="html" xml:base="http://localhost:3000/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">&lt;p&gt;今年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で &lt;a href=&quot;https://rubykaigi.org&quot;&gt;RubyKaigi&lt;/a&gt; のオンラインイベント化された &lt;a href=&quot;https://rubykaigi.org/2021-takeout&quot;&gt;RubyKaigi Takeout 2021&lt;/a&gt; に行ってきた。&lt;/p&gt;
 
 &lt;p&gt;去年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で takeout をやっていたがすっかり忘れてたので参加していなかった。ので 2 年ぶりの参加である。&lt;/p&gt;
 
@@ -69,7 +116,7 @@
 
 &lt;h2 id=&quot;matome&quot;&gt;matome&lt;/h2&gt;
 
-&lt;p&gt;久しぶりの RubyKaigi 参加で大変たのしく、興奮した3日間でした!!!&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="rubykaigi" /><summary type="html">今年も COVID-19 の影響で RubyKaigi のオンラインイベント化された RubyKaigi Takeout 2021 に行ってきた。</summary></entry><entry><title type="html">2020 買ってよかったものたち</title><link href="https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020/" rel="alternate" type="text/html" title="2020 買ってよかったものたち" /><published>2020-12-31T23:59:59+09:00</published><updated>2020-12-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2020/12/31/best-buy-2020/">&lt;p&gt;今年は &lt;strong&gt;COVID-19&lt;/strong&gt; のためどこにも行けていないので買ってよかったものをあげていきます。
+&lt;p&gt;久しぶりの RubyKaigi 参加で大変たのしく、興奮した3日間でした!!!&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="rubykaigi" /><summary type="html">今年も COVID-19 の影響で RubyKaigi のオンラインイベント化された RubyKaigi Takeout 2021 に行ってきた。</summary></entry><entry><title type="html">2020 買ってよかったものたち</title><link href="http://localhost:3000/blog/2020/12/31/best-buy-2020/" rel="alternate" type="text/html" title="2020 買ってよかったものたち" /><published>2020-12-31T23:59:59+09:00</published><updated>2020-12-31T23:59:59+09:00</updated><id>http://localhost:3000/blog/2020/12/31/best-buy-2020</id><content type="html" xml:base="http://localhost:3000/blog/2020/12/31/best-buy-2020/">&lt;p&gt;今年は &lt;strong&gt;COVID-19&lt;/strong&gt; のためどこにも行けていないので買ってよかったものをあげていきます。
 買ったものとしてあげないのは本や消耗品は載せないです。&lt;/p&gt;
 
 &lt;h2 id=&quot;アマゾンから-yodobashi-へ&quot;&gt;アマゾンから YODOBASHI へ&lt;/h2&gt;
@@ -123,7 +170,7 @@
 &lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
 
 &lt;p&gt;今年は &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で出歩くことも減りひきこもる機会も増えた1年でした。
-来年はもう少し出歩けるようになったらいいなあ。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><summary type="html">今年は COVID-19 のためどこにも行けていないので買ってよかったものをあげていきます。 買ったものとしてあげないのは本や消耗品は載せないです。</summary></entry><entry><title type="html">Favorite Beer House 2019</title><link href="https://blog.katsyoshi.org/blog/2019/12/31/favorite-beer-house-2019/" rel="alternate" type="text/html" title="Favorite Beer House 2019" /><published>2019-12-31T23:59:59+09:00</published><updated>2019-12-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2019/12/31/favorite-beer-house-2019</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2019/12/31/favorite-beer-house-2019/">&lt;p&gt;年末になったので今年行ったビール屋さんをまとめてみます。&lt;/p&gt;
+来年はもう少し出歩けるようになったらいいなあ。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><summary type="html">今年は COVID-19 のためどこにも行けていないので買ってよかったものをあげていきます。 買ったものとしてあげないのは本や消耗品は載せないです。</summary></entry><entry><title type="html">Favorite Beer House 2019</title><link href="http://localhost:3000/blog/2019/12/31/favorite-beer-house-2019/" rel="alternate" type="text/html" title="Favorite Beer House 2019" /><published>2019-12-31T23:59:59+09:00</published><updated>2019-12-31T23:59:59+09:00</updated><id>http://localhost:3000/blog/2019/12/31/favorite-beer-house-2019</id><content type="html" xml:base="http://localhost:3000/blog/2019/12/31/favorite-beer-house-2019/">&lt;p&gt;年末になったので今年行ったビール屋さんをまとめてみます。&lt;/p&gt;
 
 &lt;h2 id=&quot;spot&quot;&gt;Spot&lt;/h2&gt;
 
@@ -176,7 +223,7 @@
 &lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;今年行ったビールをまとめてみましたが、今年はあまりビールのんでないなーとおもってたら40軒ぐらい行ってた。
-来年は日本酒まとめますね。&lt;/p&gt;</content><author><name></name></author><category term="beer" /><summary type="html">年末になったので今年行ったビール屋さんをまとめてみます。</summary></entry><entry><title type="html">RubyKaigi 2019</title><link href="https://blog.katsyoshi.org/blog/2019/04/27/rubykaigi2019/" rel="alternate" type="text/html" title="RubyKaigi 2019" /><published>2019-04-27T19:53:31+09:00</published><updated>2019-04-27T19:53:31+09:00</updated><id>https://blog.katsyoshi.org/blog/2019/04/27/rubykaigi2019</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2019/04/27/rubykaigi2019/">&lt;p&gt;&lt;a href=&quot;https://rubykagi.org/2019&quot;&gt;RubyKaigi2019&lt;/a&gt; があったので行ってきました。
+来年は日本酒まとめますね。&lt;/p&gt;</content><author><name></name></author><category term="beer" /><summary type="html">年末になったので今年行ったビール屋さんをまとめてみます。</summary></entry><entry><title type="html">RubyKaigi 2019</title><link href="http://localhost:3000/blog/2019/04/27/rubykaigi2019/" rel="alternate" type="text/html" title="RubyKaigi 2019" /><published>2019-04-27T19:53:31+09:00</published><updated>2019-04-27T19:53:31+09:00</updated><id>http://localhost:3000/blog/2019/04/27/rubykaigi2019</id><content type="html" xml:base="http://localhost:3000/blog/2019/04/27/rubykaigi2019/">&lt;p&gt;&lt;a href=&quot;https://rubykagi.org/2019&quot;&gt;RubyKaigi2019&lt;/a&gt; があったので行ってきました。
 &lt;a href=&quot;http://b.hatena.ne.jp/search/text?q=rubykaigi2019&quot;&gt;既に様々な人&lt;/a&gt; が書いていますのでここでは気になった、よかったというセッションについて書きます。
 聴講選択基準としてよく &lt;a href=&quot;https://asakusarb.esa.io&quot;&gt;asakusa.rb&lt;/a&gt; に来ているひとは外すことにしました。&lt;/p&gt;
 
@@ -253,7 +300,7 @@ Ruby on Apple II のやつがぶっとんでてよかったですね。
 
 &lt;p&gt;今年の RubyKaigi 飯の写真は以下になります。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.amazon.co.jp/photos/share/JMFkdlomW29NdLar2a5tFydS6PjEMlkp5mLDO6dcVjn&quot;&gt;RubyKaigi 2019&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="rubykaigi" /><category term="ruby" /><category term="tech" /><category term="diary" /><summary type="html">RubyKaigi2019 があったので行ってきました。 既に様々な人 が書いていますのでここでは気になった、よかったというセッションについて書きます。 聴講選択基準としてよく asakusa.rb に来ているひとは外すことにしました。</summary></entry><entry><title type="html">endgame keyboard…</title><link href="https://blog.katsyoshi.org/blog/2019/02/11/endgame-keyboard-dot-dot-dot/" rel="alternate" type="text/html" title="endgame keyboard…" /><published>2019-02-11T22:48:24+09:00</published><updated>2019-02-11T22:48:24+09:00</updated><id>https://blog.katsyoshi.org/blog/2019/02/11/endgame-keyboard-dot-dot-dot</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2019/02/11/endgame-keyboard-dot-dot-dot/">&lt;p&gt;新しいキーボードを作りました!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.amazon.co.jp/photos/share/JMFkdlomW29NdLar2a5tFydS6PjEMlkp5mLDO6dcVjn&quot;&gt;RubyKaigi 2019&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="rubykaigi" /><category term="ruby" /><category term="tech" /><category term="diary" /><summary type="html">RubyKaigi2019 があったので行ってきました。 既に様々な人 が書いていますのでここでは気になった、よかったというセッションについて書きます。 聴講選択基準としてよく asakusa.rb に来ているひとは外すことにしました。</summary></entry><entry><title type="html">endgame keyboard…</title><link href="http://localhost:3000/blog/2019/02/11/endgame-keyboard-dot-dot-dot/" rel="alternate" type="text/html" title="endgame keyboard…" /><published>2019-02-11T22:48:24+09:00</published><updated>2019-02-11T22:48:24+09:00</updated><id>http://localhost:3000/blog/2019/02/11/endgame-keyboard-dot-dot-dot</id><content type="html" xml:base="http://localhost:3000/blog/2019/02/11/endgame-keyboard-dot-dot-dot/">&lt;p&gt;新しいキーボードを作りました!&lt;/p&gt;
 
 &lt;h2 id=&quot;fortitude60&quot;&gt;&lt;a href=&quot;https://github.com/Pekaso/fortitude60&quot;&gt;Fortitude60&lt;/a&gt;&lt;/h2&gt;
 
@@ -322,7 +369,7 @@ Ruby on Apple II のやつがぶっとんでてよかったですね。
 &lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
 
 &lt;p&gt;という漢字になりました。
-さすがに透過キーキャップだと部屋が明るくなりすぎるので不透明キーキャップに変更していまはつかってますので、大分おちつています。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="tech" /><category term="keyboard" /><category term="fortitude60" /><summary type="html">新しいキーボードを作りました!</summary></entry><entry><title type="html">今年いった日本酒が飲める店 2018</title><link href="https://blog.katsyoshi.org/blog/2018/12/31/good-sake-restaurant-2018/" rel="alternate" type="text/html" title="今年いった日本酒が飲める店 2018" /><published>2018-12-31T23:59:59+09:00</published><updated>2018-12-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/12/31/good-sake-restaurant-2018</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/12/31/good-sake-restaurant-2018/">&lt;p&gt;去年は &lt;a href=&quot;http://blog.katsyoshi.org/blog/2017/12/30/favorite-beer-house/&quot;&gt;ビール屋さん&lt;/a&gt; でしたので今年は日本酒をまとめてみます。&lt;/p&gt;
+さすがに透過キーキャップだと部屋が明るくなりすぎるので不透明キーキャップに変更していまはつかってますので、大分おちつています。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="tech" /><category term="keyboard" /><category term="fortitude60" /><summary type="html">新しいキーボードを作りました!</summary></entry><entry><title type="html">今年いった日本酒が飲める店 2018</title><link href="http://localhost:3000/blog/2018/12/31/good-sake-restaurant-2018/" rel="alternate" type="text/html" title="今年いった日本酒が飲める店 2018" /><published>2018-12-31T23:59:59+09:00</published><updated>2018-12-31T23:59:59+09:00</updated><id>http://localhost:3000/blog/2018/12/31/good-sake-restaurant-2018</id><content type="html" xml:base="http://localhost:3000/blog/2018/12/31/good-sake-restaurant-2018/">&lt;p&gt;去年は &lt;a href=&quot;http://blog.katsyoshi.org/blog/2017/12/30/favorite-beer-house/&quot;&gt;ビール屋さん&lt;/a&gt; でしたので今年は日本酒をまとめてみます。&lt;/p&gt;
 
 &lt;h2 id=&quot;何軒いった&quot;&gt;何軒いった？&lt;/h2&gt;
 
@@ -380,7 +427,7 @@ Ruby on Apple II のやつがぶっとんでてよかったですね。
 
 &lt;p&gt;いかがでしたでしょうか？来年はまたビールをまとめたいとおもいますのでよろしくおねがいします。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://drive.google.com/open?id=1NjNMxM0HM_mpi_gccWQyeSy-d3RXCAiF&amp;amp;usp=sharing&quot;&gt;sake 2018&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="sake" /><category term="delicious" /><summary type="html">去年は ビール屋さん でしたので今年は日本酒をまとめてみます。</summary></entry><entry><title type="html">docker-composeを利用してRailsアプリ開発を楽にしよう</title><link href="https://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose/" rel="alternate" type="text/html" title="docker-composeを利用してRailsアプリ開発を楽にしよう" /><published>2018-12-09T21:11:56+09:00</published><updated>2018-12-09T21:11:56+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose/">&lt;p&gt;ていうのを&lt;a href=&quot;https://twitter.com/yu_suke1994&quot;&gt;うなすけさん&lt;/a&gt;に相談したら、&lt;a href=&quot;https://blog.unasuke.com/2018/run-rails-test-on-docker-compose/&quot;&gt;解決策を示してくれた&lt;/a&gt;のでそれを開発向けに変えてみた。
+&lt;p&gt;&lt;a href=&quot;https://drive.google.com/open?id=1NjNMxM0HM_mpi_gccWQyeSy-d3RXCAiF&amp;amp;usp=sharing&quot;&gt;sake 2018&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="sake" /><category term="delicious" /><summary type="html">去年は ビール屋さん でしたので今年は日本酒をまとめてみます。</summary></entry><entry><title type="html">docker-composeを利用してRailsアプリ開発を楽にしよう</title><link href="http://localhost:3000/blog/2018/12/09/rails-app-development-using-docker-compose/" rel="alternate" type="text/html" title="docker-composeを利用してRailsアプリ開発を楽にしよう" /><published>2018-12-09T21:11:56+09:00</published><updated>2018-12-09T21:11:56+09:00</updated><id>http://localhost:3000/blog/2018/12/09/rails-app-development-using-docker-compose</id><content type="html" xml:base="http://localhost:3000/blog/2018/12/09/rails-app-development-using-docker-compose/">&lt;p&gt;ていうのを&lt;a href=&quot;https://twitter.com/yu_suke1994&quot;&gt;うなすけさん&lt;/a&gt;に相談したら、&lt;a href=&quot;https://blog.unasuke.com/2018/run-rails-test-on-docker-compose/&quot;&gt;解決策を示してくれた&lt;/a&gt;のでそれを開発向けに変えてみた。
 Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。&lt;/p&gt;
 
 &lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
@@ -443,7 +490,7 @@ services:
 
 &lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
 
-&lt;p&gt;あとは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up rails&lt;/code&gt; とし、実行することで見れるようになっています。&lt;/p&gt;</content><author><name></name></author><category term="rails" /><category term="tech" /><category term="docker" /><summary type="html">ていうのをうなすけさんに相談したら、解決策を示してくれたのでそれを開発向けに変えてみた。 Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。</summary></entry><entry><title type="html">hello language server</title><link href="https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/" rel="alternate" type="text/html" title="hello language server" /><published>2018-12-01T13:00:59+09:00</published><updated>2018-12-01T13:00:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/">&lt;p&gt;ここ1、2週間、 emacs で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsp-emacs&lt;/code&gt; を使いはじめたのでそのメモ&lt;/p&gt;
+&lt;p&gt;あとは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up rails&lt;/code&gt; とし、実行することで見れるようになっています。&lt;/p&gt;</content><author><name></name></author><category term="rails" /><category term="tech" /><category term="docker" /><summary type="html">ていうのをうなすけさんに相談したら、解決策を示してくれたのでそれを開発向けに変えてみた。 Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。</summary></entry><entry><title type="html">hello language server</title><link href="http://localhost:3000/blog/2018/12/01/hello-language-server/" rel="alternate" type="text/html" title="hello language server" /><published>2018-12-01T13:00:59+09:00</published><updated>2018-12-01T13:00:59+09:00</updated><id>http://localhost:3000/blog/2018/12/01/hello-language-server</id><content type="html" xml:base="http://localhost:3000/blog/2018/12/01/hello-language-server/">&lt;p&gt;ここ1、2週間、 emacs で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsp-emacs&lt;/code&gt; を使いはじめたのでそのメモ&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://langserver.org/&quot;&gt;Language Server&lt;/a&gt; と &lt;a href=&quot;https://microsoft.github.io/language-server-protocol/specification&quot;&gt;Language Server Protocol&lt;/a&gt; ってなによ？って人はリンクをみてください。&lt;/p&gt;
 
@@ -479,7 +526,7 @@ lsp-ruby
 &lt;h2 id=&quot;matome&quot;&gt;matome&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsp-ruby&lt;/code&gt; を導入したけど、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;solargraph&lt;/code&gt; だとちょっとあれな表示が出て残念な気分に。
-また &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rubocop&lt;/code&gt; も基本的に要求されるようで…&lt;/p&gt;</content><author><name></name></author><category term="lsp" /><category term="emacs" /><category term="tech" /><category term="diary" /><summary type="html">ここ1、2週間、 emacs で lsp-emacs を使いはじめたのでそのメモ</summary></entry><entry><title type="html">remove rails assets</title><link href="https://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets/" rel="alternate" type="text/html" title="remove rails assets" /><published>2018-11-06T00:40:32+09:00</published><updated>2018-11-06T00:40:32+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets/">&lt;p&gt;ひさびさに &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ruby on Rails&lt;/code&gt; の話で、自作の rails application で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; というところからいくつか gem を利用してたので
+また &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rubocop&lt;/code&gt; も基本的に要求されるようで…&lt;/p&gt;</content><author><name></name></author><category term="lsp" /><category term="emacs" /><category term="tech" /><category term="diary" /><summary type="html">ここ1、2週間、 emacs で lsp-emacs を使いはじめたのでそのメモ</summary></entry><entry><title type="html">remove rails assets</title><link href="http://localhost:3000/blog/2018/11/06/remove-rails-assets/" rel="alternate" type="text/html" title="remove rails assets" /><published>2018-11-06T00:40:32+09:00</published><updated>2018-11-06T00:40:32+09:00</updated><id>http://localhost:3000/blog/2018/11/06/remove-rails-assets</id><content type="html" xml:base="http://localhost:3000/blog/2018/11/06/remove-rails-assets/">&lt;p&gt;ひさびさに &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ruby on Rails&lt;/code&gt; の話で、自作の rails application で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; というところからいくつか gem を利用してたので
 それを &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Yarn&lt;/code&gt; で同様のパッケージをインストールするように変更した。&lt;/p&gt;
 
 &lt;h2 id=&quot;なにをやったのか&quot;&gt;なにをやったのか？&lt;/h2&gt;
@@ -536,37 +583,4 @@ rails s
 
 &lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
 
-&lt;p&gt;ということで &lt;em&gt;IMASARA&lt;/em&gt; ですが &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; からの脱却ついでに簡単に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn&lt;/code&gt; を利用した assets の導入をやってみました!&lt;/p&gt;</content><author><name></name></author><category term="tech" /><category term="rails" /><summary type="html">ひさびさに Ruby on Rails の話で、自作の rails application で rails-assets というところからいくつか gem を利用してたので それを Yarn で同様のパッケージをインストールするように変更した。</summary></entry><entry><title type="html">new keyboard</title><link href="https://blog.katsyoshi.org/blog/2018/10/18/new-keyboard/" rel="alternate" type="text/html" title="new keyboard" /><published>2018-10-18T23:45:09+09:00</published><updated>2018-10-18T23:45:09+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/10/18/new-keyboard</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/10/18/new-keyboard/">&lt;p&gt;タイトルのとおり家のキーボードを新調しました。&lt;/p&gt;
-
-&lt;h2 id=&quot;iris&quot;&gt;Iris&lt;/h2&gt;
-
-&lt;p&gt;機械学習でよく&lt;a href=&quot;https://archive.ics.uci.edu/ml/datasets/iris&quot;&gt;評価されるやつ&lt;/a&gt;じゃなくてキーボードであるやつです。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://keeb.io/&quot;&gt;keeb.io&lt;/a&gt; で売ってます。&lt;/p&gt;
-
-&lt;h3 id=&quot;購入&quot;&gt;購入&lt;/h3&gt;
-
-&lt;p&gt;欲しい欲しいといってたらいつのまにか復活したのでケースとセットで購入。&lt;/p&gt;
-
-&lt;h3 id=&quot;組み立て&quot;&gt;組み立て&lt;/h3&gt;
-
-&lt;p&gt;公式やASCIIにあるのでそれに従い組み立てハンダ付します。特に言うことはないです。&lt;/p&gt;
-
-&lt;p&gt;ハンダ付ミスっても近所に電子工作の得意なお兄さんに工具を借りれたのですぐに解決です。&lt;/p&gt;
-
-&lt;h3 id=&quot;完成&quot;&gt;完成&lt;/h3&gt;
-
-&lt;p&gt;はい。&lt;/p&gt;
-
-&lt;p&gt;-&amp;gt; &lt;img src=&quot;/images/photo/iris-keyboard.jpg&quot; alt=&quot;&quot; /&gt; &amp;lt;-&lt;/p&gt;
-
-&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
-
-&lt;p&gt;この記事は新しいキーボードに慣れるため書いています。&lt;/p&gt;
-
-&lt;p&gt;今まで利用していた Kinesis のやつは仕事場に持っていってます。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/katsyoshi/qmk_firmware&quot;&gt;配列&lt;/a&gt;を Kinesis で利用してた時と似せていますが、少し違うのでまだ打ちにくいです。&lt;/p&gt;
-
-&lt;p&gt;あと、技術書典5来てくださいた皆さまありがとうございました。
-次回も出そうという気が湧いてきましたので次回もよろしくお願いします。&lt;/p&gt;</content><author><name></name></author><category term="tech" /><category term="diary" /><category term="keyboard" /><summary type="html">タイトルのとおり家のキーボードを新調しました。</summary></entry></feed>
+&lt;p&gt;ということで &lt;em&gt;IMASARA&lt;/em&gt; ですが &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; からの脱却ついでに簡単に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn&lt;/code&gt; を利用した assets の導入をやってみました!&lt;/p&gt;</content><author><name></name></author><category term="tech" /><category term="rails" /><summary type="html">ひさびさに Ruby on Rails の話で、自作の rails application で rails-assets というところからいくつか gem を利用してたので それを Yarn で同様のパッケージをインストールするように変更した。</summary></entry></feed>

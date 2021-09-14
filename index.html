@@ -9,16 +9,16 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/" />
+<link rel="canonical" href="http://localhost:3000/" />
+<meta property="og:url" content="http://localhost:3000/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
-<link rel="next" href="https://blog.katsyoshi.org/page/2/" />
+<link rel="next" href="http://localhost:3000/page/2/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの","name":"katsyoshi のめもみたいなの","@type":"WebSite","@context":"https://schema.org"}</script>
+{"url":"http://localhost:3000/","headline":"katsyoshi のめもみたいなの","description":"It’s a memos.","name":"katsyoshi のめもみたいなの","@type":"WebSite","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -40,6 +40,62 @@
 </div>
 
 
+
+  <h1><a href="/blog/2021/09/13/good-bye-octopress/">Octopress 脱出</a></h1>
+  <p class="author">
+    <span class="date">2021-09-13 00:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p>長年利用してた <a href="https://github.com/octopress/octopress">Octopress</a> がずいぶん前にサポート外になってたので <a href="https://github.com/jekyll/jekyll">Jekyll</a> へ変更することにした。</p>
+
+<h2 id="問題点">問題点</h2>
+
+<p>サポート外になったことによる問題点があり、その問題によって変更することになった。
+問題点としては、 <em><a href="https://rubygems.org/gems/pygments.rb">Pygments.rb</a></em> と <em><a href="https://rubygems.org/gems/compass">Compass</a></em> と利用している <em><a href="https://ruby-lang.org/">Ruby</a></em> のバージョンが 2.3.7 というのが主であった。</p>
+
+<h2 id="変更">変更</h2>
+<p>やったことは以下のとおり。</p>
+
+<ol>
+  <li>gem の整理
+    <ul>
+      <li>最初に不要な <em>gem</em> を削除。特に消したいのは <em>Pygments.rb</em> と <em>Compass</em> それ以外にも不要なものがあるので消す。</li>
+    </ul>
+  </li>
+  <li>ディレクトリの整理
+    <ul>
+      <li>posts は元々の設定が <code class="language-plaintext highlighter-rouge">source/_posts</code> に入れていたが、 <code class="language-plaintext highlighter-rouge">_posts</code> に変更</li>
+      <li>画像も同様に <code class="language-plaintext highlighter-rouge">source/images</code> だったものを <code class="language-plaintext highlighter-rouge">images</code> に変更</li>
+    </ul>
+  </li>
+  <li>テンプレートの整理
+    <ul>
+      <li>テンプレート <em><a href="https://rubygems.org/gems/minima">minima</a></em> を利用するにあたり <code class="language-plaintext highlighter-rouge">_includes</code> などの中身を整理</li>
+    </ul>
+  </li>
+  <li>プラグインの整理
+    <ul>
+      <li>いまのところ <em><a href="https://rubygems.org/gems/jekyll-paginate-v2">jekyll-paginate-v2</a></em> のみ変更で他は入れていない。</li>
+    </ul>
+    <ul>
+      <li>そのうち theme も含めて検討したい</li>
+    </ul>
+  </li>
+  <li><a href="https://rubygems.org/gems/rake">Rake コマンド</a> の整理
+    <ul>
+      <li>とりあえず octopress で利用してた <em>Rakefile</em> から必要最低限の変更のみ実行。</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>日曜日の夜中 <strong><a href="/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">RubyKaigi の日記</a></strong> をポストしてからこのリポジトリを <em>jekyll</em> にしようと <strong>雑に</strong> 弄ってたら、 <code class="language-plaintext highlighter-rouge">rake generate</code> が <code class="language-plaintext highlighter-rouge">Unknown language: xml</code> という謎の <em>Pygments</em> エラーが出てしまった。
+このエラーを修正しようとしがんばってみたが、失敗して修正できなかったので <em>jekyll</em> に変更したものでデプロイした。</p>
+
+<p>そんなこんなあって <em>Octopress</em> はやめて <em>jekyll</em> に変更しました。</p>
+
+  </div>
 
   <h1><a href="/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">2021.takeout.rubykaigi.org</a></h1>
   <p class="author">
@@ -658,48 +714,6 @@ rails s
 <h2 id="おわり">おわり</h2>
 
 <p>ということで <em>IMASARA</em> ですが <code class="language-plaintext highlighter-rouge">rails-assets</code> からの脱却ついでに簡単に <code class="language-plaintext highlighter-rouge">yarn</code> を利用した assets の導入をやってみました!</p>
-
-  </div>
-
-  <h1><a href="/blog/2018/10/18/new-keyboard/">new keyboard</a></h1>
-  <p class="author">
-    <span class="date">2018-10-18 23:45:09 +0900</span>
-  </p>
-  <div class="content">
-    <p>タイトルのとおり家のキーボードを新調しました。</p>
-
-<h2 id="iris">Iris</h2>
-
-<p>機械学習でよく<a href="https://archive.ics.uci.edu/ml/datasets/iris">評価されるやつ</a>じゃなくてキーボードであるやつです。</p>
-
-<p><a href="https://keeb.io/">keeb.io</a> で売ってます。</p>
-
-<h3 id="購入">購入</h3>
-
-<p>欲しい欲しいといってたらいつのまにか復活したのでケースとセットで購入。</p>
-
-<h3 id="組み立て">組み立て</h3>
-
-<p>公式やASCIIにあるのでそれに従い組み立てハンダ付します。特に言うことはないです。</p>
-
-<p>ハンダ付ミスっても近所に電子工作の得意なお兄さんに工具を借りれたのですぐに解決です。</p>
-
-<h3 id="完成">完成</h3>
-
-<p>はい。</p>
-
-<p>-&gt; <img src="/images/photo/iris-keyboard.jpg" alt="" /> &lt;-</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>この記事は新しいキーボードに慣れるため書いています。</p>
-
-<p>今まで利用していた Kinesis のやつは仕事場に持っていってます。</p>
-
-<p><a href="https://github.com/katsyoshi/qmk_firmware">配列</a>を Kinesis で利用してた時と似せていますが、少し違うのでまだ打ちにくいです。</p>
-
-<p>あと、技術書典5来てくださいた皆さまありがとうございました。
-次回も出そうという気が湧いてきましたので次回もよろしくお願いします。</p>
 
   </div>
 
