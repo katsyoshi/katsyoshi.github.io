@@ -17,25 +17,9 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 8" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/8/","headline":"katsyoshi のめもみたいなの - page 8","description":"It’s a memos.","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/8/","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 8","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
-if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-49549546-1', 'auto');
-  ga('send', 'pageview');
-}
-</script>
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-</head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -59,6 +43,60 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2015/01/12/typescript-in-rails/">Ruby on RailsでTypeScriptを使ってみる</a></h1>
+  <p class="author">
+    <span class="date">2015-01-12 11:41:25 +0900</span>
+  </p>
+  <div class="content">
+    <p>ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。</p>
+
+<h2 id="インストール">インストール</h2>
+
+<p>これは簡単で <code class="language-plaintext highlighter-rouge">Gemfile</code> に <code class="language-plaintext highlighter-rouge">typescript-rails</code> を追加すればいけます。ですが、<a href="http://stackoverflow.com/questions/28117786/why-am-i-not-able-to-compile-a-file-that-references-jquery-d-ts">jQueryがTypeScript v1.4以上しかサポートしていないようなので</a>それに対応したものも追加します。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s1">'typescript-src'</span><span class="p">,</span> <span class="ss">github: </span><span class="s1">'katsyoshi/typescript-src-ruby'</span>
+<span class="n">gem</span> <span class="s1">'typescript-rails'</span>
+</code></pre></div></div>
+
+<p>インストールはこれだけでOKです。</p>
+
+<h3 id="jqueryをつかう">jQueryをつかう</h3>
+
+<p>TypeScriptでjQueryを使う場合、TypeScriptの型定義ファイルをインストールする必要があります。
+で、それを自力で作るのは大変なので、 <code class="language-plaintext highlighter-rouge">tsd</code> を利用してインストールします。</p>
+
+<h4 id="tsd-をインストール">tsd をインストール</h4>
+
+<p><code class="language-plaintext highlighter-rouge">tsd</code> は <code class="language-plaintext highlighter-rouge">npm</code> でインストールできるので、それでインストールします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm install tsd -g
+</code></pre></div></div>
+
+<p>でインストールできたので、この <code class="language-plaintext highlighter-rouge">tsd</code> を利用してjQueryの型定義ファイルをインストールします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ tsd init
+$ $EDITOR tsd.json
+  path: "app/assets/javascripts/typings",
+  bundle: "app/assets/javascripts/typings/tsd.d.ts"
+$ tsd query jquery -osa install
+</code></pre></div></div>
+
+<p>でjQueryを利用する準備は整いました。</p>
+
+<h2 id="typescriptを書いてみよう">TypeScriptを書いてみよう</h2>
+
+<p>コンソールに <code class="language-plaintext highlighter-rouge">hello, world!</code> を出すだけの例を示します。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello, world!</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>でいけますよ。
+が <code class="language-plaintext highlighter-rouge">$('#hello').text('hoge');</code> いかねぇ。</p>
+
+  </div>
 
   <h1><a href="/blog/2014/12/01/mikutter-advent-calendar-1-day/">mikutter advent calendar 1日目</a></h1>
   <p class="author">
@@ -417,50 +455,6 @@ $ bundle exec ruby mikutter.rb
 
 <p>有線のLANケーブルがなかったからはまった。
 続きは明日以降に…</p>
-
-  </div>
-
-  <h1><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">Gentoo Install Battle Part I</a></h1>
-  <p class="author">
-    <span class="date">2014-08-20 23:48:45 +0900</span>
-  </p>
-  <div class="content">
-    <p>ここにThinkPad X240があります。これの中身を Gentoo/Linux にします。</p>
-
-<h2 id="準備">準備</h2>
-
-<p>準備として、Gentoo/LinuxのLiveCDを作成、Bootの設定を行います。</p>
-
-<h3 id="イメージ作成">イメージ作成</h3>
-<p>まずLiveCDイメージをダウンロードしUSBフラッシュメモリにコピーします。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wget ftp://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140814.iso
-$ dd of=/path/to/disk if=install-amd64-minimal-20140814.iso bs=4m
-</code></pre></div></div>
-
-<p>でイメージの作成終了です。
-次に、X240の設定を行います。</p>
-
-<h3 id="x240の起動準備">X240の起動準備</h3>
-<p>Windowsを起動し、Shift押しながら再起動します。
-再起動したら、以下の順番でBIOSを起動させます。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>トラブルシューティング -&gt; 詳細オプション -&gt; UEFIファームウェアの設定 -&gt; 再起動
-</code></pre></div></div>
-
-<p>でBIOSがたちあがるので、Secure BootとUEFI BootとBoot順の設定を変更します。</p>
-
-<p>Seucre Bootでは<code class="language-plaintext highlighter-rouge">Securety -&gt; Secure Boot -&gt; Secure Boot [Enable]</code>を<code class="language-plaintext highlighter-rouge">[Disable]</code>に変更</p>
-
-<p>UEFI Bootでは<code class="language-plaintext highlighter-rouge">Startup -&gt; UEFI/Legacy Boot [UEFI only]</code>を<code class="language-plaintext highlighter-rouge">[Both]</code>に変更</p>
-
-<p>Boot順の設定では、<code class="language-plaintext highlighter-rouge">Startup -&gt; Boot</code>でBootさせたい順番に変更</p>
-
-<p>BIOSを変更したらRestartします。</p>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>とりあえず今日はここで終りです。インストールは明日以降にします。</p>
 
   </div>
 

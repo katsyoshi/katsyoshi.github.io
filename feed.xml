@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2021-09-16T10:02:34+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Octopress 脱出</title><link href="https://blog.katsyoshi.org/blog/2021/09/13/good-bye-octopress/" rel="alternate" type="text/html" title="Octopress 脱出" /><published>2021-09-13T00:00:00+09:00</published><updated>2021-09-13T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/09/13/good-bye-octopress</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/09/13/good-bye-octopress/">&lt;p&gt;長年利用してた &lt;a href=&quot;https://github.com/octopress/octopress&quot;&gt;Octopress&lt;/a&gt; がずいぶん前にサポート外になってたので &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll&lt;/a&gt; へ変更することにした。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2021-12-06T22:36:49+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">やんちゃクラブとRubyistと川</title><link href="https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist/" rel="alternate" type="text/html" title="やんちゃクラブとRubyistと川" /><published>2021-12-06T23:59:59+09:00</published><updated>2021-12-06T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist/">&lt;p&gt;おはようございます、 2021年、12月6日 のよるだったり、12月7日の朝だったりします。&lt;/p&gt;
+
+&lt;p&gt;これは &lt;a href=&quot;https://adventar.org/calendars/6668&quot;&gt;やんちゃクラブリスナーアドベントカレンダー&lt;/a&gt; の6日目だったり、
+&lt;a href=&quot;https://adventar.org/calendars/6777&quot;&gt;Rubyist近況[1]アドベントカレンダー&lt;/a&gt; の7日目だったりします。&lt;/p&gt;
+
+&lt;p&gt;最近仕事としては Rails 6.1 にしたり、 Ruby-3.0 にしてたり、java 書いてたりしています。&lt;/p&gt;
+
+&lt;p&gt;コロナになり、RubyKaigi後恒例の &lt;strong&gt;川&lt;/strong&gt; がなくなってかなりさみしい思いをしている方もいらっしゃるとおもいますので、
+東京近郊でのよい &lt;strong&gt;川&lt;/strong&gt; をまとめてみたいとおもいます。&lt;/p&gt;
+
+&lt;h2 id=&quot;川&quot;&gt;川&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.google.com/maps/place/%E3%80%92120-0034+%E6%9D%B1%E4%BA%AC%E9%83%BD%E8%B6%B3%E7%AB%8B%E5%8C%BA%E5%8D%83%E4%BD%8F%EF%BC%95%E4%B8%81%E7%9B%AE/@35.7563561,139.8029477,17z/data=!3m1!4b1!4m5!3m4!1s0x60188e4823ec7b73:0xf626ddac28b8deac!8m2!3d35.7562782!4d139.8054747&quot;&gt;荒川： 虹の広場&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.google.com/maps/place/%E5%8F%B0%E6%9D%B1%E5%8C%BA%E7%AB%8B+%E9%9A%85%E7%94%B0%E5%85%AC%E5%9C%92/@35.7247541,139.8060852,15.75z/data=!4m9!1m2!2m1!1z5aKo55Sw5YWs5ZyS!3m5!1s0x60188ec349138a67:0xc95c03b0375fa0d7!8m2!3d35.7107642!4d139.7982715!15sCgzloqjnlLDlhazlnJJaDyIN5aKo55SwIOWFrOWckpIBBHBhcms&quot;&gt;墨田川： 墨田公園&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.google.com/maps/place/%E3%80%92214-0003+%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82%E5%A4%9A%E6%91%A9%E5%8C%BA%E8%8F%85%E7%A8%B2%E7%94%B0%E5%A0%A4%EF%BC%92%E4%B8%81%E7%9B%AE%EF%BC%91%EF%BC%90%E2%88%92%EF%BC%92%EF%BC%92/@35.6383952,139.5346417,18z/data=!3m1!4b1!4m5!3m4!1s0x6018f07a89b9d099:0x77385278ffea0854!8m2!3d35.6383952!4d139.535736&quot;&gt;多摩川： 稲田堤&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.google.com/maps/search/%E3%80%92272-0111+%E5%8D%83%E8%91%89%E7%9C%8C%E5%B8%82%E5%B7%9D%E5%B8%82%E5%A6%99%E5%85%B8%EF%BC%96%E4%B8%81%E7%9B%AE%EF%BC%91%E2%88%92%EF%BC%91/@35.6945582,139.9282683,17z/data=!3m1!4b1&quot;&gt;江戸川： 妙典公園、江戸川河川敷緑地&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;荒川-虹の広場&quot;&gt;荒川： 虹の広場&lt;/h3&gt;
+
+&lt;p&gt;ここは &lt;a href=&quot;https://twitter.com/yancya&quot;&gt;yancyaさん&lt;/a&gt; の地元で一緒によく行く川です。
+ここの &lt;strong&gt;最高&lt;/strong&gt; は大きな街(北千住)が近く、ふらっと行っても調達が楽なところで、たべもの、のみものなんでも楽に調達できます。
+とくにのみものは国外のクラフトビールがたくさん買える場所あるので &lt;strong&gt;最高&lt;/strong&gt; なのと、クラフトビール作ってる場所があるので &lt;strong&gt;最高&lt;/strong&gt; なのです。
+また、公園のような場所なので花火できます。バーベキューとか火を使うのは岩渕水門あたりじゃないとできないので気をつけてください。&lt;/p&gt;
+
+&lt;p&gt;周りに邪魔をするようなものがとくにないので、日の入りやスカイツリーが綺麗に見えます。
+そばに電車(東武伊勢崎線、TX、常磐線)が通っているので電車を眺めるのもいいです。&lt;/p&gt;
+
+&lt;p&gt;時期としては春から秋にかけて行くのが &lt;strong&gt;最高&lt;/strong&gt; ですね。冬はまだ行ったことないのでそのうち試してみるかもしれないです。&lt;/p&gt;
+
+&lt;h3 id=&quot;墨田川-墨田公園&quot;&gt;墨田川： 墨田公園&lt;/h3&gt;
+
+&lt;p&gt;墨田公園といえば &lt;a href=&quot;https://www.sakuranokai.or.jp/information/local5/&quot;&gt;さくらの名所100選&lt;/a&gt; に選ばれるほどの桜の名所です。
+ここも浅草という大きな街が近くなので、調達が楽です。しかしながら、桜の季節は人が多いので調達は事前にして &lt;strong&gt;川&lt;/strong&gt; するのがよいです。&lt;/p&gt;
+
+&lt;p&gt;見所としてはもちろん桜です。ここも東武伊勢崎線がとおってるのと、浅草名物アサヒビールの建物、スカイツリーが見えるので桜の時期とくに映えますね。
+やんちゃクラブで紹介されたように、水上バスの発着場があるので水上バスを利用するのもおもしろいと思います。&lt;/p&gt;
+
+&lt;p&gt;時期としては &lt;strong&gt;最高&lt;/strong&gt; なのはもちろん桜の時期です。それ以外の時期でも場所が浅草なので、風が強い日以外はオールシーズン &lt;strong&gt;川&lt;/strong&gt; デキルと思います。
+風が強かったら逃げれる場所たくさんあるのでよいですよ。&lt;/p&gt;
+
+&lt;h3 id=&quot;多摩川-稲田堤&quot;&gt;多摩川： 稲田堤&lt;/h3&gt;
+
+&lt;p&gt;ここの &lt;strong&gt;最高&lt;/strong&gt; さは、&lt;a href=&quot;https://tabelog.com/kanagawa/A1405/A140506/14014188/&quot;&gt;たぬきや&lt;/a&gt; という夏の間だけやっている(と飲み仲間に教えてもらった)
+川の家があったのですが、去年あたりに終ってしまった。川辺にあるお店で、川を眺めながら飲むビールとか &lt;strong&gt;最高&lt;/strong&gt; でした。&lt;/p&gt;
+
+&lt;p&gt;見所としては今説明したたぬきやです。ジェットスキーとかできるんならもっと楽しめるんじゃないんですかね。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;最高&lt;/strong&gt; な時期としては夏だったのですが、もう行ってもね……&lt;/p&gt;
+
+&lt;h3 id=&quot;江戸川-妙典公園江戸川河川敷緑地&quot;&gt;江戸川： 妙典公園、江戸川河川敷緑地&lt;/h3&gt;
+
+&lt;p&gt;ここは虹の広場とは違い、バーベキュー場があり火が使えるようです。火が使えるのでスモークとかやると &lt;strong&gt;最高&lt;/strong&gt; かと。
+ただ、駅から遠いのと、街が近くないので調達は事前にやっておくとよいです。近くに大型スーパーがあるのですが、クラフトビールなどの飲みものがイマイチ(個人的感想)です。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;最高&lt;/strong&gt; な時期は夏じゃないですかね、BBQとかはよくわからないですが……&lt;/p&gt;
+
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;最高&lt;/strong&gt; な東京の &lt;strong&gt;川&lt;/strong&gt; をまとめてみました。コロナのため最近 &lt;strong&gt;川&lt;/strong&gt; できていないですので、みんなコロナ開けたら &lt;strong&gt;川&lt;/strong&gt; しような!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://adventar.org/calendars/6668&quot;&gt;やんちゃクラブリスナーアドベントカレンダー&lt;/a&gt; の次は12/7の &lt;a href=&quot;https://twitter.com/igaiga555&quot;&gt;igaigaさん&lt;/a&gt; です。
+&lt;a href=&quot;https://adventar.org/calendars/6777&quot;&gt;Rubyist近況[1]アドベントカレンダー&lt;/a&gt; の次は12/10のKirika_K2さんです。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><summary type="html">おはようございます、 2021年、12月6日 のよるだったり、12月7日の朝だったりします。</summary></entry><entry><title type="html">Octopress 脱出</title><link href="https://blog.katsyoshi.org/blog/2021/09/13/good-bye-octopress/" rel="alternate" type="text/html" title="Octopress 脱出" /><published>2021-09-13T00:00:00+09:00</published><updated>2021-09-13T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/09/13/good-bye-octopress</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/09/13/good-bye-octopress/">&lt;p&gt;長年利用してた &lt;a href=&quot;https://github.com/octopress/octopress&quot;&gt;Octopress&lt;/a&gt; がずいぶん前にサポート外になってたので &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll&lt;/a&gt; へ変更することにした。&lt;/p&gt;
 
 &lt;h2 id=&quot;問題点&quot;&gt;問題点&lt;/h2&gt;
 
@@ -526,61 +589,4 @@ lsp-ruby
 &lt;h2 id=&quot;matome&quot;&gt;matome&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsp-ruby&lt;/code&gt; を導入したけど、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;solargraph&lt;/code&gt; だとちょっとあれな表示が出て残念な気分に。
-また &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rubocop&lt;/code&gt; も基本的に要求されるようで…&lt;/p&gt;</content><author><name></name></author><category term="lsp" /><category term="emacs" /><category term="tech" /><category term="diary" /><summary type="html">ここ1、2週間、 emacs で lsp-emacs を使いはじめたのでそのメモ</summary></entry><entry><title type="html">remove rails assets</title><link href="https://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets/" rel="alternate" type="text/html" title="remove rails assets" /><published>2018-11-06T00:40:32+09:00</published><updated>2018-11-06T00:40:32+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/11/06/remove-rails-assets/">&lt;p&gt;ひさびさに &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ruby on Rails&lt;/code&gt; の話で、自作の rails application で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; というところからいくつか gem を利用してたので
-それを &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Yarn&lt;/code&gt; で同様のパッケージをインストールするように変更した。&lt;/p&gt;
-
-&lt;h2 id=&quot;なにをやったのか&quot;&gt;なにをやったのか？&lt;/h2&gt;
-
-&lt;p&gt;単純に一旦 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; からインストールしている gem を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; から削除します。&lt;/p&gt;
-
-&lt;p&gt;そのあと、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn add&lt;/code&gt; で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt; を生成し &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; にインストールします。&lt;/p&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;go&quot;&gt;yarn add bootstrap@3 font-awesome jquery
-yarn install
-rails s
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;インストールが終了し、railsを起動したら必要な情報(&lt;a href=&quot;https://blog.zerokol.com/2018/06/ruby-on-rails-yarn-font-awesome-in.html&quot;&gt;font-awesome&lt;/a&gt;, &lt;a href=&quot;https://qiita.com/fuqda/items/c5756b8f56dcc238c110&quot;&gt;bootstrap&lt;/a&gt;) を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app/assets/{javascripts,stylesheets}&lt;/code&gt; に記載。&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// app/assets/javascripts/application.js&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//= require rails-ujs&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//= require turbolinks&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//= require jquery/dist/jquery.js&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//= require bootstrap-sass/assets/javascripts/bootstrap&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//= require_tree .&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;assets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;stylesheets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.scss&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&apos;bootstrap-sass/assets/stylesheets/bootstrap&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/variables&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;fa-font-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/fonts/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/mixins&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@font-face&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;font-family&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&apos;FontAwesome&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.eot?#iefix&amp;amp;v=#{$fa-version}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;embedded-opentype&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;woff2&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;woff&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;truetype&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;font-url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&apos;svg&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;font-weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;font-style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/core&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/larger&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/fixed-width&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/list&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/bordered-pulled&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/animated&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/rotated-flipped&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/stacked&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/icons&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;font-awesome/scss/screen-reader&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;icon-font-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;bootstrap-sass/assets/fonts/bootstrap&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;ってかいたら使えるようになっています!&lt;/p&gt;
-
-&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
-
-&lt;p&gt;ということで &lt;em&gt;IMASARA&lt;/em&gt; ですが &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rails-assets&lt;/code&gt; からの脱却ついでに簡単に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn&lt;/code&gt; を利用した assets の導入をやってみました!&lt;/p&gt;</content><author><name></name></author><category term="tech" /><category term="rails" /><summary type="html">ひさびさに Ruby on Rails の話で、自作の rails application で rails-assets というところからいくつか gem を利用してたので それを Yarn で同様のパッケージをインストールするように変更した。</summary></entry></feed>
+また &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rubocop&lt;/code&gt; も基本的に要求されるようで…&lt;/p&gt;</content><author><name></name></author><category term="lsp" /><category term="emacs" /><category term="tech" /><category term="diary" /><summary type="html">ここ1、2週間、 emacs で lsp-emacs を使いはじめたのでそのメモ</summary></entry></feed>
