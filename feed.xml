@@ -1,4 +1,120 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2021-12-06T23:12:25+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">やんちゃクラブとRubyistと川</title><link href="https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist/" rel="alternate" type="text/html" title="やんちゃクラブとRubyistと川" /><published>2021-12-06T23:59:59+09:00</published><updated>2021-12-06T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist/">&lt;p&gt;おはようございます、 2021年、12月6日 のよるだったり、12月7日の朝だったりします。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2021-12-26T16:46:17+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">いんとろでぅーす xremap</title><link href="https://blog.katsyoshi.org/blog/2021/12/26/xremap/" rel="alternate" type="text/html" title="いんとろでぅーす xremap" /><published>2021-12-26T13:59:59+09:00</published><updated>2021-12-26T13:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/12/26/xremap</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/12/26/xremap/">&lt;p&gt;仕事で利用したりしている &lt;strong&gt;Slack&lt;/strong&gt; などのキーボードでの操作が面倒になってきたので、
+&lt;strong&gt;emacs keybind&lt;/strong&gt; が利用できるようにするため &lt;a href=&quot;https://github.com/k0kubun/xremap&quot;&gt;&lt;strong&gt;xremap&lt;/strong&gt;&lt;/a&gt; を利用することにした。&lt;/p&gt;
+
+&lt;p&gt;この記事はその利用するまでの顛末をメモとして残す。&lt;/p&gt;
+
+&lt;h2 id=&quot;導入&quot;&gt;導入&lt;/h2&gt;
+
+&lt;p&gt;これは、さくっと &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo install xremap&lt;/code&gt; でインストールできます。
+&lt;a href=&quot;https://www.rust-lang.org&quot;&gt;&lt;strong&gt;rust&lt;/strong&gt;&lt;/a&gt; をまだ導入していない方は &lt;a href=&quot;https://www.rust-lang.org/tools/install&quot;&gt;公式ページのインストール&lt;/a&gt; を参考にインストールしてください。&lt;/p&gt;
+
+&lt;h2 id=&quot;起動&quot;&gt;起動!!!&lt;/h2&gt;
+
+&lt;p&gt;これも簡単で以下のコマンドで起動します。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xremap /path/to/your/xremap/config.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;エラーに遭遇&quot;&gt;エラーに遭遇&lt;/h3&gt;
+
+&lt;p&gt;起動してみると以下のようなメッセージが出て起動ができませんでした。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Selecting devices from the following list:
+------------------------------------------------------------------------------
+/dev/input/event0 : Power Button
+/dev/input/event1 : Power Button
+/dev/input/event2 : HDA NVidia HDMI/DP,pcm=3
+/dev/input/event3 : HDA NVidia HDMI/DP,pcm=7
+/dev/input/event4 : HDA NVidia HDMI/DP,pcm=8
+/dev/input/event5 : HDA NVidia HDMI/DP,pcm=9
+/dev/input/event6 : HDA NVidia HDMI/DP,pcm=10
+/dev/input/event7 : HDA NVidia HDMI/DP,pcm=11
+/dev/input/event8 : Pekaso The Fortitude60 Keyboard
+/dev/input/event9 : Pekaso The Fortitude60 Keyboard Mouse
+/dev/input/event10: Pekaso The Fortitude60 Keyboard System Control
+/dev/input/event11: Pekaso The Fortitude60 Keyboard Consumer Control
+/dev/input/event12: Kensington Kensington Slimblade Trackball
+/dev/input/event13: Burr-Brown from TI               USB Audio CODEC
+/dev/input/event14: HD Web Camera: HD Web Camera
+------------------------------------------------------------------------------
+Selected keyboards automatically since --device options weren&apos;t specified:
+------------------------------------------------------------------------------
+/dev/input/event8 : Pekaso The Fortitude60 Keyboard
+------------------------------------------------------------------------------
+Error: Failed to build an output device: no such file or directory (os error 2)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;で、答えは出てるので設定ファイル、対象となる入力デバイスなどを見ますが、
+これらのファイルはあるのでわからんとなります。&lt;/p&gt;
+
+&lt;p&gt;しかたないのでソースをダウンロードして手元でデバッグしてみます。
+&lt;strong&gt;rust&lt;/strong&gt; というか &lt;strong&gt;cargo&lt;/strong&gt; は便利で、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo run&lt;/code&gt; でソースをいじったあとすぐにコンパイルして利用することができます。
+今回はメンドウなので怪しいところに &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;println&lt;/code&gt; 文を挿入して実行してみます。
+そうすると、どうやら &lt;a href=&quot;https://github.com/k0kubun/xremap/blob/f058c444335c153e638ecf3c76492cdf9f8a975d/src/output.rs#L39-L43&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/output.rs&lt;/code&gt; の 39 行目の &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;VirtualDeviceBuilder&lt;/code&gt; に問題がありそう&lt;/a&gt; ということがわかりました。&lt;/p&gt;
+
+&lt;p&gt;この行のどこに問題あるんだ？と思い利用しているこのライブラリ &lt;a href=&quot;https://docs.rs/evdev&quot;&gt;&lt;strong&gt;evdev&lt;/strong&gt;&lt;/a&gt; を見ることにしました&lt;sup id=&quot;fnref:evdev-rs&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:evdev-rs&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;。
+そうすると &lt;a href=&quot;https://docs.rs/evdev/latest/src/evdev/uinput.rs.html#13&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/uinput&lt;/code&gt; が必要&lt;/a&gt; ということがわかります。
+それで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/uinput&lt;/code&gt; があるかどうか &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; で見ますが、当然無いので無いです。
+なぜ無いのかというと &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INPUT_UINPUT&lt;/code&gt; でドライバーを入れていなかったようです。
+なのでカーネルのビルトインとしてビルドして再起動。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Defined at drivers/input/misc/Kconfig:513
+     Prompt: User level driver support
+     Depends on: INPUT [=y] &amp;amp;&amp;amp; INPUT_MISC [=y]
+     Location:
+       -&amp;gt; Device Drivers
+         -&amp;gt; Input device support
+           -&amp;gt; Generic input layer (needed for keyboard, mouse, ...) (INPUT [=y])
+             -&amp;gt; Miscellaneous devices (INPUT_MISC [=y])
+               -&amp;gt; User level driver support
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;再起動したら、確認を行ないます。&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ xremap ~/.config/xremap/config.yml
+Selecting devices from the following list:
+------------------------------------------------------------------------------
+/dev/input/event0 : Power Button
+/dev/input/event1 : Power Button
+/dev/input/event2 : HDA NVidia HDMI/DP,pcm=3
+/dev/input/event3 : HDA NVidia HDMI/DP,pcm=7
+/dev/input/event4 : HDA NVidia HDMI/DP,pcm=8
+/dev/input/event5 : HDA NVidia HDMI/DP,pcm=9
+/dev/input/event6 : HDA NVidia HDMI/DP,pcm=10
+/dev/input/event7 : HDA NVidia HDMI/DP,pcm=11
+/dev/input/event8 : Pekaso The Fortitude60 Keyboard
+/dev/input/event9 : Pekaso The Fortitude60 Keyboard Mouse
+/dev/input/event10: Pekaso The Fortitude60 Keyboard System Control
+/dev/input/event11: Pekaso The Fortitude60 Keyboard Consumer Control
+/dev/input/event12: Kensington Kensington Slimblade Trackball
+/dev/input/event13: Burr-Brown from TI               USB Audio CODEC
+/dev/input/event14: HD Web Camera: HD Web Camera
+------------------------------------------------------------------------------
+Selected keyboards automatically since --device options weren&apos;t specified:
+------------------------------------------------------------------------------
+/dev/input/event8 : Pekaso The Fortitude60 Keyboard
+------------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;yatta 起動できた!
+あとは、アプリでキーバインドが効いているかどうかを確認して、
+&lt;strong&gt;Window Manager&lt;/strong&gt; である &lt;strong&gt;i3&lt;/strong&gt; の起動時に &lt;strong&gt;xremap&lt;/strong&gt; が起動するようにしたりしています。&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+&lt;p&gt;最近、 &lt;strong&gt;Mac&lt;/strong&gt; との行き来をしていると &lt;strong&gt;emacs keybind&lt;/strong&gt; が使えないときにちょっといらっとしますので使えるようにキーバインドを変更してみました。
+設定ファイルの動的読み込みに対応していないのがちょっと面倒なのですが&lt;sup id=&quot;fnref:hotreload&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:hotreload&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;、これで &lt;strong&gt;Slack&lt;/strong&gt; などで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C-a&lt;/code&gt; で行頭にもどれるようになりました。便利。&lt;/p&gt;
+
+&lt;h4 id=&quot;注釈&quot;&gt;注釈&lt;/h4&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:evdev-rs&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;はじめは似た名前のライブラリの &lt;a href=&quot;https://github.com/ndesh26/evdev-rs&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;evdev-rs&lt;/code&gt;&lt;/a&gt; を見てたのですが、対象であるはずのファイル内に宣言されていないのでちょっととまどい、このライブラリは違うやつだとなり &lt;a href=&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt; で再検索して発見しています。 &lt;a href=&quot;#fnref:evdev-rs&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:hotreload&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;どうせ1回確認できたら再起動する必要はないので問題ないといえば問題ないけど、ちょっと面倒。 &lt;a href=&quot;#fnref:hotreload&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name></name></author><category term="diary" /><summary type="html">仕事で利用したりしている Slack などのキーボードでの操作が面倒になってきたので、 emacs keybind が利用できるようにするため xremap を利用することにした。</summary></entry><entry><title type="html">やんちゃクラブとRubyistと川</title><link href="https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist/" rel="alternate" type="text/html" title="やんちゃクラブとRubyistと川" /><published>2021-12-06T23:59:59+09:00</published><updated>2021-12-06T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist/">&lt;p&gt;おはようございます、 2021年、12月6日 のよるだったり、12月7日の朝だったりします。&lt;/p&gt;
 
 &lt;p&gt;これは &lt;a href=&quot;https://adventar.org/calendars/6668&quot;&gt;やんちゃクラブリスナーアドベントカレンダー&lt;/a&gt; の6日目だったり、
 &lt;a href=&quot;https://adventar.org/calendars/6777&quot;&gt;Rubyist近況[1]アドベントカレンダー&lt;/a&gt; の7日目だったりします。&lt;/p&gt;
@@ -553,40 +669,4 @@ services:
 
 &lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
 
-&lt;p&gt;あとは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up rails&lt;/code&gt; とし、実行することで見れるようになっています。&lt;/p&gt;</content><author><name></name></author><category term="rails" /><category term="tech" /><category term="docker" /><summary type="html">ていうのをうなすけさんに相談したら、解決策を示してくれたのでそれを開発向けに変えてみた。 Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。</summary></entry><entry><title type="html">hello language server</title><link href="https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/" rel="alternate" type="text/html" title="hello language server" /><published>2018-12-01T13:00:59+09:00</published><updated>2018-12-01T13:00:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/12/01/hello-language-server/">&lt;p&gt;ここ1、2週間、 emacs で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsp-emacs&lt;/code&gt; を使いはじめたのでそのメモ&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://langserver.org/&quot;&gt;Language Server&lt;/a&gt; と &lt;a href=&quot;https://microsoft.github.io/language-server-protocol/specification&quot;&gt;Language Server Protocol&lt;/a&gt; ってなによ？って人はリンクをみてください。&lt;/p&gt;
-
-&lt;h2 id=&quot;導入&quot;&gt;導入&lt;/h2&gt;
-
-&lt;p&gt;導入は簡単で以下の3つをpackage-installでインストールしてしまえば OK です。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lsp-mode
-lsp-ui
-lsp-ruby
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;インストール後は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.emacs.d/init.el&lt;/code&gt; あたりに、&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(require &apos;lsp-mode)
-(require &apos;lsp-ui)
-(require &apos;lsp-ruby)
-(add-hook &apos;ruby-mode-hook #&apos;lsp-ruby-enable)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;を追記すると emacs 側の設定はできました。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsp-ruby&lt;/code&gt;(emacs) を起動する前に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install solargraph&lt;/code&gt; で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;solargraph&lt;/code&gt; をインストールしておきましょう。&lt;/p&gt;
-
-&lt;h2 id=&quot;利用開始&quot;&gt;利用開始!&lt;/h2&gt;
-
-&lt;p&gt;利用開始するときは利用したいファイルのトップディレクトリ(プロジェクトディレクトリ)に、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; が必要です。&lt;/p&gt;
-
-&lt;p&gt;でこんなかんじに表示してくれます。&lt;/p&gt;
-
-&lt;p&gt;-&amp;gt; &lt;img src=&quot;/images/screenshot/lsp-ruby.png&quot; alt=&quot;&quot; /&gt; &amp;lt;-&lt;/p&gt;
-
-&lt;h2 id=&quot;matome&quot;&gt;matome&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsp-ruby&lt;/code&gt; を導入したけど、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;solargraph&lt;/code&gt; だとちょっとあれな表示が出て残念な気分に。
-また &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rubocop&lt;/code&gt; も基本的に要求されるようで…&lt;/p&gt;</content><author><name></name></author><category term="lsp" /><category term="emacs" /><category term="tech" /><category term="diary" /><summary type="html">ここ1、2週間、 emacs で lsp-emacs を使いはじめたのでそのメモ</summary></entry></feed>
+&lt;p&gt;あとは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up rails&lt;/code&gt; とし、実行することで見れるようになっています。&lt;/p&gt;</content><author><name></name></author><category term="rails" /><category term="tech" /><category term="docker" /><summary type="html">ていうのをうなすけさんに相談したら、解決策を示してくれたのでそれを開発向けに変えてみた。 Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。</summary></entry></feed>

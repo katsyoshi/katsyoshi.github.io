@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 8" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/8/","headline":"katsyoshi のめもみたいなの - page 8","description":"It’s a memos.","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/8/","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 8","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -59,6 +59,49 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2015/01/27/start-rust/">Start Rust by Example</a></h1>
+  <p class="author">
+    <span class="date">2015-01-27 07:10:29 +0900</span>
+  </p>
+  <div class="content">
+    <p>年ぁけたので、新しいプログラミング言語を覚えようと思い<a href="http://www.rust-lang.org">Rust Lang</a>を始めました。</p>
+
+<p>チュートリアルとして<a href="http://rustbyexample.com">Rust bye Example</a>を<a href="https://github.com/katsyoshi/rustbyexamle">やっていって</a>ます。</p>
+
+<h2 id="気が付いた点">気が付いた点</h2>
+
+<p>Rustという言語は変更が多いらしいのでここでは、Chap.1-14(2015/01/25時点)までで気がついた点で書きます。 まず、今回環境を下に示します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rustc --version
+rustc 1.0.0-nightly (29bd9a06e 2015-01-20 23:03:09 +0000)
+</code></pre></div></div>
+
+<h3 id="i---is">i -&gt; is</h3>
+
+<p>まず、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/2.FormattedPrint/FormattedPrint.rs#L9">Chap. 2のコード</a>で<code class="language-plaintext highlighter-rouge">integer</code>のsuffixが<code class="language-plaintext highlighter-rouge">is</code>に変更されています。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FormattedPrint.rs:9:69: 9:71 warning: the `i` suffix on integers is deprecated; use `is` or one of the fixed-sized suffixes
+FormattedPrint.rs:9     println!("{} of {:b} people know binary, the other half don't", 1i, 2i);
+                                                                                        ^~
+</code></pre></div></div>
+
+<h3 id="rangea-b--ab">range(a, b) –&gt; (a..b)</h3>
+
+<p>つぎに、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/10.ForAndRange/ForAndRange.rs#L2">Chap. 10のコード</a>で<code class="language-plaintext highlighter-rouge">range(a, b)</code>がunstableになっているので<code class="language-plaintext highlighter-rouge">(a..b)</code>に変更しました。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ForAndRange.rs:2:14: 2:19 warning: use of unstable item: will be replaced by range notation, #[warn(unstable)] on by default
+ForAndRange.rs:2     for n in range(1u32, 101) {
+                              ^~~~~
+</code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+
+<p>いま確認してたらそもそもRust by Example自体が変更されてた…</p>
+
+<p>ちゃんちゃん</p>
+
+  </div>
 
   <h1><a href="/blog/2015/01/12/typescript-in-rails/">Ruby on RailsでTypeScriptを使ってみる</a></h1>
   <p class="author">
@@ -434,43 +477,6 @@ $ bundle exec ruby mikutter.rb
 
 <p><img src="/images/photo/mikutter.png" alt="mikutter" /></p>
 
-
-  </div>
-
-  <h1><a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">Gentoo Install Battle Part II</a></h1>
-  <p class="author">
-    <span class="date">2014-08-21 20:01:51 +0900</span>
-  </p>
-  <div class="content">
-    <p>X240の準備は終ったので、<a href="http://wiki.gentoo.org/wiki/Quick_install_guide">インストール</a>します。基本的にはこの流れです。</p>
-
-<h2 id="usbブート">USBブート</h2>
-
-<p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">作成したUSBメモリ</a>をX240に差して起動します。
-起動したら、まずパーティションの設定を行います。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gpart /dev/sda
-</code></pre></div></div>
-
-<p>で不要なパーティションを削除し、必要なパーティションを作成します。</p>
-
-<h2 id="無線lan">無線LAN</h2>
-
-<p>ネットワークを接続しますが、今回は無線LANを利用してインストールを行います。</p>
-
-<p>まず、どこか適当な位置に<a href="http://www.xmisao.com/2014/01/16/how-to-connect-wpa2-wireless-lan-using-wpa-supplicant.html">リンク先</a>のファイルを作成してください。</p>
-
-<p>次に以下のコマンドを実行します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wpa_supplicant -Dnl80211 -ieth0 -c/path/to/supplicant.config
-</code></pre></div></div>
-
-<p>実行したら、接続されているのでATL + F2とかでコンソールの表示を変更してください。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>有線のLANケーブルがなかったからはまった。
-続きは明日以降に…</p>
 
   </div>
 

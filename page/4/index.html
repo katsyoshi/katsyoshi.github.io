@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 4" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/4/","headline":"katsyoshi のめもみたいなの - page 4","description":"It’s a memos.","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/4/","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 4","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -59,6 +59,37 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2017/07/01/emacs-config-from-itamae/">Emacsの構成管理をitamaeで管理</a></h1>
+  <p class="author">
+    <span class="date">2017-07-01 22:59:16 +0900</span>
+  </p>
+  <div class="content">
+    <p>仕事とプライベート環境でemacsのフォント等設定するのがいいかげんダるくなってきたので、Itamaeを流すだけでイイカンジにするようにした</p>
+
+<h2 id="もともとどうかんりしてたのか">もともとどうかんりしてたのか</h2>
+<p>もともと<a href="https://github.com/katsyoshi/dot.emacs.d">github</a>で管理していたが、さすがにFontの環境異差をちょこちょこ変えるのが面倒になった</p>
+
+<h2 id="itamae-de-kanri">Itamae de kanri</h2>
+<p>gitで管理しているので環境異差ある部分を<a href="https://github.com/katsyoshi/itamae-recipes">itamae</a>で管理するように方針を転換。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">emacs</span><span class="pi">:</span>
+  <span class="na">font</span><span class="pi">:</span>
+    <span class="na">family</span><span class="pi">:</span> <span class="s">Ricty</span>
+    <span class="na">height</span><span class="pi">:</span> <span class="m">120</span>
+  <span class="na">packages</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">auto-complete</span>
+  <span class="na">settings</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">git</span>
+</code></pre></div></div>
+
+<p>とか書いてあとはItamaeを実行することで必要なパッケージのインストール、
+必要な設定へのリンク追加などをするようにしました。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>これでなにも考えなくてすむようになるのかな？</p>
+
+  </div>
 
   <h1><a href="/blog/2017/06/04/rustful-web/">rustful web</a></h1>
   <p class="author">
@@ -394,34 +425,6 @@ $ bundle exec rake deploy
 
 <h2 id="おわり">おわり</h2>
 <p>おわり</p>
-
-  </div>
-
-  <h1><a href="/blog/2016/12/17/emoji-in-mikutter/">みくったーでえもじ</a></h1>
-  <p class="author">
-    <span class="date">2016-12-17 00:00:00 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="http://www.adventar.org/calendars/1375">mikutter advent calenedar 2016</a> 17日目の記事です
-たぶんだれかが作ってた気がするけど、mikuterで<a href="https://slack.com">slack</a>や、<a href="https://github.com">github</a>のような絵文字を表示するプラグインを作成しました。</p>
-
-<h2 id="なんぞそれ">なんぞそれ？</h2>
-<p>ここにあります。<a href="https://github.com/katsyoshi/mikutter-emoji">mikutter-emoji</a>
-<code class="language-plaintext highlighter-rouge">:tofu_on_fire:</code> みたいに <code class="language-plaintext highlighter-rouge">:</code> で囲われた文字列を絵文字に置換するだけです。</p>
-
-<h2 id="つかいかた">つかいかた</h2>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/katsyoshi/mikutter-emoji.git ~/.mikutter/plugin/emoji
-EDIT ~/.mikutter/plugin/emoji/emoji.yml
-</code></pre></div></div>
-
-<p>gitでプラグインディレクトリにコピーします。
-コピーしたら、絵文字の設定を <code class="language-plaintext highlighter-rouge">emoji.yml</code> に入れます。
-今は5つしか登録していないので皆で登録しましょう</p>
-
-<h2 id="おわり">おわり</h2>
-<p>おわり</p>
-
 
   </div>
 

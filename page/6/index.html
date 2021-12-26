@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 6" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/6/","headline":"katsyoshi のめもみたいなの - page 6","description":"It’s a memos.","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/6/","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 6","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -59,6 +59,101 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2016/08/08/renewal-my-site/">RENEWAL MY SITE!!!</a></h1>
+  <p class="author">
+    <span class="date">2016-08-08 21:05:47 +0900</span>
+  </p>
+  <div class="content">
+    <p>ってのは嘘ではないですが、嘘に近いです。
+実はおとといの土曜日に katsyoshi.org をのぞいたら、 <em>nginx</em> の初期ページが表示されたので
+とくにコンテンツはないですが、いそいでサイトの復旧をしました。
+が、もともとあったファイル置場を失念したため似た感じで再構築してました。
+再構築ついでにssl化、<code class="language-plaintext highlighter-rouge">nginx</code> から <code class="language-plaintext highlighter-rouge">h2o</code> へのWebサーバー変更しました。
+あと <code class="language-plaintext highlighter-rouge">systemd</code> でデーモン化とかも。</p>
+
+<h2 id="lets-encrypt">Let’s Encrypt</h2>
+
+<p>リリースされてだいぶたつのですが、<a href="https://letsencrypt.org">Let’s Encrypt</a>を利用してみました。
+Ubuntu Linux 16.04 では、簡単に導入できます。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>letsencrypt
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>letsencrypt certonly
+</code></pre></div></div>
+
+<p>でいくつかの質問に答えればおわりです。
+ここで、戸惑った場面としては認証を受けたいサーバーの確認があるのですが、
+サーバーポート443を開ける<a href="https://letsencrypt.jp">必要があり</a>、1回失敗しました。</p>
+
+<h2 id="h2o">H2O</h2>
+
+<p>せっかくだし、<a href="https://h2o.examp1e.net/">H2O</a>を使おうと思います。
+インストールはかんたんでいかのようにすればokです。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone h2o/h2o
+$ cd h2o
+$ cmake -DCMAKE_INSTALL_PREFIX_PATH=/opt/local .
+$ make &amp;&amp; make install
+</code></pre></div></div>
+
+<p>設定は<a href="https://h2o.examp1e.net/configure/quick_start.html">ここ</a>と<a href="https://github.com/h2o/h2o/wiki/redirect-HTTP-to-HTTPS">ここ</a>を参考にして以下にしています。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user: www-data
+hosts:
+  "katsyoshi.org:80":
+    listen:
+      port: 80
+    paths:
+      /:
+        redirect: https://katsyoshi.org
+hosts:
+  "katsyoshi.org:443":
+    listen:
+      port: 443
+      ssl:
+        certificate-file: /etc/letsencrypt/live/katsyoshi.org/fullchain.pem
+        key-file: /etc/letsencrypt/live/katsyoshi.org/privkey.pem
+    paths:
+      /:
+        file.dir: /opt/website/top
+access-log: /var/log/h2o/access.log
+error-log: /var/log/h2o/error.log
+pid-file: /var/run/h2o.pid
+http2-reprioritize-blocking-assets: ON
+</code></pre></div></div>
+
+<h2 id="h2oservice"><a href="https://negima.mobi/2015/10/2092">h2o.service</a></h2>
+
+<p>さいきんわだいのしすてむでーってやつででーもん？かしようとおもいます</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
+Description=H2O the optimized HTTP/1, HTTP/2 server
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/h2o.pid
+ExecStartPre=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -t
+ExecStart=/opt/local/bin/h2o -c /etc/h2o/h2o.conf -m daemon
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div></div>
+
+<p>いやーしすてむでーってべんりですねー</p>
+
+<h2 id="owari">owari</h2>
+<p>サイトがぶっとんだのでサイトの復旧？と let’s encrypt でのSSL化、 h2oへのウェブサーバー変更と <code class="language-plaintext highlighter-rouge">systemd</code> でのデーモン化をやりました。</p>
+
+<p>1年ぶりの日記だたので、Markdownどうかくんだっけ？とか、別のところで大変でした。</p>
+
+<h2 id="参考サイト">参考サイト</h2>
+
+
+  </div>
 
   <h1><a href="/blog/2015/08/25/i-went-to-yapc-asia-as-a-volanteer-staff/">YAPC::Asia 2015に参加しました(ボランティアスタッフとして)</a></h1>
   <p class="author">
@@ -379,50 +474,6 @@ Linuxで使ってみた。</p>
 X250を買った。それ以外にもメガネも一つ買ってみた。</p>
 
 <p>あと欲しいのは、ルンバかなあ</p>
-
-  </div>
-
-  <h1><a href="/blog/2015/04/09/file-name-needs-scss-extention/">ファイル名間違えてテスト通らなかった話</a></h1>
-  <p class="author">
-    <span class="date">2015-04-09 15:38:49 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="https://rails-assets.org">rails-assets.org</a> から <code class="language-plaintext highlighter-rouge">bootstrap-sass-official</code> をインストールし、動かしたら、 test環境でテストが落ちてたのでメモ。</p>
-
-<h2 id="オチ">オチ</h2>
-
-<p>CSSの<a href="https://twitter.com/izumin5210/status/586054782994874368">ファイル名</a>が <code class="language-plaintext highlighter-rouge">application.css.scss</code> じゃなかった。</p>
-
-<h2 id="設定">設定</h2>
-
-<p>まず、<code class="language-plaintext highlighter-rouge">Gemfile</code> に以下のように追記をします。</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">source</span> <span class="s1">'https://rails-assets.org'</span> <span class="k">do</span>
-  <span class="n">gem</span> <span class="s1">'rails-asstes-bootstrap-sass-official'</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<p>あとはいつも通りにインストールします。
-次に <code class="language-plaintext highlighter-rouge">app/assets/javascripts/application.js</code> や <code class="language-plaintext highlighter-rouge">app/assets/stylesheets/application.css</code> に必要な読み込みを<a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">設定</a>します。</p>
-
-<h2 id="問題">問題</h2>
-<p>以上の設定が終ったあと、 <code class="language-plaintext highlighter-rouge">cucumber</code> でテストを実行すると、</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>File to import not found or unreadable: bootstrap-sass-official/bootstrap-sprockets.
-</code></pre></div></div>
-
-<p>などといわれますのでオチを参考にファイル名変更して終了です。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>おわり</p>
-
-<h3 id="参考">参考</h3>
-
-<ol>
-  <li>http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5</li>
-  <li>https://twitter.com/izumin5210/status/586054782994874368</li>
-</ol>
 
   </div>
 
