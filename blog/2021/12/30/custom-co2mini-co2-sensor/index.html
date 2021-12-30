@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>custom CO2-mini で CO2 を見えるようにしよう | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="custom CO2-mini で CO2 を見えるようにしよう" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="コロナになって結構前に custom CO2-mini に 話題になった ので買って放置してあったの1 を活用しようと思いたった。 とりあえず値は取得はできているので mackerel との連携をしてグラフに表示できるようにします。 あと mercker-plugin を Rust で書いてみたいとおもったので、やってみることにしました。 Amazon で確認したら買ったの 2020/03 だった…… &#8617;" />
+<meta property="og:description" content="コロナになって結構前に custom CO2-mini に 話題になった ので買って放置してあったの1 を活用しようと思いたった。 とりあえず値は取得はできているので mackerel との連携をしてグラフに表示できるようにします。 あと mercker-plugin を Rust で書いてみたいとおもったので、やってみることにしました。 Amazon で確認したら買ったの 2020/03 だった…… &#8617;" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-12-30T16:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="custom CO2-mini で CO2 を見えるようにしよう" />
+<script type="application/ld+json">
+{"url":"https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor/","description":"コロナになって結構前に custom CO2-mini に 話題になった ので買って放置してあったの1 を活用しようと思いたった。 とりあえず値は取得はできているので mackerel との連携をしてグラフに表示できるようにします。 あと mercker-plugin を Rust で書いてみたいとおもったので、やってみることにしました。 Amazon で確認したら買ったの 2020/03 だった…… &#8617;","headline":"custom CO2-mini で CO2 を見えるようにしよう","dateModified":"2021-12-30T16:59:59+09:00","datePublished":"2021-12-30T16:59:59+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49549546-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+</head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">custom CO2-mini で CO2 を見えるようにしよう</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-12-30T16:59:59+09:00" itemprop="datePublished">Dec 30, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>コロナになって結構前に <a href="https://www.kk-custom.co.jp/emp/CO2-mini.html"><strong>custom CO2-mini</strong></a>
+に <a href="https://www.itmedia.co.jp/pcuser/articles/2012/18/news069.html">話題になった</a>
+ので買って放置してあったの<sup id="fnref:buy-co2mon" role="doc-noteref"><a href="#fn:buy-co2mon" class="footnote" rel="footnote">1</a></sup> を活用しようと思いたった。
+とりあえず値は取得はできているので <a href="https://meckerel.io"><strong>mackerel</strong></a> との連携をしてグラフに表示できるようにします。
+あと  <strong>mercker-plugin</strong> を <a href="https://www.rust-lang.org"><strong>Rust</strong></a> で書いてみたいとおもったので、やってみることにしました。</p>
+
+<p>以下のリポジトリにコードはあります。</p>
+
+<p><a href="https://github.com/katsyoshi/mackerel-plugin-co2mon"><img src="https://gh-card.dev/repos/katsyoshi/mackerel-plugin-co2mon.svg" alt="katsyoshi/mackerel-plugin-co2mon - GitHub" /></a></p>
+
+<h2 id="mackerel-plugin-として作る">mackerel plugin として作る</h2>
+<p><strong>mackerel</strong> に投稿する前にこの <strong>custom CO2-mini</strong> が <strong>Rust</strong> で読めるのかを調査してみましたら、<a href="https://crates.io/crates/co2mon"><strong>co2mon</strong></a> がピンズドな感じでありました。
+確認としてセンサーの読み込みは <strong>co2mon</strong> の README の通りにやることで読みとることができます。</p>
+
+<p>センサーの値が読み込めるようになったら、今度は <strong>mackerel</strong> へ投げれるようにします。
+と言ってもやることは <a href="https://mackerel.io/ja/docs/entry/advanced/custom-metrics#post-metric">公式にあるよう</a> に以下のフォーマットで標準出力に出すだけのようです。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{metric name}\t{metric value}\t{unix epoch time}
+</code></pre></div></div>
+
+<p>ということなので適当に <strong>metric name</strong> を <code class="language-plaintext highlighter-rouge">CO2MINI.co2/temp.living</code> <sup id="fnref:custom-co2mini" role="doc-noteref"><a href="#fn:custom-co2mini" class="footnote" rel="footnote">2</a></sup> にして出力しています。
+<strong>mackerel-plugin</strong> として動かすために、 <strong>mackerel-agent.conf</strong> に以下のような設定を追加し、再起動することでグラフが追加できます。</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[plugin.metrics.CO2MINI]</span>
+<span class="py">command</span> <span class="p">=</span> <span class="nn">["/path/to/build/bin/mackerel-plugin-co2mon"]</span>
+</code></pre></div></div>
+
+<p>グラフは以下のように表示されました!やったね!
+<img src="/images/screenshot/co2mini-metrics.png" alt="" /></p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>ずっとやろうやろうと思ってた <strong>Rust</strong> で <strong>mackerel</strong> のプラグイン作成、
+面倒で先延しにしてたのですが、チョットやってみたらすぐにできたのでよかったです。
+今後としては <strong>CO2</strong> の値に応じて窓開けたりできるようにしたいなあと思っています<sup id="fnref:window" role="doc-noteref"><a href="#fn:window" class="footnote" rel="footnote">3</a></sup>。</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:buy-co2mon" role="doc-endnote">
+      <p>Amazon で確認したら買ったの 2020/03 だった…… <a href="#fnref:buy-co2mon" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:custom-co2mini" role="doc-endnote">
+      <p>mackerel のグラフ表示部分のタイトルが <code class="language-plaintext highlighter-rouge">cusotm.CO2MINI.co2.living</code> となり、メーカー名も入っていいじゃんとなった。 <a href="#fnref:custom-co2mini" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:window" role="doc-endnote">
+      <p>窓開閉する道具もないのでそこから仕入れる必要がありいつになるか不明です。 <a href="#fnref:window" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/blog/2021/12/30/custom-co2mini-co2-sensor/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -60,6 +60,78 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 
 
+  <h1><a href="/blog/2018/12/09/rails-app-development-using-docker-compose/">docker-composeを利用してRailsアプリ開発を楽にしよう</a></h1>
+  <p class="author">
+    <span class="date">2018-12-09 21:11:56 +0900</span>
+  </p>
+  <div class="content">
+    <p>ていうのを<a href="https://twitter.com/yu_suke1994">うなすけさん</a>に相談したら、<a href="https://blog.unasuke.com/2018/run-rails-test-on-docker-compose/">解決策を示してくれた</a>のでそれを開発向けに変えてみた。
+Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。</p>
+
+<h2 id="はじめに">はじめに</h2>
+
+<p>Railsアプリ用 Dockerfile を準備します。こちらは、元記事と同じで良いとおもいますが、元記事ではすべての条件を満たすために、不要な <code class="language-plaintext highlighter-rouge">DB</code> やミドルウェアのライブライをインストールしてますので必要なものだけにします。
+このRailsアプリでは、<code class="language-plaintext highlighter-rouge">DB</code> として <code class="language-plaintext highlighter-rouge">postgres</code> を利用していますので関連のライブラリをインストールします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ruby:2.5.3-stretch
+
+ARG NODE_MAJOR_VER=11
+ARG BUNDLER_JOBS=4
+
+RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VER}.x | bash - \
+  &amp;&amp; curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  &amp;&amp; echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+  &amp;&amp; apt update &amp;&amp; apt install --assume-yes \
+    postgresql-contrib \
+    libpq-dev \
+    libxml2 \
+    libxml2-dev \
+    libxslt1-dev \
+    git \
+    make \
+    nodejs \
+    yarn \
+ &amp;&amp; apt-get clean \
+ &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+WORKDIR /rails
+COPY . .
+RUN bundle install --jobs=${BUNDLER_JOBS}
+RUN yarn install
+</code></pre></div></div>
+
+<p>同様に <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> を必要なものだけにします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '3'
+services:
+  rails:
+    build: .
+    command: /bin/bash
+    environment:
+      - NODE_MAJAR_VER=11
+      - BUNDLER_JOBS=4
+      - DB_HOST=postgres
+    volumes:
+      - ".:/rails"
+    links:
+      - postgres
+    command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
+    ports:
+      - "3000:3000"
+  postgres:
+    image: postgres:11.1-alpine
+    ports:
+      - "5432:5432"
+</code></pre></div></div>
+
+<p>こちらも <code class="language-plaintext highlighter-rouge">postgres</code> だけにします。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>あとは <code class="language-plaintext highlighter-rouge">docker-compose up rails</code> とし、実行することで見れるようになっています。</p>
+
+  </div>
+
   <h1><a href="/blog/2018/12/01/hello-language-server/">hello language server</a></h1>
   <p class="author">
     <span class="date">2018-12-01 13:00:59 +0900</span>
@@ -576,52 +648,6 @@ index da302ca1..94025817 100755
 
 <p>おわり。
 別に <code class="language-plaintext highlighter-rouge">dotenv.gem</code> いらんなこれ</p>
-
-  </div>
-
-  <h1><a href="/blog/2018/04/30/happy-holidays/">1日はやくはじめた</a></h1>
-  <p class="author">
-    <span class="date">2018-04-30 01:02:57 +0900</span>
-  </p>
-  <div class="content">
-    <p>2018/4/27 に休み入れて一日はやくGWはじめています。</p>
-
-<h3 id="毎月恒例">毎月恒例</h3>
-
-<p>毎月月末金曜に知り合いの <a href="https://twitter.com/n_kane">@n_kane</a> と築地で朝御飯を食べにいってて
-今月はGW直前だし朝からやってる <a href="https://tabelog.com/tokyo/A1311/A131106/13009812/">根津 鷹匠</a> で朝からそばもいこうとなっていってきた。
-そういうわけで休みを入れていた。</p>
-
-<h3 id="国税局">国税局</h3>
-
-<p>前日あたりに <a href="https://instagram.com">instagram</a> で <a href="https://www.instagram.com/ginzabrewery/">ginzabrewery</a> を眺めててどこだろと <em>ggrks</em> してみたら
-<a href="https://www.nta.go.jp/about/organization/tokyo/sake/beer/tokyo/tokyo.htm">ここ</a> の便利ページが出てきた。このページはだいたいブリュワリーとパブが一体化した
-店が掲載されているよう。でよく行く<a href="http://www.campionale.com/jp/">Campion Ale</a> や最近教えてもらった <a href="http://plusplus.suiken.beer/">十条すいけんブルワリー</a>、
-などが掲載されている。</p>
-
-<h3 id="ガハハハ">ガハハハ</h3>
-
-<p>で午後は @n_kane も予定があったらしく、暇だったので上記国税局の便利ページを参考に <a href="https://www.facebook.com/%E3%82%AC%E3%83%8F%E3%83%8F%E3%83%93%E3%83%BC%E3%83%AB-gahahabeer-1639230606096746/">ガハハビール</a> に行ってみた。</p>
-
-<p>流石に平日の午後3時だったので店員さん以外は誰もおらず、一人だけでした。
-とりあえず <a href="https://untappd.com/b/gahaha-beer-danchi-ipa/2502617">Danchi IPA</a> とレバーを頼んでみた。</p>
-
-<p>-&gt; <img src="/images/photo/gahaha-danchi-ipa.jpg" alt="" /> &lt;-</p>
-
-<p>Danchi IPA は苦味がすくなく美味しいビールでした。</p>
-
-<p>つぎに <a href="https://untappd.com/b/gahaha-beer-marcy-ipa-ipa/2517460">Marcy IPA</a> とライスなしカツカレーを注文。
-こちらは苦味が強くおいしいビールでした。</p>
-
-<p>-&gt; <img src="/images/photo/gahaha-marcy-ipa.jpg" alt="" /> &lt;-</p>
-
-<p>そんなことより、謎のメニューが幾つかあり、店員さんに聞いてみたら、「だってお酒のむ人お米とか麺とかあんまりすきじゃないですよね」っていっておりました。
-あと、軟骨バッファローチキンは頼んでないけどとてもよさそうだったので今度いく時に注文しよう。</p>
-
-<h3 id="おわり">おわり</h3>
-<p>国税局を調べたおかげで良いビール屋を見付けることができてよかったよかった。</p>
-
-<p>ってガハハビールの情報探してたら老舗クラフトビールの紹介サイトの <a href="http://beer-cruise.net/">ビアクルーズ</a> さんで <a href="http://beer-cruise.net/beer/170922.html">紹介されてた</a> 。</p>
 
   </div>
 

@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2021-12-26T16:46:17+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">いんとろでぅーす xremap</title><link href="https://blog.katsyoshi.org/blog/2021/12/26/xremap/" rel="alternate" type="text/html" title="いんとろでぅーす xremap" /><published>2021-12-26T13:59:59+09:00</published><updated>2021-12-26T13:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/12/26/xremap</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/12/26/xremap/">&lt;p&gt;仕事で利用したりしている &lt;strong&gt;Slack&lt;/strong&gt; などのキーボードでの操作が面倒になってきたので、
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2021-12-30T18:31:02+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">custom CO2-mini で CO2 を見えるようにしよう</title><link href="https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor/" rel="alternate" type="text/html" title="custom CO2-mini で CO2 を見えるようにしよう" /><published>2021-12-30T16:59:59+09:00</published><updated>2021-12-30T16:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor/">&lt;p&gt;コロナになって結構前に &lt;a href=&quot;https://www.kk-custom.co.jp/emp/CO2-mini.html&quot;&gt;&lt;strong&gt;custom CO2-mini&lt;/strong&gt;&lt;/a&gt;
+に &lt;a href=&quot;https://www.itmedia.co.jp/pcuser/articles/2012/18/news069.html&quot;&gt;話題になった&lt;/a&gt;
+ので買って放置してあったの&lt;sup id=&quot;fnref:buy-co2mon&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:buy-co2mon&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; を活用しようと思いたった。
+とりあえず値は取得はできているので &lt;a href=&quot;https://meckerel.io&quot;&gt;&lt;strong&gt;mackerel&lt;/strong&gt;&lt;/a&gt; との連携をしてグラフに表示できるようにします。
+あと  &lt;strong&gt;mercker-plugin&lt;/strong&gt; を &lt;a href=&quot;https://www.rust-lang.org&quot;&gt;&lt;strong&gt;Rust&lt;/strong&gt;&lt;/a&gt; で書いてみたいとおもったので、やってみることにしました。&lt;/p&gt;
+
+&lt;p&gt;以下のリポジトリにコードはあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/katsyoshi/mackerel-plugin-co2mon&quot;&gt;&lt;img src=&quot;https://gh-card.dev/repos/katsyoshi/mackerel-plugin-co2mon.svg&quot; alt=&quot;katsyoshi/mackerel-plugin-co2mon - GitHub&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;mackerel-plugin-として作る&quot;&gt;mackerel plugin として作る&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;mackerel&lt;/strong&gt; に投稿する前にこの &lt;strong&gt;custom CO2-mini&lt;/strong&gt; が &lt;strong&gt;Rust&lt;/strong&gt; で読めるのかを調査してみましたら、&lt;a href=&quot;https://crates.io/crates/co2mon&quot;&gt;&lt;strong&gt;co2mon&lt;/strong&gt;&lt;/a&gt; がピンズドな感じでありました。
+確認としてセンサーの読み込みは &lt;strong&gt;co2mon&lt;/strong&gt; の README の通りにやることで読みとることができます。&lt;/p&gt;
+
+&lt;p&gt;センサーの値が読み込めるようになったら、今度は &lt;strong&gt;mackerel&lt;/strong&gt; へ投げれるようにします。
+と言ってもやることは &lt;a href=&quot;https://mackerel.io/ja/docs/entry/advanced/custom-metrics#post-metric&quot;&gt;公式にあるよう&lt;/a&gt; に以下のフォーマットで標準出力に出すだけのようです。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{metric name}\t{metric value}\t{unix epoch time}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ということなので適当に &lt;strong&gt;metric name&lt;/strong&gt; を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CO2MINI.co2/temp.living&lt;/code&gt; &lt;sup id=&quot;fnref:custom-co2mini&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:custom-co2mini&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; にして出力しています。
+&lt;strong&gt;mackerel-plugin&lt;/strong&gt; として動かすために、 &lt;strong&gt;mackerel-agent.conf&lt;/strong&gt; に以下のような設定を追加し、再起動することでグラフが追加できます。&lt;/p&gt;
+
+&lt;div class=&quot;language-toml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[plugin.metrics.CO2MINI]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;[&quot;/path/to/build/bin/mackerel-plugin-co2mon&quot;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;グラフは以下のように表示されました!やったね!
+&lt;img src=&quot;/images/screenshot/co2mini-metrics.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+
+&lt;p&gt;ずっとやろうやろうと思ってた &lt;strong&gt;Rust&lt;/strong&gt; で &lt;strong&gt;mackerel&lt;/strong&gt; のプラグイン作成、
+面倒で先延しにしてたのですが、チョットやってみたらすぐにできたのでよかったです。
+今後としては &lt;strong&gt;CO2&lt;/strong&gt; の値に応じて窓開けたりできるようにしたいなあと思っています&lt;sup id=&quot;fnref:window&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:window&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:buy-co2mon&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Amazon で確認したら買ったの 2020/03 だった…… &lt;a href=&quot;#fnref:buy-co2mon&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:custom-co2mini&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;mackerel のグラフ表示部分のタイトルが &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cusotm.CO2MINI.co2.living&lt;/code&gt; となり、メーカー名も入っていいじゃんとなった。 &lt;a href=&quot;#fnref:custom-co2mini&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:window&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;窓開閉する道具もないのでそこから仕入れる必要がありいつになるか不明です。 &lt;a href=&quot;#fnref:window&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html">コロナになって結構前に custom CO2-mini に 話題になった ので買って放置してあったの1 を活用しようと思いたった。 とりあえず値は取得はできているので mackerel との連携をしてグラフに表示できるようにします。 あと mercker-plugin を Rust で書いてみたいとおもったので、やってみることにしました。 Amazon で確認したら買ったの 2020/03 だった…… &amp;#8617;</summary></entry><entry><title type="html">いんとろでぅーす xremap</title><link href="https://blog.katsyoshi.org/blog/2021/12/26/xremap/" rel="alternate" type="text/html" title="いんとろでぅーす xremap" /><published>2021-12-26T13:59:59+09:00</published><updated>2021-12-26T13:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/12/26/xremap</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/12/26/xremap/">&lt;p&gt;仕事で利用したりしている &lt;strong&gt;Slack&lt;/strong&gt; などのキーボードでの操作が面倒になってきたので、
 &lt;strong&gt;emacs keybind&lt;/strong&gt; が利用できるようにするため &lt;a href=&quot;https://github.com/k0kubun/xremap&quot;&gt;&lt;strong&gt;xremap&lt;/strong&gt;&lt;/a&gt; を利用することにした。&lt;/p&gt;
 
 &lt;p&gt;この記事はその利用するまでの顛末をメモとして残す。&lt;/p&gt;
@@ -103,7 +153,7 @@ Selected keyboards automatically since --device options weren&apos;t specified:
 &lt;p&gt;最近、 &lt;strong&gt;Mac&lt;/strong&gt; との行き来をしていると &lt;strong&gt;emacs keybind&lt;/strong&gt; が使えないときにちょっといらっとしますので使えるようにキーバインドを変更してみました。
 設定ファイルの動的読み込みに対応していないのがちょっと面倒なのですが&lt;sup id=&quot;fnref:hotreload&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:hotreload&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;、これで &lt;strong&gt;Slack&lt;/strong&gt; などで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C-a&lt;/code&gt; で行頭にもどれるようになりました。便利。&lt;/p&gt;
 
-&lt;h4 id=&quot;注釈&quot;&gt;注釈&lt;/h4&gt;
+&lt;hr /&gt;
 
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
@@ -606,67 +656,4 @@ Ruby on Apple II のやつがぶっとんでてよかったですね。
 
 &lt;p&gt;いかがでしたでしょうか？来年はまたビールをまとめたいとおもいますのでよろしくおねがいします。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://drive.google.com/open?id=1NjNMxM0HM_mpi_gccWQyeSy-d3RXCAiF&amp;amp;usp=sharing&quot;&gt;sake 2018&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="sake" /><category term="delicious" /><summary type="html">去年は ビール屋さん でしたので今年は日本酒をまとめてみます。</summary></entry><entry><title type="html">docker-composeを利用してRailsアプリ開発を楽にしよう</title><link href="https://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose/" rel="alternate" type="text/html" title="docker-composeを利用してRailsアプリ開発を楽にしよう" /><published>2018-12-09T21:11:56+09:00</published><updated>2018-12-09T21:11:56+09:00</updated><id>https://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2018/12/09/rails-app-development-using-docker-compose/">&lt;p&gt;ていうのを&lt;a href=&quot;https://twitter.com/yu_suke1994&quot;&gt;うなすけさん&lt;/a&gt;に相談したら、&lt;a href=&quot;https://blog.unasuke.com/2018/run-rails-test-on-docker-compose/&quot;&gt;解決策を示してくれた&lt;/a&gt;のでそれを開発向けに変えてみた。
-Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。&lt;/p&gt;
-
-&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
-
-&lt;p&gt;Railsアプリ用 Dockerfile を準備します。こちらは、元記事と同じで良いとおもいますが、元記事ではすべての条件を満たすために、不要な &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DB&lt;/code&gt; やミドルウェアのライブライをインストールしてますので必要なものだけにします。
-このRailsアプリでは、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DB&lt;/code&gt; として &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;postgres&lt;/code&gt; を利用していますので関連のライブラリをインストールします。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ruby:2.5.3-stretch
-
-ARG NODE_MAJOR_VER=11
-ARG BUNDLER_JOBS=4
-
-RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VER}.x | bash - \
-  &amp;amp;&amp;amp; curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  &amp;amp;&amp;amp; echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | tee /etc/apt/sources.list.d/yarn.list \
-  &amp;amp;&amp;amp; apt update &amp;amp;&amp;amp; apt install --assume-yes \
-    postgresql-contrib \
-    libpq-dev \
-    libxml2 \
-    libxml2-dev \
-    libxslt1-dev \
-    git \
-    make \
-    nodejs \
-    yarn \
- &amp;amp;&amp;amp; apt-get clean \
- &amp;amp;&amp;amp; rm -rf /var/lib/apt/lists/*
-
-WORKDIR /rails
-COPY . .
-RUN bundle install --jobs=${BUNDLER_JOBS}
-RUN yarn install
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;同様に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; を必要なものだけにします。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: &apos;3&apos;
-services:
-  rails:
-    build: .
-    command: /bin/bash
-    environment:
-      - NODE_MAJAR_VER=11
-      - BUNDLER_JOBS=4
-      - DB_HOST=postgres
-    volumes:
-      - &quot;.:/rails&quot;
-    links:
-      - postgres
-    command: [&quot;bundle&quot;, &quot;exec&quot;, &quot;rails&quot;, &quot;s&quot;, &quot;-b&quot;, &quot;0.0.0.0&quot;]
-    ports:
-      - &quot;3000:3000&quot;
-  postgres:
-    image: postgres:11.1-alpine
-    ports:
-      - &quot;5432:5432&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;こちらも &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;postgres&lt;/code&gt; だけにします。&lt;/p&gt;
-
-&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
-
-&lt;p&gt;あとは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose up rails&lt;/code&gt; とし、実行することで見れるようになっています。&lt;/p&gt;</content><author><name></name></author><category term="rails" /><category term="tech" /><category term="docker" /><summary type="html">ていうのをうなすけさんに相談したら、解決策を示してくれたのでそれを開発向けに変えてみた。 Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://drive.google.com/open?id=1NjNMxM0HM_mpi_gccWQyeSy-d3RXCAiF&amp;amp;usp=sharing&quot;&gt;sake 2018&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="sake" /><category term="delicious" /><summary type="html">去年は ビール屋さん でしたので今年は日本酒をまとめてみます。</summary></entry></feed>
