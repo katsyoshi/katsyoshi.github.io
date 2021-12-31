@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 3" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/3/","headline":"katsyoshi のめもみたいなの - page 3","description":"It’s a memos.","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/3/","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 3","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -59,6 +59,73 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2018/05/06/teokure/">API キーが凍結されてら</a></h1>
+  <p class="author">
+    <span class="date">2018-05-06 23:33:23 +0900</span>
+  </p>
+  <div class="content">
+    <p>mikutter の <a href="http://mikutter.hatenablog.com/entry/2018/05/05/164014">Twitter API キーが凍結された</a> ようです。</p>
+
+<h2 id="回避方法">回避方法</h2>
+<p>とりあず、twitter の <a href="https://developer.twitter.com/en.html">開発者ページ</a> から API キーを生成してください。
+あとは以下の様に編集してください</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/Gemfile b/Gemfile
+index 0a88a191..cb48cd4f 100644
+</span><span class="gd">--- a/Gemfile
+</span><span class="gi">+++ b/Gemfile
+</span><span class="p">@@ -21,6 +21,7 @@</span> group :default do
+   gem 'pluggaloid', '&gt;= 1.1.1', '&lt; 2.0'
+   gem 'delayer-deferred', '&gt;= 2.0', '&lt; 3.0'
+   gem 'twitter-text', '&gt;= 2.1.0'
+<span class="gi">+  gem 'dotenv'
+</span> end
+
+ group :test do
+<span class="gh">diff --git a/core/config.rb b/core/config.rb
+index 6e3d95ba..455e3083 100644
+</span><span class="gd">--- a/core/config.rb
+</span><span class="gi">+++ b/core/config.rb
+</span><span class="p">@@ -14,8 +14,8 @@</span> module CHIConfig
+   ACRO = "mikutter"
+
+   # 下の２行は馬鹿にしか見えない
+<span class="gd">-  TWITTER_CONSUMER_KEY = "AmDS1hCCXWstbss5624kVw"
+-  TWITTER_CONSUMER_SECRET = "KOPOooopg9Scu7gJUBHBWjwkXz9xgPJxnhnhO55VQ"
+</span><span class="gi">+  TWITTER_CONSUMER_KEY = ENV["TWITTER_CONSUMER_KEY"]
++  TWITTER_CONSUMER_SECRET = ENV["TWITTER_SECRET_KEY"]
+</span>   TWITTER_AUTHENTICATE_REVISION = 1
+
+   # pidファイル
+<span class="gh">diff --git a/mikutter.rb b/mikutter.rb
+index da302ca1..94025817 100755
+</span><span class="gd">--- a/mikutter.rb
+</span><span class="gi">+++ b/mikutter.rb
+</span><span class="p">@@ -32,6 +32,8 @@</span> require 'benchmark'
+ require 'webrick'
+ require 'thread'
+ require 'fileutils'
+<span class="gi">+require 'dotenv'
++Dotenv.load(".env")
+</span>
+ require_relative 'core/utils'
+</code></pre></div></div>
+
+<p>あとは環境変数<code class="language-plaintext highlighter-rouge">TWITTER_CONSUMER_KEY</code> と <code class="language-plaintext highlighter-rouge">TWITTER_SECRET_KEY</code> を設定してあげると起動できるようになります</p>
+
+<h3 id="dotenv">dotenv</h3>
+
+<p>環境変数を指定して毎回起動したくない、とか <code class="language-plaintext highlighter-rouge">.bashrc</code> に書きたくない、とかある場合は
+<a href="https://github.com/bkeepers/dotenv"><code class="language-plaintext highlighter-rouge">dotenv.gem</code> </a> を使うことで良いかんじに読みとってくれるようになります。
+つかいかたは <code class="language-plaintext highlighter-rouge">Dotenv.load(file_name)</code> で <code class="language-plaintext highlighter-rouge">file_name</code> にあるファイルのなかに環境変数を書けばよいです。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>おわり。
+別に <code class="language-plaintext highlighter-rouge">dotenv.gem</code> いらんなこれ</p>
+
+  </div>
 
   <h1><a href="/blog/2018/04/30/happy-holidays/">1日はやくはじめた</a></h1>
   <p class="author">
@@ -1330,40 +1397,6 @@ gem install iruby cztop
  "nbformat_minor": 2
 }
 </code></pre></div></div>
-
-  </div>
-
-  <h1><a href="/blog/2017/12/02/wiskey-advent-calendar/">ウイスキーアドベントカレンダー2日目</a></h1>
-  <p class="author">
-    <span class="date">2017-12-02 00:00:00 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="https://adventar.org/calendars/2219">ウイスキー Advent Calendar 2017</a> の2日目の記事です。</p>
-
-<p>ウィスキーはピートの香りが強いほうがすきです。</p>
-
-<p>とりあえず蒸留所に行ってきた話を
-以前、<a href="http://www.suntory.co.jp/factory/hakushu/">白州蒸留所</a> と <a href="http://www.suntory.co.jp/factory/yamazaki/">山崎蒸留所</a> に行ったことがあるのでその話を。</p>
-
-<h2 id="白州蒸留所">白州蒸留所</h2>
-
-<p>白州へは5年くらい前に5人でわいわいしながら行ってきました。
-ここでは、工場見学のツアーに参加しました。
-また、テイスティングルームですこしウイスキーを試せて良いです。</p>
-
-<h2 id="山崎蒸留所">山崎蒸留所</h2>
-
-<p>山崎は去年、京都へ行く機会があり、ウイスキーを買うために行きました。
-ここでも工場見学可能だったのですが、事前に予約が必要であるため
-今回はパスして、工場に併設されているウイスキーのテイスティングルーム
-で幾つかのウイスキーをたのしみ、ショップでウイスキーと梅酒を買って
-鴨川へ</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>日本のウイスキーはあまり得意じゃないのですが、蒸留所に行くのは楽しいし
-楽しみ方を教えてもらえるので近くに蒸留所がある方は一度行ってみるとよいとおもいます</p>
-
 
   </div>
 

@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 9" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/9/","headline":"katsyoshi のめもみたいなの - page 9","description":"It’s a memos.","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/9/","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 9","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -59,6 +59,43 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2014/09/12/jubatus-in-gentoo/">Gentoo LinuxむけのJubatusパッケージ書いたよ</a></h1>
+  <p class="author">
+    <span class="date">2014-09-12 12:29:20 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">PC</a>を<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">買い替えた</a>ので<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">環境構築</a>してます。
+<a href="https://github.com/kazuki/overlay/tree/master/sci-calculators/jubatus">Jubatusのoverlay</a>があったのですが、古かったので新しく<a href="https://github.com/katsyoshi/overlay">Jubatusのoverlay</a>作成しました。</p>
+
+<h2 id="インストール">インストール</h2>
+
+<p>これは、以下のコマンドでインストールができます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># curl https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml &gt; /etc/layman/overlays/katsyoshi.xml
+# layman -f -a katsyoshi
+# eix-sync
+# emerge -av jubatus
+</code></pre></div></div>
+
+<p>でいけるとおもいます。</p>
+
+<h2 id="未実装">未実装</h2>
+<ul>
+  <li>jubatus_coreのオプションがはたらいてない(ハズ)</li>
+  <li>jubatus_msgpack-rpcの依存パッケージにdev-libs/msgpackをいれていない</li>
+  <li>jubatusのオプションを確認していない</li>
+</ul>
+
+<p>などなどあるので、PRまってます。</p>
+
+<h2 id="まとめ">まとめ</h2>
+<p><a href="https://github.com/kazuki/overlay/">よくみたら</a>必要なライブラリのパッケージもあったのでこれのバージョンとjubatus_core追加するだけでよかったかも。</p>
+
+<p>ちゃんちゃん</p>
+
+
+  </div>
 
   <h1><a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">Gentoo Install Battle Part III</a></h1>
   <p class="author">
@@ -412,27 +449,6 @@ tcp4       0      0  localhost.9199         *.*                    LISTEN
 <img src="/images/photo/kameari-miso.jpg" alt="お通し" /></p>
 
 <p>あと、githubにある使ってないリポジトリの整理を行った。</p>
-
-  </div>
-
-  <h1><a href="/blog/2014/05/21/new-td-agent-for-mac/">td-agent.pkg</a></h1>
-  <p class="author">
-    <span class="date">2014-05-21 08:53:46 +0900</span>
-  </p>
-  <div class="content">
-    <p>td-agent2が<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">リリース</a>され、Macへの公式パッケージがでたのでインストールメモ</p>
-
-<h2 id="install">Install</h2>
-
-<p><a href="https://s3.amazonaws.com/td-agent-repository/macosx/td-agent2-1.0.0-0.dmg">ダウンロード</a>してダブルクリックでインストールできます。</p>
-
-<h2 id="設定">設定</h2>
-<p>設定ファイル置場は<code class="language-plaintext highlighter-rouge">/etc/td-agent/td-agent.conf</code>になります。
-設定ファイルはいままでの設定で使えるようです。
-あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo launchctl load /Library/LaunchDaemon/td-agent.plist
-</code></pre></div></div>
 
   </div>
 
