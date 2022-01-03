@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 2" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/2/","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 2","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/2/","headline":"katsyoshi のめもみたいなの - page 2","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -30,6 +30,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
   ga('send', 'pageview');
 }
 </script>
+  
 <script>
   !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
   reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
@@ -59,6 +60,84 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2019/02/11/endgame-keyboard-dot-dot-dot/">endgame keyboard...</a></h1>
+  <p class="author">
+    <span class="date">2019-02-11 22:48:24 +0900</span>
+  </p>
+  <div class="content">
+    <p>新しいキーボードを作りました!</p>
+
+<h2 id="fortitude60"><a href="https://github.com/Pekaso/fortitude60">Fortitude60</a></h2>
+
+<p>去年の9月頃に <strong>Group Buy</strong> の募集があったので応募して購入。</p>
+
+<h2 id="くみたて">くみたて</h2>
+
+<p><a href="https://github.com/Pekaso/fortitude60/blob/master/Documents/buildguide_jp_v1.0.md">ビルドガイド</a> に沿って組み立てていけば問題ないです。</p>
+
+<p>今回は、 LED をキー毎に光らせる方向ですすめてみました。</p>
+
+<ol>
+  <li>基板にダイオードつけます。</li>
+</ol>
+
+<p><img src="/images/photo/fortitude60-diode.jpg" alt="" /></p>
+
+<ol>
+  <li>基板にLED 用に抵抗(470Ω)をスイッチ毎につけます。制御用の抵抗(1kΩ)と FET を各ボード毎につけます。</li>
+</ol>
+
+<p><img src="/images/photo/fortitude60-fet-resister.jpg" alt="" /></p>
+
+<ol>
+  <li>スイッチをプレートにはめます。</li>
+</ol>
+
+<p><img src="/images/photo/fortitude60-switch-in-plate.jpg" alt="" /></p>
+
+<ol>
+  <li>基板とスイッチをはめたプレートを合体させます</li>
+</ol>
+
+<p><img src="/images/photo/fortitude60-docking-switch.jpg" alt="" /></p>
+
+<ol>
+  <li>LED をスイッチに刺します。</li>
+</ol>
+
+<p><img src="/images/photo/fortitude60-led-in-switch.jpg" alt="" /></p>
+
+<ol>
+  <li>半田付します。</li>
+</ol>
+
+<p><img src="/images/photo/fortitude60-soldering-switch.jpg" alt="" /></p>
+
+<ol>
+  <li>MCU を基板に接続</li>
+</ol>
+
+<p><img src="/images/photo/fortitude60-mcu-on-keyboard.jpg" alt="" /></p>
+
+<ol>
+  <li>通電確認!</li>
+</ol>
+
+<p><img src="/images/photo/fortitude60-lighting-keyboard.jpg" alt="" /></p>
+
+<ol>
+  <li>keycap まうんと!</li>
+</ol>
+
+<p><img src="/images/photo/fortitude60-completing.jpg" alt="" /></p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>という漢字になりました。
+さすがに透過キーキャップだと部屋が明るくなりすぎるので不透明キーキャップに変更していまはつかってますので、大分おちつています。</p>
+
+  </div>
 
   <h1><a href="/blog/2018/12/31/good-sake-restaurant-2018/">今年いった日本酒が飲める店 2018</a></h1>
   <p class="author">
@@ -580,74 +659,6 @@ docker run -t katsyoshi/itamae-plugin-resource-pip bundle exec rake
 <h3 id="おわり">おわり</h3>
 
 <p>これやろうと思って調べてたらみつからずに <code class="language-plaintext highlighter-rouge">Dockerfile</code> 書き終えて、<a href="https://travis-ci.org">travis</a> を追加しようとしたときに、<a href="https://twitter.com/sue445">@sue445</a> さんが<a href="https://sue445.hatenablog.com/entry/2018/05/01/115522">やってた</a>のをみつけてしまった。。。</p>
-
-  </div>
-
-  <h1><a href="/blog/2018/06/03/rubykaigi2018/">RubyKaigi2018</a></h1>
-  <p class="author">
-    <span class="date">2018-06-03 23:44:28 +0900</span>
-  </p>
-  <div class="content">
-    <p>RubyKaigi2018 に行ってきた</p>
-
-<h2 id="1日目">1日目</h2>
-
-<p>1日目は、 ずっと会場Aにいました。</p>
-
-<ol>
-  <li>Matz: <a href="http://rubykaigi.org/2018/presentations/yukihiro_matz.html#may31">Keynote</a></li>
-  <li>Aaron Patterson: <a href="http://rubykaigi.org/2018/presentations/tenderlove.html#may31">Analyzing and Reducing Ruby Memory Usage</a></li>
-  <li>Kenta Murata, and Yusaku Hatanaka: <a href="http://rubykaigi.org/2018/presentations/mrkn.html#may31">Deep Learning Programming on Ruby</a></li>
-  <li>Bozhidar Batsov: <a href="http://rubykaigi.org/2018/presentations/bbatsov.html#may31">All About RuboCop</a></li>
-  <li>Naotoshi Seo: <a href="http://rubykaigi.org/2018/presentations/sonots.html#may31">Fast Numerical Computing and Deep Learning in Ruby with Cumo</a></li>
-  <li>Emma Haruka Iwao: <a href="http://rubykaigi.org/2018/presentations/Yuryu.html#may31">Exploring Internal Ruby Through C Extensions</a></li>
-  <li><a href="http://rubykaigi.org/2018/presentations/lt/">Lightning Talks</a></li>
-</ol>
-
-<p>この日、今年の RubyKaigi 2018 で最も楽しみにしてたのが <code class="language-plaintext highlighter-rouge">rubocop</code> の作者のトークで、彼のプロダクト(<code class="language-plaintext highlighter-rouge">rubocop</code>, <code class="language-plaintext highlighter-rouge">flycheck-ruby</code>)を利用してる身としては非常に楽しみでした。
-DLと数値計算のやつは進捗が聞けてよかったっていうのとDeep Learningに関していうと難しいのかなあという感想が…
-Haruka さんのやつは、やっぱり今の実装十分に速いってのがわかって、これ以上速くするには非常に大変だなってのがよかったですね。
-LTはどれもよくて <code class="language-plaintext highlighter-rouge">rib</code> も面白いし、 csvの高速化の話が特に好きでした。</p>
-
-<h2 id="2日目">2日目</h2>
-
-<p>2日目もほとんどA会場できいていたのと、GitHubの電源スペースにいました。</p>
-
-<ol>
-  <li>Kouhei Sutou: <a href="http://rubykaigi.org/2018/presentations/ktou.html#jun01">My way with Ruby</a></li>
-  <li>Kouichi Sasada: <a href="http://rubykaigi.org/2018/presentations/ko1.html#jun01">Guild Prototype</a></li>
-  <li>Yuichiro Kaneko: <a href="http://rubykaigi.org/2018/presentations/spikeolaf.html#jun01">RNode with code positions</a></li>
-  <li>Yusuke Endo: <a href="http://rubykaigi.org/2018/presentations/mametter.html#jun01">Type Profiler: An analysis to guess type signatures</a></li>
-  <li><a href="http://rubykaigi.org/2018/presentations/rubylangorg.html#jun01">Ruby Commiters vs. the World</a></li>
-</ol>
-
-<p>この日のトークは特に楽しみにしていたのはなかったのですが、ここ最近毎年聞いていた <a href="http://rubykaigi.org/2018/presentations/v0dro.html#jun01">@v0dro</a> の発表を聞いていなかった。
-金子さんの発表がわりとたのしく聞けて、「あーやっぱり型のはなしは興味ないな」って感じで遠藤さんの発表聞いてました。
-この日の懇親会で飲みすぎた。</p>
-
-<h2 id="3日目">3日目</h2>
-
-<p>3日目はパフォーマンス改善を中心として聞いてました。</p>
-
-<ol>
-  <li>Benoit Daloze: <a href="http://rubykaigi.org/2018/presentations/eregontp.html#jun02">Parallel and Thread-Safe Ruby at High-Speed with TruffleRuby</a></li>
-  <li>Takashi Kokubun: <a href="http://rubykaigi.org/2018/presentations/k0kubun.html#jun02">The Method JIT Compiler for Ruby 2.6</a></li>
-  <li>Takeshi Watanabe: <a href="http://rubykaigi.org/2018/presentations/take-cheeze.html#jun02">LuaJIT as a Ruby backend.</a></li>
-  <li>Prasun Anand: <a href="http://rubykaigi.org/2018/presentations/prasun_anand.html#jun02">High Performance GPU computing with Ruby</a></li>
-  <li>Vladimir Makarov: <a href="http://rubykaigi.org/2018/presentations/vnmakarov.html#jun02">Three Ruby performance projects</a></li>
-  <li><a href="http://rubykaigi.org/2018/presentations/tric.html#jun02">TRICK 2018 (FINAL)</a></li>
-</ol>
-
-<p>TuffleRubyとはやくてとてもよさそう。
-国分さん、Vladimirの話はいつもどおりで安心した。</p>
-
-<p>TRICK、どうしてこんなプログラムが思いつくのかさっぱりわからんがとにかく凄い以上の感想がうかんでこない。</p>
-
-<h2 id="おわり">おわり</h2>
-<p>RubyKaigi 2018に行ってきてたいへんたのしいイベントでした。</p>
-
-<p>(型のはなしはやはり興味がないというかまだまだ理解が浅いのでTaPL読むべきだな)</p>
-
 
   </div>
 

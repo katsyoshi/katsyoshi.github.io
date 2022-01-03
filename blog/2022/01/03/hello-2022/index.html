@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>冬やすみ | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="冬やすみ" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。 ひとつは xremap の設定ともうひとつは CO2-mini から CO2 を見える ようにした。" />
+<meta property="og:description" content="冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。 ひとつは xremap の設定ともうひとつは CO2-mini から CO2 を見える ようにした。" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-01-03T23:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="冬やすみ" />
+<script type="application/ld+json">
+{"url":"https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/","headline":"冬やすみ","dateModified":"2022-01-03T23:59:59+09:00","datePublished":"2022-01-03T23:59:59+09:00","@type":"BlogPosting","description":"冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。 ひとつは xremap の設定ともうひとつは CO2-mini から CO2 を見える ようにした。","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49549546-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+</head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">冬やすみ</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-01-03T23:59:59+09:00" itemprop="datePublished">Jan 3, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。
+ひとつは <a href="/blog/2021/12/26/xremap/">xremap</a> の設定ともうひとつは <a href="/blog/2021/12/30/custom-co2mini-co2-sensor/">CO2-mini から CO<sub>2</sub> を見える</a> ようにした。</p>
+
+<p>今回は、 <a href="https://mackerel.io"><strong>mackerel</strong></a> で見えるようになった <strong>CO<sub>2</sub></strong> の値を <strong>Slack</strong> へ定期的に投げるようにします。今回も <a href="https://www.rust-lang.org"><strong>Rust</strong></a> を利用しています。</p>
+
+<h2 id="準備">準備</h2>
+
+<p>準備として、 <strong>mackerel</strong> <sup id="fnref:mackerel-token" role="doc-noteref"><a href="#fn:mackerel-token" class="footnote" rel="footnote">1</a></sup> と <strong>Slack</strong> <sup id="fnref:slack-token" role="doc-noteref"><a href="#fn:slack-token" class="footnote" rel="footnote">2</a></sup>
+両アプリケーションの投稿 API 用 Token をそれぞれ用意します。
+各公式ページにあるように生成、取得するだけでよいです。</p>
+
+<p><strong>mackerel</strong> 側は <a href="https://mackerel.io/ja/api-docs/entry/host-metrics#get">ホストメトリック API</a> を利用します。
+<strong>Slack</strong> 側は <a href="https://api.slack.com/methods/chat.postMessage">chat.postMessage API</a> を利用します。
+各 API に対して取得した API Token を用いて <code class="language-plaintext highlighter-rouge">curl</code> で確認しておきます。</p>
+
+<h2 id="実装">実装</h2>
+
+<p>今回は対話式の <strong>bot</strong> ではないので、 <a href="https://api.slack.com/rtm"><strong>RTM</strong></a> を利用せずに、<strong>HTTP</strong> クライアントだけで構成しています<sup id="fnref:slack-rs" role="doc-noteref"><a href="#fn:slack-rs" class="footnote" rel="footnote">3</a></sup>。
+<strong>Rust</strong> の <strong>HTTP</strong> クライアントとして <a href="https://github.com/hyperium/hyper"><strong>hyper</strong></a><sup id="fnref:hyper-warning" role="doc-noteref"><a href="#fn:hyper-warning" class="footnote" rel="footnote">4</a></sup> を利用します。
+<strong>TLS</strong> は <a href="https://github.com/hyperium/hyper-tls"><strong>hyper_tls</strong></a> を利用しています。</p>
+
+<p>実装とは言っても対象の <strong>mackerel</strong> の APIを叩き値を取得して、
+その値を元に <strong>Slack</strong> へポストするだけです。</p>
+
+<p><strong>mackerel</strong> での値取得時に気をつける点としては、<strong>ホストメトリック API</strong> では <code class="language-plaintext highlighter-rouge">host名</code> ではなく、
+<code class="language-plaintext highlighter-rouge">host id</code> がパラメーターとなっていますので注意が必要です。
+まずレスポンスを入れる構造体を定義します。</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">#[derive(Deserialize)]</span>
+<span class="k">pub</span> <span class="k">struct</span> <span class="n">Metric</span> <span class="p">{</span>
+    <span class="k">pub</span> <span class="n">time</span><span class="p">:</span> <span class="nb">i64</span><span class="p">,</span>
+    <span class="k">pub</span> <span class="n">value</span><span class="p">:</span> <span class="nb">i16</span><span class="p">,</span> <span class="c">// 今回は co2 の値なので i16 としている</span>
+<span class="p">}</span>
+
+<span class="nd">#[derive(Deserialize)]</span>
+<span class="k">pub</span> <span class="k">struct</span> <span class="n">ResponseMetrics</span> <span class="p">{</span>
+    <span class="k">pub</span> <span class="n">metrics</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Metric</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>つぎに以下のようにしてリクエストを組みたてて、値を取得しています。</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">https</span> <span class="o">=</span> <span class="nn">HttpsConnector</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+<span class="k">let</span> <span class="n">req</span> <span class="o">=</span> <span class="nn">hyper</span><span class="p">::</span><span class="nn">Request</span><span class="p">::</span><span class="nf">builder</span><span class="p">()</span>
+    <span class="nf">.method</span><span class="p">(</span><span class="nn">hyper</span><span class="p">::</span><span class="nn">Method</span><span class="p">::</span><span class="n">GET</span><span class="p">)</span>
+    <span class="nf">.uri</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="nf">.header</span><span class="p">(</span><span class="s">"X-Api-Key"</span><span class="p">,</span> <span class="n">api_key</span><span class="p">)</span>
+    <span class="nf">.body</span><span class="p">(</span><span class="nn">hyper</span><span class="p">::</span><span class="nn">Body</span><span class="p">::</span><span class="nf">empty</span><span class="p">())</span><span class="o">?</span><span class="p">;</span>
+<span class="c">// https として request する</span>
+<span class="k">let</span> <span class="n">client</span> <span class="o">=</span> <span class="nn">hyper</span><span class="p">::</span><span class="nn">Client</span><span class="p">::</span><span class="nf">builder</span><span class="p">()</span><span class="py">.build</span><span class="p">::</span><span class="o">&lt;</span><span class="mi">_</span><span class="p">,</span> <span class="nn">hyper</span><span class="p">::</span><span class="n">Body</span><span class="o">&gt;</span><span class="p">(</span><span class="n">https</span><span class="p">);</span>
+<span class="k">let</span> <span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.request</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="k">.await</span><span class="o">?</span><span class="p">;</span>
+<span class="k">let</span> <span class="n">body</span> <span class="o">=</span> <span class="nn">hyper</span><span class="p">::</span><span class="nn">body</span><span class="p">::</span><span class="nf">aggregate</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="k">.await</span><span class="o">?</span><span class="p">;</span>
+<span class="k">let</span> <span class="n">json</span><span class="p">:</span> <span class="n">ResponseMetrics</span> <span class="o">=</span> <span class="nn">serde_json</span><span class="p">::</span><span class="nf">from_reader</span><span class="p">(</span><span class="n">body</span><span class="nf">.reader</span><span class="p">())</span><span class="o">?</span><span class="p">;</span>
+<span class="k">let</span> <span class="n">metrics</span> <span class="o">=</span> <span class="n">json</span><span class="py">.metrics</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>値を取得したら、今度は同じように <strong>Slack</strong> の方も構造体を定義します。</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// リクエスト用構造体</span>
+<span class="nd">#[derive(Serialize)]</span>
+<span class="k">pub</span> <span class="k">struct</span> <span class="n">SlackMessage</span> <span class="p">{</span>
+    <span class="k">pub</span> <span class="n">channel</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="k">pub</span> <span class="n">sub_type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="k">pub</span> <span class="n">text</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="k">pub</span> <span class="n">username</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="k">pub</span> <span class="n">as_user</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="c">// レスポンス用構造体</span>
+<span class="nd">#[derive(Deserialize)]</span>
+<span class="k">pub</span> <span class="k">struct</span> <span class="n">PostMessage</span> <span class="p">{</span>
+    <span class="nd">#[allow(unused)]</span>
+    <span class="n">channel</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>リクエストを組みたてて、POSTします。
+見てわかると思いますが、ほとんど <strong>mackerel</strong> と変わらないです。</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// リクエスト body を json に変換</span>
+<span class="k">let</span> <span class="n">json</span> <span class="o">=</span> <span class="nn">serde_json</span><span class="p">::</span><span class="nf">to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="n">SlackMessage</span> <span class="p">{</span>
+    <span class="n">channel</span><span class="p">:</span> <span class="s">"channel"</span><span class="nf">.to_string</span><span class="p">(),</span>
+    <span class="n">sub_type</span><span class="p">:</span> <span class="s">"bot_message"</span><span class="nf">.to_string</span><span class="p">(),</span>
+    <span class="n">text</span><span class="p">:</span> <span class="s">"message"</span><span class="nf">.to_string</span><span class="p">(),</span>
+    <span class="n">username</span><span class="p">:</span> <span class="s">"botname"</span><span class="nf">.to_string</span><span class="p">(),</span>
+    <span class="n">as_user</span><span class="p">:</span> <span class="k">true</span><span class="p">,</span>
+<span class="p">})</span><span class="o">?</span><span class="p">;</span>
+
+<span class="k">let</span> <span class="n">https</span> <span class="o">=</span> <span class="nn">hyper_tls</span><span class="p">::</span><span class="nn">HttpsConnector</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+<span class="k">let</span> <span class="n">req</span> <span class="o">=</span> <span class="nn">hyper</span><span class="p">::</span><span class="nn">Request</span><span class="p">::</span><span class="nf">builder</span><span class="p">()</span>
+    <span class="nf">.method</span><span class="p">(</span><span class="nn">hyper</span><span class="p">::</span><span class="nn">Method</span><span class="p">::</span><span class="n">POST</span><span class="p">)</span>
+    <span class="nf">.uri</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="nf">.header</span><span class="p">(</span><span class="s">"Content-Type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
+    <span class="nf">.header</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="nd">format!</span><span class="p">(</span><span class="s">"Bearer {}"</span><span class="p">,</span> <span class="nf">get_env</span><span class="p">(</span><span class="s">"SLACK_API_KEY"</span><span class="p">)))</span>
+    <span class="nf">.body</span><span class="p">(</span><span class="nn">hyper</span><span class="p">::</span><span class="nn">Body</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="n">json</span><span class="p">))</span><span class="o">?</span><span class="p">;</span>
+
+<span class="k">let</span> <span class="n">client</span> <span class="o">=</span> <span class="nn">hyper</span><span class="p">::</span><span class="nn">Client</span><span class="p">::</span><span class="nf">builder</span><span class="p">()</span><span class="py">.build</span><span class="p">::</span><span class="o">&lt;</span><span class="mi">_</span><span class="p">,</span> <span class="nn">hyper</span><span class="p">::</span><span class="n">Body</span><span class="o">&gt;</span><span class="p">(</span><span class="n">https</span><span class="p">);</span>
+<span class="k">let</span> <span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.request</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="k">.await</span><span class="o">?</span><span class="p">;</span>
+<span class="k">let</span> <span class="n">body</span> <span class="o">=</span> <span class="nn">hyper</span><span class="p">::</span><span class="nn">body</span><span class="p">::</span><span class="nf">aggregate</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="k">.await</span><span class="o">?</span><span class="p">;</span>
+<span class="k">let</span> <span class="mi">_</span><span class="n">json</span><span class="p">:</span> <span class="n">PostMessage</span> <span class="o">=</span> <span class="nn">serde_json</span><span class="p">::</span><span class="nf">from_reader</span><span class="p">(</span><span class="n">body</span><span class="nf">.reader</span><span class="p">())</span><span class="o">?</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>ポストするメッセージを作る際に2つのことをしています。
+まずは <code class="language-plaintext highlighter-rouge">time</code> の <strong>UNIX EPOCH TIME</strong> からローカルの時間を表示するようにしています。
+それと <strong>CO<sub>2</sub></strong> の値に依って絵文字を追加するかどうかを入れています。 -1 とか予定していない値が入ってきた場合は <code class="language-plaintext highlighter-rouge">panic!</code> するようにしています。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">chrono</span><span class="p">::</span><span class="n">Local</span><span class="nf">.timestamp</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+<span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="k">match</span> <span class="n">value</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="o">..=</span><span class="mi">700</span> <span class="k">=&gt;</span> <span class="s">":large_green_circle:"</span><span class="p">,</span>
+    <span class="mi">701</span><span class="o">..=</span><span class="mi">1000</span> <span class="k">=&gt;</span> <span class="s">":large_yellow_circle:"</span><span class="p">,</span>
+    <span class="mi">1001</span><span class="o">..</span> <span class="k">=&gt;</span> <span class="s">":red_circle:"</span><span class="p">,</span> <span class="c">// なんで slack は :large_red_circle: を用意していないんだろうか</span>
+    <span class="mi">_</span> <span class="k">=&gt;</span> <span class="nd">panic!</span><span class="p">(</span><span class="s">"unexpected number!!"</span><span class="p">),</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>こうやってポストされたメッセージは以下のようになります。
+<img src="/images/screenshot/posted-slack-message.png" alt="" />
+絵文字つきでポストされましたね。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p><strong>Rust</strong> で <strong>bot</strong> を作ってみました。
+と言ってもただの <strong>HTTP クライアント</strong> な <strong>bot</strong> なだけですけど。
+一旦 <strong>Slack</strong> でも見えるようになったので今度は <a href="https://nature.global"><strong>Nature Remo</strong></a> と連携して気温や湿度での自動化ができたらいいな。</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:mackerel-token" role="doc-endnote">
+      <p>https://mackerel.io/ja/api-docs/ <a href="#fnref:mackerel-token" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:slack-token" role="doc-endnote">
+      <p>https://slack.com/intl/ja-jp/help/articles/215770388-API-%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E7%94%9F%E6%88%90%E3%81%A8%E5%86%8D%E7%94%9F%E6%88%90 <a href="#fnref:slack-token" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:slack-rs" role="doc-endnote">
+      <p><a href="https://github.com/slack-rs/slack-rs">slack-rs</a> という便利ライブラリがあるのですが、ちょっと触ってみたこれは必要なんだっけ？となってやめました。 <a href="#fnref:slack-rs" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:hyper-warning" role="doc-endnote">
+      <p><a href="https://github.com/hyperium/hyper#low-level">公式の README</a> にあるようにこの場合は <a href="https://github.com/seanmonstar/reqwest"><strong>reqwest</strong></a> を利用するほうがよかったかもしれない。<strong>TLS</strong> は直接 <strong>hyper</strong> が対応していなかったりしてすこし面倒です。 <a href="#fnref:hyper-warning" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/blog/2022/01/03/hello-2022/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
