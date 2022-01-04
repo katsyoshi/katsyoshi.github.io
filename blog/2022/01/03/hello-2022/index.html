@@ -152,9 +152,10 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <p>ポストするメッセージを作る際に2つのことをしています。
 まずは <code class="language-plaintext highlighter-rouge">time</code> の <strong>UNIX EPOCH TIME</strong> からローカルの時間を表示するようにしています。
-それと <strong>CO<sub>2</sub></strong> の値に依って絵文字を追加するかどうかを入れています。 -1 とか予定していない値が入ってきた場合は <code class="language-plaintext highlighter-rouge">panic!</code> するようにしています。</p>
+それと <strong>CO<sub>2</sub></strong> の値に依って絵文字を追加するかどうかを入れています。 <code class="language-plaintext highlighter-rouge">-1</code> とか予定していない値が入ってきた場合は <code class="language-plaintext highlighter-rouge">panic!</code> するようにしています。</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">chrono</span><span class="p">::</span><span class="n">Local</span><span class="nf">.timestamp</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// chrono を利用して unix time からローカルの文字列へ変換</span>
+<span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">chrono</span><span class="p">::</span><span class="n">Local</span><span class="nf">.timestamp</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
 <span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="k">match</span> <span class="n">value</span> <span class="p">{</span>
     <span class="mi">0</span><span class="o">..=</span><span class="mi">700</span> <span class="k">=&gt;</span> <span class="s">":large_green_circle:"</span><span class="p">,</span>
     <span class="mi">701</span><span class="o">..=</span><span class="mi">1000</span> <span class="k">=&gt;</span> <span class="s">":large_yellow_circle:"</span><span class="p">,</span>
@@ -163,9 +164,11 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>こうやってポストされたメッセージは以下のようになります。
-<img src="/images/screenshot/posted-slack-message.png" alt="" />
-絵文字つきでポストされましたね。</p>
+<p>こうやってポストされたメッセージは以下のようになります。</p>
+
+<p><img src="/images/screenshot/posted-slack-message.png" alt="" /></p>
+
+<p>絵文字つきでポストされましたね。</p>
 
 <h2 id="まとめ">まとめ</h2>
 

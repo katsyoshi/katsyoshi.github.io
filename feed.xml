@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2022-01-04T13:07:58+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">冬やすみ</title><link href="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/" rel="alternate" type="text/html" title="冬やすみ" /><published>2022-01-03T23:59:59+09:00</published><updated>2022-01-03T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/01/03/hello-2022</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/">&lt;p&gt;冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2022-01-04T13:45:58+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">冬やすみ</title><link href="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/" rel="alternate" type="text/html" title="冬やすみ" /><published>2022-01-03T23:59:59+09:00</published><updated>2022-01-03T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/01/03/hello-2022</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/">&lt;p&gt;冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。
 ひとつは &lt;a href=&quot;/blog/2021/12/26/xremap/&quot;&gt;xremap&lt;/a&gt; の設定ともうひとつは &lt;a href=&quot;/blog/2021/12/30/custom-co2mini-co2-sensor/&quot;&gt;CO2-mini から CO&lt;sub&gt;2&lt;/sub&gt; を見える&lt;/a&gt; ようにした。&lt;/p&gt;
 
 &lt;p&gt;今回は、 &lt;a href=&quot;https://mackerel.io&quot;&gt;&lt;strong&gt;mackerel&lt;/strong&gt;&lt;/a&gt; で見えるようになった &lt;strong&gt;CO&lt;sub&gt;2&lt;/sub&gt;&lt;/strong&gt; の値を &lt;strong&gt;Slack&lt;/strong&gt; へ定期的に投げるようにします。今回も &lt;a href=&quot;https://www.rust-lang.org&quot;&gt;&lt;strong&gt;Rust&lt;/strong&gt;&lt;/a&gt; を利用しています。&lt;/p&gt;
@@ -96,9 +96,10 @@
 
 &lt;p&gt;ポストするメッセージを作る際に2つのことをしています。
 まずは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;time&lt;/code&gt; の &lt;strong&gt;UNIX EPOCH TIME&lt;/strong&gt; からローカルの時間を表示するようにしています。
-それと &lt;strong&gt;CO&lt;sub&gt;2&lt;/sub&gt;&lt;/strong&gt; の値に依って絵文字を追加するかどうかを入れています。 -1 とか予定していない値が入ってきた場合は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;panic!&lt;/code&gt; するようにしています。&lt;/p&gt;
+それと &lt;strong&gt;CO&lt;sub&gt;2&lt;/sub&gt;&lt;/strong&gt; の値に依って絵文字を追加するかどうかを入れています。 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-1&lt;/code&gt; とか予定していない値が入ってきた場合は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;panic!&lt;/code&gt; するようにしています。&lt;/p&gt;
 
-&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;chrono&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;// chrono を利用して unix time からローカルの文字列へ変換&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;chrono&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;700&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;:large_green_circle:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;mi&quot;&gt;701&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;:large_yellow_circle:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -107,9 +108,11 @@
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;こうやってポストされたメッセージは以下のようになります。
-&lt;img src=&quot;/images/screenshot/posted-slack-message.png&quot; alt=&quot;&quot; /&gt;
-絵文字つきでポストされましたね。&lt;/p&gt;
+&lt;p&gt;こうやってポストされたメッセージは以下のようになります。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/screenshot/posted-slack-message.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;絵文字つきでポストされましたね。&lt;/p&gt;
 
 &lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
 
