@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 3" />
 <script type="application/ld+json">
-{"headline":"katsyoshi のめもみたいなの - page 3","url":"https://blog.katsyoshi.org/page/3/","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/3/","headline":"katsyoshi のめもみたいなの - page 3","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -60,6 +60,59 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2018/07/09/hello/">Hello, Itamae from docker!!</a></h1>
+  <p class="author">
+    <span class="date">2018-07-09 22:54:12 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://itamae.kitchen/">Itamae</a> の plugin 書いててそろそろ test 欲しいなあとおもって2年くらいたちましたが、
+ようやく <a href="https://www.docker.com/">Docker</a> 使って test 書きました。</p>
+
+<h3 id="方向性">方向性</h3>
+
+<p>ここでテストを実施するとして何に対しておこなうのかというのを考えましたが、E2Eのテストだけで良いだろうという方向でテストを書くようにしています。
+VMを立てて実行することにはチョット大袈裟だろうということでもっと簡単に、楽にということで <code class="language-plaintext highlighter-rouge">docker</code> を選択しています。</p>
+
+<p>itamae で E2E のテストなのでここでは <a href="https://serverspec.org/">serverspec</a> を利用してテストを行います。
+E2E のテスト準備として <code class="language-plaintext highlighter-rouge">docker</code> 内で最初に目的のレシピを実施し、そのレシピが正しく動作しているかをテストしています。</p>
+
+<h3 id="準備とテスト実施">準備とテスト実施</h3>
+
+<p>準備として以下の <code class="language-plaintext highlighter-rouge">gem</code> を追加しますが、 <a href="https://github.com/swipely/docker-api">docker-api.gem</a> の方はなくてもとくに問題ないです。
+<code class="language-plaintext highlighter-rouge">serverspec</code> の対象バックエンドで <code class="language-plaintext highlighter-rouge">docker</code> が<a href="https://tsub.hatenablog.com/entry/2016/06/25/222508">指定できるようになります</a>が、 <code class="language-plaintext highlighter-rouge">docker</code> 内 (<code class="language-plaintext highlighter-rouge">docker run -t hoge bundle exec serverspec</code> など) で <code class="language-plaintext highlighter-rouge">serverspec</code> を実施すれば実行できますので、好みで追加しましょう。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spec.add_development_dependency "docker-api"
+spec.add_development_dependency "serverspec"
+</code></pre></div></div>
+
+<p>次に <code class="language-plaintext highlighter-rouge">Dockerfile</code> を作成します。ここでは単純に必要な準備を実施、テストしたいディレクトリの追加、 <code class="language-plaintext highlighter-rouge">bundler</code> を利用して <code class="language-plaintext highlighter-rouge">gem</code> のインストールを実施してから、対象のディレクトリで <code class="language-plaintext highlighter-rouge">itamae</code> の <code class="language-plaintext highlighter-rouge">local</code> を指定して対象の <code class="language-plaintext highlighter-rouge">docker</code> にレシピ適用します。そのあと <code class="language-plaintext highlighter-rouge">docker run</code> や <code class="language-plaintext highlighter-rouge">serverspec</code> を実施することでテストをすることが可能となります。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ruby
+RUN echo "gem: --no-rdoc --no-ri" &gt;&gt; /.gemrc
+RUN gem install bundler
+ADD . /app
+WORKDIR /app
+RUN bundle install
+RUN bundle exec itamae local samples/recipe.rb
+CMD bundle exec rake
+</code></pre></div></div>
+
+<h3 id="itamae-plugin-resource-pip"><a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">itamae-plugin-resource-pip</a></h3>
+
+<p><a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">itamae-plugin-resource-pip</a> でできるようになってます。
+とくに <a href="https://docker.io">docker.io</a> とかで公開していませんので、以下に例を</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /path/to/itamae-plugin-resource-pip
+docker build -t katsyoshi/itamae-plugin-resource-pip .
+docker run -t katsyoshi/itamae-plugin-resource-pip bundle exec rake
+</code></pre></div></div>
+
+<h3 id="おわり">おわり</h3>
+
+<p>これやろうと思って調べてたらみつからずに <code class="language-plaintext highlighter-rouge">Dockerfile</code> 書き終えて、<a href="https://travis-ci.org">travis</a> を追加しようとしたときに、<a href="https://twitter.com/sue445">@sue445</a> さんが<a href="https://sue445.hatenablog.com/entry/2018/05/01/115522">やってた</a>のをみつけてしまった。。。</p>
+
+  </div>
 
   <h1><a href="/blog/2018/06/03/rubykaigi2018/">RubyKaigi2018</a></h1>
   <p class="author">
@@ -1292,76 +1345,6 @@ let markup = Regex::new(r"&lt;/*.+?&gt;").unwrap();
 
 <h2 id="おわり">おわり</h2>
 <p>とりあえず2問解いてみたけど、自然言語処理 &amp;&amp; <code class="language-plaintext highlighter-rouge">Rust</code> 難しい。</p>
-
-  </div>
-
-  <h1><a href="/blog/2017/12/30/favorite-beer-house/">今年いったビール屋さん 2017</a></h1>
-  <p class="author">
-    <span class="date">2017-12-30 17:01:14 +0900</span>
-  </p>
-  <div class="content">
-    <p>今年行ってよかったビアバー、ビアパブをまとめてみようとおもいます。</p>
-
-<h2 id="何軒いった">何軒いった?</h2>
-
-<p>まず、今年何軒いったのか確認します。</p>
-
-<ol>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131102/13095482/">浅草ビアホール D’s diner</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1323/A132302/13199539/">Titans</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1310/A131003/13000242/">ブラッセルズ</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1314/A131403/13202319/">アンテナアメリカ</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1310/A131002/13184169/">WIZ CRAFT BEER and FOOD</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131106/13168688/">Bon Fire</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131105/13180065/">谷中ビアホール</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1303/A130301/13130658/">アボットチョイス 渋谷店</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1317/A131709/13195653/">グッド スリープ ベーカー</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1303/A130301/13208803/">Mikkeller Tokyo</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1316/A131603/13197463/">デビルクラフト 五反田店</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1307/A130701/13165318/">BrewDog Roppongi</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1301/A130101/13142917/">Craft Beer Bar iBREW</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131102/13163537/">カンピオンエール</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1301/A130102/13200310/">シェイク シャック 東京国際フォーラム店</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1304/A130403/13142430/">Watering Hole</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1309/A130905/13135158/">ザロイヤルスコッツマン</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1313/A131307/13034571/">Belg Aube</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1324/A132402/13200541/">びあマ &amp; Beer-Ma BAR</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1310/A131004/13056128/">Tail’s Ale House 本郷店</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1310/A131004/13199373/">クラフト ワークス</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1310/A131002/13009331/">地ビールハウス 蔵くら</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1303/A130301/13053765/">BEER DINING The Griffon</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1314/A131402/13194636/">SWANLAKE Pub Edo 田町店</a></li>
-</ol>
-
-<p>24軒、大分いってますね・・・</p>
-
-<h2 id="どこがよかった">どこがよかった?</h2>
-
-<p>だいたいよいですね。Mikkeller, BrewDog, Swanlakeなどの直営店、Watering Hole, 蔵くら, Devil Craftの有名店は説明不要だとおもうんでパスします</p>
-
-<h3 id="特に気に入ったお店">特に気に入ったお店</h3>
-
-<p>北千住のびあマと大塚のTitansがとくによく、
-両店ともボトルビールが充実しています。</p>
-
-<p>びあマのほうはボトルビール選べるお店とタップや角打ちができる複合タイプのお店です。
-近くに<a href="https://www.google.co.jp/search?newwindow=1&amp;client=firefox-b-ab&amp;dcr=0&amp;q=%E8%99%B9%E3%81%AE%E5%BA%83%E5%A0%B4&amp;spell=1&amp;sa=X&amp;ved=0ahUKEwjB4NCmsbHYAhUIUZQKHVycCa8QvS4IRDAA&amp;biw=1918&amp;bih=981&amp;npsic=0&amp;rflfq=1&amp;rlha=0&amp;rllag=35709023,139831431,5842&amp;tbm=lcl&amp;rldimm=12406913573681279321&amp;rldoc=1&amp;tbs=lrf:!2m1!1e2!2m1!1e3!3sIAE,lf:1,lf_ui:1#rlfi=hd:;si:12406913573681279321;mv:!1m3!1d76559.41565753905!2d139.78141775!3d35.6865969!2m3!1f0!2f0!3f0!3m2!1i497!2i567!4f13.1;tbs:lrf:!2m1!1e2!2m1!1e3!3sIAE,lf:1,lf_ui:1">大きな公園</a>があり、ここでビールを買ってわいわいしながら公園で飲むのがよいかんじです。店のなかで飲むのもよいです。</p>
-
-<p>Titans は持ち込みありのお店で、近くに商店街があり、そこに有名なたこ焼き屋の<a href="https://tabelog.com/tokyo/A1323/A132302/13132934/">はち八</a>があるのでここで買ってきて飲むのもいいですし、
-鍋持ち込んで鍋するのもよいですね。</p>
-
-<p>あと、いいかんじの雰囲気で住宅街にある店でGood Sleep Bakerが好きです。
-ここは Tap 数が少ないですが、パンがとてもおいしいです。
-おすすめのメニューとしてはバインミーがとくにおすすめです。</p>
-
-<h3 id="今年行ってない店">今年行ってない店</h3>
-
-<p>意外でポパイ、萬感今年行ってないようでびっくりしてます。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>こうやってみると24軒(重複してるのは数えていない)とほぼ毎週行ってるようで、それはお金がなくなるよね
-今年、広島、兵庫行きましたが、どちらも日本酒しか飲まなかったので来年は、東京(関東)以外でも行こうとおもってます。</p>
 
   </div>
 

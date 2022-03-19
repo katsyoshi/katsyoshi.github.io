@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 10" />
 <script type="application/ld+json">
-{"headline":"katsyoshi のめもみたいなの - page 10","url":"https://blog.katsyoshi.org/page/10/","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/10/","headline":"katsyoshi のめもみたいなの - page 10","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -59,6 +59,38 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2014/06/10/pitfall-in-boot2docker/">docker on OS Xで嵌ったおはなし</a></h1>
+  <p class="author">
+    <span class="date">2014-06-10 19:52:53 +0900</span>
+  </p>
+  <div class="content">
+    <p>MacOS XでDockerを動かしてたら嵌ったのでメモ</p>
+
+<h2 id="docker-on-os-x">Docker on OS X</h2>
+<p>OS XでもDockerが<a href="http://docs.docker.com/installation/mac/">動かせるよう</a>になりました。
+インストールは<a href="http://dev.classmethod.jp/tool/docker/getting-started-docker-on-osx/">ここ</a>とかを参考にしてください。</p>
+
+<h2 id="で嵌ったところ">で嵌ったところ</h2>
+<p>Docker上で動いているアプリケーションとどうしても通信ができない。どうやらDockerとアプリケーションは起動はしてるようなんだが、
+どうしても通信できないということがわかりました。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -p 9199:9199 hogehoge
+$ netstat -a | grep 9199
+</code></pre></div></div>
+
+<p>でも見えない。なんでかなあと思ってたら<a href="https://github.com/dotcloud/docker/issues/4007">こんな</a>ことや<a href="http://k-shogo.github.io/article/2014/02/13/boot2docker-portforward/">こんな</a>ことがわかりました。</p>
+
+<h2 id="解決策">解決策</h2>
+<p>VirtualBoxからboot2docker-vmのポートフォワードを設定すればいいです。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ netstat -a | grep 9199
+tcp4       0      0  localhost.9199         *.*                    LISTEN
+</code></pre></div></div>
+
+<p>ちゃんちゃん。</p>
+
+  </div>
 
   <h1><a href="/blog/2014/06/02/github-cleanup/">今日の夕飯</a></h1>
   <p class="author">

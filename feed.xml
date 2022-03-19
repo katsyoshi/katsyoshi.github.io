@@ -1,4 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2022-01-04T13:45:58+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">冬やすみ</title><link href="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/" rel="alternate" type="text/html" title="冬やすみ" /><published>2022-01-03T23:59:59+09:00</published><updated>2022-01-03T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/01/03/hello-2022</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/">&lt;p&gt;冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2022-03-19T18:03:12+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Hello Wezterm</title><link href="https://blog.katsyoshi.org/blog/2022/03/19/hello-wezterm/" rel="alternate" type="text/html" title="Hello Wezterm" /><published>2022-03-19T00:00:00+09:00</published><updated>2022-03-19T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/03/19/hello-wezterm</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/03/19/hello-wezterm/">&lt;hr /&gt;
+&lt;p&gt;layout: post
+title: “Hello, Wezterm”
+date: 2022-03-19 18:00:00 +0900
+comments: true
+categories: diary
+–&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tmux/tmux&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmux&lt;/code&gt;&lt;/a&gt; + &lt;a href=&quot;https://github.com/tmux/tmux&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Allacritty&lt;/code&gt;&lt;/a&gt; が疲れてきたので&lt;a href=&quot;https://zenn.dev/yutakatay/articles/wezterm-intro&quot;&gt;はてぶで流れてきた&lt;/a&gt; &lt;a href=&quot;https://github.com/wez/wezterm&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wezterm&lt;/code&gt;&lt;/a&gt; が &lt;a href=&quot;https://github.com/saitoha/libsixel&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sixel&lt;/code&gt;&lt;/a&gt; を利用できてよさそうだったので試してみることにした。&lt;/p&gt;
+
+&lt;h2 id=&quot;設定&quot;&gt;設定&lt;/h2&gt;
+
+&lt;p&gt;設定ファイルが &lt;a href=&quot;https://www.lua.org/&quot;&gt;lua&lt;/a&gt; でカスタマイズがいろいろとできるのでまずは色を代えてみます。&lt;/p&gt;
+
+&lt;div class=&quot;language-lua highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wezterm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;wezterm&apos;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;color_scheme&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Dracula&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;プログラミング言語でカスタマイズができるので以下のようにアクティブなタブへの移動のキーバインドのカスタマイズができます。&lt;/p&gt;
+
+&lt;div class=&quot;language-lua highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wezterm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;wezterm&apos;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;move_keys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+   &lt;span class=&quot;nb&quot;&gt;table.insert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;move_keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;tostring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;mods&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;CTRL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;action&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wezterm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ActivateTab&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;color_scheme&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Dracula&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;disable_default_key_bindings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- 初期のキーバインドは利用しない場合&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;move_keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;こんな感じで設定できるので便利です。&lt;/p&gt;
+
+&lt;p&gt;このキーバインドは任意のイベントも設定でき、任意のイベントを利用してアクションを定義できます。以下の例では、Paneを開い監視用のプログラムを開きます。&lt;/p&gt;
+
+&lt;div class=&quot;language-lua highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wezterm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;wezterm&apos;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;wezterm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;open-nvtop-and-ytop&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;win&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pane&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;win&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;perform_action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wezterm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SplitHorizontal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;domain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;CurrentPaneDomain&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;nvtop&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pane&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;win&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;perform_action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wezterm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SplitVertical&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;domain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;CurrentPaneDomain&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ytop&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;-ps&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pane&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;r&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mods&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;CTRL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;action&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wezterm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EmitEvent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;open-nvtop-and-ytop&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;とすると以下のようになります。
+&lt;img src=&quot;/images/screenshot/open-nvtop-and-ytop-in-wezterm.png&quot; width=&quot;100%&quot; /&gt;
+便利!&lt;/p&gt;
+
+&lt;p&gt;こんな便利なものということで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;systemd&lt;/code&gt; でデーモン化しています。&lt;/p&gt;
+
+&lt;div class=&quot;language-toml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[Unit]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;Description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;GUI&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Accellarated&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;terminal&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;Documentation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
+
+&lt;span class=&quot;nn&quot;&gt;[Service]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;forking&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;ExecStart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/usr/local/bin/wezterm-mux-server&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;--daemonize&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;Restart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;on-failure&lt;/span&gt;
+
+&lt;span class=&quot;nn&quot;&gt;[Install]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;WantedBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;default.target&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;で起動しておいています&lt;/p&gt;
+
+&lt;h3 id=&quot;問題点&quot;&gt;問題点&lt;/h3&gt;
+
+&lt;p&gt;と設定ファイルの例書いてみたのですが、とても大きな問題点にブチあたったので書いておきます。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wezterm&lt;/code&gt; には &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wezterm-mux-server&lt;/code&gt; というマルチプレクサ(tmuxのように扱うため)のサーバーモードプログラムがあるのですが、こいつがどうも &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wezterm&lt;/code&gt; とは挙動が異なり、前述した監視用のキーバインドが微妙に異なった挙動となってしまっています。サーバーモードに接続した場合の挙動は以下のようになります。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/screenshot/failed-nvtop-ytop.png&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;1つ目はpaneの位置が期待したとおりになっていない。2つ目は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ytop&lt;/code&gt; が起動していないというので2つ目の方は気にしなければいいのでまあいいかと思っている。1つ目の問題は許容できていないので一旦はこのキーバインドは封印となっています。&lt;/p&gt;
+
+&lt;h1 id=&quot;おわり&quot;&gt;おわり&lt;/h1&gt;
+
+&lt;p&gt;長年利用してた &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmux&lt;/code&gt; を捨てて &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wezterm&lt;/code&gt; を利用しはじめた。
+設定が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lua&lt;/code&gt; で書けるのが体験的にとても良いのでこれからも利用するかなと。
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wezterm&lt;/code&gt; で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sixel&lt;/code&gt; 利用した画像表示ができるようになったのが便利なので「よしっ！」&lt;/p&gt;</content><author><name></name></author><summary type="html">layout: post title: “Hello, Wezterm” date: 2022-03-19 18:00:00 +0900 comments: true categories: diary –</summary></entry><entry><title type="html">冬やすみ</title><link href="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/" rel="alternate" type="text/html" title="冬やすみ" /><published>2022-01-03T23:59:59+09:00</published><updated>2022-01-03T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/01/03/hello-2022</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/">&lt;p&gt;冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。
 ひとつは &lt;a href=&quot;/blog/2021/12/26/xremap/&quot;&gt;xremap&lt;/a&gt; の設定ともうひとつは &lt;a href=&quot;/blog/2021/12/30/custom-co2mini-co2-sensor/&quot;&gt;CO2-mini から CO&lt;sub&gt;2&lt;/sub&gt; を見える&lt;/a&gt; ようにした。&lt;/p&gt;
 
 &lt;p&gt;今回は、 &lt;a href=&quot;https://mackerel.io&quot;&gt;&lt;strong&gt;mackerel&lt;/strong&gt;&lt;/a&gt; で見えるようになった &lt;strong&gt;CO&lt;sub&gt;2&lt;/sub&gt;&lt;/strong&gt; の値を &lt;strong&gt;Slack&lt;/strong&gt; へ定期的に投げるようにします。今回も &lt;a href=&quot;https://www.rust-lang.org&quot;&gt;&lt;strong&gt;Rust&lt;/strong&gt;&lt;/a&gt; を利用しています。&lt;/p&gt;
@@ -639,81 +729,4 @@ Selected keyboards automatically since --device options weren&apos;t specified:
 &lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;今年行ったビールをまとめてみましたが、今年はあまりビールのんでないなーとおもってたら40軒ぐらい行ってた。
-来年は日本酒まとめますね。&lt;/p&gt;</content><author><name></name></author><category term="beer" /><summary type="html">年末になったので今年行ったビール屋さんをまとめてみます。</summary></entry><entry><title type="html">RubyKaigi 2019</title><link href="https://blog.katsyoshi.org/blog/2019/04/27/rubykaigi2019/" rel="alternate" type="text/html" title="RubyKaigi 2019" /><published>2019-04-27T19:53:31+09:00</published><updated>2019-04-27T19:53:31+09:00</updated><id>https://blog.katsyoshi.org/blog/2019/04/27/rubykaigi2019</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2019/04/27/rubykaigi2019/">&lt;p&gt;&lt;a href=&quot;https://rubykagi.org/2019&quot;&gt;RubyKaigi2019&lt;/a&gt; があったので行ってきました。
-&lt;a href=&quot;http://b.hatena.ne.jp/search/text?q=rubykaigi2019&quot;&gt;既に様々な人&lt;/a&gt; が書いていますのでここでは気になった、よかったというセッションについて書きます。
-聴講選択基準としてよく &lt;a href=&quot;https://asakusarb.esa.io&quot;&gt;asakusa.rb&lt;/a&gt; に来ているひとは外すことにしました。&lt;/p&gt;
-
-&lt;h2 id=&quot;0日目&quot;&gt;0日目&lt;/h2&gt;
-
-&lt;p&gt;前日入りしましたのでプレパーティ前に &lt;a href=&quot;https://twitter.com/284km&quot;&gt;秒速さん&lt;/a&gt; と福岡のイカを食べに
-&lt;a href=&quot;https://tabelog.com/fukuoka/A4001/A400104/40015417/&quot;&gt;第三共進丸&lt;/a&gt; へ行ってイカとゴマサバを食べました。&lt;/p&gt;
-
-&lt;p&gt;今回の RubyKaigi では &lt;a href=&quot;https://rubykaigi.org/2019/parties&quot;&gt;複数プレパーティ&lt;/a&gt; があり、 &lt;a href=&quot;https://pepabo.connpass.com/event/124168/&quot;&gt;プレパーティ&lt;/a&gt; は &lt;a href=&quot;https://pepabo.com/&quot;&gt;GMO Pepabo&lt;/a&gt; の &lt;a href=&quot;https://www.ippudo.com/store/nishidori_stand/&quot;&gt;一風堂スタンド&lt;/a&gt; に行きました。
-ここで LT が3件あり、福岡市役所、ペパボ、&lt;a href=&quot;https://twitter.com/yugui&quot;&gt;Yuguiさん&lt;/a&gt; が話してくれました。
-特に福岡市役所の方が直々に来て如何に自治体が本気を出して企業誘致をするか、しているかを話してくれていました。
-Yugui さんの LT は地図の話するということでしたので、地図をどう見せるかの話をしてくれました。&lt;/p&gt;
-
-&lt;h2 id=&quot;1日目&quot;&gt;1日目&lt;/h2&gt;
-&lt;p&gt;初日に見たリストは以下になります。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;matz キーノート&lt;/li&gt;
-  &lt;li&gt;Ruby3 Progress&lt;/li&gt;
-  &lt;li&gt;How to take over a Ruby gem&lt;/li&gt;
-  &lt;li&gt;Determing Ruby Process Counts: Theory and Practice&lt;/li&gt;
-  &lt;li&gt;Compiling Ruby to idimomatic code in static language&lt;/li&gt;
-  &lt;li&gt;Fiber Are the Right Solution&lt;/li&gt;
-  &lt;li&gt;Compacting GC for MRI v2&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;このなかで期待したのが &lt;strong&gt;Compling Ruby to idimomatic code in static language&lt;/strong&gt; でした。
-こちらは基本 Ruby のコードを &lt;a href=&quot;https://nim-lang.org/&quot;&gt;Nim&lt;/a&gt; へ変換するためにやったことをはなししていました。
-&lt;strong&gt;Fiber&lt;/strong&gt; のやつは非同期すると速くなるかもねって感じでおわらせています。
-&lt;a href=&quot;https://github.com/tenderlove&quot;&gt;Aaron&lt;/a&gt; は Aaron だなーとおもいながら聴いていました。&lt;/p&gt;
-
-&lt;p&gt;後で聞いて失敗したなってやつが、 Matz と Ruby3 progress の間にトイレをガマンしてたので走ってトイレに行ってたら、
-福岡県知事が出てきて &lt;strong&gt;RubyKaigi&lt;/strong&gt; めっちゃ楽しみにしてたっていう話をされていたというのを
-聴き逃がしたのがかなりの後悔点です。&lt;/p&gt;
-
-&lt;h2 id=&quot;2日目&quot;&gt;2日目&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;All bugfix are incompatibilities&lt;/li&gt;
-  &lt;li&gt;Pratical mruby/c firmware development with CRuby&lt;/li&gt;
-  &lt;li&gt;RubyData Workshop&lt;/li&gt;
-  &lt;li&gt;A light weight JIT compiler project for CRuby&lt;/li&gt;
-  &lt;li&gt;What is Domain Specific Language?&lt;/li&gt;
-  &lt;li&gt;LT&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;この日一番の衝撃的なできごととしては RubyData Workshop で
-最近 &lt;a href=&quot;https://github.com/sonots/cumo&quot;&gt;&lt;strong&gt;Cumo&lt;/strong&gt;&lt;/a&gt; でも動くようにちょっとずつ対応している、
-&lt;a href=&quot;https://github.com/yoshoku/rumale&quot;&gt;&lt;strong&gt;Rumale&lt;/strong&gt;&lt;/a&gt; の読みが &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ルメール&lt;/code&gt; ではなく &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ラムエール&lt;/code&gt; だったことです(この場で発表された)。&lt;/p&gt;
-
-&lt;h2 id=&quot;3日目&quot;&gt;3日目&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Fuzzing native Ruby code with Kisaten&lt;/li&gt;
-  &lt;li&gt;Running Ruby on Apple II&lt;/li&gt;
-  &lt;li&gt;Performance Optimization Techniques of MessagePack-Ruby&lt;/li&gt;
-  &lt;li&gt;Timezone API&lt;/li&gt;
-  &lt;li&gt;The send-pop optimization&lt;/li&gt;
-  &lt;li&gt;Optimization Techniques Used by the Benchmark Winners&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;この日は &lt;strong&gt;Fuzzing&lt;/strong&gt; という文字列を見かけたのでこちらを聴講。
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gem&lt;/code&gt; をリリースしているみたいで使ってみようかとおもった。&lt;/p&gt;
-
-&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
-
-&lt;p&gt;今回は全セッション聴講しました。このなかで一番すきな発表としては
-Ruby on Apple II のやつがぶっとんでてよかったですね。
-最後のキーノートは疲れながらも聴いていたが、
-ネルネルネルーとおもった瞬間に「お前はなにを言っているんだ？」っていう
-スライドが表れて大変よかった。&lt;/p&gt;
-
-&lt;p&gt;来年の RubyKaigi 2020 はMatz本なのでまた参加しますねこれは。&lt;/p&gt;
-
-&lt;p&gt;今年の RubyKaigi 飯の写真は以下になります。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.amazon.co.jp/photos/share/JMFkdlomW29NdLar2a5tFydS6PjEMlkp5mLDO6dcVjn&quot;&gt;RubyKaigi 2019&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="rubykaigi" /><category term="ruby" /><category term="tech" /><category term="diary" /><summary type="html">RubyKaigi2019 があったので行ってきました。 既に様々な人 が書いていますのでここでは気になった、よかったというセッションについて書きます。 聴講選択基準としてよく asakusa.rb に来ているひとは外すことにしました。</summary></entry></feed>
+来年は日本酒まとめますね。&lt;/p&gt;</content><author><name></name></author><category term="beer" /><summary type="html">年末になったので今年行ったビール屋さんをまとめてみます。</summary></entry></feed>

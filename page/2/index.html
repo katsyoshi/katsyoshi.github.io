@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 2" />
 <script type="application/ld+json">
-{"headline":"katsyoshi のめもみたいなの - page 2","url":"https://blog.katsyoshi.org/page/2/","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/2/","headline":"katsyoshi のめもみたいなの - page 2","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -60,6 +60,92 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2019/04/27/rubykaigi2019/">RubyKaigi 2019</a></h1>
+  <p class="author">
+    <span class="date">2019-04-27 19:53:31 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://rubykagi.org/2019">RubyKaigi2019</a> があったので行ってきました。
+<a href="http://b.hatena.ne.jp/search/text?q=rubykaigi2019">既に様々な人</a> が書いていますのでここでは気になった、よかったというセッションについて書きます。
+聴講選択基準としてよく <a href="https://asakusarb.esa.io">asakusa.rb</a> に来ているひとは外すことにしました。</p>
+
+<h2 id="0日目">0日目</h2>
+
+<p>前日入りしましたのでプレパーティ前に <a href="https://twitter.com/284km">秒速さん</a> と福岡のイカを食べに
+<a href="https://tabelog.com/fukuoka/A4001/A400104/40015417/">第三共進丸</a> へ行ってイカとゴマサバを食べました。</p>
+
+<p>今回の RubyKaigi では <a href="https://rubykaigi.org/2019/parties">複数プレパーティ</a> があり、 <a href="https://pepabo.connpass.com/event/124168/">プレパーティ</a> は <a href="https://pepabo.com/">GMO Pepabo</a> の <a href="https://www.ippudo.com/store/nishidori_stand/">一風堂スタンド</a> に行きました。
+ここで LT が3件あり、福岡市役所、ペパボ、<a href="https://twitter.com/yugui">Yuguiさん</a> が話してくれました。
+特に福岡市役所の方が直々に来て如何に自治体が本気を出して企業誘致をするか、しているかを話してくれていました。
+Yugui さんの LT は地図の話するということでしたので、地図をどう見せるかの話をしてくれました。</p>
+
+<h2 id="1日目">1日目</h2>
+<p>初日に見たリストは以下になります。</p>
+
+<ol>
+  <li>matz キーノート</li>
+  <li>Ruby3 Progress</li>
+  <li>How to take over a Ruby gem</li>
+  <li>Determing Ruby Process Counts: Theory and Practice</li>
+  <li>Compiling Ruby to idimomatic code in static language</li>
+  <li>Fiber Are the Right Solution</li>
+  <li>Compacting GC for MRI v2</li>
+</ol>
+
+<p>このなかで期待したのが <strong>Compling Ruby to idimomatic code in static language</strong> でした。
+こちらは基本 Ruby のコードを <a href="https://nim-lang.org/">Nim</a> へ変換するためにやったことをはなししていました。
+<strong>Fiber</strong> のやつは非同期すると速くなるかもねって感じでおわらせています。
+<a href="https://github.com/tenderlove">Aaron</a> は Aaron だなーとおもいながら聴いていました。</p>
+
+<p>後で聞いて失敗したなってやつが、 Matz と Ruby3 progress の間にトイレをガマンしてたので走ってトイレに行ってたら、
+福岡県知事が出てきて <strong>RubyKaigi</strong> めっちゃ楽しみにしてたっていう話をされていたというのを
+聴き逃がしたのがかなりの後悔点です。</p>
+
+<h2 id="2日目">2日目</h2>
+
+<ol>
+  <li>All bugfix are incompatibilities</li>
+  <li>Pratical mruby/c firmware development with CRuby</li>
+  <li>RubyData Workshop</li>
+  <li>A light weight JIT compiler project for CRuby</li>
+  <li>What is Domain Specific Language?</li>
+  <li>LT</li>
+</ol>
+
+<p>この日一番の衝撃的なできごととしては RubyData Workshop で
+最近 <a href="https://github.com/sonots/cumo"><strong>Cumo</strong></a> でも動くようにちょっとずつ対応している、
+<a href="https://github.com/yoshoku/rumale"><strong>Rumale</strong></a> の読みが <code class="language-plaintext highlighter-rouge">ルメール</code> ではなく <code class="language-plaintext highlighter-rouge">ラムエール</code> だったことです(この場で発表された)。</p>
+
+<h2 id="3日目">3日目</h2>
+
+<ol>
+  <li>Fuzzing native Ruby code with Kisaten</li>
+  <li>Running Ruby on Apple II</li>
+  <li>Performance Optimization Techniques of MessagePack-Ruby</li>
+  <li>Timezone API</li>
+  <li>The send-pop optimization</li>
+  <li>Optimization Techniques Used by the Benchmark Winners</li>
+</ol>
+
+<p>この日は <strong>Fuzzing</strong> という文字列を見かけたのでこちらを聴講。
+<code class="language-plaintext highlighter-rouge">Gem</code> をリリースしているみたいで使ってみようかとおもった。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>今回は全セッション聴講しました。このなかで一番すきな発表としては
+Ruby on Apple II のやつがぶっとんでてよかったですね。
+最後のキーノートは疲れながらも聴いていたが、
+ネルネルネルーとおもった瞬間に「お前はなにを言っているんだ？」っていう
+スライドが表れて大変よかった。</p>
+
+<p>来年の RubyKaigi 2020 はMatz本なのでまた参加しますねこれは。</p>
+
+<p>今年の RubyKaigi 飯の写真は以下になります。</p>
+
+<p><a href="https://www.amazon.co.jp/photos/share/JMFkdlomW29NdLar2a5tFydS6PjEMlkp5mLDO6dcVjn">RubyKaigi 2019</a></p>
+
+  </div>
 
   <h1><a href="/blog/2019/02/11/endgame-keyboard-dot-dot-dot/">endgame keyboard...</a></h1>
   <p class="author">
@@ -606,59 +692,6 @@ sudo apt-get install wireguard
 <h2 id="おわり">おわり</h2>
 
 <p>あとは、再起動時に自動で接続するように変更する必要がありそうですがつながったし、おそいのでこれでおわり</p>
-
-  </div>
-
-  <h1><a href="/blog/2018/07/09/hello/">Hello, Itamae from docker!!</a></h1>
-  <p class="author">
-    <span class="date">2018-07-09 22:54:12 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="https://itamae.kitchen/">Itamae</a> の plugin 書いててそろそろ test 欲しいなあとおもって2年くらいたちましたが、
-ようやく <a href="https://www.docker.com/">Docker</a> 使って test 書きました。</p>
-
-<h3 id="方向性">方向性</h3>
-
-<p>ここでテストを実施するとして何に対しておこなうのかというのを考えましたが、E2Eのテストだけで良いだろうという方向でテストを書くようにしています。
-VMを立てて実行することにはチョット大袈裟だろうということでもっと簡単に、楽にということで <code class="language-plaintext highlighter-rouge">docker</code> を選択しています。</p>
-
-<p>itamae で E2E のテストなのでここでは <a href="https://serverspec.org/">serverspec</a> を利用してテストを行います。
-E2E のテスト準備として <code class="language-plaintext highlighter-rouge">docker</code> 内で最初に目的のレシピを実施し、そのレシピが正しく動作しているかをテストしています。</p>
-
-<h3 id="準備とテスト実施">準備とテスト実施</h3>
-
-<p>準備として以下の <code class="language-plaintext highlighter-rouge">gem</code> を追加しますが、 <a href="https://github.com/swipely/docker-api">docker-api.gem</a> の方はなくてもとくに問題ないです。
-<code class="language-plaintext highlighter-rouge">serverspec</code> の対象バックエンドで <code class="language-plaintext highlighter-rouge">docker</code> が<a href="https://tsub.hatenablog.com/entry/2016/06/25/222508">指定できるようになります</a>が、 <code class="language-plaintext highlighter-rouge">docker</code> 内 (<code class="language-plaintext highlighter-rouge">docker run -t hoge bundle exec serverspec</code> など) で <code class="language-plaintext highlighter-rouge">serverspec</code> を実施すれば実行できますので、好みで追加しましょう。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spec.add_development_dependency "docker-api"
-spec.add_development_dependency "serverspec"
-</code></pre></div></div>
-
-<p>次に <code class="language-plaintext highlighter-rouge">Dockerfile</code> を作成します。ここでは単純に必要な準備を実施、テストしたいディレクトリの追加、 <code class="language-plaintext highlighter-rouge">bundler</code> を利用して <code class="language-plaintext highlighter-rouge">gem</code> のインストールを実施してから、対象のディレクトリで <code class="language-plaintext highlighter-rouge">itamae</code> の <code class="language-plaintext highlighter-rouge">local</code> を指定して対象の <code class="language-plaintext highlighter-rouge">docker</code> にレシピ適用します。そのあと <code class="language-plaintext highlighter-rouge">docker run</code> や <code class="language-plaintext highlighter-rouge">serverspec</code> を実施することでテストをすることが可能となります。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ruby
-RUN echo "gem: --no-rdoc --no-ri" &gt;&gt; /.gemrc
-RUN gem install bundler
-ADD . /app
-WORKDIR /app
-RUN bundle install
-RUN bundle exec itamae local samples/recipe.rb
-CMD bundle exec rake
-</code></pre></div></div>
-
-<h3 id="itamae-plugin-resource-pip"><a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">itamae-plugin-resource-pip</a></h3>
-
-<p><a href="https://github.com/katsyoshi/itamae-plugin-resource-pip">itamae-plugin-resource-pip</a> でできるようになってます。
-とくに <a href="https://docker.io">docker.io</a> とかで公開していませんので、以下に例を</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /path/to/itamae-plugin-resource-pip
-docker build -t katsyoshi/itamae-plugin-resource-pip .
-docker run -t katsyoshi/itamae-plugin-resource-pip bundle exec rake
-</code></pre></div></div>
-
-<h3 id="おわり">おわり</h3>
-
-<p>これやろうと思って調べてたらみつからずに <code class="language-plaintext highlighter-rouge">Dockerfile</code> 書き終えて、<a href="https://travis-ci.org">travis</a> を追加しようとしたときに、<a href="https://twitter.com/sue445">@sue445</a> さんが<a href="https://sue445.hatenablog.com/entry/2018/05/01/115522">やってた</a>のをみつけてしまった。。。</p>
 
   </div>
 
