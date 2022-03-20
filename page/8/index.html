@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 8" />
 <script type="application/ld+json">
-{"headline":"katsyoshi のめもみたいなの - page 8","url":"https://blog.katsyoshi.org/page/8/","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/8/","headline":"katsyoshi のめもみたいなの - page 8","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -60,6 +60,40 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2015/02/24/portage2git/">emerge --syncをgitにかえたはなし</a></h1>
+  <p class="author">
+    <span class="date">2015-02-24 00:13:18 +0900</span>
+  </p>
+  <div class="content">
+    <p>portageはデフォルトだと <code class="language-plaintext highlighter-rouge">rsync</code> を利用しての更新をしているので、
+<code class="language-plaintext highlighter-rouge">git</code> を用いた方法に変更します。</p>
+
+<h2 id="準備">準備</h2>
+
+<p><code class="language-plaintext highlighter-rouge">portage</code> を <code class="language-plaintext highlighter-rouge">2.2.17</code> に変更し、USEフラグとして <code class="language-plaintext highlighter-rouge">git</code> をつかいます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># USE="git ${USE}" emerge -av \=portage-2.2.17
+</code></pre></div></div>
+
+<p>つぎに、Gitのリポジトリを見に行くように<a href="http://qiita.com/wjn/items/a3b71059211711501e35">設定</a>します。</p>
+
+<p>と設定してあとはいつもどおり <code class="language-plaintext highlighter-rouge">sudo eix-sync</code> させるだけで大丈夫です。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>基本的にはリンク先だけ見てればいけると思います。</p>
+
+<p>引越ししてWiMAXの電波の入りがわるくなったので鉄製ボウル買おうかとおもってたら2時間ほど<a href="https://ingress.com">徘徊</a>してました。</p>
+
+<h3 id="参考サイト">参考サイト</h3>
+
+<ol>
+  <li>http://qiita.com/wjn/items/a3b71059211711501e35</li>
+  <li>https://wiki.gentoo.org/wiki/Project:Portage/Sync</li>
+</ol>
+
+  </div>
 
   <h1><a href="/blog/2015/02/22/mv-sakura-github-dot-io/">blogの引越し</a></h1>
   <p class="author">
@@ -381,53 +415,6 @@ $ tsd query jquery -osa install
 
 <p>そういうことで<a href="http://www.adventar.org/calendars/401">mikutterのAdventCalendar</a>を立てましたので参加してくだされ~</p>
 
-
-  </div>
-
-  <h1><a href="/blog/2014/10/01/pitfall-in-docker/">Dockerではまってます</a></h1>
-  <p class="author">
-    <span class="date">2014-10-01 21:11:04 +0900</span>
-  </p>
-  <div class="content">
-    <p>タイトルのとおりです。
-Gentoo/LinuxでDockerが起動しないのでとりあえずメモ。</p>
-
-<h2 id="インストール">インストール</h2>
-<p>dockerの<a href="https://docs.docker.com/installation/gentoolinux/">Gentooインストールページ</a>を参考に<a href="https://github.com/tianon/docker-overlay">overlay</a>を導入します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo layman -a docker
-$ sudo eix-sync
-$ sudo emerge -av app-emulators/docker
-</code></pre></div></div>
-
-<p>ここでカーネルオプションの警告が出るのでひとつひとつ潰しておきます。</p>
-
-<h2 id="起動">起動</h2>
-<p>インストールおわったら、起動させますが、以下のようなログが出てるので起動できません。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2014/10/01 18:39:17 docker daemon: 1.1.2 d84a070; execdriver: native; graphdriver:
-[6c541422] +job serveapi(unix:///var/run/docker.sock)
-[6c541422] +job initserver()
-[6c541422.initserver()] Creating server
-[6c541422] +job init_networkdriver()
-[6c541422.init_networkdriver()] creating new bridge for docker0
-package not installed
-[6c541422] -job init_networkdriver() = ERR (1)
-package not installed
-[6c541422] -job initserver() = ERR (1)
-2014/10/01 18:39:17 package not installed
-</code></pre></div></div>
-
-<p>このときは <code class="language-plaintext highlighter-rouge">bridge-utils</code> をインストールすればいいのかなと思ってたら、インストールしても解決できないです。</p>
-
-<h2 id="おわり">おわり</h2>
-<p>どなたか助けてくだされ〜</p>
-
-<h2 id="追記">追記</h2>
-
-<p>再構築したカーネルをインストールしてなかったというオチでした。</p>
-
-<p>ちゃんちゃん</p>
 
   </div>
 

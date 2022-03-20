@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 5" />
 <script type="application/ld+json">
-{"headline":"katsyoshi のめもみたいなの - page 5","url":"https://blog.katsyoshi.org/page/5/","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/5/","headline":"katsyoshi のめもみたいなの - page 5","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -60,6 +60,51 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2017/04/09/use-dnsmasq-for-domestic-network/">raspiでdnsを運用してみはじめた</a></h1>
+  <p class="author">
+    <span class="date">2017-04-09 00:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p>RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
+RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code class="language-plaintext highlighter-rouge">apt install dnsmasq</code> するだけでおわります。</p>
+
+<h2 id="はまったところ">はまったところ</h2>
+
+<p>いつもどおりはまりました。今回は以下の二点</p>
+
+<ul>
+  <li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
+  <li>/etc/hosts ファイルのパーミッションが <code class="language-plaintext highlighter-rouge">600</code> になっていたためエラー</li>
+</ul>
+
+<h3 id="etcdnsmasqd-に-hosts-ファイルを置くとエラー">/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
+<p>ログを見ても以下のログしか出ておらず理由の調査に時間がかかった。hosts ファイルは設定ファイルではないため当然といえば当然なのですが…</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts
+</code></pre></div></div>
+
+<p>今、<code class="language-plaintext highlighter-rouge">/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new
+</code></pre></div></div>
+
+<h3 id="etchosts-ファイルのパーミッションが-600-になっていたためエラー">/etc/hosts ファイルのパーミッションが <code class="language-plaintext highlighter-rouge">600</code> になっていたためエラー</h3>
+<p>こちらは上記問題を解決したあと、反映されないのでログを見たときにわかりました。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied
+</code></pre></div></div>
+
+<p>これの原因は <code class="language-plaintext highlighter-rouge">itamae</code> でファイルを送信するときに <code class="language-plaintext highlighter-rouge">mode '644'</code> を指定する必要があったのだが、指定せずに
+送信してしまったため発生。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>おわり</p>
+
+<h3 id="関連リポジトリ">関連リポジトリ</h3>
+<p>https://github.com/katsyoshi/itamae-recipes</p>
+
+  </div>
 
   <h1><a href="/blog/2017/04/01/how-to-install-elixir/">Elixirのインストール方法</a></h1>
   <p class="author">
@@ -429,30 +474,6 @@ Result = PASS
 
 <h2 id="おわり">おわり</h2>
 <p>こんなのに3時間ほど時間を費しましたね。はい。</p>
-
-  </div>
-
-  <h1><a href="/blog/2016/11/28/hello/">あったらしーPCかったよー</a></h1>
-  <p class="author">
-    <span class="date">2016-11-28 01:14:21 +0900</span>
-  </p>
-  <div class="content">
-    <h2 id="あたらしいpc買いました">あたらしいPC買いました</h2>
-
-<p>先月のおわりに注文し今月頭のOSCあたりに新しいPCを組み立てました。
-先月おわりあたりまではDDR4の32GBメモリーが2万円と安く売っていたので勢いで購入。
-構成は以下のようになっています。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CPU: XeonE5-2620V4 * 2
-MB: X10PE-D16WS
-DISK: INTEL 600 シリーズ 512GB
-MEM: Crucial [Micron製] DDR4 サーバー用メモリー 32GB ECC Registered * 4
-NIC: X540-T2
-GPU: Zotac GeForce GTX 1050
-</code></pre></div></div>
-
-<p>というかんじになっています。
-今回はメモリー4枚しか買っていないので安くなったらあと12枚買いたいとおもってます</p>
 
   </div>
 

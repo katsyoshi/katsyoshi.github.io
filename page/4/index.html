@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 4" />
 <script type="application/ld+json">
-{"headline":"katsyoshi のめもみたいなの - page 4","url":"https://blog.katsyoshi.org/page/4/","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
+{"url":"https://blog.katsyoshi.org/page/4/","headline":"katsyoshi のめもみたいなの - page 4","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -60,6 +60,61 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2018/01/16/happy-new-year-and-new-language/">happy new year and new language</a></h1>
+  <p class="author">
+    <span class="date">2018-01-16 00:32:16 +0900</span>
+  </p>
+  <div class="content">
+    <p>いまさらですが、あけましておめでとうございます。</p>
+
+<h2 id="happy-new-language">happy new language</h2>
+
+<p>年開けから新しくプログラミング言語(Rust)始めました。(ってわけでもない)</p>
+
+<p>雑に <a href="https://doc.rust-lang.org/book/second-edition/">rust book 2nd edition</a> を一通り読み終えたので、
+<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> をやりはじめました。
+とりあえず第1章が終ったので、メモとしてのこします。
+基本的に <code class="language-plaintext highlighter-rouge">Rust</code> (に限らず)でやりたいことがとくにないので
+<a href="http://yamasy1549.hateblo.jp/entry/2017/12/28/222631">ちょうどよさそうな勉強</a> として自然言語処理を選択しています。</p>
+
+<h2 id="躓いたところ">躓いたところ</h2>
+
+<p>躓いていないところがないです。
+まあやっていくうちに以下二つは常に書いておくと楽になるかなと。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// 1文字毎</span>
+<span class="k">fn</span> <span class="nf">chars</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">string</span><span class="nf">.chars</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c">// 1単語毎</span>
+<span class="k">fn</span> <span class="nf">words</span><span class="p">(</span><span class="n">sentence</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">str</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">sentence</span><span class="nf">.split</span><span class="p">(</span><span class="sc">' '</span><span class="p">)</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">str</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="00-文字列の逆順"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec00">00. 文字列の逆順</a></h3>
+<p>これは簡単で(でもなかった)、1文字ずつ分解して<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.rev">反対化</a>したあと <code class="language-plaintext highlighter-rouge">String</code> にします。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">reverse_string</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">string</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.rev</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="01-パタトクカシーー"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec01">01. 「パタトクカシーー」</a></h3>
+<p>これも簡単で、1文字ずつ分解して抜き出します。(絶対違う)</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="s">"パタトクカシーー"</span><span class="nf">.chars</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}{}{}{}"</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+<p>とりあえず2問解いてみたけど、自然言語処理 &amp;&amp; <code class="language-plaintext highlighter-rouge">Rust</code> 難しい。</p>
+
+  </div>
 
   <h1><a href="/blog/2017/12/30/favorite-beer-house/">今年いったビール屋さん 2017</a></h1>
   <p class="author">
@@ -486,51 +541,6 @@ DAZN をみようとおもったきっかけはNBAのカンファレンスファ
 特に気になりません。</p>
 
 <p>肝心の試合内容が現在非常に残念なため試合内の評価はしません。</p>
-
-  </div>
-
-  <h1><a href="/blog/2017/04/09/use-dnsmasq-for-domestic-network/">raspiでdnsを運用してみはじめた</a></h1>
-  <p class="author">
-    <span class="date">2017-04-09 00:00:00 +0900</span>
-  </p>
-  <div class="content">
-    <p>RasPi2 が3台あってつかっていないので DNS として動かすようにしてみた。
-RasPi とはいえ中身は Ubuntu Linux なのでのインストールは <code class="language-plaintext highlighter-rouge">apt install dnsmasq</code> するだけでおわります。</p>
-
-<h2 id="はまったところ">はまったところ</h2>
-
-<p>いつもどおりはまりました。今回は以下の二点</p>
-
-<ul>
-  <li>/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</li>
-  <li>/etc/hosts ファイルのパーミッションが <code class="language-plaintext highlighter-rouge">600</code> になっていたためエラー</li>
-</ul>
-
-<h3 id="etcdnsmasqd-に-hosts-ファイルを置くとエラー">/etc/dnsmasq.d/ に hosts ファイルを置くとエラー</h3>
-<p>ログを見ても以下のログしか出ておらず理由の調査に時間がかかった。hosts ファイルは設定ファイルではないため当然といえば当然なのですが…</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan  1 00:00:08 localhost dnsmasq[673]: bad option at line 1 of /etc/dnsmasq.d/hosts
-</code></pre></div></div>
-
-<p>今、<code class="language-plaintext highlighter-rouge">/etc/defaults/dnsmasq</code> を調べてみるとそうなってました。はい。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new
-</code></pre></div></div>
-
-<h3 id="etchosts-ファイルのパーミッションが-600-になっていたためエラー">/etc/hosts ファイルのパーミッションが <code class="language-plaintext highlighter-rouge">600</code> になっていたためエラー</h3>
-<p>こちらは上記問題を解決したあと、反映されないのでログを見たときにわかりました。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Apr  8 08:57:20 localhost dnsmasq[4733]: failed to load names from /etc/hosts: Permission denied
-</code></pre></div></div>
-
-<p>これの原因は <code class="language-plaintext highlighter-rouge">itamae</code> でファイルを送信するときに <code class="language-plaintext highlighter-rouge">mode '644'</code> を指定する必要があったのだが、指定せずに
-送信してしまったため発生。</p>
-
-<h2 id="おわり">おわり</h2>
-<p>おわり</p>
-
-<h3 id="関連リポジトリ">関連リポジトリ</h3>
-<p>https://github.com/katsyoshi/itamae-recipes</p>
 
   </div>
 
