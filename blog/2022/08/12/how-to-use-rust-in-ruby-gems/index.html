@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Ruby gem で Rust をつかって爆速にしたい!!!!!!11 | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Ruby gem で Rust をつかって爆速にしたい!!!!!!11" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Ruby Gems で Rust が Native として利用可能になった のでとりあえず UUIDv4 を生成してみた。" />
+<meta property="og:description" content="Ruby Gems で Rust が Native として利用可能になった のでとりあえず UUIDv4 を生成してみた。" />
+<link rel="canonical" href="http://localhost:3000/blog/2022/08/12/how-to-use-rust-in-ruby-gems/" />
+<meta property="og:url" content="http://localhost:3000/blog/2022/08/12/how-to-use-rust-in-ruby-gems/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-12T13:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Ruby gem で Rust をつかって爆速にしたい!!!!!!11" />
+<script type="application/ld+json">
+{"description":"Ruby Gems で Rust が Native として利用可能になった のでとりあえず UUIDv4 を生成してみた。","headline":"Ruby gem で Rust をつかって爆速にしたい!!!!!!11","dateModified":"2022-08-12T13:59:59+09:00","datePublished":"2022-08-12T13:59:59+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:3000/blog/2022/08/12/how-to-use-rust-in-ruby-gems/"},"url":"http://localhost:3000/blog/2022/08/12/how-to-use-rust-in-ruby-gems/","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Ruby gem で Rust をつかって爆速にしたい!!!!!!11</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-08-12T13:59:59+09:00" itemprop="datePublished">Aug 12, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="https://rubygems.org">Ruby Gems</a> で <a href="https://www.rust-lang.org">Rust</a> が <a href="https://github.com/rubygems/rubygems/pull/5175">Native として利用可能になった</a> のでとりあえず <a href="https://www.rfc-editor.org/rfc/rfc4122.html"><code class="language-plaintext highlighter-rouge">UUIDv4</code></a> を生成してみた。</p>
+
+<h2 id="準備">準備</h2>
+
+<p>Ruby 側の <code class="language-plaintext highlighter-rouge">gem</code> に Rust を利用する準備として <a href="https://github.com/oxidize-rb/rb-sys"><code class="language-plaintext highlighter-rouge">rb_sys</code></a> と <a href="https://github.com/rake-compiler/rake-compiler"><code class="language-plaintext highlighter-rouge">rake-compiler</code></a> を利用します。この二つの <code class="language-plaintext highlighter-rouge">gem</code> は native compile するためにインストールしておきます。
+Rust 側から Ruby へ関数を公開するために <a href="https://github.com/oxidize-rb/rb-sys"><code class="language-plaintext highlighter-rouge">rb-sys</code></a> と <a href="https://github.com/matsadler/magnus"><code class="language-plaintext highlighter-rouge">mugnus</code></a> を利用します。</p>
+
+<h2 id="gem-install">gem install</h2>
+
+<p>とりあえず <code class="language-plaintext highlighter-rouge">cargo</code> で Rust のパッケージを作って Rust を書いてみます。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> bundle gem rust_uuid <span class="nt">--mit</span> <span class="nt">--ext</span> rust_uuid <span class="c"># --ext を指定してnative build する gem を作成</span>
+<span class="o">&gt;</span> <span class="nb">cd </span>rust_uuid <span class="c"># 作成した gem のディレクトリへ移動</span>
+<span class="o">&gt;</span> <span class="nb">cd </span>ext/rust_uuid <span class="c"># ビルドするディレクトリへ移動</span>
+<span class="o">&gt;</span> cargo init <span class="nb">.</span> <span class="nt">--lib</span> <span class="c"># cargo を初期化</span>
+<span class="o">&gt;</span> <span class="nb">rm</span> <span class="nt">-f</span> <span class="k">*</span>.c <span class="k">*</span>.h <span class="c"># C のファイルが生成されるので削除</span>
+<span class="o">&gt;</span> cargo add rb-sys rb-allocator
+<span class="o">&gt;</span> cargo add magnus <span class="nt">--features</span> rb-sys-interop
+<span class="o">&gt;</span> cargo add uuid <span class="nt">--features</span> v4 <span class="c"># uuid v4 を指定</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ext/rust_uuid/extconf.rb</code> を以下のように編集します。</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -1,5 +1,6 @@</span>
+ # frozen_string_literal: true
+ 
+ require "mkmf"
+<span class="gi">+require "rb_sys/mkmf"
+</span> 
+<span class="gd">-create_makefile("rust_uuid/rust_uuid")
+</span><span class="gi">+create_rust_makefile("rust_uuid/rust_uuid")
+</span></code></pre></div></div>
+
+<p>次に <code class="language-plaintext highlighter-rouge">ext/rust_uuid/src/lib.rs</code> を以下の様に変更します。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">magnus</span><span class="p">::{</span><span class="n">define_module</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">,</span> <span class="n">Error</span><span class="p">};</span>
+<span class="k">use</span> <span class="nn">rb_allocator</span><span class="p">::</span><span class="n">ruby_global_allocator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">uuid</span><span class="p">::</span><span class="n">Uuid</span><span class="p">;</span>
+
+<span class="nd">ruby_global_allocator!</span><span class="p">();</span>
+
+<span class="c">// UUIDv4 を文字列として公開</span>
+<span class="k">fn</span> <span class="nf">v4</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+    <span class="nn">Uuid</span><span class="p">::</span><span class="nf">new_v4</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nd">#[magnus::init]</span>
+<span class="k">fn</span> <span class="nf">init</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="n">Result</span><span class="o">&lt;</span><span class="p">(),</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">module</span> <span class="o">=</span> <span class="nf">define_module</span><span class="p">(</span><span class="s">"RustUUID"</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+    <span class="c">// RustUUID.v4 と利用するようにシングルトンメソッドを定義</span>
+    <span class="n">module</span><span class="nf">.define_singleton_method</span><span class="p">(</span><span class="s">"v4"</span><span class="p">,</span> <span class="nd">function!</span><span class="p">(</span><span class="n">v4</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span><span class="o">?</span><span class="p">;</span>
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>これまでできたら一旦 Rust をコンパイルしましょう。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="nb">cd </span>ext/rust_uuid
+<span class="o">&gt;</span> cargo build
+<span class="o">&gt;</span> git add <span class="nb">.</span>
+<span class="o">&gt;</span> rake build
+.... <span class="c"># install cargo dependencies and packages</span>
+<span class="nb">cp</span>: <span class="s1">'/home/katsyoshi/Program/Ruby/rust_uuid/tmp/x86_64-linux/rust_uuid/3.1.2/target/release/librust_uuid.so'</span> を <span class="nb">stat </span>できません: そのようなファイルやディレクトリはありません
+gmake: <span class="k">***</span> <span class="o">[</span>Makefile:551: foo_bar.so] エラー 1
+rake aborted!
+Command failed with status <span class="o">(</span>2<span class="o">)</span>: <span class="o">[</span>/usr/bin/gmake...]
+
+Tasks: TOP <span class="o">=&gt;</span> build <span class="o">=&gt;</span> compile <span class="o">=&gt;</span> compile:x86_64-linux <span class="o">=&gt;</span> compile:foo_bar:x86_64-linux <span class="o">=&gt;</span> copy:rust_uuid:x86_64-linux:3.1.2 <span class="o">=&gt;</span> tmp/x86_64-linux/rust_uuid/3.1.2/rust_uuid.so
+</code></pre></div></div>
+
+<p>とエラーになります。
+これは <code class="language-plaintext highlighter-rouge">ext/rust_uuid/Cargo.toml</code> の設定が足りていません。そこで以下を追加してみてください。</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[lib]</span>
+<span class="py">crate-type</span> <span class="p">=</span> <span class="nn">["cdylib"]</span>
+</code></pre></div></div>
+
+<p>追加したら <code class="language-plaintext highlighter-rouge">gem</code> をビルド&amp;&amp;インストール&amp;&amp;試してみましょう!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> rake <span class="nb">install</span>
+....
+<span class="o">&gt;</span> ruby <span class="nt">-rrust_uuid</span> <span class="nt">-e</span> <span class="s1">'puts RustUUID.v4'</span>
+2be6f4d2-200b-4d08-9a1a-11fa523b316b
+</code></pre></div></div>
+
+<h2 id="べんちまーく">べんちまーく</h2>
+
+<p>以下、 <code class="language-plaintext highlighter-rouge">SecureRandom.uuid</code> との比較用のベンチマークコードを示します。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"benchmark/ips"</span>
+<span class="nb">require</span> <span class="s2">"securerandom"</span>
+<span class="nb">require</span> <span class="s2">"rust_uuid"</span>
+
+<span class="no">Benchmark</span><span class="p">.</span><span class="nf">ips</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+  <span class="n">x</span><span class="p">.</span><span class="nf">report</span><span class="p">(</span><span class="s2">"standard"</span><span class="p">)</span> <span class="p">{</span> <span class="no">SecureRandom</span><span class="p">.</span><span class="nf">uuid</span> <span class="p">}</span>
+  <span class="n">x</span><span class="p">.</span><span class="nf">report</span><span class="p">(</span><span class="s2">"rust lib"</span><span class="p">)</span> <span class="p">{</span> <span class="no">RustUUID</span><span class="p">.</span><span class="nf">v4</span> <span class="p">}</span>
+  <span class="n">x</span><span class="p">.</span><span class="nf">compare!</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h3 id="結果発表">結果発表〜</h3>
+
+<p>Rust を利用することでだいたい 5 倍ほど速くなっています。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>ruby bentimark.rb
+<span class="go">Warming up --------------------------------------
+            standard    36.437k i/100ms
+            rust lib   177.585k i/100ms
+Calculating -------------------------------------
+            standard    365.407k (± 1.4%) i/s -      1.858M in   5.086491s
+            rust lib      1.793M (± 1.8%) i/s -      9.057M in   5.053179s
+
+Comparison:
+            rust lib:  1792925.9 i/s
+            standard:   365407.3 i/s - 4.91x  (± 0.00) slower
+
+ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
+</span></code></pre></div></div>
+
+<p>TOO HAYAI</p>
+
+<h2 id="まとめ">まとめ</h2>
+<p>簡単に Rust を利用して速くしてみました。
+思った以上に速くなっていたので重い処理をする場合に <code class="language-plaintext highlighter-rouge">C</code> や <code class="language-plaintext highlighter-rouge">C++</code> 以外でも簡単に利用できるようになって
+選択肢が増えたのはよいことでした。</p>
+
+<p>実はこの <code class="language-plaintext highlighter-rouge">uuid</code> crate の features に <code class="language-plaintext highlighter-rouge">fast-rng</code> を追加すると 10 倍速くなるんですが、 ruby 側の終了時に <code class="language-plaintext highlighter-rouge">SEGV</code> してしまうので載せていないです。 <code class="language-plaintext highlighter-rouge">SEGV</code> しないように原因を調査などはまた今度。</p>
+
+<h3 id="リポジトリ">リポジトリ</h3>
+<p>https://github.com/katsyoshi/rust_uuid</p>
+
+  </div><a class="u-url" href="/blog/2022/08/12/how-to-use-rust-in-ruby-gems/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

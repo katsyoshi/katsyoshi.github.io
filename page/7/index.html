@@ -9,34 +9,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/7/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/7/" />
+<link rel="canonical" href="http://localhost:3000/page/7/" />
+<meta property="og:url" content="http://localhost:3000/page/7/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/6/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/8/" />
+<link rel="prev" href="http://localhost:3000/page/6/" />
+<link rel="next" href="http://localhost:3000/page/8/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 7" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/7/","headline":"katsyoshi のめもみたいなの - page 7","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
+{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 7","url":"http://localhost:3000/page/7/","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
-if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-49549546-1', 'auto');
-  ga('send', 'pageview');
-}
-</script>
-  
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-</head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -60,6 +43,38 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2015/05/15/screencast-use-gif/">すくりーんきゃすと</a></h1>
+  <p class="author">
+    <span class="date">2015-05-15 23:47:14 +0900</span>
+  </p>
+  <div class="content">
+    <p>LinuxでScreenCast用の環境を整えてみた。</p>
+
+<h2 id="必要パッケージ">必要パッケージ</h2>
+
+<ul>
+  <li>ffmpeg</li>
+  <li>gtk-recordMyDesktop</li>
+</ul>
+
+<h2 id="使いかた">使いかた</h2>
+
+<p><code class="language-plaintext highlighter-rouge">gtk-recordMyDesktop</code> でデスクトップをキャプチャする。
+その後は、 <code class="language-plaintext highlighter-rouge">ffmpeg</code> を使って好きな動画形式に変換します。
+ここでは、gif画像に変更しています。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ffmpeg -i ~/screencast.ovg img/screencast.gif
+</code></pre></div></div>
+
+<p>-&gt; <img src="/images/screenshot/gtk-recordMyDesktop.gif =512x" alt="" /> &lt;-</p>
+
+<h3 id="参考サイト">参考サイト</h3>
+<ol>
+  <li>http://d.hatena.ne.jp/over80/20080802/1217693705</li>
+</ol>
+
+  </div>
 
   <h1><a href="/blog/2015/05/11/golden-weak/">ゴールデンウィークのお買いもの</a></h1>
   <p class="author">
@@ -328,24 +343,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 ずーっと、devopsについてちょっと気になることがあったので<a href="https://twitter.com/hsbt">@hsbtさん</a>に聞いてみたりしてた。</p>
 
 <p>あとは終ったあとかなり早い花見してた。</p>
-
-
-  </div>
-
-  <h1><a href="/blog/2015/03/17/heroku-deploy-anther-branch/">Herokuでmaster以外のブランチを利用してデプロイする方法</a></h1>
-  <p class="author">
-    <span class="date">2015-03-17 12:08:17 +0900</span>
-  </p>
-  <div class="content">
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push heroku your-branch:master
-</code></pre></div></div>
-
-<h3 id="参考">参考</h3>
-
-<ol>
-  <li>http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing</li>
-  <li>http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7</li>
-</ol>
 
 
   </div>

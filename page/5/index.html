@@ -9,34 +9,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/5/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/5/" />
+<link rel="canonical" href="http://localhost:3000/page/5/" />
+<meta property="og:url" content="http://localhost:3000/page/5/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/4/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/6/" />
+<link rel="prev" href="http://localhost:3000/page/4/" />
+<link rel="next" href="http://localhost:3000/page/6/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 5" />
 <script type="application/ld+json">
-{"url":"https://blog.katsyoshi.org/page/5/","headline":"katsyoshi のめもみたいなの - page 5","@type":"WebPage","description":"It’s a memos.","@context":"https://schema.org"}</script>
+{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 5","url":"http://localhost:3000/page/5/","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
-if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-49549546-1', 'auto');
-  ga('send', 'pageview');
-}
-</script>
-  
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-</head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -60,6 +43,23 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2017/05/21/start-watching-dazn/">start watching dazn</a></h1>
+  <p class="author">
+    <span class="date">2017-05-21 14:49:19 +0900</span>
+  </p>
+  <div class="content">
+    <p>タイトルのとおり、DAZNを見はじめた。
+Netflix, Huluを契約してたけど、ぜんぜん見ていなかったので解約した。
+DAZN をみようとおもったきっかけはNBAのカンファレンスファイナルをみようとおもったため。</p>
+
+<p>とりあえず視聴感想ですが、表示は色々なところで言われてるとおもいますが、
+接続開始時にブロックノイズが気になりますが、一旦綺麗に表示されるとそのあとは
+特に気になりません。</p>
+
+<p>肝心の試合内容が現在非常に残念なため試合内の評価はしません。</p>
+
+  </div>
 
   <h1><a href="/blog/2017/04/09/use-dnsmasq-for-domestic-network/">raspiでdnsを運用してみはじめた</a></h1>
   <p class="author">
@@ -385,95 +385,6 @@ Firstはこの曲よりも <a href="https://www.amazon.co.jp/dp/B00K2ZK5OE/ref=d
     </li>
   </ol>
 </div>
-
-  </div>
-
-  <h1><a href="/blog/2016/11/29/introduced-cuda/">YARAKASHI CUDA編</a></h1>
-  <p class="author">
-    <span class="date">2016-11-29 00:48:15 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="/blog/2016/11/28/hello/">昨日</a>かいた奴でGTX 1050があるのでCUDAを導入してみた。</p>
-
-<h2 id="cuda導入">CUDA導入</h2>
-
-<p>これは簡単で <a href="https://developer.nvidia.com/cuda-downloads">ここ</a> から必要なパッケージをダウンロードしてきます。
-今回は Linux x86_64 Ubuntu 14.04 runfile(local) を順に選択。
-インストールはここでダウンロードしたrunfileを実行して、指示に従うだけです。
-これが終ったら、SampleProjectもインストールされてるとおもうのでこのプロジェクトをコンパイルします。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chmod 555 ./cuda_8.0.44_linux.run
-$ ./cuda_8.0.44_linux.run
-:
-:
-$ cd NVIDIA_CUDA-8.0_Samples
-$ make
-</code></pre></div></div>
-
-<p>でコンパイルが終了したらサンプルプログラムを実行します。とりあえず <code class="language-plaintext highlighter-rouge">deviceQuery</code> を実行します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd bin/x86_64/linux/release
-$ ./deviceQuery
-./deviceQuery Starting...
-
- CUDA Device Query (Runtime API) version (CUDART static linking)
-
-cudaGetDeviceCount returned 38
--&gt; no CUDA-capable device is detected
-Result = FAIL
-</code></pre></div></div>
-
-<p>と出ます。どうみてもエラーですね</p>
-
-<p>で、以下のようにrootで実行すると</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo ./deviceQuery
-./deviceQuery Starting...
-
- CUDA Device Query (Runtime API) version (CUDART static linking)
-
-Detected 1 CUDA Capable device(s)
-
-Device 0: "GeForce GTX 1050"
-  CUDA Driver Version / Runtime Version          8.0 / 8.0
-  CUDA Capability Major/Minor version number:    6.1
-  Total amount of global memory:                 1965 MBytes (2060255232 bytes)
-  ( 5) Multiprocessors, (128) CUDA Cores/MP:     640 CUDA Cores
-  GPU Max Clock rate:                            1455 MHz (1.46 GHz)
-  Memory Clock rate:                             3504 Mhz
-  Memory Bus Width:                              128-bit
-  L2 Cache Size:                                 1048576 bytes
-  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
-  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
-  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
-  Total amount of constant memory:               65536 bytes
-  Total amount of shared memory per block:       49152 bytes
-  Total number of registers available per block: 65536
-  Warp size:                                     32
-  Maximum number of threads per multiprocessor:  2048
-  Maximum number of threads per block:           1024
-  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
-  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
-  Maximum memory pitch:                          2147483647 bytes
-  Texture alignment:                             512 bytes
-  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)
-  Run time limit on kernels:                     Yes
-  Integrated GPU sharing Host Memory:            No
-  Support host page-locked memory mapping:       Yes
-  Alignment requirement for Surfaces:            Yes
-  Device has ECC support:                        Disabled
-  Device supports Unified Addressing (UVA):      Yes
-  Device PCI Domain ID / Bus ID / location ID:   0 / 129 / 0
-  Compute Mode:
-     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
-
-deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 8.0, CUDA Runtime Version = 8.0, NumDevs = 1, Device0 = GeForce GTX 1050
-Result = PASS
-</code></pre></div></div>
-<p>と出てきますので、パーミッションがなかったようです。
-あとは簡単、CUDA使いたいユーザーにパーミッションつけたらおわりです。</p>
-
-<h2 id="おわり">おわり</h2>
-<p>こんなのに3時間ほど時間を費しましたね。はい。</p>
 
   </div>
 
