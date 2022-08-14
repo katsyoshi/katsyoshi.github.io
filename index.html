@@ -65,6 +65,9 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
   <div class="content">
     <p><a href="https://rubygems.org">Ruby Gems</a> で <a href="https://www.rust-lang.org">Rust</a> が <a href="https://github.com/rubygems/rubygems/pull/5175">Native として利用可能になった</a> のでとりあえず <a href="https://www.rfc-editor.org/rfc/rfc4122.html"><code class="language-plaintext highlighter-rouge">UUIDv4</code></a> を生成してみた。</p>
 
+<h3 id="リポジトリ">リポジトリ</h3>
+<p><a href="https://github.com/katsyoshi/rust_uuid"><img src="https://gh-card.dev/repos/katsyoshi/rust_uuid.svg" alt="katsyoshi/rust_uuid - GitHub" /></a></p>
+
 <h2 id="準備">準備</h2>
 
 <p>Ruby 側の <code class="language-plaintext highlighter-rouge">gem</code> に Rust を利用する準備として <a href="https://github.com/oxidize-rb/rb-sys"><code class="language-plaintext highlighter-rouge">rb_sys</code></a> と <a href="https://github.com/rake-compiler/rake-compiler"><code class="language-plaintext highlighter-rouge">rake-compiler</code></a> を利用します。この二つの <code class="language-plaintext highlighter-rouge">gem</code> は native compile するためにインストールしておきます。
@@ -190,9 +193,6 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
 選択肢が増えたのはよいことでした。</p>
 
 <p>実はこの <code class="language-plaintext highlighter-rouge">uuid</code> crate の features に <code class="language-plaintext highlighter-rouge">fast-rng</code> を追加すると 10 倍速くなるんですが、 ruby 側の終了時に <code class="language-plaintext highlighter-rouge">SEGV</code> してしまうので載せていないです。 <code class="language-plaintext highlighter-rouge">SEGV</code> しないように原因を調査などはまた今度。</p>
-
-<h3 id="リポジトリ">リポジトリ</h3>
-<p>https://github.com/katsyoshi/rust_uuid</p>
 
   </div>
 
