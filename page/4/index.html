@@ -3,41 +3,23 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Page 4 of 10 for katsyoshi のめもみたいなの - page 4 | katsyoshi のめもみたいなの</title>
+<title>Page 4 of 11 for katsyoshi のめもみたいなの - page 4 | katsyoshi のめもみたいなの</title>
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="katsyoshi のめもみたいなの - page 4" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/4/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/4/" />
+<link rel="canonical" href="http://localhost:3000/page/4/" />
+<meta property="og:url" content="http://localhost:3000/page/4/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/3/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/5/" />
+<link rel="prev" href="http://localhost:3000/page/3/" />
+<link rel="next" href="http://localhost:3000/page/5/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 4" />
 <script type="application/ld+json">
-{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 4","url":"https://blog.katsyoshi.org/page/4/","@type":"WebPage","@context":"https://schema.org"}</script>
+{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 4","url":"http://localhost:3000/page/4/","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
-if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-49549546-1', 'auto');
-  ga('send', 'pageview');
-}
-</script>
-  
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646533193235045" crossorigin="anonymous"></script>
-</head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -53,7 +35,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     </a>
   
   <span class="page_number ">
-    Page: 4 of 10
+    Page: 4 of 11
   </span>
   
     <a href="/page/5/" class="next">Next</a>
@@ -61,6 +43,190 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2018/01/21/nlp-100-section-1-part-3/">nlp 100 section 1 part 3</a></h1>
+  <p class="author">
+    <span class="date">2018-01-21 10:23:02 +0900</span>
+  </p>
+  <div class="content">
+    <p>前回、<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> の04までやったので05からやります。</p>
+
+<h3 id="05-ngram"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec05">05. ngram</a></h3>
+<p>こいつはbi-gramを単語、文字二つを実装するひつようがあります</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">bi</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">loop</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">words</span><span class="nf">.len</span><span class="p">()</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">bi</span><span class="nf">.push</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="o">..</span><span class="n">w</span><span class="p">]</span><span class="nf">.join</span><span class="p">(</span><span class="s">""</span><span class="p">));</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">bi</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">words</span> <span class="o">=</span> <span class="s">"I am an NLPer"</span><span class="nf">.split</span><span class="p">(</span><span class="sc">' '</span><span class="p">)</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">===word bi-gram"</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="n">in</span> <span class="nf">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">let</span> <span class="n">words</span> <span class="o">=</span> <span class="s">"I am an NLPer"</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="n">in</span> <span class="nf">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\"</span><span class="s">{}</span><span class="se">\"</span><span class="s">"</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="06-集合"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec06">06. 集合</a></h3>
+
+<p>これは単純に <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html"><code class="language-plaintext highlighter-rouge">HashSet</code></a> を利用して、解決します。<code class="language-plaintext highlighter-rouge">HashSet</code> の差集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.difference"><code class="language-plaintext highlighter-rouge">difference</code></a> を利用し、和集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.union"><code class="language-plaintext highlighter-rouge">union</code></a> を、積集合は <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.intersection"><code class="language-plaintext highlighter-rouge">intersection</code></a> をそれぞれ利用します。また、特定の要素が含有していることを判定するには <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashSet.html#method.contains"><code class="language-plaintext highlighter-rouge">contains</code></a> を利用して判定します。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">collections</span><span class="p">::</span><span class="n">HashSet</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">bigram</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">bi</span><span class="p">:</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">HashSet</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">loop</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">words</span><span class="nf">.len</span><span class="p">()</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">bi</span><span class="nf">.insert</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="o">..</span><span class="n">w</span><span class="p">]</span><span class="nf">.join</span><span class="p">(</span><span class="s">""</span><span class="p">));</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">bi</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">chars</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">s</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">s1</span> <span class="o">=</span> <span class="nf">bigram</span><span class="p">(</span><span class="nf">chars</span><span class="p">(</span><span class="s">"paraparaparadise"</span><span class="nf">.to_string</span><span class="p">()));</span>
+    <span class="k">let</span> <span class="n">s2</span> <span class="o">=</span> <span class="nf">bigram</span><span class="p">(</span><span class="nf">chars</span><span class="p">(</span><span class="s">"paragraph"</span><span class="nf">.to_string</span><span class="p">()));</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"===UNION==="</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="nf">.union</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">===DIFF==="</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"===s1 - s2==="</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="nf">.difference</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"===s2 - s1==="</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s2</span><span class="nf">.difference</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">===intersection==="</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="n">in</span> <span class="n">s1</span><span class="nf">.intersection</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">===INCLUDE==="</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">se</span> <span class="o">=</span> <span class="s">"se"</span><span class="p">;</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"s1: {}"</span><span class="p">,</span> <span class="n">s1</span><span class="nf">.contains</span><span class="p">(</span><span class="n">se</span><span class="p">));</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"s2: {}"</span><span class="p">,</span> <span class="n">s2</span><span class="nf">.contains</span><span class="p">(</span><span class="n">se</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="07-テンプレートによる文生成"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec07">07. テンプレートによる文生成</a></h3>
+
+<p>これは <a href=""><code class="language-plaintext highlighter-rouge">format!</code></a> を使えば終りです。(問題意図ほんとこれなんか？)</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">string_template</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">i8</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">f32</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+    <span class="nd">format!</span><span class="p">(</span><span class="s">"{}時の{}は{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">string</span> <span class="o">=</span> <span class="nf">string_template</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="s">"気温"</span><span class="p">,</span> <span class="mf">22.5</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">string</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="08-暗号文"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec08">08. 暗号文</a></h3>
+<p>ASCII以外の判定と、小文字のASCIIが判れば簡単です。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">ascii</span><span class="p">::</span><span class="n">AsciiExt</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">cipher</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">src</span><span class="nf">.chars</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">result</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="n">chars</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="k">if</span> <span class="n">c</span><span class="nf">.is_ascii</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">var</span><span class="p">:</span> <span class="nb">u8</span> <span class="o">=</span> <span class="n">c</span> <span class="k">as</span> <span class="nb">u8</span><span class="p">;</span>
+            <span class="k">match</span> <span class="n">var</span> <span class="p">{</span>
+                <span class="mi">97</span> <span class="o">...</span> <span class="mi">122</span> <span class="k">=&gt;</span> <span class="p">(</span><span class="mi">219</span> <span class="o">-</span> <span class="p">(</span><span class="n">var</span><span class="p">))</span> <span class="k">as</span> <span class="nb">char</span><span class="p">,</span>
+                <span class="mi">_</span> <span class="k">=&gt;</span> <span class="n">c</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">c</span>
+        <span class="p">};</span>
+        <span class="n">result</span><span class="nf">.push</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">result</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="nf">cipher</span><span class="p">(</span><span class="s">"Today is fine."</span><span class="p">));</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="nf">cipher</span><span class="p">(</span><span class="o">&amp;</span><span class="nf">cipher</span><span class="p">(</span><span class="s">"Today is fine."</span><span class="p">)));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="09-typoglycemia"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec09">09. Typoglycemia</a></h3>
+
+<p>こちらは、 <code class="language-plaintext highlighter-rouge">Vec</code> に <code class="language-plaintext highlighter-rouge">shuffle</code> 的なものがないので、<a href="https://doc.rust-lang.org/rand"><code class="language-plaintext highlighter-rouge">rand</code></a> を呼び出して <a href="https://doc.rust-lang.org/rand/rand/trait.Rng.html#method.shuffle"><code class="language-plaintext highlighter-rouge">shuffle</code></a> を使います。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">extern</span> <span class="n">crate</span> <span class="n">rand</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">rand</span><span class="p">::</span><span class="n">Rng</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">words</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">result</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="n">s</span> <span class="n">in</span> <span class="n">src</span><span class="nf">.split</span><span class="p">(</span><span class="sc">' '</span><span class="p">)</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">str</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">s</span><span class="nf">.chars</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+        <span class="k">if</span> <span class="n">chars</span><span class="nf">.len</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="p">{</span>
+            <span class="n">result</span><span class="nf">.push</span><span class="p">(</span><span class="n">s</span><span class="nf">.to_string</span><span class="p">());</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">last_index</span> <span class="o">=</span> <span class="n">chars</span><span class="nf">.len</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">first_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="k">let</span> <span class="n">last_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">last_index</span><span class="p">];</span>
+
+            <span class="k">let</span> <span class="n">rand_chars</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">chars</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">last_index</span><span class="p">];</span>
+            <span class="nf">shuffle</span><span class="p">(</span><span class="n">rand_chars</span><span class="p">);</span>
+            <span class="k">let</span> <span class="k">mut</span> <span class="n">rand_string</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="n">rand_chars</span> <span class="p">{</span> <span class="n">rand_string</span><span class="nf">.push</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">}</span>
+            <span class="n">result</span><span class="nf">.push</span><span class="p">(</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}{}{}"</span><span class="p">,</span> <span class="n">first_char</span><span class="p">,</span> <span class="n">rand_string</span><span class="p">,</span> <span class="n">last_char</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">result</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">shuffle</span><span class="p">(</span><span class="n">chars</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="p">[</span><span class="nb">char</span><span class="p">])</span> <span class="p">{</span>
+    <span class="nn">rand</span><span class="p">::</span><span class="nf">thread_rng</span><span class="p">()</span><span class="nf">.shuffle</span><span class="p">(</span><span class="n">chars</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">paragraph</span> <span class="o">=</span> <span class="s">"I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind ."</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="n">w</span> <span class="n">in</span> <span class="nf">words</span><span class="p">(</span><span class="n">paragraph</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+
+<p>ということで <code class="language-plaintext highlighter-rouge">Rust</code> で言語処理100本ノック1章をやってみました。
+最近 <code class="language-plaintext highlighter-rouge">Ruby</code> しか書いていなかったので、新鮮で楽しいですね <code class="language-plaintext highlighter-rouge">Rust</code> 。</p>
+
+  </div>
 
   <h1><a href="/blog/2018/01/19/nlp-100-section-1-part-2/">NLP100本ノック section 1 part 2</a></h1>
   <p class="author">
@@ -544,64 +710,6 @@ record-batch[1]:
 
   </div>
 
-  <h1><a href="/blog/2017/05/29/installing-apache-arrow/">installing apache arrow</a></h1>
-  <p class="author">
-    <span class="date">2017-05-29 21:45:29 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="https://slide.rabbit-shocker.org/authors/kou/nagoya-rubykaigi-03/">最近</a><a href="https://github.com/kou">すとうさん</a>が<a href="https://slide.rabbit-shocker.org/authors/kou/data-science-rb/">一押し</a>している<a href="https://arrow.apache.org/">apache arrow</a>をインストールしてみた</p>
-
-<h2 id="環境">環境</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ uname -a
-Linux rin 4.9.10-gentoo #6 SMP Tue Mar 28 01:29:26 JST 2017 x86_64 Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz GenuineIntel GNU/Linux
-$ gcc -v
-組み込み spec を使用しています。
-COLLECT_GCC=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0/gcc
-COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-pc-linux-gnu/5.4.0/lto-wrapper
-ターゲット: x86_64-pc-linux-gnu
-configure 設定: /var/tmp/portage/sys-devel/gcc-5.4.0-r3/work/gcc-5.4.0/configure --host=x86_64-pc-linux-gnu --build=x86_64-pc-linux-gnu --prefix=/usr --bindir=/usr/x86_64-pc-linux-gnu/gcc-bin/5.4.0 --includedir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include --datadir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0 --mandir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/man --infodir=/usr/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/info --with-gxx-include-dir=/usr/lib/gcc/x86_64-pc-linux-gnu/5.4.0/include/g++-v5 --with-python-dir=/share/gcc-data/x86_64-pc-linux-gnu/5.4.0/python --enable-languages=c,c++,fortran --enable-obsolete --enable-secureplt --disable-werror --with-system-zlib --enable-nls --without-included-gettext --enable-checking=release --with-bugurl=https://bugs.gentoo.org/ --with-pkgversion='Gentoo 5.4.0-r3 p1.3, pie-0.6.5' --enable-libstdcxx-time --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-clocale=gnu --enable-multilib --with-multilib-list=m32,m64 --disable-altivec --disable-fixed-point --enable-targets=all --disable-libgcj --enable-libgomp --disable-libmudflap --disable-libssp --disable-libcilkrts --disable-libmpx --enable-vtable-verify --enable-libvtv --enable-lto --without-isl --enable-libsanitizer
-スレッドモデル: posix
-gcc バージョン 5.4.0 (Gentoo 5.4.0-r3 p1.3, pie-0.6.5)
-</code></pre></div></div>
-
-<h2 id="いんすとーる">いんすとーる</h2>
-
-<p>今回まだGentooにパッケージがないのでgitからインストールします。ほしいのはrubygems.orgに公開されている<a href="https://rubygems.org/gems/red-arrow">red-arrow</a>をコンパイルするためにglibとこれを利用するために必要な依存パッケージとしてcppをインストールします。インストールはかんたんで <code class="language-plaintext highlighter-rouge">cmake</code> を実行すればインストールデキルはずです。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git clone git@github.com:apache/arrow.git
-<span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>arrow/cpp
-<span class="gp">$</span><span class="w"> </span><span class="nb">mkdir </span>release
-<span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>release
-<span class="gp">$</span><span class="w"> </span>cmake .. <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Release
-</code></pre></div></div>
-
-<p>でリリース用パッケージがビルドされるはずですが<a href="https://gist.github.com/katsyoshi/4486792ad43feae4d690d589dac1a157">エラー</a>が出ます。
-これはJIRAで<a href="https://issues.apache.org/jira/browse/ARROW-667">検索した結果</a>より <code class="language-plaintext highlighter-rouge">gcc</code> のバージョン情報がとれずにエラーをだしているやりとりが発見されたのでわかりました。
-ログを見ると実際に取得できていないことも確認しました。で <code class="language-plaintext highlighter-rouge">cpp/cmake_modules/CompilerInfo.cmake</code> をみるとどうやら日本語のバージョン情報は考慮されていないような作りになっていました。
-なので <code class="language-plaintext highlighter-rouge">LANG=C</code> をつけて <code class="language-plaintext highlighter-rouge">cmake</code> 再びつけて実行します。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">LANG</span><span class="o">=</span>C cmake .. <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Release
-<span class="gp">$</span><span class="w"> </span>make
-<span class="gp">$</span><span class="w"> </span>make <span class="nb">install</span>
-</code></pre></div></div>
-
-<p>これでC++のインストールは終了です。続いてglibをインストールします。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> ../../c_glib
-<span class="gp">$</span><span class="w"> </span>./autgen.sh
-<span class="gp">$</span><span class="w"> </span>./configure
-<span class="gp">$</span><span class="w"> </span>make
-<span class="gp">$</span><span class="w"> </span>make <span class="nb">install</span>
-</code></pre></div></div>
-
-<p>でインストールできます。こちら久々に野良ビルドしたため <code class="language-plaintext highlighter-rouge">PKG_CONFIG_PATH</code> や <code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code> の設定をわすれてただけなのですんなりいけました。
-で最後に <code class="language-plaintext highlighter-rouge">gem install red-arrow</code> を実行して目的を達成しました!!!!11</p>
-
-<h2 id="おわり">おわり</h2>
-<p>ほんとうのもくてきは <code class="language-plaintext highlighter-rouge">fluentd</code> のぷらぐいんをかくことですがつかれたのできょうはここまで</p>
-
-  </div>
-
 
 <!-- Pagination links -->
 <div class="pagination">
@@ -611,7 +719,7 @@ gcc バージョン 5.4.0 (Gentoo 5.4.0-r3 p1.3, pie-0.6.5)
     </a>
   
   <span class="page_number ">
-    Page: 4 of 10
+    Page: 4 of 11
   </span>
   
     <a href="/page/5/" class="next">Next</a>

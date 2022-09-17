@@ -3,41 +3,23 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Page 7 of 10 for katsyoshi のめもみたいなの - page 7 | katsyoshi のめもみたいなの</title>
+<title>Page 7 of 11 for katsyoshi のめもみたいなの - page 7 | katsyoshi のめもみたいなの</title>
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="katsyoshi のめもみたいなの - page 7" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/7/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/7/" />
+<link rel="canonical" href="http://localhost:3000/page/7/" />
+<meta property="og:url" content="http://localhost:3000/page/7/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/6/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/8/" />
+<link rel="prev" href="http://localhost:3000/page/6/" />
+<link rel="next" href="http://localhost:3000/page/8/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 7" />
 <script type="application/ld+json">
-{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 7","url":"https://blog.katsyoshi.org/page/7/","@type":"WebPage","@context":"https://schema.org"}</script>
+{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 7","url":"http://localhost:3000/page/7/","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
-if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-49549546-1', 'auto');
-  ga('send', 'pageview');
-}
-</script>
-  
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646533193235045" crossorigin="anonymous"></script>
-</head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -53,7 +35,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
     </a>
   
   <span class="page_number ">
-    Page: 7 of 10
+    Page: 7 of 11
   </span>
   
     <a href="/page/8/" class="next">Next</a>
@@ -61,6 +43,50 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2015/06/26/sir-elasticsearch/">elasticsearchどの〜</a></h1>
+  <p class="author">
+    <span class="date">2015-06-26 00:26:10 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://www.elastic.co/products/kibana">kibana</a> で表示しようとしてたら嵌ったのでメモ</p>
+
+<h2 id="嵌った原因">嵌った原因</h2>
+<p>数字をElasticsearchに投げているつもりが文字列を投げていた。
+ので対処方法としては、 <code class="language-plaintext highlighter-rouge">fluent-plugin-typecast</code> を導入して終了。</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;match</span> <span class="err">elasticsearch.**.*</span><span class="nt">&gt;</span>
+  type typecast
+  item_types value:float
+  prefix typed
+<span class="nt">&lt;/match&gt;</span>
+</code></pre></div></div>
+
+<h2 id="elasticsearch">Elasticsearch</h2>
+
+<p><a href="https://www.fluentd.org">fluentd</a> で集めたデータを <a href="http://www.elasitc.co">Elasticsearch</a> に <a href="https://github.com/uken/fluent-plugin-elasticsearch">fluent-plugin-elastchsearch</a> を利用して入れます。設定は以下のようにします。</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;match</span> <span class="err">typed.elasticserch.**.*</span><span class="nt">&gt;</span>
+  type elasticsearch
+  type_name hoge
+  host 127.0.0.1
+  port 9200
+  logstash_format true
+  logstash_prefix logstash
+  flash_interval 1s
+<span class="nt">&lt;/match&gt;</span>
+</code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+<p>おわり</p>
+
+<h3 id="参考資料">参考資料</h3>
+<ol>
+  <li>http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html</li>
+  <li>https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html</li>
+</ol>
+
+  </div>
 
   <h1><a href="/blog/2015/05/15/screencast-use-gif/">すくりーんきゃすと</a></h1>
   <p class="author">
@@ -352,19 +378,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 
   </div>
 
-  <h1><a href="/blog/2015/03/18/party-of-asakusa-dot-rb-300th/">Asakusa.rbの300回記念パーティに行ってきた</a></h1>
-  <p class="author">
-    <span class="date">2015-03-18 01:26:33 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="https://asakusarb.doorkeeper.jp/events/22018">Asakusa.rbの300回記念パーティ</a>に行ってきた。
-ずーっと、devopsについてちょっと気になることがあったので<a href="https://twitter.com/hsbt">@hsbtさん</a>に聞いてみたりしてた。</p>
-
-<p>あとは終ったあとかなり早い花見してた。</p>
-
-
-  </div>
-
 
 <!-- Pagination links -->
 <div class="pagination">
@@ -374,7 +387,7 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
     </a>
   
   <span class="page_number ">
-    Page: 7 of 10
+    Page: 7 of 11
   </span>
   
     <a href="/page/8/" class="next">Next</a>
