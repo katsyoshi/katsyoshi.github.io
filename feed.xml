@@ -1,4 +1,176 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://localhost:3000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:3000/" rel="alternate" type="text/html" /><updated>2022-09-18T01:37:56+09:00</updated><id>http://localhost:3000/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">RubyKaigi 最高！</title><link href="http://localhost:3000/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022/" rel="alternate" type="text/html" title="RubyKaigi 最高！" /><published>2022-09-11T23:59:50+09:00</published><updated>2022-09-11T23:59:50+09:00</updated><id>http://localhost:3000/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022</id><content type="html" xml:base="http://localhost:3000/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022/">&lt;p&gt;&lt;a href=&quot;https://rubykaigi.org/2022&quot;&gt;RubyKaigi 2022&lt;/a&gt; に行ってきました! ので感想を&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://localhost:3000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:3000/" rel="alternate" type="text/html" /><updated>2022-10-15T17:46:38+09:00</updated><id>http://localhost:3000/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Communicate on IPv6 from home</title><link href="http://localhost:3000/blog/2022/10/12/ipv6nize-at-home/" rel="alternate" type="text/html" title="Communicate on IPv6 from home" /><published>2022-10-12T23:59:50+09:00</published><updated>2022-10-12T23:59:50+09:00</updated><id>http://localhost:3000/blog/2022/10/12/ipv6nize-at-home</id><content type="html" xml:base="http://localhost:3000/blog/2022/10/12/ipv6nize-at-home/">&lt;p&gt;家のネットワークからインターネットへ出るとき &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPoE&lt;/code&gt; を使ってたけど、家庭内 LAN のネットワークは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; を off にしていた。
+この LAN 内 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; 化していなかった理由としては、昔 Linux (だけじゃないかも)が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; が利用できる状態だと
+先に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; で繋ぎにいこうとして &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; で通信できなかったら &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv4&lt;/code&gt; にフォールバックするという挙動で、すごくストレスフルだった。
+この挙動の対処として、カーネルレベルで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; を off にしてました。
+そうこうしているうちに契約している ISP が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; オプションなしで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPoE&lt;/code&gt; を利用できるようになったので、
+とりあえず &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPoE&lt;/code&gt; だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。
+いいかげんこの家庭内 LAN のネットワークを &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; 化し、インターネットと &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; で通信できるようにした顛末をのこす。のこします。&lt;/p&gt;
+
+&lt;h2 id=&quot;家庭内-lan-環境&quot;&gt;家庭内 LAN 環境&lt;/h2&gt;
+
+&lt;p&gt;ゲートウェイ: NEC IP38X/1210 (YAMAHA RTX1200)
+PC: 6.0.0-gentoo&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/home2internet.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ipoe-化と家庭内-lan-の-ipv6-化&quot;&gt;IPoE 化と家庭内 LAN の IPv6 化&lt;/h2&gt;
+
+&lt;p&gt;設定は &lt;a href=&quot;https://network.yamaha.com/setting/router_firewall/flets/flets_other_service/ipv6_ipoe&quot;&gt;YAMAHA の設定例集&lt;/a&gt;に載ってあるのでそれを参考にします。
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPoE&lt;/code&gt; 化はこの設定例でいけるのですが、どうも設定したときにミスったらしく、 LAN の IP アドレスが &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv4&lt;/code&gt; ではインターネットへ出ることができるが、
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; ではインターネットへ出ることができない状態になってしまいました。&lt;/p&gt;
+
+&lt;h3 id=&quot;旧設定&quot;&gt;旧設定&lt;/h3&gt;
+&lt;p&gt;どのような設定だったかは以下に&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ip route default gateway tunnel 1
+ipv6 prefix 1 ra-prefix@lan2::/64
+ipv6 lan1 address ra-prefix@lan2::1/64
+ipv6 lan1 prefix ra-prefix@lan2::/64
+ipv6 lan1 rtadv send 1
+ipv6 lan1 dhcp service server
+ipv6 lan2 address auto
+ipv6 lan2 secure filter in 1010 1011 1012 2000
+ipv6 lan2 secure filter out 3000 dynamic 100 101 102 103 104 105 106
+ipv6 lan2 dhcp service client ir=on
+ngn type lan2 ntt
+tunnel select 1
+ tunnel encapsulation ipip
+ tunnel endpoint address 2404:8e00::feed:100
+ tunnel enable 1
+ipv6 filter 1010 pass * * icmp6 * *
+ipv6 filter 1011 pass * * tcp * ident
+ipv6 filter 1012 pass * * udp * 546
+ipv6 filter 2000 reject * * * * *
+ipv6 filter 3000 pass * * * * *
+ipv6 filter dynamic 100 * * ftp
+ipv6 filter dynamic 101 * * domain
+ipv6 filter dynamic 102 * * www
+ipv6 filter dynamic 103 * * smtp
+ipv6 filter dynamic 104 * * pop3
+ipv6 filter dynamic 105 * * tcp
+ipv6 filter dynamic 106 * * udp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;この設定ではインターネットとは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv4&lt;/code&gt; でしか通信できていない状態でした。
+でこのトラブルシュートとして知人(&lt;a href=&quot;https://twitter.com/n_kane&quot;&gt;@n_kane&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/paina&quot;&gt;@paina&lt;/a&gt;) のちからを借りてどこまで通じてどこから通じないかを確認しました。&lt;/p&gt;
+
+&lt;h3 id=&quot;trable-shooting&quot;&gt;trable shooting&lt;/h3&gt;
+
+&lt;p&gt;とりあえず &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ping6&lt;/code&gt; 、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traceroute6&lt;/code&gt; で通じていないことを確認します。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ping6 -c 3 google.com
+
+PING  google.com(nrt13s55-in-x0e.1e100.net (2404:6800:4004:824::200e)) 56 データ長(byte)
+
+--- google.com ping 統計 ---
+送信パケット数 3, 受信パケット数 0, パケット損失 100%, 時間 2067ミリ秒
+
+$ traceroute6 google.com
+traceroute to google.com, 30 hops max, 80 byte packets
+ 1  * * *
+ 2  * * *
+ 3  * * *
+ 4  * * *
+ 5  * * *
+ 6  * * *
+ 7  * * *
+ 8  * * *
+ 9  * * *
+10  * * *
+11  * * *
+12  * * *
+13  * * *
+14  * * *
+15  * * *
+16  * * *
+17  * * *
+18  * * *
+19  * * *
+20  * * *
+21  * * *
+22  * * *
+23  * * *
+24  * * *
+25  * * *
+26  * * *
+27  * * *
+28  * * *
+29  * * *
+30  * * *
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;通ってないですね。
+先述したように PC は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; を on にしたばかりなのでクライアント側の設定でブロックしていないかを確認します。
+まずクライアント側で考えられるのは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables&lt;/code&gt; でのパケットフィルタリングですね。
+ルーターの下にある PC なので、ここでブロックすることは低いのですが、確認します。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ip6tables --list
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;なにもフィルタリングしていないですね。
+ということで、クライアント側には問題なさそうですね。
+どこまで通じてどこまで通じていないのか別のエンドポイントで確認します。&lt;/p&gt;
+
+&lt;p&gt;まず、手元と相手で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tcpdump&lt;/code&gt; 利用してパケットが送っているか届いているかを確認します。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# tcpdump -nei enp8s0f0 icmp6
+dropped privs to pcap
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on enp8s0f0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+22:35:41.158558 00:a0:de:69:40:9d &amp;gt; 33:33:ff:51:5e:63, ethertype IPv6 (0x86dd), length 86: fe80::212:e2ff:fe70:6144 &amp;gt; ff02::1:ff51:5e63: ICMP6, neighbor solicitation, who has 2409:10:a5c0:1f00:d903:ddb5:851:5e63, length 32
+22:35:58.765783 ee:60:51:38:43:9c &amp;gt; 33:33:ff:00:00:01, ethertype IPv6 (0x86dd), length 86: 2409:10:a5c0:1f00:5ce3:afcb:9bb2:5c1b &amp;gt; ff02::1:ff00:1: ICMP6, neighbor solicitation, who has 2409:10:a5c0:1f00::1, length 32
+22:36:09.249427 ee:60:51:38:43:9c &amp;gt; 33:33:ff:00:00:01, ethertype IPv6 (0x86dd), length 86: 2409:10:a5c0:1f00:5ce3:afcb:9bb2:5c1b &amp;gt; ff02::1:ff00:1: ICMP6, neighbor solicitation, who has 2409:10:a5c0:1f00::1, length 32
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;送れてはいるようで対向側にも届いていたらしく戻りのパケットは送ってたようですが、手元では戻ってくるパケットは見えていないですね。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/ping6-failure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ということはやはりルーターの設定が悪そうということが推察されますね。
+設定のどこが悪いのかあやしいところを見ていきます。&lt;/p&gt;
+
+&lt;p&gt;最初に怪しいとおもったのはルーターのフィルターまわりです。一旦、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;no ipv6 interface secure filer in&lt;/code&gt; で全部無効化しましょう。しかしとくに変りはないです。これはフィルターが原因ではなさそうですね。&lt;/p&gt;
+
+&lt;p&gt;次にあやしい点は以下2つの設定&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.rtpro.yamaha.co.jp/RT/manual/rt-common/ipv6/ipv6_interface_address.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ipv6 interface address&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.rtpro.yamaha.co.jp/RT/manual/rt-common/ipv6/ipv6_interface_address.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ipv6 interface prefix&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;上のコマンドは ISP から自動で振ってきている IP を割り当てる設定で、下のコマンドは ISP から振ってきた &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; のプレフィックスを付けるようにするための設定となります。
+どうもこの下のコマンドが邪魔なようです。
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;no ipv6 interface prefix&lt;/code&gt; で無効化できるので一旦外してみましょう。
+すると&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ping6 -c 3 google.com
+PING google.com(nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e)) 56 データ長(byte)
+64 バイト応答 送信元 nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e): icmp_seq=1 ttl=57 時間=6.53ミリ秒
+64 バイト応答 送信元 nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e): icmp_seq=2 ttl=57 時間=2.73ミリ秒
+64 バイト応答 送信元 nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e): icmp_seq=3 ttl=57 時間=2.81ミリ秒
+
+--- google.com ping 統計 ---
+送信パケット数 3, 受信パケット数 3, パケット損失 0%, 時間 2002ミリ秒
+rtt 最小/平均/最大/mdev = 2.731/4.023/6.532/1.773ミリ秒
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;のように通りました!勝ったッ!第三部完!&lt;/p&gt;
+
+&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
+
+&lt;p&gt;以前中途半端に設定したおかげで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; 有効化に時間が掛ってしまった顛末をまとめました。
+これで家のネットワークから &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IPv6&lt;/code&gt; で通信できるようになりました。
+ありがとうございました!&lt;/p&gt;
+
+&lt;p&gt;次回 katsyoshi.org お名前.COM やめるってよ&lt;/p&gt;</content><author><name></name></author><category term="tech" /><category term="diary" /><summary type="html">家のネットワークからインターネットへ出るとき IPoE を使ってたけど、家庭内 LAN のネットワークは IPv6 を off にしていた。 この LAN 内 IPv6 化していなかった理由としては、昔 Linux (だけじゃないかも)が IPv6 が利用できる状態だと 先に IPv6 で繋ぎにいこうとして IPv6 で通信できなかったら IPv4 にフォールバックするという挙動で、すごくストレスフルだった。 この挙動の対処として、カーネルレベルで IPv6 を off にしてました。 そうこうしているうちに契約している ISP が IPv6 オプションなしで IPoE を利用できるようになったので、 とりあえず IPoE だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。 いいかげんこの家庭内 LAN のネットワークを IPv6 化し、インターネットと IPv6 で通信できるようにした顛末をのこす。のこします。</summary></entry><entry><title type="html">RubyKaigi 最高！</title><link href="http://localhost:3000/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022/" rel="alternate" type="text/html" title="RubyKaigi 最高！" /><published>2022-09-11T23:59:50+09:00</published><updated>2022-09-11T23:59:50+09:00</updated><id>http://localhost:3000/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022</id><content type="html" xml:base="http://localhost:3000/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022/">&lt;p&gt;&lt;a href=&quot;https://rubykaigi.org/2022&quot;&gt;RubyKaigi 2022&lt;/a&gt; に行ってきました! ので感想を&lt;/p&gt;
 
 &lt;h2 id=&quot;day-0&quot;&gt;DAY 0&lt;/h2&gt;
 
@@ -804,75 +976,4 @@ Selected keyboards automatically since --device options weren&apos;t specified:
 &lt;p&gt;日曜日の夜中 &lt;strong&gt;&lt;a href=&quot;/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/&quot;&gt;RubyKaigi の日記&lt;/a&gt;&lt;/strong&gt; をポストしてからこのリポジトリを &lt;em&gt;jekyll&lt;/em&gt; にしようと &lt;strong&gt;雑に&lt;/strong&gt; 弄ってたら、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rake generate&lt;/code&gt; が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Unknown language: xml&lt;/code&gt; という謎の &lt;em&gt;Pygments&lt;/em&gt; エラーが出てしまった。
 このエラーを修正しようとしがんばってみたが、失敗して修正できなかったので &lt;em&gt;jekyll&lt;/em&gt; に変更したものでデプロイした。&lt;/p&gt;
 
-&lt;p&gt;そんなこんなあって &lt;em&gt;Octopress&lt;/em&gt; はやめて &lt;em&gt;jekyll&lt;/em&gt; に変更しました。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><summary type="html">長年利用してた Octopress がずいぶん前にサポート外になってたので Jekyll へ変更することにした。</summary></entry><entry><title type="html">2021.takeout.rubykaigi.org</title><link href="http://localhost:3000/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/" rel="alternate" type="text/html" title="2021.takeout.rubykaigi.org" /><published>2021-09-12T00:00:00+09:00</published><updated>2021-09-12T00:00:00+09:00</updated><id>http://localhost:3000/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021</id><content type="html" xml:base="http://localhost:3000/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">&lt;p&gt;今年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で &lt;a href=&quot;https://rubykaigi.org&quot;&gt;RubyKaigi&lt;/a&gt; のオンラインイベント化された &lt;a href=&quot;https://rubykaigi.org/2021-takeout&quot;&gt;RubyKaigi Takeout 2021&lt;/a&gt; に行ってきた。&lt;/p&gt;
-
-&lt;p&gt;去年も &lt;strong&gt;COVID-19&lt;/strong&gt; の影響で takeout をやっていたがすっかり忘れてたので参加していなかった。ので 2 年ぶりの参加である。&lt;/p&gt;
-
-&lt;p&gt;見たセッションは開催日毎に以下のようになった。&lt;/p&gt;
-
-&lt;h2 id=&quot;day-1&quot;&gt;day: 1&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Yusuke Endo, “TypeProf for IDE: Enrich Dev-Experience without Annotations,” https://rubykaigi.org/2021-takeout/presentations/mametter.html&lt;/li&gt;
-  &lt;li&gt;Takeshi Kokubun, “Why Ruby’s JIT was slow,” https://rubykaigi.org/2021-takeout/presentations/k0kubun.html&lt;/li&gt;
-  &lt;li&gt;Jeremy Evance, “Optimizing Partial Backtraces in Ruby 3,” https://rubykaigi.org/2021-takeout/presentations/jeremyevans0.html&lt;/li&gt;
-  &lt;li&gt;Nick Schwaderer, “Ruby Archaeology,” https://rubykaigi.org/2021-takeout/presentations/schwad4hd14.html&lt;/li&gt;
-  &lt;li&gt;Masaki Shioi, “Toycol: Define your own application protocol,” https://rubykaigi.org/2021-takeout/presentations/coe401_.html&lt;/li&gt;
-  &lt;li&gt;Masatoshi Seki, and Tatsuya Sonokawa, “dRuby in the real-world embedded systems.,” https://rubykaigi.org/2021-takeout/presentations/m_seki.html&lt;/li&gt;
-  &lt;li&gt;Uchio Kondo, “Story of Rucy - How to &quot;compile&quot; a BPF binary from Ruby,” https://rubykaigi.org/2021-takeout/presentations/udzura.html&lt;/li&gt;
-  &lt;li&gt;Ufuk Kayserilioglu, “ Demystifying DSLs for better analysis and understanding,” https://rubykaigi.org/2021-takeout/presentations/paracycle.html&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;day-2&quot;&gt;day: 2&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Chris Seaton, “The Future Shape of Ruby Objects,” https://rubykaigi.org/2021-takeout/presentations/chrisgseaton.html&lt;/li&gt;
-  &lt;li&gt;Hitoshi HASUMI, “PRK Firmware: Keyboard is Essentially Ruby,” https://rubykaigi.org/2021-takeout/presentations/hasumikin.html&lt;/li&gt;
-  &lt;li&gt;Maxime Chevalier-Boisvert, “YJIT - Building a new JIT Compiler inside CRuby,” https://rubykaigi.org/2021-takeout/presentations/maximecb.html&lt;/li&gt;
-  &lt;li&gt;Shugo Maeda, “include/prepend in refinements should be prohibited,” https://rubykaigi.org/2021-takeout/presentations/shugomaeda.html&lt;/li&gt;
-  &lt;li&gt;Satoshi “moris” Tagomori, “Ractor’s speed is not light-speed,” https://rubykaigi.org/2021-takeout/presentations/tagomoris.html&lt;/li&gt;
-  &lt;li&gt;CRuby Committers, “Ruby Commiters vs. the World,” https://rubykaigi.org/2021-takeout/presentations/rubylangorg.html&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;day-3&quot;&gt;day: 3&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;osyo, “Use Macro all the time ~ マクロを使いまくろ ~,” https://rubykaigi.org/2021-takeout/presentations/pink_bangbi.html&lt;/li&gt;
-  &lt;li&gt;Mauro Eldritch, “Crafting exploits, tools and havoc with Ruby,” https://rubykaigi.org/2021-takeout/presentations/MauroEldritch.html&lt;/li&gt;
-  &lt;li&gt;Mike Dalessio, “Building Native Extensions. This Could Take A While…,” https://rubykaigi.org/2021-takeout/presentations/flavorjones.html&lt;/li&gt;
-  &lt;li&gt;Richard Schneeman, “Beware the Dead End!!,” https://rubykaigi.org/2021-takeout/presentations/schneems.html&lt;/li&gt;
-  &lt;li&gt;Yusuke Nakamura, “Ruby, Ractor, QUIC,” https://rubykaigi.org/2021-takeout/presentations/yu_suke1994.html&lt;/li&gt;
-  &lt;li&gt;Mat Schaffer, “10 years of Ruby-powered citizen science,” https://rubykaigi.org/2021-takeout/presentations/matschaffer.html&lt;/li&gt;
-  &lt;li&gt;Yukihiro “Matz” Matsumoto, “Matz Keynote,” https://rubykaigi.org/2021-takeout/presentations/yukihiro_matz.html&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;セッションへの感想&quot;&gt;セッションへの感想&lt;/h2&gt;
-
-&lt;p&gt;印象に残ったセッションとしては、 2 日目の PRK, 3 日目 のマクロ, 3 日目の deadend, あたりが強烈に残っています。&lt;/p&gt;
-
-&lt;p&gt;PRK に関しては、 &lt;em&gt;&lt;a href=&quot;https://www.switch-science.com/catalog/3914/&quot;&gt;Promiro&lt;/a&gt;&lt;/em&gt; 互換 &lt;em&gt;&lt;a href=&quot;https://www.sparkfun.com/rp2040#boards&quot;&gt;RP2040&lt;/a&gt;&lt;/em&gt; で Ruby を使って firmware(keymap) を書けるところがとてもイイ!&lt;/p&gt;
-
-&lt;p&gt;マクロに関しては &lt;em&gt;&lt;a href=&quot;https://docs.ruby-lang.org/ja/latest/class/RubyVM=3a=3aAbstractSyntaxTree.html&quot;&gt;AST&lt;/a&gt;&lt;/em&gt; を利用したマクロでこれなら自分でも使えそうだしだなあ。(最近さわってる Rust にも macro あるけど、書くのは一見むずかしそう)。とりあえず後で触ってみるかという気分にさせてくれる発表内容でした。以下の2つのgemから利用できるようです。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;kenma: https://rubygems.org/gems/kenma&lt;/li&gt;
-  &lt;li&gt;rensei: https://rubygems.org/gems/rensei&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;最後に &lt;em&gt;&lt;a href=&quot;https://rubygems.org/gems/dead_end&quot;&gt;dead_end&lt;/a&gt;&lt;/em&gt; は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby -w&lt;/code&gt; でも同じようなことができそうだけど、 &lt;em&gt;&lt;a href=&quot;https://docs.ruby-lang.org/ja/latest/class/SyntaxError.html&quot;&gt;syntax error&lt;/a&gt;&lt;/em&gt; を早めに分かるための Gem でした。印象としてはメッチャ便利!と思ってたら&lt;a href=&quot;https://bugs.ruby-lang.org/issues/18159&quot;&gt;本体に入れる提案&lt;/a&gt;が走ってるようです。&lt;/p&gt;
-
-&lt;h2 id=&quot;感想戦の感想&quot;&gt;感想戦の感想&lt;/h2&gt;
-&lt;p&gt;2 日目、 3 日目の最終セッション後に zoom などで笹田さんを中心に感想戦が行なわれていました。
-2 日目は&lt;a href=&quot;https://bugs.ruby-lang.org/issues/12075&quot;&gt;最近話題になっていた議論&lt;/a&gt;を進めていたようです(この日はチョット疲れたので17:00頃に上ったけど、19:00頃までやっていたようです)。
-3 日目は Matz の振り返りを中心に感想戦が行なわれて印象に残った発表を聞いたりしてました。他にも&lt;a href=&quot;https://bugs.ruby-lang.org/issues/14579&quot;&gt;昔から要望してた機能&lt;/a&gt;の取り込みが行なわれてました。&lt;/p&gt;
-
-&lt;h2 id=&quot;takeout-全体の感想&quot;&gt;Takeout 全体の感想&lt;/h2&gt;
-
-&lt;p&gt;全体通しての感想としては、配信は開始直後にちょっとしたトラブルがあった以外は非常に快適でした。
-あとこの配信サービス自体も&lt;a href=&quot;https://github.com/ruby-no-kai/takeout-app&quot;&gt;自前で開発&lt;/a&gt;されたようで大変感謝しています。&lt;/p&gt;
-
-&lt;p&gt;折角なので他の人と感想話したいなーとおもったのでなんどか twitter spaces を開いてみたけど(当然)誰も参加してくれなかったのがちょっとさみしかったけど、mitaka-rb のみなさんが &lt;a href=&quot;https://spatial.chat/s/spatial-mitaka&quot;&gt;spatialchat&lt;/a&gt;  を立ててくれてたので雑談を毎回2時間ほどしてました。&lt;/p&gt;
-
-&lt;h2 id=&quot;matome&quot;&gt;matome&lt;/h2&gt;
-
-&lt;p&gt;久しぶりの RubyKaigi 参加で大変たのしく、興奮した3日間でした!!!&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="rubykaigi" /><summary type="html">今年も COVID-19 の影響で RubyKaigi のオンラインイベント化された RubyKaigi Takeout 2021 に行ってきた。</summary></entry></feed>
+&lt;p&gt;そんなこんなあって &lt;em&gt;Octopress&lt;/em&gt; はやめて &lt;em&gt;jekyll&lt;/em&gt; に変更しました。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><summary type="html">長年利用してた Octopress がずいぶん前にサポート外になってたので Jekyll へ変更することにした。</summary></entry></feed>

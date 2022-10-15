@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Communicate on IPv6 from home | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Communicate on IPv6 from home" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="家のネットワークからインターネットへ出るとき IPoE を使ってたけど、家庭内 LAN のネットワークは IPv6 を off にしていた。 この LAN 内 IPv6 化していなかった理由としては、昔 Linux (だけじゃないかも)が IPv6 が利用できる状態だと 先に IPv6 で繋ぎにいこうとして IPv6 で通信できなかったら IPv4 にフォールバックするという挙動で、すごくストレスフルだった。 この挙動の対処として、カーネルレベルで IPv6 を off にしてました。 そうこうしているうちに契約している ISP が IPv6 オプションなしで IPoE を利用できるようになったので、 とりあえず IPoE だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。 いいかげんこの家庭内 LAN のネットワークを IPv6 化し、インターネットと IPv6 で通信できるようにした顛末をのこす。のこします。" />
+<meta property="og:description" content="家のネットワークからインターネットへ出るとき IPoE を使ってたけど、家庭内 LAN のネットワークは IPv6 を off にしていた。 この LAN 内 IPv6 化していなかった理由としては、昔 Linux (だけじゃないかも)が IPv6 が利用できる状態だと 先に IPv6 で繋ぎにいこうとして IPv6 で通信できなかったら IPv4 にフォールバックするという挙動で、すごくストレスフルだった。 この挙動の対処として、カーネルレベルで IPv6 を off にしてました。 そうこうしているうちに契約している ISP が IPv6 オプションなしで IPoE を利用できるようになったので、 とりあえず IPoE だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。 いいかげんこの家庭内 LAN のネットワークを IPv6 化し、インターネットと IPv6 で通信できるようにした顛末をのこす。のこします。" />
+<link rel="canonical" href="http://localhost:3000/blog/2022/10/12/ipv6nize-at-home/" />
+<meta property="og:url" content="http://localhost:3000/blog/2022/10/12/ipv6nize-at-home/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-12T23:59:50+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Communicate on IPv6 from home" />
+<script type="application/ld+json">
+{"description":"家のネットワークからインターネットへ出るとき IPoE を使ってたけど、家庭内 LAN のネットワークは IPv6 を off にしていた。 この LAN 内 IPv6 化していなかった理由としては、昔 Linux (だけじゃないかも)が IPv6 が利用できる状態だと 先に IPv6 で繋ぎにいこうとして IPv6 で通信できなかったら IPv4 にフォールバックするという挙動で、すごくストレスフルだった。 この挙動の対処として、カーネルレベルで IPv6 を off にしてました。 そうこうしているうちに契約している ISP が IPv6 オプションなしで IPoE を利用できるようになったので、 とりあえず IPoE だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。 いいかげんこの家庭内 LAN のネットワークを IPv6 化し、インターネットと IPv6 で通信できるようにした顛末をのこす。のこします。","headline":"Communicate on IPv6 from home","dateModified":"2022-10-12T23:59:50+09:00","datePublished":"2022-10-12T23:59:50+09:00","url":"http://localhost:3000/blog/2022/10/12/ipv6nize-at-home/","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:3000/blog/2022/10/12/ipv6nize-at-home/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Communicate on IPv6 from home</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-10-12T23:59:50+09:00" itemprop="datePublished">Oct 12, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>家のネットワークからインターネットへ出るとき <code class="language-plaintext highlighter-rouge">IPoE</code> を使ってたけど、家庭内 LAN のネットワークは <code class="language-plaintext highlighter-rouge">IPv6</code> を off にしていた。
+この LAN 内 <code class="language-plaintext highlighter-rouge">IPv6</code> 化していなかった理由としては、昔 Linux (だけじゃないかも)が <code class="language-plaintext highlighter-rouge">IPv6</code> が利用できる状態だと
+先に <code class="language-plaintext highlighter-rouge">IPv6</code> で繋ぎにいこうとして <code class="language-plaintext highlighter-rouge">IPv6</code> で通信できなかったら <code class="language-plaintext highlighter-rouge">IPv4</code> にフォールバックするという挙動で、すごくストレスフルだった。
+この挙動の対処として、カーネルレベルで <code class="language-plaintext highlighter-rouge">IPv6</code> を off にしてました。
+そうこうしているうちに契約している ISP が <code class="language-plaintext highlighter-rouge">IPv6</code> オプションなしで <code class="language-plaintext highlighter-rouge">IPoE</code> を利用できるようになったので、
+とりあえず <code class="language-plaintext highlighter-rouge">IPoE</code> だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。
+いいかげんこの家庭内 LAN のネットワークを <code class="language-plaintext highlighter-rouge">IPv6</code> 化し、インターネットと <code class="language-plaintext highlighter-rouge">IPv6</code> で通信できるようにした顛末をのこす。のこします。</p>
+
+<h2 id="家庭内-lan-環境">家庭内 LAN 環境</h2>
+
+<p>ゲートウェイ: NEC IP38X/1210 (YAMAHA RTX1200)
+PC: 6.0.0-gentoo</p>
+
+<p><img src="/images/home2internet.png" alt="" /></p>
+
+<h2 id="ipoe-化と家庭内-lan-の-ipv6-化">IPoE 化と家庭内 LAN の IPv6 化</h2>
+
+<p>設定は <a href="https://network.yamaha.com/setting/router_firewall/flets/flets_other_service/ipv6_ipoe">YAMAHA の設定例集</a>に載ってあるのでそれを参考にします。
+<code class="language-plaintext highlighter-rouge">IPoE</code> 化はこの設定例でいけるのですが、どうも設定したときにミスったらしく、 LAN の IP アドレスが <code class="language-plaintext highlighter-rouge">IPv4</code> ではインターネットへ出ることができるが、
+<code class="language-plaintext highlighter-rouge">IPv6</code> ではインターネットへ出ることができない状態になってしまいました。</p>
+
+<h3 id="旧設定">旧設定</h3>
+<p>どのような設定だったかは以下に</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route default gateway tunnel 1
+ipv6 prefix 1 ra-prefix@lan2::/64
+ipv6 lan1 address ra-prefix@lan2::1/64
+ipv6 lan1 prefix ra-prefix@lan2::/64
+ipv6 lan1 rtadv send 1
+ipv6 lan1 dhcp service server
+ipv6 lan2 address auto
+ipv6 lan2 secure filter in 1010 1011 1012 2000
+ipv6 lan2 secure filter out 3000 dynamic 100 101 102 103 104 105 106
+ipv6 lan2 dhcp service client ir=on
+ngn type lan2 ntt
+tunnel select 1
+ tunnel encapsulation ipip
+ tunnel endpoint address 2404:8e00::feed:100
+ tunnel enable 1
+ipv6 filter 1010 pass * * icmp6 * *
+ipv6 filter 1011 pass * * tcp * ident
+ipv6 filter 1012 pass * * udp * 546
+ipv6 filter 2000 reject * * * * *
+ipv6 filter 3000 pass * * * * *
+ipv6 filter dynamic 100 * * ftp
+ipv6 filter dynamic 101 * * domain
+ipv6 filter dynamic 102 * * www
+ipv6 filter dynamic 103 * * smtp
+ipv6 filter dynamic 104 * * pop3
+ipv6 filter dynamic 105 * * tcp
+ipv6 filter dynamic 106 * * udp
+</code></pre></div></div>
+
+<p>この設定ではインターネットとは <code class="language-plaintext highlighter-rouge">IPv4</code> でしか通信できていない状態でした。
+でこのトラブルシュートとして知人(<a href="https://twitter.com/n_kane">@n_kane</a>, <a href="https://twitter.com/paina">@paina</a>) のちからを借りてどこまで通じてどこから通じないかを確認しました。</p>
+
+<h3 id="trable-shooting">trable shooting</h3>
+
+<p>とりあえず <code class="language-plaintext highlighter-rouge">ping6</code> 、 <code class="language-plaintext highlighter-rouge">traceroute6</code> で通じていないことを確認します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ping6 -c 3 google.com
+
+PING  google.com(nrt13s55-in-x0e.1e100.net (2404:6800:4004:824::200e)) 56 データ長(byte)
+
+--- google.com ping 統計 ---
+送信パケット数 3, 受信パケット数 0, パケット損失 100%, 時間 2067ミリ秒
+
+$ traceroute6 google.com
+traceroute to google.com, 30 hops max, 80 byte packets
+ 1  * * *
+ 2  * * *
+ 3  * * *
+ 4  * * *
+ 5  * * *
+ 6  * * *
+ 7  * * *
+ 8  * * *
+ 9  * * *
+10  * * *
+11  * * *
+12  * * *
+13  * * *
+14  * * *
+15  * * *
+16  * * *
+17  * * *
+18  * * *
+19  * * *
+20  * * *
+21  * * *
+22  * * *
+23  * * *
+24  * * *
+25  * * *
+26  * * *
+27  * * *
+28  * * *
+29  * * *
+30  * * *
+</code></pre></div></div>
+
+<p>通ってないですね。
+先述したように PC は <code class="language-plaintext highlighter-rouge">IPv6</code> を on にしたばかりなのでクライアント側の設定でブロックしていないかを確認します。
+まずクライアント側で考えられるのは <code class="language-plaintext highlighter-rouge">iptables</code> でのパケットフィルタリングですね。
+ルーターの下にある PC なので、ここでブロックすることは低いのですが、確認します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip6tables --list
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+</code></pre></div></div>
+
+<p>なにもフィルタリングしていないですね。
+ということで、クライアント側には問題なさそうですね。
+どこまで通じてどこまで通じていないのか別のエンドポイントで確認します。</p>
+
+<p>まず、手元と相手で <code class="language-plaintext highlighter-rouge">tcpdump</code> 利用してパケットが送っているか届いているかを確認します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># tcpdump -nei enp8s0f0 icmp6
+dropped privs to pcap
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on enp8s0f0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+22:35:41.158558 00:a0:de:69:40:9d &gt; 33:33:ff:51:5e:63, ethertype IPv6 (0x86dd), length 86: fe80::212:e2ff:fe70:6144 &gt; ff02::1:ff51:5e63: ICMP6, neighbor solicitation, who has 2409:10:a5c0:1f00:d903:ddb5:851:5e63, length 32
+22:35:58.765783 ee:60:51:38:43:9c &gt; 33:33:ff:00:00:01, ethertype IPv6 (0x86dd), length 86: 2409:10:a5c0:1f00:5ce3:afcb:9bb2:5c1b &gt; ff02::1:ff00:1: ICMP6, neighbor solicitation, who has 2409:10:a5c0:1f00::1, length 32
+22:36:09.249427 ee:60:51:38:43:9c &gt; 33:33:ff:00:00:01, ethertype IPv6 (0x86dd), length 86: 2409:10:a5c0:1f00:5ce3:afcb:9bb2:5c1b &gt; ff02::1:ff00:1: ICMP6, neighbor solicitation, who has 2409:10:a5c0:1f00::1, length 32
+</code></pre></div></div>
+
+<p>送れてはいるようで対向側にも届いていたらしく戻りのパケットは送ってたようですが、手元では戻ってくるパケットは見えていないですね。</p>
+
+<p><img src="/images/ping6-failure.png" alt="" /></p>
+
+<p>ということはやはりルーターの設定が悪そうということが推察されますね。
+設定のどこが悪いのかあやしいところを見ていきます。</p>
+
+<p>最初に怪しいとおもったのはルーターのフィルターまわりです。一旦、<code class="language-plaintext highlighter-rouge">no ipv6 interface secure filer in</code> で全部無効化しましょう。しかしとくに変りはないです。これはフィルターが原因ではなさそうですね。</p>
+
+<p>次にあやしい点は以下2つの設定</p>
+
+<ol>
+  <li><a href="http://www.rtpro.yamaha.co.jp/RT/manual/rt-common/ipv6/ipv6_interface_address.html"><code class="language-plaintext highlighter-rouge">ipv6 interface address</code></a></li>
+  <li><a href="http://www.rtpro.yamaha.co.jp/RT/manual/rt-common/ipv6/ipv6_interface_address.html"><code class="language-plaintext highlighter-rouge">ipv6 interface prefix</code></a></li>
+</ol>
+
+<p>上のコマンドは ISP から自動で振ってきている IP を割り当てる設定で、下のコマンドは ISP から振ってきた <code class="language-plaintext highlighter-rouge">IPv6</code> のプレフィックスを付けるようにするための設定となります。
+どうもこの下のコマンドが邪魔なようです。
+<code class="language-plaintext highlighter-rouge">no ipv6 interface prefix</code> で無効化できるので一旦外してみましょう。
+すると</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ping6 -c 3 google.com
+PING google.com(nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e)) 56 データ長(byte)
+64 バイト応答 送信元 nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e): icmp_seq=1 ttl=57 時間=6.53ミリ秒
+64 バイト応答 送信元 nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e): icmp_seq=2 ttl=57 時間=2.73ミリ秒
+64 バイト応答 送信元 nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e): icmp_seq=3 ttl=57 時間=2.81ミリ秒
+
+--- google.com ping 統計 ---
+送信パケット数 3, 受信パケット数 3, パケット損失 0%, 時間 2002ミリ秒
+rtt 最小/平均/最大/mdev = 2.731/4.023/6.532/1.773ミリ秒
+</code></pre></div></div>
+
+<p>のように通りました!勝ったッ!第三部完!</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>以前中途半端に設定したおかげで <code class="language-plaintext highlighter-rouge">IPv6</code> 有効化に時間が掛ってしまった顛末をまとめました。
+これで家のネットワークから <code class="language-plaintext highlighter-rouge">IPv6</code> で通信できるようになりました。
+ありがとうございました!</p>
+
+<p>次回 katsyoshi.org お名前.COM やめるってよ</p>
+
+  </div><a class="u-url" href="/blog/2022/10/12/ipv6nize-at-home/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
