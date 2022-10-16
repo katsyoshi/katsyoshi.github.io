@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活 | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="katsyoshi.org の登録先を お名前ドットコム にしてたけど、広告のようなメールとか届くし 更新案内と広告の違いがわからない感じのメールが大量にくるのでやめようやめようと思ってたのでいいかげん変えてみた話。" />
+<meta property="og:description" content="katsyoshi.org の登録先を お名前ドットコム にしてたけど、広告のようなメールとか届くし 更新案内と広告の違いがわからない感じのメールが大量にくるのでやめようやめようと思ってたのでいいかげん変えてみた話。" />
+<link rel="canonical" href="http://localhost:3000/blog/2022/10/15/goodbey-onamae-dot-com/" />
+<meta property="og:url" content="http://localhost:3000/blog/2022/10/15/goodbey-onamae-dot-com/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-15T23:59:50+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活" />
+<script type="application/ld+json">
+{"description":"katsyoshi.org の登録先を お名前ドットコム にしてたけど、広告のようなメールとか届くし 更新案内と広告の違いがわからない感じのメールが大量にくるのでやめようやめようと思ってたのでいいかげん変えてみた話。","headline":"お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活","dateModified":"2022-10-15T23:59:50+09:00","datePublished":"2022-10-15T23:59:50+09:00","url":"http://localhost:3000/blog/2022/10/15/goodbey-onamae-dot-com/","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:3000/blog/2022/10/15/goodbey-onamae-dot-com/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-10-15T23:59:50+09:00" itemprop="datePublished">Oct 15, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><strong>katsyoshi.org</strong> の登録先を <a href="https://www.onamae.com"><strong>お名前ドットコム</strong></a> にしてたけど、広告のようなメールとか届くし
+更新案内と広告の違いがわからない感じのメールが大量にくるのでやめようやめようと思ってたのでいいかげん変えてみた話。</p>
+
+<h2 id="準備">準備</h2>
+
+<p>準備として移行先のレジストラを選定します。
+移行先としては普通のレジストラとクラウド業者がやっているレジストラがあると思いますが、今回は以下3つを候補にしました。</p>
+
+<ol>
+  <li><a href="https://domains.google/intl/ja_jp/"><strong>Google Domains</strong></a>: <strong>Google</strong> がやっているやつ。メールとか <strong>Google</strong> なんで <em>DNS</em> まで <strong>Google</strong> にするのは心理的抵抗が強い。</li>
+  <li><a href="https://aws.amazon.com/jp/route53/"><strong>Route 53</strong></a>: みんなつかってる <strong>AWS</strong> のサービス。仕事で利用しているので、プライベートは別のがいいかな。</li>
+  <li><a href="https://www.cloudflare.com/ja-jp/dns/"><strong>Cloudflare の DNS</strong></a>: みんなだいすき低価格 <em>CDN</em> 業者の <a href="https://cloudflare.com"><strong>Cloudflare</strong></a> がやってる <em>DNS</em> サービス。</li>
+</ol>
+
+<p><strong>Google</strong> 、 <strong>AWS</strong> は言わずと知れた巨大企業でサービスがなくなるということはないとおもうが、
+仕事で利用したり、情報全部預けたりしているところなので選択する理由が個人的には弱い。
+個人利用でガンガン変えたり、 <strong>VPC</strong> でネットワーク構築するわけじゃないので <strong>Cloudflare</strong> でいいかなと。</p>
+
+<h3 id="お名前ドットコムでの作業">お名前ドットコムでの作業</h3>
+
+<p>レジストラを移管する前に現在登録してある <a href="https://www.nic.ad.jp/ja/whois/">WHOIS 情報</a> を確認します。
+これは移管作業で移管作業用コードが WHOIS 登録者にメールが送られてくるのでどのメールアドレスかの確認です。
+ここで<a href="https://www.onamae.com/service/d-regist/option.html">WHOIS 情報公開代行</a> を利用している場合は、
+WHOIS を一旦登録時のものに変更します<sup id="fnref:org" role="doc-noteref"><a href="#fn:org" class="footnote" rel="footnote">1</a></sup>。</p>
+
+<h2 id="移管">移管</h2>
+
+<p>移管作業としては新規レジストラで<a href="https://developers.cloudflare.com/registrar/get-started/transfer-domain-to-cloudflare/">移管依頼</a>を参考に移管依頼ページを開きます。
+開いたら、旧サービスから移管コードの発行を行ないます<sup id="fnref:onamae" role="doc-noteref"><a href="#fn:onamae" class="footnote" rel="footnote">2</a></sup>。
+移管コードを <a href="https://zenn.dev/a24k/articles/20220527-cloudflare-dns"><strong>Cloudflare</strong> 側で入力して</a>しばし待機。</p>
+
+<p>しばらくしたら、レコードが登録されるので完了です。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>ということで <em>DNS</em> の登録を <strong>Cloudflare</strong> へ移管しました。
+<strong>お名前ドットコム</strong> はあのメールさえなければ続けたのかもしれない。
+が更新警告と普通のメールの違いがあまりにもわからないので捨てることにしました。
+<strong>Cloudflare</strong> で不満があったらまた変更すると思いますが、快適な生活になりました(たぶん</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:org" role="doc-endnote">
+      <p>前に移行しようとしたとき、<strong>.org</strong> のドメインは WHOIS 情報書き変えられなくて移行失敗。現在この制限はなくなったので移行。 <a href="#fnref:org" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:onamae" role="doc-endnote">
+      <p>こいつが見つけにくく、お名前ドットコムからは見つけられずに<a href="https://www.tsukimi.net/domain_onamae_xdomain.html">移管レポートブログ</a>から発見。 <a href="#fnref:onamae" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/blog/2022/10/15/goodbey-onamae-dot-com/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

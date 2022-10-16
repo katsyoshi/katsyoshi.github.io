@@ -9,33 +9,16 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/11/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/11/" />
+<link rel="canonical" href="http://localhost:3000/page/11/" />
+<meta property="og:url" content="http://localhost:3000/page/11/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/10/" />
+<link rel="prev" href="http://localhost:3000/page/10/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 11" />
 <script type="application/ld+json">
-{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 11","url":"https://blog.katsyoshi.org/page/11/","@type":"WebPage","@context":"https://schema.org"}</script>
+{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 11","url":"http://localhost:3000/page/11/","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
-if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-49549546-1', 'auto');
-  ga('send', 'pageview');
-}
-</script>
-  
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-</head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -59,6 +42,213 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2014/04/11/post-access-log-to-treasure-data/">アクセスログをTreasureData.comへ</a></h1>
+  <p class="author">
+    <span class="date">2014-04-11 00:50:27 +0900</span>
+  </p>
+  <div class="content">
+    <p>いいかげん<a href="http://www.treasuredata.com">treasure data</a>を使おうかな。
+ということでこの鯖のアクセスログをfluentdを使って保存しようとおもいます。</p>
+
+<p>今回は<a href="https://github.com/treasure-data/td-agent">td-agent</a>を利用せずにgemからインストールしたfluentdを利用します。</p>
+
+<h2 id="環境">環境</h2>
+<p>環境としてUbuntu 12.04を利用しています。</p>
+
+<h2 id="準備">準備</h2>
+<p>事前準備としてユーザ、グループの作成、rubyのインストールを行ないます。</p>
+
+<h3 id="ユーザグループの作成">ユーザ、グループの作成</h3>
+<p>以下のコマンドでユーザ、グループの作成を行います。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo adduser fluentd -s /bin/false
+</code></pre></div></div>
+<p>指示に従って入力するとユーザ、グループが作成されています。
+このユーザは<a href="http://qiita.com/shunichi/items/c7744878f5c02eaab18d#2-5">ログインできません</a>。</p>
+
+<h3 id="rubyのインストール">Rubyのインストール</h3>
+
+<p>以下のコマンドを入力しRubyのインストールを行ないます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo aptitude build-dep ruby1.9.3
+$ sudo aptitude install git
+$ sudo git clone git://github.com/sstephenson/rbenv.git /usr/local/rbenv
+$ sudo git clone git://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
+$ export RBENV_ROOT=/usr/local/rbenv
+$ export PATH=${RBENV_ROOT}/bin:${PATH}
+$ eval "$(rbenv init -)"
+</code></pre></div></div>
+
+<p>ここまで入力したら<code class="language-plaintext highlighter-rouge">sudo visudo -f /etc/sudoers.d/00_base</code>と入力し、以下を<a href="http://office.tsukuba-bunko.org/ppoi/entry/systemwide-rbenv">入力してください</a>。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Defaults !secure_path
+Defaults env_keep += "PATH RBENV_ROOT"
+</code></pre></div></div>
+
+<p>入力したらRuby 2.1.1をインストールします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo rbenv install 2.1.1
+$ sudo rbenv rehash
+</code></pre></div></div>
+<p>でインストール完了です。次にfluentdをインストールします。</p>
+
+<h3 id="fluentdとプラグインのインストール">fluentdとプラグインのインストール</h3>
+<p>gemでfluentdとtdプラグインのfluent-plugin-tdをインストールします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo gem install fluentd fluent-plugin-td
+</code></pre></div></div>
+
+<p>つぎに設定ファイル<code class="language-plaintext highlighter-rouge">fluentd.conf</code>を作成します。</p>
+
+<p>```xml fluentd.conf</p>
+<source />
+
+<p>type forward
+&lt;/source&gt;</p>
+
+<source />
+
+<p>type tail
+  path /var/log/nginx/access.log
+  format nginx
+  time_format %d/%b/%Y:%H:%M:%S %z
+  tag td.nginx.main.access
+  pos_file /var/log/fluentd/main_access.pos
+&lt;/source&gt;</p>
+
+<p>&lt;match td.<em>*.</em>&gt;
+  type copy</p>
+<store>
+    type stdout
+  </store>
+<store>
+    type tdlog
+    endpoint api.treasure-data.com
+    apikey ここにtdのAPIキーを入力してね
+    auto_create_table
+    buffer_type file
+    buffer_path /var/log/fluentd/buffer/td
+    use_ssl true
+  </store>
+<p>&lt;/match&gt;</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+作成後起動確認を行なってください `fluentd -c fluentd.conf` 。
+起動確認を行ったら `fluentd.conf` を `/etc/fluentd/fluentd.conf` に移動します。
+これで終了です。
+
+### init.dスクリプトの作成
+まず `/etc/init.d/skelton` を `/etc/init.d/fluentd` にコピーします。
+コピーしたら以下の様にします。
+
+```diff fluentd_diff_skelton
+diff --git a/etc/init.d/skeleton b/fluentd
+old mode 100644
+new mode 100755
+index dac9480..c59505e
+--- a/etc/init.d/skeleton
++++ b/fluentd
+@@ -1,6 +1,6 @@
+ #! /bin/sh
+ ### BEGIN INIT INFO
+-# Provides:          skeleton
++# Provides:          fleuntd
+ # Required-Start:    $remote_fs $syslog
+ # Required-Stop:     $remote_fs $syslog
+ # Default-Start:     2 3 4 5
+@@ -19,19 +19,14 @@
+
+ # PATH should only include /usr/* if it runs after the mountnfs.sh script
+ PATH=/sbin:/usr/sbin:/bin:/usr/bin
+-DESC="Description of the service"
+-NAME=daemonexecutablename
+-DAEMON=/usr/sbin/$NAME
+-DAEMON_ARGS="--options args"
+-PIDFILE=/var/run/$NAME.pid
+-SCRIPTNAME=/etc/init.d/$NAME
+-
+-# Exit if the package is not installed
+-[ -x "$DAEMON" ] || exit 0
++NAME=fluentd
+
+ # Read configuration variable file if it is present
+ [ -r /etc/default/$NAME ] &amp;&amp; . /etc/default/$NAME
+
++# Exit if the package is not installed
++[ -x "$DAEMON" ] || exit 0
++
+ # Load the VERBOSE setting and other rcS variables
+ . /lib/init/vars.sh
+
+@@ -49,10 +44,11 @@ do_start()
+  #   0 if daemon has been started
+  #   1 if daemon was already running
+  #   2 if daemon could not be started
+-    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --test &gt; /dev/null \
++    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON \
++    ${START_STOP_DAEMON_ARGS} --test &gt; /dev/null \
+      || return 1
+-    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- \
+-        $DAEMON_ARGS \
++    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON \
++        ${START_STOP_DAEMON_ARGS} -- $DAEMON_ARGS \
+      || return 2
+  # Add code here, if necessary, that waits for the process to be ready
+  # to handle requests from services started subsequently which depend
+</code></pre></div></div>
+
+<p>このままでは起動しないので <code class="language-plaintext highlighter-rouge">/etc/default/fluentd</code> を作成します。</p>
+
+<p>```sh fluentd.default
+RBENV_ROOT=/usr/local/rbenv
+PATH=${RBENV_ROOT}/bin:${PATH}
+eval “$(rbenv init -)”
+USER=fluentd
+GROUP=fluentd
+DESC=”fluentd”
+PIDFILE=/var/log/$NAME/run.pid
+CONFFILE=/etc/fluentd/fluentd.conf
+DAEMON=/usr/local/rbenv/shims/fluentd
+DAEMON_ARGS=”–daemon $PIDFILE –log /var/log/fluentd/fluentd.log –config $CONFFILE”
+SCRIPTNAME=/etc/init.d/$NAME
+START_STOP_DAEMON_ARGS=””</p>
+
+<p>if [ -n “${USER}” ]; then
+   if ! getent passwd | grep -q “^${USER}:”; then
+      echo “$0: user for running td-agent doesn’t exist: ${USER}” &gt;&amp;2
+      exit 1
+   fi
+   if [ ! -d $(dirname ${PIDFILE}) ]; then
+       mkdir -p $(dirname ${PIDFILE})
+   fi
+   chown -R ${USER} $(dirname ${PIDFILE})
+   START_STOP_DAEMON_ARGS=”${START_STOP_DAEMON_ARGS} -c ${USER}”
+fi</p>
+
+<p>if [ -n “${GROUP}” ]; then
+   if ! getent group | grep -q “^${GROUP}:”; then
+       echo “$0: group for running td-agent doesn’t exist: ${GROUP}” &gt;&amp;2
+       exit 1
+   fi
+   START_STOP_DAEMON_ARGS=”${START_STOP_DAEMON_ARGS} –group ${GROUP}”
+fi</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+としたら、以下のコマンドを入力し、fluentdデーモンを起動します。
+
+</code></pre></div></div>
+<p>$ sudo update-rc.d fluentd defaults
+$ sudo mkdir -p /var/log/fluentd
+$ sudo chown fluentd:fluentd /var/log/fluentd
+$ sudo service fluentd start
+```</p>
+
+<p>で起動してるはずでう。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>いくつかアクセスしてみてなげられてるのを確認できたらねます。
+最後に<a href="http://katsyoshi.doorkeeper.jp/events/10420">さけまつり</a>やるかもしれないのできてみてくだしあ。</p>
+
+  </div>
 
   <h1><a href="/blog/2014/04/09/how-to-install-applications-non-super-user/">スーパーユーザ権限もたずに好きなソフトをインストール</a></h1>
   <p class="author">

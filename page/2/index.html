@@ -9,34 +9,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/2/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/2/" />
+<link rel="canonical" href="http://localhost:3000/page/2/" />
+<meta property="og:url" content="http://localhost:3000/page/2/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
-<link rel="prev" href="https://blog.katsyoshi.org/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/3/" />
+<link rel="prev" href="http://localhost:3000/" />
+<link rel="next" href="http://localhost:3000/page/3/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 2" />
 <script type="application/ld+json">
-{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 2","url":"https://blog.katsyoshi.org/page/2/","@type":"WebPage","@context":"https://schema.org"}</script>
+{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 2","url":"http://localhost:3000/page/2/","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
-if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-49549546-1', 'auto');
-  ga('send', 'pageview');
-}
-</script>
-  
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-</head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -60,6 +43,62 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2021/09/13/good-bye-octopress/">Octopress 脱出</a></h1>
+  <p class="author">
+    <span class="date">2021-09-13 00:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p>長年利用してた <a href="https://github.com/octopress/octopress">Octopress</a> がずいぶん前にサポート外になってたので <a href="https://github.com/jekyll/jekyll">Jekyll</a> へ変更することにした。</p>
+
+<h2 id="問題点">問題点</h2>
+
+<p>サポート外になったことによる問題点があり、その問題によって変更することになった。
+問題点としては、 <em><a href="https://rubygems.org/gems/pygments.rb">Pygments.rb</a></em> と <em><a href="https://rubygems.org/gems/compass">Compass</a></em> と利用している <em><a href="https://ruby-lang.org/">Ruby</a></em> のバージョンが 2.3.7 というのが主であった。</p>
+
+<h2 id="変更">変更</h2>
+<p>やったことは以下のとおり。</p>
+
+<ol>
+  <li>gem の整理
+    <ul>
+      <li>最初に不要な <em>gem</em> を削除。特に消したいのは <em>Pygments.rb</em> と <em>Compass</em> それ以外にも不要なものがあるので消す。</li>
+    </ul>
+  </li>
+  <li>ディレクトリの整理
+    <ul>
+      <li>posts は元々の設定が <code class="language-plaintext highlighter-rouge">source/_posts</code> に入れていたが、 <code class="language-plaintext highlighter-rouge">_posts</code> に変更</li>
+      <li>画像も同様に <code class="language-plaintext highlighter-rouge">source/images</code> だったものを <code class="language-plaintext highlighter-rouge">images</code> に変更</li>
+    </ul>
+  </li>
+  <li>テンプレートの整理
+    <ul>
+      <li>テンプレート <em><a href="https://rubygems.org/gems/minima">minima</a></em> を利用するにあたり <code class="language-plaintext highlighter-rouge">_includes</code> などの中身を整理</li>
+    </ul>
+  </li>
+  <li>プラグインの整理
+    <ul>
+      <li>いまのところ <em><a href="https://rubygems.org/gems/jekyll-paginate-v2">jekyll-paginate-v2</a></em> のみ変更で他は入れていない。</li>
+    </ul>
+    <ul>
+      <li>そのうち theme も含めて検討したい</li>
+    </ul>
+  </li>
+  <li><a href="https://rubygems.org/gems/rake">Rake コマンド</a> の整理
+    <ul>
+      <li>とりあえず octopress で利用してた <em>Rakefile</em> から必要最低限の変更のみ実行。</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>日曜日の夜中 <strong><a href="/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">RubyKaigi の日記</a></strong> をポストしてからこのリポジトリを <em>jekyll</em> にしようと <strong>雑に</strong> 弄ってたら、 <code class="language-plaintext highlighter-rouge">rake generate</code> が <code class="language-plaintext highlighter-rouge">Unknown language: xml</code> という謎の <em>Pygments</em> エラーが出てしまった。
+このエラーを修正しようとしがんばってみたが、失敗して修正できなかったので <em>jekyll</em> に変更したものでデプロイした。</p>
+
+<p>そんなこんなあって <em>Octopress</em> はやめて <em>jekyll</em> に変更しました。</p>
+
+  </div>
 
   <h1><a href="/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">2021.takeout.rubykaigi.org</a></h1>
   <p class="author">
@@ -636,72 +675,6 @@ lsp-ruby
 
 <p><code class="language-plaintext highlighter-rouge">lsp-ruby</code> を導入したけど、<code class="language-plaintext highlighter-rouge">solargraph</code> だとちょっとあれな表示が出て残念な気分に。
 また <code class="language-plaintext highlighter-rouge">rubocop</code> も基本的に要求されるようで…</p>
-
-  </div>
-
-  <h1><a href="/blog/2018/11/06/remove-rails-assets/">remove rails assets</a></h1>
-  <p class="author">
-    <span class="date">2018-11-06 00:40:32 +0900</span>
-  </p>
-  <div class="content">
-    <p>ひさびさに <code class="language-plaintext highlighter-rouge">Ruby on Rails</code> の話で、自作の rails application で <code class="language-plaintext highlighter-rouge">rails-assets</code> というところからいくつか gem を利用してたので
-それを <code class="language-plaintext highlighter-rouge">Yarn</code> で同様のパッケージをインストールするように変更した。</p>
-
-<h2 id="なにをやったのか">なにをやったのか？</h2>
-
-<p>単純に一旦 <code class="language-plaintext highlighter-rouge">rails-assets</code> からインストールしている gem を <code class="language-plaintext highlighter-rouge">Gemfile</code> から削除します。</p>
-
-<p>そのあと、 <code class="language-plaintext highlighter-rouge">yarn add</code> で <code class="language-plaintext highlighter-rouge">package.json</code> を生成し <code class="language-plaintext highlighter-rouge">node_modules</code> にインストールします。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">yarn add bootstrap@3 font-awesome jquery
-yarn install
-rails s
-</span></code></pre></div></div>
-
-<p>インストールが終了し、railsを起動したら必要な情報(<a href="https://blog.zerokol.com/2018/06/ruby-on-rails-yarn-font-awesome-in.html">font-awesome</a>, <a href="https://qiita.com/fuqda/items/c5756b8f56dcc238c110">bootstrap</a>) を <code class="language-plaintext highlighter-rouge">app/assets/{javascripts,stylesheets}</code> に記載。</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/assets/javascripts/application.js</span>
-<span class="c1">//= require rails-ujs</span>
-<span class="c1">//= require turbolinks</span>
-<span class="c1">//= require jquery/dist/jquery.js</span>
-<span class="c1">//= require bootstrap-sass/assets/javascripts/bootstrap</span>
-<span class="c1">//= require_tree .</span>
-</code></pre></div></div>
-
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">#</span> <span class="nt">app</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">application</span><span class="nc">.scss</span>
-<span class="k">@import</span> <span class="s2">'bootstrap-sass/assets/stylesheets/bootstrap'</span><span class="p">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/variables"</span><span class="p">;</span>
-<span class="err">$</span><span class="nt">fa-font-path</span><span class="o">:</span> <span class="s1">"font-awesome/fonts/"</span><span class="o">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/mixins"</span><span class="p">;</span>
-<span class="k">@font-face</span> <span class="p">{</span>
-  <span class="nl">font-family</span><span class="p">:</span> <span class="s2">'FontAwesome'</span><span class="p">;</span>
-  <span class="nl">src</span><span class="p">:</span> <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}'</span><span class="p">);</span>
-  <span class="nl">src</span><span class="p">:</span> <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.eot?#iefix&amp;v=#{$fa-version}'</span><span class="p">)</span> <span class="n">format</span><span class="p">(</span><span class="s2">'embedded-opentype'</span><span class="p">),</span>
-    <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}'</span><span class="p">)</span> <span class="n">format</span><span class="p">(</span><span class="s2">'woff2'</span><span class="p">),</span>
-    <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}'</span><span class="p">)</span> <span class="n">format</span><span class="p">(</span><span class="s2">'woff'</span><span class="p">),</span>
-    <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}'</span><span class="p">)</span> <span class="n">format</span><span class="p">(</span><span class="s2">'truetype'</span><span class="p">),</span>
-    <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular'</span><span class="p">)</span> <span class="n">format</span><span class="p">(</span><span class="s2">'svg'</span><span class="p">);</span>
-  <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
-  <span class="nl">font-style</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/core"</span><span class="p">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/larger"</span><span class="p">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/fixed-width"</span><span class="p">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/list"</span><span class="p">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/bordered-pulled"</span><span class="p">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/animated"</span><span class="p">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/rotated-flipped"</span><span class="p">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/stacked"</span><span class="p">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/icons"</span><span class="p">;</span>
-<span class="k">@import</span> <span class="s1">"font-awesome/scss/screen-reader"</span><span class="p">;</span>
-<span class="err">$</span><span class="nt">icon-font-path</span><span class="o">:</span> <span class="s1">"bootstrap-sass/assets/fonts/bootstrap"</span><span class="o">;</span>
-</code></pre></div></div>
-
-<p>ってかいたら使えるようになっています!</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>ということで <em>IMASARA</em> ですが <code class="language-plaintext highlighter-rouge">rails-assets</code> からの脱却ついでに簡単に <code class="language-plaintext highlighter-rouge">yarn</code> を利用した assets の導入をやってみました!</p>
 
   </div>
 
