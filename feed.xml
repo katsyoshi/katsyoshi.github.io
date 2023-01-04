@@ -1,4 +1,309 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2022-10-17T09:35:38+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活</title><link href="https://blog.katsyoshi.org/blog/2022/10/15/goodbey-onamae-dot-com/" rel="alternate" type="text/html" title="お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活" /><published>2022-10-15T23:59:50+09:00</published><updated>2022-10-15T23:59:50+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/10/15/goodbey-onamae-dot-com</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/10/15/goodbey-onamae-dot-com/">&lt;p&gt;&lt;strong&gt;katsyoshi.org&lt;/strong&gt; の登録先を &lt;a href=&quot;https://www.onamae.com&quot;&gt;&lt;strong&gt;お名前ドットコム&lt;/strong&gt;&lt;/a&gt; にしてたけど、広告のようなメールとか届くし
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2023-01-04T18:01:43+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Update rubygems using Rust for Ruby 3.2</title><link href="https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/" rel="alternate" type="text/html" title="Update rubygems using Rust for Ruby 3.2" /><published>2023-01-03T23:59:59+09:00</published><updated>2023-01-03T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/">&lt;p&gt;&lt;a href=&quot;/blog/2022/08/12/how-to-use-rust-in-ruby-gems/&quot;&gt;以前このブログ&lt;/a&gt;で &lt;a href=&quot;https://www.rust-lang.org/&quot;&gt;&lt;strong&gt;Rust&lt;/strong&gt;&lt;/a&gt; を利用して &lt;a href=&quot;https://rubygems.org&quot;&gt;&lt;strong&gt;rubygems&lt;/strong&gt;&lt;/a&gt; を作成した
+&lt;a href=&quot;https://github.com/katsyoshi/rust_uuid&quot;&gt;&lt;strong&gt;rust_uuid&lt;/strong&gt;&lt;/a&gt; が &lt;a href=&quot;https://www.ruby-lang.org/ja/news/2022/12/25/ruby-3-2-0-released/&quot;&gt;&lt;strong&gt;Ruby 3.2&lt;/strong&gt; がリリース&lt;/a&gt; によりコンパイルできなくなったのでその修正顛末。&lt;/p&gt;
+
+&lt;h2 id=&quot;環境&quot;&gt;環境&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;system&lt;/th&gt;
+      &lt;th&gt;failed version&lt;/th&gt;
+      &lt;th&gt;succeed version&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ruby&lt;/td&gt;
+      &lt;td&gt;3.2.0&lt;/td&gt;
+      &lt;td&gt;3.2.0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;gem&lt;/td&gt;
+      &lt;td&gt;3.4.1&lt;/td&gt;
+      &lt;td&gt;3.4.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;bundler&lt;/td&gt;
+      &lt;td&gt;2.3.19&lt;/td&gt;
+      &lt;td&gt;2.4.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rb-sys&lt;/td&gt;
+      &lt;td&gt;0.9.29&lt;/td&gt;
+      &lt;td&gt;0.9.53&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;magnus&lt;/td&gt;
+      &lt;td&gt;0.3.2&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;whats-happened&quot;&gt;what’s happened?&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Ruby 3.2&lt;/strong&gt; が出てたのでアップデートして試してみるかーとおもいコマンドを実行!!!!&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;rake build
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+...
+error[E0425]: cannot find value &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;RUBY_ABI_VERSION&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;the crate root
+  &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /path/to/cargo/dir/registry/src/github.com-1ecc6299db9ec823/rb-sys-0.9.29/src/ruby_abi_version.rs:14:73
+   |
+14 | pub const __RB_SYS_RUBY_ABI_VERSION: std::os::raw::c_ulonglong &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; crate::RUBY_ABI_VERSION as _&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   |                                                                         ^^^^^^^^^^^^^^^^ not found &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;the crate root
+
+For more information about this error, try &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;rustc &lt;span class=&quot;nt&quot;&gt;--explain&lt;/span&gt; E0425&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+error: could not compile &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;rb-sys&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; due to previous error
+warning: build failed, waiting &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;other &lt;span class=&quot;nb&quot;&gt;jobs &lt;/span&gt;to finish...
+gmake: &lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Makefile:564: target/release/librust_uuid.so] エラー 101
+rake aborted!
+Command failed with status &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;/usr/bin/gmake...]
+/path/to/rbenv/versions/3.2.0/bin/bundle:25:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;load&lt;span class=&quot;s1&quot;&gt;&apos;
+/path/to/rbenv/versions/3.2.0/bin/bundle:25:in `&amp;lt;main&amp;gt;&apos;&lt;/span&gt;
+Tasks: TOP &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; build &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; compile &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; compile:x86_64-linux &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; compile:rust_uuid:x86_64-linux &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; copy:rust_uuid:x86_64-linux:3.2.0 &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; tmp/x86_64-linux/rust_uuid/3.2.0/rust_uuid.so
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;See full trace by running task with &lt;span class=&quot;nt&quot;&gt;--trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;rake build  63.55s user 10.61s system 541% cpu 13.705 total
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;おーなるほどなるほど、 &lt;strong&gt;cargo&lt;/strong&gt; の &lt;a href=&quot;https://github.com/oxidize-rb/rb-sys&quot;&gt;&lt;strong&gt;rb-sys&lt;/strong&gt;&lt;/a&gt; が &lt;strong&gt;Ruby 3.2&lt;/strong&gt; に対応していないバージョンつかってるんだなと理解。&lt;strong&gt;cargo&lt;/strong&gt; を更新っするぞい。&lt;/p&gt;
+
+&lt;h2 id=&quot;うpだて-cargo-ぱっけーじ&quot;&gt;うpだて &lt;strong&gt;cargo&lt;/strong&gt; ぱっけーじ&lt;/h2&gt;
+
+&lt;p&gt;ということで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo build&lt;/code&gt; が通るようにパッケージを更新するぞい。
+&lt;strong&gt;cargo&lt;/strong&gt; も &lt;strong&gt;bundler&lt;/strong&gt; 同様、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo update&lt;/code&gt; でいい感じにアップデートしてくれます。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;ext/rust_uuid
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cargo update
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cargo build
+   Compiling magnus v0.3.2
+error[E0432]: unresolved import &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;crate::ruby_sys::ruby_rstring_consts&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /path/to/cargo/dir/registry/src/github.com-1ecc6299db9ec823/magnus-0.3.2/src/r_string.rs:23:47
+   |
+23 | use crate::ruby_sys::&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;rb_str_to_interned_str, ruby_rstring_consts::RSTRING_EMBED_LEN_SHIFT&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   |                                               ^^^^^^^^^^^^^^^^^^^ could not find &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;ruby_rstring_consts&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;ruby_sys&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+
+error[E0599]: no variant or associated item named &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;RSTRING_EMBED_LEN_MASK&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; found &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;enum &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;ruby_rstring_flags&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;the current scope
+   &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /path/to/cargo/dir/registry/src/github.com-1ecc6299db9ec823/magnus-0.3.2/src/r_string.rs:368:38
+    |
+368 |             f &amp;amp;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ruby_rstring_flags::RSTRING_EMBED_LEN_MASK as VALUE&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    |                                      ^^^^^^^^^^^^^^^^^^^^^^ variant or associated item not found &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;ruby_rstring_flags&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+
+error[E0599]: no variant or associated item named &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;RSTRING_EMBED_LEN_MASK&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; found &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;enum &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;ruby_rstring_flags&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;the current scope
+   &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /path/to/cargo/dir/registry/src/github.com-1ecc6299db9ec823/magnus-0.3.2/src/r_string.rs:968:42
+    |
+968 |                 f &amp;amp;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ruby_rstring_flags::RSTRING_EMBED_LEN_MASK as VALUE&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^ variant or associated item not found &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;ruby_rstring_flags&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+
+Some errors have detailed explanations: E0432, E0599.
+For more information about an error, try &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;rustc &lt;span class=&quot;nt&quot;&gt;--explain&lt;/span&gt; E0432&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+error: could not compile &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;magnus&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; due to 3 previous errors
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo update&lt;/code&gt; しましたが、やっぱり駄目でしたね。今度は &lt;a href=&quot;https://github.com/matsadler/magnus&quot;&gt;&lt;strong&gt;magnus&lt;/strong&gt;&lt;/a&gt; が駄目そう。
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cargo.toml&lt;/code&gt; を見てみると、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;magnus = { version = &quot;0.3&quot;, features = [&quot;rb-sys-interop&quot;] }&lt;/code&gt; と指定してあり、 version 0.3 系が駄目そうということが類推されます。ということで公式ページを見ると新しいバージョンが出ているのでこちらにします。&lt;/p&gt;
+
+&lt;div class=&quot;language-diff highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gd&quot;&gt;--- a/ext/rust_uuid/Cargo.toml
+&lt;/span&gt;&lt;span class=&quot;gi&quot;&gt;+++ b/ext/rust_uuid/Cargo.toml
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;@@ -10,7 +10,7 @@&lt;/span&gt; crate-type = [&quot;cdylib&quot;]
+ [dependencies]
+ rb-sys = &quot;0.9&quot;
+ rb-allocator = &quot;0.9&quot;
+&lt;span class=&quot;gd&quot;&gt;-magnus = { version = &quot;0.3&quot;, features = [&quot;rb-sys-interop&quot;] }
+&lt;/span&gt;&lt;span class=&quot;gi&quot;&gt;+magnus = { version = &quot;0.4&quot;, features = [&quot;rb-sys-interop&quot;] }
+&lt;/span&gt;
+ [dependencies.uuid]
+ version = &quot;1.1.2&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;再度ビルド!&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cargo update
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cargo build
+   Compiling rust_uuid v0.1.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;/home/katsyoshi/Program/Ruby/rust_uuid/ext/rust_uuid&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    Finished dev &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;unoptimized + debuginfo] target&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;0.18s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;おおっ通りました!やったね!&lt;/p&gt;
+
+&lt;h2 id=&quot;build&quot;&gt;build&lt;/h2&gt;
+
+&lt;p&gt;ということ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo build&lt;/code&gt; 通ったので &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install&lt;/code&gt; しましよう。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /path/to/rust_uuid
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;rake build
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;tmp/x86_64-linux/rust_uuid/3.2.0
+/usr/bin/gmake
+generating target/release/librust_uuid.so &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;release&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+cargo rustc &lt;span class=&quot;nt&quot;&gt;--target-dir&lt;/span&gt; target &lt;span class=&quot;nt&quot;&gt;--manifest-path&lt;/span&gt; ../../../../ext/rust_uuid/Cargo.toml &lt;span class=&quot;nt&quot;&gt;--lib&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--release&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;linker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gcc &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/rbenv/versions/3.2.0/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/rbenv/versions/3.2.0/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/katsyoshi/.local/lib:-L/home/katsyoshi/.local/lib: &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; link-arg&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-lm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; pthread
+   Compiling libc v0.2.139
+   Compiling proc-macro2 v1.0.49
+   Compiling quote v1.0.23
+   Compiling unicode-ident v1.0.6
+   Compiling clang-sys v1.4.0
+   Compiling regex-syntax v0.6.28
+   Compiling syn v1.0.107
+   Compiling rb-sys-env v0.1.1
+   Compiling libloading v0.7.4
+   Compiling nom v7.1.2
+   Compiling aho-corasick v0.7.20
+   Compiling magnus v0.4.4
+   Compiling bindgen v0.60.1
+   Compiling getrandom v0.2.8
+   Compiling uuid v1.2.2
+   Compiling cexpr v0.6.0
+   Compiling regex v1.7.0
+   Compiling magnus-macros v0.3.0
+   Compiling rb-sys-build v0.9.53
+   Compiling rb-sys v0.9.53
+   Compiling rb-allocator v0.9.6
+   Compiling rust_uuid v0.1.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;/path/to/rust_uuid/ext/rust_uuid&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    Finished release &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;optimized] target&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;12.03s
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; -
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; tmp/x86_64-linux/stage/lib/rust_uuid
+/usr/bin/gmake &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;target_prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+generating target/release/librust_uuid.so &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;release&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+cargo rustc &lt;span class=&quot;nt&quot;&gt;--target-dir&lt;/span&gt; target &lt;span class=&quot;nt&quot;&gt;--manifest-path&lt;/span&gt; ../../../../ext/rust_uuid/Cargo.toml &lt;span class=&quot;nt&quot;&gt;--lib&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--release&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;linker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gcc &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/rbenv/versions/3.2.0/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/rbenv/versions/3.2.0/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/katsyoshi/.local/lib:-L/home/katsyoshi/.local/lib: &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; link-arg&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-lm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; pthread
+    Finished release &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;optimized] target&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;0.02s
+installing rust_uuid.so to /path/to/rust_uuid/lib/rust_uuid
+/usr/bin/install &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; 0755 rust_uuid.so /path/to/rust_uuid/lib/rust_uuid
+&lt;span class=&quot;nb&quot;&gt;cp &lt;/span&gt;tmp/x86_64-linux/rust_uuid/3.2.0/rust_uuid.so tmp/x86_64-linux/stage/lib/rust_uuid/rust_uuid.so
+rake aborted!
+Running &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;gem build &lt;span class=&quot;nt&quot;&gt;-V&lt;/span&gt; /path/to/rust_uuid/rust_uuid.gemspec&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; failed with the following output:
+
+WARNING:  description and summary are identical
+WARNING:  open-ended dependency on benchmark-ips &lt;span class=&quot;o&quot;&gt;(&amp;gt;=&lt;/span&gt; 0, development&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is not recommended
+  use a bounded requirement, such as &lt;span class=&quot;s1&quot;&gt;&apos;~&amp;gt; x.y&apos;&lt;/span&gt;
+WARNING:  open-ended dependency on rake &lt;span class=&quot;o&quot;&gt;(&amp;gt;=&lt;/span&gt; 13.0.0, development&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is not recommended
+  &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;rake is semantically versioned, use:
+    add_development_dependency &lt;span class=&quot;s1&quot;&gt;&apos;rake&apos;&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;&apos;~&amp;gt; 13.0&apos;&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;&apos;&amp;gt;= 13.0.0&apos;&lt;/span&gt;
+WARNING:  open-ended dependency on rake-compiler &lt;span class=&quot;o&quot;&gt;(&amp;gt;=&lt;/span&gt; 0, development&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is not recommended
+  use a bounded requirement, such as &lt;span class=&quot;s1&quot;&gt;&apos;~&amp;gt; x.y&apos;&lt;/span&gt;
+WARNING:  open-ended dependency on rb_sys &lt;span class=&quot;o&quot;&gt;(&amp;gt;=&lt;/span&gt; 0, development&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is not recommended
+  use a bounded requirement, such as &lt;span class=&quot;s1&quot;&gt;&apos;~&amp;gt; x.y&apos;&lt;/span&gt;
+WARNING:  open-ended dependency on rspec &lt;span class=&quot;o&quot;&gt;(&amp;gt;=&lt;/span&gt; 0, development&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is not recommended
+  use a bounded requirement, such as &lt;span class=&quot;s1&quot;&gt;&apos;~&amp;gt; x.y&apos;&lt;/span&gt;
+WARNING:  See https://guides.rubygems.org/specification-reference/ &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;help
+&lt;/span&gt;ERROR:  While executing gem ... &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Gem::InvalidSpecificationException&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    You have specified rust based extension, but Cargo.lock is not part of the gem files. Please run &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;cargo generate-lockfile&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; or any other &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;to generate Cargo.lock and ensure it is added to your gem files section &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;gemspec.
+
+/path/to/rbenv/versions/3.2.0/bin/bundle:25:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;load&lt;span class=&quot;s1&quot;&gt;&apos;
+/path/to/rbenv/versions/3.2.0/bin/bundle:25:in `&amp;lt;main&amp;gt;&apos;&lt;/span&gt;
+Tasks: TOP &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; build
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;See full trace by running task with &lt;span class=&quot;nt&quot;&gt;--trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;rake build  32.87s user 4.33s system 291% cpu 12.741 total
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;なるほど？ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cargo.lock&lt;/code&gt; ファイルもあるし問題なさそうだな。よくわからんので &lt;strong&gt;rubygems&lt;/strong&gt; のリポジトリでエラーメッセージを探してみます。&lt;/p&gt;
+
+&lt;p&gt;すると&lt;a href=&quot;https://github.com/rubygems/rubygems/blob/05df95280e5f25299f4130a25dc44100226c2235/lib/rubygems/specification_policy.rb#L467-L474&quot;&gt;以下のようなコード&lt;/a&gt;が&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validate_rust_extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# :nodoc:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rust_extension&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@specification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;any?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;builder_for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;is_a?&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Gem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Ext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;CargoBuilder&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;missing_cargo_lock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@specification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;include?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Cargo.lock&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ERROR&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rust_extension&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;missing_cargo_lock&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+You have specified rust based extension, but Cargo.lock is not part of the gem files. Please run `cargo generate-lockfile` or any other command to generate Cargo.lock and ensure it is added to your gem files section in gemspec.
+&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;    ERROR&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;なろほどなろほど、プロジェクトの root 直下に置いておく必要があるのね。でもそのファイルどういうものなの？&lt;/p&gt;
+
+&lt;h2 id=&quot;gem-bundler-update&quot;&gt;gem, bundler update&lt;/h2&gt;
+
+&lt;p&gt;ってなわけで、今度は正式に &lt;strong&gt;rubygems&lt;/strong&gt; で正式にサポートされ、 &lt;strong&gt;bundler&lt;/strong&gt; でも &lt;strong&gt;gem&lt;/strong&gt; を作成するときにも &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle gem --ext=rust gem_name&lt;/code&gt; で&lt;a href=&quot;https://github.com/rubygems/rubygems/pull/6149&quot;&gt;スケルトンが作成&lt;/a&gt;されるようになりました。ということでこれを利用して &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cargo.toml&lt;/code&gt; を作ってみましょう&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle gem &lt;span class=&quot;nt&quot;&gt;--mit&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--ext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rust gem_name
+ERROR: &lt;span class=&quot;s2&quot;&gt;&quot;bundle gem&quot;&lt;/span&gt; was called with arguments &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;rust&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;gem_name&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+Usage: &lt;span class=&quot;s2&quot;&gt;&quot;bundle gem NAME [OPTIONS]&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ok, ok, これは &lt;strong&gt;bundler&lt;/strong&gt; のバージョンが古いな&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle version
+Bundler version 2.3.19 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2022-07-27 commit 4f496f93e6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;さっきの &lt;strong&gt;PR&lt;/strong&gt; は入ったのは &lt;strong&gt;Ruby 3.2&lt;/strong&gt; リリース直前なのでまだ入ってないよなとおもったけど、実際は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile.lock&lt;/code&gt; の &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BUNDLED WITH&lt;/code&gt; が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2.3.19&lt;/code&gt; を指定してるだけだったのです。
+なので対象の 2 行を削除して &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle update&lt;/code&gt; を実行し、続いて &lt;strong&gt;rust&lt;/strong&gt; サポートした &lt;strong&gt;gem&lt;/strong&gt; を生成して、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cargo.toml&lt;/code&gt; を見てみましょう。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle gem &lt;span class=&quot;nt&quot;&gt;--mit&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--ext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rust gem_name
+Creating gem &lt;span class=&quot;s1&quot;&gt;&apos;gem_name&apos;&lt;/span&gt;...
+MIT License enabled &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;config
+Changelog enabled &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;config
+Initializing git repo &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /path/to/rust_uuid/gem_name
+      create  gem_name/Gemfile
+      create  gem_name/lib/gem_name.rb
+      create  gem_name/lib/gem_name/version.rb
+      create  gem_name/sig/gem_name.rbs
+      create  gem_name/gem_name.gemspec
+      create  gem_name/Rakefile
+      create  gem_name/README.md
+      create  gem_name/bin/console
+      create  gem_name/bin/setup
+      create  gem_name/.gitignore
+      create  gem_name/.github/workflows/main.yml
+      create  gem_name/LICENSE.txt
+      create  gem_name/CHANGELOG.md
+      create  gem_name/Cargo.toml
+      create  gem_name/ext/gem_name/Cargo.toml
+      create  gem_name/ext/gem_name/extconf.rb
+      create  gem_name/ext/gem_name/src/lib.rs
+Gem &lt;span class=&quot;s1&quot;&gt;&apos;gem_name&apos;&lt;/span&gt; was successfully created. For more information on making a RubyGem visit https://bundler.io/guides/creating_gem.html
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;Cargo.toml
+&lt;span class=&quot;c&quot;&gt;# This Cargo.toml is here to let externals tools (IDEs, etc.) know that this is&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# a Rust project. Your extensions depedencies should be added to the Cargo.toml&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# in the ext/ directory.&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;workspace]
+members &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;./ext/gem_name&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+resolver &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;というようなファイルが得られるので真似して作成しちゃいましょう。&lt;/p&gt;
+
+&lt;div class=&quot;language-toml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[workspace]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;members&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;[&quot;./ext/rust_uuid&quot;]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;resolver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;そうしたらもう一度ビルドしてしまいます!&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cargo generate-lockfile
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add Cargo.toml Carog.lock
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;rake build
+/usr/bin/gmake &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;target_prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+generating target/release/librust_uuid.so &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;release&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+cargo rustc &lt;span class=&quot;nt&quot;&gt;--target-dir&lt;/span&gt; target &lt;span class=&quot;nt&quot;&gt;--manifest-path&lt;/span&gt; ../../../../ext/rust_uuid/Cargo.toml &lt;span class=&quot;nt&quot;&gt;--lib&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--release&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;linker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gcc &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/rbenv/versions/3.2.0/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/rbenv/versions/3.2.0/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/katsyoshi/.local/lib:-L/home/katsyoshi/.local/lib: &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; link-arg&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-lm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; pthread
+   Compiling rust_uuid v0.1.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;/path/to/rust_uuid/ext/rust_uuid&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    Finished release &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;optimized] target&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;0.26s
+installing rust_uuid.so to /path/to/rust_uuid/lib/rust_uuid
+/usr/bin/install &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; 0755 rust_uuid.so /path/to/rust_uuid/lib/rust_uuid
+&lt;span class=&quot;nb&quot;&gt;cp &lt;/span&gt;tmp/x86_64-linux/rust_uuid/3.2.0/rust_uuid.so tmp/x86_64-linux/stage/lib/rust_uuid/rust_uuid.so
+rust_uuid 0.1.0 built to pkg/rust_uuid-0.1.0.gem.
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;rake &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+/usr/bin/gmake &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;target_prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+generating target/release/librust_uuid.so &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;release&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+cargo rustc &lt;span class=&quot;nt&quot;&gt;--target-dir&lt;/span&gt; target &lt;span class=&quot;nt&quot;&gt;--manifest-path&lt;/span&gt; ../../../../ext/rust_uuid/Cargo.toml &lt;span class=&quot;nt&quot;&gt;--lib&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--release&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;linker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gcc &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/rbenv/versions/3.2.0/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/rbenv/versions/3.2.0/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;native&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/katsyoshi/.local/lib:-L/home/katsyoshi/.local/lib: &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; link-arg&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-lm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; pthread
+    Finished release &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;optimized] target&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;0.03s
+installing rust_uuid.so to /path/to/rust_uuid/lib/rust_uuid
+/usr/bin/install &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; 0755 rust_uuid.so /path/to/rust_uuid/lib/rust_uuid
+&lt;span class=&quot;nb&quot;&gt;cp &lt;/span&gt;tmp/x86_64-linux/rust_uuid/3.2.0/rust_uuid.so tmp/x86_64-linux/stage/lib/rust_uuid/rust_uuid.so
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;ruby &lt;span class=&quot;nt&quot;&gt;-rrust_uuid&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;puts RustUUID.v4&apos;&lt;/span&gt;
+2eb053de-8ae7-4669-853b-95f06c872300
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ようやっと通ったああぁあ!!!!&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;conclusion&lt;/h2&gt;
+
+&lt;p&gt;実際は11月の末あたりに &lt;strong&gt;head&lt;/strong&gt; でコンパイルできないなあと気がついていたのですが、そのうち直るやろと思っててなにもしなかったのです。いざ &lt;strong&gt;Ruby 3.2&lt;/strong&gt; がリリースされたときに試して動かなかったのでやっと対応してみました。&lt;/p&gt;
+
+&lt;p&gt;ということで正式に &lt;strong&gt;Rust&lt;/strong&gt; がサポートされるようになったのでまた YARUKI がでてきますね。&lt;/p&gt;
+
+&lt;p&gt;それはそうと今度は、&lt;a href=&quot;https://jekyllrb.com&quot;&gt;&lt;strong&gt;jekyll&lt;/strong&gt;&lt;/a&gt; が &lt;strong&gt;Ruby 3.2&lt;/strong&gt; で動かなくなった。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html">以前このブログで Rust を利用して rubygems を作成した rust_uuid が Ruby 3.2 がリリース によりコンパイルできなくなったのでその修正顛末。</summary></entry><entry><title type="html">お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活</title><link href="https://blog.katsyoshi.org/blog/2022/10/15/goodbey-onamae-dot-com/" rel="alternate" type="text/html" title="お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活" /><published>2022-10-15T23:59:50+09:00</published><updated>2022-10-15T23:59:50+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/10/15/goodbey-onamae-dot-com</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/10/15/goodbey-onamae-dot-com/">&lt;p&gt;&lt;strong&gt;katsyoshi.org&lt;/strong&gt; の登録先を &lt;a href=&quot;https://www.onamae.com&quot;&gt;&lt;strong&gt;お名前ドットコム&lt;/strong&gt;&lt;/a&gt; にしてたけど、広告のようなメールとか届くし
 更新案内と広告の違いがわからない感じのメールが大量にくるのでやめようやめようと思ってたのでいいかげん変えてみた話。&lt;/p&gt;
 
 &lt;h2 id=&quot;準備&quot;&gt;準備&lt;/h2&gt;
@@ -919,67 +1224,4 @@ Selected keyboards automatically since --device options weren&apos;t specified:
       &lt;p&gt;どうせ1回確認できたら再起動する必要はないので問題ないといえば問題ないけど、ちょっと面倒。 &lt;a href=&quot;#fnref:hotreload&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><category term="diary" /><summary type="html">仕事で利用したりしている Slack などのキーボードでの操作が面倒になってきたので、 emacs keybind が利用できるようにするため xremap を利用することにした。</summary></entry><entry><title type="html">やんちゃクラブとRubyistと川</title><link href="https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist/" rel="alternate" type="text/html" title="やんちゃクラブとRubyistと川" /><published>2021-12-06T23:59:59+09:00</published><updated>2021-12-06T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/12/06/yancya-club-and-rubyist/">&lt;p&gt;おはようございます、 2021年、12月6日 のよるだったり、12月7日の朝だったりします。&lt;/p&gt;
-
-&lt;p&gt;これは &lt;a href=&quot;https://adventar.org/calendars/6668&quot;&gt;やんちゃクラブリスナーアドベントカレンダー&lt;/a&gt; の6日目だったり、
-&lt;a href=&quot;https://adventar.org/calendars/6777&quot;&gt;Rubyist近況[1]アドベントカレンダー&lt;/a&gt; の7日目だったりします。&lt;/p&gt;
-
-&lt;p&gt;最近仕事としては Rails 6.1 にしたり、 Ruby-3.0 にしてたり、java 書いてたりしています。&lt;/p&gt;
-
-&lt;p&gt;コロナになり、RubyKaigi後恒例の &lt;strong&gt;川&lt;/strong&gt; がなくなってかなりさみしい思いをしている方もいらっしゃるとおもいますので、
-東京近郊でのよい &lt;strong&gt;川&lt;/strong&gt; をまとめてみたいとおもいます。&lt;/p&gt;
-
-&lt;h2 id=&quot;川&quot;&gt;川&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.google.com/maps/place/%E3%80%92120-0034+%E6%9D%B1%E4%BA%AC%E9%83%BD%E8%B6%B3%E7%AB%8B%E5%8C%BA%E5%8D%83%E4%BD%8F%EF%BC%95%E4%B8%81%E7%9B%AE/@35.7563561,139.8029477,17z/data=!3m1!4b1!4m5!3m4!1s0x60188e4823ec7b73:0xf626ddac28b8deac!8m2!3d35.7562782!4d139.8054747&quot;&gt;荒川： 虹の広場&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.google.com/maps/place/%E5%8F%B0%E6%9D%B1%E5%8C%BA%E7%AB%8B+%E9%9A%85%E7%94%B0%E5%85%AC%E5%9C%92/@35.7247541,139.8060852,15.75z/data=!4m9!1m2!2m1!1z5aKo55Sw5YWs5ZyS!3m5!1s0x60188ec349138a67:0xc95c03b0375fa0d7!8m2!3d35.7107642!4d139.7982715!15sCgzloqjnlLDlhazlnJJaDyIN5aKo55SwIOWFrOWckpIBBHBhcms&quot;&gt;墨田川： 墨田公園&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.google.com/maps/place/%E3%80%92214-0003+%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82%E5%A4%9A%E6%91%A9%E5%8C%BA%E8%8F%85%E7%A8%B2%E7%94%B0%E5%A0%A4%EF%BC%92%E4%B8%81%E7%9B%AE%EF%BC%91%EF%BC%90%E2%88%92%EF%BC%92%EF%BC%92/@35.6383952,139.5346417,18z/data=!3m1!4b1!4m5!3m4!1s0x6018f07a89b9d099:0x77385278ffea0854!8m2!3d35.6383952!4d139.535736&quot;&gt;多摩川： 稲田堤&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.google.com/maps/search/%E3%80%92272-0111+%E5%8D%83%E8%91%89%E7%9C%8C%E5%B8%82%E5%B7%9D%E5%B8%82%E5%A6%99%E5%85%B8%EF%BC%96%E4%B8%81%E7%9B%AE%EF%BC%91%E2%88%92%EF%BC%91/@35.6945582,139.9282683,17z/data=!3m1!4b1&quot;&gt;江戸川： 妙典公園、江戸川河川敷緑地&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;荒川-虹の広場&quot;&gt;荒川： 虹の広場&lt;/h3&gt;
-
-&lt;p&gt;ここは &lt;a href=&quot;https://twitter.com/yancya&quot;&gt;yancyaさん&lt;/a&gt; の地元で一緒によく行く川です。
-ここの &lt;strong&gt;最高&lt;/strong&gt; は大きな街(北千住)が近く、ふらっと行っても調達が楽なところで、たべもの、のみものなんでも楽に調達できます。
-とくにのみものは国外のクラフトビールがたくさん買える場所あるので &lt;strong&gt;最高&lt;/strong&gt; なのと、クラフトビール作ってる場所があるので &lt;strong&gt;最高&lt;/strong&gt; なのです。
-また、公園のような場所なので花火できます。バーベキューとか火を使うのは岩渕水門あたりじゃないとできないので気をつけてください。&lt;/p&gt;
-
-&lt;p&gt;周りに邪魔をするようなものがとくにないので、日の入りやスカイツリーが綺麗に見えます。
-そばに電車(東武伊勢崎線、TX、常磐線)が通っているので電車を眺めるのもいいです。&lt;/p&gt;
-
-&lt;p&gt;時期としては春から秋にかけて行くのが &lt;strong&gt;最高&lt;/strong&gt; ですね。冬はまだ行ったことないのでそのうち試してみるかもしれないです。&lt;/p&gt;
-
-&lt;h3 id=&quot;墨田川-墨田公園&quot;&gt;墨田川： 墨田公園&lt;/h3&gt;
-
-&lt;p&gt;墨田公園といえば &lt;a href=&quot;https://www.sakuranokai.or.jp/information/local5/&quot;&gt;さくらの名所100選&lt;/a&gt; に選ばれるほどの桜の名所です。
-ここも浅草という大きな街が近くなので、調達が楽です。しかしながら、桜の季節は人が多いので調達は事前にして &lt;strong&gt;川&lt;/strong&gt; するのがよいです。&lt;/p&gt;
-
-&lt;p&gt;見所としてはもちろん桜です。ここも東武伊勢崎線がとおってるのと、浅草名物アサヒビールの建物、スカイツリーが見えるので桜の時期とくに映えますね。
-やんちゃクラブで紹介されたように、水上バスの発着場があるので水上バスを利用するのもおもしろいと思います。&lt;/p&gt;
-
-&lt;p&gt;時期としては &lt;strong&gt;最高&lt;/strong&gt; なのはもちろん桜の時期です。それ以外の時期でも場所が浅草なので、風が強い日以外はオールシーズン &lt;strong&gt;川&lt;/strong&gt; デキルと思います。
-風が強かったら逃げれる場所たくさんあるのでよいですよ。&lt;/p&gt;
-
-&lt;h3 id=&quot;多摩川-稲田堤&quot;&gt;多摩川： 稲田堤&lt;/h3&gt;
-
-&lt;p&gt;ここの &lt;strong&gt;最高&lt;/strong&gt; さは、&lt;a href=&quot;https://tabelog.com/kanagawa/A1405/A140506/14014188/&quot;&gt;たぬきや&lt;/a&gt; という夏の間だけやっている(と飲み仲間に教えてもらった)
-川の家があったのですが、去年あたりに終ってしまった。川辺にあるお店で、川を眺めながら飲むビールとか &lt;strong&gt;最高&lt;/strong&gt; でした。&lt;/p&gt;
-
-&lt;p&gt;見所としては今説明したたぬきやです。ジェットスキーとかできるんならもっと楽しめるんじゃないんですかね。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;最高&lt;/strong&gt; な時期としては夏だったのですが、もう行ってもね……&lt;/p&gt;
-
-&lt;h3 id=&quot;江戸川-妙典公園江戸川河川敷緑地&quot;&gt;江戸川： 妙典公園、江戸川河川敷緑地&lt;/h3&gt;
-
-&lt;p&gt;ここは虹の広場とは違い、バーベキュー場があり火が使えるようです。火が使えるのでスモークとかやると &lt;strong&gt;最高&lt;/strong&gt; かと。
-ただ、駅から遠いのと、街が近くないので調達は事前にやっておくとよいです。近くに大型スーパーがあるのですが、クラフトビールなどの飲みものがイマイチ(個人的感想)です。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;最高&lt;/strong&gt; な時期は夏じゃないですかね、BBQとかはよくわからないですが……&lt;/p&gt;
-
-&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;最高&lt;/strong&gt; な東京の &lt;strong&gt;川&lt;/strong&gt; をまとめてみました。コロナのため最近 &lt;strong&gt;川&lt;/strong&gt; できていないですので、みんなコロナ開けたら &lt;strong&gt;川&lt;/strong&gt; しような!&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://adventar.org/calendars/6668&quot;&gt;やんちゃクラブリスナーアドベントカレンダー&lt;/a&gt; の次は12/7の &lt;a href=&quot;https://twitter.com/igaiga555&quot;&gt;igaigaさん&lt;/a&gt; です。
-&lt;a href=&quot;https://adventar.org/calendars/6777&quot;&gt;Rubyist近況[1]アドベントカレンダー&lt;/a&gt; の次は12/10のKirika_K2さんです。&lt;/p&gt;</content><author><name></name></author><category term="diary" /><summary type="html">おはようございます、 2021年、12月6日 のよるだったり、12月7日の朝だったりします。</summary></entry></feed>
+&lt;/div&gt;</content><author><name></name></author><category term="diary" /><summary type="html">仕事で利用したりしている Slack などのキーボードでの操作が面倒になってきたので、 emacs keybind が利用できるようにするため xremap を利用することにした。</summary></entry></feed>
