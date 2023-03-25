@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Ruby gem で Rust をつかって爆速にしたい!!!!!!11 | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Ruby gem で Rust をつかって爆速にしたい!!!!!!11" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Ruby Gems で Rust が Native として利用可能になった のでとりあえず UUIDv4 を生成してみた。" />
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Ruby gem で Rust をつかって爆速にしたい!!!!!!11" />
 <script type="application/ld+json">
-{"description":"Ruby Gems で Rust が Native として利用可能になった のでとりあえず UUIDv4 を生成してみた。","headline":"Ruby gem で Rust をつかって爆速にしたい!!!!!!11","dateModified":"2022-08-12T13:59:59+09:00","url":"https://blog.katsyoshi.org/blog/2022/08/12/how-to-use-rust-in-ruby-gems/","datePublished":"2022-08-12T13:59:59+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2022/08/12/how-to-use-rust-in-ruby-gems/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"Ruby Gems で Rust が Native として利用可能になった のでとりあえず UUIDv4 を生成してみた。","datePublished":"2022-08-12T13:59:59+09:00","headline":"Ruby gem で Rust をつかって爆速にしたい!!!!!!11","url":"https://blog.katsyoshi.org/blog/2022/08/12/how-to-use-rust-in-ruby-gems/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2022/08/12/how-to-use-rust-in-ruby-gems/"},"@type":"BlogPosting","dateModified":"2022-08-12T13:59:59+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -98,15 +98,15 @@ Rust 側から Ruby へ関数を公開するために <a href="https://github.co
 
 <span class="nd">ruby_global_allocator!</span><span class="p">();</span>
 
-<span class="c">// UUIDv4 を文字列として公開</span>
+<span class="c1">// UUIDv4 を文字列として公開</span>
 <span class="k">fn</span> <span class="nf">v4</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
     <span class="nn">Uuid</span><span class="p">::</span><span class="nf">new_v4</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">()</span>
 <span class="p">}</span>
 
 <span class="nd">#[magnus::init]</span>
-<span class="k">fn</span> <span class="nf">init</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="n">Result</span><span class="o">&lt;</span><span class="p">(),</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="k">fn</span> <span class="nf">init</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">let</span> <span class="n">module</span> <span class="o">=</span> <span class="nf">define_module</span><span class="p">(</span><span class="s">"RustUUID"</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
-    <span class="c">// RustUUID.v4 と利用するようにシングルトンメソッドを定義</span>
+    <span class="c1">// RustUUID.v4 と利用するようにシングルトンメソッドを定義</span>
     <span class="n">module</span><span class="nf">.define_singleton_method</span><span class="p">(</span><span class="s">"v4"</span><span class="p">,</span> <span class="nd">function!</span><span class="p">(</span><span class="n">v4</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span><span class="o">?</span><span class="p">;</span>
     <span class="nf">Ok</span><span class="p">(())</span>
 <span class="p">}</span>
@@ -131,7 +131,7 @@ Tasks: TOP <span class="o">=&gt;</span> build <span class="o">=&gt;</span> compi
 これは <code class="language-plaintext highlighter-rouge">ext/rust_uuid/Cargo.toml</code> の設定が足りていません。そこで以下を追加してみてください。</p>
 
 <div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[lib]</span>
-<span class="py">crate-type</span> <span class="p">=</span> <span class="nn">["cdylib"]</span>
+<span class="py">crate-type</span> <span class="p">=</span> <span class="p">[</span><span class="s">"cdylib"</span><span class="p">]</span>
 </code></pre></div></div>
 
 <p>追加したら <code class="language-plaintext highlighter-rouge">gem</code> をビルド&amp;&amp;インストール&amp;&amp;試してみましょう!</p>

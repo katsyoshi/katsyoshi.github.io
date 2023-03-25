@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>happy new year and new language | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="happy new year and new language" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="いまさらですが、あけましておめでとうございます。" />
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="happy new year and new language" />
 <script type="application/ld+json">
-{"description":"いまさらですが、あけましておめでとうございます。","headline":"happy new year and new language","dateModified":"2018-01-16T00:32:16+09:00","url":"https://blog.katsyoshi.org/blog/2018/01/16/happy-new-year-and-new-language/","datePublished":"2018-01-16T00:32:16+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2018/01/16/happy-new-year-and-new-language/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"いまさらですが、あけましておめでとうございます。","datePublished":"2018-01-16T00:32:16+09:00","headline":"happy new year and new language","url":"https://blog.katsyoshi.org/blog/2018/01/16/happy-new-year-and-new-language/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2018/01/16/happy-new-year-and-new-language/"},"@type":"BlogPosting","dateModified":"2018-01-16T00:32:16+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -71,12 +71,12 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <p>躓いていないところがないです。
 まあやっていくうちに以下二つは常に書いておくと楽になるかなと。</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// 1文字毎</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 1文字毎</span>
 <span class="k">fn</span> <span class="nf">chars</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="n">string</span><span class="nf">.chars</span><span class="p">()</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;&gt;</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="c">// 1単語毎</span>
+<span class="c1">// 1単語毎</span>
 <span class="k">fn</span> <span class="nf">words</span><span class="p">(</span><span class="n">sentence</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">str</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="n">sentence</span><span class="nf">.split</span><span class="p">(</span><span class="sc">' '</span><span class="p">)</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">str</span><span class="o">&gt;&gt;</span><span class="p">()</span>
 <span class="p">}</span>

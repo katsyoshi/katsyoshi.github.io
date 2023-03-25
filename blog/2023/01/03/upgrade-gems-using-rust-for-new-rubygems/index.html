@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Update rubygems using Rust for Ruby 3.2 | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Update rubygems using Rust for Ruby 3.2" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="以前このブログで Rust を利用して rubygems を作成した rust_uuid が Ruby 3.2 がリリース によりコンパイルできなくなったのでその修正顛末。" />
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Update rubygems using Rust for Ruby 3.2" />
 <script type="application/ld+json">
-{"description":"以前このブログで Rust を利用して rubygems を作成した rust_uuid が Ruby 3.2 がリリース によりコンパイルできなくなったのでその修正顛末。","headline":"Update rubygems using Rust for Ruby 3.2","dateModified":"2023-01-03T23:59:59+09:00","url":"https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/","datePublished":"2023-01-03T23:59:59+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"以前このブログで Rust を利用して rubygems を作成した rust_uuid が Ruby 3.2 がリリース によりコンパイルできなくなったのでその修正顛末。","datePublished":"2023-01-03T23:59:59+09:00","headline":"Update rubygems using Rust for Ruby 3.2","url":"https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/"},"@type":"BlogPosting","dateModified":"2023-01-03T23:59:59+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -168,8 +168,8 @@ error: could not compile <span class="sb">`</span>magnus<span class="sb">`</span
  rb-allocator = "0.9"
 <span class="gd">-magnus = { version = "0.3", features = ["rb-sys-interop"] }
 </span><span class="gi">+magnus = { version = "0.4", features = ["rb-sys-interop"] }
-</span>
- [dependencies.uuid]
+</span><span class="err">
+</span> [dependencies.uuid]
  version = "1.1.2"
 </code></pre></div></div>
 
@@ -321,7 +321,7 @@ resolver <span class="o">=</span> <span class="s2">"2"</span>
 <p>というようなファイルが得られるので真似して作成しちゃいましょう。</p>
 
 <div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[workspace]</span>
-<span class="py">members</span> <span class="p">=</span> <span class="nn">["./ext/rust_uuid"]</span>
+<span class="py">members</span> <span class="p">=</span> <span class="p">[</span><span class="s">"./ext/rust_uuid"</span><span class="p">]</span>
 <span class="py">resolver</span> <span class="p">=</span> <span class="s">"2"</span>
 </code></pre></div></div>
 

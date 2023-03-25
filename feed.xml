@@ -1,4 +1,103 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2023-01-04T18:03:39+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Update rubygems using Rust for Ruby 3.2</title><link href="https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/" rel="alternate" type="text/html" title="Update rubygems using Rust for Ruby 3.2" /><published>2023-01-03T23:59:59+09:00</published><updated>2023-01-03T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/">&lt;p&gt;&lt;a href=&quot;/blog/2022/08/12/how-to-use-rust-in-ruby-gems/&quot;&gt;以前このブログ&lt;/a&gt;で &lt;a href=&quot;https://www.rust-lang.org/&quot;&gt;&lt;strong&gt;Rust&lt;/strong&gt;&lt;/a&gt; を利用して &lt;a href=&quot;https://rubygems.org&quot;&gt;&lt;strong&gt;rubygems&lt;/strong&gt;&lt;/a&gt; を作成した
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2023-03-25T15:55:06+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">趣味は vaporware 造りですv0.0.0</title><link href="https://blog.katsyoshi.org/blog/2023/03/21/my-hobby-is-building-vaporware/" rel="alternate" type="text/html" title="趣味は vaporware 造りですv0.0.0" /><published>2023-03-21T13:59:59+09:00</published><updated>2023-03-21T13:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/03/21/my-hobby-is-building-vaporware</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/03/21/my-hobby-is-building-vaporware/">&lt;p&gt;プログラマー三大勉強はしたけど、実装はしたことないものといえば
+CPU、OS、コンパイラーなのです&lt;sup id=&quot;fnref:kojinsa&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:kojinsa&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;が、先日 &lt;a href=&quot;https://www.publickey1.jp/blog/23/ruby30static_compiler_for_ruby.html&quot;&gt;ruby30th 誕生日会のキーノート&lt;/a&gt;で
+matz が “Static Compiler for Ruby” という今はまだない &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vaporware&lt;/code&gt; として
+挙げていたのでこの &lt;strong&gt;static compiler&lt;/strong&gt; を作ろうとなりました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/katsyoshi/vaporware&quot;&gt;&lt;img src=&quot;https://gh-card.dev/repos/katsyoshi/vaporware.svg&quot; alt=&quot;katsyoshi/vaporware - GitHub&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;goal&quot;&gt;Goal&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Ruby&lt;/strong&gt; のコードを &lt;strong&gt;static compile&lt;/strong&gt; できるようにする。&lt;/p&gt;
+
+&lt;p&gt;コンパイル先のターゲットは &lt;strong&gt;x86&lt;/strong&gt; とします。 &lt;strong&gt;ARM&lt;/strong&gt; や &lt;strong&gt;RISC-V&lt;/strong&gt; などは今回の実装ではターゲットにしないです。&lt;/p&gt;
+
+&lt;p&gt;とはいえすべての &lt;strong&gt;Ruby&lt;/strong&gt; の機能を実装すると時間がかかりすぎるので個人で無理のない範囲
+で作ろうとします。無理のない実装範囲は以下なのかなと&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;四則演算&lt;/li&gt;
+  &lt;li&gt;変数&lt;/li&gt;
+  &lt;li&gt;メソッド&lt;/li&gt;
+  &lt;li&gt;制御構文&lt;/li&gt;
+  &lt;li&gt;プリミティブ型&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;この5つの機能を実装する予定です。&lt;/p&gt;
+
+&lt;h3 id=&quot;実現する機能以外のことについて&quot;&gt;実現する機能以外のことについて&lt;/h3&gt;
+
+&lt;p&gt;5つの機能を実現すること以上のことはやらない予定です。
+やらないこととしては &lt;em&gt;最適化&lt;/em&gt; 、 &lt;em&gt;GC&lt;/em&gt; 、 外部ファイルで定義したメソッドやクラスの読み込みは実装しない予定です。
+実装しない個人的意見を以下に書いていきます。&lt;/p&gt;
+
+&lt;p&gt;最適化は &lt;strong&gt;Ruby&lt;/strong&gt; のコードを単純に &lt;em&gt;機械語&lt;/em&gt; におとしただけでは現在の &lt;strong&gt;RubyVM&lt;/strong&gt;
+より速くならないと考えているからです(要確認)。
+&lt;strong&gt;LLVM IR&lt;/strong&gt; などへの変換ではなく、 &lt;em&gt;機械語&lt;/em&gt; なのは &lt;strong&gt;LLVM&lt;/strong&gt; をインストールする必要があるなどして
+面倒なのが大きいです&lt;sup id=&quot;fnref:gentoo&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:gentoo&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;。あとバージョン毎に &lt;strong&gt;LLVM IR&lt;/strong&gt; が異なるのも現状では対応しにくい点となっています。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;GC&lt;/em&gt; (Garbage Collection: ガベージコレクション) についてはそもそもクラスをサポートできない、
+変数などのメモリを確保しておく時間が長いプログラムを対象としないので今回はスコープ外としています。&lt;/p&gt;
+
+&lt;p&gt;外部ファイル読み込みについてですが、外部ファイルの読み込みして &lt;em&gt;コンパイル&lt;/em&gt; するだけなら
+そこまで問題にはならないと考えていますが、外部ファイルで定義された &lt;em&gt;メソッド&lt;/em&gt; や &lt;em&gt;クラス&lt;/em&gt; を
+事前に &lt;em&gt;コンパイル&lt;/em&gt; して最後に &lt;em&gt;リンク&lt;/em&gt; するのは型が不定になるのでサポートするのは難しいと考えています。&lt;/p&gt;
+
+&lt;h2 id=&quot;実装方針&quot;&gt;実装方針&lt;/h2&gt;
+&lt;p&gt;Goal までの実装は &lt;a href=&quot;https://www.sigbus.info/compilerbook&quot;&gt;低レイヤを知りたい人のためのCコンパイラ作成入門&lt;/a&gt; を参考にすすめていきます。
+最初に &lt;em&gt;コンパイラー&lt;/em&gt; を実装するものとして &lt;em&gt;C 言語&lt;/em&gt; がたぶん勉強してきてうかぶと思います&lt;sup id=&quot;fnref:java&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:java&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;。
+&lt;em&gt;C 言語&lt;/em&gt; だと &lt;em&gt;機械語&lt;/em&gt; や &lt;em&gt;VM&lt;/em&gt; のバイトコードへ落とすことのできる資料が多いので選択しています。
+とは言っても &lt;strong&gt;Ruby&lt;/strong&gt; からの脳内変換はある程度必要なので慣れているというのもあります。&lt;/p&gt;
+
+&lt;p&gt;実装としては &lt;em&gt;AST&lt;/em&gt;(Abstract Syntax Tree: 構文抽象木) から愚直に &lt;strong&gt;x86 アセンブラ&lt;/strong&gt; をファイルへ書き出し、
+そこから &lt;em&gt;C コンパイラー&lt;/em&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gcc&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;clang&lt;/code&gt;) をつかって機械語へ &lt;em&gt;コンパイル&lt;/em&gt; します。
+フルフルの &lt;strong&gt;Ruby&lt;/strong&gt; を実装するわけじゃないので依存する &lt;strong&gt;gem&lt;/strong&gt; の依存も極力減らしたいです。&lt;/p&gt;
+
+&lt;h3 id=&quot;実装環境&quot;&gt;実装環境&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CPU: Ryzen Thread Ripper 1950x&lt;/li&gt;
+  &lt;li&gt;gcc: 12.2.1&lt;/li&gt;
+  &lt;li&gt;clang: 16.0.0&lt;/li&gt;
+  &lt;li&gt;OS: Gentoo Linux&lt;/li&gt;
+  &lt;li&gt;Linux Kernel: 6.2 系&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;パーサー&quot;&gt;パーサー&lt;/h2&gt;
+
+&lt;p&gt;まず、&lt;em&gt;AST&lt;/em&gt; を得るために &lt;em&gt;パーサー&lt;/em&gt; が必要なのですが、 &lt;strong&gt;Ruby&lt;/strong&gt; の構文は複雑なのでここは頑張らないようにします。ここをどうやって解決するのかというと &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RubyVM::AbstractSyntaxTree&lt;/code&gt; や &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ripper&lt;/code&gt; をつかうのか、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parser.gem&lt;/code&gt; をつかうのかを決めるひつようがあります。今回というかしばらくは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parser.gem&lt;/code&gt; を利用して &lt;em&gt;AST&lt;/em&gt; を得ることにします。
+ゆくゆくは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RubyVM::AbstractSyntaxTree&lt;/code&gt; への置き替えはするよていです。&lt;/p&gt;
+
+&lt;p&gt;ここはそのまま &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parser.gem&lt;/code&gt; のチュートリアルどおりにすれば &lt;em&gt;AST&lt;/em&gt; が得られます。&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;parser/current&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Parser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;CurrentRuby&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;(1 + 2) * 3 / (5 - 4)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;きょうはここまで&quot;&gt;きょうはここまで&lt;/h2&gt;
+
+&lt;p&gt;とりあえず手を動かしはじめましたが、ななななんと、似たような機能が実は &lt;strong&gt;Ruby 3.3&lt;/strong&gt; 向けに
+&lt;em&gt;JIT&lt;/em&gt; として入ったようです&lt;sup id=&quot;fnref:rjit&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:rjit&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;。
+ということでねこの話はね、勉強の話しかないんですが一旦 Goal まで作ってみましょうね。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:kojinsa&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;個人差があります。 &lt;a href=&quot;#fnref:kojinsa&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:gentoo&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Gentoo Linux 使っているので毎回コンパイルしているので本当にめんどう。バイナリあるよとかそういう正論は受け付けていないです。 &lt;a href=&quot;#fnref:gentoo&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:java&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;時代によって変わるかも。&lt;strong&gt;Java&lt;/strong&gt; だったり、&lt;strong&gt;Lisp&lt;/strong&gt; だったりする人がいるかも。 &lt;a href=&quot;#fnref:java&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:rjit&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;https://github.com/ruby/ruby/pull/7448 &lt;a href=&quot;#fnref:rjit&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name></name></author><category term="diary" /><category term="compiler" /><summary type="html">プログラマー三大勉強はしたけど、実装はしたことないものといえば CPU、OS、コンパイラーなのです1が、先日 ruby30th 誕生日会のキーノートで matz が “Static Compiler for Ruby” という今はまだない vaporware として 挙げていたのでこの static compiler を作ろうとなりました。 個人差があります。 &amp;#8617;</summary></entry><entry><title type="html">Update rubygems using Rust for Ruby 3.2</title><link href="https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/" rel="alternate" type="text/html" title="Update rubygems using Rust for Ruby 3.2" /><published>2023-01-03T23:59:59+09:00</published><updated>2023-01-03T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/">&lt;p&gt;&lt;a href=&quot;/blog/2022/08/12/how-to-use-rust-in-ruby-gems/&quot;&gt;以前このブログ&lt;/a&gt;で &lt;a href=&quot;https://www.rust-lang.org/&quot;&gt;&lt;strong&gt;Rust&lt;/strong&gt;&lt;/a&gt; を利用して &lt;a href=&quot;https://rubygems.org&quot;&gt;&lt;strong&gt;rubygems&lt;/strong&gt;&lt;/a&gt; を作成した
 &lt;a href=&quot;https://github.com/katsyoshi/rust_uuid&quot;&gt;&lt;strong&gt;rust_uuid&lt;/strong&gt;&lt;/a&gt; が &lt;a href=&quot;https://www.ruby-lang.org/ja/news/2022/12/25/ruby-3-2-0-released/&quot;&gt;&lt;strong&gt;Ruby 3.2&lt;/strong&gt; がリリース&lt;/a&gt; によりコンパイルできなくなったのでその修正顛末。&lt;/p&gt;
 
 &lt;h2 id=&quot;環境&quot;&gt;環境&lt;/h2&gt;
@@ -112,8 +211,8 @@ error: could not compile &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;magnus&l
  rb-allocator = &quot;0.9&quot;
 &lt;span class=&quot;gd&quot;&gt;-magnus = { version = &quot;0.3&quot;, features = [&quot;rb-sys-interop&quot;] }
 &lt;/span&gt;&lt;span class=&quot;gi&quot;&gt;+magnus = { version = &quot;0.4&quot;, features = [&quot;rb-sys-interop&quot;] }
-&lt;/span&gt;
- [dependencies.uuid]
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt; [dependencies.uuid]
  version = &quot;1.1.2&quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -265,7 +364,7 @@ resolver &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&
 &lt;p&gt;というようなファイルが得られるので真似して作成しちゃいましょう。&lt;/p&gt;
 
 &lt;div class=&quot;language-toml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[workspace]&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;members&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;[&quot;./ext/rust_uuid&quot;]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;members&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;./ext/rust_uuid&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 &lt;span class=&quot;py&quot;&gt;resolver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -704,15 +803,15 @@ Rust 側から Ruby へ関数を公開するために &lt;a href=&quot;https://g
 
 &lt;span class=&quot;nd&quot;&gt;ruby_global_allocator!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;// UUIDv4 を文字列として公開&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// UUIDv4 を文字列として公開&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;v4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nn&quot;&gt;Uuid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new_v4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;nd&quot;&gt;#[magnus::init]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;define_module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;RustUUID&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;// RustUUID.v4 と利用するようにシングルトンメソッドを定義&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// RustUUID.v4 と利用するようにシングルトンメソッドを定義&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.define_singleton_method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;v4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;function!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;nf&quot;&gt;Ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(())&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -737,7 +836,7 @@ Tasks: TOP &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; build &lt;span
 これは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ext/rust_uuid/Cargo.toml&lt;/code&gt; の設定が足りていません。そこで以下を追加してみてください。&lt;/p&gt;
 
 &lt;div class=&quot;language-toml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[lib]&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;crate-type&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;[&quot;cdylib&quot;]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;crate-type&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cdylib&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;追加したら &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem&lt;/code&gt; をビルド&amp;amp;&amp;amp;インストール&amp;amp;&amp;amp;試してみましょう!&lt;/p&gt;
@@ -901,7 +1000,7 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
 &lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;#[derive(Deserialize)]&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Metric&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// 今回は co2 の値なので i16 としている&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 今回は co2 の値なので i16 としている&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;nd&quot;&gt;#[derive(Deserialize)]&lt;/span&gt;
@@ -917,8 +1016,8 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
     &lt;span class=&quot;nf&quot;&gt;.uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;nf&quot;&gt;.header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;X-Api-Key&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;api_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;nf&quot;&gt;.body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;Body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;// https として request する&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;Client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;.build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// https として request する&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;Client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;.build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;aggregate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ResponseMetrics&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;serde_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from_reader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.reader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -926,7 +1025,7 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;値を取得したら、今度は同じように &lt;strong&gt;Slack&lt;/strong&gt; の方も構造体を定義します。&lt;/p&gt;
-&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;// リクエスト用構造体&lt;/span&gt;
+&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// リクエスト用構造体&lt;/span&gt;
 &lt;span class=&quot;nd&quot;&gt;#[derive(Serialize)]&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SlackMessage&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;channel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -935,7 +1034,7 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
     &lt;span class=&quot;k&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;as_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;// レスポンス用構造体&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// レスポンス用構造体&lt;/span&gt;
 &lt;span class=&quot;nd&quot;&gt;#[derive(Deserialize)]&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PostMessage&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nd&quot;&gt;#[allow(unused)]&lt;/span&gt;
@@ -944,7 +1043,7 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;リクエストを組みたてて、POSTします。
 見てわかると思いますが、ほとんど &lt;strong&gt;mackerel&lt;/strong&gt; と変わらないです。&lt;/p&gt;
-&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;// リクエスト body を json に変換&lt;/span&gt;
+&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// リクエスト body を json に変換&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;serde_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SlackMessage&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;channel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;channel&quot;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;sub_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bot_message&quot;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
@@ -961,23 +1060,23 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
     &lt;span class=&quot;nf&quot;&gt;.header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Authorization&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;format!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Bearer {}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SLACK_API_KEY&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
     &lt;span class=&quot;nf&quot;&gt;.body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;Body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;Client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;.build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;Client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;.build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;aggregate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PostMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;serde_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from_reader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.reader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PostMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;serde_json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from_reader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.reader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;ポストするメッセージを作る際に2つのことをしています。
 まずは &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;time&lt;/code&gt; の &lt;strong&gt;UNIX EPOCH TIME&lt;/strong&gt; からローカルの時間を表示するようにしています。
 それと &lt;strong&gt;CO&lt;sub&gt;2&lt;/sub&gt;&lt;/strong&gt; の値に依って絵文字を追加するかどうかを入れています。 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-1&lt;/code&gt; とか予定していない値が入ってきた場合は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;panic!&lt;/code&gt; するようにしています。&lt;/p&gt;
 
-&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;// chrono を利用して unix time からローカルの文字列へ変換&lt;/span&gt;
+&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// chrono を利用して unix time からローカルの文字列へ変換&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;chrono&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;700&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;:large_green_circle:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;mi&quot;&gt;701&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;:large_yellow_circle:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;mi&quot;&gt;1001&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;:red_circle:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// なんで slack は :large_red_circle: を用意していないんだろうか&lt;/span&gt;
-    &lt;span class=&quot;mi&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;panic!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;unexpected number!!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;mi&quot;&gt;1001&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;:red_circle:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// なんで slack は :large_red_circle: を用意していないんだろうか&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;panic!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;unexpected number!!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -1082,7 +1181,7 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
 &lt;strong&gt;mackerel-plugin&lt;/strong&gt; として動かすために、 &lt;strong&gt;mackerel-agent.conf&lt;/strong&gt; に以下のような設定を追加し、再起動することでグラフが追加できます。&lt;/p&gt;
 
 &lt;div class=&quot;language-toml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[plugin.metrics.CO2MINI]&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;[&quot;/path/to/build/bin/mackerel-plugin-co2mon&quot;]&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/path/to/build/bin/mackerel-plugin-co2mon&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;グラフは以下のように表示されました!やったね!
@@ -1108,120 +1207,4 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
       &lt;p&gt;窓開閉する道具もないのでそこから仕入れる必要がありいつになるか不明です。 &lt;a href=&quot;#fnref:window&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html">コロナになって結構前に custom CO2-mini に 話題になった ので買って放置してあったの1 を活用しようと思いたった。 とりあえず値は取得はできているので mackerel との連携をしてグラフに表示できるようにします。 あと mercker-plugin を Rust で書いてみたいとおもったので、やってみることにしました。 Amazon で確認したら買ったの 2020/03 だった…… &amp;#8617;</summary></entry><entry><title type="html">いんとろでぅーす xremap</title><link href="https://blog.katsyoshi.org/blog/2021/12/26/xremap/" rel="alternate" type="text/html" title="いんとろでぅーす xremap" /><published>2021-12-26T13:59:59+09:00</published><updated>2021-12-26T13:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/12/26/xremap</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/12/26/xremap/">&lt;p&gt;仕事で利用したりしている &lt;strong&gt;Slack&lt;/strong&gt; などのキーボードでの操作が面倒になってきたので、
-&lt;strong&gt;emacs keybind&lt;/strong&gt; が利用できるようにするため &lt;a href=&quot;https://github.com/k0kubun/xremap&quot;&gt;&lt;strong&gt;xremap&lt;/strong&gt;&lt;/a&gt; を利用することにした。&lt;/p&gt;
-
-&lt;p&gt;この記事はその利用するまでの顛末をメモとして残す。&lt;/p&gt;
-
-&lt;h2 id=&quot;導入&quot;&gt;導入&lt;/h2&gt;
-
-&lt;p&gt;これは、さくっと &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo install xremap&lt;/code&gt; でインストールできます。
-&lt;a href=&quot;https://www.rust-lang.org&quot;&gt;&lt;strong&gt;rust&lt;/strong&gt;&lt;/a&gt; をまだ導入していない方は &lt;a href=&quot;https://www.rust-lang.org/tools/install&quot;&gt;公式ページのインストール&lt;/a&gt; を参考にインストールしてください。&lt;/p&gt;
-
-&lt;h2 id=&quot;起動&quot;&gt;起動!!!&lt;/h2&gt;
-
-&lt;p&gt;これも簡単で以下のコマンドで起動します。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xremap /path/to/your/xremap/config.yml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;エラーに遭遇&quot;&gt;エラーに遭遇&lt;/h3&gt;
-
-&lt;p&gt;起動してみると以下のようなメッセージが出て起動ができませんでした。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Selecting devices from the following list:
-------------------------------------------------------------------------------
-/dev/input/event0 : Power Button
-/dev/input/event1 : Power Button
-/dev/input/event2 : HDA NVidia HDMI/DP,pcm=3
-/dev/input/event3 : HDA NVidia HDMI/DP,pcm=7
-/dev/input/event4 : HDA NVidia HDMI/DP,pcm=8
-/dev/input/event5 : HDA NVidia HDMI/DP,pcm=9
-/dev/input/event6 : HDA NVidia HDMI/DP,pcm=10
-/dev/input/event7 : HDA NVidia HDMI/DP,pcm=11
-/dev/input/event8 : Pekaso The Fortitude60 Keyboard
-/dev/input/event9 : Pekaso The Fortitude60 Keyboard Mouse
-/dev/input/event10: Pekaso The Fortitude60 Keyboard System Control
-/dev/input/event11: Pekaso The Fortitude60 Keyboard Consumer Control
-/dev/input/event12: Kensington Kensington Slimblade Trackball
-/dev/input/event13: Burr-Brown from TI               USB Audio CODEC
-/dev/input/event14: HD Web Camera: HD Web Camera
-------------------------------------------------------------------------------
-Selected keyboards automatically since --device options weren&apos;t specified:
-------------------------------------------------------------------------------
-/dev/input/event8 : Pekaso The Fortitude60 Keyboard
-------------------------------------------------------------------------------
-Error: Failed to build an output device: no such file or directory (os error 2)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;で、答えは出てるので設定ファイル、対象となる入力デバイスなどを見ますが、
-これらのファイルはあるのでわからんとなります。&lt;/p&gt;
-
-&lt;p&gt;しかたないのでソースをダウンロードして手元でデバッグしてみます。
-&lt;strong&gt;rust&lt;/strong&gt; というか &lt;strong&gt;cargo&lt;/strong&gt; は便利で、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo run&lt;/code&gt; でソースをいじったあとすぐにコンパイルして利用することができます。
-今回はメンドウなので怪しいところに &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;println&lt;/code&gt; 文を挿入して実行してみます。
-そうすると、どうやら &lt;a href=&quot;https://github.com/k0kubun/xremap/blob/f058c444335c153e638ecf3c76492cdf9f8a975d/src/output.rs#L39-L43&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/output.rs&lt;/code&gt; の 39 行目の &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;VirtualDeviceBuilder&lt;/code&gt; に問題がありそう&lt;/a&gt; ということがわかりました。&lt;/p&gt;
-
-&lt;p&gt;この行のどこに問題あるんだ？と思い利用しているこのライブラリ &lt;a href=&quot;https://docs.rs/evdev&quot;&gt;&lt;strong&gt;evdev&lt;/strong&gt;&lt;/a&gt; を見ることにしました&lt;sup id=&quot;fnref:evdev-rs&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:evdev-rs&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;。
-そうすると &lt;a href=&quot;https://docs.rs/evdev/latest/src/evdev/uinput.rs.html#13&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/uinput&lt;/code&gt; が必要&lt;/a&gt; ということがわかります。
-それで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/uinput&lt;/code&gt; があるかどうか &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; で見ますが、当然無いので無いです。
-なぜ無いのかというと &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INPUT_UINPUT&lt;/code&gt; でドライバーを入れていなかったようです。
-なのでカーネルのビルトインとしてビルドして再起動。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Defined at drivers/input/misc/Kconfig:513
-     Prompt: User level driver support
-     Depends on: INPUT [=y] &amp;amp;&amp;amp; INPUT_MISC [=y]
-     Location:
-       -&amp;gt; Device Drivers
-         -&amp;gt; Input device support
-           -&amp;gt; Generic input layer (needed for keyboard, mouse, ...) (INPUT [=y])
-             -&amp;gt; Miscellaneous devices (INPUT_MISC [=y])
-               -&amp;gt; User level driver support
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;再起動したら、確認を行ないます。&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ xremap ~/.config/xremap/config.yml
-Selecting devices from the following list:
-------------------------------------------------------------------------------
-/dev/input/event0 : Power Button
-/dev/input/event1 : Power Button
-/dev/input/event2 : HDA NVidia HDMI/DP,pcm=3
-/dev/input/event3 : HDA NVidia HDMI/DP,pcm=7
-/dev/input/event4 : HDA NVidia HDMI/DP,pcm=8
-/dev/input/event5 : HDA NVidia HDMI/DP,pcm=9
-/dev/input/event6 : HDA NVidia HDMI/DP,pcm=10
-/dev/input/event7 : HDA NVidia HDMI/DP,pcm=11
-/dev/input/event8 : Pekaso The Fortitude60 Keyboard
-/dev/input/event9 : Pekaso The Fortitude60 Keyboard Mouse
-/dev/input/event10: Pekaso The Fortitude60 Keyboard System Control
-/dev/input/event11: Pekaso The Fortitude60 Keyboard Consumer Control
-/dev/input/event12: Kensington Kensington Slimblade Trackball
-/dev/input/event13: Burr-Brown from TI               USB Audio CODEC
-/dev/input/event14: HD Web Camera: HD Web Camera
-------------------------------------------------------------------------------
-Selected keyboards automatically since --device options weren&apos;t specified:
-------------------------------------------------------------------------------
-/dev/input/event8 : Pekaso The Fortitude60 Keyboard
-------------------------------------------------------------------------------
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;yatta 起動できた!
-あとは、アプリでキーバインドが効いているかどうかを確認して、
-&lt;strong&gt;Window Manager&lt;/strong&gt; である &lt;strong&gt;i3&lt;/strong&gt; の起動時に &lt;strong&gt;xremap&lt;/strong&gt; が起動するようにしたりしています。&lt;/p&gt;
-
-&lt;h2 id=&quot;おわり&quot;&gt;おわり&lt;/h2&gt;
-&lt;p&gt;最近、 &lt;strong&gt;Mac&lt;/strong&gt; との行き来をしていると &lt;strong&gt;emacs keybind&lt;/strong&gt; が使えないときにちょっといらっとしますので使えるようにキーバインドを変更してみました。
-設定ファイルの動的読み込みに対応していないのがちょっと面倒なのですが&lt;sup id=&quot;fnref:hotreload&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:hotreload&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;、これで &lt;strong&gt;Slack&lt;/strong&gt; などで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C-a&lt;/code&gt; で行頭にもどれるようになりました。便利。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:evdev-rs&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;はじめは似た名前のライブラリの &lt;a href=&quot;https://github.com/ndesh26/evdev-rs&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;evdev-rs&lt;/code&gt;&lt;/a&gt; を見てたのですが、対象であるはずのファイル内に宣言されていないのでちょっととまどい、このライブラリは違うやつだとなり &lt;a href=&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt; で再検索して発見しています。 &lt;a href=&quot;#fnref:evdev-rs&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:hotreload&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;どうせ1回確認できたら再起動する必要はないので問題ないといえば問題ないけど、ちょっと面倒。 &lt;a href=&quot;#fnref:hotreload&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><category term="diary" /><summary type="html">仕事で利用したりしている Slack などのキーボードでの操作が面倒になってきたので、 emacs keybind が利用できるようにするため xremap を利用することにした。</summary></entry></feed>
+&lt;/div&gt;</content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html">コロナになって結構前に custom CO2-mini に 話題になった ので買って放置してあったの1 を活用しようと思いたった。 とりあえず値は取得はできているので mackerel との連携をしてグラフに表示できるようにします。 あと mercker-plugin を Rust で書いてみたいとおもったので、やってみることにしました。 Amazon で確認したら買ったの 2020/03 だった…… &amp;#8617;</summary></entry></feed>

@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>API キーが凍結されてら | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="API キーが凍結されてら" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="mikutter の Twitter API キーが凍結された ようです。" />
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="API キーが凍結されてら" />
 <script type="application/ld+json">
-{"description":"mikutter の Twitter API キーが凍結された ようです。","headline":"API キーが凍結されてら","dateModified":"2018-05-06T23:33:23+09:00","url":"https://blog.katsyoshi.org/blog/2018/05/06/teokure/","datePublished":"2018-05-06T23:33:23+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2018/05/06/teokure/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"mikutter の Twitter API キーが凍結された ようです。","datePublished":"2018-05-06T23:33:23+09:00","headline":"API キーが凍結されてら","url":"https://blog.katsyoshi.org/blog/2018/05/06/teokure/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2018/05/06/teokure/"},"@type":"BlogPosting","dateModified":"2018-05-06T23:33:23+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -70,23 +70,23 @@ index 0a88a191..cb48cd4f 100644
    gem 'twitter-text', '&gt;= 2.1.0'
 <span class="gi">+  gem 'dotenv'
 </span> end
-
- group :test do
+<span class="err">
+</span> group :test do
 <span class="gh">diff --git a/core/config.rb b/core/config.rb
 index 6e3d95ba..455e3083 100644
 </span><span class="gd">--- a/core/config.rb
 </span><span class="gi">+++ b/core/config.rb
 </span><span class="p">@@ -14,8 +14,8 @@</span> module CHIConfig
    ACRO = "mikutter"
-
-   # 下の２行は馬鹿にしか見えない
+<span class="err">
+</span>   # 下の２行は馬鹿にしか見えない
 <span class="gd">-  TWITTER_CONSUMER_KEY = "AmDS1hCCXWstbss5624kVw"
 -  TWITTER_CONSUMER_SECRET = "KOPOooopg9Scu7gJUBHBWjwkXz9xgPJxnhnhO55VQ"
 </span><span class="gi">+  TWITTER_CONSUMER_KEY = ENV["TWITTER_CONSUMER_KEY"]
 +  TWITTER_CONSUMER_SECRET = ENV["TWITTER_SECRET_KEY"]
 </span>   TWITTER_AUTHENTICATE_REVISION = 1
-
-   # pidファイル
+<span class="err">
+</span>   # pidファイル
 <span class="gh">diff --git a/mikutter.rb b/mikutter.rb
 index da302ca1..94025817 100755
 </span><span class="gd">--- a/mikutter.rb
@@ -97,8 +97,8 @@ index da302ca1..94025817 100755
  require 'fileutils'
 <span class="gi">+require 'dotenv'
 +Dotenv.load(".env")
-</span>
- require_relative 'core/utils'
+</span><span class="err">
+</span> require_relative 'core/utils'
 </code></pre></div></div>
 
 <p>あとは環境変数<code class="language-plaintext highlighter-rouge">TWITTER_CONSUMER_KEY</code> と <code class="language-plaintext highlighter-rouge">TWITTER_SECRET_KEY</code> を設定してあげると起動できるようになります</p>

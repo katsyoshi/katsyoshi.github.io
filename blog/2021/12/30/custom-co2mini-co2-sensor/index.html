@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>custom CO2-mini で CO2 を見えるようにしよう | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="custom CO2-mini で CO2 を見えるようにしよう" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="コロナになって結構前に custom CO2-mini に 話題になった ので買って放置してあったの1 を活用しようと思いたった。 とりあえず値は取得はできているので mackerel との連携をしてグラフに表示できるようにします。 あと mercker-plugin を Rust で書いてみたいとおもったので、やってみることにしました。 Amazon で確認したら買ったの 2020/03 だった…… &#8617;" />
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="custom CO2-mini で CO2 を見えるようにしよう" />
 <script type="application/ld+json">
-{"description":"コロナになって結構前に custom CO2-mini に 話題になった ので買って放置してあったの1 を活用しようと思いたった。 とりあえず値は取得はできているので mackerel との連携をしてグラフに表示できるようにします。 あと mercker-plugin を Rust で書いてみたいとおもったので、やってみることにしました。 Amazon で確認したら買ったの 2020/03 だった…… &#8617;","headline":"custom CO2-mini で CO2 を見えるようにしよう","dateModified":"2021-12-30T16:59:59+09:00","url":"https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor/","datePublished":"2021-12-30T16:59:59+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"コロナになって結構前に custom CO2-mini に 話題になった ので買って放置してあったの1 を活用しようと思いたった。 とりあえず値は取得はできているので mackerel との連携をしてグラフに表示できるようにします。 あと mercker-plugin を Rust で書いてみたいとおもったので、やってみることにしました。 Amazon で確認したら買ったの 2020/03 だった…… &#8617;","datePublished":"2021-12-30T16:59:59+09:00","headline":"custom CO2-mini で CO2 を見えるようにしよう","url":"https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2021/12/30/custom-co2mini-co2-sensor/"},"@type":"BlogPosting","dateModified":"2021-12-30T16:59:59+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /><script>
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -78,7 +78,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <strong>mackerel-plugin</strong> として動かすために、 <strong>mackerel-agent.conf</strong> に以下のような設定を追加し、再起動することでグラフが追加できます。</p>
 
 <div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[plugin.metrics.CO2MINI]</span>
-<span class="py">command</span> <span class="p">=</span> <span class="nn">["/path/to/build/bin/mackerel-plugin-co2mon"]</span>
+<span class="py">command</span> <span class="p">=</span> <span class="p">[</span><span class="s">"/path/to/build/bin/mackerel-plugin-co2mon"</span><span class="p">]</span>
 </code></pre></div></div>
 
 <p>グラフは以下のように表示されました!やったね!

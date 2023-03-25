@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Page 11 of 11 for katsyoshi のめもみたいなの - page 11 | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="katsyoshi のめもみたいなの - page 11" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
@@ -59,6 +59,35 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 
 
+
+  <h1><a href="/blog/2014/05/12/jubatus-runs-on-docker/">JubatusをDocker上で動かしてみた</a></h1>
+  <p class="author">
+    <span class="date">2014-05-12 23:50:33 +0900</span>
+  </p>
+  <div class="content">
+    <p>最近話題の<a href="https://www.docker.io/">Docker</a>使ってJubatusを動かしてみたのでメモ的なものを</p>
+
+<h2 id="環境">環境</h2>
+<p>環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作</p>
+
+<ul>
+  <li>Vagrant: 1.5.4</li>
+  <li>docker: 0.11.1</li>
+</ul>
+
+<h2 id="dockerfile">Dockerfile</h2>
+
+<p><a href="https://github.com/katsyoshi/docker-jubatus">リポジトリ</a>を作成しておきましたのでcloneして実行します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/katsyoshi/docker-jubatus
+$ cd docker-jubatus
+$ docker build .
+$ docker run -p 9199:9199 最後に出てきたハッシュ値
+</code></pre></div></div>
+
+<p>で動きはじめます。</p>
+
+  </div>
 
   <h1><a href="/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus/">jubatus handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ</a></h1>
   <p class="author">
