@@ -1,5 +1,16 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
   !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
   reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
   reproio("track", "pageView");
@@ -21,7 +32,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Communicate on IPv6 from home" />
 <script type="application/ld+json">
-{"description":"家のネットワークからインターネットへ出るとき IPoE を使ってたけど、家庭内 LAN のネットワークは IPv6 を off にしていた。 この LAN 内 IPv6 化していなかった理由としては、昔 Linux (だけじゃないかも)が IPv6 が利用できる状態だと 先に IPv6 で繋ぎにいこうとして IPv6 で通信できなかったら IPv4 にフォールバックするという挙動で、すごくストレスフルだった。 この挙動の対処として、カーネルレベルで IPv6 を off にしてました。 そうこうしているうちに契約している ISP が IPv6 オプションなしで IPoE を利用できるようになったので、 とりあえず IPoE だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。 いいかげんこの家庭内 LAN のネットワークを IPv6 化し、インターネットと IPv6 で通信できるようにした顛末をのこす。のこします。","url":"https://blog.katsyoshi.org/blog/2022/10/12/ipv6nize-at-home/","dateModified":"2022-10-12T23:59:50+09:00","datePublished":"2022-10-12T23:59:50+09:00","headline":"Communicate on IPv6 from home","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2022/10/12/ipv6nize-at-home/"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"家のネットワークからインターネットへ出るとき IPoE を使ってたけど、家庭内 LAN のネットワークは IPv6 を off にしていた。 この LAN 内 IPv6 化していなかった理由としては、昔 Linux (だけじゃないかも)が IPv6 が利用できる状態だと 先に IPv6 で繋ぎにいこうとして IPv6 で通信できなかったら IPv4 にフォールバックするという挙動で、すごくストレスフルだった。 この挙動の対処として、カーネルレベルで IPv6 を off にしてました。 そうこうしているうちに契約している ISP が IPv6 オプションなしで IPoE を利用できるようになったので、 とりあえず IPoE だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。 いいかげんこの家庭内 LAN のネットワークを IPv6 化し、インターネットと IPv6 で通信できるようにした顛末をのこす。のこします。","datePublished":"2022-10-12T23:59:50+09:00","headline":"Communicate on IPv6 from home","url":"https://blog.katsyoshi.org/blog/2022/10/12/ipv6nize-at-home/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2022/10/12/ipv6nize-at-home/"},"@type":"BlogPosting","dateModified":"2022-10-12T23:59:50+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
