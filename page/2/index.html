@@ -17,7 +17,7 @@
 </script>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 2 of 11 for katsyoshi のめもみたいなの - page 2 | katsyoshi のめもみたいなの</title>
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="katsyoshi のめもみたいなの - page 2" />
@@ -27,12 +27,13 @@
 <link rel="canonical" href="https://blog.katsyoshi.org/page/2/" />
 <meta property="og:url" content="https://blog.katsyoshi.org/page/2/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="website" />
 <link rel="prev" href="https://blog.katsyoshi.org/" />
 <link rel="next" href="https://blog.katsyoshi.org/page/3/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 2" />
 <script type="application/ld+json">
-{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 2","url":"https://blog.katsyoshi.org/page/2/","@type":"WebPage","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 2","url":"https://blog.katsyoshi.org/page/2/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
@@ -58,6 +59,65 @@
 </div>
 
 
+
+  <h1><a href="/blog/2021/12/30/custom-co2mini-co2-sensor/">custom CO2-mini で CO2 を見えるようにしよう</a></h1>
+  <p class="author">
+    <span class="date">2021-12-30 16:59:59 +0900</span>
+  </p>
+  <div class="content">
+    <p>コロナになって結構前に <a href="https://www.kk-custom.co.jp/emp/CO2-mini.html"><strong>custom CO2-mini</strong></a>
+に <a href="https://www.itmedia.co.jp/pcuser/articles/2012/18/news069.html">話題になった</a>
+ので買って放置してあったの<sup id="fnref:buy-co2mon" role="doc-noteref"><a href="#fn:buy-co2mon" class="footnote" rel="footnote">1</a></sup> を活用しようと思いたった。
+とりあえず値は取得はできているので <a href="https://meckerel.io"><strong>mackerel</strong></a> との連携をしてグラフに表示できるようにします。
+あと  <strong>mercker-plugin</strong> を <a href="https://www.rust-lang.org"><strong>Rust</strong></a> で書いてみたいとおもったので、やってみることにしました。</p>
+
+<p>以下のリポジトリにコードはあります。</p>
+
+<p><a href="https://github.com/katsyoshi/mackerel-plugin-co2mon"><img src="https://gh-card.dev/repos/katsyoshi/mackerel-plugin-co2mon.svg" alt="katsyoshi/mackerel-plugin-co2mon - GitHub" /></a></p>
+
+<h2 id="mackerel-plugin-として作る">mackerel plugin として作る</h2>
+<p><strong>mackerel</strong> に投稿する前にこの <strong>custom CO2-mini</strong> が <strong>Rust</strong> で読めるのかを調査してみましたら、<a href="https://crates.io/crates/co2mon"><strong>co2mon</strong></a> がピンズドな感じでありました。
+確認としてセンサーの読み込みは <strong>co2mon</strong> の <a href="https://github.com/lnicola/co2mon#permissions">README の通り</a> にやることで読みとることができます。</p>
+
+<p>センサーの値が読み込めるようになったら、今度は <strong>mackerel</strong> へ投げれるようにします。
+と言ってもやることは <a href="https://mackerel.io/ja/docs/entry/advanced/custom-metrics#post-metric">公式にあるよう</a> に以下のフォーマットで標準出力に出すだけのようです。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{metric name}\t{metric value}\t{unix epoch time}
+</code></pre></div></div>
+
+<p>ということなので適当に <strong>metric name</strong> を <code class="language-plaintext highlighter-rouge">CO2MINI.co2/temp.living</code> <sup id="fnref:custom-co2mini" role="doc-noteref"><a href="#fn:custom-co2mini" class="footnote" rel="footnote">2</a></sup> にして出力しています。
+<strong>mackerel-plugin</strong> として動かすために、 <strong>mackerel-agent.conf</strong> に以下のような設定を追加し、再起動することでグラフが追加できます。</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[plugin.metrics.CO2MINI]</span>
+<span class="py">command</span> <span class="p">=</span> <span class="p">[</span><span class="s">"/path/to/build/bin/mackerel-plugin-co2mon"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>グラフは以下のように表示されました!やったね!
+<img src="/images/screenshot/co2mini-metrics.png" alt="" /></p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>ずっとやろうやろうと思ってた <strong>Rust</strong> で <strong>mackerel</strong> のプラグイン作成、
+面倒で先延しにしてたのですが、チョットやってみたらすぐにできたのでよかったです。
+今後としては <strong>CO<sub>2</sub></strong> の値に応じて窓開けたりできるようにしたいなあと思っています<sup id="fnref:window" role="doc-noteref"><a href="#fn:window" class="footnote" rel="footnote">3</a></sup>。</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:buy-co2mon" role="doc-endnote">
+      <p>Amazon で確認したら買ったの 2020/03 だった…… <a href="#fnref:buy-co2mon" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:custom-co2mini" role="doc-endnote">
+      <p>mackerel のグラフ表示部分のタイトルが <code class="language-plaintext highlighter-rouge">custom.CO2MINI.co2.living</code> となり、メーカー名も入っていいじゃんとなった。 <a href="#fnref:custom-co2mini" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:window" role="doc-endnote">
+      <p>窓開閉する道具もないのでそこから仕入れる必要がありいつになるか不明です。 <a href="#fnref:window" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
 
   <h1><a href="/blog/2021/12/26/xremap/">いんとろでぅーす xremap</a></h1>
   <p class="author">
@@ -703,73 +763,6 @@ Ruby on Apple II のやつがぶっとんでてよかったですね。
 
 <p>という漢字になりました。
 さすがに透過キーキャップだと部屋が明るくなりすぎるので不透明キーキャップに変更していまはつかってますので、大分おちつています。</p>
-
-  </div>
-
-  <h1><a href="/blog/2018/12/31/good-sake-restaurant-2018/">今年いった日本酒が飲める店 2018</a></h1>
-  <p class="author">
-    <span class="date">2018-12-31 23:59:59 +0900</span>
-  </p>
-  <div class="content">
-    <p>去年は <a href="http://blog.katsyoshi.org/blog/2017/12/30/favorite-beer-house/">ビール屋さん</a> でしたので今年は日本酒をまとめてみます。</p>
-
-<h2 id="何軒いった">何軒いった？</h2>
-
-<p>まず、今年行ったお店を列挙してみます。</p>
-
-<ol>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131106/13009812/">鷹匠</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131106/13187564/">多田</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131101/13146616/">かず味家</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1314/A131403/13145814/">喜楽</a></li>
-  <li><a href="https://tabelog.com/yamanashi/A1905/A190501/19006029/">笹一酒造 酒遊館</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131101/13016778/">絵馬亭</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1309/A130905/13196674/">オトナリ</a></li>
-  <li><a href="https://tabelog.com/miyagi/A0401/A040101/4019381/">まぼ屋</a></li>
-  <li><a href="https://tabelog.com/miyagi/A0401/A040101/4010195/">勘助</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1323/A132302/13113345/">大塚はなおか</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1310/A131002/13169654/">KURARA</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1309/A130906/13029173/">うお座</a></li>
-  <li><a href="https://tabelog.com/kumamoto/A4301/A430101/43013344/">うしじま酒店</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1310/A131002/13177769/">福33</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1307/A130701/13094750/">魚屋 がぶ</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131102/13216303/">ずぶ六</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131106/13174819/">酒壺しずく</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131106/13227775/">坂ノ下ノオリゼ</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1311/A131106/13020252/">釜竹</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1301/A130103/13141421/">立ち呑み 庫裏</a></li>
-  <li><a href="https://tabelog.com/tokyo/A1303/A130301/13158104/">いまここ</a></li>
-</ol>
-
-<p>とりあえず挙げてみました。</p>
-
-<h2 id="どこがよかった">どこがよかった？</h2>
-
-<p>ここに書いてあるところはどこもよかったですよ</p>
-
-<h3 id="特に気に入ったお店">特に気に入ったお店</h3>
-
-<p>今年はじめて行ったなかでは、多田、はなおか、しずく、ずぶ六が特に好きでした。</p>
-
-<p>多田とはなおかは、ミシュランのビブグルマンにのっているらしいです。料理がとてもおいしく、うめぇうめぇ言いながらたべてました。
-多田は、日本酒が選択できますが、はなおかは料理にあわせたお酒をだしてくれます。
-どちらのお店も日本料理となります。</p>
-
-<p>季節によりますが、多田は季節にあわせた肴を出してくれて冬は牡蠣の塩辛？(失念)や夏ですと、鱧のお吸い物を出してくれました。</p>
-
-<h3 id="今年行っていない店">今年行っていない店</h3>
-
-<p>今年行っていない店としては、29rotiと壺中が行けていないですね。</p>
-
-<p>29rotiは生ハムとチーズが大変美味しく、熱燗や常温のお酒とよい感じに合います。要予約のお店ですので今年は行けなかったです。</p>
-
-<p>壺中は熱燗専門のお店で予約とかなく入れますので、そのうち行こうと思い行かずにおわってしまた。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>いかがでしたでしょうか？来年はまたビールをまとめたいとおもいますのでよろしくおねがいします。</p>
-
-<p><a href="https://drive.google.com/open?id=1NjNMxM0HM_mpi_gccWQyeSy-d3RXCAiF&amp;usp=sharing">sake 2018</a></p>
 
   </div>
 

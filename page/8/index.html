@@ -17,7 +17,7 @@
 </script>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 8 of 11 for katsyoshi のめもみたいなの - page 8 | katsyoshi のめもみたいなの</title>
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="katsyoshi のめもみたいなの - page 8" />
@@ -27,12 +27,13 @@
 <link rel="canonical" href="https://blog.katsyoshi.org/page/8/" />
 <meta property="og:url" content="https://blog.katsyoshi.org/page/8/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="website" />
 <link rel="prev" href="https://blog.katsyoshi.org/page/7/" />
 <link rel="next" href="https://blog.katsyoshi.org/page/9/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 8" />
 <script type="application/ld+json">
-{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 8","url":"https://blog.katsyoshi.org/page/8/","@type":"WebPage","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 8","url":"https://blog.katsyoshi.org/page/8/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
@@ -58,6 +59,56 @@
 </div>
 
 
+
+  <h1><a href="/blog/2015/04/30/use-visual-studio-code/">Visual Studio Codeを使ってみた</a></h1>
+  <p class="author">
+    <span class="date">2015-04-30 13:09:55 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://code.visualstudio.com/">Visual Studio Code</a>というものがでたので普段利用している
+Linuxで使ってみた。</p>
+
+<h2 id="インストール">インストール</h2>
+<p>は簡単にできて、ウェブサイトからZIPファイルをダウンロードして展開し、展開したディレクトリで
+以下のコマンドで実行できます</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./Code
+</code></pre></div></div>
+
+<h2 id="感想">感想</h2>
+<p>VSC使ってみたけど、日本語表示がされない。</p>
+
+<p>-&gt; <img src="/images/screenshot/vsc_japanese.png" alt="" /> &lt;-</p>
+
+<p><em>追記</em></p>
+
+<p>フォントを変更すると表示できるようになりました。</p>
+
+<p><code class="language-plaintext highlighter-rouge">File -&gt; Preferences -&gt; User Settings</code> から、 <code class="language-plaintext highlighter-rouge">settings.json</code> を開き、
+以下のように追加する</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"editor.fontFamily"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ricty"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>-&gt; <img src="/images/screenshot/vsc_settings.png" alt="" /> &lt;-</p>
+
+<p><em>追記おわり</em></p>
+
+<p>デバッガ動かすためにMONOが必要。</p>
+
+<p><img src="/images/screenshot/vsc_debugger_needed_mono.png" alt="" /></p>
+
+<p>補完がよさそう。Rubyでの補完の出かたです。</p>
+
+<p>-&gt; <img src="/images/screenshot/vsc_completion.png" alt="" /> &lt;-</p>
+
+<p>などあります。</p>
+
+<p>そのうちなにかこれで書くかなぁ。</p>
+
+  </div>
 
   <h1><a href="/blog/2015/04/15/looks-good-new-machine/">おにゅーな</a></h1>
   <p class="author">
@@ -301,55 +352,6 @@ $ rake deploy
 <h3 id="参考">参考</h3>
 
 <p>‘xdg-open’, archlinux wiki, https://wiki.archlinux.org/index.php/xdg-open, 2015/02/16</p>
-
-  </div>
-
-  <h1><a href="/blog/2015/02/12/remove-ibus/">とりあえずibusやめてみた</a></h1>
-  <p class="author">
-    <span class="date">2015-02-12 07:10:29 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
-
-<h2 id="前提条件">前提条件</h2>
-
-<p>ここでは<a href="http://www.gentoo.org">Gentoo/Linux</a>での導入方法について述べています。
-日本語変換エンジンとしてMozcについて述べています。</p>
-
-<h2 id="導入">導入</h2>
-
-<p>とりあえずfcitxをインストール、設定します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ emerge -av fcitx
-
-$ $EDITOR .xinitrc
-
-export XMODIFIERS=@im="fcitx"
-export GTK_IM_MODULE="fcitx"
-export QT_IM_MODULE="fcitx"
-fcitx
-</code></pre></div></div>
-
-<p>これでインストールはこれでおわりです。</p>
-
-<h2 id="fcitxでmozc">fcitxでmozc</h2>
-
-<p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ $EDITOR /etc/portage/make.conf
-USE="fcitx ${USE}"
-
-$ sudo emerge -av mozc
-</code></pre></div></div>
-
-<p>で、インストールすれば使えるようになります。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p><a href="http://anond.hatelabo.jp/20150210030728">こういうの</a>があったので、真面目にかこうかと思ったんですがどめんどうなので導入メモになりました。</p>
-
-<p>あと引越ししたので贈っていただいてもいいんですよ？
-http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</p>
 
   </div>
 

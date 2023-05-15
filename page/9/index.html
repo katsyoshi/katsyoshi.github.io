@@ -17,7 +17,7 @@
 </script>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 9 of 11 for katsyoshi のめもみたいなの - page 9 | katsyoshi のめもみたいなの</title>
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="katsyoshi のめもみたいなの - page 9" />
@@ -27,12 +27,13 @@
 <link rel="canonical" href="https://blog.katsyoshi.org/page/9/" />
 <meta property="og:url" content="https://blog.katsyoshi.org/page/9/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="website" />
 <link rel="prev" href="https://blog.katsyoshi.org/page/8/" />
 <link rel="next" href="https://blog.katsyoshi.org/page/10/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 9" />
 <script type="application/ld+json">
-{"description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 9","url":"https://blog.katsyoshi.org/page/9/","@type":"WebPage","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 9","url":"https://blog.katsyoshi.org/page/9/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
@@ -58,6 +59,55 @@
 </div>
 
 
+
+  <h1><a href="/blog/2015/02/12/remove-ibus/">とりあえずibusやめてみた</a></h1>
+  <p class="author">
+    <span class="date">2015-02-12 07:10:29 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://www.google.co.jp/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#newwindow=1&amp;q=ibus1.5">ibus-1.5</a>からあまり評判がよろしくない(特に不満はない)ので、あたらしく<a href="https://code.google.com/p/fcitx/">fcitx</a>を導入してみた。</p>
+
+<h2 id="前提条件">前提条件</h2>
+
+<p>ここでは<a href="http://www.gentoo.org">Gentoo/Linux</a>での導入方法について述べています。
+日本語変換エンジンとしてMozcについて述べています。</p>
+
+<h2 id="導入">導入</h2>
+
+<p>とりあえずfcitxをインストール、設定します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ emerge -av fcitx
+
+$ $EDITOR .xinitrc
+
+export XMODIFIERS=@im="fcitx"
+export GTK_IM_MODULE="fcitx"
+export QT_IM_MODULE="fcitx"
+fcitx
+</code></pre></div></div>
+
+<p>これでインストールはこれでおわりです。</p>
+
+<h2 id="fcitxでmozc">fcitxでmozc</h2>
+
+<p>これは、<a href="http://gpo.zugaina.org/app-i18n/mozc">overlay</a>が提供されいているのでそれで導入します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ $EDITOR /etc/portage/make.conf
+USE="fcitx ${USE}"
+
+$ sudo emerge -av mozc
+</code></pre></div></div>
+
+<p>で、インストールすれば使えるようになります。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p><a href="http://anond.hatelabo.jp/20150210030728">こういうの</a>があったので、真面目にかこうかと思ったんですがどめんどうなので導入メモになりました。</p>
+
+<p>あと引越ししたので贈っていただいてもいいんですよ？
+http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</p>
+
+  </div>
 
   <h1><a href="/blog/2015/01/31/emacs-fonts/">Rictyやめるってよ</a></h1>
   <p class="author">
@@ -433,43 +483,6 @@ RubyChallengeはコミッタでも間違えててむずかしい。
 
 <p>ということで名古屋から新宿まで塩尻を経由して鈍行の中央線を走破しました。
 おわり。</p>
-
-  </div>
-
-  <h1><a href="/blog/2014/09/12/jubatus-in-gentoo/">Gentoo LinuxむけのJubatusパッケージ書いたよ</a></h1>
-  <p class="author">
-    <span class="date">2014-09-12 12:29:20 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="/blog/2014/08/20/gentoo-install-battle-part-i/">PC</a>を<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">買い替えた</a>ので<a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">環境構築</a>してます。
-<a href="https://github.com/kazuki/overlay/tree/master/sci-calculators/jubatus">Jubatusのoverlay</a>があったのですが、古かったので新しく<a href="https://github.com/katsyoshi/overlay">Jubatusのoverlay</a>作成しました。</p>
-
-<h2 id="インストール">インストール</h2>
-
-<p>これは、以下のコマンドでインストールができます。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># curl https://raw.githubusercontent.com/katsyoshi/overlay/master/profiles/layman.xml &gt; /etc/layman/overlays/katsyoshi.xml
-# layman -f -a katsyoshi
-# eix-sync
-# emerge -av jubatus
-</code></pre></div></div>
-
-<p>でいけるとおもいます。</p>
-
-<h2 id="未実装">未実装</h2>
-<ul>
-  <li>jubatus_coreのオプションがはたらいてない(ハズ)</li>
-  <li>jubatus_msgpack-rpcの依存パッケージにdev-libs/msgpackをいれていない</li>
-  <li>jubatusのオプションを確認していない</li>
-</ul>
-
-<p>などなどあるので、PRまってます。</p>
-
-<h2 id="まとめ">まとめ</h2>
-<p><a href="https://github.com/kazuki/overlay/">よくみたら</a>必要なライブラリのパッケージもあったのでこれのバージョンとjubatus_core追加するだけでよかったかも。</p>
-
-<p>ちゃんちゃん</p>
-
 
   </div>
 

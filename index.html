@@ -17,7 +17,7 @@
 </script>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>katsyoshi のめもみたいなの | It’s a memos.</title>
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="katsyoshi のめもみたいなの" />
@@ -27,11 +27,12 @@
 <link rel="canonical" href="https://blog.katsyoshi.org/" />
 <meta property="og:url" content="https://blog.katsyoshi.org/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="website" />
 <link rel="next" href="https://blog.katsyoshi.org/page/2/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの" />
 <script type="application/ld+json">
-{"name":"katsyoshi のめもみたいなの","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの","url":"https://blog.katsyoshi.org/","@type":"WebSite","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"WebSite","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの","name":"katsyoshi のめもみたいなの","url":"https://blog.katsyoshi.org/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
@@ -55,6 +56,150 @@
 </div>
 
 
+
+  <h1><a href="/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/">RubyKaigi2023 @MATZ本</a></h1>
+  <p class="author">
+    <span class="date">2023-05-15 23:59:59 +0900</span>
+  </p>
+  <div class="content">
+    <p>行ってきたのでまとめます。LT やったのですが、 LT の話はまた今度。</p>
+
+<h2 id="day--1">Day -1</h2>
+
+<p>前日は恒例の <a href="https://asakusarb.esa.io">Asakusa.rb</a> の <a href="https://asakusarb.doorkeeper.jp/events/154786">predrinkup</a> に行ってました。ここでは、 <a href="https://twitter.com/n0kada">nobu</a> とかとはなししたりしてすごしました。
+drinkup は次の日のため終了後すぐさま帰宅し、就寝した。</p>
+
+<h2 id="day-0">Day 0</h2>
+<p>この日は、 <a href="https://cookpad.connpass.com/event/277569/">RubyistsOnRails</a> というすばらしいイベント列車があったのでノータイム <sup id="fnref:sonnnakotohanai" role="doc-noteref"><a href="#fn:sonnnakotohanai" class="footnote" rel="footnote">1</a></sup> 8時の会に参加申し込み。6時に起床し、7時に出発。
+会ではRubyistと話しながら、山見ながら、松本に到着。
+松本に到着後飯として <a href="https://tabelog.com/nagano/A2002/A200201/20000092/">みよ田</a> という蕎麦屋に直行。
+蕎麦を食べた直後、松本城へ。松本城では <a href="https://twitter.com/yukihiro_matz/">まつもとさん</a> 集団を見つけたので、みんなで Matz本城 背景に記念撮影。まつもとさん一行は開発者会議があったらしく記念撮影後すぐにわかれました。
+われわれは、この記念撮影後松本城観光し、もう一軒蕎麦屋へ昼食へ。二軒目の蕎麦屋は <a href="https://tabelog.com/nagano/A2002/A200201/20002376/">蕎麦倶楽部佐々木</a> へ。</p>
+
+<p>そんなことしてたら宿がチェックイン可能になったので、荷物置くのと下着類を購入しひとやすみ(10min程)。</p>
+
+<p>Day 0 最大のイベント、 <a href="https://keebkaigi.org/2023/">KeebKaigi</a> へ!ここで豪華ノベリティを大量に頂きました!!!1とくによいのが城キーキャップで松本城を3DプリントしたISO エンターキーを頂きました。しかしながらこのキー差すキーボードがないので知人に譲る予定です。</p>
+
+<p>KeebKaigi 自体もたいへん面白い Kaigi で楽しめました。とくに、 t-code の紹介のLT、頭文字Vなどよかったです。
+KeebKaigi 後は懇親会には参加せず、友人とかるく夕飯をして宿へ。</p>
+
+<h2 id="day-1">Day 1</h2>
+
+<p>ここまででも大変楽しいものでしたが、<a href="https://rubykaigi.org/2023/">RubyKaigi本番</a> はこの日から。</p>
+
+<p>1日目の朝食は会場行く途中でもともと聞いていた店の <a href="https://sioribi.jp/">栞日</a> さんへ。
+会場開いて登録したあとノベリティの列をみてげんなりしてたので一旦スポンサーブースをうろうろしてた。
+この日聞いたセッションは以下です。</p>
+
+<h3 id="matz-keynote"><a href="https://rubykaigi.org/2023/presentations/yukihiro_matz.html#day1">Matz Keynote</a></h3>
+
+<p>毎年恒例 Matz のキーノート。</p>
+
+<h3 id="昼飯">昼飯</h3>
+<p>ランチはたまたま居合わせた6人で <a href="https://tabelog.com/nagano/A2002/A200201/20000098/">おきな堂</a> へ。名物のボルガライスとリンゴジュースを。シードルがあったので一緒にいったひとへオススメしてたりした。</p>
+
+<h3 id="the-future-vision-of-ruby-parser"><a href="https://rubykaigi.org/2023/presentations/spikeolaf.html#day1">The future vision of Ruby Parser</a></h3>
+
+<p>コミッターの <a href="https://twitter.com/spikeolaf">spikelaf</a> さんによるパーサーの開発話。魔窟じゃないよーなんかいってまいましたが、難しい問題を丁寧にひとつひとつ倒していった話をしていました。</p>
+
+<h3 id="make-regexpmatch-much-faster"><a href="https://rubykaigi.org/2023/presentations/makenowjust.html#day1">Make Regexp#match much faster</a></h3>
+
+<p>去年 <a href="https://www.ruby-lang.org/ja/news/2023/03/30/redos-in-time-cve-2023-28756/">ReDoS</a> の対応をしたコミッターの発表。正規表現の可能性を話してくれています。</p>
+
+<h3 id="high-performance-real-time-3d-graphics-with-vulkan"><a href="https://rubykaigi.org/2023/presentations/fredolinhares.html#day1">High-performance real-time 3D graphics with Vulkan</a></h3>
+
+<p><a href="https://www.vulkan.org/">Valkan</a> を Ruby で利用できるようにした話。このあたりは LT への緊張感でほとんど覚えていないです。</p>
+
+<h3 id="power-up-your-repl-life-with-types"><a href="https://rubykaigi.org/2023/presentations/tompng.html#day1">Power up your REPL life with types</a></h3>
+
+<p>去年の <a href="https://github.com/tric/trick2022/blob/master/01-tompng/entry.rb">TRICK Winner</a> で今回の話は <code class="language-plaintext highlighter-rouge">irb</code> を利用しているときにどういう感じで補完が出るのか、出すためにどのような型推論を行なっているのかの話だったとおもう。</p>
+
+<h3 id="lt">LT</h3>
+
+<p>しゃべった</p>
+
+<h3 id="オフィシャルパーティー">オフィシャルパーティー</h3>
+
+<p>つかれたのでそこそこで帰った</p>
+
+<h2 id="day-2">Day 2</h2>
+
+<p>朝飯は <a href="https://tabelog.com/nagano/A2002/A200201/20020720/">珈琲茶房かめのや</a> へ。ここもワンオペで配膳されるまで少し時間がかかった。というか、朝食べくるひといないのかどこもワンオペだったので Day 3 も早めに出るようにしようとなった。</p>
+
+<h3 id="on-ruby-and-ꝩduя-or-how-scary-are-trojan-source-attacks"><a href="https://rubykaigi.org/2023/presentations/duerst.html#day2">On Ruby and ꝩduЯ, or How Scary are Trojan Source Attacks</a></h3>
+
+<p>昔他の言語で話題になった Ruby のコード的には正しいが、見た目ではわからない
+不正な文字が入ったときの対策のはなしでした。</p>
+
+<h3 id="build-a-mini-ruby-debugger-in-under-300-lines"><a href="https://rubykaigi.org/2023/presentations/_st0012.html#day2">Build a mini Ruby debugger in under 300 lines</a></h3>
+
+<p>300 行といったなあれは嘘だ。という話。Ruby の Debugger を200 行くらいでつくったはなしでした。</p>
+
+<h3 id="昼飯-1">昼飯</h3>
+
+<p><a href="https://tabelog.com/nagano/A2002/A200201/20015852/">種村</a> で蕎麦と岩魚と日本酒。</p>
+
+<h3 id="revisiting-typeprof---ide-support-as-a-primary-feature"><a href="https://rubykaigi.org/2023/presentations/mametter.html#day2">Revisiting TypeProf - IDE support as a primary feature</a></h3>
+
+<p>Ruby に梱包されている <a href="https://github.com/ruby/typeprof/blob/master/doc/doc.ja.md"><code class="language-plaintext highlighter-rouge">TypeProf</code></a> が遅いので速くして、また書いている途中でもエラーがでたときどうするかとかの説明をしていました。まだ利用できていないので試したくなるものだった。</p>
+
+<h3 id="ruby-implementation-of-quic-progress-and-challenges"><a href="https://rubykaigi.org/2023/presentations/yu_suke1994.html#day2">Ruby Implementation of QUIC: Progress and Challenges</a></h3>
+
+<p><a href="https://twitter.com/yu_suke1994">Unasuke</a> 大先生のライフワーク、 Ruby の <a href="https://datatracker.ietf.org/doc/html/rfc9000">QUIC</a> 対応のはなし。Python での実装はどうとかのはなしで今回は実装がすすんでいるようでよかった。とはいえ道程はまだまだかかりそう。</p>
+
+<h3 id="afternoon-break">afternoon break</h3>
+
+<p>お昼休憩後は Jeremy Evans や Maxime の話を聞いていたが疲れてなにも覚えていない。</p>
+
+<h3 id="leaner-drinkup-at-rubykaigi-2023"><a href="https://leanertechnologies.connpass.com/event/280191/">Leaner Drinkup at RubyKaigi 2023</a></h3>
+
+<p>この日は <a href="https://leaner.jp/">Leaner</a> さん主催の drinkup へ行きました。ここでは主に日本を飲んですごしました。でここで、spikelaf が kaigi でも話してた <a href="https://github.com/ruby/lrama">lrama</a> が Ruby 本体のとりこまれ、 <a href="https://www.ruby-lang.org/ja/news/2023/05/12/ruby-3-3-0-preview1-released/">Ruby 3.3.0-preview1 がリリースされました</a>!なんかさわいでるなと思たらリリース作業シテイタトハ…
+drinkup 終了後は <a href="https://twitter.com/onk">onk</a> とふたりで近所のワインバーへ行き、軽くのんで宿へ帰りました。</p>
+
+<p>宿帰ったら <a href="https://esm.co.jp/">ESM</a> さんのノベリティの <a href="https://blog.agile.esm.co.jp/entry/ruby-method-karuta">Rubyメソッドかるた</a> でみんなでわいわいしながら遊んでました。</p>
+
+<h2 id="day-3">Day 3</h2>
+
+<p>この日の朝食は <a href="https://tabelog.com/nagano/A2002/A200201/20023046">山山食堂</a> というところでしました。</p>
+
+<h3 id="committers-and-the-worldのあと">Committers and the Worldのあと</h3>
+
+<p>今回は Matz本 ということで会場にいる「まつもとさん」一同会して写真を撮ることを目的としてあつめてました。写真は以下になります</p>
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">松本さん大集合に、当社の松本さんも混ぜていただきありがとうございましたっ🏯<a href="https://twitter.com/hashtag/RubyKaigi2023?src=hash&amp;ref_src=twsrc%5Etfw">#RubyKaigi2023</a> <a href="https://t.co/neYYer5e2A">pic.twitter.com/neYYer5e2A</a></p>&mdash; Yasunori Suzuki (@yasuzukisan) <a href="https://twitter.com/yasuzukisan/status/1657253330056519680?ref_src=twsrc%5Etfw">May 13, 2023</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<h3 id="ruby--adbc---a-single-api-between-ruby-and-dbs"><a href="https://rubykaigi.org/2023/presentations/ktou.html#day3">Ruby + ADBC - A single API between Ruby and DBs</a></h3>
+
+<p><a href="https://github.com/kou">須藤さん</a> の発表で、 <a href="https://arrow.apache.org/docs/format/ADBC.html"><code class="language-plaintext highlighter-rouge">ADBC</code></a> で DB へ接続し、さらのその接続からのよみかきの高速化のはなしでした。あいかわらずすごいなと思いながら聞いていました。</p>
+
+<h3 id="ruby-jit-hacking-guide"><a href="https://rubykaigi.org/2023/presentations/k0kubun.html#day3">Ruby JIT Hacking Guide</a></h3>
+
+<p><a href="https://github.com/k0kubun">国分さん</a> の新作 <a href="https://github.com/ruby/ruby/pull/7448">RubyJIT</a>。PRみた感じだとやってるネタにてるなあとおもってたけど、アプローチがすこし違い、またこちらは直接ELFを書いているようなのでまだちがうようだ。とはいえ今やっていることは似ているのであとで参考にしよう。</p>
+
+<h3 id="after-party-and-music-mixin">After Party and Music Mixin</h3>
+
+<p><a href="https://stores.jp/">STORESさん</a> の <a href="https://hey.connpass.com/event/277763/">アフターパティー</a> と <a href="https://www.pixiv.net">pixivさん</a> の <a href="https://conference.pixiv.co.jp/2023/rubymusicmixin">ruby music mixin</a> にいってきました。両方ともサイコーでした!!!!</p>
+
+<h2 id="day-4">Day 4</h2>
+
+<p>一人で野沢温泉村いって温泉はいって、ジンのんで、ビールのみいこうと一旦山おりたら温泉にしか飲むとこなかったのでもどったりして帰りました。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>今回のRubyKaigi久しぶりのFull開催で大変楽しめたのですが、LTとは言えはじめての発表があり、心から楽しめたかというとあれですが、すごく楽しかったし、刺激になりました。来年の那覇は本編に出せるようになんとか精進します!!!</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:sonnnakotohanai" role="doc-endnote">
+      <p>海外の人が登録して行ったほうがいいんじゃないかと一瞬思った <a href="#fnref:sonnnakotohanai" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
 
   <h1><a href="/blog/2023/03/21/my-hobby-is-building-vaporware/">趣味は vaporware 造りですv0.0.0</a></h1>
   <p class="author">
@@ -1291,65 +1436,6 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
   <ol>
     <li id="fn:coffee" role="doc-endnote">
       <p>ここ1,2年コーヒー飲みすぎると胃が痛くなるのに気がついた。 <a href="#fnref:coffee" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
-
-  </div>
-
-  <h1><a href="/blog/2021/12/30/custom-co2mini-co2-sensor/">custom CO2-mini で CO2 を見えるようにしよう</a></h1>
-  <p class="author">
-    <span class="date">2021-12-30 16:59:59 +0900</span>
-  </p>
-  <div class="content">
-    <p>コロナになって結構前に <a href="https://www.kk-custom.co.jp/emp/CO2-mini.html"><strong>custom CO2-mini</strong></a>
-に <a href="https://www.itmedia.co.jp/pcuser/articles/2012/18/news069.html">話題になった</a>
-ので買って放置してあったの<sup id="fnref:buy-co2mon" role="doc-noteref"><a href="#fn:buy-co2mon" class="footnote" rel="footnote">1</a></sup> を活用しようと思いたった。
-とりあえず値は取得はできているので <a href="https://meckerel.io"><strong>mackerel</strong></a> との連携をしてグラフに表示できるようにします。
-あと  <strong>mercker-plugin</strong> を <a href="https://www.rust-lang.org"><strong>Rust</strong></a> で書いてみたいとおもったので、やってみることにしました。</p>
-
-<p>以下のリポジトリにコードはあります。</p>
-
-<p><a href="https://github.com/katsyoshi/mackerel-plugin-co2mon"><img src="https://gh-card.dev/repos/katsyoshi/mackerel-plugin-co2mon.svg" alt="katsyoshi/mackerel-plugin-co2mon - GitHub" /></a></p>
-
-<h2 id="mackerel-plugin-として作る">mackerel plugin として作る</h2>
-<p><strong>mackerel</strong> に投稿する前にこの <strong>custom CO2-mini</strong> が <strong>Rust</strong> で読めるのかを調査してみましたら、<a href="https://crates.io/crates/co2mon"><strong>co2mon</strong></a> がピンズドな感じでありました。
-確認としてセンサーの読み込みは <strong>co2mon</strong> の <a href="https://github.com/lnicola/co2mon#permissions">README の通り</a> にやることで読みとることができます。</p>
-
-<p>センサーの値が読み込めるようになったら、今度は <strong>mackerel</strong> へ投げれるようにします。
-と言ってもやることは <a href="https://mackerel.io/ja/docs/entry/advanced/custom-metrics#post-metric">公式にあるよう</a> に以下のフォーマットで標準出力に出すだけのようです。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{metric name}\t{metric value}\t{unix epoch time}
-</code></pre></div></div>
-
-<p>ということなので適当に <strong>metric name</strong> を <code class="language-plaintext highlighter-rouge">CO2MINI.co2/temp.living</code> <sup id="fnref:custom-co2mini" role="doc-noteref"><a href="#fn:custom-co2mini" class="footnote" rel="footnote">2</a></sup> にして出力しています。
-<strong>mackerel-plugin</strong> として動かすために、 <strong>mackerel-agent.conf</strong> に以下のような設定を追加し、再起動することでグラフが追加できます。</p>
-
-<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[plugin.metrics.CO2MINI]</span>
-<span class="py">command</span> <span class="p">=</span> <span class="p">[</span><span class="s">"/path/to/build/bin/mackerel-plugin-co2mon"</span><span class="p">]</span>
-</code></pre></div></div>
-
-<p>グラフは以下のように表示されました!やったね!
-<img src="/images/screenshot/co2mini-metrics.png" alt="" /></p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>ずっとやろうやろうと思ってた <strong>Rust</strong> で <strong>mackerel</strong> のプラグイン作成、
-面倒で先延しにしてたのですが、チョットやってみたらすぐにできたのでよかったです。
-今後としては <strong>CO<sub>2</sub></strong> の値に応じて窓開けたりできるようにしたいなあと思っています<sup id="fnref:window" role="doc-noteref"><a href="#fn:window" class="footnote" rel="footnote">3</a></sup>。</p>
-
-<hr />
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:buy-co2mon" role="doc-endnote">
-      <p>Amazon で確認したら買ったの 2020/03 だった…… <a href="#fnref:buy-co2mon" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:custom-co2mini" role="doc-endnote">
-      <p>mackerel のグラフ表示部分のタイトルが <code class="language-plaintext highlighter-rouge">custom.CO2MINI.co2.living</code> となり、メーカー名も入っていいじゃんとなった。 <a href="#fnref:custom-co2mini" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:window" role="doc-endnote">
-      <p>窓開閉する道具もないのでそこから仕入れる必要がありいつになるか不明です。 <a href="#fnref:window" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
