@@ -1,21 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>katsyoshi のめもみたいなの | It’s a memos.</title>
@@ -24,17 +8,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/" />
+<link rel="canonical" href="http://localhost:3000/" />
+<meta property="og:url" content="http://localhost:3000/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
 <meta property="og:type" content="website" />
-<link rel="next" href="https://blog.katsyoshi.org/page/2/" />
+<link rel="next" href="http://localhost:3000/page/2/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの","name":"katsyoshi のめもみたいなの","url":"https://blog.katsyoshi.org/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの","name":"katsyoshi のめもみたいなの","url":"http://localhost:3000/"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -56,6 +40,135 @@
 </div>
 
 
+
+  <h1><a href="/blog/2023/05/25/vaporware-for-ruby-compiler/">趣味はvaporware造りです v.0.0.1</a></h1>
+  <p class="author">
+    <span class="date">2023-05-25 23:59:59 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="htttps://rubykaigi.org/2023"><strong>RubyKaigi2023</strong></a>に行ってきたのは<a href="/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/">別エントリ</a>にしたのでこのエントリでは <a href="https://rubykaigi.org/2023/presentations/lt/"><em>LT</em></a> で話しした内容の説明などをしていこうかと思います。</p>
+
+<h2 id="presentation">Presentation</h2>
+
+<iframe class="speakerdeck-iframe" style="border: 0px none; background: rgba(0, 0, 0, 0.1) padding-box; margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 420;" src="https://speakerdeck.com/player/59e0f2da2d014f3e9b1d1d7633ef000f" title="Building Ruby Native Extension using Ruby" allowfullscreen="true" data-ratio="1.3333333333333333" frameborder="0"></iframe>
+
+<h2 id="lt申し込みまで">LT申し込みまで</h2>
+
+<p><a href="https://rubykaigi.org/2023"><strong>RubyKaigi2023</strong></a> 松本でやるし発表もしたいが、ネタがないなとおもってたら本編の方の <em>CFP</em><sup id="fnref:cfp" role="doc-noteref"><a href="#fn:cfp" class="footnote" rel="footnote">1</a></sup> が閉じられてた<sup id="fnref:cfpdate" role="doc-noteref"><a href="#fn:cfpdate" class="footnote" rel="footnote">2</a></sup>。
+とはいえ今年は <strong>COVID-19</strong> の制限も無くなるから <em>LT</em> あるとおもうので <em>LT</em> 出せたらいいなあと考えてた。
+そうこうしているうちに <a href="https://30.ruby.or.jp/"><strong>Ruby30th</strong></a> で今はまだないものだけど…って matz がいったものを造ろうとなりました。</p>
+
+<p><em>LT</em> の応募サイト開くまでにネタが幸い見つけることができ、実装をはじめることにした。</p>
+
+<h2 id="実装">実装</h2>
+
+<p>ということで、通るかどうかわからないですが、発表できるように準備をはじめました。
+準備といっても実際は実装どこまでできましたーというような発表にする予定だったので
+そのまま実装をしています。</p>
+
+<p>実装予定は発表にもあった通り、以下の予定ですすめて、最後に <a href="https://docs.ruby-lang.org/ja/latest/library/fiddle.html"><code class="language-plaintext highlighter-rouge">fiddle</code></a> で読み込めるように実装していました。</p>
+
+<ol>
+  <li>四則演算: <code class="language-plaintext highlighter-rouge">Integer</code> の計算ができること</li>
+  <li>変数: 変数が使えること</li>
+  <li>制御構文: <code class="language-plaintext highlighter-rouge">for</code> や <code class="language-plaintext highlighter-rouge">if</code> などの基本的な制御構文が使えること</li>
+  <li>メソッド: メソッドが定義でき、利用できこと</li>
+</ol>
+
+<p>を目標に実装をすすめていましたのでそれぞれの進捗を</p>
+
+<h3 id="四則演算">四則演算</h3>
+
+<p>とくに詰まる点もなく、<em>AST</em> をもとに <em>assembler</em> へ変換するだけでいけた。</p>
+
+<h3 id="変数">変数</h3>
+
+<p>これが一番大変だった。<a href="https://www.sigbus.info/compilerbook">教科書</a> を <code class="language-plaintext highlighter-rouge">cherry-picking</code> しながら進めてたために、
+実装でわからん部分が出てきたのでインターネット介して <code class="language-plaintext highlighter-rouge">gdb</code> リモートデバッグの講習を受けながら実装。
+もともとここか制御構文までで終わるだろうなあと予想してたが、<code class="language-plaintext highlighter-rouge">SEGV</code> 出しながらもなんとかくりあ。</p>
+
+<h3 id="制御構文">制御構文</h3>
+
+<p>はじめは素直に <code class="language-plaintext highlighter-rouge">if</code> 文を実装。ここも上記の理由によりなんもわからんとなり、<a href="https://github.com/ktateish/9cc">別の人の実装</a> を参考に実装。
+<code class="language-plaintext highlighter-rouge">if</code> 文だけじゃつまんないというか、とくになにもできないのでループ文を追加しようとしました。
+はじめは <code class="language-plaintext highlighter-rouge">for</code> 文を実装しようと考えましたが、なんとここで重大なことに気がつきました。
+<strong>Ruby</strong> の <code class="language-plaintext highlighter-rouge">for</code> のことはなにもしらない。ということに。そういえば <code class="language-plaintext highlighter-rouge">for x in 1..10; puts x;end</code> とか書けるけど
+そもそも <code class="language-plaintext highlighter-rouge">Range</code> クラスや <code class="language-plaintext highlighter-rouge">Array</code> 作る必要あるよな？ということで一旦 <code class="language-plaintext highlighter-rouge">for</code> はやめに。</p>
+
+<p>ということでここは <code class="language-plaintext highlighter-rouge">while</code> 文を実装して、<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%9C%E3%83%8A%E3%83%83%E3%83%81%E6%95%B0"><strong><code class="language-plaintext highlighter-rouge">fibonacci</code> 数</strong></a> を求めることができるようになりました。</p>
+
+<h3 id="メソッド">メソッド</h3>
+
+<p>ここは変数、制御構文ができれば作るだけなら問題はなかったように思えます。
+ただほんとうに作るだけだったので、引数なし、定数を返すだけのメソッドの確認しか行なっていないです。
+ここの実装にたどり着くとは思っておらず、最後のRubyKaigi直前の6連休に入ってから実装できてしまったので
+あんまりブラッシュアップできていないです。
+引数の扱い、変数の利用、などなど確認をとれておらずにいますが動いたので <code class="language-plaintext highlighter-rouge">fiddle</code> で読み込めるように。</p>
+
+<h3 id="fiddle-で利用できるようにする">Fiddle で利用できるようにする</h3>
+
+<p>定義したメソッドを <strong>C言語</strong> の関数として見えるようにしてあげればいいので、
+そうしたら、あっさりとうごいてしまった<sup id="fnref:yoteigai" role="doc-noteref"><a href="#fn:yoteigai" class="footnote" rel="footnote">3</a></sup>。この時点で連休の終わりの方だったのは覚えている</p>
+
+<h2 id="発表準備">発表準備</h2>
+
+<p>もともとGW前の連休には実装を終らせてGWの連休中に発表資料作成とできたところまでの実装のブラッシュアップを
+行なう予定でしたが、目標の実装が見えてるとなるとどうしても実装したくなって実装の方を進めてました。</p>
+
+<p>もともと発表は <a href="https://rabbit-shocker.org"><strong>Rabbit</strong></a> を利用して英語で行う予定でしたが、LTはとくに
+うちあわせのために資料を先に出すとかなかったのでとりあえず日本語で作成しました。
+実装おわっていないというか実装に時間掛けすぎたのと、RubyKaigiへ持っていくPCをあたらしくしたので
+冒険はできずに素直に <a href="https://docs.google.com/presentation"><strong>Google スライド</strong></a> 利用して作成、
+後日 <strong>Rabbit</strong> で清書するということにしました。</p>
+
+<p>発表資料自体は 5/8 or 5/9 ぐらいに作成し終っていました。デモなしで発表練習するとちょうど時間通りに
+おわるのでこの資料作成完了時点ではこれでよしとしてました。
+この時点でも資料はすくたなくとも英語にしようとは考えて資料は作成していました。</p>
+
+<h2 id="当日">当日</h2>
+
+<p>当日の朝、資料作成というか資料の英語変換をやっていて、やっているうちに
+実際発表してなにができてなにができてないみたいなこと言ったとしても
+なにがなんだかわからんよなとなったので急遽デモをやって、実行できること示すように少し変更しました。</p>
+
+<p>当日はセッションききながらかなり緊張していました、直前のセッションのトラブルもあったので。
+聞いた人はわかるとおもうのですが、発表が途中でおわったのはこういった事情があったのでああいう発表になりました。</p>
+
+<h2 id="後日">後日</h2>
+
+<p>発表当日の昼飯時に、 <a href="https://twitter.com/ukstudio">@ukstudio</a> が <a href="https://cookpad.com"><strong>cookpad</strong></a> のイベントとして <a href="https://cookpad.connpass.com/event/282436/"><strong>手を動かして振り返る RubyKaigi 2023</strong></a> が5/18にあるからきてよと誘われたのでいくことにしました。
+この会では、デキテイナカったデモを最後までやりきっています。</p>
+
+<h2 id="書き直し">書き直し</h2>
+
+<p><strong>手を動かして~</strong> のあとに <strong>Rabbit</strong> への清書を行ないました。
+いままでもいくつかの発表は <strong>Rabbit</strong> でやってたのですが、
+<strong>Rabbit テーマ</strong> を作りたい作りたいと思っていたので今回は時間もあるのでつくることにしました。
+とはいってもほぼ <a href="https://twitter.com/yu_suke1994">@yu_suke1994</a> の<a href="https://github.com/unasuke/rubykaigi-2023/">リポジトリ</a>をコピーしただけなんでうが……</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p><strong>RubyKaigi</strong> の <em>LT</em> で話ししたことをまとめました。
+実装の話はもうちょっと詳しく書きたいけど、そもそも実装もすすめたいしでなかなか書けていないですね。</p>
+
+<p>次回作もご期待ください 完</p>
+
+<hr />
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:cfp" role="doc-endnote">
+      <p>Call For Proposal。ずっと Call For Paper だとおもってたので知ったときえってなった。 <a href="#fnref:cfp" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:cfpdate" role="doc-endnote">
+      <p><a href="https://cfp.rubykaigi.org/events/2023">2023-01-31</a> 締切で完全にネタない状態だった。 <a href="#fnref:cfpdate" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:yoteigai" role="doc-endnote">
+      <p>もともとの発表予定ではここまでしかできなかったんですよーって濁す予定でしたが思っている以上に実装がすすんでしまった。 <a href="#fnref:yoteigai" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
 
   <h1><a href="/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/">RubyKaigi2023 @MATZ本</a></h1>
   <p class="author">
@@ -1379,63 +1492,6 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
     </li>
     <li id="fn:hyper-warning" role="doc-endnote">
       <p><a href="https://github.com/hyperium/hyper#low-level">公式の README</a> にあるようにこの場合は <a href="https://github.com/seanmonstar/reqwest"><strong>reqwest</strong></a> を利用するほうがよかったかもしれない。<strong>TLS</strong> は直接 <strong>hyper</strong> が対応していなかったりしてすこし面倒です。 <a href="#fnref:hyper-warning" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
-
-  </div>
-
-  <h1><a href="/blog/2021/12/31/me-and-coffee/">今年飲んだコーヒー豆の種類 2021</a></h1>
-  <p class="author">
-    <span class="date">2021-12-31 23:59:59 +0900</span>
-  </p>
-  <div class="content">
-    <p>今年もコロナでどこにも行くにしても行きにくかったし、
-店もどこもあまりやってなかったようだったので今年も酒ではないまとめを。</p>
-
-<p>苦いコーヒーすこし飽きてきたなーとか、あんまり大量にのむのはなーと思ってたところ<sup id="fnref:coffee" role="doc-noteref"><a href="#fn:coffee" class="footnote" rel="footnote">1</a></sup>に
-スペシャルティコーヒー専門店が近所にできていて、そこで飲んで教えてもらったコーヒーが
-気に入りよく通うように。</p>
-
-<p>普段の飲む量を1日1杯のみに抑えるために多少高くてもおいしい豆で1杯で満足できる豆を買うことにした。</p>
-
-<h2 id="豆">豆</h2>
-
-<p>買ったというのがわかっている豆。</p>
-
-<ul>
-  <li>HAMBELA WAMENA, HEIRLOOM, Natural, エチオピア</li>
-  <li>Carmo De Minas Santuario Sul, Yellow Bourbon, Citrus Sweetness, ブラジル</li>
-  <li>NYERI KARATINA, SL<sub>28</sub>SL<sub>32</sub>RUIRU<sub>11</sub>, Fully Washed, ケニア</li>
-  <li>KAKAMEGA ISULU, SL<sub>28</sub>SL<sub>32</sub>RUIRU<sub>11</sub>, Natural Anaerobic, ケニア</li>
-  <li>WEST ARSI GORA KONE, HEIRLOOM, Washed, エチオピア</li>
-  <li>GEDEB WORKA, HEIRLOOM, Special Process Natural, エチオピア</li>
-  <li>EL PARAISO RED FRUITS, CASTILLO, DOUBLE ANAEROBIC WASHED, コロンビア</li>
-  <li>EL PARAISO LYCHEE, CASTILLO, DOUBLE ANAEROBIC WASHED, コロンビア</li>
-  <li>NYERI MAGANJO, SL<sub>28</sub>SL<sub>32</sub>RUIRU<sub>11</sub>, Fully Washed, ケニア</li>
-  <li>Fazenda Guariroba, Yellow Catuai, Double Fermentation Black Honey, ブラジル</li>
-</ul>
-
-<h2 id="感想">感想</h2>
-
-<p>を書くつもりが、そもそも感想メモをほとんど残していなかった。いくつか残しているのでそれを。</p>
-
-<ul>
-  <li>EL PARAISO RED FRUITS: 別ロットはピーチティのような感じであったが、今回はかなりフルーティな味でライチな感じです。</li>
-  <li>Fazenda Guariroba: 香りが柑橘系というかレモンの香りがする。味はスッキリしてて口に含んだ酸味は少なく、後味としての酸味が強くのこって美味しい。</li>
-</ul>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>1年くらい前に社内 <strong>Slack</strong> にコーヒーの感想をまとめるためのチャンネル作ったけど、
-まったく活用していなくて感想がほとんど残っていない。
-おいしいこと以外は思いだせるわけもなく……</p>
-
-<hr />
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:coffee" role="doc-endnote">
-      <p>ここ1,2年コーヒー飲みすぎると胃が痛くなるのに気がついた。 <a href="#fnref:coffee" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

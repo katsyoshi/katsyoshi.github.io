@@ -1,4 +1,124 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2023-05-16T01:27:38+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">RubyKaigi2023 @MATZ本</title><link href="https://blog.katsyoshi.org/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/" rel="alternate" type="text/html" title="RubyKaigi2023 @MATZ本" /><published>2023-05-15T23:59:59+09:00</published><updated>2023-05-15T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/"><![CDATA[<p>行ってきたのでまとめます。LT やったのですが、 LT の話はまた今度。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:3000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:3000/" rel="alternate" type="text/html" /><updated>2023-05-27T17:16:41+09:00</updated><id>http://localhost:3000/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">趣味はvaporware造りです v.0.0.1</title><link href="http://localhost:3000/blog/2023/05/25/vaporware-for-ruby-compiler/" rel="alternate" type="text/html" title="趣味はvaporware造りです v.0.0.1" /><published>2023-05-25T23:59:59+09:00</published><updated>2023-05-25T23:59:59+09:00</updated><id>http://localhost:3000/blog/2023/05/25/vaporware-for-ruby-compiler</id><content type="html" xml:base="http://localhost:3000/blog/2023/05/25/vaporware-for-ruby-compiler/"><![CDATA[<p><a href="htttps://rubykaigi.org/2023"><strong>RubyKaigi2023</strong></a>に行ってきたのは<a href="/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/">別エントリ</a>にしたのでこのエントリでは <a href="https://rubykaigi.org/2023/presentations/lt/"><em>LT</em></a> で話しした内容の説明などをしていこうかと思います。</p>
+
+<h2 id="presentation">Presentation</h2>
+
+<iframe class="speakerdeck-iframe" style="border: 0px none; background: rgba(0, 0, 0, 0.1) padding-box; margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 420;" src="https://speakerdeck.com/player/59e0f2da2d014f3e9b1d1d7633ef000f" title="Building Ruby Native Extension using Ruby" allowfullscreen="true" data-ratio="1.3333333333333333" frameborder="0"></iframe>
+
+<h2 id="lt申し込みまで">LT申し込みまで</h2>
+
+<p><a href="https://rubykaigi.org/2023"><strong>RubyKaigi2023</strong></a> 松本でやるし発表もしたいが、ネタがないなとおもってたら本編の方の <em>CFP</em><sup id="fnref:cfp" role="doc-noteref"><a href="#fn:cfp" class="footnote" rel="footnote">1</a></sup> が閉じられてた<sup id="fnref:cfpdate" role="doc-noteref"><a href="#fn:cfpdate" class="footnote" rel="footnote">2</a></sup>。
+とはいえ今年は <strong>COVID-19</strong> の制限も無くなるから <em>LT</em> あるとおもうので <em>LT</em> 出せたらいいなあと考えてた。
+そうこうしているうちに <a href="https://30.ruby.or.jp/"><strong>Ruby30th</strong></a> で今はまだないものだけど…って matz がいったものを造ろうとなりました。</p>
+
+<p><em>LT</em> の応募サイト開くまでにネタが幸い見つけることができ、実装をはじめることにした。</p>
+
+<h2 id="実装">実装</h2>
+
+<p>ということで、通るかどうかわからないですが、発表できるように準備をはじめました。
+準備といっても実際は実装どこまでできましたーというような発表にする予定だったので
+そのまま実装をしています。</p>
+
+<p>実装予定は発表にもあった通り、以下の予定ですすめて、最後に <a href="https://docs.ruby-lang.org/ja/latest/library/fiddle.html"><code class="language-plaintext highlighter-rouge">fiddle</code></a> で読み込めるように実装していました。</p>
+
+<ol>
+  <li>四則演算: <code class="language-plaintext highlighter-rouge">Integer</code> の計算ができること</li>
+  <li>変数: 変数が使えること</li>
+  <li>制御構文: <code class="language-plaintext highlighter-rouge">for</code> や <code class="language-plaintext highlighter-rouge">if</code> などの基本的な制御構文が使えること</li>
+  <li>メソッド: メソッドが定義でき、利用できこと</li>
+</ol>
+
+<p>を目標に実装をすすめていましたのでそれぞれの進捗を</p>
+
+<h3 id="四則演算">四則演算</h3>
+
+<p>とくに詰まる点もなく、<em>AST</em> をもとに <em>assembler</em> へ変換するだけでいけた。</p>
+
+<h3 id="変数">変数</h3>
+
+<p>これが一番大変だった。<a href="https://www.sigbus.info/compilerbook">教科書</a> を <code class="language-plaintext highlighter-rouge">cherry-picking</code> しながら進めてたために、
+実装でわからん部分が出てきたのでインターネット介して <code class="language-plaintext highlighter-rouge">gdb</code> リモートデバッグの講習を受けながら実装。
+もともとここか制御構文までで終わるだろうなあと予想してたが、<code class="language-plaintext highlighter-rouge">SEGV</code> 出しながらもなんとかくりあ。</p>
+
+<h3 id="制御構文">制御構文</h3>
+
+<p>はじめは素直に <code class="language-plaintext highlighter-rouge">if</code> 文を実装。ここも上記の理由によりなんもわからんとなり、<a href="https://github.com/ktateish/9cc">別の人の実装</a> を参考に実装。
+<code class="language-plaintext highlighter-rouge">if</code> 文だけじゃつまんないというか、とくになにもできないのでループ文を追加しようとしました。
+はじめは <code class="language-plaintext highlighter-rouge">for</code> 文を実装しようと考えましたが、なんとここで重大なことに気がつきました。
+<strong>Ruby</strong> の <code class="language-plaintext highlighter-rouge">for</code> のことはなにもしらない。ということに。そういえば <code class="language-plaintext highlighter-rouge">for x in 1..10; puts x;end</code> とか書けるけど
+そもそも <code class="language-plaintext highlighter-rouge">Range</code> クラスや <code class="language-plaintext highlighter-rouge">Array</code> 作る必要あるよな？ということで一旦 <code class="language-plaintext highlighter-rouge">for</code> はやめに。</p>
+
+<p>ということでここは <code class="language-plaintext highlighter-rouge">while</code> 文を実装して、<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%9C%E3%83%8A%E3%83%83%E3%83%81%E6%95%B0"><strong><code class="language-plaintext highlighter-rouge">fibonacci</code> 数</strong></a> を求めることができるようになりました。</p>
+
+<h3 id="メソッド">メソッド</h3>
+
+<p>ここは変数、制御構文ができれば作るだけなら問題はなかったように思えます。
+ただほんとうに作るだけだったので、引数なし、定数を返すだけのメソッドの確認しか行なっていないです。
+ここの実装にたどり着くとは思っておらず、最後のRubyKaigi直前の6連休に入ってから実装できてしまったので
+あんまりブラッシュアップできていないです。
+引数の扱い、変数の利用、などなど確認をとれておらずにいますが動いたので <code class="language-plaintext highlighter-rouge">fiddle</code> で読み込めるように。</p>
+
+<h3 id="fiddle-で利用できるようにする">Fiddle で利用できるようにする</h3>
+
+<p>定義したメソッドを <strong>C言語</strong> の関数として見えるようにしてあげればいいので、
+そうしたら、あっさりとうごいてしまった<sup id="fnref:yoteigai" role="doc-noteref"><a href="#fn:yoteigai" class="footnote" rel="footnote">3</a></sup>。この時点で連休の終わりの方だったのは覚えている</p>
+
+<h2 id="発表準備">発表準備</h2>
+
+<p>もともとGW前の連休には実装を終らせてGWの連休中に発表資料作成とできたところまでの実装のブラッシュアップを
+行なう予定でしたが、目標の実装が見えてるとなるとどうしても実装したくなって実装の方を進めてました。</p>
+
+<p>もともと発表は <a href="https://rabbit-shocker.org"><strong>Rabbit</strong></a> を利用して英語で行う予定でしたが、LTはとくに
+うちあわせのために資料を先に出すとかなかったのでとりあえず日本語で作成しました。
+実装おわっていないというか実装に時間掛けすぎたのと、RubyKaigiへ持っていくPCをあたらしくしたので
+冒険はできずに素直に <a href="https://docs.google.com/presentation"><strong>Google スライド</strong></a> 利用して作成、
+後日 <strong>Rabbit</strong> で清書するということにしました。</p>
+
+<p>発表資料自体は 5/8 or 5/9 ぐらいに作成し終っていました。デモなしで発表練習するとちょうど時間通りに
+おわるのでこの資料作成完了時点ではこれでよしとしてました。
+この時点でも資料はすくたなくとも英語にしようとは考えて資料は作成していました。</p>
+
+<h2 id="当日">当日</h2>
+
+<p>当日の朝、資料作成というか資料の英語変換をやっていて、やっているうちに
+実際発表してなにができてなにができてないみたいなこと言ったとしても
+なにがなんだかわからんよなとなったので急遽デモをやって、実行できること示すように少し変更しました。</p>
+
+<p>当日はセッションききながらかなり緊張していました、直前のセッションのトラブルもあったので。
+聞いた人はわかるとおもうのですが、発表が途中でおわったのはこういった事情があったのでああいう発表になりました。</p>
+
+<h2 id="後日">後日</h2>
+
+<p>発表当日の昼飯時に、 <a href="https://twitter.com/ukstudio">@ukstudio</a> が <a href="https://cookpad.com"><strong>cookpad</strong></a> のイベントとして <a href="https://cookpad.connpass.com/event/282436/"><strong>手を動かして振り返る RubyKaigi 2023</strong></a> が5/18にあるからきてよと誘われたのでいくことにしました。
+この会では、デキテイナカったデモを最後までやりきっています。</p>
+
+<h2 id="書き直し">書き直し</h2>
+
+<p><strong>手を動かして~</strong> のあとに <strong>Rabbit</strong> への清書を行ないました。
+いままでもいくつかの発表は <strong>Rabbit</strong> でやってたのですが、
+<strong>Rabbit テーマ</strong> を作りたい作りたいと思っていたので今回は時間もあるのでつくることにしました。
+とはいってもほぼ <a href="https://twitter.com/yu_suke1994">@yu_suke1994</a> の<a href="https://github.com/unasuke/rubykaigi-2023/">リポジトリ</a>をコピーしただけなんでうが……</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p><strong>RubyKaigi</strong> の <em>LT</em> で話ししたことをまとめました。
+実装の話はもうちょっと詳しく書きたいけど、そもそも実装もすすめたいしでなかなか書けていないですね。</p>
+
+<p>次回作もご期待ください 完</p>
+
+<hr />
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:cfp" role="doc-endnote">
+      <p>Call For Proposal。ずっと Call For Paper だとおもってたので知ったときえってなった。 <a href="#fnref:cfp" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:cfpdate" role="doc-endnote">
+      <p><a href="https://cfp.rubykaigi.org/events/2023">2023-01-31</a> 締切で完全にネタない状態だった。 <a href="#fnref:cfpdate" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:yoteigai" role="doc-endnote">
+      <p>もともとの発表予定ではここまでしかできなかったんですよーって濁す予定でしたが思っている以上に実装がすすんでしまった。 <a href="#fnref:yoteigai" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[RubyKaigi2023に行ってきたのは別エントリにしたのでこのエントリでは LT で話しした内容の説明などをしていこうかと思います。]]></summary></entry><entry><title type="html">RubyKaigi2023 @MATZ本</title><link href="http://localhost:3000/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/" rel="alternate" type="text/html" title="RubyKaigi2023 @MATZ本" /><published>2023-05-15T23:59:59+09:00</published><updated>2023-05-15T23:59:59+09:00</updated><id>http://localhost:3000/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto</id><content type="html" xml:base="http://localhost:3000/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/"><![CDATA[<p>行ってきたのでまとめます。LT やったのですが、 LT の話はまた今度。</p>
 
 <h2 id="day--1">Day -1</h2>
 
@@ -133,7 +253,7 @@ drinkup 終了後は <a href="https://twitter.com/onk">onk</a> とふたりで�
       <p>海外の人が登録して行ったほうがいいんじゃないかと一瞬思った <a href="#fnref:sonnnakotohanai" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[行ってきたのでまとめます。LT やったのですが、 LT の話はまた今度。]]></summary></entry><entry><title type="html">趣味は vaporware 造りですv0.0.0</title><link href="https://blog.katsyoshi.org/blog/2023/03/21/my-hobby-is-building-vaporware/" rel="alternate" type="text/html" title="趣味は vaporware 造りですv0.0.0" /><published>2023-03-21T13:59:59+09:00</published><updated>2023-03-21T13:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/03/21/my-hobby-is-building-vaporware</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/03/21/my-hobby-is-building-vaporware/"><![CDATA[<p>プログラマー三大勉強はしたけど、実装はしたことないものといえば
+</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[行ってきたのでまとめます。LT やったのですが、 LT の話はまた今度。]]></summary></entry><entry><title type="html">趣味は vaporware 造りですv0.0.0</title><link href="http://localhost:3000/blog/2023/03/21/my-hobby-is-building-vaporware/" rel="alternate" type="text/html" title="趣味は vaporware 造りですv0.0.0" /><published>2023-03-21T13:59:59+09:00</published><updated>2023-03-21T13:59:59+09:00</updated><id>http://localhost:3000/blog/2023/03/21/my-hobby-is-building-vaporware</id><content type="html" xml:base="http://localhost:3000/blog/2023/03/21/my-hobby-is-building-vaporware/"><![CDATA[<p>プログラマー三大勉強はしたけど、実装はしたことないものといえば
 CPU、OS、コンパイラーなのです<sup id="fnref:kojinsa" role="doc-noteref"><a href="#fn:kojinsa" class="footnote" rel="footnote">1</a></sup>が、先日 <a href="https://www.publickey1.jp/blog/23/ruby30static_compiler_for_ruby.html">ruby30th 誕生日会のキーノート</a>で
 matz が “Static Compiler for Ruby” という今はまだない <code class="language-plaintext highlighter-rouge">vaporware</code> として
 挙げていたのでこの <strong>static compiler</strong> を作ろうとなりました。</p>
@@ -232,7 +352,7 @@ matz が “Static Compiler for Ruby” という今はまだない <code class=
       <p>https://github.com/ruby/ruby/pull/7448 <a href="#fnref:rjit" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><category term="compiler" /><summary type="html"><![CDATA[プログラマー三大勉強はしたけど、実装はしたことないものといえば CPU、OS、コンパイラーなのです1が、先日 ruby30th 誕生日会のキーノートで matz が “Static Compiler for Ruby” という今はまだない vaporware として 挙げていたのでこの static compiler を作ろうとなりました。 個人差があります。 &#8617;]]></summary></entry><entry><title type="html">Update rubygems using Rust for Ruby 3.2</title><link href="https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/" rel="alternate" type="text/html" title="Update rubygems using Rust for Ruby 3.2" /><published>2023-01-03T23:59:59+09:00</published><updated>2023-01-03T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/"><![CDATA[<p><a href="/blog/2022/08/12/how-to-use-rust-in-ruby-gems/">以前このブログ</a>で <a href="https://www.rust-lang.org/"><strong>Rust</strong></a> を利用して <a href="https://rubygems.org"><strong>rubygems</strong></a> を作成した
+</div>]]></content><author><name></name></author><category term="diary" /><category term="compiler" /><summary type="html"><![CDATA[プログラマー三大勉強はしたけど、実装はしたことないものといえば CPU、OS、コンパイラーなのです1が、先日 ruby30th 誕生日会のキーノートで matz が “Static Compiler for Ruby” という今はまだない vaporware として 挙げていたのでこの static compiler を作ろうとなりました。 個人差があります。 &#8617;]]></summary></entry><entry><title type="html">Update rubygems using Rust for Ruby 3.2</title><link href="http://localhost:3000/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/" rel="alternate" type="text/html" title="Update rubygems using Rust for Ruby 3.2" /><published>2023-01-03T23:59:59+09:00</published><updated>2023-01-03T23:59:59+09:00</updated><id>http://localhost:3000/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems</id><content type="html" xml:base="http://localhost:3000/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/"><![CDATA[<p><a href="/blog/2022/08/12/how-to-use-rust-in-ruby-gems/">以前このブログ</a>で <a href="https://www.rust-lang.org/"><strong>Rust</strong></a> を利用して <a href="https://rubygems.org"><strong>rubygems</strong></a> を作成した
 <a href="https://github.com/katsyoshi/rust_uuid"><strong>rust_uuid</strong></a> が <a href="https://www.ruby-lang.org/ja/news/2022/12/25/ruby-3-2-0-released/"><strong>Ruby 3.2</strong> がリリース</a> によりコンパイルできなくなったのでその修正顛末。</p>
 
 <h2 id="環境">環境</h2>
@@ -537,7 +657,7 @@ installing rust_uuid.so to /path/to/rust_uuid/lib/rust_uuid
 
 <p>ということで正式に <strong>Rust</strong> がサポートされるようになったのでまた YARUKI がでてきますね。</p>
 
-<p>それはそうと今度は、<a href="https://jekyllrb.com"><strong>jekyll</strong></a> が <strong>Ruby 3.2</strong> で動かなくなった。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[以前このブログで Rust を利用して rubygems を作成した rust_uuid が Ruby 3.2 がリリース によりコンパイルできなくなったのでその修正顛末。]]></summary></entry><entry><title type="html">お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活</title><link href="https://blog.katsyoshi.org/blog/2022/10/15/goodbey-onamae-dot-com/" rel="alternate" type="text/html" title="お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活" /><published>2022-10-15T23:59:50+09:00</published><updated>2022-10-15T23:59:50+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/10/15/goodbey-onamae-dot-com</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/10/15/goodbey-onamae-dot-com/"><![CDATA[<p><strong>katsyoshi.org</strong> の登録先を <a href="https://www.onamae.com"><strong>お名前ドットコム</strong></a> にしてたけど、広告のようなメールとか届くし
+<p>それはそうと今度は、<a href="https://jekyllrb.com"><strong>jekyll</strong></a> が <strong>Ruby 3.2</strong> で動かなくなった。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[以前このブログで Rust を利用して rubygems を作成した rust_uuid が Ruby 3.2 がリリース によりコンパイルできなくなったのでその修正顛末。]]></summary></entry><entry><title type="html">お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活</title><link href="http://localhost:3000/blog/2022/10/15/goodbey-onamae-dot-com/" rel="alternate" type="text/html" title="お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活" /><published>2022-10-15T23:59:50+09:00</published><updated>2022-10-15T23:59:50+09:00</updated><id>http://localhost:3000/blog/2022/10/15/goodbey-onamae-dot-com</id><content type="html" xml:base="http://localhost:3000/blog/2022/10/15/goodbey-onamae-dot-com/"><![CDATA[<p><strong>katsyoshi.org</strong> の登録先を <a href="https://www.onamae.com"><strong>お名前ドットコム</strong></a> にしてたけど、広告のようなメールとか届くし
 更新案内と広告の違いがわからない感じのメールが大量にくるのでやめようやめようと思ってたのでいいかげん変えてみた話。</p>
 
 <h2 id="準備">準備</h2>
@@ -588,7 +708,7 @@ WHOIS を一旦登録時のものに変更します<sup id="fnref:org" role="doc
       <p>こいつが見つけにくく、お名前ドットコムからは見つけられずに<a href="https://www.tsukimi.net/domain_onamae_xdomain.html">移管レポートブログ</a>から発見。 <a href="#fnref:onamae" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[katsyoshi.org の登録先を お名前ドットコム にしてたけど、広告のようなメールとか届くし 更新案内と広告の違いがわからない感じのメールが大量にくるのでやめようやめようと思ってたのでいいかげん変えてみた話。]]></summary></entry><entry><title type="html">Communicate on IPv6 from home</title><link href="https://blog.katsyoshi.org/blog/2022/10/12/ipv6nize-at-home/" rel="alternate" type="text/html" title="Communicate on IPv6 from home" /><published>2022-10-12T23:59:50+09:00</published><updated>2022-10-12T23:59:50+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/10/12/ipv6nize-at-home</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/10/12/ipv6nize-at-home/"><![CDATA[<p>家のネットワークからインターネットへ出るとき <code class="language-plaintext highlighter-rouge">IPoE</code> を使ってたけど、家庭内 LAN のネットワークは <code class="language-plaintext highlighter-rouge">IPv6</code> を off にしていた。
+</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[katsyoshi.org の登録先を お名前ドットコム にしてたけど、広告のようなメールとか届くし 更新案内と広告の違いがわからない感じのメールが大量にくるのでやめようやめようと思ってたのでいいかげん変えてみた話。]]></summary></entry><entry><title type="html">Communicate on IPv6 from home</title><link href="http://localhost:3000/blog/2022/10/12/ipv6nize-at-home/" rel="alternate" type="text/html" title="Communicate on IPv6 from home" /><published>2022-10-12T23:59:50+09:00</published><updated>2022-10-12T23:59:50+09:00</updated><id>http://localhost:3000/blog/2022/10/12/ipv6nize-at-home</id><content type="html" xml:base="http://localhost:3000/blog/2022/10/12/ipv6nize-at-home/"><![CDATA[<p>家のネットワークからインターネットへ出るとき <code class="language-plaintext highlighter-rouge">IPoE</code> を使ってたけど、家庭内 LAN のネットワークは <code class="language-plaintext highlighter-rouge">IPv6</code> を off にしていた。
 この LAN 内 <code class="language-plaintext highlighter-rouge">IPv6</code> 化していなかった理由としては、昔 Linux (だけじゃないかも)が <code class="language-plaintext highlighter-rouge">IPv6</code> が利用できる状態だと
 先に <code class="language-plaintext highlighter-rouge">IPv6</code> で繋ぎにいこうとして <code class="language-plaintext highlighter-rouge">IPv6</code> で通信できなかったら <code class="language-plaintext highlighter-rouge">IPv4</code> にフォールバックするという挙動で、すごくストレスフルだった。
 この挙動の対処として、カーネルレベルで <code class="language-plaintext highlighter-rouge">IPv6</code> を off にしてました。
@@ -762,7 +882,7 @@ rtt 最小/平均/最大/mdev = 2.731/4.023/6.532/1.773ミリ秒
 これで家のネットワークから <code class="language-plaintext highlighter-rouge">IPv6</code> で通信できるようになりました。
 ありがとうございました!</p>
 
-<p>次回 katsyoshi.org お名前.COM やめるってよ</p>]]></content><author><name></name></author><category term="tech" /><category term="diary" /><summary type="html"><![CDATA[家のネットワークからインターネットへ出るとき IPoE を使ってたけど、家庭内 LAN のネットワークは IPv6 を off にしていた。 この LAN 内 IPv6 化していなかった理由としては、昔 Linux (だけじゃないかも)が IPv6 が利用できる状態だと 先に IPv6 で繋ぎにいこうとして IPv6 で通信できなかったら IPv4 にフォールバックするという挙動で、すごくストレスフルだった。 この挙動の対処として、カーネルレベルで IPv6 を off にしてました。 そうこうしているうちに契約している ISP が IPv6 オプションなしで IPoE を利用できるようになったので、 とりあえず IPoE だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。 いいかげんこの家庭内 LAN のネットワークを IPv6 化し、インターネットと IPv6 で通信できるようにした顛末をのこす。のこします。]]></summary></entry><entry><title type="html">RubyKaigi 最高！</title><link href="https://blog.katsyoshi.org/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022/" rel="alternate" type="text/html" title="RubyKaigi 最高！" /><published>2022-09-11T23:59:50+09:00</published><updated>2022-09-11T23:59:50+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022/"><![CDATA[<p><a href="https://rubykaigi.org/2022">RubyKaigi 2022</a> に行ってきました! ので感想を</p>
+<p>次回 katsyoshi.org お名前.COM やめるってよ</p>]]></content><author><name></name></author><category term="tech" /><category term="diary" /><summary type="html"><![CDATA[家のネットワークからインターネットへ出るとき IPoE を使ってたけど、家庭内 LAN のネットワークは IPv6 を off にしていた。 この LAN 内 IPv6 化していなかった理由としては、昔 Linux (だけじゃないかも)が IPv6 が利用できる状態だと 先に IPv6 で繋ぎにいこうとして IPv6 で通信できなかったら IPv4 にフォールバックするという挙動で、すごくストレスフルだった。 この挙動の対処として、カーネルレベルで IPv6 を off にしてました。 そうこうしているうちに契約している ISP が IPv6 オプションなしで IPoE を利用できるようになったので、 とりあえず IPoE だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。 いいかげんこの家庭内 LAN のネットワークを IPv6 化し、インターネットと IPv6 で通信できるようにした顛末をのこす。のこします。]]></summary></entry><entry><title type="html">RubyKaigi 最高！</title><link href="http://localhost:3000/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022/" rel="alternate" type="text/html" title="RubyKaigi 最高！" /><published>2022-09-11T23:59:50+09:00</published><updated>2022-09-11T23:59:50+09:00</updated><id>http://localhost:3000/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022</id><content type="html" xml:base="http://localhost:3000/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022/"><![CDATA[<p><a href="https://rubykaigi.org/2022">RubyKaigi 2022</a> に行ってきました! ので感想を</p>
 
 <h2 id="day-0">DAY 0</h2>
 
@@ -894,7 +1014,7 @@ rtt 最小/平均/最大/mdev = 2.731/4.023/6.532/1.773ミリ秒
 ビールについては瓶ビールしか飲まなかったので感想はなしで。</p>
 
 <p>三重は大きな街が比較的分散しているようで、津も松坂も伊勢も鳥羽も駅前が小さく感じました。
-とくに0日目の食事が大変で、調達が難しかった。</p>]]></content><author><name></name></author><category term="tech" /><category term="diary" /><category term="ruby" /><category term="rubykaigi" /><summary type="html"><![CDATA[RubyKaigi 2022 に行ってきました! ので感想を]]></summary></entry><entry><title type="html">Ruby gem で Rust をつかって爆速にしたい!!!!!!11</title><link href="https://blog.katsyoshi.org/blog/2022/08/12/how-to-use-rust-in-ruby-gems/" rel="alternate" type="text/html" title="Ruby gem で Rust をつかって爆速にしたい!!!!!!11" /><published>2022-08-12T13:59:59+09:00</published><updated>2022-08-12T13:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/08/12/how-to-use-rust-in-ruby-gems</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/08/12/how-to-use-rust-in-ruby-gems/"><![CDATA[<p><a href="https://rubygems.org">Ruby Gems</a> で <a href="https://www.rust-lang.org">Rust</a> が <a href="https://github.com/rubygems/rubygems/pull/5175">Native として利用可能になった</a> のでとりあえず <a href="https://www.rfc-editor.org/rfc/rfc4122.html"><code class="language-plaintext highlighter-rouge">UUIDv4</code></a> を生成してみた。</p>
+とくに0日目の食事が大変で、調達が難しかった。</p>]]></content><author><name></name></author><category term="tech" /><category term="diary" /><category term="ruby" /><category term="rubykaigi" /><summary type="html"><![CDATA[RubyKaigi 2022 に行ってきました! ので感想を]]></summary></entry><entry><title type="html">Ruby gem で Rust をつかって爆速にしたい!!!!!!11</title><link href="http://localhost:3000/blog/2022/08/12/how-to-use-rust-in-ruby-gems/" rel="alternate" type="text/html" title="Ruby gem で Rust をつかって爆速にしたい!!!!!!11" /><published>2022-08-12T13:59:59+09:00</published><updated>2022-08-12T13:59:59+09:00</updated><id>http://localhost:3000/blog/2022/08/12/how-to-use-rust-in-ruby-gems</id><content type="html" xml:base="http://localhost:3000/blog/2022/08/12/how-to-use-rust-in-ruby-gems/"><![CDATA[<p><a href="https://rubygems.org">Ruby Gems</a> で <a href="https://www.rust-lang.org">Rust</a> が <a href="https://github.com/rubygems/rubygems/pull/5175">Native として利用可能になった</a> のでとりあえず <a href="https://www.rfc-editor.org/rfc/rfc4122.html"><code class="language-plaintext highlighter-rouge">UUIDv4</code></a> を生成してみた。</p>
 
 <h3 id="リポジトリ">リポジトリ</h3>
 <p><a href="https://github.com/katsyoshi/rust_uuid"><img src="https://gh-card.dev/repos/katsyoshi/rust_uuid.svg" alt="katsyoshi/rust_uuid - GitHub" /></a></p>
@@ -1023,7 +1143,7 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
 思った以上に速くなっていたので重い処理をする場合に <code class="language-plaintext highlighter-rouge">C</code> や <code class="language-plaintext highlighter-rouge">C++</code> 以外でも簡単に利用できるようになって
 選択肢が増えたのはよいことでした。</p>
 
-<p>実はこの <code class="language-plaintext highlighter-rouge">uuid</code> crate の features に <code class="language-plaintext highlighter-rouge">fast-rng</code> を追加すると 10 倍速くなるんですが、 ruby 側の終了時に <code class="language-plaintext highlighter-rouge">SEGV</code> してしまうので載せていないです。 <code class="language-plaintext highlighter-rouge">SEGV</code> しないように原因を調査などはまた今度。</p>]]></content><author><name></name></author><category term="rust" /><summary type="html"><![CDATA[Ruby Gems で Rust が Native として利用可能になった のでとりあえず UUIDv4 を生成してみた。]]></summary></entry><entry><title type="html">Hello, Wezterm</title><link href="https://blog.katsyoshi.org/blog/2022/03/19/hello-wezterm/" rel="alternate" type="text/html" title="Hello, Wezterm" /><published>2022-03-19T18:00:00+09:00</published><updated>2022-03-19T18:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/03/19/hello-wezterm</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/03/19/hello-wezterm/"><![CDATA[<p><a href="https://github.com/tmux/tmux"><code class="language-plaintext highlighter-rouge">tmux</code></a> + <a href="https://github.com/tmux/tmux"><code class="language-plaintext highlighter-rouge">Allacritty</code></a> が疲れてきたので<a href="https://zenn.dev/yutakatay/articles/wezterm-intro">はてぶで流れてきた</a> <a href="https://github.com/wez/wezterm"><code class="language-plaintext highlighter-rouge">wezterm</code></a> が <a href="https://github.com/saitoha/libsixel"><code class="language-plaintext highlighter-rouge">sixel</code></a> を利用できてよさそうだったので試してみることにした。</p>
+<p>実はこの <code class="language-plaintext highlighter-rouge">uuid</code> crate の features に <code class="language-plaintext highlighter-rouge">fast-rng</code> を追加すると 10 倍速くなるんですが、 ruby 側の終了時に <code class="language-plaintext highlighter-rouge">SEGV</code> してしまうので載せていないです。 <code class="language-plaintext highlighter-rouge">SEGV</code> しないように原因を調査などはまた今度。</p>]]></content><author><name></name></author><category term="rust" /><summary type="html"><![CDATA[Ruby Gems で Rust が Native として利用可能になった のでとりあえず UUIDv4 を生成してみた。]]></summary></entry><entry><title type="html">Hello, Wezterm</title><link href="http://localhost:3000/blog/2022/03/19/hello-wezterm/" rel="alternate" type="text/html" title="Hello, Wezterm" /><published>2022-03-19T18:00:00+09:00</published><updated>2022-03-19T18:00:00+09:00</updated><id>http://localhost:3000/blog/2022/03/19/hello-wezterm</id><content type="html" xml:base="http://localhost:3000/blog/2022/03/19/hello-wezterm/"><![CDATA[<p><a href="https://github.com/tmux/tmux"><code class="language-plaintext highlighter-rouge">tmux</code></a> + <a href="https://github.com/tmux/tmux"><code class="language-plaintext highlighter-rouge">Allacritty</code></a> が疲れてきたので<a href="https://zenn.dev/yutakatay/articles/wezterm-intro">はてぶで流れてきた</a> <a href="https://github.com/wez/wezterm"><code class="language-plaintext highlighter-rouge">wezterm</code></a> が <a href="https://github.com/saitoha/libsixel"><code class="language-plaintext highlighter-rouge">sixel</code></a> を利用できてよさそうだったので試してみることにした。</p>
 
 <h2 id="設定">設定</h2>
 
@@ -1105,7 +1225,7 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
 
 <p>長年利用してた <code class="language-plaintext highlighter-rouge">tmux</code> を捨てて <code class="language-plaintext highlighter-rouge">wezterm</code> を利用しはじめた。
 設定が <code class="language-plaintext highlighter-rouge">lua</code> で書けるのが体験的にとても良いのでこれからも利用するかなと。
-<code class="language-plaintext highlighter-rouge">wezterm</code> で <code class="language-plaintext highlighter-rouge">sixel</code> 利用した画像表示ができるようになったのが便利なので「よしっ！」</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[tmux + Allacritty が疲れてきたのではてぶで流れてきた wezterm が sixel を利用できてよさそうだったので試してみることにした。]]></summary></entry><entry><title type="html">冬やすみ</title><link href="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/" rel="alternate" type="text/html" title="冬やすみ" /><published>2022-01-03T23:59:59+09:00</published><updated>2022-01-03T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/01/03/hello-2022</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/01/03/hello-2022/"><![CDATA[<p>冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。
+<code class="language-plaintext highlighter-rouge">wezterm</code> で <code class="language-plaintext highlighter-rouge">sixel</code> 利用した画像表示ができるようになったのが便利なので「よしっ！」</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[tmux + Allacritty が疲れてきたのではてぶで流れてきた wezterm が sixel を利用できてよさそうだったので試してみることにした。]]></summary></entry><entry><title type="html">冬やすみ</title><link href="http://localhost:3000/blog/2022/01/03/hello-2022/" rel="alternate" type="text/html" title="冬やすみ" /><published>2022-01-03T23:59:59+09:00</published><updated>2022-01-03T23:59:59+09:00</updated><id>http://localhost:3000/blog/2022/01/03/hello-2022</id><content type="html" xml:base="http://localhost:3000/blog/2022/01/03/hello-2022/"><![CDATA[<p>冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。
 ひとつは <a href="/blog/2021/12/26/xremap/">xremap</a> の設定ともうひとつは <a href="/blog/2021/12/30/custom-co2mini-co2-sensor/">CO2-mini から CO<sub>2</sub> を見える</a> ようにした。</p>
 
 <p>今回は、 <a href="https://mackerel.io"><strong>mackerel</strong></a> で見えるようになった <strong>CO<sub>2</sub></strong> の値を <strong>Slack</strong> へ定期的に投げるようにします。今回も <a href="https://www.rust-lang.org"><strong>Rust</strong></a> を利用しています。</p>
@@ -1244,52 +1364,4 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
       <p><a href="https://github.com/hyperium/hyper#low-level">公式の README</a> にあるようにこの場合は <a href="https://github.com/seanmonstar/reqwest"><strong>reqwest</strong></a> を利用するほうがよかったかもしれない。<strong>TLS</strong> は直接 <strong>hyper</strong> が対応していなかったりしてすこし面倒です。 <a href="#fnref:hyper-warning" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。 ひとつは xremap の設定ともうひとつは CO2-mini から CO2 を見える ようにした。]]></summary></entry><entry><title type="html">今年飲んだコーヒー豆の種類 2021</title><link href="https://blog.katsyoshi.org/blog/2021/12/31/me-and-coffee/" rel="alternate" type="text/html" title="今年飲んだコーヒー豆の種類 2021" /><published>2021-12-31T23:59:59+09:00</published><updated>2021-12-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2021/12/31/me-and-coffee</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2021/12/31/me-and-coffee/"><![CDATA[<p>今年もコロナでどこにも行くにしても行きにくかったし、
-店もどこもあまりやってなかったようだったので今年も酒ではないまとめを。</p>
-
-<p>苦いコーヒーすこし飽きてきたなーとか、あんまり大量にのむのはなーと思ってたところ<sup id="fnref:coffee" role="doc-noteref"><a href="#fn:coffee" class="footnote" rel="footnote">1</a></sup>に
-スペシャルティコーヒー専門店が近所にできていて、そこで飲んで教えてもらったコーヒーが
-気に入りよく通うように。</p>
-
-<p>普段の飲む量を1日1杯のみに抑えるために多少高くてもおいしい豆で1杯で満足できる豆を買うことにした。</p>
-
-<h2 id="豆">豆</h2>
-
-<p>買ったというのがわかっている豆。</p>
-
-<ul>
-  <li>HAMBELA WAMENA, HEIRLOOM, Natural, エチオピア</li>
-  <li>Carmo De Minas Santuario Sul, Yellow Bourbon, Citrus Sweetness, ブラジル</li>
-  <li>NYERI KARATINA, SL<sub>28</sub>SL<sub>32</sub>RUIRU<sub>11</sub>, Fully Washed, ケニア</li>
-  <li>KAKAMEGA ISULU, SL<sub>28</sub>SL<sub>32</sub>RUIRU<sub>11</sub>, Natural Anaerobic, ケニア</li>
-  <li>WEST ARSI GORA KONE, HEIRLOOM, Washed, エチオピア</li>
-  <li>GEDEB WORKA, HEIRLOOM, Special Process Natural, エチオピア</li>
-  <li>EL PARAISO RED FRUITS, CASTILLO, DOUBLE ANAEROBIC WASHED, コロンビア</li>
-  <li>EL PARAISO LYCHEE, CASTILLO, DOUBLE ANAEROBIC WASHED, コロンビア</li>
-  <li>NYERI MAGANJO, SL<sub>28</sub>SL<sub>32</sub>RUIRU<sub>11</sub>, Fully Washed, ケニア</li>
-  <li>Fazenda Guariroba, Yellow Catuai, Double Fermentation Black Honey, ブラジル</li>
-</ul>
-
-<h2 id="感想">感想</h2>
-
-<p>を書くつもりが、そもそも感想メモをほとんど残していなかった。いくつか残しているのでそれを。</p>
-
-<ul>
-  <li>EL PARAISO RED FRUITS: 別ロットはピーチティのような感じであったが、今回はかなりフルーティな味でライチな感じです。</li>
-  <li>Fazenda Guariroba: 香りが柑橘系というかレモンの香りがする。味はスッキリしてて口に含んだ酸味は少なく、後味としての酸味が強くのこって美味しい。</li>
-</ul>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>1年くらい前に社内 <strong>Slack</strong> にコーヒーの感想をまとめるためのチャンネル作ったけど、
-まったく活用していなくて感想がほとんど残っていない。
-おいしいこと以外は思いだせるわけもなく……</p>
-
-<hr />
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:coffee" role="doc-endnote">
-      <p>ここ1,2年コーヒー飲みすぎると胃が痛くなるのに気がついた。 <a href="#fnref:coffee" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[今年もコロナでどこにも行くにしても行きにくかったし、 店もどこもあまりやってなかったようだったので今年も酒ではないまとめを。]]></summary></entry></feed>
+</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。 ひとつは xremap の設定ともうひとつは CO2-mini から CO2 を見える ようにした。]]></summary></entry></feed>

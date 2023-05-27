@@ -1,21 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 5 of 11 for katsyoshi のめもみたいなの - page 5 | katsyoshi のめもみたいなの</title>
@@ -24,18 +8,18 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/5/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/5/" />
+<link rel="canonical" href="http://localhost:3000/page/5/" />
+<meta property="og:url" content="http://localhost:3000/page/5/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
 <meta property="og:type" content="website" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/4/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/6/" />
+<link rel="prev" href="http://localhost:3000/page/4/" />
+<link rel="next" href="http://localhost:3000/page/6/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 5" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 5","url":"https://blog.katsyoshi.org/page/5/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 5","url":"http://localhost:3000/page/5/"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -59,6 +43,110 @@
 </div>
 
 
+
+  <h1><a href="/blog/2017/12/18/hello/">IRubyはじめました</a></h1>
+  <p class="author">
+    <span class="date">2017-12-18 21:56:55 +0900</span>
+  </p>
+  <div class="content">
+    <p>表題のとおり、 <a href="https://github.com/SciRuby/iruby">IRuby</a> をはじめてみました</p>
+
+<h3 id="インストール">インストール</h3>
+
+<p>インストールは簡単で <code class="language-plaintext highlighter-rouge">gem install iruby</code> でいけますが、私の利用している環境では依存している <a href="https://github.com/zeromq/czmq">czmq</a> が古かったので手動でインストールして回避しています。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">git clone https://github.com/zeromq/czmq.git
+cd czmq
+./autogen
+</span><span class="gp">./configure --prefix=$</span><span class="o">{</span>HOME<span class="o">}</span>/.local
+<span class="go">make -j4
+make install
+gem install iruby cztop
+</span><span class="gp">LD_LIBRARY_PATH=$</span><span class="o">{</span>HOME<span class="o">}</span>/.local/lib iruby
+</code></pre></div></div>
+
+<p>でインストールと動作はできます。画像貼るのがメンドイので <code class="language-plaintext highlighter-rouge">ipython</code> 貼っておきます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "\n",
+       "  &lt;script&gt;\n",
+       "  requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min'] }})\n",
+       "  &lt;/script&gt;\n",
+       "\n",
+       "\n",
+       "&lt;div id=\"c34db0db-dc37-4ae3-a2b3-33ab99830b89\" style=\"height: 100%; width: 100%;\"&gt;&lt;/div&gt;\n",
+       "\n",
+       "&lt;script&gt;\n",
+       " require(['plotly'], function(Plotly) { \n",
+       "Plotly.newPlot(\n",
+       "  'c34db0db-dc37-4ae3-a2b3-33ab99830b89',\n",
+       "  [{\"x\":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],\"y\":[100,81,64,49,36,25,16,9,4,1,0,1,4,9,16,25,36,49,64,81,100],\"type\":null,\"mode\":\"\"}],\n",
+       "  {\"width\":1000,\"height\":500},\n",
+       "  {\"linkText\":\"Export to plot.ly\",\"showLink\":true}\n",
+       ")\n",
+       "\n",
+       "window.addEventListener('resize', function() {\n",
+       "  Plotly.Plots.resize(document.getElementById('c34db0db-dc37-4ae3-a2b3-33ab99830b89'))\n",
+       "})\n",
+       " }) \n",
+       "&lt;/script&gt;"
+      ],
+      "text/plain": [
+       "#&lt;Plotly::Offline::HTML:0x000056356f14be00 @id=\"c34db0db-dc37-4ae3-a2b3-33ab99830b89\", @data=[{:x=&gt;[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], :y=&gt;[100, 81, 64, 49, 36, 25, 16, 9, 4, 1, 0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100], :type=&gt;nil, :mode=&gt;\"\"}], @layout={:width=&gt;1000, :height=&gt;500}, @config={:linkText=&gt;\"Export to plot.ly\", :showLink=&gt;true}, @embedded=true&gt;"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/plain": [
+       "#&lt;CZTop::Socket::PUB:0x56356e7f3620 last_endpoint=\"tcp://127.0.0.1:45835\"&gt;"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "require 'daru'\n",
+    "require 'daru/plotly'\n",
+    "include Daru::Plotly::Methods\n",
+    "\n",
+    "dv = Daru::Vector.new((-10..10).map{|n| n ** 2 })\n",
+    "plot(dv, x: \"x\", y: \"y\").show"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Ruby 2.4.2",
+   "language": "ruby",
+   "name": "ruby"
+  },
+  "language_info": {
+   "file_extension": ".rb",
+   "mimetype": "application/x-ruby",
+   "name": "ruby",
+   "version": "2.4.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
+</code></pre></div></div>
+
+  </div>
 
   <h1><a href="/blog/2017/12/02/wiskey-advent-calendar/">ウイスキーアドベントカレンダー2日目</a></h1>
   <p class="author">
@@ -400,47 +488,6 @@ mv elixir /path/to/elixir
   <ol>
     <li id="fn:zakk" role="doc-endnote">
       <p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧 <a href="#fnref:zakk" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
-
-  </div>
-
-  <h1><a href="/blog/2017/02/20/basic-authenticate-in-h2o/">basic authenticate in h2o</a></h1>
-  <p class="author">
-    <span class="date">2017-02-20 21:53:49 +0900</span>
-  </p>
-  <div class="content">
-    <p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:h2odoc" role="doc-noteref"><a href="#fn:h2odoc" class="footnote" rel="footnote">1</a></sup></p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">paths</span><span class="pi">:</span>
-  <span class="s2">"</span><span class="s">/"</span><span class="err">:</span>
-    <span class="na">mruby.handler</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="s">require "htpasswd.rb"</span>
-      <span class="s">Htpasswd.new("/etc/h2o/.htpasswd", "realm-name")</span>
-</code></pre></div></div>
-
-<p>また、 <code class="language-plaintext highlighter-rouge">.htpasswd</code> で plain フォーマットはサポートされていません。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">failed to validate password using file:/etc/h2o/.htpasswd:crypt-style password hash is not supported
-</span></code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">.htpasswd</code> を手動で作成したい場合は以下の方法でできます<sup id="fnref:apachdoc" role="doc-noteref"><a href="#fn:apachdoc" class="footnote" rel="footnote">2</a></sup></p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"digest/sha1"</span>
-<span class="nb">require</span> <span class="s2">"base64"</span>
-<span class="nb">open</span><span class="p">(</span><span class="s2">"/etc/h2o/.htpasswd"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">w</span><span class="o">|</span>
-  <span class="n">w</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s2">"user:{SHA}</span><span class="si">#{</span><span class="no">Base64</span><span class="p">.</span><span class="nf">encode64</span><span class="p">(</span><span class="no">Digest</span><span class="o">::</span><span class="no">SHA1</span><span class="p">.</span><span class="nf">digest</span><span class="p">(</span><span class="s2">"password"</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:h2odoc" role="doc-endnote">
-      <p>Configure &gt; Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧 <a href="#fnref:h2odoc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:apachdoc" role="doc-endnote">
-      <p>Password Formats, The Apache Software Foundation., https://httpd.apache.org/docs/2.4/misc/password_encryptions.html, 2017/02/20 閲覧 <a href="#fnref:apachdoc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

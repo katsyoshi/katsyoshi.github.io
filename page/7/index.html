@@ -1,21 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 7 of 11 for katsyoshi のめもみたいなの - page 7 | katsyoshi のめもみたいなの</title>
@@ -24,18 +8,18 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/7/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/7/" />
+<link rel="canonical" href="http://localhost:3000/page/7/" />
+<meta property="og:url" content="http://localhost:3000/page/7/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
 <meta property="og:type" content="website" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/6/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/8/" />
+<link rel="prev" href="http://localhost:3000/page/6/" />
+<link rel="next" href="http://localhost:3000/page/8/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 7" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 7","url":"https://blog.katsyoshi.org/page/7/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 7","url":"http://localhost:3000/page/7/"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -59,6 +43,26 @@
 </div>
 
 
+
+  <h1><a href="/blog/2016/10/10/fxxking-ssh-permission/">ssh permission</a></h1>
+  <p class="author">
+    <span class="date">2016-10-10 20:14:30 +0900</span>
+  </p>
+  <div class="content">
+    <p>またやらかしたので</p>
+
+<h2 id="経緯">経緯</h2>
+<p>サーバーにSSHログインが急にできなくなった</p>
+
+<h2 id="対処">対処</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod 744 ~/.ssh
+</code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+<p>おわり</p>
+
+  </div>
 
   <h1><a href="/blog/2016/10/09/hello-gentoo-using-itamae/">ItamaeつかってOSのインストールをやってみた</a></h1>
   <p class="author">
@@ -453,43 +457,6 @@ include_recipe ‘plenv::system’</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo shred -n 3 -v /dev/sda
 </code></pre></div></div>
-
-  </div>
-
-  <h1><a href="/blog/2015/05/03/softether/">softether</a></h1>
-  <p class="author">
-    <span class="date">2015-05-03 16:28:42 +0900</span>
-  </p>
-  <div class="content">
-    <p>Ubuntuに<a href="https://www.softether.jp/">SoftEther</a>を導入してみた。</p>
-
-<h2 id="マシン構成">マシン構成</h2>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OS: Ubuntu Linux 14.4.0.2 LTS
-Machine: SakuraVPS 1GBプラン
-</code></pre></div></div>
-
-<h2 id="インストール">インストール</h2>
-
-<p><a href="http://qiita.com/Makotonton/items/18683a9f1e846433c035">ここ</a>を参考にインストール、設定すればいけます。</p>
-
-<h3 id="嵌ったところ">嵌ったところ</h3>
-
-<p><code class="language-plaintext highlighter-rouge">nginx</code> で <code class="language-plaintext highlighter-rouge">ssl</code> 動かしてた。</p>
-
-<p>設定ができなかったが <code class="language-plaintext highlighter-rouge">sudo service nginx stop</code> として、 <code class="language-plaintext highlighter-rouge">nginx</code> を止めたあと、 <code class="language-plaintext highlighter-rouge">sudo vpncmd</code> とすれば設定できます。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>自作のRailsアプリCIを自宅で動かそうと思ってVPN導入してみたが、一人で開発してるしCIに問題がない限り必要ないというのを構築したあと気が付いた。</p>
-
-<h3 id="参考">参考</h3>
-
-<ol>
-  <li>http://qiita.com/Makotonton/items/18683a9f1e846433c035</li>
-  <li>https://www.softether.jp/</li>
-</ol>
-
 
   </div>
 

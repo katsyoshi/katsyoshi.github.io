@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>趣味はvaporware造りです v.0.0.1 | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="趣味はvaporware造りです v.0.0.1" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="RubyKaigi2023に行ってきたのは別エントリにしたのでこのエントリでは LT で話しした内容の説明などをしていこうかと思います。" />
+<meta property="og:description" content="RubyKaigi2023に行ってきたのは別エントリにしたのでこのエントリでは LT で話しした内容の説明などをしていこうかと思います。" />
+<link rel="canonical" href="http://localhost:3000/blog/2023/05/25/vaporware-for-ruby-compiler/" />
+<meta property="og:url" content="http://localhost:3000/blog/2023/05/25/vaporware-for-ruby-compiler/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-05-25T23:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="趣味はvaporware造りです v.0.0.1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-05-25T23:59:59+09:00","datePublished":"2023-05-25T23:59:59+09:00","description":"RubyKaigi2023に行ってきたのは別エントリにしたのでこのエントリでは LT で話しした内容の説明などをしていこうかと思います。","headline":"趣味はvaporware造りです v.0.0.1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:3000/blog/2023/05/25/vaporware-for-ruby-compiler/"},"url":"http://localhost:3000/blog/2023/05/25/vaporware-for-ruby-compiler/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">趣味はvaporware造りです v.0.0.1</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-05-25T23:59:59+09:00" itemprop="datePublished">May 25, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="htttps://rubykaigi.org/2023"><strong>RubyKaigi2023</strong></a>に行ってきたのは<a href="/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/">別エントリ</a>にしたのでこのエントリでは <a href="https://rubykaigi.org/2023/presentations/lt/"><em>LT</em></a> で話しした内容の説明などをしていこうかと思います。</p>
+
+<h2 id="presentation">Presentation</h2>
+
+<iframe class="speakerdeck-iframe" style="border: 0px none; background: rgba(0, 0, 0, 0.1) padding-box; margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 420;" src="https://speakerdeck.com/player/59e0f2da2d014f3e9b1d1d7633ef000f" title="Building Ruby Native Extension using Ruby" allowfullscreen="true" data-ratio="1.3333333333333333" frameborder="0"></iframe>
+
+<h2 id="lt申し込みまで">LT申し込みまで</h2>
+
+<p><a href="https://rubykaigi.org/2023"><strong>RubyKaigi2023</strong></a> 松本でやるし発表もしたいが、ネタがないなとおもってたら本編の方の <em>CFP</em><sup id="fnref:cfp" role="doc-noteref"><a href="#fn:cfp" class="footnote" rel="footnote">1</a></sup> が閉じられてた<sup id="fnref:cfpdate" role="doc-noteref"><a href="#fn:cfpdate" class="footnote" rel="footnote">2</a></sup>。
+とはいえ今年は <strong>COVID-19</strong> の制限も無くなるから <em>LT</em> あるとおもうので <em>LT</em> 出せたらいいなあと考えてた。
+そうこうしているうちに <a href="https://30.ruby.or.jp/"><strong>Ruby30th</strong></a> で今はまだないものだけど…って matz がいったものを造ろうとなりました。</p>
+
+<p><em>LT</em> の応募サイト開くまでにネタが幸い見つけることができ、実装をはじめることにした。</p>
+
+<h2 id="実装">実装</h2>
+
+<p>ということで、通るかどうかわからないですが、発表できるように準備をはじめました。
+準備といっても実際は実装どこまでできましたーというような発表にする予定だったので
+そのまま実装をしています。</p>
+
+<p>実装予定は発表にもあった通り、以下の予定ですすめて、最後に <a href="https://docs.ruby-lang.org/ja/latest/library/fiddle.html"><code class="language-plaintext highlighter-rouge">fiddle</code></a> で読み込めるように実装していました。</p>
+
+<ol>
+  <li>四則演算: <code class="language-plaintext highlighter-rouge">Integer</code> の計算ができること</li>
+  <li>変数: 変数が使えること</li>
+  <li>制御構文: <code class="language-plaintext highlighter-rouge">for</code> や <code class="language-plaintext highlighter-rouge">if</code> などの基本的な制御構文が使えること</li>
+  <li>メソッド: メソッドが定義でき、利用できこと</li>
+</ol>
+
+<p>を目標に実装をすすめていましたのでそれぞれの進捗を</p>
+
+<h3 id="四則演算">四則演算</h3>
+
+<p>とくに詰まる点もなく、<em>AST</em> をもとに <em>assembler</em> へ変換するだけでいけた。</p>
+
+<h3 id="変数">変数</h3>
+
+<p>これが一番大変だった。<a href="https://www.sigbus.info/compilerbook">教科書</a> を <code class="language-plaintext highlighter-rouge">cherry-picking</code> しながら進めてたために、
+実装でわからん部分が出てきたのでインターネット介して <code class="language-plaintext highlighter-rouge">gdb</code> リモートデバッグの講習を受けながら実装。
+もともとここか制御構文までで終わるだろうなあと予想してたが、<code class="language-plaintext highlighter-rouge">SEGV</code> 出しながらもなんとかくりあ。</p>
+
+<h3 id="制御構文">制御構文</h3>
+
+<p>はじめは素直に <code class="language-plaintext highlighter-rouge">if</code> 文を実装。ここも上記の理由によりなんもわからんとなり、<a href="https://github.com/ktateish/9cc">別の人の実装</a> を参考に実装。
+<code class="language-plaintext highlighter-rouge">if</code> 文だけじゃつまんないというか、とくになにもできないのでループ文を追加しようとしました。
+はじめは <code class="language-plaintext highlighter-rouge">for</code> 文を実装しようと考えましたが、なんとここで重大なことに気がつきました。
+<strong>Ruby</strong> の <code class="language-plaintext highlighter-rouge">for</code> のことはなにもしらない。ということに。そういえば <code class="language-plaintext highlighter-rouge">for x in 1..10; puts x;end</code> とか書けるけど
+そもそも <code class="language-plaintext highlighter-rouge">Range</code> クラスや <code class="language-plaintext highlighter-rouge">Array</code> 作る必要あるよな？ということで一旦 <code class="language-plaintext highlighter-rouge">for</code> はやめに。</p>
+
+<p>ということでここは <code class="language-plaintext highlighter-rouge">while</code> 文を実装して、<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%9C%E3%83%8A%E3%83%83%E3%83%81%E6%95%B0"><strong><code class="language-plaintext highlighter-rouge">fibonacci</code> 数</strong></a> を求めることができるようになりました。</p>
+
+<h3 id="メソッド">メソッド</h3>
+
+<p>ここは変数、制御構文ができれば作るだけなら問題はなかったように思えます。
+ただほんとうに作るだけだったので、引数なし、定数を返すだけのメソッドの確認しか行なっていないです。
+ここの実装にたどり着くとは思っておらず、最後のRubyKaigi直前の6連休に入ってから実装できてしまったので
+あんまりブラッシュアップできていないです。
+引数の扱い、変数の利用、などなど確認をとれておらずにいますが動いたので <code class="language-plaintext highlighter-rouge">fiddle</code> で読み込めるように。</p>
+
+<h3 id="fiddle-で利用できるようにする">Fiddle で利用できるようにする</h3>
+
+<p>定義したメソッドを <strong>C言語</strong> の関数として見えるようにしてあげればいいので、
+そうしたら、あっさりとうごいてしまった<sup id="fnref:yoteigai" role="doc-noteref"><a href="#fn:yoteigai" class="footnote" rel="footnote">3</a></sup>。この時点で連休の終わりの方だったのは覚えている</p>
+
+<h2 id="発表準備">発表準備</h2>
+
+<p>もともとGW前の連休には実装を終らせてGWの連休中に発表資料作成とできたところまでの実装のブラッシュアップを
+行なう予定でしたが、目標の実装が見えてるとなるとどうしても実装したくなって実装の方を進めてました。</p>
+
+<p>もともと発表は <a href="https://rabbit-shocker.org"><strong>Rabbit</strong></a> を利用して英語で行う予定でしたが、LTはとくに
+うちあわせのために資料を先に出すとかなかったのでとりあえず日本語で作成しました。
+実装おわっていないというか実装に時間掛けすぎたのと、RubyKaigiへ持っていくPCをあたらしくしたので
+冒険はできずに素直に <a href="https://docs.google.com/presentation"><strong>Google スライド</strong></a> 利用して作成、
+後日 <strong>Rabbit</strong> で清書するということにしました。</p>
+
+<p>発表資料自体は 5/8 or 5/9 ぐらいに作成し終っていました。デモなしで発表練習するとちょうど時間通りに
+おわるのでこの資料作成完了時点ではこれでよしとしてました。
+この時点でも資料はすくたなくとも英語にしようとは考えて資料は作成していました。</p>
+
+<h2 id="当日">当日</h2>
+
+<p>当日の朝、資料作成というか資料の英語変換をやっていて、やっているうちに
+実際発表してなにができてなにができてないみたいなこと言ったとしても
+なにがなんだかわからんよなとなったので急遽デモをやって、実行できること示すように少し変更しました。</p>
+
+<p>当日はセッションききながらかなり緊張していました、直前のセッションのトラブルもあったので。
+聞いた人はわかるとおもうのですが、発表が途中でおわったのはこういった事情があったのでああいう発表になりました。</p>
+
+<h2 id="後日">後日</h2>
+
+<p>発表当日の昼飯時に、 <a href="https://twitter.com/ukstudio">@ukstudio</a> が <a href="https://cookpad.com"><strong>cookpad</strong></a> のイベントとして <a href="https://cookpad.connpass.com/event/282436/"><strong>手を動かして振り返る RubyKaigi 2023</strong></a> が5/18にあるからきてよと誘われたのでいくことにしました。
+この会では、デキテイナカったデモを最後までやりきっています。</p>
+
+<h2 id="書き直し">書き直し</h2>
+
+<p><strong>手を動かして~</strong> のあとに <strong>Rabbit</strong> への清書を行ないました。
+いままでもいくつかの発表は <strong>Rabbit</strong> でやってたのですが、
+<strong>Rabbit テーマ</strong> を作りたい作りたいと思っていたので今回は時間もあるのでつくることにしました。
+とはいってもほぼ <a href="https://twitter.com/yu_suke1994">@yu_suke1994</a> の<a href="https://github.com/unasuke/rubykaigi-2023/">リポジトリ</a>をコピーしただけなんでうが……</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p><strong>RubyKaigi</strong> の <em>LT</em> で話ししたことをまとめました。
+実装の話はもうちょっと詳しく書きたいけど、そもそも実装もすすめたいしでなかなか書けていないですね。</p>
+
+<p>次回作もご期待ください 完</p>
+
+<hr />
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:cfp" role="doc-endnote">
+      <p>Call For Proposal。ずっと Call For Paper だとおもってたので知ったときえってなった。 <a href="#fnref:cfp" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:cfpdate" role="doc-endnote">
+      <p><a href="https://cfp.rubykaigi.org/events/2023">2023-01-31</a> 締切で完全にネタない状態だった。 <a href="#fnref:cfpdate" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:yoteigai" role="doc-endnote">
+      <p>もともとの発表予定ではここまでしかできなかったんですよーって濁す予定でしたが思っている以上に実装がすすんでしまった。 <a href="#fnref:yoteigai" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/blog/2023/05/25/vaporware-for-ruby-compiler/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

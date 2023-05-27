@@ -1,21 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 6 of 11 for katsyoshi のめもみたいなの - page 6 | katsyoshi のめもみたいなの</title>
@@ -24,18 +8,18 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/6/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/6/" />
+<link rel="canonical" href="http://localhost:3000/page/6/" />
+<meta property="og:url" content="http://localhost:3000/page/6/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
 <meta property="og:type" content="website" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/5/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/7/" />
+<link rel="prev" href="http://localhost:3000/page/5/" />
+<link rel="next" href="http://localhost:3000/page/7/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 6" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 6","url":"https://blog.katsyoshi.org/page/6/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 6","url":"http://localhost:3000/page/6/"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -59,6 +43,47 @@
 </div>
 
 
+
+  <h1><a href="/blog/2017/02/20/basic-authenticate-in-h2o/">basic authenticate in h2o</a></h1>
+  <p class="author">
+    <span class="date">2017-02-20 21:53:49 +0900</span>
+  </p>
+  <div class="content">
+    <p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:h2odoc" role="doc-noteref"><a href="#fn:h2odoc" class="footnote" rel="footnote">1</a></sup></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">paths</span><span class="pi">:</span>
+  <span class="s2">"</span><span class="s">/"</span><span class="err">:</span>
+    <span class="na">mruby.handler</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">require "htpasswd.rb"</span>
+      <span class="s">Htpasswd.new("/etc/h2o/.htpasswd", "realm-name")</span>
+</code></pre></div></div>
+
+<p>また、 <code class="language-plaintext highlighter-rouge">.htpasswd</code> で plain フォーマットはサポートされていません。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">failed to validate password using file:/etc/h2o/.htpasswd:crypt-style password hash is not supported
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">.htpasswd</code> を手動で作成したい場合は以下の方法でできます<sup id="fnref:apachdoc" role="doc-noteref"><a href="#fn:apachdoc" class="footnote" rel="footnote">2</a></sup></p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"digest/sha1"</span>
+<span class="nb">require</span> <span class="s2">"base64"</span>
+<span class="nb">open</span><span class="p">(</span><span class="s2">"/etc/h2o/.htpasswd"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">w</span><span class="o">|</span>
+  <span class="n">w</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s2">"user:{SHA}</span><span class="si">#{</span><span class="no">Base64</span><span class="p">.</span><span class="nf">encode64</span><span class="p">(</span><span class="no">Digest</span><span class="o">::</span><span class="no">SHA1</span><span class="p">.</span><span class="nf">digest</span><span class="p">(</span><span class="s2">"password"</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:h2odoc" role="doc-endnote">
+      <p>Configure &gt; Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧 <a href="#fnref:h2odoc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:apachdoc" role="doc-endnote">
+      <p>Password Formats, The Apache Software Foundation., https://httpd.apache.org/docs/2.4/misc/password_encryptions.html, 2017/02/20 閲覧 <a href="#fnref:apachdoc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
 
   <h1><a href="/blog/2017/02/12/octopress-themes/">Blogのテーマかえた</a></h1>
   <p class="author">
@@ -414,26 +439,6 @@ GPU: Zotac GeForce GTX 1050
 
 <h2 id="おわり">おわり</h2>
 <p>たのしい一人旅でした。</p>
-
-  </div>
-
-  <h1><a href="/blog/2016/10/10/fxxking-ssh-permission/">ssh permission</a></h1>
-  <p class="author">
-    <span class="date">2016-10-10 20:14:30 +0900</span>
-  </p>
-  <div class="content">
-    <p>またやらかしたので</p>
-
-<h2 id="経緯">経緯</h2>
-<p>サーバーにSSHログインが急にできなくなった</p>
-
-<h2 id="対処">対処</h2>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod 744 ~/.ssh
-</code></pre></div></div>
-
-<h2 id="おわり">おわり</h2>
-<p>おわり</p>
 
   </div>
 

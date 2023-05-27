@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>趣味は vaporware 造りですv0.0.1 | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="趣味は vaporware 造りですv0.0.1" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="It’s a memos." />
+<meta property="og:description" content="It’s a memos." />
+<link rel="canonical" href="http://localhost:3000/2023-03-24-implementation-of-basic-arithmetic-operation/" />
+<meta property="og:url" content="http://localhost:3000/2023-03-24-implementation-of-basic-arithmetic-operation/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-03-24T13:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="趣味は vaporware 造りですv0.0.1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-24T13:59:59+09:00","datePublished":"2023-03-24T13:59:59+09:00","description":"It’s a memos.","headline":"趣味は vaporware 造りですv0.0.1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:3000/2023-03-24-implementation-of-basic-arithmetic-operation/"},"url":"http://localhost:3000/2023-03-24-implementation-of-basic-arithmetic-operation/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">趣味は vaporware 造りですv0.0.1</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-03-24T13:59:59+09:00" itemprop="datePublished">Mar 24, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="/blog/2023/03/21/my-hobby-is-building-vaporware/">前回</a> は意気込みだけでしたので、
+今回から実装に入ります。
+今回の実装範囲は四則演算で、参考書の <a href="https://www.sigbus.info/compilerbook#%E9%9B%BB%E5%8D%93%E3%83%AC%E3%83%99%E3%83%AB%E3%81%AE%E8%A8%80%E8%AA%9E%E3%81%AE%E4%BD%9C%E6%88%90">電卓レベルの言語の作成</a>
+節をやっていきます。</p>
+
+<h2 id="goal">Goal</h2>
+
+<p>以下のような四則演算を実行し、 <em>process</em> の <em>exit コード</em> で返すようにします。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">/</span> <span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>確認は以下のようなコマンドで <em>exitコード</em> を得ることができます。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./foo
+<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+9
+</code></pre></div></div>
+
+<h2 id="実装">実装</h2>
+
+<p><em>AST</em> で構文の木構造が手にはいるのでこれを左から追う感じで <em>x86 アセンブラ</em> へファイルを書き込む実装をします。
+できた <em>x86 アセンブラ</em> ファイルを <code class="language-plaintext highlighter-rouge">gcc</code> などの <em>コンパイラ</em> でコンパイルして実行できるファイルを生成します。</p>
+
+<h3 id="ast">AST<sup id="fnref:ast" role="doc-noteref"><a href="#fn:ast" class="footnote" rel="footnote">1</a></sup></h3>
+
+<p><a href="/blog/2023/03/21/my-hobby-is-building-vaporware/#パーサー">前回でもやったよう</a> に <em>パーサー</em> は <code class="language-plaintext highlighter-rouge">parser.gem</code> を利用します。
+今回の例題として先述した四則演算のファイルをパースして <em>AST</em> から、 <em>アセンブラ</em> に変換します。
+まず <em>AST</em> の結果は以下のようになります。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="p">(</span><span class="ss">:send</span><span class="p">,</span>
+  <span class="n">s</span><span class="p">(</span><span class="ss">:begin</span><span class="p">,</span>
+    <span class="n">s</span><span class="p">(</span><span class="ss">:send</span><span class="p">,</span>
+      <span class="n">s</span><span class="p">(</span><span class="ss">:begin</span><span class="p">,</span>
+        <span class="n">s</span><span class="p">(</span><span class="ss">:send</span><span class="p">,</span>
+          <span class="n">s</span><span class="p">(</span><span class="ss">:int</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">:</span><span class="o">+</span><span class="p">,</span>
+          <span class="n">s</span><span class="p">(</span><span class="ss">:int</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span> <span class="p">:</span><span class="o">*</span><span class="p">,</span>
+      <span class="n">s</span><span class="p">(</span><span class="ss">:int</span><span class="p">,</span> <span class="mi">3</span><span class="p">))),</span> <span class="ss">:/</span><span class="p">,</span>
+  <span class="n">s</span><span class="p">(</span><span class="ss">:begin</span><span class="p">,</span>
+    <span class="n">s</span><span class="p">(</span><span class="ss">:send</span><span class="p">,</span>
+      <span class="n">s</span><span class="p">(</span><span class="ss">:int</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">:</span><span class="o">-</span><span class="p">,</span>
+      <span class="n">s</span><span class="p">(</span><span class="ss">:int</span><span class="p">,</span> <span class="mi">4</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>ここで <code class="language-plaintext highlighter-rouge">:send</code> や <code class="language-plaintext highlighter-rouge">:begin</code> などが <code class="language-plaintext highlighter-rouge">Node</code> とよばれるものになります。<code class="language-plaintext highlighter-rouge">Node</code> を順に辿ることで実行できるような <em>x86 アセンブラ</em><sup id="fnref:assembly" role="doc-noteref"><a href="#fn:assembly" class="footnote" rel="footnote">2</a></sup> を書くことができます。
+<code class="language-plaintext highlighter-rouge">:int</code> の型情報や <code class="language-plaintext highlighter-rouge">:+</code> などの演算子があることがわかるとおもいます。今はまだ <code class="language-plaintext highlighter-rouge">:send</code> や <code class="language-plaintext highlighter-rouge">:begin</code> は実装に必要でないので処理では気にせず進めることにします。</p>
+
+<h3 id="ruby-の実装">Ruby の実装</h3>
+
+<p><em>AST</em> はその名のとおり木なので順を追っていくだけで実行できます。
+<em>Ruby</em> のコードから <em>x86 アセンブラ</em> へはこの抽象構文木から得た命令情報を元に組みます。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"parser/current"</span>
+<span class="c1"># デバッグフラグ</span>
+<span class="n">debug</span> <span class="o">=</span> <span class="o">!!</span><span class="no">ARGV</span><span class="p">.</span><span class="nf">shift</span>
+<span class="c1"># ソースコードの AST を取得</span>
+<span class="n">ast</span> <span class="o">=</span> <span class="no">Parser</span><span class="o">::</span><span class="no">CurrentRuby</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"(1 + 2) * 3 / (5 - 4)"</span><span class="p">)</span>
+
+<span class="c1"># x86 アセンブラを書き出し</span>
+<span class="k">def</span> <span class="nf">precompile</span><span class="p">(</span><span class="n">ast</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+  <span class="n">f</span><span class="p">.</span><span class="nf">puts</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+  <span class="n">f</span><span class="p">.</span><span class="nf">puts</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="c1"># AST に応じてアセンブラに書きかえる</span>
+<span class="k">def</span> <span class="nf">_precompile</span><span class="p">(</span><span class="n">ast</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="s2">"tmp.s"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span>
+<span class="n">precompile</span><span class="p">(</span><span class="n">ast</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">close</span>
+<span class="n">io</span> <span class="o">=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">popen</span><span class="p">(</span><span class="s2">"gcc -o tmp tmp.s"</span><span class="p">).</span><span class="nf">close</span>
+<span class="no">File</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="s2">"tmp.s"</span><span class="p">)</span> <span class="k">unless</span> <span class="n">debug</span>
+</code></pre></div></div>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:ast" role="doc-endnote">
+      <p>抽象構文木の詳細が知りたいひとはお手元にあるコンパイラーの本や <a href="https://www.sigbus.info/compilerbook">参考書</a> を読んでください。 <a href="#fnref:ast" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:assembly" role="doc-endnote">
+      <p>詳細を知りたいひとは intel のマニュアル読んでください。 <a href="#fnref:assembly" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2023-03-24-implementation-of-basic-arithmetic-operation/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
