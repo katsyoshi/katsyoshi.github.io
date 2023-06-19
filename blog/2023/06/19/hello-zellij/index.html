@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Zellij はじめました | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Zellij はじめました" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="はい。タイトルの通り、 Zellij をはじめてみました。 切っ掛けは以下のツイートを見つけたので。" />
+<meta property="og:description" content="はい。タイトルの通り、 Zellij をはじめてみました。 切っ掛けは以下のツイートを見つけたので。" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-06-19T23:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Zellij はじめました" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-19T23:59:59+09:00","datePublished":"2023-06-19T23:59:59+09:00","description":"はい。タイトルの通り、 Zellij をはじめてみました。 切っ掛けは以下のツイートを見つけたので。","headline":"Zellij はじめました","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij/"},"url":"https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Zellij はじめました</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-06-19T23:59:59+09:00" itemprop="datePublished">Jun 19, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>はい。タイトルの通り、 <a href="https://zellij.dev/"><strong>Zellij</strong></a> をはじめてみました。
+切っ掛けは以下のツイートを見つけたので。</p>
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">tmux みたいなやつは terminal multiplexer とか呼ばれてて，たぶん沼さんが求めてるのは zellij<a href="https://t.co/KlyMMeatzH">https://t.co/KlyMMeatzH</a></p>&mdash; sksat (@sksat_tty) <a href="https://twitter.com/sksat_tty/status/1670656419174191105?ref_src=twsrc%5Etfw">June 19, 2023</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>というっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっことでね、はじめます。</p>
+
+<h2 id="zellijとは">Zellijとは？</h2>
+
+<p><a href="https://rust-lang.org"><strong>Rust</strong></a> 製の <a href="https://github.com/tmux/tmux"><strong>tmux</strong></a> クローン。
+はやってますね <strong>Rust</strong> 。</p>
+
+<h2 id="install">Install</h2>
+
+<p>つかってるのが <strong>Gentoo Linux</strong> なので <code class="language-plaintext highlighter-rouge">portage</code> からもはいります。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>emerge zellij
+</code></pre></div></div>
+
+<p>他の <strong>OS</strong> やソースコードからのインストール方法は公式から見て入れてください。</p>
+
+<h2 id="customize">Customize</h2>
+
+<p><strong>tmux</strong> のクローンとあり、カスタマイズもかなりできるようです。
+とりあえず、起動してみましょう。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>zellij
+</code></pre></div></div>
+
+<p><img src="/images/screenshot/zellij-default.png" alt="" /></p>
+
+<p>デフォルトでもナビがあり、簡単に利用できて便利です。が、キーバインドが気に食わないので変更しましょう。
+といってもカスタムするファイルを書いていませんでしたね。初期設定を標準出力に <code class="language-plaintext highlighter-rouge">zellij setup --dump-config</code> で出せるので <em>リダイレクト</em> なり、 <em>コピペ</em> なりでファイルを作りましょう。保存先はどこでもいいのですが、標準で読み込んでくれる <code class="language-plaintext highlighter-rouge">$HOME/.config/zellij/config.kdl</code> がいいでしょう。ファイル形式は <a href="https://kdl.dev/"><strong>KDL</strong></a> となっていますがなんんもわからん。</p>
+
+<pre><code class="language-kdl">keybinds clear-defaults=true {
+  shared {
+    bind "Ctrl g" { SwitchToMode "Normal"; }
+  }
+  normal {
+    bind "Ctrl t" { SwitchToMode "Tmux"; }
+  }
+  tmux {
+    bind "c" { NewTab; SwitchToMode "Normal"; }
+    bind "o" { FocusNextPane; SwitchToMode "Normal"; }
+  }
+}
+</code></pre>
+
+<p><code class="language-plaintext highlighter-rouge">keybinds</code> でキーバインドの設定がデキルのですが、 <code class="language-plaintext highlighter-rouge">clear-defaults=true</code> を指定してあげることで <em>デフォルト</em> のキーバインドを消すことができます。<a href="https://zellij.dev/documentation/keybindings-modes.html">モードがたくさんあり</a>、そのモードに対してそれぞれキーバインドを設定することができます。上記の例では、<strong>Normal</strong> モードで <code class="language-plaintext highlighter-rouge">Ctrl t</code> を押すと、<strong>Tmux</strong> モードに入ります。ここで、<code class="language-plaintext highlighter-rouge">c</code> を入力すると新しい <strong>tab</strong> で <strong>Shell</strong> が動きます。今どのモードに居るのかわからなくなっても必ず <strong>Normal</strong> モードへ <code class="language-plaintext highlighter-rouge">Ctrl g</code> で戻れるように <code class="language-plaintext highlighter-rouge">shared</code> に設定してあります。
+こんな感じで設定は簡単にできます。</p>
+
+<h2 id="おわりに">おわりに</h2>
+
+<p>かんたんに <strong>zellij</strong> の現在(2023/6/20 バージョン <code class="language-plaintext highlighter-rouge">0.36.0</code> で確認。最新バージョンは <code class="language-plaintext highlighter-rouge">0.37.0</code>。)の設定をみてきました。カスタムできるのはキーバインドだけじゃなく、カラースキーム、レイアウトなどなど様々に変更できるので御参考までにーーーー。
+ねむい。</p>
+
+  </div><a class="u-url" href="/blog/2023/06/19/hello-zellij/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

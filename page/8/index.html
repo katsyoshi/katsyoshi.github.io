@@ -60,6 +60,19 @@
 
 
 
+  <h1><a href="/blog/2015/05/10/shred-x240/">バイバイX240</a></h1>
+  <p class="author">
+    <span class="date">2015-05-10 11:05:19 +0900</span>
+  </p>
+  <div class="content">
+    <p>新しく<a href="/blog/2015/04/15/looks-good-new-machine/">X250</a>を買ったので、X240の中身を削除します。
+以下のコマンドでできるようです。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo shred -n 3 -v /dev/sda
+</code></pre></div></div>
+
+  </div>
+
   <h1><a href="/blog/2015/05/03/softether/">softether</a></h1>
   <p class="author">
     <span class="date">2015-05-03 16:28:42 +0900</span>
@@ -322,53 +335,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 <ol>
   <li>http://qiita.com/wjn/items/a3b71059211711501e35</li>
   <li>https://wiki.gentoo.org/wiki/Project:Portage/Sync</li>
-</ol>
-
-  </div>
-
-  <h1><a href="/blog/2015/02/22/mv-sakura-github-dot-io/">blogの引越し</a></h1>
-  <p class="author">
-    <span class="date">2015-02-22 18:29:09 +0900</span>
-  </p>
-  <div class="content">
-    <p>自分でblogを管理するのがちょっとだけ面倒になってきたので、
-このblogを<a href="katsyoshi.github.io">github.io</a>に移行した。</p>
-
-<h2 id="手順">手順</h2>
-
-<p>github.com に <code class="language-plaintext highlighter-rouge">katsyoshi.github.io</code> というリポジトリを作成し、以下のコマンドを実行</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rake setup_github_pages
-set your github repogitory
-$ rake generate
-$ rake deploy
-</code></pre></div></div>
-
-<p>そのあと、DNSでCNAMEに <code class="language-plaintext highlighter-rouge">katsyoshi.github.io</code> を設定し、リポジトリ<del>のトップ</del>に <code class="language-plaintext highlighter-rouge">blog.katsyoshi.org</code> と書いた <code class="language-plaintext highlighter-rouge">source/CNAME</code> ファイルを追加しおわりです。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>おわり</p>
-
-<h2 id="追記">追記</h2>
-<p>実は記事を追加したあと <code class="language-plaintext highlighter-rouge">rake deploy</code> ができないという問題がありましたが、そのときは、</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rake generate
-$ cd _deploy
-$ git pull origin/master
-$ cd ../
-$ rake deploy
-</code></pre></div></div>
-
-<p>で更新されます。</p>
-
-<h3 id="参考サイト">参考サイト</h3>
-
-<ol>
-  <li>http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/</li>
-  <li>http://blog.textfile.org/20141014/github/</li>
-  <li>http://stackoverflow.com/questions/17609453/rake-gen-deploy-rejected-in-octopress</li>
-  <li>http://learnaholic.me/2012/10/10/deploying-octopress-to-github-pages-and-setting-custom-subdomain-cname/</li>
 </ol>
 
   </div>
