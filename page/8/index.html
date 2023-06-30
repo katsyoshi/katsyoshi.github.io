@@ -60,6 +60,50 @@
 
 
 
+  <h1><a href="/blog/2015/05/11/golden-weak/">ゴールデンウィークのお買いもの</a></h1>
+  <p class="author">
+    <span class="date">2015-05-11 21:38:35 +0900</span>
+  </p>
+  <div class="content">
+    <p>GWに勢い余って買いものしたのでそれを。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=katsyoshi05-22&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=B00J5ZBVFY" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+<p>Roomba買いました。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=katsyoshi05-22&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=B004N3RQ5W" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+<p>机買いました。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=katsyoshi05-22&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=B00G21MID8" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+<p>Kinesis買いました。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=katsyoshi05-22&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=B000EVPGTU" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=katsyoshi05-22&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=B000P4D5F8" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+<p>コーヒーセット買いました。</p>
+
+<p>もともと欲しかったのもあり、勢いで買ってしまいました。</p>
+
+<p>Roombaの方は炬燵をまだ出してるのもあり、動かしていないです。</p>
+
+<p>机は1ヶ月ほど前に椅子を買ったのもあり、買いました。
+足が短いので、椅子を低くしたいのですが、天板が高いので足置き場をつくってそこにのせています。
+それ以外の気になる点としては、角がちょっと痛いというぐらいで今のところ満足しています。</p>
+
+<p>Kinesisは以前仕事で週1日だけ使わせてもらったことがあったので、気に入ったのでそれで買いました。
+赤軸モデルを買ったのですが、カチカチ音がしないのでこれはこれでイイカンジです。</p>
+
+<p>コーヒーセットは、机がきてから買う予定で買いました。このドリッパ用の用紙を見付けるのが大変で、2時間ほど彷徨いました。</p>
+
+<p>これで欲しいものは大体そろったのですが、最近デスクトップPC欲しくなってきたんだよなぁ…</p>
+
+<p>もうしわけねぇ。</p>
+
+
+  </div>
+
   <h1><a href="/blog/2015/05/10/shred-x240/">バイバイX240</a></h1>
   <p class="author">
     <span class="date">2015-05-10 11:05:19 +0900</span>
@@ -302,40 +346,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
   <li>http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7</li>
 </ol>
 
-
-  </div>
-
-  <h1><a href="/blog/2015/02/24/portage2git/">emerge --syncをgitにかえたはなし</a></h1>
-  <p class="author">
-    <span class="date">2015-02-24 00:13:18 +0900</span>
-  </p>
-  <div class="content">
-    <p>portageはデフォルトだと <code class="language-plaintext highlighter-rouge">rsync</code> を利用しての更新をしているので、
-<code class="language-plaintext highlighter-rouge">git</code> を用いた方法に変更します。</p>
-
-<h2 id="準備">準備</h2>
-
-<p><code class="language-plaintext highlighter-rouge">portage</code> を <code class="language-plaintext highlighter-rouge">2.2.17</code> に変更し、USEフラグとして <code class="language-plaintext highlighter-rouge">git</code> をつかいます。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># USE="git ${USE}" emerge -av \=portage-2.2.17
-</code></pre></div></div>
-
-<p>つぎに、Gitのリポジトリを見に行くように<a href="http://qiita.com/wjn/items/a3b71059211711501e35">設定</a>します。</p>
-
-<p>と設定してあとはいつもどおり <code class="language-plaintext highlighter-rouge">sudo eix-sync</code> させるだけで大丈夫です。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>基本的にはリンク先だけ見てればいけると思います。</p>
-
-<p>引越ししてWiMAXの電波の入りがわるくなったので鉄製ボウル買おうかとおもってたら2時間ほど<a href="https://ingress.com">徘徊</a>してました。</p>
-
-<h3 id="参考サイト">参考サイト</h3>
-
-<ol>
-  <li>http://qiita.com/wjn/items/a3b71059211711501e35</li>
-  <li>https://wiki.gentoo.org/wiki/Project:Portage/Sync</li>
-</ol>
 
   </div>
 

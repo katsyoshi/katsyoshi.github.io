@@ -60,6 +60,98 @@
 
 
 
+  <h1><a href="/blog/2022/03/19/hello-wezterm/">Hello, Wezterm</a></h1>
+  <p class="author">
+    <span class="date">2022-03-19 18:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://github.com/tmux/tmux"><code class="language-plaintext highlighter-rouge">tmux</code></a> + <a href="https://github.com/tmux/tmux"><code class="language-plaintext highlighter-rouge">Allacritty</code></a> が疲れてきたので<a href="https://zenn.dev/yutakatay/articles/wezterm-intro">はてぶで流れてきた</a> <a href="https://github.com/wez/wezterm"><code class="language-plaintext highlighter-rouge">wezterm</code></a> が <a href="https://github.com/saitoha/libsixel"><code class="language-plaintext highlighter-rouge">sixel</code></a> を利用できてよさそうだったので試してみることにした。</p>
+
+<h2 id="設定">設定</h2>
+
+<p>設定ファイルが <a href="https://www.lua.org/">lua</a> でカスタマイズがいろいろとできるのでまずは色を代えてみます。</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">wezterm</span> <span class="o">=</span> <span class="nb">require</span> <span class="s1">'wezterm'</span>
+<span class="k">return</span> <span class="p">{</span>
+  <span class="n">color_scheme</span> <span class="o">=</span> <span class="s2">"Dracula"</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>プログラミング言語でカスタマイズができるので以下のようにアクティブなタブへの移動のキーバインドのカスタマイズができます。</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">wezterm</span> <span class="o">=</span> <span class="nb">require</span> <span class="s1">'wezterm'</span>
+<span class="kd">local</span> <span class="n">move_keys</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span> <span class="k">do</span>
+   <span class="nb">table.insert</span><span class="p">(</span><span class="n">move_keys</span><span class="p">,</span> <span class="p">{</span>
+      <span class="n">key</span> <span class="o">=</span> <span class="nb">tostring</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+      <span class="n">mods</span> <span class="o">=</span> <span class="s2">"CTRL"</span><span class="p">,</span>
+      <span class="n">action</span> <span class="o">=</span> <span class="n">wezterm</span><span class="p">.</span><span class="n">action</span><span class="p">{</span> <span class="n">ActivateTab</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">},</span>
+   <span class="p">})</span>
+<span class="k">end</span>
+
+<span class="k">return</span> <span class="p">{</span>
+   <span class="n">color_scheme</span> <span class="o">=</span> <span class="s2">"Dracula"</span><span class="p">,</span>
+   <span class="n">disable_default_key_bindings</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">-- 初期のキーバインドは利用しない場合</span>
+   <span class="n">keys</span> <span class="o">=</span> <span class="n">move_keys</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>こんな感じで設定できるので便利です。</p>
+
+<p>このキーバインドは任意のイベントも設定でき、任意のイベントを利用してアクションを定義できます。以下の例では、Paneを開い監視用のプログラムを開きます。</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">wezterm</span> <span class="o">=</span> <span class="nb">require</span> <span class="s1">'wezterm'</span>
+<span class="n">wezterm</span><span class="p">.</span><span class="n">on</span><span class="p">(</span><span class="s2">"open-nvtop-and-ytop"</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="n">pane</span><span class="p">)</span>
+   <span class="n">win</span><span class="p">:</span><span class="n">perform_action</span><span class="p">(</span><span class="n">wezterm</span><span class="p">.</span><span class="n">action</span><span class="p">{</span> <span class="n">SplitHorizontal</span> <span class="o">=</span> <span class="p">{</span> <span class="n">domain</span> <span class="o">=</span> <span class="s2">"CurrentPaneDomain"</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">"nvtop"</span><span class="p">,</span> <span class="p">},</span> <span class="p">},</span> <span class="p">},</span> <span class="n">pane</span><span class="p">)</span>
+   <span class="n">win</span><span class="p">:</span><span class="n">perform_action</span><span class="p">(</span><span class="n">wezterm</span><span class="p">.</span><span class="n">action</span><span class="p">{</span> <span class="n">SplitVertical</span> <span class="o">=</span> <span class="p">{</span> <span class="n">domain</span> <span class="o">=</span> <span class="s2">"CurrentPaneDomain"</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">"ytop"</span><span class="p">,</span> <span class="s2">"-ps"</span><span class="p">,</span> <span class="p">},</span> <span class="p">},</span> <span class="p">},</span> <span class="n">pane</span><span class="p">)</span>
+<span class="k">end</span><span class="p">)</span>
+
+<span class="k">return</span> <span class="p">{</span>
+   <span class="n">keys</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span> <span class="n">key</span> <span class="o">=</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">mods</span> <span class="o">=</span> <span class="s2">"CTRL"</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="n">wezterm</span><span class="p">.</span><span class="n">action</span><span class="p">{</span> <span class="n">EmitEvent</span> <span class="o">=</span> <span class="s2">"open-nvtop-and-ytop"</span><span class="p">,</span> <span class="p">},</span> <span class="p">},</span> <span class="p">},</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>とすると以下のようになります。
+<img src="/images/screenshot/open-nvtop-and-ytop-in-wezterm.png" width="100%" />
+便利!</p>
+
+<p>こんな便利なものということで <code class="language-plaintext highlighter-rouge">systemd</code> でデーモン化しています。</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Unit]</span>
+<span class="py">Description</span><span class="p">=</span><span class="err">GUI</span> <span class="err">Accellarated</span> <span class="err">terminal</span>
+<span class="py">Documentation</span><span class="p">=</span>
+
+<span class="nn">[Service]</span>
+<span class="py">Type</span><span class="p">=</span><span class="err">forking</span>
+<span class="py">ExecStart</span><span class="p">=</span><span class="err">/usr/local/bin/wezterm-mux-server</span> <span class="err">--daemonize</span>
+<span class="py">Restart</span><span class="p">=</span><span class="err">on-failure</span>
+
+<span class="nn">[Install]</span>
+<span class="py">WantedBy</span><span class="p">=</span><span class="err">default.target</span>
+</code></pre></div></div>
+
+<p>で起動しておいています</p>
+
+<h3 id="問題点">問題点</h3>
+
+<p>と設定ファイルの例書いてみたのですが、とても大きな問題点にブチあたったので書いておきます。</p>
+
+<p><code class="language-plaintext highlighter-rouge">wezterm</code> には <code class="language-plaintext highlighter-rouge">wezterm-mux-server</code> というマルチプレクサ(tmuxのように扱うため)のサーバーモードプログラムがあるのですが、こいつがどうも <code class="language-plaintext highlighter-rouge">wezterm</code> とは挙動が異なり、前述した監視用のキーバインドが微妙に異なった挙動となってしまっています。サーバーモードに接続した場合の挙動は以下のようになります。</p>
+
+<p><img src="/images/screenshot/failed-nvtop-ytop.png" width="100%" /></p>
+
+<p>1つ目はpaneの位置が期待したとおりになっていない。2つ目は <code class="language-plaintext highlighter-rouge">ytop</code> が起動していないというので2つ目の方は気にしなければいいのでまあいいかと思っている。1つ目の問題は許容できていないので一旦はこのキーバインドは封印となっています。</p>
+
+<h1 id="おわり">おわり</h1>
+
+<p>長年利用してた <code class="language-plaintext highlighter-rouge">tmux</code> を捨てて <code class="language-plaintext highlighter-rouge">wezterm</code> を利用しはじめた。
+設定が <code class="language-plaintext highlighter-rouge">lua</code> で書けるのが体験的にとても良いのでこれからも利用するかなと。
+<code class="language-plaintext highlighter-rouge">wezterm</code> で <code class="language-plaintext highlighter-rouge">sixel</code> 利用した画像表示ができるようになったのが便利なので「よしっ！」</p>
+
+
+  </div>
+
   <h1><a href="/blog/2022/01/03/hello-2022/">冬やすみ</a></h1>
   <p class="author">
     <span class="date">2022-01-03 23:59:59 +0900</span>
@@ -742,68 +834,6 @@ Selected keyboards automatically since --device options weren't specified:
 
 <p>今年は <strong>COVID-19</strong> の影響で出歩くことも減りひきこもる機会も増えた1年でした。
 来年はもう少し出歩けるようになったらいいなあ。</p>
-
-  </div>
-
-  <h1><a href="/blog/2019/12/31/favorite-beer-house-2019/">Favorite Beer House 2019</a></h1>
-  <p class="author">
-    <span class="date">2019-12-31 23:59:59 +0900</span>
-  </p>
-  <div class="content">
-    <p>年末になったので今年行ったビール屋さんをまとめてみます。</p>
-
-<h2 id="spot">Spot</h2>
-
-<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1zPHCWSOnz860vvp5ZPUHGPaist8lPDWO" width="640" height="480"></iframe>
-
-<p><a href="https://blog.katsyoshi.org/blog/2017/12/30/favorite-beer-house/">2017年</a>と比較して倍くらい行ってますね…</p>
-
-<h2 id="行ってよかった店">行ってよかった店</h2>
-
-<p>はじめに2017年に行ってなくて新しい店でよかた店をあげてみたいとです。</p>
-
-<ul>
-  <li><a href="http://www.pdxtap.com/">PDX Taproom</a>
-ここはオレゴンのクラフトビールを中心に生で飲めます。海外のビールが多くおもしろいです。</li>
-  <li><a href="https://www.facebook.com/goldengate01/">Golden Gate</a>
-ここも名前のとおり、海外のビールが中心です。つながっているのは 4 tap ですがよいです。駅近でハンバーガーが夜おそくても食べれるので便利。
-いちおう朝2畤までやってるけど、大人数で行けばもっと遅くまでやってくれる感じでもある。
-<del>いつもすくないのでみんないって</del></li>
-  <li><a href="https://granzoo-beer.com/">Granzoo</a>
-ここはビールの醸造所(Kanpai Brewing)が併設されてるタイプの店でビールが美味しいです。神田川目の前で桜の時期とてもよさそう。まだ出来たばかりなので桜の時期は行けてないです。</li>
-  <li><a href="https://www.miyatabeer.com/">Miyatabeer</a>
-ここも <strong>Granzoo</strong> と同様に醸造所が併設されている店です。ビール以外にもブランデーやシードルが置いてあるのでビールが苦手な人でもイケますね。</li>
-  <li><a href="http://www.brewinbar.com/">Bewin’ Bar 主水</a>
-ここもブリュパブ(醸造所が併設されているパブ)です。もともとはここのInstagramをフォローしてて気にはなっていましたが、なかなか行ける機会がなかったのですが、2018年に初めていけてからすごくよかったです。
-食事がたいへんよく、普通の居酒屋メニューにアレンジが加えられたタンドリー鯖が気に入ってます。</li>
-  <li><a href="https://www.facebook.com/sakaduki/">さかずき Brewing</a>
-ここもブリュパブです。行ったときにはお腹いっぱいだったので…</li>
-</ul>
-
-<p>いつもどおり安心できるお店</p>
-
-<ul>
-  <li><a href="http://goodsleepbaker.com/">Good Sleep Baker</a>
-いつもパンがおいしい。バインミーが好き。</li>
-  <li><a href="http://www.lares.dti.ne.jp/~ppy/">Popeye</a>
-老舗。タップが多くてすごい。あとエミューが食べられるのはここだけ(たぶん)</li>
-  <li><a href="https://ban-kan.com/">萬感</a>
-ここもポパイほどではないが、クラフトビール出してくれる店として老舗。店員さんがボウズから金髪になってた。Minou の W山椒IPA がいつも置いてあって便利。</li>
-</ul>
-
-<p>今年いってないけど、なくなったお店</p>
-
-<ul>
-  <li><a href="https://www.facebook.com/kurakura.kanda">蔵くら</a>
-鳥のたたきとかおいしかった。</li>
-  <li><a href="https://www.sylvans.jp/topics/beer-bar-%E5%AF%8C%E5%A3%AB%E6%A1%9C%E9%96%89%E5%BA%97%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.html">Beer Bar 富士桜</a>
-とある会合のあとでよくいってて、ソーセージとかおいしかった。</li>
-</ul>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>今年行ったビールをまとめてみましたが、今年はあまりビールのんでないなーとおもってたら40軒ぐらい行ってた。
-来年は日本酒まとめますね。</p>
 
   </div>
 

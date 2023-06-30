@@ -1,4 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2023-06-20T01:23:55+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Zellij はじめました</title><link href="https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij/" rel="alternate" type="text/html" title="Zellij はじめました" /><published>2023-06-19T23:59:59+09:00</published><updated>2023-06-19T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij/"><![CDATA[<p>はい。タイトルの通り、 <a href="https://zellij.dev/"><strong>Zellij</strong></a> をはじめてみました。
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2023-06-30T16:56:40+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">新しいキーキャップ手にいれたよ!!!!</title><link href="https://blog.katsyoshi.org/blog/2023/06/27/my-new-gear/" rel="alternate" type="text/html" title="新しいキーキャップ手にいれたよ!!!!" /><published>2023-06-27T23:59:59+09:00</published><updated>2023-06-27T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/06/27/my-new-gear</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/06/27/my-new-gear/"><![CDATA[<p>最高だったイベント <a href="https://keebkaigi.org/2023/"><strong>第一回keebkaigi</strong></a> 行った影響で、キーボードをいじりたくなりました。
+今利用している <a href="https://github.com/foostan/crkbd"><strong>corne cherry</strong></a> でかなり満足しているため、
+新規につくるとかはあまりやる気はないので、見た目(<em>キーキャップ</em>)や触った感じ(<em>キースイッチ</em>)を替えようかとおもいます。</p>
+
+<h2 id="見た目と触った感じ">見た目と触った感じ</h2>
+
+<p>見た目の変更としてキーキャップを海外のサイト <a href="https://drop.com"><strong>Drop.com</strong></a> や <a href="https://yushakobo.jp"><strong>遊舎工房</strong></a> から買いました。
+買ったのは以下の4つ!</p>
+<ul>
+  <li><a href="https://shop.yushakobo.jp/products/maxkey-sa-purple-keycaps-set">MAXKEY SA Purple keycaps set</a></li>
+  <li><a href="https://drop.com/buy/carbon?defaultSelectionIds=967954">Drop + T0mb3ry SA Carbon Custom Keycap Set</a></li>
+  <li><a href="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2?defaultSelectionIds=966268">Drop + Oblotzky SA Oblivion V2 Custom Keycap Set</a></li>
+  <li><a href="https://drop.com/buy/domikey-abs-doubleshot-sa-cyberpunk-pumper-keycap-set?defaultSelectionIds=958152">DOMIKEY ABS Doubleshot SA Cyberpunk Pumper Keycap Set</a></li>
+</ul>
+
+<p><em>SA プロファイル</em><sup id="fnref:keycap_profile" role="doc-noteref"><a href="#fn:keycap_profile" class="footnote" rel="footnote">1</a></sup> が好きでいつものように遊舎工房へ行ったら展示品でアルファベットだけのを見つけたので即購入。
+一つだけだと寂しいので、なんとなく <strong>Drop.com</strong> を眺めていたら、 <em>SA プロファイル</em> でいくつか安くなっていたので購入。
+現時点では、<strong>MAXKEY SA Purple</strong> と <strong>DOMIKEY ABS Doubleshot SA Cyberpunk Pumper</strong> を市松模様に交互にキャップをはめて使っています。</p>
+
+<p>触った感じの変更として <em>キースイッチ</em> を <a href="https://talpkeyboard.net/"><strong>Talp Keyboard</strong></a> で買っています。</p>
+
+<ul>
+  <li><a href="https://talpkeyboard.net/items/611f422c84ca6370e66aeb85">Durock T1 Shrimp サイレントタクタイル キースイッチ（ターコイズ/5ピン/67g/5個）</a></li>
+  <li><a href="https://talpkeyboard.net/items/640d7ff65d04872b6fa57115">KTT Matcha キースイッチ（グリーン/タクタイル/3ピン/40g/5個）</a></li>
+  <li>KBDiy hp type タクタイル キースイッチ（クリーム/3ピン/62g/5個）<sup id="fnref:soldout" role="doc-noteref"><a href="#fn:soldout" class="footnote" rel="footnote">2</a></sup></li>
+</ul>
+
+<p>もともとは <em>リニア</em> と呼ばれるタイプの <em>キースイッチ</em><sup id="fnref:keyswitch_type" role="doc-noteref"><a href="#fn:keyswitch_type" class="footnote" rel="footnote">3</a></sup> が好きでしたが、感触が最近飽きてきたので、 <em>タクタイル</em> と呼ばれるタイプの
+<em>キースイッチ</em> を利用するようになっています。さらに最近は重めの方が好きなのかもしれないという状況です。
+<strong>Durock T1 Shrimp</strong> をどこか<sup id="fnref:itumono" role="doc-noteref"><a href="#fn:itumono" class="footnote" rel="footnote">4</a></sup>で見かけたので購入。見た目もよく、タクタイルだったので結構気に入ってます。
+<strong>KTT Matcha</strong> と <strong>KBDiy hp type</strong> は <strong>Durock T1 Shrimp</strong> が <strong>corne cherry</strong> の <em>バックライトLED</em> がきつく感じはじめたので購入。
+<strong>KTT Matcha</strong> をしばらく利用してたのですが、<em>タクタイル</em> でもちょっと音が気になるのと、軽すぎる感じでした。
+音が気になったので今時点では <strong>KBDiy hp type</strong> を利用しています。この <em>キースイッチ</em> は少し重いです。</p>
+
+<p>ついでに <em>TRRS ケーブル</em> を変更しました。これは <strong>アマゾン</strong> でてきとうに</p>
+
+<p><img src="/images/photo/kbdiy-maxkey-and-cyberpunk.jpg" alt="" /></p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>気分転換にキーボードのキースイッチとキーキャップ変更とを行ってみました!
+自作キーボードはいいぞ。</p>
+
+<hr />
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:keycap_profile" role="doc-endnote">
+      <p>背が高いプロファイルや統一された高さなど様々なプロファイルがあります。キーキャップに関することのくわしくは <a href="https://salicylic-acid3.hatenablog.com/entry/keycap-introduction"><strong>自作キーボード温泉街の歩き方</strong> の キーキャップの湯のお誘い ver2 </a> を参考にしてください。 <a href="#fnref:keycap_profile" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:soldout" role="doc-endnote">
+      <p>2023/6/30 時点、 <strong>Talp Keyboard</strong> では販売終了。 <a href="#fnref:soldout" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:keyswitch_type" role="doc-endnote">
+      <p>音が鳴るようなタイプやクリック感があるようなタイプ様々なタイプがあります。くわしくは <a href="https://shop.yushakobo.jp/pages/how-to-select-switch"><strong>遊舎工房</strong> のキースイッチの説明</a> を参考にしてください。 <a href="#fnref:keyswitch_type" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:itumono" role="doc-endnote">
+      <p>たぶん <strong>twitter.com</strong> で <a href="https://twitter.com/takkanm">@takkanm</a> か <a href="https://twitter.com/talpkeyboard">@talpkeyboard</a> のついーと。 <a href="#fnref:itumono" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[最高だったイベント 第一回keebkaigi 行った影響で、キーボードをいじりたくなりました。 今利用している corne cherry でかなり満足しているため、 新規につくるとかはあまりやる気はないので、見た目(キーキャップ)や触った感じ(キースイッチ)を替えようかとおもいます。]]></summary></entry><entry><title type="html">Zellij はじめました</title><link href="https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij/" rel="alternate" type="text/html" title="Zellij はじめました" /><published>2023-06-19T23:59:59+09:00</published><updated>2023-06-19T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij/"><![CDATA[<p>はい。タイトルの通り、 <a href="https://zellij.dev/"><strong>Zellij</strong></a> をはじめてみました。
 切っ掛けは以下のツイートを見つけたので。</p>
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">tmux みたいなやつは terminal multiplexer とか呼ばれてて，たぶん沼さんが求めてるのは zellij<a href="https://t.co/KlyMMeatzH">https://t.co/KlyMMeatzH</a></p>&mdash; sksat (@sksat_tty) <a href="https://twitter.com/sksat_tty/status/1670656419174191105?ref_src=twsrc%5Etfw">June 19, 2023</a></blockquote>
@@ -1198,86 +1257,4 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
 思った以上に速くなっていたので重い処理をする場合に <code class="language-plaintext highlighter-rouge">C</code> や <code class="language-plaintext highlighter-rouge">C++</code> 以外でも簡単に利用できるようになって
 選択肢が増えたのはよいことでした。</p>
 
-<p>実はこの <code class="language-plaintext highlighter-rouge">uuid</code> crate の features に <code class="language-plaintext highlighter-rouge">fast-rng</code> を追加すると 10 倍速くなるんですが、 ruby 側の終了時に <code class="language-plaintext highlighter-rouge">SEGV</code> してしまうので載せていないです。 <code class="language-plaintext highlighter-rouge">SEGV</code> しないように原因を調査などはまた今度。</p>]]></content><author><name></name></author><category term="rust" /><summary type="html"><![CDATA[Ruby Gems で Rust が Native として利用可能になった のでとりあえず UUIDv4 を生成してみた。]]></summary></entry><entry><title type="html">Hello, Wezterm</title><link href="https://blog.katsyoshi.org/blog/2022/03/19/hello-wezterm/" rel="alternate" type="text/html" title="Hello, Wezterm" /><published>2022-03-19T18:00:00+09:00</published><updated>2022-03-19T18:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/03/19/hello-wezterm</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/03/19/hello-wezterm/"><![CDATA[<p><a href="https://github.com/tmux/tmux"><code class="language-plaintext highlighter-rouge">tmux</code></a> + <a href="https://github.com/tmux/tmux"><code class="language-plaintext highlighter-rouge">Allacritty</code></a> が疲れてきたので<a href="https://zenn.dev/yutakatay/articles/wezterm-intro">はてぶで流れてきた</a> <a href="https://github.com/wez/wezterm"><code class="language-plaintext highlighter-rouge">wezterm</code></a> が <a href="https://github.com/saitoha/libsixel"><code class="language-plaintext highlighter-rouge">sixel</code></a> を利用できてよさそうだったので試してみることにした。</p>
-
-<h2 id="設定">設定</h2>
-
-<p>設定ファイルが <a href="https://www.lua.org/">lua</a> でカスタマイズがいろいろとできるのでまずは色を代えてみます。</p>
-
-<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">wezterm</span> <span class="o">=</span> <span class="nb">require</span> <span class="s1">'wezterm'</span>
-<span class="k">return</span> <span class="p">{</span>
-  <span class="n">color_scheme</span> <span class="o">=</span> <span class="s2">"Dracula"</span><span class="p">,</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>プログラミング言語でカスタマイズができるので以下のようにアクティブなタブへの移動のキーバインドのカスタマイズができます。</p>
-
-<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">wezterm</span> <span class="o">=</span> <span class="nb">require</span> <span class="s1">'wezterm'</span>
-<span class="kd">local</span> <span class="n">move_keys</span> <span class="o">=</span> <span class="p">{}</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span> <span class="k">do</span>
-   <span class="nb">table.insert</span><span class="p">(</span><span class="n">move_keys</span><span class="p">,</span> <span class="p">{</span>
-      <span class="n">key</span> <span class="o">=</span> <span class="nb">tostring</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
-      <span class="n">mods</span> <span class="o">=</span> <span class="s2">"CTRL"</span><span class="p">,</span>
-      <span class="n">action</span> <span class="o">=</span> <span class="n">wezterm</span><span class="p">.</span><span class="n">action</span><span class="p">{</span> <span class="n">ActivateTab</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">},</span>
-   <span class="p">})</span>
-<span class="k">end</span>
-
-<span class="k">return</span> <span class="p">{</span>
-   <span class="n">color_scheme</span> <span class="o">=</span> <span class="s2">"Dracula"</span><span class="p">,</span>
-   <span class="n">disable_default_key_bindings</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">-- 初期のキーバインドは利用しない場合</span>
-   <span class="n">keys</span> <span class="o">=</span> <span class="n">move_keys</span><span class="p">,</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>こんな感じで設定できるので便利です。</p>
-
-<p>このキーバインドは任意のイベントも設定でき、任意のイベントを利用してアクションを定義できます。以下の例では、Paneを開い監視用のプログラムを開きます。</p>
-
-<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">wezterm</span> <span class="o">=</span> <span class="nb">require</span> <span class="s1">'wezterm'</span>
-<span class="n">wezterm</span><span class="p">.</span><span class="n">on</span><span class="p">(</span><span class="s2">"open-nvtop-and-ytop"</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="n">pane</span><span class="p">)</span>
-   <span class="n">win</span><span class="p">:</span><span class="n">perform_action</span><span class="p">(</span><span class="n">wezterm</span><span class="p">.</span><span class="n">action</span><span class="p">{</span> <span class="n">SplitHorizontal</span> <span class="o">=</span> <span class="p">{</span> <span class="n">domain</span> <span class="o">=</span> <span class="s2">"CurrentPaneDomain"</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">"nvtop"</span><span class="p">,</span> <span class="p">},</span> <span class="p">},</span> <span class="p">},</span> <span class="n">pane</span><span class="p">)</span>
-   <span class="n">win</span><span class="p">:</span><span class="n">perform_action</span><span class="p">(</span><span class="n">wezterm</span><span class="p">.</span><span class="n">action</span><span class="p">{</span> <span class="n">SplitVertical</span> <span class="o">=</span> <span class="p">{</span> <span class="n">domain</span> <span class="o">=</span> <span class="s2">"CurrentPaneDomain"</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">"ytop"</span><span class="p">,</span> <span class="s2">"-ps"</span><span class="p">,</span> <span class="p">},</span> <span class="p">},</span> <span class="p">},</span> <span class="n">pane</span><span class="p">)</span>
-<span class="k">end</span><span class="p">)</span>
-
-<span class="k">return</span> <span class="p">{</span>
-   <span class="n">keys</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span> <span class="n">key</span> <span class="o">=</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">mods</span> <span class="o">=</span> <span class="s2">"CTRL"</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="n">wezterm</span><span class="p">.</span><span class="n">action</span><span class="p">{</span> <span class="n">EmitEvent</span> <span class="o">=</span> <span class="s2">"open-nvtop-and-ytop"</span><span class="p">,</span> <span class="p">},</span> <span class="p">},</span> <span class="p">},</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>とすると以下のようになります。
-<img src="/images/screenshot/open-nvtop-and-ytop-in-wezterm.png" width="100%" />
-便利!</p>
-
-<p>こんな便利なものということで <code class="language-plaintext highlighter-rouge">systemd</code> でデーモン化しています。</p>
-
-<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Unit]</span>
-<span class="py">Description</span><span class="p">=</span><span class="err">GUI</span> <span class="err">Accellarated</span> <span class="err">terminal</span>
-<span class="py">Documentation</span><span class="p">=</span>
-
-<span class="nn">[Service]</span>
-<span class="py">Type</span><span class="p">=</span><span class="err">forking</span>
-<span class="py">ExecStart</span><span class="p">=</span><span class="err">/usr/local/bin/wezterm-mux-server</span> <span class="err">--daemonize</span>
-<span class="py">Restart</span><span class="p">=</span><span class="err">on-failure</span>
-
-<span class="nn">[Install]</span>
-<span class="py">WantedBy</span><span class="p">=</span><span class="err">default.target</span>
-</code></pre></div></div>
-
-<p>で起動しておいています</p>
-
-<h3 id="問題点">問題点</h3>
-
-<p>と設定ファイルの例書いてみたのですが、とても大きな問題点にブチあたったので書いておきます。</p>
-
-<p><code class="language-plaintext highlighter-rouge">wezterm</code> には <code class="language-plaintext highlighter-rouge">wezterm-mux-server</code> というマルチプレクサ(tmuxのように扱うため)のサーバーモードプログラムがあるのですが、こいつがどうも <code class="language-plaintext highlighter-rouge">wezterm</code> とは挙動が異なり、前述した監視用のキーバインドが微妙に異なった挙動となってしまっています。サーバーモードに接続した場合の挙動は以下のようになります。</p>
-
-<p><img src="/images/screenshot/failed-nvtop-ytop.png" width="100%" /></p>
-
-<p>1つ目はpaneの位置が期待したとおりになっていない。2つ目は <code class="language-plaintext highlighter-rouge">ytop</code> が起動していないというので2つ目の方は気にしなければいいのでまあいいかと思っている。1つ目の問題は許容できていないので一旦はこのキーバインドは封印となっています。</p>
-
-<h1 id="おわり">おわり</h1>
-
-<p>長年利用してた <code class="language-plaintext highlighter-rouge">tmux</code> を捨てて <code class="language-plaintext highlighter-rouge">wezterm</code> を利用しはじめた。
-設定が <code class="language-plaintext highlighter-rouge">lua</code> で書けるのが体験的にとても良いのでこれからも利用するかなと。
-<code class="language-plaintext highlighter-rouge">wezterm</code> で <code class="language-plaintext highlighter-rouge">sixel</code> 利用した画像表示ができるようになったのが便利なので「よしっ！」</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[tmux + Allacritty が疲れてきたのではてぶで流れてきた wezterm が sixel を利用できてよさそうだったので試してみることにした。]]></summary></entry></feed>
+<p>実はこの <code class="language-plaintext highlighter-rouge">uuid</code> crate の features に <code class="language-plaintext highlighter-rouge">fast-rng</code> を追加すると 10 倍速くなるんですが、 ruby 側の終了時に <code class="language-plaintext highlighter-rouge">SEGV</code> してしまうので載せていないです。 <code class="language-plaintext highlighter-rouge">SEGV</code> しないように原因を調査などはまた今度。</p>]]></content><author><name></name></author><category term="rust" /><summary type="html"><![CDATA[Ruby Gems で Rust が Native として利用可能になった のでとりあえず UUIDv4 を生成してみた。]]></summary></entry></feed>
