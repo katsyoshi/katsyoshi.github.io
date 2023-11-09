@@ -60,6 +60,95 @@
 
 
 
+  <h1><a href="/blog/2016/11/29/introduced-cuda/">YARAKASHI CUDA編</a></h1>
+  <p class="author">
+    <span class="date">2016-11-29 00:48:15 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="/blog/2016/11/28/hello/">昨日</a>かいた奴でGTX 1050があるのでCUDAを導入してみた。</p>
+
+<h2 id="cuda導入">CUDA導入</h2>
+
+<p>これは簡単で <a href="https://developer.nvidia.com/cuda-downloads">ここ</a> から必要なパッケージをダウンロードしてきます。
+今回は Linux x86_64 Ubuntu 14.04 runfile(local) を順に選択。
+インストールはここでダウンロードしたrunfileを実行して、指示に従うだけです。
+これが終ったら、SampleProjectもインストールされてるとおもうのでこのプロジェクトをコンパイルします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chmod 555 ./cuda_8.0.44_linux.run
+$ ./cuda_8.0.44_linux.run
+:
+:
+$ cd NVIDIA_CUDA-8.0_Samples
+$ make
+</code></pre></div></div>
+
+<p>でコンパイルが終了したらサンプルプログラムを実行します。とりあえず <code class="language-plaintext highlighter-rouge">deviceQuery</code> を実行します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd bin/x86_64/linux/release
+$ ./deviceQuery
+./deviceQuery Starting...
+
+ CUDA Device Query (Runtime API) version (CUDART static linking)
+
+cudaGetDeviceCount returned 38
+-&gt; no CUDA-capable device is detected
+Result = FAIL
+</code></pre></div></div>
+
+<p>と出ます。どうみてもエラーですね</p>
+
+<p>で、以下のようにrootで実行すると</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo ./deviceQuery
+./deviceQuery Starting...
+
+ CUDA Device Query (Runtime API) version (CUDART static linking)
+
+Detected 1 CUDA Capable device(s)
+
+Device 0: "GeForce GTX 1050"
+  CUDA Driver Version / Runtime Version          8.0 / 8.0
+  CUDA Capability Major/Minor version number:    6.1
+  Total amount of global memory:                 1965 MBytes (2060255232 bytes)
+  ( 5) Multiprocessors, (128) CUDA Cores/MP:     640 CUDA Cores
+  GPU Max Clock rate:                            1455 MHz (1.46 GHz)
+  Memory Clock rate:                             3504 Mhz
+  Memory Bus Width:                              128-bit
+  L2 Cache Size:                                 1048576 bytes
+  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
+  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
+  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
+  Total amount of constant memory:               65536 bytes
+  Total amount of shared memory per block:       49152 bytes
+  Total number of registers available per block: 65536
+  Warp size:                                     32
+  Maximum number of threads per multiprocessor:  2048
+  Maximum number of threads per block:           1024
+  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+  Maximum memory pitch:                          2147483647 bytes
+  Texture alignment:                             512 bytes
+  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)
+  Run time limit on kernels:                     Yes
+  Integrated GPU sharing Host Memory:            No
+  Support host page-locked memory mapping:       Yes
+  Alignment requirement for Surfaces:            Yes
+  Device has ECC support:                        Disabled
+  Device supports Unified Addressing (UVA):      Yes
+  Device PCI Domain ID / Bus ID / location ID:   0 / 129 / 0
+  Compute Mode:
+     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
+
+deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 8.0, CUDA Runtime Version = 8.0, NumDevs = 1, Device0 = GeForce GTX 1050
+Result = PASS
+</code></pre></div></div>
+<p>と出てきますので、パーミッションがなかったようです。
+あとは簡単、CUDA使いたいユーザーにパーミッションつけたらおわりです。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>こんなのに3時間ほど時間を費しましたね。はい。</p>
+
+  </div>
+
   <h1><a href="/blog/2016/11/28/hello/">あったらしーPCかったよー</a></h1>
   <p class="author">
     <span class="date">2016-11-28 01:14:21 +0900</span>
@@ -457,38 +546,6 @@ include_recipe ‘plenv::system’</p>
 <ol>
   <li>http://blog.nomadscafe.jp/2014/03/dstat-fluentd-elasticsearch-kibana.html</li>
   <li>https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html</li>
-</ol>
-
-  </div>
-
-  <h1><a href="/blog/2015/05/15/screencast-use-gif/">すくりーんきゃすと</a></h1>
-  <p class="author">
-    <span class="date">2015-05-15 23:47:14 +0900</span>
-  </p>
-  <div class="content">
-    <p>LinuxでScreenCast用の環境を整えてみた。</p>
-
-<h2 id="必要パッケージ">必要パッケージ</h2>
-
-<ul>
-  <li>ffmpeg</li>
-  <li>gtk-recordMyDesktop</li>
-</ul>
-
-<h2 id="使いかた">使いかた</h2>
-
-<p><code class="language-plaintext highlighter-rouge">gtk-recordMyDesktop</code> でデスクトップをキャプチャする。
-その後は、 <code class="language-plaintext highlighter-rouge">ffmpeg</code> を使って好きな動画形式に変換します。
-ここでは、gif画像に変更しています。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ffmpeg -i ~/screencast.ovg img/screencast.gif
-</code></pre></div></div>
-
-<p>-&gt; <img src="/images/screenshot/gtk-recordMyDesktop.gif =512x" alt="" /> &lt;-</p>
-
-<h3 id="参考サイト">参考サイト</h3>
-<ol>
-  <li>http://d.hatena.ne.jp/over80/20080802/1217693705</li>
 </ol>
 
   </div>

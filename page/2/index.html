@@ -60,6 +60,144 @@
 
 
 
+  <h1><a href="/blog/2022/08/12/how-to-use-rust-in-ruby-gems/">Ruby gem で Rust をつかって爆速にしたい!!!!!!11</a></h1>
+  <p class="author">
+    <span class="date">2022-08-12 13:59:59 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://rubygems.org">Ruby Gems</a> で <a href="https://www.rust-lang.org">Rust</a> が <a href="https://github.com/rubygems/rubygems/pull/5175">Native として利用可能になった</a> のでとりあえず <a href="https://www.rfc-editor.org/rfc/rfc4122.html"><code class="language-plaintext highlighter-rouge">UUIDv4</code></a> を生成してみた。</p>
+
+<h3 id="リポジトリ">リポジトリ</h3>
+<p><a href="https://github.com/katsyoshi/rust_uuid"><img src="https://gh-card.dev/repos/katsyoshi/rust_uuid.svg" alt="katsyoshi/rust_uuid - GitHub" /></a></p>
+
+<h2 id="準備">準備</h2>
+
+<p>Ruby 側の <code class="language-plaintext highlighter-rouge">gem</code> に Rust を利用する準備として <a href="https://github.com/oxidize-rb/rb-sys"><code class="language-plaintext highlighter-rouge">rb_sys</code></a> と <a href="https://github.com/rake-compiler/rake-compiler"><code class="language-plaintext highlighter-rouge">rake-compiler</code></a> を利用します。この二つの <code class="language-plaintext highlighter-rouge">gem</code> は native compile するためにインストールしておきます。
+Rust 側から Ruby へ関数を公開するために <a href="https://github.com/oxidize-rb/rb-sys"><code class="language-plaintext highlighter-rouge">rb-sys</code></a> と <a href="https://github.com/matsadler/magnus"><code class="language-plaintext highlighter-rouge">magnus</code></a> を利用します。</p>
+
+<h2 id="gem-install">gem install</h2>
+
+<p>とりあえず <code class="language-plaintext highlighter-rouge">cargo</code> で Rust のパッケージを作って Rust を書いてみます。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> bundle gem rust_uuid <span class="nt">--mit</span> <span class="nt">--ext</span> rust_uuid <span class="c"># --ext を指定してnative build する gem を作成</span>
+<span class="o">&gt;</span> <span class="nb">cd </span>rust_uuid <span class="c"># 作成した gem のディレクトリへ移動</span>
+<span class="o">&gt;</span> <span class="nb">cd </span>ext/rust_uuid <span class="c"># ビルドするディレクトリへ移動</span>
+<span class="o">&gt;</span> cargo init <span class="nb">.</span> <span class="nt">--lib</span> <span class="c"># cargo を初期化</span>
+<span class="o">&gt;</span> <span class="nb">rm</span> <span class="nt">-f</span> <span class="k">*</span>.c <span class="k">*</span>.h <span class="c"># C のファイルが生成されるので削除</span>
+<span class="o">&gt;</span> cargo add rb-sys rb-allocator
+<span class="o">&gt;</span> cargo add magnus <span class="nt">--features</span> rb-sys-interop
+<span class="o">&gt;</span> cargo add uuid <span class="nt">--features</span> v4 <span class="c"># uuid v4 を指定</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ext/rust_uuid/extconf.rb</code> を以下のように編集します。</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -1,5 +1,6 @@</span>
+ # frozen_string_literal: true
+ 
+ require "mkmf"
+<span class="gi">+require "rb_sys/mkmf"
+</span> 
+<span class="gd">-create_makefile("rust_uuid/rust_uuid")
+</span><span class="gi">+create_rust_makefile("rust_uuid/rust_uuid")
+</span></code></pre></div></div>
+
+<p>次に <code class="language-plaintext highlighter-rouge">ext/rust_uuid/src/lib.rs</code> を以下の様に変更します。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">magnus</span><span class="p">::{</span><span class="n">define_module</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">,</span> <span class="n">Error</span><span class="p">};</span>
+<span class="k">use</span> <span class="nn">rb_allocator</span><span class="p">::</span><span class="n">ruby_global_allocator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">uuid</span><span class="p">::</span><span class="n">Uuid</span><span class="p">;</span>
+
+<span class="nd">ruby_global_allocator!</span><span class="p">();</span>
+
+<span class="c1">// UUIDv4 を文字列として公開</span>
+<span class="k">fn</span> <span class="nf">v4</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+    <span class="nn">Uuid</span><span class="p">::</span><span class="nf">new_v4</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nd">#[magnus::init]</span>
+<span class="k">fn</span> <span class="nf">init</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">module</span> <span class="o">=</span> <span class="nf">define_module</span><span class="p">(</span><span class="s">"RustUUID"</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+    <span class="c1">// RustUUID.v4 と利用するようにシングルトンメソッドを定義</span>
+    <span class="n">module</span><span class="nf">.define_singleton_method</span><span class="p">(</span><span class="s">"v4"</span><span class="p">,</span> <span class="nd">function!</span><span class="p">(</span><span class="n">v4</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span><span class="o">?</span><span class="p">;</span>
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>これまでできたら一旦 Rust をコンパイルしましょう。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="nb">cd </span>ext/rust_uuid
+<span class="o">&gt;</span> cargo build
+<span class="o">&gt;</span> git add <span class="nb">.</span>
+<span class="o">&gt;</span> rake build
+.... <span class="c"># install cargo dependencies and packages</span>
+<span class="nb">cp</span>: <span class="s1">'/home/katsyoshi/Program/Ruby/rust_uuid/tmp/x86_64-linux/rust_uuid/3.1.2/target/release/librust_uuid.so'</span> を <span class="nb">stat </span>できません: そのようなファイルやディレクトリはありません
+gmake: <span class="k">***</span> <span class="o">[</span>Makefile:551: foo_bar.so] エラー 1
+rake aborted!
+Command failed with status <span class="o">(</span>2<span class="o">)</span>: <span class="o">[</span>/usr/bin/gmake...]
+
+Tasks: TOP <span class="o">=&gt;</span> build <span class="o">=&gt;</span> compile <span class="o">=&gt;</span> compile:x86_64-linux <span class="o">=&gt;</span> compile:foo_bar:x86_64-linux <span class="o">=&gt;</span> copy:rust_uuid:x86_64-linux:3.1.2 <span class="o">=&gt;</span> tmp/x86_64-linux/rust_uuid/3.1.2/rust_uuid.so
+</code></pre></div></div>
+
+<p>とエラーになります。
+これは <code class="language-plaintext highlighter-rouge">ext/rust_uuid/Cargo.toml</code> の設定が足りていません。そこで以下を追加してみてください。</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[lib]</span>
+<span class="py">crate-type</span> <span class="p">=</span> <span class="p">[</span><span class="s">"cdylib"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>追加したら <code class="language-plaintext highlighter-rouge">gem</code> をビルド&amp;&amp;インストール&amp;&amp;試してみましょう!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> rake <span class="nb">install</span>
+....
+<span class="o">&gt;</span> ruby <span class="nt">-rrust_uuid</span> <span class="nt">-e</span> <span class="s1">'puts RustUUID.v4'</span>
+2be6f4d2-200b-4d08-9a1a-11fa523b316b
+</code></pre></div></div>
+
+<h2 id="べんちまーく">べんちまーく</h2>
+
+<p>以下、 <code class="language-plaintext highlighter-rouge">SecureRandom.uuid</code> との比較用のベンチマークコードを示します。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"benchmark/ips"</span>
+<span class="nb">require</span> <span class="s2">"securerandom"</span>
+<span class="nb">require</span> <span class="s2">"rust_uuid"</span>
+
+<span class="no">Benchmark</span><span class="p">.</span><span class="nf">ips</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+  <span class="n">x</span><span class="p">.</span><span class="nf">report</span><span class="p">(</span><span class="s2">"standard"</span><span class="p">)</span> <span class="p">{</span> <span class="no">SecureRandom</span><span class="p">.</span><span class="nf">uuid</span> <span class="p">}</span>
+  <span class="n">x</span><span class="p">.</span><span class="nf">report</span><span class="p">(</span><span class="s2">"rust lib"</span><span class="p">)</span> <span class="p">{</span> <span class="no">RustUUID</span><span class="p">.</span><span class="nf">v4</span> <span class="p">}</span>
+  <span class="n">x</span><span class="p">.</span><span class="nf">compare!</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h3 id="結果発表">結果発表〜</h3>
+
+<p>Rust を利用することでだいたい 5 倍ほど速くなっています。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>ruby bentimark.rb
+<span class="go">Warming up --------------------------------------
+            standard    36.437k i/100ms
+            rust lib   177.585k i/100ms
+Calculating -------------------------------------
+            standard    365.407k (± 1.4%) i/s -      1.858M in   5.086491s
+            rust lib      1.793M (± 1.8%) i/s -      9.057M in   5.053179s
+
+Comparison:
+            rust lib:  1792925.9 i/s
+            standard:   365407.3 i/s - 4.91x  (± 0.00) slower
+
+ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
+</span></code></pre></div></div>
+
+<p>TOO HAYAI</p>
+
+<h2 id="まとめ">まとめ</h2>
+<p>簡単に Rust を利用して速くしてみました。
+思った以上に速くなっていたので重い処理をする場合に <code class="language-plaintext highlighter-rouge">C</code> や <code class="language-plaintext highlighter-rouge">C++</code> 以外でも簡単に利用できるようになって
+選択肢が増えたのはよいことでした。</p>
+
+<p>実はこの <code class="language-plaintext highlighter-rouge">uuid</code> crate の features に <code class="language-plaintext highlighter-rouge">fast-rng</code> を追加すると 10 倍速くなるんですが、 ruby 側の終了時に <code class="language-plaintext highlighter-rouge">SEGV</code> してしまうので載せていないです。 <code class="language-plaintext highlighter-rouge">SEGV</code> しないように原因を調査などはまた今度。</p>
+
+  </div>
+
   <h1><a href="/blog/2022/03/19/hello-wezterm/">Hello, Wezterm</a></h1>
   <p class="author">
     <span class="date">2022-03-19 18:00:00 +0900</span>
@@ -771,69 +909,6 @@ Selected keyboards automatically since --device options weren't specified:
 
 <p>あと、順を追ってマイクロサービスへの移行が例示されててとてもよかった。以前読んだ進化的アーキテクチャとはまた違った良さがあった。</p>
 
-
-  </div>
-
-  <h1><a href="/blog/2020/12/31/best-buy-2020/">2020 買ってよかったものたち</a></h1>
-  <p class="author">
-    <span class="date">2020-12-31 23:59:59 +0900</span>
-  </p>
-  <div class="content">
-    <p>今年は <strong>COVID-19</strong> のためどこにも行けていないので買ってよかったものをあげていきます。
-買ったものとしてあげないのは本や消耗品は載せないです。</p>
-
-<h2 id="アマゾンから-yodobashi-へ">アマゾンから YODOBASHI へ</h2>
-
-<p>今年変わったこととしては、買うのが <a href="https://www.amazon.co.jp">Amazon.co.jp</a> から <a href="https://www.yodobashi.com">ヨドバシドットコム</a> で買うことが多くなっています。</p>
-
-<h2 id="今年買ったもの">今年買ったもの</h2>
-
-<ol>
-  <li>抗菌防臭・防ダニ敷布団 セミダブル(SD) (掲載終了)</li>
-  <li><a href="https://www.nitori-net.jp/ec/product/5652818/">ホワイトダックダウン85%羽毛布団(ムーンシャンテン3 セミダブル IV)</a></li>
-  <li><a href="https://www.nitori-net.jp/ec/product/5650120/">総檜すのこベッドフレーム(SD)</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001001416854/">アイリスオーヤマ IRISOHYAMA MR-1215DJ メタルラック（ポール直径25mm） 幅120cm×奥行61cm 棚板4枚</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001004140773/">アイリスオーヤマ IRISOHYAMA DSI-356 ペアー/シルバー サイドテーブル</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001004140747/">アイリスオーヤマ IRISOHYAMA KBD-500 オフホワイト キッチンボード</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001004139973/">アイリスオーヤマ IRISOHYAMA SWR-6280 ブラウン スチールウッドラック</a></li>
-  <li><a href="https://www.amazon.co.jp/gp/product/B07Z5482Y6">アイリスオーヤマ 低温調理器 真空調理器 スロークッカー IPX7防水 低温調理器具 防水機能搭載 レシピブック付き ブラック LTC-01</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001004098394/">ガーミン GARMIN 010-01995-64 vivosmart 4 Blue Silver レギュラー (ヴィヴォスマート 4 ブルーシルバー) アクティビティトラッカー</a></li>
-  <li><a href="https://www.amazon.co.jp/gp/product/B088T5M7GX">Y&amp;H HDMIキャプチャカード HD 1080P 録画 配信用、HDMI キャプチャー、ビデオキャプチャ DSLR ビデオカメラ ミラーレス Xbox 360 One PS4 Wii U Switch 対応 HDVC2</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001004239528/">STANLEY スタンレー 01941-078 クラシック真空グロウラー1.9L ロイヤルブルー</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001003817244/">タニタ TANITA KJ-114-WH デジタルクッキングスケール</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001002989474/">ハリオ HARIO MSS-1TB コーヒーミル・セラミックスリム</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001002595751/">山下工業研究所 Ko-ken コーケン 2400MZ7 1/4 6.35mm差込 Z-EAL 6角スタンダードソケット 7mm</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001001770635/">マンフロット Manfrotto MTPIXI-B PIXI ミニ三脚 ブラック</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001005568352/">ソニー SONY KJ-75X9500H BRAVIA（ブラビア） X9500Hシリーズ 75V型 地上・BS・110度CSデジタル液晶テレビ 4K対応/4Kダブルチューナー内蔵</a></li>
-  <li><a href="https://www.amazon.co.jp/gp/product/B0145YLQ2C">山善 ミニマット 40×40cm ホットマット YMM-K404 メーカー保証1年 ベージュ</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001002232784/">ベルモント Belmont 679013 H-027 鉄製 燻製鍋 27cm</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001002990844/">コールマン Coleman 2000027863 ホイールクーラー 60QT ブルー/ホワイト</a></li>
-  <li><a href="https://www.yodobashi.com/product-detail/100000001003589327/">パール金属 PEARL HB-3295 プレミアムクイックエコ 3層底切り替え式圧力鍋 5.0L</a></li>
-</ol>
-
-<h2 id="家具">家具</h2>
-
-<p>幸い今年の頭は寒くなかったので古く、薄い布団でも耐えれてたのですがさすがにこの布団じゃだめだろうと思い敷布団と羽毛布団を買いました。
-その際にマットレス床に直敷きじゃなくしようとしたのでベッドもついでに買っています。</p>
-
-<p>今の部屋に丸5年住んでいたのですが、作業用机と椅子、食事用こたつ以外の家具をまったくおいていなかったので家具をいまさらながら購入。
-サイドテーブルは寝室で携帯充電するために買ってとても便利だった。</p>
-
-<h2 id="covid-19のせい">COVID-19のせい</h2>
-
-<p><strong>COVID-19</strong> の影響は自炊するように圧力がかかってしまったので料理道具も買っています。低温調理器具はたいへん便利で、利用しまくってたのですが、途中からめんどうになって最近の利用回数はへってきています。
-安く肉塊が買える機会があればなにか低温調理しようかと。
-12月はいってから圧力鍋を購入。おかゆ作るのに大活躍しております。この鍋がくる前のおかゆは2日くらい時間をかけて作ってたので大変べんりになった。今は白米+押し麦のおかゆなので玄米+押し麦のおかゆを試したいと考えています。</p>
-
-<p>ひきこもり生活を捗らせるためにコーヒーミルも買った。コーヒーミルが手動だったんで電動ドリルで挽けるようにビット買って便利になった。</p>
-
-<p><strong>COVID-19</strong> の影響を考えると、旅するにはキャンプした方がよさそうということによりキャンプ用品として、でかいクーラーボックスを購入しています。
-最近釣り欲が高まっていたのもありこれも便利に利用しています。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>今年は <strong>COVID-19</strong> の影響で出歩くことも減りひきこもる機会も増えた1年でした。
-来年はもう少し出歩けるようになったらいいなあ。</p>
 
   </div>
 

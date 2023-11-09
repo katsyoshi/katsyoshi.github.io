@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>irb の補完の色がいじれるようになったのでかっこよくしてみた | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="irb の補完の色がいじれるようになったのでかっこよくしてみた" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Reline が 0.4.0 になり、タイトルのとおり irb で補完画面の色を好きなように変更できるようになりました。" />
+<meta property="og:description" content="Reline が 0.4.0 になり、タイトルのとおり irb で補完画面の色を好きなように変更できるようになりました。" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2023/11/08/makeup-your-irb-suggestions/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2023/11/08/makeup-your-irb-suggestions/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-08T23:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="irb の補完の色がいじれるようになったのでかっこよくしてみた" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-11-08T23:59:59+09:00","datePublished":"2023-11-08T23:59:59+09:00","description":"Reline が 0.4.0 になり、タイトルのとおり irb で補完画面の色を好きなように変更できるようになりました。","headline":"irb の補完の色がいじれるようになったのでかっこよくしてみた","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2023/11/08/makeup-your-irb-suggestions/"},"url":"https://blog.katsyoshi.org/blog/2023/11/08/makeup-your-irb-suggestions/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">irb の補完の色がいじれるようになったのでかっこよくしてみた</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-11-08T23:59:59+09:00" itemprop="datePublished">Nov 8, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="https://github.com/ruby/reline"><code class="language-plaintext highlighter-rouge">Reline</code></a> が <code class="language-plaintext highlighter-rouge">0.4.0</code> になり、タイトルのとおり <a href="https://github.com/ruby/irb"><code class="language-plaintext highlighter-rouge">irb</code></a> で<a href="https://github.com/ruby/reline/blob/master/doc/reline/face.md">補完画面の色を好きなように変更</a>できるようになりました。</p>
+
+<p>変更できるようになったので <a href="https://draculatheme.com/"><strong>dracula</strong></a> 風のテーマを <a href="https://rubygems.org"><strong>gem</strong></a> としてリリースしました!!!!
+リポジトリは以下です!!!</p>
+
+<p><a href="https://github.com/katsyoshi/irb-theme-dracula"><img src="https://gh-card.dev/repos/katsyoshi/irb-theme-dracula.svg" alt="katsyoshi/irb-theme-dracula - GitHub" /></a></p>
+
+<h3 id="インストール">インストール</h3>
+
+<p>ということで使いかたを。まずは <code class="language-plaintext highlighter-rouge">gem i irb-theme-dracula</code> で <strong>インストール</strong> します。
+<strong>ダーク</strong> と <strong>ライト</strong> を作りました。 <strong>ダーク</strong> は明るい <strong>コンソール</strong> 向けに、 <strong>ライト</strong> は暗い <strong>コンソール</strong> 向けに作っています。
+インストール後は <code class="language-plaintext highlighter-rouge">irbrc</code> ファイルに <code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/dark"</code> か <code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/light"</code> を追加。</p>
+
+<p><code class="language-plaintext highlighter-rouge">irb</code> を実行し、補完をしてみましょう。まず、<code class="language-plaintext highlighter-rouge">irbrc</code> ファイルになにもかかないデフォルトの場合は以下</p>
+
+<p><img src="/images/screenshot/irb-default.png" alt="" /></p>
+
+<p>次に <strong>ダーク</strong> の <code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/dark"</code> を書いた場合は以下</p>
+
+<p><img src="/images/screenshot/dracula-dark.png" alt="" /></p>
+
+<p>最後に <strong>ライト</strong> <code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/light"</code> の場合は以下</p>
+
+<p><img src="/images/screenshot/dracula-light.png" alt="" /></p>
+
+<h3 id="おわり">おわり</h3>
+
+<p><strong>irb</strong> も便利になってカスタマイズができるようになりました。色とか考えたくないひとは <strong>gem</strong> にして一発で決まるようにすると便利ですよ。たぶん。</p>
+
+  </div><a class="u-url" href="/blog/2023/11/08/makeup-your-irb-suggestions/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

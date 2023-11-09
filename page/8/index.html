@@ -60,6 +60,38 @@
 
 
 
+  <h1><a href="/blog/2015/05/15/screencast-use-gif/">すくりーんきゃすと</a></h1>
+  <p class="author">
+    <span class="date">2015-05-15 23:47:14 +0900</span>
+  </p>
+  <div class="content">
+    <p>LinuxでScreenCast用の環境を整えてみた。</p>
+
+<h2 id="必要パッケージ">必要パッケージ</h2>
+
+<ul>
+  <li>ffmpeg</li>
+  <li>gtk-recordMyDesktop</li>
+</ul>
+
+<h2 id="使いかた">使いかた</h2>
+
+<p><code class="language-plaintext highlighter-rouge">gtk-recordMyDesktop</code> でデスクトップをキャプチャする。
+その後は、 <code class="language-plaintext highlighter-rouge">ffmpeg</code> を使って好きな動画形式に変換します。
+ここでは、gif画像に変更しています。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ffmpeg -i ~/screencast.ovg img/screencast.gif
+</code></pre></div></div>
+
+<p>-&gt; <img src="/images/screenshot/gtk-recordMyDesktop.gif =512x" alt="" /> &lt;-</p>
+
+<h3 id="参考サイト">参考サイト</h3>
+<ol>
+  <li>http://d.hatena.ne.jp/over80/20080802/1217693705</li>
+</ol>
+
+  </div>
+
   <h1><a href="/blog/2015/05/11/golden-weak/">ゴールデンウィークのお買いもの</a></h1>
   <p class="author">
     <span class="date">2015-05-11 21:38:35 +0900</span>
@@ -327,24 +359,6 @@ SSH接続すると、ホストごとに毎回接続確認が必要なので、�
 ずーっと、devopsについてちょっと気になることがあったので<a href="https://twitter.com/hsbt">@hsbtさん</a>に聞いてみたりしてた。</p>
 
 <p>あとは終ったあとかなり早い花見してた。</p>
-
-
-  </div>
-
-  <h1><a href="/blog/2015/03/17/heroku-deploy-anther-branch/">Herokuでmaster以外のブランチを利用してデプロイする方法</a></h1>
-  <p class="author">
-    <span class="date">2015-03-17 12:08:17 +0900</span>
-  </p>
-  <div class="content">
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push heroku your-branch:master
-</code></pre></div></div>
-
-<h3 id="参考">参考</h3>
-
-<ol>
-  <li>http://stackoverflow.com/questions/1823397/heroku-using-git-branch-is-confusing</li>
-  <li>http://qiita.com/pugiemonn/items/bd79abbc72c20d8ee9a7</li>
-</ol>
 
 
   </div>
