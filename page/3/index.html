@@ -18,7 +18,7 @@
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 3 of 12 for katsyoshi のめもみたいなの - page 3 | katsyoshi のめもみたいなの</title>
+<title>Page 3 of 11 for katsyoshi のめもみたいなの - page 3 | katsyoshi のめもみたいなの</title>
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="katsyoshi のめもみたいなの - page 3" />
 <meta property="og:locale" content="en_US" />
@@ -51,7 +51,7 @@
     </a>
   
   <span class="page_number ">
-    Page: 3 of 12
+    Page: 3 of 11
   </span>
   
     <a href="/page/4/" class="next">Next</a>
@@ -59,30 +59,6 @@
 </div>
 
 
-
-  <h1><a href="/blog/2021/04/26/state-of-emergency/">緊急事態宣言</a></h1>
-  <p class="author">
-    <span class="date">2021-04-26 19:00:00 +0900</span>
-  </p>
-  <div class="content">
-    <p>緊急事態宣言に再突入したので久しぶりに本を二冊ほど読んだので感想を</p>
-
-<h2 id="ユニコーン企業の秘密"><a href="https://www.oreilly.co.jp/books/9784873119465/">ユニコーン企業の秘密</a></h2>
-
-<p>(「ユニコーン企業は書籍に書かれているようなアジャイルなんてやってない」)[https://bufferings.hatenablog.com/entry/2021/04/24/224925] というブログ記事を読んでみて気になったのと、 <a href="https://twitter.com/snoozer05">島田（@snoozer05）</a> さんと <a href="https://twitter.com/kakutani">角谷（@kakutani）</a> さんの翻訳なので買ってみた。</p>
-
-<p>よみやすくサクッと読めました。イイネイイネという感じで読み進められるのでぜひ。</p>
-
-<h2 id="モノリスからマイクロサービスへ"><a href="https://www.oreilly.co.jp/books/9784873119311/">モノリスからマイクロサービスへ</a></h2>
-
-<p>島田さんが翻訳してたのと、マイクロサービスに一家言あるものとして読んでみた。</p>
-
-<p>この本のスタンスとしてきちんとした目的がないマイクロサービスはやめとけ、ときちんと書いてあり、よかった点しかないくらいよかった。</p>
-
-<p>あと、順を追ってマイクロサービスへの移行が例示されててとてもよかった。以前読んだ進化的アーキテクチャとはまた違った良さがあった。</p>
-
-
-  </div>
 
   <h1><a href="/blog/2020/12/31/best-buy-2020/">2020 買ってよかったものたち</a></h1>
   <p class="author">
@@ -665,6 +641,89 @@ rails s
 
   </div>
 
+  <h1><a href="/blog/2018/09/11/cumo/">くーも</a></h1>
+  <p class="author">
+    <span class="date">2018-09-11 00:13:45 +0900</span>
+  </p>
+  <div class="content">
+    <p>Rubyで <a href="https://developer.nvidia.com/cuda-downloads"><code class="language-plaintext highlighter-rouge">cuda</code></a> を利用して GPGPU 使いたいの
+で <a href="https://github.com/sonots/cumo"><code class="language-plaintext highlighter-rouge">cumo</code></a> を導入してみた。</p>
+
+<h2 id="install">install</h2>
+
+<p>はじめに <code class="language-plaintext highlighter-rouge">cuda</code> をインストールしておきます。
+<code class="language-plaintext highlighter-rouge">gem</code> に登録されているので、雑に <code class="language-plaintext highlighter-rouge">gem install</code> 実施してみます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export CUDA_PATH="/opt/cuda"
+export CPATH="$CUDA_PATH/include:$CPATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+export PATH="$CUDA_PATH/bin:$PATH"
+export LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LIBRARY_PATH"
+gem install cumo
+</code></pre></div></div>
+
+<p>とすると以下のようなエラーが出てだめです。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcc -I. -Iinclude -Inarray -Icuda -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0/x86_64-linux -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0/ruby/backward -I/home/katsyoshi/.rbenv/versions/2.5.1/include/ruby-2.5.0 -I. -I/home/katsyoshi/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/numo-narray-0.9.1.3/ext/numo/narray -DHAVE_NUMO_NARRAY_H -DHAVE_DLFCN_H -DHAVE_DLOPEN -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_TYPE_BOOL -DHAVE_TYPE_U_INT8_T -DHAVE_TYPE_U_INT16_T -DHAVE_TYPE_INT32_T -DHAVE_TYPE_U_INT32_T -DHAVE_TYPE_INT64_T -DHAVE_TYPE_U_INT64_T -DHAVE_EXP10 -DHAVE_RB_CCOMPLEX -DHAVE_RB_THREAD_CALL_WITHOUT_GVL -I/opt/cuda/include -I/home/katsyoshi/.rbenv/versions/2.5.1/include -fPIC -O3 -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wno-tautological-compare -Wno-parentheses-equality -Wno-constant-logical-operand -Wno-self-assign -Wunused-variable -Wimplicit-int -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wmisleading-indentation -Wno-packed-bitfield-compat -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wduplicated-cond -Wno-maybe-uninitialized -o narray/types/bit.o -c narray/types/bit.c
+narray/gen/tmpl/lib.c:22:7: エラー: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘/’ token
+ #define m_map(x) m_num_to_data(rb_yield(m_data_to_num(x)))
+       ^
+narray/gen/tmpl/lib.c:23:29: エラー: 終端する &gt; 文字がありません
+
+                             ^
+narray/gen/tmpl/lib.c:23:29: 致命的エラー: static ID id_cast;: そのようなファイルやディレクトリはありません
+コンパイルを停止しました。
+make: *** [Makefile:453: narray/types/bit.o] エラー 1
+</code></pre></div></div>
+
+<p>公式リポジトリ覗いてもとくに問題なさそうなので <code class="language-plaintext highlighter-rouge">gem</code> からのインストールは一旦おいてソースからインストールします。</p>
+
+<h3 id="build">build</h3>
+
+<p>公式リポジトリからダウンロードしてコンパイルをはじめます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/sonotz/cumo.git
+cd cumo
+export CUDA_PATH="/usr/local/cuda"
+export CPATH="$CUDA_PATH/include:$CPATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LD_LIBRARY_PATH"
+export PATH="$CUDA_PATH/bin:$PATH"
+export LIBRARY_PATH="$CUDA_PATH/lib64:$CUDA_PATH/lib:$LIBRARY_PATH"
+bundle install
+rake compile
+rake install
+</code></pre></div></div>
+
+<p>ってインストールできますが、その前に僕の環境が <code class="language-plaintext highlighter-rouge">gcc-8.2.0</code> だったりして、これを <code class="language-plaintext highlighter-rouge">gcc-6.4.0</code> に戻したりしてインストールしました。</p>
+
+<h2 id="run">run</h2>
+
+<p>これでインストール終わりましたので、 <code class="language-plaintext highlighter-rouge">irb</code> で確認してみようと思います。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):001:0&gt; require 'cumo/narray'
+=&gt; true
+irb(main):002:0&gt; Cumo::Int32.new(3, 3).fill(0)
+=&gt; Cumo::Int32#shape=[3,3]
+[[0, 0, 0],
+ [0, 0, 0],
+ [0, 0, 0]]
+</code></pre></div></div>
+
+<p>とこれで実行されたことを確認できます。</p>
+
+<p>と簡単に書きましたが、インストール後にGPUへのアクセス権が無いユーザーで実行したためエラーが出ます(エビデンス取得忘れ)。
+手元のPCではGPUにアクセス権がvideo groupにもあるので利用ユーザーをvideo groupへ追加して再起動することでようやく動作確認ができます。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>簡単にGPGPUを利用したプログラムが書けるようになりましたのでおわりです。
+技術書典5はこれを使ったはなしを出展しますのできてみてくださいな。</p>
+
+<p>え37でまってます</p>
+
+
+  </div>
+
 
 <!-- Pagination links -->
 <div class="pagination">
@@ -674,7 +733,7 @@ rails s
     </a>
   
   <span class="page_number ">
-    Page: 3 of 12
+    Page: 3 of 11
   </span>
   
     <a href="/page/4/" class="next">Next</a>
