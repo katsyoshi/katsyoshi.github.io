@@ -1,4 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2023-11-10T09:30:21+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">irb の補完の色がいじれるようになったのでかっこよくしてみた</title><link href="https://blog.katsyoshi.org/blog/2023/11/08/makeup-your-irb-suggestions/" rel="alternate" type="text/html" title="irb の補完の色がいじれるようになったのでかっこよくしてみた" /><published>2023-11-08T23:59:59+09:00</published><updated>2023-11-08T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/11/08/makeup-your-irb-suggestions</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/11/08/makeup-your-irb-suggestions/"><![CDATA[<p><a href="https://github.com/ruby/reline"><code class="language-plaintext highlighter-rouge">Reline</code></a> が <code class="language-plaintext highlighter-rouge">0.4.0</code> になり、タイトルのとおり <a href="https://github.com/ruby/irb"><code class="language-plaintext highlighter-rouge">irb</code></a> で<a href="https://github.com/ruby/reline/blob/master/doc/reline/face.md">補完画面の色を好きなように変更</a>できるようになりました。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2023-11-22T19:16:28+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">いいかんじに Bundler で管理されていない Gem を使いたい</title><link href="https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/" rel="alternate" type="text/html" title="いいかんじに Bundler で管理されていない Gem を使いたい" /><published>2023-11-16T23:59:59+09:00</published><updated>2023-11-16T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/"><![CDATA[<p>前回作成した <code class="language-plaintext highlighter-rouge">irb-theme-dracula</code> を <strong>bundler</strong> で <strong>gem</strong> が管理されているプロジェクトで利用したい。
+利用したいが、そのままでは利用できないです。
+これは <strong>gem</strong> が <strong>bundler</strong> で管理されているので、 <code class="language-plaintext highlighter-rouge">Gemfile</code> に書いていない <strong>gem</strong> は利用できないです。</p>
+
+<h2 id="対処案">対処案</h2>
+
+<p><strong>bundler</strong> で管理されていない <strong>gem</strong> をどうしても利用したい場合は以下のような方法が考えられます。</p>
+
+<ol>
+  <li>:100: <code class="language-plaintext highlighter-rouge">Gemfile</code> に追加: 正攻法。ただ複数人で開発しているなどの場合色付けだけの機能で追加するのかというと…</li>
+  <li>:+1: 古きよき方法: <a href="https://i.loveruby.net/ja/projects/setup/doc/usage.html"><code class="language-plaintext highlighter-rouge">setup.rb</code></a> を利用して、対象 <strong>gem</strong> の必要ファイルをインストールする。</li>
+  <li>:poop: 実行する <strong>Ruby</strong> の <code class="language-plaintext highlighter-rouge">$LOAD_PATH</code> に <strong>gem</strong> のパスを追加: 強引にパスを追加して <code class="language-plaintext highlighter-rouge">require</code> することで解決。</li>
+</ol>
+
+<p>ということでそれぞれ方法をみてみましょう。</p>
+
+<h3 id="gemfile-に追加">Gemfile に追加</h3>
+
+<p>正攻法ですね。便利で全員が使い、必要なら追加しましょう。
+どうしても利用したい場合でプロジェクトの <code class="language-plaintext highlighter-rouge">Gemfile</code> に書きたくない場合はプロジェクトを管理している<strong>バージョン管理システム</strong> にコミットしないなどオペレーションを行いましょう。
+管理方法が大変なのでこの方法はないなと。</p>
+
+<h3 id="古きよき方法">古きよき方法</h3>
+
+<p><strong>rubygems</strong> が生まれる前の方法をとりましょう。ここでは <strong><code class="language-plaintext highlighter-rouge">setup.rb</code></strong> で <code class="language-plaintext highlighter-rouge">site_ruby</code> に必要なファイルをインストールしてくれます。
+便利なやつです。</p>
+
+<h4 id="使い方">使い方</h4>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gem <span class="nb">install </span>setup <span class="c"># gem でイントールします。</span>
+<span class="gp">#</span><span class="w"> </span>インストールしたい gem のリポジトリをコピーなどして手元にもってきましょう。
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /path/to/install/gem
+<span class="gp">$</span><span class="w"> </span>setup.rb <span class="nb">install</span> <span class="c"># gem のインストールが行なわれます。</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /path/to/your/project
+<span class="gp">$</span><span class="w"> </span>bundle <span class="nb">exec </span>ruby your/scrip.rb
+</code></pre></div></div>
+
+<p>これでできるのですが問題点があり、この方法では利用したいプロジェクト以外でも利用できてしまうので特定のプログラムだけで <code class="language-plaintext highlighter-rouge">site_ruby</code> を読み込むとかしていいかんじに使い分けるには少し工夫が必要です。
+全部の <strong>Ruby</strong> プログラムで利用したい訳ではないのでこの方法については断念。</p>
+
+<h3 id="実行する-ruby-の-load_path-に利用する-gem-のパスを追加">実行する Ruby の $LOAD_PATH に利用する gem のパスを追加</h3>
+
+<p>この方法は単純で、プログラム側で必要なファイルを読み込む時のみ利用する。
+利用するファイル(<code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/light"</code> を書いているファイル)で利用したい <strong>gem</strong> へのパスを <code class="language-plaintext highlighter-rouge">$LOAD_PATH</code> へ追加します。
+<code class="language-plaintext highlighter-rouge">$LOAD_PATH</code> への追加方法としては以下の方法があります。</p>
+
+<ol>
+  <li>環境変数 (<code class="language-plaintext highlighter-rouge">$RUBYLIB</code>) に指定: 環境変数を利用するごとに指定することができる。</li>
+  <li>実行時に指定: 実行時に <code class="language-plaintext highlighter-rouge">-I/path/to/gem</code> を <code class="language-plaintext highlighter-rouge">ruby</code> の引数に利用可能。利用するごとに指定する必要がある。</li>
+  <li>実行ファイルで指定: 設定ファイルを読み込んで実行するような場合では楽。</li>
+</ol>
+
+<p>ここでは <strong>実行ファイルで指定</strong> する方法を見ていきましょう。</p>
+
+<p>実行対象のプログラムは <code class="language-plaintext highlighter-rouge">irb</code> です。 <code class="language-plaintext highlighter-rouge">irb</code> は <code class="language-plaintext highlighter-rouge">~/.irbrc</code> を読み込んで起動するため、 <code class="language-plaintext highlighter-rouge">~/.irbrc</code> に以下のような設定を書きます。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Reline 0.4.0 以上に対応した irb のバージョンチェック</span>
+<span class="k">if</span> <span class="no">Gem</span><span class="o">::</span><span class="no">Version</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">IRB</span><span class="o">::</span><span class="no">VERSION</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="no">Gem</span><span class="o">::</span><span class="no">Version</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"1.9.0"</span><span class="p">)</span>
+  <span class="c1"># gem のインストールされるパスを取得。rbenv を利用している場合は以下</span>
+  <span class="c1"># preview 判では version に previewX や 0 がついたりするので * を付与し、検索</span>
+  <span class="n">ld_path</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">ENV</span><span class="p">[</span><span class="s2">"RBENV_ROOT"</span><span class="p">],</span> <span class="s2">"versions"</span><span class="p">,</span> <span class="no">RUBY_VERSION</span> <span class="o">+</span> <span class="s2">"*"</span><span class="p">,</span> <span class="s2">"lib"</span><span class="p">,</span> <span class="s2">"ruby"</span><span class="p">,</span> <span class="s2">"gems"</span><span class="p">,</span> <span class="no">RUBY_VERSION</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="sr">/\d+$/</span><span class="p">,</span> <span class="s2">"0*"</span><span class="p">),</span> <span class="s2">"gems"</span><span class="p">)</span>
+  <span class="c1"># 読み込む gem 対象のパスを取得</span>
+  <span class="n">gem_path</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">Dir</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">ld_path</span><span class="p">,</span> <span class="s2">"irb-theme"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"-*"</span><span class="p">).</span><span class="nf">last</span><span class="p">,</span> <span class="s2">"lib"</span><span class="p">)</span>
+  <span class="vg">$LOAD_PATH</span><span class="p">.</span><span class="nf">unshift</span><span class="p">(</span><span class="n">gem_path</span><span class="p">)</span> <span class="c1"># LOAD_PATH に追加</span>
+  <span class="vg">$LOAD_PATH</span><span class="p">.</span><span class="nf">uniq!</span> <span class="c1"># LOAD_PATH に追加した重複してた場合削除</span>
+  <span class="nb">require</span> <span class="s2">"irb/theme/dracula/light"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>この設定を書いたら <strong>Ruby</strong> を <code class="language-plaintext highlighter-rouge">3.3.0-preview3</code> 以上にして <code class="language-plaintext highlighter-rouge">bundle exec irb</code> と実行してみましょう。</p>
+
+<p><img src="/images/screenshot/force-load-bundler-external-gem.png" alt="" /></p>
+
+<p>かった!</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p><strong>gem</strong> は入ってるけど、プロジェクトで利用できないなあとおもい使えるようにしたいということでやってみました。
+今回の <code class="language-plaintext highlighter-rouge">irb</code> は <strong>Ruby</strong> <code class="language-plaintext highlighter-rouge">2.2</code> 以下だとデフォルトでインストールされているのでそもそも
+<code class="language-plaintext highlighter-rouge">Reline</code> の新しいバージョン(<code class="language-plaintext highlighter-rouge">0.4.0</code>)をサポートしていないのこの方法を利用してみました。</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[前回作成した irb-theme-dracula を bundler で gem が管理されているプロジェクトで利用したい。 利用したいが、そのままでは利用できないです。 これは gem が bundler で管理されているので、 Gemfile に書いていない gem は利用できないです。]]></summary></entry><entry><title type="html">irb の補完の色がいじれるようになったのでかっこよくしてみた</title><link href="https://blog.katsyoshi.org/blog/2023/11/08/makeup-your-irb-suggestions/" rel="alternate" type="text/html" title="irb の補完の色がいじれるようになったのでかっこよくしてみた" /><published>2023-11-08T23:59:59+09:00</published><updated>2023-11-08T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/11/08/makeup-your-irb-suggestions</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/11/08/makeup-your-irb-suggestions/"><![CDATA[<p><a href="https://github.com/ruby/reline"><code class="language-plaintext highlighter-rouge">Reline</code></a> が <code class="language-plaintext highlighter-rouge">0.4.0</code> になり、タイトルのとおり <a href="https://github.com/ruby/irb"><code class="language-plaintext highlighter-rouge">irb</code></a> で<a href="https://github.com/ruby/reline/blob/master/doc/reline/face.md">補完画面の色を好きなように変更</a>できるようになりました。</p>
 
 <p>変更できるようになったので <a href="https://draculatheme.com/"><strong>dracula</strong></a> 風のテーマを <a href="https://rubygems.org"><strong>gem</strong></a> としてリリースしました!!!!
 リポジトリは以下です!!!</p>
@@ -1023,136 +1102,4 @@ rtt 最小/平均/最大/mdev = 2.731/4.023/6.532/1.773ミリ秒
 これで家のネットワークから <code class="language-plaintext highlighter-rouge">IPv6</code> で通信できるようになりました。
 ありがとうございました!</p>
 
-<p>次回 katsyoshi.org お名前.COM やめるってよ</p>]]></content><author><name></name></author><category term="tech" /><category term="diary" /><summary type="html"><![CDATA[家のネットワークからインターネットへ出るとき IPoE を使ってたけど、家庭内 LAN のネットワークは IPv6 を off にしていた。 この LAN 内 IPv6 化していなかった理由としては、昔 Linux (だけじゃないかも)が IPv6 が利用できる状態だと 先に IPv6 で繋ぎにいこうとして IPv6 で通信できなかったら IPv4 にフォールバックするという挙動で、すごくストレスフルだった。 この挙動の対処として、カーネルレベルで IPv6 を off にしてました。 そうこうしているうちに契約している ISP が IPv6 オプションなしで IPoE を利用できるようになったので、 とりあえず IPoE だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。 いいかげんこの家庭内 LAN のネットワークを IPv6 化し、インターネットと IPv6 で通信できるようにした顛末をのこす。のこします。]]></summary></entry><entry><title type="html">RubyKaigi 最高！</title><link href="https://blog.katsyoshi.org/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022/" rel="alternate" type="text/html" title="RubyKaigi 最高！" /><published>2022-09-11T23:59:50+09:00</published><updated>2022-09-11T23:59:50+09:00</updated><id>https://blog.katsyoshi.org/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2022/09/11/had-lovely-days-at-rubykaigi-2022/"><![CDATA[<p><a href="https://rubykaigi.org/2022">RubyKaigi 2022</a> に行ってきました! ので感想を</p>
-
-<h2 id="day-0">DAY 0</h2>
-
-<p>今回も <a href="https://yancya.house/">やんちゃハウス</a> に楽をして泊まることにしてたのでなにも気にせず宿へ。
-着いて他メンバーが来るまで宿で待機してたが、最寄り駅の周りが思った以上になにもなく、途方に暮れてました。</p>
-
-<h4 id="夕飯">夕飯</h4>
-
-<p>もうひとり宿に着いたので入れ変わりで夕飯へ出かけたが、そもそも最寄り駅前にはなにもないので伊勢駅まで出ることにした。</p>
-
-<p>この判断が間違えてたようで、伊勢駅に出てもとくに変らなかった。しかし幸い伊勢駅前に担々麺屋があったのでそこで食料摂取した。</p>
-
-<h2 id="day-1">DAY 1</h2>
-
-<p>この日の聞いたセトリと感想は以下のとおり</p>
-
-<h4 id="ruby-meets-webassembly-presentation"><a href="https://rubykaigi.org/2022/presentations/kateinoigakukun.html">Ruby meets WebAssembly</a>: <a href="">presentation</a></h4>
-
-<p>この日のキーノートは <a href="https://www.ruby-lang.org/"><code class="language-plaintext highlighter-rouge">Ruby</code></a> の <a href="https://webassembly.org/"><code class="language-plaintext highlighter-rouge">wasm</code></a> 対応の話で <a href="https://wasi.dev/"><code class="language-plaintext highlighter-rouge">wasi</code></a> を通じてブラウザで <code class="language-plaintext highlighter-rouge">Ruby</code> が動かすまでのたのしいことをしゃべってたようです。
-おなかいたくてトイレ行ってたら面白いところ聞き逃がしてしまった。</p>
-
-<h4 id="ランチ">ランチ</h4>
-<p>適当に幕の内弁当を最初に選択。</p>
-
-<h4 id="making-many-threads-on-ruby-presentation"><a href="https://rubykaigi.org/2022/presentations/ko1.html">Making *MaNy* threads on Ruby</a>: <a href="">presentation</a></h4>
-
-<p>笹田さんの発表で如何に <code class="language-plaintext highlighter-rouge">Ruby</code> で CPU をフルに使えるようにするかの話。 <code class="language-plaintext highlighter-rouge">Ruby</code> での <code class="language-plaintext highlighter-rouge">Thread</code> のはなしから <a href="https://github.com/ruby/ruby/blob/master/doc/ractor.md"><code class="language-plaintext highlighter-rouge">Ractor</code></a> を利用してフルフルに CPU 利用するための書きかたとかの話していました。</p>
-
-<h4 id="building-a-lightweight-ir-and-backend-for-yjit-presentation"><a href="https://rubykaigi.org/2022/presentations/maximecb.html">Building a Lightweight IR and Backend for YJIT</a>: <a href="">presentation</a></h4>
-
-<p><code class="language-plaintext highlighter-rouge">Ruby 3.1</code> で <a href="https://github.com/Shopify/yjit"><code class="language-plaintext highlighter-rouge">YJIT</code></a> が入って <code class="language-plaintext highlighter-rouge">Ruby 3.2</code> でサポートされる CPU アーキテクチャが増えたはなし。RubyVM(？) に <code class="language-plaintext highlighter-rouge">YJIT</code> 用 <code class="language-plaintext highlighter-rouge">Ruby IR</code> を作成して <code class="language-plaintext highlighter-rouge">JIT</code> を実行するという話。
-聞いてて疑問になった点としては、 <code class="language-plaintext highlighter-rouge">Ruby IR</code> では直接機械語に翻訳しているようだったが、このバックエンドに <a href="https://llvm.org"><code class="language-plaintext highlighter-rouge">LLVM</code></a> を利用していないのはなんでなんだろう。聞き逃がしているという話はあるので、詳しいひと教えて。</p>
-
-<h4 id="tools-for-providing-rich-user-experience-in-debugger-presentation"><a href="https://rubykaigi.org/2022/presentations/ono-max.html">Tools for Providing rich user experience in debugger</a>: <a href="">presentation</a></h4>
-
-<p><a href="https://github.com/ruby/debug"><code class="language-plaintext highlighter-rouge">debug.gem</code></a> を <a href="https://code.visualstudio.com/"><code class="language-plaintext highlighter-rouge">VS Code</code></a> だけじゃなく、 <a href="https://www.google.com/intl/ja_jp/chrome/"><code class="language-plaintext highlighter-rouge">Chrome</code></a> のリモートデバッグ機能を利用したデバッグの話でした。
-この機能自体はすごく便利だと思うのですが、そもそも両方とも宗教上の理由で利用できない体なので聞くだけでした。</p>
-
-<h4 id="trick-2022-returns-repos"><a href="https://rubykaigi.org/2022/presentations/tric.html">TRICK 2022 (Returns)</a>: <a href="">repos</a></h4>
-
-<p>いつも通り <del>変な</del> エキセントリックなプログラムしか出てこなかったし、いつもの面子が賞もらってたのですごいなーという感想。</p>
-
-<h4 id="夕飯-1">夕飯</h4>
-
-<p>この日は津駅があまりなさそうだったので、駅近くで飲むのではなく、宿寄りの場所松坂駅で飲むことにした。
-ここで、津の夜情報を聞き込んだり、朝ごはん情報自体を仕入れてました。</p>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">昨日の夕飯 <a href="https://twitter.com/hashtag/rubykaigi?src=hash&amp;ref_src=twsrc%5Etfw">#rubykaigi</a> <a href="https://t.co/G8lmetYX9J">pic.twitter.com/G8lmetYX9J</a></p>&mdash; katsyoshi (@katsyoshi) <a href="https://twitter.com/katsyoshi/status/1568012256566480896?ref_src=twsrc%5Etfw">September 8, 2022</a></blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<h2 id="day-2">DAY 2</h2>
-<p>2日目は、ネットワークが不安定になったりしてこちらの集中力が切れたりしたのであまり覚えていない。</p>
-
-<h4 id="朝ごはん">朝ごはん</h4>
-
-<p>前日の夕飯に教えてもらった市場の人向け食堂が松坂駅前にあり、その食堂で食事をした。</p>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">朝メッシ <a href="https://twitter.com/hashtag/rubykaigi?src=hash&amp;ref_src=twsrc%5Etfw">#rubykaigi</a> <a href="https://t.co/PvbaUrRUIf">pic.twitter.com/PvbaUrRUIf</a></p>&mdash; katsyoshi (@katsyoshi) <a href="https://twitter.com/katsyoshi/status/1568019085430259712?ref_src=twsrc%5Etfw">September 8, 2022</a></blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<h4 id="matz-keynote-presentation"><a href="https://rubykaigi.org/2022/presentations/yukihiro_matz.html">Matz Keynote</a>: <a href="">presentation</a></h4>
-
-<h4 id="do-pure-ruby-dream-of-encrypted-binary-protocol-presentation"><a href="https://rubykaigi.org/2022/presentations/yu_suke1994.html">Do Pure Ruby Dream of Encrypted Binary Protocol?</a>: <a href="">presentation</a></h4>
-
-<p>ノーコメント。</p>
-
-<h4 id="ランチ-1">ランチ</h4>
-
-<p>この日も一番に弁当を取得。弁当はみんな大好き松坂牛ローストビーフ丼にした。感想としては、もう肉はいいかな。</p>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">昼飯　<a href="https://twitter.com/hashtag/rubykaigi?src=hash&amp;ref_src=twsrc%5Etfw">#rubykaigi</a> <a href="https://t.co/vpOf6Uwf0K">pic.twitter.com/vpOf6Uwf0K</a></p>&mdash; katsyoshi (@katsyoshi) <a href="https://twitter.com/katsyoshi/status/1568070622210826240?ref_src=twsrc%5Etfw">September 9, 2022</a></blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<h4 id="自キkaigi">自キKaigi</h4>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">きょうも <a href="https://twitter.com/hashtag/%E8%87%AA%E3%82%ADKaigi?src=hash&amp;ref_src=twsrc%5Etfw">#自キKaigi</a> やります。ランチ食べたらスポンサーエリアの手前あたりにお集まりください <a href="https://twitter.com/hashtag/rubykaigi?src=hash&amp;ref_src=twsrc%5Etfw">#rubykaigi</a></p>&mdash; 🇺🇦hasumikin🇺🇦 (@hasumikin) <a href="https://twitter.com/hasumikin/status/1568023525407211521?ref_src=twsrc%5Etfw">September 8, 2022</a></blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<p>誘われたので参加しました。iPad で活動しようと思い <a href="https://github.com/foostan/crkbd">corne</a> 持っていってたので参加してた。</p>
-
-<h4 id="ruby-x-bpf-in-action-how-important-observability-is-presentation"><a href="https://rubykaigi.org/2022/presentations/udzura.html">Ruby x BPF in Action: How important observability is</a>: <a href="">presentation</a></h4>
-<h4 id="hunting-production-memory-leaks-with-heap-sampling-presentation"><a href="https://rubykaigi.org/2022/presentations/KnuX.html">Hunting Production Memory Leaks with Heap Sampling</a>: <a href="">presentation</a></h4>
-<p>このあたりネットワークが不安定になり、セッションが中断されたりしたためあまり覚えていない。</p>
-
-<h4 id="立ち話">立ち話</h4>
-
-<p>久し振りの対面での参加だったのでセッションあまり聞かずに受け付け前で立ち話している人たちがいたので、その立ち話に参加した。
-たまたま、最近読んでる本の翻訳者がいたのでこれからの話などを聞いたりしていた。</p>
-
-<h4 id="caching-with-messagepack-presentation"><a href="https://rubykaigi.org/2022/presentations/shioyama.html">Caching With MessagePack</a>: <a href="">presentation</a></h4>
-<h4 id="ruby-committers-vs-the-world"><a href="https://rubykaigi.org/2022/presentations/rubylangorg.html">Ruby Committers vs The World</a></h4>
-
-<h4 id="夕飯-2">夕飯</h4>
-
-<p>夕飯は、駅近くのお店でかるく3人で。</p>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">いまどこ</p>&mdash; tagomoris (@tagomoris) <a href="https://twitter.com/tagomoris/status/1568221035702685696?ref_src=twsrc%5Etfw">September 9, 2022</a></blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<p>こんなリプライがきてたようなので一緒にいたひとにまかせた。ギリギリまで粘ってたので帰宿後すぐ就寝。</p>
-
-<h2 id="day-3">DAY 3</h2>
-
-<p>3日目はそもそも前2日の疲れが出たりしたのかほとんど覚えていない。あと <a href="https://ruby-puzzles-2022.cookpad.tech/">ruby puzzle</a> をやっていてセッションをあまり聞けていない。</p>
-
-<h4 id="朝ごはん-1">朝ごはん</h4>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今日も一日 <a href="https://twitter.com/hashtag/rubykaigi?src=hash&amp;ref_src=twsrc%5Etfw">#rubykaigi</a> <a href="https://t.co/PKnj8sHxwE">pic.twitter.com/PKnj8sHxwE</a></p>&mdash; katsyoshi (@katsyoshi) <a href="https://twitter.com/katsyoshi/status/1568387387088322560?ref_src=twsrc%5Etfw">September 9, 2022</a></blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<h4 id="megaruby---running-mrubyc-programs-on-sega-mega-drive-presentation"><a href="https://rubykaigi.org/2022/presentations/yujiyokoo.html">Megaruby - Running mruby/c programs on Sega Mega Drive</a>: <a href="">presentation</a></h4>
-
-<p>これに間に合うように出たはずだったが、間に合わず聞いていた。メガドライブすげえ。</p>
-
-<h4 id="automatically-find-memory-leaks-in-native-gems-presentation"><a href="https://rubykaigi.org/2022/presentations/peterzhu2118.html">Automatically Find Memory Leaks in Native Gems</a>: <a href="">presentation</a></h4>
-<h4 id="fast-data-processing-with-ruby-and-apache-arrow-presentation"><a href="https://rubykaigi.org/2022/presentations/ktou.html">Fast data processing with Ruby and Apache Arrow</a>: <a href="">presentation</a></h4>
-<h4 id="fixing-assignment-evaluation-order-presentation"><a href="https://rubykaigi.org/2022/presentations/jeremyevans0.html">Fixing Assignment Evaluation Order</a>: <a href="">presentation</a></h4>
-<h4 id="stories-from-developing-yjit-presentation"><a href="https://rubykaigi.org/2022/presentations/alanwusx.html">Stories from developing YJIT</a>: <a href="">presentation</a></h4>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>3年ぶりの現地開催だったので参加してきました。対面での参加はやはりよいもので新しい出会いや、疑問を本人、解っている人に直接聞くことができてすばらしい体験でした。</p>
-
-<h3 id="三重について">三重について</h3>
-<p>三重県の酒のイメージは、行く前は「作」「 而今」「伊勢角谷屋麦酒」というイメージでした。
-とくに日本酒は美味しいイメージがあり、知らない日本酒もあったりするんだろうなあと思っていました。
-行ってみると日本酒はイメージと変わらないのですが、だいたい似た味の傾向で飽きるというかなんというか
-美味しいんだけど、好きじゃないという感想になってしまった。
-ビールについては瓶ビールしか飲まなかったので感想はなしで。</p>
-
-<p>三重は大きな街が比較的分散しているようで、津も松坂も伊勢も鳥羽も駅前が小さく感じました。
-とくに0日目の食事が大変で、調達が難しかった。</p>]]></content><author><name></name></author><category term="tech" /><category term="diary" /><category term="ruby" /><category term="rubykaigi" /><summary type="html"><![CDATA[RubyKaigi 2022 に行ってきました! ので感想を]]></summary></entry></feed>
+<p>次回 katsyoshi.org お名前.COM やめるってよ</p>]]></content><author><name></name></author><category term="tech" /><category term="diary" /><summary type="html"><![CDATA[家のネットワークからインターネットへ出るとき IPoE を使ってたけど、家庭内 LAN のネットワークは IPv6 を off にしていた。 この LAN 内 IPv6 化していなかった理由としては、昔 Linux (だけじゃないかも)が IPv6 が利用できる状態だと 先に IPv6 で繋ぎにいこうとして IPv6 で通信できなかったら IPv4 にフォールバックするという挙動で、すごくストレスフルだった。 この挙動の対処として、カーネルレベルで IPv6 を off にしてました。 そうこうしているうちに契約している ISP が IPv6 オプションなしで IPoE を利用できるようになったので、 とりあえず IPoE だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。 いいかげんこの家庭内 LAN のネットワークを IPv6 化し、インターネットと IPv6 で通信できるようにした顛末をのこす。のこします。]]></summary></entry></feed>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>いいかんじに Bundler で管理されていない Gem を使いたい | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="いいかんじに Bundler で管理されていない Gem を使いたい" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="前回作成した irb-theme-dracula を bundler で gem が管理されているプロジェクトで利用したい。 利用したいが、そのままでは利用できないです。 これは gem が bundler で管理されているので、 Gemfile に書いていない gem は利用できないです。" />
+<meta property="og:description" content="前回作成した irb-theme-dracula を bundler で gem が管理されているプロジェクトで利用したい。 利用したいが、そのままでは利用できないです。 これは gem が bundler で管理されているので、 Gemfile に書いていない gem は利用できないです。" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-16T23:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="いいかんじに Bundler で管理されていない Gem を使いたい" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-11-16T23:59:59+09:00","datePublished":"2023-11-16T23:59:59+09:00","description":"前回作成した irb-theme-dracula を bundler で gem が管理されているプロジェクトで利用したい。 利用したいが、そのままでは利用できないです。 これは gem が bundler で管理されているので、 Gemfile に書いていない gem は利用できないです。","headline":"いいかんじに Bundler で管理されていない Gem を使いたい","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/"},"url":"https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">いいかんじに Bundler で管理されていない Gem を使いたい</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-11-16T23:59:59+09:00" itemprop="datePublished">Nov 16, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>前回作成した <code class="language-plaintext highlighter-rouge">irb-theme-dracula</code> を <strong>bundler</strong> で <strong>gem</strong> が管理されているプロジェクトで利用したい。
+利用したいが、そのままでは利用できないです。
+これは <strong>gem</strong> が <strong>bundler</strong> で管理されているので、 <code class="language-plaintext highlighter-rouge">Gemfile</code> に書いていない <strong>gem</strong> は利用できないです。</p>
+
+<h2 id="対処案">対処案</h2>
+
+<p><strong>bundler</strong> で管理されていない <strong>gem</strong> をどうしても利用したい場合は以下のような方法が考えられます。</p>
+
+<ol>
+  <li>:100: <code class="language-plaintext highlighter-rouge">Gemfile</code> に追加: 正攻法。ただ複数人で開発しているなどの場合色付けだけの機能で追加するのかというと…</li>
+  <li>:+1: 古きよき方法: <a href="https://i.loveruby.net/ja/projects/setup/doc/usage.html"><code class="language-plaintext highlighter-rouge">setup.rb</code></a> を利用して、対象 <strong>gem</strong> の必要ファイルをインストールする。</li>
+  <li>:poop: 実行する <strong>Ruby</strong> の <code class="language-plaintext highlighter-rouge">$LOAD_PATH</code> に <strong>gem</strong> のパスを追加: 強引にパスを追加して <code class="language-plaintext highlighter-rouge">require</code> することで解決。</li>
+</ol>
+
+<p>ということでそれぞれ方法をみてみましょう。</p>
+
+<h3 id="gemfile-に追加">Gemfile に追加</h3>
+
+<p>正攻法ですね。便利で全員が使い、必要なら追加しましょう。
+どうしても利用したい場合でプロジェクトの <code class="language-plaintext highlighter-rouge">Gemfile</code> に書きたくない場合はプロジェクトを管理している<strong>バージョン管理システム</strong> にコミットしないなどオペレーションを行いましょう。
+管理方法が大変なのでこの方法はないなと。</p>
+
+<h3 id="古きよき方法">古きよき方法</h3>
+
+<p><strong>rubygems</strong> が生まれる前の方法をとりましょう。ここでは <strong><code class="language-plaintext highlighter-rouge">setup.rb</code></strong> で <code class="language-plaintext highlighter-rouge">site_ruby</code> に必要なファイルをインストールしてくれます。
+便利なやつです。</p>
+
+<h4 id="使い方">使い方</h4>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gem <span class="nb">install </span>setup <span class="c"># gem でイントールします。</span>
+<span class="gp">#</span><span class="w"> </span>インストールしたい gem のリポジトリをコピーなどして手元にもってきましょう。
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /path/to/install/gem
+<span class="gp">$</span><span class="w"> </span>setup.rb <span class="nb">install</span> <span class="c"># gem のインストールが行なわれます。</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /path/to/your/project
+<span class="gp">$</span><span class="w"> </span>bundle <span class="nb">exec </span>ruby your/scrip.rb
+</code></pre></div></div>
+
+<p>これでできるのですが問題点があり、この方法では利用したいプロジェクト以外でも利用できてしまうので特定のプログラムだけで <code class="language-plaintext highlighter-rouge">site_ruby</code> を読み込むとかしていいかんじに使い分けるには少し工夫が必要です。
+全部の <strong>Ruby</strong> プログラムで利用したい訳ではないのでこの方法については断念。</p>
+
+<h3 id="実行する-ruby-の-load_path-に利用する-gem-のパスを追加">実行する Ruby の $LOAD_PATH に利用する gem のパスを追加</h3>
+
+<p>この方法は単純で、プログラム側で必要なファイルを読み込む時のみ利用する。
+利用するファイル(<code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/light"</code> を書いているファイル)で利用したい <strong>gem</strong> へのパスを <code class="language-plaintext highlighter-rouge">$LOAD_PATH</code> へ追加します。
+<code class="language-plaintext highlighter-rouge">$LOAD_PATH</code> への追加方法としては以下の方法があります。</p>
+
+<ol>
+  <li>環境変数 (<code class="language-plaintext highlighter-rouge">$RUBYLIB</code>) に指定: 環境変数を利用するごとに指定することができる。</li>
+  <li>実行時に指定: 実行時に <code class="language-plaintext highlighter-rouge">-I/path/to/gem</code> を <code class="language-plaintext highlighter-rouge">ruby</code> の引数に利用可能。利用するごとに指定する必要がある。</li>
+  <li>実行ファイルで指定: 設定ファイルを読み込んで実行するような場合では楽。</li>
+</ol>
+
+<p>ここでは <strong>実行ファイルで指定</strong> する方法を見ていきましょう。</p>
+
+<p>実行対象のプログラムは <code class="language-plaintext highlighter-rouge">irb</code> です。 <code class="language-plaintext highlighter-rouge">irb</code> は <code class="language-plaintext highlighter-rouge">~/.irbrc</code> を読み込んで起動するため、 <code class="language-plaintext highlighter-rouge">~/.irbrc</code> に以下のような設定を書きます。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Reline 0.4.0 以上に対応した irb のバージョンチェック</span>
+<span class="k">if</span> <span class="no">Gem</span><span class="o">::</span><span class="no">Version</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">IRB</span><span class="o">::</span><span class="no">VERSION</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="no">Gem</span><span class="o">::</span><span class="no">Version</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"1.9.0"</span><span class="p">)</span>
+  <span class="c1"># gem のインストールされるパスを取得。rbenv を利用している場合は以下</span>
+  <span class="c1"># preview 判では version に previewX や 0 がついたりするので * を付与し、検索</span>
+  <span class="n">ld_path</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">ENV</span><span class="p">[</span><span class="s2">"RBENV_ROOT"</span><span class="p">],</span> <span class="s2">"versions"</span><span class="p">,</span> <span class="no">RUBY_VERSION</span> <span class="o">+</span> <span class="s2">"*"</span><span class="p">,</span> <span class="s2">"lib"</span><span class="p">,</span> <span class="s2">"ruby"</span><span class="p">,</span> <span class="s2">"gems"</span><span class="p">,</span> <span class="no">RUBY_VERSION</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="sr">/\d+$/</span><span class="p">,</span> <span class="s2">"0*"</span><span class="p">),</span> <span class="s2">"gems"</span><span class="p">)</span>
+  <span class="c1"># 読み込む gem 対象のパスを取得</span>
+  <span class="n">gem_path</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">Dir</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">ld_path</span><span class="p">,</span> <span class="s2">"irb-theme"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"-*"</span><span class="p">).</span><span class="nf">last</span><span class="p">,</span> <span class="s2">"lib"</span><span class="p">)</span>
+  <span class="vg">$LOAD_PATH</span><span class="p">.</span><span class="nf">unshift</span><span class="p">(</span><span class="n">gem_path</span><span class="p">)</span> <span class="c1"># LOAD_PATH に追加</span>
+  <span class="vg">$LOAD_PATH</span><span class="p">.</span><span class="nf">uniq!</span> <span class="c1"># LOAD_PATH に追加した重複してた場合削除</span>
+  <span class="nb">require</span> <span class="s2">"irb/theme/dracula/light"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>この設定を書いたら <strong>Ruby</strong> を <code class="language-plaintext highlighter-rouge">3.3.0-preview3</code> 以上にして <code class="language-plaintext highlighter-rouge">bundle exec irb</code> と実行してみましょう。</p>
+
+<p><img src="/images/screenshot/force-load-bundler-external-gem.png" alt="" /></p>
+
+<p>かった!</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p><strong>gem</strong> は入ってるけど、プロジェクトで利用できないなあとおもい使えるようにしたいということでやってみました。
+今回の <code class="language-plaintext highlighter-rouge">irb</code> は <strong>Ruby</strong> <code class="language-plaintext highlighter-rouge">2.2</code> 以下だとデフォルトでインストールされているのでそもそも
+<code class="language-plaintext highlighter-rouge">Reline</code> の新しいバージョン(<code class="language-plaintext highlighter-rouge">0.4.0</code>)をサポートしていないのこの方法を利用してみました。</p>
+
+
+  </div><a class="u-url" href="/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
