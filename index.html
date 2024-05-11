@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>katsyoshi のめもみたいなの | It’s a memos.</title>
-<meta name="generator" content="Jekyll v4.3.2" />
+<meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="katsyoshi のめもみたいなの" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
@@ -56,6 +40,118 @@
 </div>
 
 
+
+  <h1><a href="/blog/2024/05/11/sway-window-switcher-using-wofi/">Sway 用 Window 切り替えを作った</a></h1>
+  <p class="author">
+    <span class="date">2024-05-11 23:59:59 +0900</span>
+  </p>
+  <div class="content">
+    <p>あたらしく PC 買って、 <strong>Linux</strong> の GUI 環境を <strong>X11</strong> から <strong>Wayland</strong> に乗り変えることにしました。
+いままで利用していたデスクトップ環境を <a href="https://i3wm.org/"><strong>i3</strong></a> から <a href="https://swaywm.org/"><strong>sway</strong></a>
+に変更しました。
+最近利用していた <strong>macOS</strong> や <strong>i3</strong> ではあまり気にしていなかったのですが、<strong>Windows</strong> の <code class="language-plaintext highlighter-rouge">Alt+Tab</code> での
+ウインドウ切り替えが便利だったのを思い出したのでこの便利な機能を模倣することにしました。</p>
+
+<p>でも本当にほしいのは <code class="language-plaintext highlighter-rouge">Alt+Tab</code> の順番に切り変わるやつではなく、アクセスしたいウィンドウへの切り変えなのです。
+そこでこの機能を <strong>ruby</strong> で実装することにしました。</p>
+
+<h2 id="準備">準備</h2>
+
+<p>準備として以下のソフトウェアがインストールされていることを期待しています。</p>
+
+<ul>
+  <li>window manager: <strong>i3</strong>/<strong>sway</strong></li>
+  <li>launcher/menu program: <a href="https://hg.sr.ht/~scoopta/wofi"><strong>wofi</strong></a></li>
+</ul>
+
+<h2 id="作成">作成</h2>
+
+<p>なにかしら実装あるだろうということで参考を探していたら<a href="https://gist.github.com/muniter/1c187e7c973accba463fb05c1402621f">見付けた</a>のでその実装を参考にします。
+プログラムは以下になります。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env ruby</span>
+
+<span class="nb">require</span> <span class="s1">'bundler/inline'</span>
+
+<span class="n">gemfile</span> <span class="k">do</span>
+  <span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+  <span class="n">gem</span> <span class="s2">"i3ipc"</span>
+<span class="k">end</span>
+
+<span class="nb">require</span> <span class="s2">"i3ipc"</span>
+<span class="nb">require</span> <span class="s2">"open3"</span>
+
+<span class="k">class</span> <span class="nc">SwayWindowSwithcer</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">switch</span> <span class="o">=</span> <span class="n">new</span><span class="p">.</span><span class="nf">switch</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@conn</span> <span class="o">=</span> <span class="no">I3Ipc</span><span class="o">::</span><span class="no">Connection</span><span class="p">.</span><span class="nf">new</span>
+    <span class="vi">@workspaces</span> <span class="o">=</span> <span class="vi">@conn</span><span class="p">.</span><span class="nf">workspaces</span>
+    <span class="vi">@windows</span> <span class="o">=</span> <span class="no">Set</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">set_windows</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">switch</span> <span class="o">=</span> <span class="vi">@conn</span><span class="p">.</span><span class="nf">command</span><span class="p">(</span><span class="s2">"[con_id=</span><span class="si">#{</span><span class="vi">@windows</span><span class="p">.</span><span class="nf">to_a</span><span class="p">[</span><span class="nb">open</span><span class="p">].</span><span class="nf">to_h</span><span class="p">[</span><span class="ss">:id</span><span class="p">]</span><span class="si">}</span><span class="s2">] focus"</span><span class="p">)</span>
+
+  <span class="kp">private</span>
+  <span class="k">def</span> <span class="nf">list_window</span> <span class="o">=</span> <span class="vi">@windows</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">displays</span> <span class="o">=</span> <span class="vi">@conn</span><span class="p">.</span><span class="nf">tree</span><span class="p">.</span><span class="nf">nodes</span><span class="p">.</span><span class="nf">reject</span> <span class="p">{</span> <span class="o">|</span><span class="nb">display</span><span class="o">|</span> <span class="nb">display</span><span class="p">.</span><span class="nf">name</span> <span class="o">==</span> <span class="s2">"__i3"</span> <span class="p">}</span>
+  <span class="k">def</span> <span class="nf">open</span>
+    <span class="no">Open3</span><span class="p">.</span><span class="nf">popen3</span><span class="p">([</span><span class="s1">'wofi'</span><span class="p">,</span> <span class="s1">'-i'</span><span class="p">,</span> <span class="s1">'-k'</span><span class="p">,</span> <span class="s1">'/dev/null'</span><span class="p">,</span> <span class="s1">'-d'</span><span class="p">].</span><span class="nf">join</span> <span class="s2">" "</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">_e</span><span class="p">,</span> <span class="n">_w</span><span class="o">|</span>
+      <span class="n">i</span><span class="p">.</span><span class="nf">puts</span> <span class="n">list_window</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+      <span class="n">i</span><span class="p">.</span><span class="nf">close</span>
+      <span class="n">list_window</span><span class="p">.</span><span class="nf">index</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="nf">read</span><span class="p">.</span><span class="nf">strip</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">set_windows</span>
+    <span class="n">displays</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="nb">display</span><span class="o">|</span>
+      <span class="nb">display</span><span class="p">.</span><span class="nf">nodes</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">workspace</span><span class="o">|</span> <span class="vi">@windows</span> <span class="o">+=</span> <span class="n">workspace</span><span class="p">.</span><span class="nf">nodes</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">SwayWindowSwithcer</span><span class="p">.</span><span class="nf">switch</span>
+</code></pre></div></div>
+
+<p><strong>i3</strong> は <a href="https://i3wm.org/docs/ipc.html"><strong>IPC</strong> が定義</a> されています <sup id="fnref:ipc" role="doc-noteref"><a href="#fn:ipc" class="footnote" rel="footnote">1</a></sup> 。
+今利用している <strong>sway</strong> は <strong>i3</strong> の <strong>wayland</strong> 向け実装なので <strong>IPC</strong> に互換性があります。
+そのまま <strong>i3ipc</strong> 関連のライブラリを利用することが可能です。
+ということで今回は <strong>ruby</strong> の <strong>gem</strong> として <strong>i3ipc.gem</strong> というそのままのやつがあったので利用します。
+<strong>i3</strong> で起動しているウィンドウ一覧を取得して、名前を <strong>wofi</strong> に渡します。
+ウィンドウ一覧を受け取った <strong>wofi</strong> は切り替えたいウィンドウを絞り込み、選択ができます。
+切り替えたいウィンドウを選択したら、今度は <strong>i3</strong> へ選択したウィンドウへのフォーカスする命令を送ります。</p>
+
+<p>ここで注意点として、二つありひとつ目は以下があります。
+<strong>ruby</strong> の <strong>i3ipc</strong> は <code class="language-plaintext highlighter-rouge">I3Ipc::Connection</code> からでしかコマンドを送れないです<sup id="fnref:sanko" role="doc-noteref"><a href="#fn:sanko" class="footnote" rel="footnote">2</a></sup>。
+そのためこのプログラムでは <code class="language-plaintext highlighter-rouge">@conn.command</code> でコマンドを送るとします。
+このままではどのウインドウかはわからないので <strong>i3</strong> コマンドを送る際に <code class="language-plaintext highlighter-rouge">[con_id=id]</code> を付けます。
+今回はウィンドウを切り替えることをしたいだけなので <code class="language-plaintext highlighter-rouge">[con_id=id] focus</code> とします。
+ふたつ目はシステムの <strong>ruby</strong> を利用する際には必要な <strong>gem</strong> がシステムにインストールされている必要があります。
+もしインストールされていないのであれば手動でいれる必要があります<sup id="fnref:bundler" role="doc-noteref"><a href="#fn:bundler" class="footnote" rel="footnote">3</a></sup>。</p>
+
+<p><img src="/images/screenshot/wofi-window-switcher.png" alt="" /></p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>あたらしい PC を買い、デスクトップ環境を替えました。
+あたらしい環境で少し不便だったところを解消するプログラムを書いてみました。</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:ipc" role="doc-endnote">
+      <p>InerProcess Communication <a href="#fnref:ipc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:sanko" role="doc-endnote">
+      <p>参考にした <strong>Python</strong> はウィンドウのオブジェクトから直接コマンドが送れます。 <a href="#fnref:sanko" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:bundler" role="doc-endnote">
+      <p><strong>root</strong> ユーザーで一度実行するか、手動でやる必要がある。インラインとはいったい…… <a href="#fnref:bundler" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
 
   <h1><a href="/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/">いいかんじに Bundler で管理されていない Gem を使いたい</a></h1>
   <p class="author">
@@ -142,7 +238,6 @@
 <p><strong>gem</strong> は入ってるけど、プロジェクトで利用できないなあとおもい使えるようにしたいということでやってみました。
 今回の <code class="language-plaintext highlighter-rouge">irb</code> は <strong>Ruby</strong> <code class="language-plaintext highlighter-rouge">2.2</code> 以下だとデフォルトでインストールされているのでそもそも
 <code class="language-plaintext highlighter-rouge">Reline</code> の新しいバージョン(<code class="language-plaintext highlighter-rouge">0.4.0</code>)をサポートしていないのこの方法を利用してみました。</p>
-
 
   </div>
 
@@ -1066,189 +1161,6 @@ WHOIS を一旦登録時のものに変更します<sup id="fnref:org" role="doc
     </li>
   </ol>
 </div>
-
-  </div>
-
-  <h1><a href="/blog/2022/10/12/ipv6nize-at-home/">Communicate on IPv6 from home</a></h1>
-  <p class="author">
-    <span class="date">2022-10-12 23:59:50 +0900</span>
-  </p>
-  <div class="content">
-    <p>家のネットワークからインターネットへ出るとき <code class="language-plaintext highlighter-rouge">IPoE</code> を使ってたけど、家庭内 LAN のネットワークは <code class="language-plaintext highlighter-rouge">IPv6</code> を off にしていた。
-この LAN 内 <code class="language-plaintext highlighter-rouge">IPv6</code> 化していなかった理由としては、昔 Linux (だけじゃないかも)が <code class="language-plaintext highlighter-rouge">IPv6</code> が利用できる状態だと
-先に <code class="language-plaintext highlighter-rouge">IPv6</code> で繋ぎにいこうとして <code class="language-plaintext highlighter-rouge">IPv6</code> で通信できなかったら <code class="language-plaintext highlighter-rouge">IPv4</code> にフォールバックするという挙動で、すごくストレスフルだった。
-この挙動の対処として、カーネルレベルで <code class="language-plaintext highlighter-rouge">IPv6</code> を off にしてました。
-そうこうしているうちに契約している ISP が <code class="language-plaintext highlighter-rouge">IPv6</code> オプションなしで <code class="language-plaintext highlighter-rouge">IPoE</code> を利用できるようになったので、
-とりあえず <code class="language-plaintext highlighter-rouge">IPoE</code> だけを利用できるようにして、家庭内の LAN はそのままという状態にしていました。
-いいかげんこの家庭内 LAN のネットワークを <code class="language-plaintext highlighter-rouge">IPv6</code> 化し、インターネットと <code class="language-plaintext highlighter-rouge">IPv6</code> で通信できるようにした顛末をのこす。のこします。</p>
-
-<h2 id="家庭内-lan-環境">家庭内 LAN 環境</h2>
-
-<ul>
-  <li>ゲートウェイ: NEC IP38X/1210 (YAMAHA RTX1200)</li>
-  <li>PC: 6.0.0-gentoo</li>
-</ul>
-
-<p><img src="/images/home2internet.png" alt="" /></p>
-
-<h2 id="ipoe-化と家庭内-lan-の-ipv6-化">IPoE 化と家庭内 LAN の IPv6 化</h2>
-
-<p>設定は <a href="https://network.yamaha.com/setting/router_firewall/flets/flets_other_service/ipv6_ipoe">YAMAHA の設定例集</a>に載ってあるのでそれを参考にします。
-<code class="language-plaintext highlighter-rouge">IPoE</code> 化はこの設定例でいけるのですが、どうも設定したときにミスったらしく、 LAN の IP アドレスが <code class="language-plaintext highlighter-rouge">IPv4</code> ではインターネットへ出ることができるが、
-<code class="language-plaintext highlighter-rouge">IPv6</code> ではインターネットへ出ることができない状態になってしまいました。</p>
-
-<h3 id="旧設定">旧設定</h3>
-<p>どのような設定だったかは以下に</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip route default gateway tunnel 1
-ipv6 prefix 1 ra-prefix@lan2::/64
-ipv6 lan1 address ra-prefix@lan2::1/64
-ipv6 lan1 prefix ra-prefix@lan2::/64
-ipv6 lan1 rtadv send 1
-ipv6 lan1 dhcp service server
-ipv6 lan2 address auto
-ipv6 lan2 secure filter in 1010 1011 1012 2000
-ipv6 lan2 secure filter out 3000 dynamic 100 101 102 103 104 105 106
-ipv6 lan2 dhcp service client ir=on
-ngn type lan2 ntt
-tunnel select 1
- tunnel encapsulation ipip
- tunnel endpoint address 2404:8e00::feed:100
- tunnel enable 1
-ipv6 filter 1010 pass * * icmp6 * *
-ipv6 filter 1011 pass * * tcp * ident
-ipv6 filter 1012 pass * * udp * 546
-ipv6 filter 2000 reject * * * * *
-ipv6 filter 3000 pass * * * * *
-ipv6 filter dynamic 100 * * ftp
-ipv6 filter dynamic 101 * * domain
-ipv6 filter dynamic 102 * * www
-ipv6 filter dynamic 103 * * smtp
-ipv6 filter dynamic 104 * * pop3
-ipv6 filter dynamic 105 * * tcp
-ipv6 filter dynamic 106 * * udp
-</code></pre></div></div>
-
-<p>この設定ではインターネットとは <code class="language-plaintext highlighter-rouge">IPv4</code> でしか通信できていない状態でした。
-でこのトラブルシュートとして知人(<a href="https://twitter.com/n_kane">@n_kane</a>, <a href="https://twitter.com/paina">@paina</a>) のちからを借りてどこまで通じてどこから通じないかを確認しました。</p>
-
-<h3 id="troubleshooting">troubleshooting</h3>
-
-<p>とりあえず <code class="language-plaintext highlighter-rouge">ping6</code> 、 <code class="language-plaintext highlighter-rouge">traceroute6</code> で通じていないことを確認します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ping6 -c 3 google.com
-
-PING  google.com(nrt13s55-in-x0e.1e100.net (2404:6800:4004:824::200e)) 56 データ長(byte)
-
---- google.com ping 統計 ---
-送信パケット数 3, 受信パケット数 0, パケット損失 100%, 時間 2067ミリ秒
-
-$ traceroute6 google.com
-traceroute to google.com, 30 hops max, 80 byte packets
- 1  * * *
- 2  * * *
- 3  * * *
- 4  * * *
- 5  * * *
- 6  * * *
- 7  * * *
- 8  * * *
- 9  * * *
-10  * * *
-11  * * *
-12  * * *
-13  * * *
-14  * * *
-15  * * *
-16  * * *
-17  * * *
-18  * * *
-19  * * *
-20  * * *
-21  * * *
-22  * * *
-23  * * *
-24  * * *
-25  * * *
-26  * * *
-27  * * *
-28  * * *
-29  * * *
-30  * * *
-</code></pre></div></div>
-
-<p>通ってないですね。
-先述したように PC は <code class="language-plaintext highlighter-rouge">IPv6</code> を on にしたばかりなのでクライアント側の設定でブロックしていないかを確認します。
-まずクライアント側で考えられるのは <code class="language-plaintext highlighter-rouge">iptables</code> でのパケットフィルタリングですね。
-ルーターの下にある PC なので、ここでブロックすることは低いのですが、確認します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip6tables --list
-Chain INPUT (policy ACCEPT)
-target     prot opt source               destination
-
-Chain FORWARD (policy ACCEPT)
-target     prot opt source               destination
-
-Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination
-</code></pre></div></div>
-
-<p>なにもフィルタリングしていないですね。
-ということで、クライアント側には問題なさそうですね。
-どこまで通じてどこまで通じていないのか別のエンドポイントで確認します。</p>
-
-<p>まず、手元と相手で <code class="language-plaintext highlighter-rouge">tcpdump</code> 利用してパケットが送っているか届いているかを確認します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># tcpdump -nei enp8s0f0 icmp6
-dropped privs to pcap
-tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
-listening on enp8s0f0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
-22:35:41.158558 00:a0:de:69:40:9d &gt; 33:33:ff:51:5e:63, ethertype IPv6 (0x86dd), length 86: fe80::212:e2ff:fe70:6144 &gt; ff02::1:ff51:5e63: ICMP6, neighbor solicitation, who has 2409:10:a5c0:1f00:d903:ddb5:851:5e63, length 32
-22:35:58.765783 ee:60:51:38:43:9c &gt; 33:33:ff:00:00:01, ethertype IPv6 (0x86dd), length 86: 2409:10:a5c0:1f00:5ce3:afcb:9bb2:5c1b &gt; ff02::1:ff00:1: ICMP6, neighbor solicitation, who has 2409:10:a5c0:1f00::1, length 32
-22:36:09.249427 ee:60:51:38:43:9c &gt; 33:33:ff:00:00:01, ethertype IPv6 (0x86dd), length 86: 2409:10:a5c0:1f00:5ce3:afcb:9bb2:5c1b &gt; ff02::1:ff00:1: ICMP6, neighbor solicitation, who has 2409:10:a5c0:1f00::1, length 32
-</code></pre></div></div>
-
-<p>送れてはいるようで対向側にも届いていたらしく戻りのパケットは送ってたようですが、手元では戻ってくるパケットは見えていないですね。</p>
-
-<p><img src="/images/ping6-failure.png" alt="" /></p>
-
-<p>ということはやはりルーターの設定が悪そうということが推察されますね。
-設定のどこが悪いのかあやしいところを見ていきます。</p>
-
-<p>最初に怪しいとおもったのはルーターのフィルターまわりです。一旦、<code class="language-plaintext highlighter-rouge">no ipv6 interface secure filer in</code> で全部無効化しましょう。しかしとくに変りはないです。これはフィルターが原因ではなさそうですね。</p>
-
-<p>次にあやしい点は以下2つの設定</p>
-
-<ol>
-  <li><a href="http://www.rtpro.yamaha.co.jp/RT/manual/rt-common/ipv6/ipv6_interface_address.html"><code class="language-plaintext highlighter-rouge">ipv6 interface address</code></a></li>
-  <li><a href="http://www.rtpro.yamaha.co.jp/RT/manual/rt-common/ipv6/ipv6_interface_address.html"><code class="language-plaintext highlighter-rouge">ipv6 interface prefix</code></a></li>
-</ol>
-
-<p>上のコマンドは ISP から自動で振ってきている IP を割り当てる設定で、下のコマンドは ISP から振ってきた <code class="language-plaintext highlighter-rouge">IPv6</code> のプレフィックスを付けるようにするための設定となります。
-どうもこの下のコマンドが邪魔なようです。
-<code class="language-plaintext highlighter-rouge">no ipv6 interface prefix</code> で無効化できるので一旦外してみましょう。
-すると</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ping6 -c 3 google.com
-PING google.com(nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e)) 56 データ長(byte)
-64 バイト応答 送信元 nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e): icmp_seq=1 ttl=57 時間=6.53ミリ秒
-64 バイト応答 送信元 nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e): icmp_seq=2 ttl=57 時間=2.73ミリ秒
-64 バイト応答 送信元 nrt20s18-in-x0e.1e100.net (2404:6800:4004:81c::200e): icmp_seq=3 ttl=57 時間=2.81ミリ秒
-
---- google.com ping 統計 ---
-送信パケット数 3, 受信パケット数 3, パケット損失 0%, 時間 2002ミリ秒
-rtt 最小/平均/最大/mdev = 2.731/4.023/6.532/1.773ミリ秒
-</code></pre></div></div>
-
-<p>のように通りました!勝ったッ!第三部完!</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>以前中途半端に設定したおかげで <code class="language-plaintext highlighter-rouge">IPv6</code> 有効化に時間が掛ってしまった顛末をまとめました。
-これで家のネットワークから <code class="language-plaintext highlighter-rouge">IPv6</code> で通信できるようになりました。
-ありがとうございました!</p>
-
-<p>次回 katsyoshi.org お名前.COM やめるってよ</p>
 
   </div>
 

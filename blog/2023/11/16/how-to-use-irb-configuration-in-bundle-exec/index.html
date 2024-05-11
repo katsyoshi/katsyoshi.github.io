@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>いいかんじに Bundler で管理されていない Gem を使いたい | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.3.2" />
+<meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="いいかんじに Bundler で管理されていない Gem を使いたい" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="前回作成した irb-theme-dracula を bundler で gem が管理されているプロジェクトで利用したい。 利用したいが、そのままでは利用できないです。 これは gem が bundler で管理されているので、 Gemfile に書いていない gem は利用できないです。" />
@@ -132,7 +116,6 @@
 <p><strong>gem</strong> は入ってるけど、プロジェクトで利用できないなあとおもい使えるようにしたいということでやってみました。
 今回の <code class="language-plaintext highlighter-rouge">irb</code> は <strong>Ruby</strong> <code class="language-plaintext highlighter-rouge">2.2</code> 以下だとデフォルトでインストールされているのでそもそも
 <code class="language-plaintext highlighter-rouge">Reline</code> の新しいバージョン(<code class="language-plaintext highlighter-rouge">0.4.0</code>)をサポートしていないのこの方法を利用してみました。</p>
-
 
   </div><a class="u-url" href="/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/" hidden></a>
 </article>

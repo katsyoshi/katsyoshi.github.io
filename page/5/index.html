@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 5 of 12 for katsyoshi のめもみたいなの - page 5 | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.3.2" />
+<meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="katsyoshi のめもみたいなの - page 5" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
@@ -59,6 +43,289 @@
 </div>
 
 
+
+  <h1><a href="/blog/2018/01/27/nlp-100-section-2/">NLP100ノック第2章</a></h1>
+  <p class="author">
+    <span class="date">2018-01-27 19:46:23 +0900</span>
+  </p>
+  <div class="content">
+    <p>第2章を一通り終えたので書きます。</p>
+
+<h3 id="10-行数のカウント"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec10">10. 行数のカウント</a></h3>
+
+<p>タイトルのままです。 <code class="language-plaintext highlighter-rouge">Rust</code> では <a href="https://doc.rust-lang.org/std/str/struct.Lines.html"><code class="language-plaintext highlighter-rouge">std::str::Lines</code></a> で <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.count"><code class="language-plaintext highlighter-rouge">count()</code></a> がありますので利用しておわりです。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">args</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">();</span>
+
+    <span class="n">args</span><span class="nf">.next</span><span class="p">();</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="k">in</span> <span class="n">args</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+        <span class="k">let</span> <span class="n">br</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">br</span><span class="nf">.lines</span><span class="p">()</span><span class="nf">.count</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="11-タブをスペースに置換"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec11">11. タブをスペースに置換</a></h3>
+
+<p>コチラも、<a href="https://doc.rust-lang.org/std/string/struct.String.html#method.replace"><code class="language-plaintext highlighter-rouge">std::string::String.replace()</code></a> 利用するだけです。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">args</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">();</span>
+    <span class="n">args</span><span class="nf">.next</span><span class="p">();</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="k">in</span> <span class="n">args</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+        <span class="k">let</span> <span class="n">reader</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="n">reader</span><span class="nf">.lines</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">line</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.replace</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">,</span> <span class="s">" "</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="12-1列目をcol1txtに2列目をcol2txtに保存"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec12">12. 1列目をcol1.txtに,2列目をcol2.txtに保存</a></h3>
+
+<p>こちらは単純にファイルに書き込むのと、分割ができれば問題ないです。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::{</span><span class="n">BufReader</span><span class="p">,</span> <span class="n">BufWriter</span><span class="p">,</span> <span class="n">Write</span><span class="p">};</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">args</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">();</span>
+
+    <span class="n">args</span><span class="nf">.next</span><span class="p">();</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="k">in</span> <span class="n">args</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="n">path</span><span class="nf">.clone</span><span class="p">()</span><span class="nf">.replace</span><span class="p">(</span><span class="s">".txt"</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
+        <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">path</span><span class="nf">.clone</span><span class="p">()</span><span class="nf">.replace</span><span class="p">(</span><span class="s">".txt"</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
+        <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+        <span class="k">let</span> <span class="n">br</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">first_column</span> <span class="o">=</span> <span class="nn">BufWriter</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">File</span><span class="p">::</span><span class="nf">create</span><span class="p">(</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}_col1.txt"</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span><span class="nf">.unwrap</span><span class="p">());</span>
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">second_column</span> <span class="o">=</span> <span class="nn">BufWriter</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">File</span><span class="p">::</span><span class="nf">create</span><span class="p">(</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}_col2.txt"</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span><span class="nf">.unwrap</span><span class="p">());</span>
+
+        <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="n">br</span><span class="nf">.lines</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.split</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">)</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+            <span class="n">first_column</span><span class="nf">.write</span><span class="p">(</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="nf">.as_bytes</span><span class="p">())</span><span class="nf">.unwrap</span><span class="p">();</span>
+            <span class="n">second_column</span><span class="nf">.write</span><span class="p">(</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="nf">.as_bytes</span><span class="p">())</span><span class="nf">.unwrap</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="13-col1txtとcol2txtをマージ"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec13">13. col1.txtとcol2.txtをマージ</a></h3>
+
+<p>こちらは以前利用した、<code class="language-plaintext highlighter-rouge">zip</code> があれば問題ないです。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::{</span><span class="n">BufReader</span><span class="p">,</span> <span class="n">BufWriter</span><span class="p">,</span> <span class="n">Write</span><span class="p">};</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">args</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">();</span>
+    <span class="k">if</span> <span class="n">args</span><span class="nf">.len</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="p">{</span> <span class="nd">panic!</span><span class="p">(</span><span class="s">"col1.txt col2.txt"</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="n">args</span><span class="nf">.next</span><span class="p">();</span>
+
+    <span class="k">let</span> <span class="n">first</span> <span class="o">=</span> <span class="n">args</span><span class="nf">.next</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">second</span> <span class="o">=</span> <span class="n">args</span><span class="nf">.next</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+
+    <span class="k">let</span> <span class="n">fr</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">first</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">())</span><span class="nf">.lines</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+
+    <span class="k">let</span> <span class="n">sr</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">second</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">())</span><span class="nf">.lines</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">merge_file</span> <span class="o">=</span>
+        <span class="nn">BufWriter</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">File</span><span class="p">::</span><span class="nf">create</span><span class="p">(</span><span class="s">"merge.txt"</span><span class="nf">.to_string</span><span class="p">())</span><span class="nf">.unwrap</span><span class="p">());</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">in</span> <span class="n">fr</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.zip</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">merge_file</span><span class="nf">.write</span><span class="p">(</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}</span><span class="se">\t</span><span class="s">{}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="nf">.as_bytes</span><span class="p">())</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="14-先頭からn行を出力"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec14">14. 先頭からN行を出力</a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">head</code> コマンドですので <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.take"><code class="language-plaintext highlighter-rouge">std::iter::Iterator.take()</code></a> を利用するだけです。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">args</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="nf">.unwrap</span><span class="p">();</span>
+
+    <span class="k">let</span> <span class="n">br</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">()</span><span class="nf">.take</span><span class="p">((</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="nf">.to_string</span><span class="p">()</span><span class="py">.parse</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">usize</span><span class="o">&gt;</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">());</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="n">br</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="15-末尾のn行を出力"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec15">15. 末尾のN行を出力</a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">tail</code> コマンドです。こちらは <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.skip"><code class="language-plaintext highlighter-rouge">std::iter::Iterator.skip()</code></a> を利用してやるだけです。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">args</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">takes</span> <span class="o">=</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="nf">.to_string</span><span class="p">()</span><span class="py">.parse</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">usize</span><span class="o">&gt;</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">br</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">skips</span> <span class="o">=</span> <span class="n">br</span><span class="nf">.count</span><span class="p">()</span> <span class="o">-</span> <span class="n">takes</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">lines</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="n">skips</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="n">lines</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">line</span><span class="nf">.unwrap</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="16-ファイルをn分割する"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec16">16. ファイルをN分割する</a></h3>
+
+<p>こちらの実装は素朴な実装とし、行数で分割しております。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufWriter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">args</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">path</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">count</span><span class="p">:</span> <span class="nb">usize</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">()</span><span class="nf">.count</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">div</span><span class="p">:</span> <span class="nb">usize</span> <span class="o">=</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="nf">.to_string</span><span class="p">()</span><span class="nf">.parse</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">br</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">();</span>
+
+    <span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">count</span> <span class="k">as</span> <span class="nb">f64</span><span class="o">/</span> <span class="n">div</span> <span class="k">as</span> <span class="nb">f64</span><span class="p">)</span><span class="nf">.ceil</span><span class="p">()</span> <span class="k">as</span> <span class="nb">usize</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="mi">1</span> <span class="o">..</span> <span class="n">div</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">l</span> <span class="o">=</span> <span class="n">br</span><span class="nf">.by_ref</span><span class="p">();</span>
+        <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">create</span><span class="p">(</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}.txt"</span><span class="p">,</span><span class="n">x</span><span class="p">))</span><span class="nf">.unwrap</span><span class="p">();</span>
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">bw</span> <span class="o">=</span> <span class="nn">BufWriter</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="k">in</span> <span class="n">l</span><span class="nf">.take</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="nd">format!</span><span class="p">(</span><span class="s">"{}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+            <span class="n">bw</span><span class="nf">.write</span><span class="p">(</span><span class="n">a</span><span class="nf">.as_bytes</span><span class="p">())</span><span class="nf">.unwrap</span><span class="p">();</span>
+            <span class="nd">println!</span><span class="p">(</span><span class="s">"{}: {}"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="17-1列目の文字列の異なり"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec17">17. 1列目の文字列の異なり</a></h3>
+
+<p>ファイル読込 + <code class="language-plaintext highlighter-rouge">HashSet</code> で実装</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">collections</span><span class="p">::</span><span class="n">HashSet</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">extern</span> <span class="k">crate</span> <span class="n">regex</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">regex</span><span class="p">::</span><span class="n">Regex</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">args</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">path</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">re</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"\W+"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">hs</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|{</span>
+        <span class="k">let</span> <span class="n">l</span> <span class="o">=</span> <span class="n">m</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.clone</span><span class="p">();</span>
+        <span class="n">re</span><span class="nf">.split</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="p">)</span><span class="nf">.next</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">()</span>
+    <span class="p">})</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="n">HashSet</span><span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="n">s</span> <span class="k">in</span> <span class="n">hs</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="18-各行を3コラム目の数値の降順にソート"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec18">18. 各行を3コラム目の数値の降順にソート</a></h3>
+
+<p>こちら、実数の比較を行う必要があり、すこし <a href="https://gist.github.com/katsyoshi/c76c2f782b3edaeff1d328a84dd582a0">めんどう</a> でした。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">args</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">path</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">val</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.split</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">)</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="nf">.next</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="py">.parse</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">f64</span><span class="o">&gt;</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">f64</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+
+    <span class="n">val</span><span class="nf">.sort_by</span><span class="p">(|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">|</span> <span class="n">a</span><span class="nf">.partial_cmp</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">());</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="k">in</span> <span class="n">val</span> <span class="p">{</span> <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="19-各行の1コラム目の文字列の出現頻度を求め出現頻度の高い順に並べる"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec19">19. 各行の1コラム目の文字列の出現頻度を求め,出現頻度の高い順に並べる</a></h3>
+
+<p>18の問題を更にカウントできるように変更した。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">collections</span><span class="p">::</span><span class="n">HashMap</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">enum</span> <span class="n">Value</span> <span class="p">{</span>
+    <span class="nf">USIZE</span><span class="p">(</span><span class="nb">usize</span><span class="p">),</span>
+    <span class="nf">NONE</span><span class="p">(()),</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">args</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">words</span><span class="p">:</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">usize</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">HashMap</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="k">in</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">m</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">()</span><span class="nf">.split</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">)</span><span class="nf">.next</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">();</span>
+        <span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="k">match</span> <span class="n">words</span><span class="nf">.get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">None</span> <span class="k">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nf">Some</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="p">};</span>
+        <span class="n">words</span><span class="nf">.insert</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">vars</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="o">&amp;</span><span class="nb">String</span><span class="p">,</span> <span class="o">&amp;</span><span class="nb">usize</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">words</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="n">vars</span><span class="nf">.sort_by</span><span class="p">(|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">|</span> <span class="n">b</span><span class="na">.1</span><span class="nf">.cmp</span><span class="p">(</span><span class="n">a</span><span class="na">.1</span><span class="p">));</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="n">vars</span> <span class="p">{</span><span class="nd">println!</span><span class="p">(</span><span class="s">"{}: {}"</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">);}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+
+<p>この章は慣れてきたのか比較的楽に解けています。</p>
+
+  </div>
 
   <h1><a href="/blog/2018/01/21/nlp-100-section-1-part-3/">nlp 100 section 1 part 3</a></h1>
   <p class="author">
@@ -664,65 +931,6 @@ gem install iruby cztop
 <h2>🍻</h2>
 <p>とりあえずいつものメンバーで🍻にいってきた。浅草のカンピオンエールという店でのんでそのあと隣の店でお好み焼きをたべてた。お好み焼き屋のあとは河原まであるて吾妻橋からみえる
 やつをながめながらビールのんでた</p>
-
-  </div>
-
-  <h1><a href="/blog/2017/05/31/use-red-arrow-dot-gem/">use red-arrow.gem</a></h1>
-  <p class="author">
-    <span class="date">2017-05-31 23:27:57 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="https://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/">こないだインストール</a> した <a href="https://arrow.apache.org/">Apache Arrow</a> がとりあえず <a href="https://github.com/red-data-tools/red-arrow">Ruby</a> でうごくようになったのでメモ</p>
-
-<h2 id="メモ">メモ</h2>
-<p>gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"arrow"</span>
-<span class="sr">/home/</span><span class="n">katsu</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">-</span><span class="mf">3.1</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">/</span><span class="n">loader</span><span class="p">.</span><span class="nf">rb</span><span class="p">:</span><span class="mi">37</span><span class="ss">:in</span> <span class="sb">`require':GObjectIntrospection::RepositoryError::TypelibNotFound: Typelib file for namespace 'Arrow' (any version) not found
-</span></code></pre></div></div>
-
-<p>これは <code class="language-plaintext highlighter-rouge">GObjectIntrospection</code> の<a href="https://github.com/red-data-tools/red-arrow/blob/master/lib/arrow.rb#L25">ロードに失敗</a>しているようです。
-なので<a href="http://www.clear-code.com/blog/2013/12/16.html">ここ</a>や<a href="http://qiita.com/groonga/items/71b145b37d77bd160bf2">ここ</a>を参考に環境変数 <code class="language-plaintext highlighter-rouge">GI_TYPELIB_PATH</code> を設定すると読み込まれるようになり実行できます。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">GI_TYPELIB_PATH</span><span class="o">=</span>/path/to/girepository-1.0
-<span class="gp">$</span><span class="w"> </span>irb <span class="nt">-rarrow</span>
-</code></pre></div></div>
-
-<p>とやるとエラーがなくなります。</p>
-
-<p>最後に<a href="https://github.com/red-data-tools/red-arrow/tree/master/example">サンプル</a>を実行して確認しました!</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">% ruby write-file.rb
-% ruby read-file.rb
-========================================
-record-batch[0]:
-  uint8: [1, 2, 4, 8]
-  uint16: [1, 2, 4, 8]
-  uint32: [1, 2, 4, 8]
-  uint64: [1, 2, 4, 8]
-  int8: [1, -2, 4, -8]
-  int16: [1, -2, 4, -8]
-  int32: [1, -2, 4, -8]
-  int64: [1, -2, 4, -8]
-  float: [1.100000023841858, -2.200000047683716, 4.400000095367432, -8.800000190734863]
-  double: [1.1, -2.2, 4.4, -8.8]
-========================================
-record-batch[1]:
-  uint8: [2, 4, 8]
-  uint16: [2, 4, 8]
-  uint32: [2, 4, 8]
-  uint64: [2, 4, 8]
-  int8: [-2, 4, -8]
-  int16: [-2, 4, -8]
-  int32: [-2, 4, -8]
-  int64: [-2, 4, -8]
-  float: [-2.200000047683716, 4.400000095367432, -8.800000190734863]
-  double: [-2.2, 4.4, -8.8]
-</span></code></pre></div></div>
-
-<h2 id="おわり">おわり</h2>
-
-<p>最初ろーどえらーでこまってた</p>
 
   </div>
 
