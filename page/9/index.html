@@ -44,6 +44,28 @@
 
 
 
+  <h1><a href="/blog/2015/04/07/many-ssh-connection/">known_hostsに載っていないホストに接続確認しないようにする</a></h1>
+  <p class="author">
+    <span class="date">2015-04-07 19:40:03 +0900</span>
+  </p>
+  <div class="content">
+    <p>昨日の<a href="/blog/2015/04/06/careless-miss/">続き</a>で、 <code class="language-plaintext highlighter-rouge">lxc</code> で大量のサーバを立てて、
+SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。</p>
+
+<h2 id="解決方法">解決方法</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ssh -oStrictHostKeyChecking=no anywhere.example.com
+</code></pre></div></div>
+
+<p>で接続確認の <code class="language-plaintext highlighter-rouge">yes or no</code> が出てこなくなります。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>おわり。</p>
+
+<p>そのうち <code class="language-plaintext highlighter-rouge">lxc</code> で100個ほどのインスタンスのベンチマークとりたい…</p>
+
+  </div>
+
   <h1><a href="/blog/2015/04/06/careless-miss/">不注意なこと</a></h1>
   <p class="author">
     <span class="date">2015-04-06 22:25:28 +0900</span>
@@ -347,60 +369,6 @@ ForAndRange.rs:2     for n in range(1u32, 101) {
 <p>いま確認してたらそもそもRust by Example自体が変更されてた…</p>
 
 <p>ちゃんちゃん</p>
-
-  </div>
-
-  <h1><a href="/blog/2015/01/12/typescript-in-rails/">Ruby on RailsでTypeScriptを使ってみる</a></h1>
-  <p class="author">
-    <span class="date">2015-01-12 11:41:25 +0900</span>
-  </p>
-  <div class="content">
-    <p>ふとRuby on RailsでTypeScriptを使いたくなったのでうごくようにしてみた。</p>
-
-<h2 id="インストール">インストール</h2>
-
-<p>これは簡単で <code class="language-plaintext highlighter-rouge">Gemfile</code> に <code class="language-plaintext highlighter-rouge">typescript-rails</code> を追加すればいけます。ですが、<a href="http://stackoverflow.com/questions/28117786/why-am-i-not-able-to-compile-a-file-that-references-jquery-d-ts">jQueryがTypeScript v1.4以上しかサポートしていないようなので</a>それに対応したものも追加します。</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s1">'typescript-src'</span><span class="p">,</span> <span class="ss">github: </span><span class="s1">'katsyoshi/typescript-src-ruby'</span>
-<span class="n">gem</span> <span class="s1">'typescript-rails'</span>
-</code></pre></div></div>
-
-<p>インストールはこれだけでOKです。</p>
-
-<h3 id="jqueryをつかう">jQueryをつかう</h3>
-
-<p>TypeScriptでjQueryを使う場合、TypeScriptの型定義ファイルをインストールする必要があります。
-で、それを自力で作るのは大変なので、 <code class="language-plaintext highlighter-rouge">tsd</code> を利用してインストールします。</p>
-
-<h4 id="tsd-をインストール">tsd をインストール</h4>
-
-<p><code class="language-plaintext highlighter-rouge">tsd</code> は <code class="language-plaintext highlighter-rouge">npm</code> でインストールできるので、それでインストールします。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm install tsd -g
-</code></pre></div></div>
-
-<p>でインストールできたので、この <code class="language-plaintext highlighter-rouge">tsd</code> を利用してjQueryの型定義ファイルをインストールします。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ tsd init
-$ $EDITOR tsd.json
-  path: "app/assets/javascripts/typings",
-  bundle: "app/assets/javascripts/typings/tsd.d.ts"
-$ tsd query jquery -osa install
-</code></pre></div></div>
-
-<p>でjQueryを利用する準備は整いました。</p>
-
-<h2 id="typescriptを書いてみよう">TypeScriptを書いてみよう</h2>
-
-<p>コンソールに <code class="language-plaintext highlighter-rouge">hello, world!</code> を出すだけの例を示します。</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">$</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello, world!</span><span class="dl">"</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div></div>
-
-<p>でいけますよ。
-が <code class="language-plaintext highlighter-rouge">$('#hello').text('hoge');</code> いかねぇ。</p>
 
   </div>
 

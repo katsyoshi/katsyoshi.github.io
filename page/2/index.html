@@ -44,6 +44,66 @@
 
 
 
+  <h1><a href="/blog/2022/10/15/goodbey-onamae-dot-com/">お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活</a></h1>
+  <p class="author">
+    <span class="date">2022-10-15 23:59:50 +0900</span>
+  </p>
+  <div class="content">
+    <p><strong>katsyoshi.org</strong> の登録先を <a href="https://www.onamae.com"><strong>お名前ドットコム</strong></a> にしてたけど、広告のようなメールとか届くし
+更新案内と広告の違いがわからない感じのメールが大量にくるのでやめようやめようと思ってたのでいいかげん変えてみた話。</p>
+
+<h2 id="準備">準備</h2>
+
+<p>準備として移行先のレジストラを選定します。
+移行先としては普通のレジストラとクラウド業者がやっているレジストラがあると思いますが、今回は以下3つを候補にしました。</p>
+
+<ol>
+  <li><a href="https://domains.google/intl/ja_jp/"><strong>Google Domains</strong></a>: <strong>Google</strong> がやっているやつ。メールとか <strong>Google</strong> なんで <em>DNS</em> まで <strong>Google</strong> にするのは心理的抵抗が強い。</li>
+  <li><a href="https://aws.amazon.com/jp/route53/"><strong>Route 53</strong></a>: みんなつかってる <strong>AWS</strong> のサービス。仕事で利用しているので、プライベートは別のがいいかな。</li>
+  <li><a href="https://www.cloudflare.com/ja-jp/dns/"><strong>Cloudflare の DNS</strong></a>: みんなだいすき低価格 <em>CDN</em> 業者の <a href="https://cloudflare.com"><strong>Cloudflare</strong></a> がやってる <em>DNS</em> サービス。</li>
+</ol>
+
+<p><strong>Google</strong> 、 <strong>AWS</strong> は言わずと知れた巨大企業でサービスがなくなるということはないとおもうが、
+仕事で利用したり、情報全部預けたりしているところなので選択する理由が個人的には弱い。
+個人利用でガンガン変えたり、 <strong>VPC</strong> でネットワーク構築するわけじゃないので <strong>Cloudflare</strong> でいいかなと。</p>
+
+<h3 id="お名前ドットコムでの作業">お名前ドットコムでの作業</h3>
+
+<p>レジストラを移管する前に現在登録してある <a href="https://www.nic.ad.jp/ja/whois/">WHOIS 情報</a> を確認します。
+これは移管作業で移管作業用コードが WHOIS 登録者にメールが送られてくるのでどのメールアドレスかの確認です。
+ここで<a href="https://www.onamae.com/service/d-regist/option.html">WHOIS 情報公開代行</a> を利用している場合は、
+WHOIS を一旦登録時のものに変更します<sup id="fnref:org" role="doc-noteref"><a href="#fn:org" class="footnote" rel="footnote">1</a></sup>。</p>
+
+<h2 id="移管">移管</h2>
+
+<p>移管作業としては新規レジストラで<a href="https://developers.cloudflare.com/registrar/get-started/transfer-domain-to-cloudflare/">移管依頼</a>を参考に移管依頼ページを開きます。
+開いたら、旧サービスから移管コードの発行を行ないます<sup id="fnref:onamae" role="doc-noteref"><a href="#fn:onamae" class="footnote" rel="footnote">2</a></sup>。
+移管コードを <a href="https://zenn.dev/a24k/articles/20220527-cloudflare-dns"><strong>Cloudflare</strong> 側で入力して</a>しばし待機。</p>
+
+<p>しばらくしたら、レコードが登録されるので完了です。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>ということで <em>DNS</em> の登録を <strong>Cloudflare</strong> へ移管しました。
+<strong>お名前ドットコム</strong> はあのメールさえなければ続けたのかもしれない。
+が更新警告と普通のメールの違いがあまりにもわからないので捨てることにしました。
+<strong>Cloudflare</strong> で不満があったらまた変更すると思いますが、快適な生活になりました(たぶん</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:org" role="doc-endnote">
+      <p>前に移行しようとしたとき、<strong>.org</strong> のドメインは WHOIS 情報書き変えられなくて移行失敗。現在この制限はなくなったので移行。 <a href="#fnref:org" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:onamae" role="doc-endnote">
+      <p>こいつが見つけにくく、お名前ドットコムからは見つけられずに<a href="https://www.tsukimi.net/domain_onamae_xdomain.html">移管レポートブログ</a>から発見。 <a href="#fnref:onamae" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
   <h1><a href="/blog/2022/10/12/ipv6nize-at-home/">Communicate on IPv6 from home</a></h1>
   <p class="author">
     <span class="date">2022-10-12 23:59:50 +0900</span>
@@ -1056,62 +1116,6 @@ Selected keyboards automatically since --device options weren't specified:
 
 <p><a href="https://adventar.org/calendars/6668">やんちゃクラブリスナーアドベントカレンダー</a> の次は12/7の <a href="https://twitter.com/igaiga555">igaigaさん</a> です。
 <a href="https://adventar.org/calendars/6777">Rubyist近況[1]アドベントカレンダー</a> の次は12/10のKirika_K2さんです。</p>
-
-  </div>
-
-  <h1><a href="/blog/2021/09/13/good-bye-octopress/">Octopress 脱出</a></h1>
-  <p class="author">
-    <span class="date">2021-09-13 00:00:00 +0900</span>
-  </p>
-  <div class="content">
-    <p>長年利用してた <a href="https://github.com/octopress/octopress">Octopress</a> がずいぶん前にサポート外になってたので <a href="https://github.com/jekyll/jekyll">Jekyll</a> へ変更することにした。</p>
-
-<h2 id="問題点">問題点</h2>
-
-<p>サポート外になったことによる問題点があり、その問題によって変更することになった。
-問題点としては、 <em><a href="https://rubygems.org/gems/pygments.rb">Pygments.rb</a></em> と <em><a href="https://rubygems.org/gems/compass">Compass</a></em> と利用している <em><a href="https://ruby-lang.org/">Ruby</a></em> のバージョンが 2.3.7 というのが主であった。</p>
-
-<h2 id="変更">変更</h2>
-<p>やったことは以下のとおり。</p>
-
-<ol>
-  <li>gem の整理
-    <ul>
-      <li>最初に不要な <em>gem</em> を削除。特に消したいのは <em>Pygments.rb</em> と <em>Compass</em> それ以外にも不要なものがあるので消す。</li>
-    </ul>
-  </li>
-  <li>ディレクトリの整理
-    <ul>
-      <li>posts は元々の設定が <code class="language-plaintext highlighter-rouge">source/_posts</code> に入れていたが、 <code class="language-plaintext highlighter-rouge">_posts</code> に変更</li>
-      <li>画像も同様に <code class="language-plaintext highlighter-rouge">source/images</code> だったものを <code class="language-plaintext highlighter-rouge">images</code> に変更</li>
-    </ul>
-  </li>
-  <li>テンプレートの整理
-    <ul>
-      <li>テンプレート <em><a href="https://rubygems.org/gems/minima">minima</a></em> を利用するにあたり <code class="language-plaintext highlighter-rouge">_includes</code> などの中身を整理</li>
-    </ul>
-  </li>
-  <li>プラグインの整理
-    <ul>
-      <li>いまのところ <em><a href="https://rubygems.org/gems/jekyll-paginate-v2">jekyll-paginate-v2</a></em> のみ変更で他は入れていない。</li>
-    </ul>
-    <ul>
-      <li>そのうち theme も含めて検討したい</li>
-    </ul>
-  </li>
-  <li><a href="https://rubygems.org/gems/rake">Rake コマンド</a> の整理
-    <ul>
-      <li>とりあえず octopress で利用してた <em>Rakefile</em> から必要最低限の変更のみ実行。</li>
-    </ul>
-  </li>
-</ol>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>日曜日の夜中 <strong><a href="/blog/2021/09/12/takout-dot-rubykaigi-dot-org-2021/">RubyKaigi の日記</a></strong> をポストしてからこのリポジトリを <em>jekyll</em> にしようと <strong>雑に</strong> 弄ってたら、 <code class="language-plaintext highlighter-rouge">rake generate</code> が <code class="language-plaintext highlighter-rouge">Unknown language: xml</code> という謎の <em>Pygments</em> エラーが出てしまった。
-このエラーを修正しようとしがんばってみたが、失敗して修正できなかったので <em>jekyll</em> に変更したものでデプロイした。</p>
-
-<p>そんなこんなあって <em>Octopress</em> はやめて <em>jekyll</em> に変更しました。</p>
 
   </div>
 

@@ -44,6 +44,72 @@
 
 
 
+  <h1><a href="/blog/2018/11/06/remove-rails-assets/">remove rails assets</a></h1>
+  <p class="author">
+    <span class="date">2018-11-06 00:40:32 +0900</span>
+  </p>
+  <div class="content">
+    <p>ひさびさに <code class="language-plaintext highlighter-rouge">Ruby on Rails</code> の話で、自作の rails application で <code class="language-plaintext highlighter-rouge">rails-assets</code> というところからいくつか gem を利用してたので
+それを <code class="language-plaintext highlighter-rouge">Yarn</code> で同様のパッケージをインストールするように変更した。</p>
+
+<h2 id="なにをやったのか">なにをやったのか？</h2>
+
+<p>単純に一旦 <code class="language-plaintext highlighter-rouge">rails-assets</code> からインストールしている gem を <code class="language-plaintext highlighter-rouge">Gemfile</code> から削除します。</p>
+
+<p>そのあと、 <code class="language-plaintext highlighter-rouge">yarn add</code> で <code class="language-plaintext highlighter-rouge">package.json</code> を生成し <code class="language-plaintext highlighter-rouge">node_modules</code> にインストールします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">yarn add bootstrap@3 font-awesome jquery
+yarn install
+rails s
+</span></code></pre></div></div>
+
+<p>インストールが終了し、railsを起動したら必要な情報(<a href="https://blog.zerokol.com/2018/06/ruby-on-rails-yarn-font-awesome-in.html">font-awesome</a>, <a href="https://qiita.com/fuqda/items/c5756b8f56dcc238c110">bootstrap</a>) を <code class="language-plaintext highlighter-rouge">app/assets/{javascripts,stylesheets}</code> に記載。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/assets/javascripts/application.js</span>
+<span class="c1">//= require rails-ujs</span>
+<span class="c1">//= require turbolinks</span>
+<span class="c1">//= require jquery/dist/jquery.js</span>
+<span class="c1">//= require bootstrap-sass/assets/javascripts/bootstrap</span>
+<span class="c1">//= require_tree .</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">#</span> <span class="nt">app</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">application</span><span class="nc">.scss</span>
+<span class="k">@import</span> <span class="s2">'bootstrap-sass/assets/stylesheets/bootstrap'</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/variables"</span><span class="p">;</span>
+<span class="err">$</span><span class="nt">fa-font-path</span><span class="o">:</span> <span class="s1">"font-awesome/fonts/"</span><span class="o">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/mixins"</span><span class="p">;</span>
+<span class="k">@font-face</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s2">'FontAwesome'</span><span class="p">;</span>
+  <span class="nl">src</span><span class="p">:</span> <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}'</span><span class="p">);</span>
+  <span class="nl">src</span><span class="p">:</span> <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.eot?#iefix&amp;v=#{$fa-version}'</span><span class="p">)</span> <span class="n">format</span><span class="p">(</span><span class="s2">'embedded-opentype'</span><span class="p">),</span>
+    <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}'</span><span class="p">)</span> <span class="n">format</span><span class="p">(</span><span class="s2">'woff2'</span><span class="p">),</span>
+    <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}'</span><span class="p">)</span> <span class="n">format</span><span class="p">(</span><span class="s2">'woff'</span><span class="p">),</span>
+    <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}'</span><span class="p">)</span> <span class="n">format</span><span class="p">(</span><span class="s2">'truetype'</span><span class="p">),</span>
+    <span class="n">font-url</span><span class="p">(</span><span class="s2">'#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular'</span><span class="p">)</span> <span class="n">format</span><span class="p">(</span><span class="s2">'svg'</span><span class="p">);</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
+  <span class="nl">font-style</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/core"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/larger"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/fixed-width"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/list"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/bordered-pulled"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/animated"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/rotated-flipped"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/stacked"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/icons"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">"font-awesome/scss/screen-reader"</span><span class="p">;</span>
+<span class="err">$</span><span class="nt">icon-font-path</span><span class="o">:</span> <span class="s1">"bootstrap-sass/assets/fonts/bootstrap"</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>ってかいたら使えるようになっています!</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>ということで <em>IMASARA</em> ですが <code class="language-plaintext highlighter-rouge">rails-assets</code> からの脱却ついでに簡単に <code class="language-plaintext highlighter-rouge">yarn</code> を利用した assets の導入をやってみました!</p>
+
+  </div>
+
   <h1><a href="/blog/2018/10/18/new-keyboard/">new keyboard</a></h1>
   <p class="author">
     <span class="date">2018-10-18 23:45:09 +0900</span>
@@ -637,321 +703,6 @@ index da302ca1..94025817 100755
 
 <h2 id="おわり">おわり</h2>
 <p>おわり</p>
-
-  </div>
-
-  <h1><a href="/blog/2018/02/09/nlp-100-section-3/">NLP 100 Knock section 3</a></h1>
-  <p class="author">
-    <span class="date">2018-02-09 23:53:24 +0900</span>
-  </p>
-  <div class="content">
-    <p>正規表現苦手なようでだいぶ時間がかかりました。</p>
-
-<h2 id="第3章-正規表現"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#ch3">第3章 正規表現</a></h2>
-
-<p>正規表現ときいて楽勝やろと思ってた時期もあったんですが・・・</p>
-
-<h3 id="準備">準備</h3>
-<p>この章では、gzファイルに入ったJSONをパースする必要があるのでさきにgzファイルから読み込むようにします。</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">read_gzip</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">string</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
-    <span class="nn">Decoder</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">file</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.read_to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">string</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="n">string</span><span class="nf">.split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span><span class="nf">.filter</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.ne</span><span class="p">(</span><span class="o">&amp;</span><span class="s">""</span><span class="p">))</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="20-jsonデータの読み込み"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec20">20. JSONデータの読み込み</a></h3>
-
-<p>こいつは、<a href="https://docs.serde.rs/serde/"><code class="language-plaintext highlighter-rouge">serde</code></a> の <a href="https://docs.serde.rs/serde_json/index.html"><code class="language-plaintext highlighter-rouge">serde_json</code></a> を利用して <a href="https://docs.serde.rs/serde_json/fn.from_str.html"><code class="language-plaintext highlighter-rouge">from_str</code></a> で読み込むだけです。</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">v</span><span class="p">:</span> <span class="n">Value</span> <span class="o">=</span> <span class="k">match</span> <span class="nn">serde_json</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="nf">.as_str</span><span class="p">())</span> <span class="p">{</span>
-     <span class="nf">Ok</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">v</span><span class="p">,</span>
-     <span class="nf">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span> <span class="k">continue</span><span class="p">;</span> <span class="p">},</span>
-<span class="p">};</span>
-</code></pre></div></div>
-<h3 id="21-カテゴリ名を含む行を抽出--22-カテゴリ名の抽出"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec21">21. カテゴリ名を含む行を抽出</a> \&amp;\&amp; <a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec22">22. カテゴリ名の抽出</a></h3>
-
-<p><a href="https://ja.wikipedia.org/wiki/Help:%E6%97%A9%E8%A6%8B%E8%A1%A8">早見表</a> を参考に <a href="https://ja.wikipedia.org/wiki/Help:%E6%97%A9%E8%A6%8B%E8%A1%A8">Regex::captures</a> で抽出することで解決。</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
-
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">regex</span><span class="p">;</span>
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">serde_json</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nn">serde_json</span><span class="p">::</span><span class="n">Value</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">regex</span><span class="p">::</span><span class="n">Regex</span><span class="p">;</span>
-
-<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">args</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="nf">.collect</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">path</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">keywords</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">];</span>
-    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">lines</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">re</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"\[\[Category:.+\]\]"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">cap</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"\[\[Category:(?P&lt;name&gt;.+?)(?:\|.*)*\]\]"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-
-    <span class="k">for</span> <span class="n">l</span> <span class="k">in</span> <span class="n">lines</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="n">v</span><span class="p">:</span> <span class="n">Value</span> <span class="o">=</span> <span class="nn">serde_json</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="nf">.unwrap</span><span class="p">())</span><span class="nf">.unwrap</span><span class="p">();</span>
-
-        <span class="k">let</span> <span class="n">title</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">[</span><span class="s">"title"</span><span class="p">]</span><span class="nf">.as_str</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">();</span>
-        <span class="k">if</span> <span class="n">keywords</span><span class="nf">.contains</span><span class="p">(</span><span class="n">title</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="n">content</span> <span class="k">in</span> <span class="n">v</span><span class="p">[</span><span class="s">"text"</span><span class="p">]</span><span class="nf">.as_str</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">()</span><span class="nf">.split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span><span class="nf">.filter</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">re</span><span class="nf">.is_match</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">for</span> <span class="n">c</span> <span class="k">in</span> <span class="n">cap</span><span class="nf">.captures_iter</span><span class="p">(</span><span class="n">content</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">[</span><span class="s">"name"</span><span class="p">]);</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="23-セクション構造"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec23">23. セクション構造</a></h3>
-
-<p>こちらは前節の問題と同様に解けばよいですが、<code class="language-plaintext highlighter-rouge">=の数 - 1</code> という罠があります。</p>
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
-
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">regex</span><span class="p">;</span>
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">serde_json</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nn">serde_json</span><span class="p">::</span><span class="n">Value</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">regex</span><span class="p">::</span><span class="n">Regex</span><span class="p">;</span>
-
-<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">args</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="nf">.collect</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">path</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">keywords</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">];</span>
-    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">lines</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">re</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(?P&lt;level&gt;==+)(?P&lt;headline&gt;.+?)(?:=+)"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-
-    <span class="k">for</span> <span class="n">l</span> <span class="k">in</span> <span class="n">lines</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="n">v</span><span class="p">:</span> <span class="n">Value</span> <span class="o">=</span> <span class="nn">serde_json</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="nf">.unwrap</span><span class="p">())</span><span class="nf">.unwrap</span><span class="p">();</span>
-
-        <span class="k">let</span> <span class="n">title</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">[</span><span class="s">"title"</span><span class="p">]</span><span class="nf">.as_str</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">();</span>
-        <span class="k">if</span> <span class="n">keywords</span><span class="nf">.contains</span><span class="p">(</span><span class="n">title</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="n">content</span> <span class="k">in</span> <span class="n">v</span><span class="p">[</span><span class="s">"text"</span><span class="p">]</span><span class="nf">.as_str</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">()</span><span class="nf">.split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span><span class="nf">.filter</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">re</span><span class="nf">.is_match</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">for</span> <span class="n">caps</span> <span class="k">in</span> <span class="n">re</span><span class="nf">.captures_iter</span><span class="p">(</span><span class="n">content</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nd">println!</span><span class="p">(</span><span class="s">"level: {}, headline: {}"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">caps</span><span class="p">[</span><span class="s">"level"</span><span class="p">]</span><span class="nf">.len</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">caps</span><span class="p">[</span><span class="s">"headline"</span><span class="p">]);</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></div></div>
-
-<h3 id="24-ファイル参照の抽出"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec24">24. ファイル参照の抽出</a></h3>
-
-<p>このあたりは問題ないとおもいます。</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">BufReader</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="nn">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
-
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">regex</span><span class="p">;</span>
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">serde_json</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nn">serde_json</span><span class="p">::</span><span class="n">Value</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">regex</span><span class="p">::</span><span class="n">Regex</span><span class="p">;</span>
-
-<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">args</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="nf">.collect</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">path</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">keywords</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">];</span>
-    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">lines</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="nf">.lines</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">re</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"\[\[(File|ファイル):(?P&lt;filename&gt;.+?)(?:\|.*)*(?:\|.*)*\]\]"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-
-    <span class="k">for</span> <span class="n">l</span> <span class="k">in</span> <span class="n">lines</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="n">v</span><span class="p">:</span> <span class="n">Value</span> <span class="o">=</span> <span class="nn">serde_json</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="nf">.unwrap</span><span class="p">())</span><span class="nf">.unwrap</span><span class="p">();</span>
-
-        <span class="k">let</span> <span class="n">title</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">[</span><span class="s">"title"</span><span class="p">]</span><span class="nf">.as_str</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">();</span>
-        <span class="k">if</span> <span class="n">keywords</span><span class="nf">.contains</span><span class="p">(</span><span class="n">title</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="n">content</span> <span class="k">in</span> <span class="n">v</span><span class="p">[</span><span class="s">"text"</span><span class="p">]</span><span class="nf">.as_str</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">()</span><span class="nf">.split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span><span class="nf">.filter</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">re</span><span class="nf">.is_match</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">for</span> <span class="n">caps</span> <span class="k">in</span> <span class="n">re</span><span class="nf">.captures_iter</span><span class="p">(</span><span class="n">content</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nd">println!</span><span class="p">(</span><span class="s">"filename: {}"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">caps</span><span class="p">[</span><span class="s">"filename"</span><span class="p">]);</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="25-テンプレートの抽出"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec25">25. テンプレートの抽出</a></h3>
-
-<p>こいつは大変でしたので参考サイト<sup id="fnref:nlp100-25" role="doc-noteref"><a href="#fn:nlp100-25" class="footnote" rel="footnote">1</a></sup> を参考に以下の正規表現でとりあえず抽出しています。</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">re</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(?ms)(?:^\{\{基礎情報.*?$)(?P&lt;dict&gt;.+?)(?:^\}\}$)"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-</code></pre></div></div>
-
-<h3 id="26-強調マークアップの除去"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec26">26. 強調マークアップの除去</a></h3>
-
-<p>こちらも同様に参考サイト<sup id="fnref:nlp100-26" role="doc-noteref"><a href="#fn:nlp100-26" class="footnote" rel="footnote">2</a></sup>を参考に以下の正規表現で</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">strong</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"'{2,5}"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-</code></pre></div></div>
-
-<h3 id="27-内部リンクの除去"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec27">27. 内部リンクの除去</a></h3>
-<p>こちらも同様に参考サイト<sup id="fnref:nlp100-27" role="doc-noteref"><a href="#fn:nlp100-27" class="footnote" rel="footnote">3</a></sup>を参考に以下の正規表現で</p>
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">link</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(?:\[{1,2})(?P&lt;link&gt;.+?)(?:\|.+)?(?:\]{1,2})"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-</code></pre></div></div>
-<h3 id="28-mediawikiマークアップの除去"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec28">28. MediaWikiマークアップの除去</a></h3>
-<p>どうよう<sup id="fnref:nlp100-28" role="doc-noteref"><a href="#fn:nlp100-28" class="footnote" rel="footnote">4</a></sup> (ry</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let link = Regex::new(r"(?:\[{1,2})(?P&lt;link&gt;.+?)(?:\|.+)?(?:\]{1,2})").unwrap();
-let lang = Regex::new(r"(?:\{\{lang\|.+?\|)(?P&lt;lang&gt;.+?)(?:\}\})").unwrap();
-let markup = Regex::new(r"&lt;/*.+?&gt;").unwrap();
-</code></pre></div></div>
-
-<h3 id="29-国旗画像のurlを取得する"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec29">29. 国旗画像のURLを取得する</a></h3>
-
-<p>こちらもさんこおおう<sup id="fnref:nlp100-29" role="doc-noteref"><a href="#fn:nlp100-29" class="footnote" rel="footnote">5</a></sup>にしてますが、主にURL部分だけです。
-こちらは <a href="https://hyper.rs/">Hyper</a> を利用することで解決しています。</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">extern</span> <span class="k">crate</span> <span class="n">futures</span><span class="p">;</span>
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">hyper</span><span class="p">;</span>
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">hyper_tls</span><span class="p">;</span>
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">libflate</span><span class="p">;</span>
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">regex</span><span class="p">;</span>
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">serde_json</span><span class="p">;</span>
-<span class="k">extern</span> <span class="k">crate</span> <span class="n">tokio_core</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nn">futures</span><span class="p">::{</span><span class="n">Future</span><span class="p">,</span> <span class="n">Stream</span><span class="p">};</span>
-<span class="k">use</span> <span class="nn">hyper</span><span class="p">::</span><span class="n">Client</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">hyper_tls</span><span class="p">::</span><span class="n">HttpsConnector</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">libflate</span><span class="p">::</span><span class="nn">gzip</span><span class="p">::</span><span class="n">Decoder</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">regex</span><span class="p">::</span><span class="n">Regex</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">serde_json</span><span class="p">::</span><span class="n">Value</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">collections</span><span class="p">::</span><span class="n">HashMap</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">env</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">Read</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">tokio_core</span><span class="p">::</span><span class="nn">reactor</span><span class="p">::</span><span class="n">Core</span><span class="p">;</span>
-
-<span class="k">fn</span> <span class="nf">get_image</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">re</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r" "</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">uri</span> <span class="o">=</span> <span class="nd">format!</span><span class="p">(</span><span class="s">"https://en.wikipedia.org/w/api.php?action=query&amp;titles=File:{}&amp;format=json&amp;prop=imageinfo&amp;iiprop=url"</span><span class="p">,</span> <span class="n">re</span><span class="nf">.replace_all</span><span class="p">(</span><span class="o">&amp;</span><span class="n">query</span><span class="p">,</span> <span class="s">"%20"</span><span class="p">));</span>
-    <span class="k">let</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">uri</span><span class="nf">.parse</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">core</span> <span class="o">=</span> <span class="nn">Core</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">handle</span> <span class="o">=</span> <span class="n">core</span><span class="nf">.handle</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">client</span> <span class="o">=</span> <span class="nn">Client</span><span class="p">::</span><span class="nf">configure</span><span class="p">()</span>
-        <span class="nf">.connector</span><span class="p">(</span><span class="nn">HttpsConnector</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">handle</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">())</span>
-        <span class="nf">.build</span><span class="p">(</span><span class="o">&amp;</span><span class="n">handle</span><span class="p">);</span>
-    <span class="k">let</span> <span class="n">work</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.get</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span><span class="nf">.and_then</span><span class="p">(|</span><span class="n">res</span><span class="p">|</span> <span class="p">{</span>
-        <span class="n">res</span><span class="nf">.body</span><span class="p">()</span><span class="nf">.concat2</span><span class="p">()</span><span class="nf">.and_then</span><span class="p">(</span><span class="k">move</span> <span class="p">|</span><span class="n">body</span><span class="p">|</span> <span class="p">{</span>
-            <span class="k">let</span> <span class="n">v</span><span class="p">:</span> <span class="n">Value</span> <span class="o">=</span> <span class="nn">serde_json</span><span class="p">::</span><span class="nf">from_slice</span><span class="p">(</span><span class="o">&amp;</span><span class="n">body</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-            <span class="k">let</span> <span class="n">page_ids</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s">"query"</span><span class="p">][</span><span class="s">"pages"</span><span class="p">]</span><span class="nf">.as_object</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.keys</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
-            <span class="k">let</span> <span class="n">imageinfo</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">[</span><span class="s">"query"</span><span class="p">][</span><span class="s">"pages"</span><span class="p">][</span><span class="o">&amp;</span><span class="n">page_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s">"imageinfo"</span><span class="p">];</span>
-            <span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="nd">format!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">imageinfo</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">"url"</span><span class="p">]</span><span class="nf">.as_str</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">());</span>
-            <span class="nf">Ok</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-        <span class="p">})</span>
-    <span class="p">});</span>
-    <span class="n">core</span><span class="nf">.run</span><span class="p">(</span><span class="n">work</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="k">fn</span> <span class="nf">read_gzip</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">string</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
-    <span class="nn">Decoder</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">file</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.read_to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">string</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="n">string</span><span class="nf">.split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span><span class="nf">.filter</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.ne</span><span class="p">(</span><span class="o">&amp;</span><span class="s">""</span><span class="p">))</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">args</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">env</span><span class="p">::</span><span class="nf">args</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="nf">.collect</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">path</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">keywords</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">];</span>
-    <span class="k">let</span> <span class="n">lines</span> <span class="o">=</span> <span class="nf">read_gzip</span><span class="p">(</span><span class="n">path</span><span class="nf">.to_string</span><span class="p">());</span>
-    <span class="k">let</span> <span class="n">re</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(?ms)(?:^\{\{基礎情報.*?$)(?P&lt;dict&gt;.+?)(?:^\}\}$)"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">bar_hat</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(?ms)(?:^\|)"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">dict</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(?P&lt;key&gt;.+?)\s*=\s*(?P&lt;val&gt;.+)"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">media</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"\[\[(File|ファイル):(?P&lt;filename&gt;.+?)(?:\|.*)*(?:\|.*)*\]\]"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">strong</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"'{2,5}"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">link</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(?:\[{1,2})(?P&lt;link&gt;.+?)(?:\|.+)?(?:\]{1,2})"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">lang</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(?:\{\{lang\|.+?\|)(?P&lt;lang&gt;.+?)(?:\}\})"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">markup</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"&lt;/*.+?&gt;"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-
-    <span class="k">for</span> <span class="n">l</span> <span class="k">in</span> <span class="n">lines</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="n">v</span><span class="p">:</span> <span class="n">Value</span> <span class="o">=</span> <span class="k">match</span> <span class="nn">serde_json</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="nf">.as_str</span><span class="p">())</span> <span class="p">{</span>
-            <span class="nf">Ok</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">v</span><span class="p">,</span>
-            <span class="nf">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span> <span class="k">continue</span><span class="p">;</span> <span class="p">},</span>
-        <span class="p">};</span>
-        <span class="k">let</span> <span class="n">text</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="k">match</span> <span class="n">v</span><span class="p">[</span><span class="s">"text"</span><span class="p">]</span><span class="nf">.as_str</span><span class="p">()</span> <span class="p">{</span>
-            <span class="nf">Some</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="nf">.to_string</span><span class="p">(),</span>
-            <span class="nb">None</span> <span class="k">=&gt;</span> <span class="p">{</span> <span class="k">continue</span><span class="p">;</span> <span class="p">},</span>
-        <span class="p">};</span>
-        <span class="k">let</span> <span class="n">title</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="k">match</span> <span class="n">v</span><span class="p">[</span><span class="s">"title"</span><span class="p">]</span><span class="nf">.as_str</span><span class="p">()</span> <span class="p">{</span>
-            <span class="nf">Some</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="nf">.to_string</span><span class="p">(),</span>
-            <span class="nb">None</span> <span class="k">=&gt;</span> <span class="p">{</span> <span class="k">continue</span><span class="p">;</span> <span class="p">},</span>
-        <span class="p">};</span>
-
-        <span class="k">if</span> <span class="n">keywords</span><span class="nf">.contains</span><span class="p">(</span><span class="o">&amp;</span><span class="n">title</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">let</span> <span class="k">mut</span> <span class="n">results</span><span class="p">:</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">HashMap</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
-            <span class="k">let</span> <span class="n">re</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="k">match</span> <span class="n">re</span><span class="nf">.captures</span><span class="p">(</span><span class="o">&amp;</span><span class="n">text</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nf">Some</span><span class="p">(</span><span class="n">caps</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">caps</span><span class="p">[</span><span class="s">"dict"</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">(),</span>
-                <span class="nb">None</span> <span class="k">=&gt;</span> <span class="p">{</span>
-                    <span class="nd">println!</span><span class="p">(</span><span class="s">"cannot capture dict!!"</span><span class="p">);</span>
-                    <span class="k">continue</span><span class="p">;</span>
-                <span class="p">},</span>
-            <span class="p">};</span>
-            <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="n">bar_hat</span><span class="nf">.split</span><span class="p">(</span><span class="o">&amp;</span><span class="n">re</span><span class="p">)</span><span class="nf">.filter</span><span class="p">(|</span><span class="n">f</span><span class="p">|</span> <span class="n">f</span><span class="nf">.ne</span><span class="p">(</span><span class="o">&amp;</span><span class="s">""</span><span class="p">))</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span> <span class="p">{</span>
-                <span class="k">let</span> <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="nf">.replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
-                <span class="k">let</span> <span class="n">dict</span> <span class="o">=</span> <span class="k">match</span> <span class="n">dict</span><span class="nf">.captures</span><span class="p">(</span><span class="o">&amp;</span><span class="n">line</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nf">Some</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="p">,</span>
-                    <span class="nb">None</span> <span class="k">=&gt;</span> <span class="p">{</span><span class="k">continue</span><span class="p">;},</span>
-                <span class="p">};</span>
-
-                <span class="k">let</span> <span class="n">val</span> <span class="o">=</span> <span class="n">dict</span><span class="p">[</span><span class="s">"val"</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">();</span>
-                <span class="k">let</span> <span class="n">key</span> <span class="o">=</span> <span class="n">dict</span><span class="p">[</span><span class="s">"key"</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">();</span>
-                <span class="k">let</span> <span class="n">file</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="n">media</span><span class="nf">.replace_all</span><span class="p">(</span><span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="s">"$filename"</span><span class="p">)</span><span class="nf">.trim</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">();</span>
-                <span class="k">let</span> <span class="n">strong</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="n">strong</span><span class="nf">.replace_all</span><span class="p">(</span><span class="o">&amp;</span><span class="n">file</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="nf">.trim</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">();</span>
-                <span class="k">let</span> <span class="n">link</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="n">link</span><span class="nf">.replace_all</span><span class="p">(</span><span class="o">&amp;</span><span class="n">strong</span><span class="p">,</span> <span class="s">"$link"</span><span class="p">)</span><span class="nf">.trim</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">();</span>
-                <span class="k">let</span> <span class="n">markup</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="n">markup</span><span class="nf">.replace_all</span><span class="p">(</span><span class="o">&amp;</span><span class="n">link</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="nf">.trim</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">();</span>
-                <span class="k">let</span> <span class="n">val</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="k">match</span> <span class="n">key</span><span class="nf">.as_ref</span><span class="p">()</span> <span class="p">{</span>
-                    <span class="s">"国旗画像"</span> <span class="k">=&gt;</span> <span class="nf">get_image</span><span class="p">(</span><span class="n">markup</span><span class="nf">.to_string</span><span class="p">()),</span>
-                    <span class="n">_</span> <span class="k">=&gt;</span> <span class="n">lang</span><span class="nf">.replace_all</span><span class="p">(</span><span class="o">&amp;</span><span class="n">markup</span><span class="p">,</span> <span class="s">"$lang"</span><span class="p">)</span><span class="nf">.trim</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">(),</span>
-                <span class="p">};</span>
-                <span class="n">results</span><span class="nf">.insert</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="n">results</span> <span class="p">{</span>
-                <span class="nd">println!</span><span class="p">(</span><span class="s">"{}: {}"</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h2 id="おわり">おわり</h2>
-<p>とりあえず3章まで終わらせましたので形態素解析へと進みたいとおもいます(思っているだけ)</p>
-
-<h2 id="参考資料">参考資料</h2>
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:nlp100-25" role="doc-endnote">
-      <p>素人の言語処理100本ノック:25, segavvy, <a href="https://qiita.com/segavvy/items/e402ad0a5b0f52453d7f">https://qiita.com/segavvy/items/e402ad0a5b0f52453d7f</a> <a href="#fnref:nlp100-25" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:nlp100-26" role="doc-endnote">
-      <p>素人の言語処理100本ノック:26, segavvy, <a href="https://qiita.com/segavvy/items/f6d0f3d6eee5acc33c58">https://qiita.com/segavvy/items/f6d0f3d6eee5acc33c58</a> <a href="#fnref:nlp100-26" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:nlp100-27" role="doc-endnote">
-      <p>素人の言語処理100本ノック:27, segavvy, <a href="https://qiita.com/segavvy/items/9a8137f045852bc299d6">https://qiita.com/segavvy/items/9a8137f045852bc299d6</a> <a href="#fnref:nlp100-27" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:nlp100-28" role="doc-endnote">
-      <p>素人の言語処理100本ノック:28, segavvy, <a href="https://qiita.com/segavvy/items/8c4567ec1124320d3354">https://qiita.com/segavvy/items/8c4567ec1124320d3354</a> <a href="#fnref:nlp100-28" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:nlp100-29" role="doc-endnote">
-      <p>素人の言語処理100本ノック:29, segavvy, <a href="https://qiita.com/segavvy/items/fc7257012d8a590185e5">https://qiita.com/segavvy/items/fc7257012d8a590185e5</a> <a href="#fnref:nlp100-29" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
 
   </div>
 

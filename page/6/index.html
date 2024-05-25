@@ -44,6 +44,21 @@
 
 
 
+  <h1><a href="/blog/2017/06/04/rustful-web/">rustful web</a></h1>
+  <p class="author">
+    <span class="date">2017-06-04 23:17:45 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://www.rust-lang.org/ja-JP/">rust</a> で Web Application をつくろうと思って <a href="https://github.com/Ogeon/rustful">rustful</a> を使ってやってみてたりした。</p>
+
+<p>ドキュメントと利用しているバージョンのコードが異なり、必要なモジュールが読み込めなかったり、関数の引数が異なったりしてうごかねぇってなったのでHEADを使うことで解決。</p>
+
+<h2>🍻</h2>
+<p>とりあえずいつものメンバーで🍻にいってきた。浅草のカンピオンエールという店でのんでそのあと隣の店でお好み焼きをたべてた。お好み焼き屋のあとは河原まであるて吾妻橋からみえる
+やつをながめながらビールのんでた</p>
+
+  </div>
+
   <h1><a href="/blog/2017/05/31/use-red-arrow-dot-gem/">use red-arrow.gem</a></h1>
   <p class="author">
     <span class="date">2017-05-31 23:27:57 +0900</span>
@@ -391,51 +406,6 @@ EDIT ~/.mikutter/plugin/emoji/emoji.yml
 <h2 id="おわり">おわり</h2>
 <p>おわり</p>
 
-
-  </div>
-
-  <h1><a href="/blog/2016/12/10/itamae-loves-gentoo/">板前さんでGentooを管理</a></h1>
-  <p class="author">
-    <span class="date">2016-12-10 16:00:38 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="http://www.adventar.org/calendars/1493">Gentoo Advent Calendar 2016</a> の10日目の記事です</p>
-
-<h2 id="itamaeでgentoo管理するには">Itamaeでgentoo管理するには？</h2>
-<p>そらはー(<a href="https://twitter.com/sora_h">@sora_h</a>)が作ってる <a href="https://github.com/sorah/itamae-plugin-resource-portage">itamae-plugin-resource-portage</a> 使え</p>
-
-<h2 id="自作のportage管理ソフトの紹介">自作のportage管理ソフトの紹介</h2>
-
-<p><a href="https://github.com/katsyoshi/itamae-recipes/tree/master/cookbook/gentoo">ここ</a>にあります。</p>
-
-<h3 id="使いかた">使いかた</h3>
-<p>簡単な使いかたとしては以下のようになります</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>itamae local gentoo.rb -j package.json
-</code></pre></div></div>
-
-<p>これだけです。</p>
-
-<h3 id="パッケージの指定方法">パッケージの指定方法</h3>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">packages</span><span class="pi">:</span>
- <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">category/package'</span>
-   <span class="na">portage</span><span class="pi">:</span>
-     <span class="na">use</span><span class="pi">:</span> <span class="s1">'</span><span class="s">package'</span>
-     <span class="na">accept_keywords</span><span class="pi">:</span> <span class="s1">'</span><span class="s">package'</span>
-     <span class="na">license</span><span class="pi">:</span> <span class="s1">'</span><span class="s">pakcage'</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">name</code> で <code class="language-plaintext highlighter-rouge">category/package</code> を指定することでインストールすることができます。
-<code class="language-plaintext highlighter-rouge">portage</code> では <code class="language-plaintext highlighter-rouge">use</code> などのフラグを指定して管理します。
-<code class="language-plaintext highlighter-rouge">use</code> ディレクトリを作成してそこにファイルを置く必要があります。
-自動生成したいけど、依存パッケージの指定方法とかまだ考えていないので取り敢えず直接指定です。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
-とおもってたら itamae-plugin-resource-portage みつけてしまったので
-itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使いましょう</p>
 
   </div>
 
