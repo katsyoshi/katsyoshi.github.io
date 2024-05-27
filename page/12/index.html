@@ -1,5 +1,21 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 12 of 12 for katsyoshi のめもみたいなの - page 12 | katsyoshi のめもみたいなの</title>
@@ -42,6 +58,40 @@
 </div>
 
 
+
+  <h1><a href="/blog/2014/04/21/jubatus-handson-and-fluent-plugin-jubatus/">jubatus handsonにいってきたのでfluent-plugin-jubatusについてちょっとだけ</a></h1>
+  <p class="author">
+    <span class="date">2014-04-21 23:45:43 +0900</span>
+  </p>
+  <div class="content">
+    <h2 id="jubatus-handson行ってきました"><a href="http://connpass.com/event/5641/">Jubatus Handson</a>行ってきました</h2>
+
+<p>行ってきました。</p>
+
+<h2 id="fluent-plugin-jubatus-002をリリースしました">fluent-plugin-jubatus 0.0.2をリリースしました</h2>
+
+<p>先日<a href="http://regional.rubykaigi.org/oedo04">大江戸Ruby会議04</a>に行ってみたらやる気が湧いてきたので半年ほど寝かせておいた<a href="http://rubygems.org/gems/fluent-plugin-jubatus">fluent-plugin-jubatus</a>をアップデートしました。</p>
+
+<p>大きな変更点としては、異常検知（jubaanomaly）をサポートするようになってます。</p>
+
+<h3 id="プラグインの今後">プラグインの今後</h3>
+
+<p>今回も入れなかったのですが、このプラグインでは未だ判定のみのサポートです。
+理由としては</p>
+
+<ul>
+  <li>計算量</li>
+  <li>メモリ</li>
+</ul>
+
+<p>のふたつがあげられます。計算量に関しては以前手元のMacで異常検出を動作させていたときマシンの動作がもっさりになるほどの計算量があったためです。メモリに関しては今のところ不安には感じてはいないですが、データ量(数)が巨大になったときどこまで必要なのかってのがよくわからない。という理由で積極的に導入していないです。</p>
+
+<p>これらを解消する方法としては忘却(<a href="https://github.com/jubatus/jubatus/tree/feature/unlearning">unlearning</a>)が考えられるのですが、じゃぁどの必要のないデータを忘却させるのって問題があります。</p>
+
+<p>とはいえ、そろそろ導入したいので<a href="https://github.com/katsyoshi/fluent-plugin-jubatus">pull req</a>まってます。</p>
+
+
+  </div>
 
   <h1><a href="/blog/2014/04/11/post-access-log-to-treasure-data/">アクセスログをTreasureData.comへ</a></h1>
   <p class="author">

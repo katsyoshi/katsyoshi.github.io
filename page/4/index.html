@@ -1,5 +1,21 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 4 of 12 for katsyoshi のめもみたいなの - page 4 | katsyoshi のめもみたいなの</title>
@@ -43,6 +59,51 @@
 </div>
 
 
+
+  <h1><a href="/blog/2018/12/01/hello-language-server/">hello language server</a></h1>
+  <p class="author">
+    <span class="date">2018-12-01 13:00:59 +0900</span>
+  </p>
+  <div class="content">
+    <p>ここ1、2週間、 emacs で <code class="language-plaintext highlighter-rouge">lsp-emacs</code> を使いはじめたのでそのメモ</p>
+
+<p><a href="https://langserver.org/">Language Server</a> と <a href="https://microsoft.github.io/language-server-protocol/specification">Language Server Protocol</a> ってなによ？って人はリンクをみてください。</p>
+
+<h2 id="導入">導入</h2>
+
+<p>導入は簡単で以下の3つをpackage-installでインストールしてしまえば OK です。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lsp-mode
+lsp-ui
+lsp-ruby
+</code></pre></div></div>
+
+<p>インストール後は <code class="language-plaintext highlighter-rouge">.emacs.d/init.el</code> あたりに、</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(require 'lsp-mode)
+(require 'lsp-ui)
+(require 'lsp-ruby)
+(add-hook 'ruby-mode-hook #'lsp-ruby-enable)
+</code></pre></div></div>
+
+<p>を追記すると emacs 側の設定はできました。</p>
+
+<p><code class="language-plaintext highlighter-rouge">lsp-ruby</code>(emacs) を起動する前に <code class="language-plaintext highlighter-rouge">gem install solargraph</code> で <code class="language-plaintext highlighter-rouge">solargraph</code> をインストールしておきましょう。</p>
+
+<h2 id="利用開始">利用開始!</h2>
+
+<p>利用開始するときは利用したいファイルのトップディレクトリ(プロジェクトディレクトリ)に、 <code class="language-plaintext highlighter-rouge">Gemfile</code> が必要です。</p>
+
+<p>でこんなかんじに表示してくれます。</p>
+
+<p>-&gt; <img src="/images/screenshot/lsp-ruby.png" alt="" /> &lt;-</p>
+
+<h2 id="matome">matome</h2>
+
+<p><code class="language-plaintext highlighter-rouge">lsp-ruby</code> を導入したけど、<code class="language-plaintext highlighter-rouge">solargraph</code> だとちょっとあれな表示が出て残念な気分に。
+また <code class="language-plaintext highlighter-rouge">rubocop</code> も基本的に要求されるようで…</p>
+
+  </div>
 
   <h1><a href="/blog/2018/11/06/remove-rails-assets/">remove rails assets</a></h1>
   <p class="author">
@@ -561,148 +622,6 @@ index da302ca1..94025817 100755
 <p>国税局を調べたおかげで良いビール屋を見付けることができてよかったよかった。</p>
 
 <p>ってガハハビールの情報探してたら老舗クラフトビールの紹介サイトの <a href="http://beer-cruise.net/">ビアクルーズ</a> さんで <a href="http://beer-cruise.net/beer/170922.html">紹介されてた</a> 。</p>
-
-  </div>
-
-  <h1><a href="/blog/2018/02/26/nlp-100-section-4/">NLP100 Knock Section IV</a></h1>
-  <p class="author">
-    <span class="date">2018-02-26 23:45:52 +0900</span>
-  </p>
-  <div class="content">
-    <p>NLP100本ノック第4節おわりましたのでまとめます</p>
-
-<h2 id="第4章-形態素解析"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#ch4">第4章 形態素解析</a></h2>
-
-<p>形態素解析やからむずいやろとおもってた</p>
-
-<h3 id="準備">準備</h3>
-<p>この章では、形態素解析済ファイルを作成する必要がありますが、毎回対象ファイルをダウンロード、解析して解いています。
-ここではいつもどおり <code class="language-plaintext highlighter-rouge">HashMap</code> を利用するため <code class="language-plaintext highlighter-rouge">ANALYZED_MECAB_KEYS</code> を作成してこれをキーにします。
-またよく利用する品詞を <code class="language-plaintext highlighter-rouge">enum</code> で定義しておき、変換関数 <code class="language-plaintext highlighter-rouge">inspect</code> を作成します。</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="n">ANALYZED_MECAB_KEYS</span><span class="p">:</span> <span class="p">[</span><span class="o">&amp;</span><span class="nb">str</span><span class="p">;</span> <span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">"pos"</span><span class="p">,</span> <span class="s">"pos1"</span><span class="p">,</span> <span class="s">"pos2"</span><span class="p">,</span> <span class="s">"pos3"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"base"</span><span class="p">,</span> <span class="s">"read"</span><span class="p">,</span> <span class="s">"speech"</span><span class="p">];</span>
-<span class="k">enum</span> <span class="n">PartOfSpeech</span> <span class="p">{</span>
-    <span class="n">VERB</span><span class="p">,</span>
-    <span class="n">NOUN</span><span class="p">,</span>
-    <span class="n">PARTICLE</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="k">use</span> <span class="nn">PartOfSpeech</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
-
-<span class="k">fn</span> <span class="nf">inspect</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="n">PartOfSpeech</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
-    <span class="k">match</span> <span class="n">val</span> <span class="p">{</span>
-        <span class="n">VERB</span> <span class="k">=&gt;</span> <span class="s">"動詞"</span><span class="p">,</span>
-        <span class="n">NOUN</span> <span class="k">=&gt;</span> <span class="s">"名詞"</span><span class="p">,</span>
-        <span class="n">PARTICLE</span> <span class="k">=&gt;</span> <span class="s">"助詞"</span><span class="p">,</span>
-    <span class="p">}</span><span class="nf">.to_string</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="30-形態素解析結果の読み込み"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec30">30. 形態素解析結果の読み込み</a></h3>
-<p><code class="language-plaintext highlighter-rouge">Map</code> を使えと指定があるので素直に利用します</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">feature</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Node</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">h</span><span class="p">:</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">HashMap</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">surface</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">node</span><span class="py">.surface</span><span class="p">)[</span><span class="o">..</span><span class="n">node</span><span class="py">.length</span> <span class="k">as</span> <span class="nb">usize</span><span class="p">])</span><span class="nf">.to_string</span><span class="p">();</span>
-    <span class="n">h</span><span class="nf">.insert</span><span class="p">(</span><span class="s">"surface"</span><span class="nf">.to_string</span><span class="p">(),</span> <span class="n">surface</span><span class="p">);</span>
-    <span class="k">let</span> <span class="n">values</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">node</span><span class="py">.feature</span><span class="nf">.split</span><span class="p">(</span><span class="s">","</span><span class="p">)</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="nf">.collect</span><span class="p">();</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">in</span> <span class="n">ANALYZED_MECAB_KEYS</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.zip</span><span class="p">(</span><span class="n">values</span><span class="nf">.iter</span><span class="p">())</span> <span class="p">{</span>
-        <span class="n">h</span><span class="nf">.insert</span><span class="p">(</span><span class="n">a</span><span class="nf">.to_string</span><span class="p">(),</span> <span class="n">b</span><span class="nf">.to_string</span><span class="p">());</span>
-    <span class="p">}</span>
-    <span class="n">h</span>
-<span class="p">}</span>
-
-<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"http://www.cl.ecei.tohoku.ac.jp/nlp100/data/neko.txt"</span><span class="nf">.to_string</span><span class="p">();</span>
-    <span class="k">let</span> <span class="n">neco</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">NLP100</span><span class="p">::</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="nf">.split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span><span class="nf">.filter</span><span class="p">(|</span><span class="n">f</span><span class="p">|</span> <span class="n">f</span><span class="nf">.ne</span><span class="p">(</span><span class="o">&amp;</span><span class="s">""</span><span class="p">))</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.to_string</span><span class="p">())</span><span class="nf">.collect</span><span class="p">();</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">morph</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
-
-    <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="n">neco</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="k">mut</span> <span class="n">tagger</span><span class="p">:</span> <span class="n">Tagger</span> <span class="o">=</span> <span class="nn">mecab</span><span class="p">::</span><span class="nn">Tagger</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">""</span><span class="p">);</span>
-        <span class="k">let</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="n">tagger</span><span class="nf">.parse_to_node</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
-
-        <span class="k">let</span> <span class="k">mut</span> <span class="n">mecabu</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="o">&gt;&gt;</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
-        <span class="k">for</span> <span class="n">node</span> <span class="k">in</span> <span class="n">nodes</span><span class="nf">.iter_next</span><span class="p">()</span> <span class="p">{</span>
-            <span class="k">match</span> <span class="n">node</span><span class="py">.stat</span> <span class="k">as</span> <span class="nb">i32</span> <span class="p">{</span>
-                <span class="nn">mecab</span><span class="p">::</span><span class="n">MECAB_BOS_NODE</span> <span class="k">=&gt;</span> <span class="p">(),</span>
-                <span class="nn">mecab</span><span class="p">::</span><span class="n">MECAB_EOS_NODE</span> <span class="k">=&gt;</span> <span class="p">(),</span>
-                <span class="n">_</span> <span class="k">=&gt;</span> <span class="p">{</span>
-                    <span class="n">mecabu</span><span class="nf">.push</span><span class="p">(</span><span class="nf">feature</span><span class="p">(</span><span class="o">&amp;</span><span class="n">node</span><span class="p">));</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="n">morph</span><span class="nf">.push</span><span class="p">(</span><span class="n">mecabu</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">for</span> <span class="n">morph</span> <span class="k">in</span> <span class="n">morphs</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="n">mecab</span> <span class="k">in</span> <span class="n">morph</span> <span class="p">{</span>
-            <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="nd">format!</span><span class="p">(</span><span class="s">"surface: {}, base: {}, pos: {}, pos1: {}"</span><span class="p">,</span> <span class="n">mecab</span><span class="p">[</span><span class="s">"surface"</span><span class="p">],</span> <span class="n">mecab</span><span class="p">[</span><span class="s">"base"</span><span class="p">],</span> <span class="n">mecab</span><span class="p">[</span><span class="s">"pos"</span><span class="p">],</span> <span class="n">mecab</span><span class="p">[</span><span class="s">"pos1"</span><span class="p">]));</span>
-        <span class="p">}</span>
-        <span class="nd">println!</span><span class="p">(</span><span class="s">""</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<h3 id="31-動詞"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec31">31. 動詞</a></h3>
-<p>動詞だけ抽出するので以下のコードで抽出し、表層形(<code class="language-plaintext highlighter-rouge">"surface"</code>)を取得する</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">verb</span><span class="p">(</span><span class="n">nodes</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
-    <span class="n">nodes</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.filter</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="p">[</span><span class="s">"pos"</span><span class="p">]</span> <span class="o">==</span> <span class="nf">inspect</span><span class="p">(</span><span class="n">VERB</span><span class="p">))</span><span class="nf">.map</span><span class="p">(|</span><span class="n">hm</span><span class="p">|</span> <span class="n">hm</span><span class="nf">.clone</span><span class="p">())</span><span class="nf">.collect</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="32-動詞の原形"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec32">32. 動詞の原形</a></h3>
-<p>動詞だけ抽出するので上記のコードで抽出し、原形(<code class="language-plaintext highlighter-rouge">"base"</code>)を取得する</p>
-
-<h3 id="33-サ変名詞"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec33">33. サ変名詞</a></h3>
-<p>サ変接続を抽出</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">sa_noun</span><span class="p">(</span><span class="n">nodes</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">{</span>
-    <span class="nf">noun</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.filter</span><span class="p">(|</span><span class="n">node</span><span class="p">|</span> <span class="n">node</span><span class="p">[</span><span class="s">"pos1"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"サ変接続"</span><span class="p">)</span><span class="nf">.map</span><span class="p">(|</span><span class="n">hm</span><span class="p">|</span> <span class="n">hm</span><span class="nf">.clone</span><span class="p">())</span><span class="nf">.collect</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="34-aのb"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec34">34. 「AのB」</a></h3>
-<p>「の」を挾んでいる名詞を抽出</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">between_noun</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Node</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">mecab</span> <span class="o">=</span> <span class="nf">feature</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
-    <span class="k">if</span> <span class="n">mecab</span><span class="p">[</span><span class="s">"surface"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"の"</span> <span class="o">&amp;&amp;</span> <span class="n">mecab</span><span class="p">[</span><span class="s">"pos"</span><span class="p">]</span> <span class="o">==</span> <span class="nf">inspect</span><span class="p">(</span><span class="n">PARTICLE</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">mecab</span><span class="p">[</span><span class="s">"pos1"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"連体化"</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="n">prev</span> <span class="o">=</span> <span class="nf">feature</span><span class="p">(</span><span class="o">&amp;</span><span class="n">node</span><span class="nf">.prev</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">());</span>
-        <span class="k">let</span> <span class="n">next</span> <span class="o">=</span> <span class="nf">feature</span><span class="p">(</span><span class="o">&amp;</span><span class="n">node</span><span class="nf">.next</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">());</span>
-
-        <span class="nf">Some</span><span class="p">(</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}{}{}"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">prev</span><span class="p">[</span><span class="s">"surface"</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">mecab</span><span class="p">[</span><span class="s">"surface"</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">next</span><span class="p">[</span><span class="s">"surface"</span><span class="p">]))</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nb">None</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="35-名詞の連接"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec35">35. 名詞の連接</a></h3>
-<p>連続した名詞を抽出するが、<code class="language-plaintext highlighter-rouge">mecab</code> でうまく関数化できなかったので割愛(あとでうかんだら追記)します。</p>
-
-<h3 id="36-単語の出現頻度"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec36">36. 単語の出現頻度</a></h3>
-<p>単純に頻度をまとめ、 <code class="language-plaintext highlighter-rouge">sort</code> するとよい</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">word_histgram</span><span class="p">(</span><span class="n">nodes</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">u64</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="k">mut</span> <span class="n">results</span><span class="p">:</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">u64</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">HashMap</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
-    <span class="k">for</span> <span class="n">node</span> <span class="k">in</span> <span class="n">nodes</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="n">base</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">[</span><span class="s">"base"</span><span class="p">];</span>
-        <span class="o">*</span><span class="n">results</span><span class="nf">.entry</span><span class="p">(</span><span class="n">base</span><span class="nf">.to_string</span><span class="p">())</span><span class="nf">.or_insert</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">results</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="37-頻度上位10語"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec37">37. 頻度上位10語</a></h3>
-<p>上記の結果より <code class="language-plaintext highlighter-rouge">.take(10)</code> するだけです。</p>
-
-<h3 id="38-ヒストグラム"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec38">38. ヒストグラム</a></h3>
-<p>37 と違いがわからずおわり。</p>
-
-<h3 id="39-zipfの法則"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec39">39. Zipfの法則</a></h3>
-<p>単純に両対数グラフ化でおわり。</p>
-
-<h2 id="おわり">おわり</h2>
-<p>おわり</p>
 
   </div>
 
