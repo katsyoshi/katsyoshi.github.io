@@ -1,4 +1,112 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2024-05-27T21:02:36+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">RubyKaigi2024 @沖縄</title><link href="https://blog.katsyoshi.org/blog/2024/05/14/rubykaigi-2024/" rel="alternate" type="text/html" title="RubyKaigi2024 @沖縄" /><published>2024-05-14T23:59:59+09:00</published><updated>2024-05-14T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/14/rubykaigi-2024</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/14/rubykaigi-2024/"><![CDATA[<p>沖縄だったのでいってきました。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2024-05-28T21:15:17+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">最果ての沖縄に行ってきた</title><link href="https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa/" rel="alternate" type="text/html" title="最果ての沖縄に行ってきた" /><published>2024-05-18T23:59:59+09:00</published><updated>2024-05-18T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa/"><![CDATA[<p><a href="https://rubykaigi.org/2024"><strong>RubyKaigi2024</strong></a> の翌日 2024-05-18 から五日間 2024-05-22 まで
+<a href="http://www.vill.kunigami.okinawa.jp/">沖縄県国頭郡国頭村</a>辺戸に滞在したはなし。</p>
+
+<h2 id="1-日目">1 日目</h2>
+
+<p><strong>RubyKaigi</strong> が終ったので東京から来る友人と合流するために<a href="https://www.naha-airport.co.jp/"><strong>那覇空港</strong></a>へ。
+友人たちと合流し昼食を食べたので、レンタカーを借りていざ宿へ出発。
+<img src="/images/go2hedo.png" alt="" />
+この時点で16:00ごろ。空港から宿のある辺戸まで <strong>100 km</strong> を越える。
+しかも宿周辺には共同売店とよばれる簡易スーパーしかない。
+ということは事前に分っていたので、名護周辺で当面の食料調達することに。
+まず、高速道路を利用して名護へ。
+名護では<a href="https://www.orionbeer.co.jp/"><strong>オリオンビール</strong></a>工場入口という看板をみつけたのでそこに寄ってみることにした。
+そこは酒屋だった。とくになにもなく、オリオンビール500ml*6を買ってでた。
+スーパーを見つけたので大量に食品を購入。この日は酒を飲んで話して就寝。
+<img src="/images/photo/hedo-base-camp.png" alt="" /></p>
+
+<h2 id="2-日目">2 日目</h2>
+
+<p>この日は、朝7時ごろに集落向けの放送があり目をさましたが、二度寝。
+10時ごろみんな起きて宿の近くの<a href="http://kunigami-kikakukanko.com/itiran/07.html"><strong>ヤンバルクイナ展望台</strong></a>へ。
+<img src="/images/photo/hedo-yanbaru-kuina-view-point.png" alt="" />
+ここまでの移動が意外と起伏が激しく、披露困憊。ここからの眺めはたいへんよかった。
+<img src="/images/photo/hedo-yanbaru-kuina-view-hedo-misaki.png" alt="" />
+ここから海岸線まで降りれそうだったが、上で書いたように疲れていたので一旦宿にもどることに。
+<img src="/images/photo/hedo-yanbaru-kuina-view-point-return.png" alt="" />
+宿への帰り道。勾配がキツい。午後は昼飯と観光を兼ねて、<a href="http://kunigami-kikakukanko.com/itiran/06.html"><strong>辺戸岬</strong></a>までいくことに。
+<img src="/images/photo/hedo-misaki-view-yoron-bird.png" alt="" />
+辺戸岬は観光地らしく、他の <strong>Rubyist</strong> たちもどうやら来てたみたい。
+ここで岬の先のほうにいったりして見たあと、昼食。
+<img src="/images/photo/hedo-misaki-messi.png" alt="" />
+昼食後、夕飯の調達のために名護のスーパーへGO。
+昼食中に温泉というかでかい風呂が山の中あったのでそこへ行くを計画。
+スーパーで買ったものを宿において、ちょっとだけ休憩してその山の中の風呂へ。
+山の中の風呂へ行く途中いい海岸にかんじの砂浜(<a href="https://okinawa-bookmark.com/beach/kunigami-beach/sosu-sunahama/"><strong>楚洲の浜</strong></a>)あったのでみんなで砂浜へ。
+<img src="/images/photo/hedo-yanbaru-sosu-no-hama-iwa.png" alt="" /></p>
+
+<p><img src="/images/photo/hedo-yanbaru-sosu-no-hama-wave.png" alt="" /></p>
+
+<p><img src="/images/photo/hedo-yanbaru-sosu-no-hama-sango.png" alt="" /></p>
+
+<p><img src="/images/photo/hedo-yanbaru-sosu-no-hama-river.png" alt="" /></p>
+
+<p><img src="/images/photo/hedo-yanbaru-sosu-no-hama-yadokari.png" alt="" /></p>
+
+<p><img src="/images/photo/hedo-yanbaru-sosu-no-hama-ashiato.png" alt="" /></p>
+
+<p>砂浜を楽しんだので、目的のお風呂、<strong>命薬の湯</strong>がある<a href="https://yanbaru-manabi.com/"><strong>やんばる学びの森</strong></a>へ。
+道中、道の左右が草で埋まっていてこの先本当にあるのか？という気分になった。
+<img src="/images/photo/hedo-yanbaru-manabi-no-mori-kanban.png" alt="" />
+到着。風呂入っているあいだに以下のメッセージが。
+<img src="/images/screenshot/yancya-comes-manabi-no-mori.png" alt="" /></p>
+
+<p>そんなわけで18:40ごろ合流。やんちゃさんが電池がないらしかっため少々談笑しながら充電。
+やんちゃさんはこのあと名護で用事があったらしいのでここでお別れ。
+<img src="/images/photo/hedo-yanbaru-manabi-no-mori-yancya.png" alt="" /></p>
+
+<h2 id="3-日目">3 日目</h2>
+<p>この日は朝からといっても9時ごろから一人で釣りへ。
+釣り場へ行くには海岸線を通るのですが、足元を靴ではなくビーサンで行ったためこの道は正規なのかとおもってた。
+釣り場着いて先に釣りしているひとに聞いたら、どうやら正規ルートだったらしく、ひとまず安心。
+車は一台しかないため昼ごろ宿へもどる。もどったら、仕事中の人がいてそういえば今日は平日だったということを思い出す。
+昼は宿で冷凍食品をレンチン。レンジを動かしてたら、なんと無線LANが繋らなくってしまった。
+ワーケーションしている友人はオンライン会議中だったが、繋らないと訴えてたためレンジを停止。
+東京の自宅居る間で気にしたこと、気になったことなかったけどよくかんがえてみたら
+レンジ使ってるときにはインターネットしないことが多いのから気にならなかっただけかも。</p>
+
+<p>この日東京へ戻る人が居たので<strong>那覇空港</strong>へ送りにドライブ。
+19:30 ごろ見届けたので帰りにどこか寄って食べたりしようとなった。
+が、そもそも宿に帰るのに2時間かかるのでそういうのはやめようと訴えた。
+帰る途中で肉の自販機で山羊刺しを購入。
+そろそろガソリンが切れそうだったので給油することに。
+給油する際に <a href="https://www.awok.co.jp/"><strong>A&amp;W</strong></a> が併設されてたので給油&amp;&amp;軽食。
+宿に帰りついて、先程購入した山羊刺しを食べて就寝。
+<img src="/images/photo/hedo-base-camp-freezed-goat.png" alt="" /></p>
+
+<h2 id="4-日目">4 日目</h2>
+
+<p>この日も午後に東京へ帰るひとがいたので那覇へドライブ。
+この日から沖縄は<a href="https://weathernews.jp/s/topics/202405/170105/">梅雨入り</a>。
+送る途中で雨が振りはじめた。
+<img src="/images/photo/hedo-round-main-island-rain.png" alt="" />
+このときまだ梅雨入りしていることはしらなかったのでまあ夕立だろとおもっていた。
+昼前だったので、沖縄のソウルフード <a href="https://jefokinawa.co.jp/"><strong>JEF</strong></a> に行きゴーヤーバーガーを喫食。
+空港着いて友人を見送りしたら再び雨が強くなったので沖縄の友人に <strong>twitter</strong> で聞いてみた。</p>
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">これデフォルトですね。関東は違うんですか？</p>&mdash; はなちん (@hanachin_) <a href="https://twitter.com/hanachin_/status/1792788936089387237?ref_src=twsrc%5Etfw">May 21, 2024</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>ということでした。
+空港へ送ったあと、午後暇なのでとりあえず<a href="https://www.himeyuri.or.jp/"><strong>ひめゆりの塔</strong></a>へ。
+駐車場へもどるとき、押しボタン式の信号機だったのに気付かなかった。
+そうしてたら、目の前の売店の店員さんが飛び出てきて強い客引きが。
+これを躱して車へもどり本島一周の旅へ。
+途中車で行ける島、<a href="https://www.okinawastory.jp/spot/1276"><strong>奥武島</strong></a>、<a href="https://www.okinawastory.jp/spot/1287"><strong>宮城島</strong></a>と
+<a href="https://www.okinawastory.jp/spot/1269"><strong>浜比嘉島</strong></a>へドライブ。
+雨が大変強く、川から流れ込む水で海が二色に。
+<img src="/images/photo/hedo-round-main-island-binary.png" alt="" />
+そのまま沖縄本島の東側を走って宿へもどる。
+宿もどってからはオンラインで飲み会後就寝。</p>
+
+<h2 id="last-day">LAST DAY</h2>
+<p>最終日この日に東京へもどるのだが、この日も雨が強く、どしゃ降りだったので宿を早めにチェックアウト。
+途中 <a href="https://tabelog.com/okinawa/A4703/A470302/47011602/"><strong>KING TACOS</strong></a> があったので寄ることに。
+この店は<strong>タコライス</strong>発祥の店らしく、いきたかったのです。
+<img src="/images/photo/hedo-king-machi-king-tacos.png" alt="" />
+見た目どおり大きく、これは失敗したなと感じましたね。チーズの味が強く大変好みの味でした。
+本店の金武店から空港は遠いのでここで空港に向った。
+この旅はここで終わり。東京もどってビール飲んで寝た。</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[RubyKaigi2024 の翌日 2024-05-18 から五日間 2024-05-22 まで 沖縄県国頭郡国頭村辺戸に滞在したはなし。]]></summary></entry><entry><title type="html">RubyKaigi2024 @沖縄</title><link href="https://blog.katsyoshi.org/blog/2024/05/14/rubykaigi-2024/" rel="alternate" type="text/html" title="RubyKaigi2024 @沖縄" /><published>2024-05-14T23:59:59+09:00</published><updated>2024-05-14T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/14/rubykaigi-2024</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/14/rubykaigi-2024/"><![CDATA[<p>沖縄だったのでいってきました。</p>
 
 <h2 id="day-0">Day 0</h2>
 
@@ -833,309 +941,4 @@ matz が “Static Compiler for Ruby” という今はまだない <code class=
       <p>https://github.com/ruby/ruby/pull/7448 <a href="#fnref:rjit" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><category term="compiler" /><summary type="html"><![CDATA[プログラマー三大勉強はしたけど、実装はしたことないものといえば CPU、OS、コンパイラーなのです1が、先日 ruby30th 誕生日会のキーノートで matz が “Static Compiler for Ruby” という今はまだない vaporware として 挙げていたのでこの static compiler を作ろうとなりました。 個人差があります。 &#8617;]]></summary></entry><entry><title type="html">Update rubygems using Rust for Ruby 3.2</title><link href="https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/" rel="alternate" type="text/html" title="Update rubygems using Rust for Ruby 3.2" /><published>2023-01-03T23:59:59+09:00</published><updated>2023-01-03T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/"><![CDATA[<p><a href="/blog/2022/08/12/how-to-use-rust-in-ruby-gems/">以前このブログ</a>で <a href="https://www.rust-lang.org/"><strong>Rust</strong></a> を利用して <a href="https://rubygems.org"><strong>rubygems</strong></a> を作成した
-<a href="https://github.com/katsyoshi/rust_uuid"><strong>rust_uuid</strong></a> が <a href="https://www.ruby-lang.org/ja/news/2022/12/25/ruby-3-2-0-released/"><strong>Ruby 3.2</strong> がリリース</a> によりコンパイルできなくなったのでその修正顛末。</p>
-
-<h2 id="環境">環境</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>system</th>
-      <th>failed version</th>
-      <th>succeed version</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>ruby</td>
-      <td>3.2.0</td>
-      <td>3.2.0</td>
-    </tr>
-    <tr>
-      <td>gem</td>
-      <td>3.4.1</td>
-      <td>3.4.2</td>
-    </tr>
-    <tr>
-      <td>bundler</td>
-      <td>2.3.19</td>
-      <td>2.4.2</td>
-    </tr>
-    <tr>
-      <td>rb-sys</td>
-      <td>0.9.29</td>
-      <td>0.9.53</td>
-    </tr>
-    <tr>
-      <td>magnus</td>
-      <td>0.3.2</td>
-      <td>0.4.4</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="whats-happened">what’s happened?</h2>
-
-<p><strong>Ruby 3.2</strong> が出てたのでアップデートして試してみるかーとおもいコマンドを実行!!!!</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundle <span class="nb">exec </span>rake build
-<span class="nb">.</span>
-<span class="nb">.</span>
-...
-error[E0425]: cannot find value <span class="sb">`</span>RUBY_ABI_VERSION<span class="sb">`</span> <span class="k">in </span>the crate root
-  <span class="nt">--</span><span class="o">&gt;</span> /path/to/cargo/dir/registry/src/github.com-1ecc6299db9ec823/rb-sys-0.9.29/src/ruby_abi_version.rs:14:73
-   |
-14 | pub const __RB_SYS_RUBY_ABI_VERSION: std::os::raw::c_ulonglong <span class="o">=</span> crate::RUBY_ABI_VERSION as _<span class="p">;</span>
-   |                                                                         ^^^^^^^^^^^^^^^^ not found <span class="k">in </span>the crate root
-
-For more information about this error, try <span class="sb">`</span>rustc <span class="nt">--explain</span> E0425<span class="sb">`</span><span class="nb">.</span>
-error: could not compile <span class="sb">`</span>rb-sys<span class="sb">`</span> due to previous error
-warning: build failed, waiting <span class="k">for </span>other <span class="nb">jobs </span>to finish...
-gmake: <span class="k">***</span> <span class="o">[</span>Makefile:564: target/release/librust_uuid.so] エラー 101
-rake aborted!
-Command failed with status <span class="o">(</span>2<span class="o">)</span>: <span class="o">[</span>/usr/bin/gmake...]
-/path/to/rbenv/versions/3.2.0/bin/bundle:25:in <span class="sb">`</span>load<span class="s1">'
-/path/to/rbenv/versions/3.2.0/bin/bundle:25:in `&lt;main&gt;'</span>
-Tasks: TOP <span class="o">=&gt;</span> build <span class="o">=&gt;</span> compile <span class="o">=&gt;</span> compile:x86_64-linux <span class="o">=&gt;</span> compile:rust_uuid:x86_64-linux <span class="o">=&gt;</span> copy:rust_uuid:x86_64-linux:3.2.0 <span class="o">=&gt;</span> tmp/x86_64-linux/rust_uuid/3.2.0/rust_uuid.so
-<span class="o">(</span>See full trace by running task with <span class="nt">--trace</span><span class="o">)</span>
-bundle <span class="nb">exec </span>rake build  63.55s user 10.61s system 541% cpu 13.705 total
-</code></pre></div></div>
-
-<p>おーなるほどなるほど、 <strong>cargo</strong> の <a href="https://github.com/oxidize-rb/rb-sys"><strong>rb-sys</strong></a> が <strong>Ruby 3.2</strong> に対応していないバージョンつかってるんだなと理解。<strong>cargo</strong> を更新っするぞい。</p>
-
-<h2 id="うpだて-cargo-ぱっけーじ">うpだて <strong>cargo</strong> ぱっけーじ</h2>
-
-<p>ということで <code class="language-plaintext highlighter-rouge">cargo build</code> が通るようにパッケージを更新するぞい。
-<strong>cargo</strong> も <strong>bundler</strong> 同様、 <code class="language-plaintext highlighter-rouge">cargo update</code> でいい感じにアップデートしてくれます。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>ext/rust_uuid
-<span class="nv">$ </span>cargo update
-<span class="nv">$ </span>cargo build
-   Compiling magnus v0.3.2
-error[E0432]: unresolved import <span class="sb">`</span>crate::ruby_sys::ruby_rstring_consts<span class="sb">`</span>
-  <span class="nt">--</span><span class="o">&gt;</span> /path/to/cargo/dir/registry/src/github.com-1ecc6299db9ec823/magnus-0.3.2/src/r_string.rs:23:47
-   |
-23 | use crate::ruby_sys::<span class="o">{</span>rb_str_to_interned_str, ruby_rstring_consts::RSTRING_EMBED_LEN_SHIFT<span class="o">}</span><span class="p">;</span>
-   |                                               ^^^^^^^^^^^^^^^^^^^ could not find <span class="sb">`</span>ruby_rstring_consts<span class="sb">`</span> <span class="k">in</span> <span class="sb">`</span>ruby_sys<span class="sb">`</span>
-
-error[E0599]: no variant or associated item named <span class="sb">`</span>RSTRING_EMBED_LEN_MASK<span class="sb">`</span> found <span class="k">for </span>enum <span class="sb">`</span>ruby_rstring_flags<span class="sb">`</span> <span class="k">in </span>the current scope
-   <span class="nt">--</span><span class="o">&gt;</span> /path/to/cargo/dir/registry/src/github.com-1ecc6299db9ec823/magnus-0.3.2/src/r_string.rs:368:38
-    |
-368 |             f &amp;<span class="o">=</span> ruby_rstring_flags::RSTRING_EMBED_LEN_MASK as VALUE<span class="p">;</span>
-    |                                      ^^^^^^^^^^^^^^^^^^^^^^ variant or associated item not found <span class="k">in</span> <span class="sb">`</span>ruby_rstring_flags<span class="sb">`</span>
-
-error[E0599]: no variant or associated item named <span class="sb">`</span>RSTRING_EMBED_LEN_MASK<span class="sb">`</span> found <span class="k">for </span>enum <span class="sb">`</span>ruby_rstring_flags<span class="sb">`</span> <span class="k">in </span>the current scope
-   <span class="nt">--</span><span class="o">&gt;</span> /path/to/cargo/dir/registry/src/github.com-1ecc6299db9ec823/magnus-0.3.2/src/r_string.rs:968:42
-    |
-968 |                 f &amp;<span class="o">=</span> ruby_rstring_flags::RSTRING_EMBED_LEN_MASK as VALUE<span class="p">;</span>
-    |                                          ^^^^^^^^^^^^^^^^^^^^^^ variant or associated item not found <span class="k">in</span> <span class="sb">`</span>ruby_rstring_flags<span class="sb">`</span>
-
-Some errors have detailed explanations: E0432, E0599.
-For more information about an error, try <span class="sb">`</span>rustc <span class="nt">--explain</span> E0432<span class="sb">`</span><span class="nb">.</span>
-error: could not compile <span class="sb">`</span>magnus<span class="sb">`</span> due to 3 previous errors
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">cargo update</code> しましたが、やっぱり駄目でしたね。今度は <a href="https://github.com/matsadler/magnus"><strong>magnus</strong></a> が駄目そう。
-<code class="language-plaintext highlighter-rouge">Cargo.toml</code> を見てみると、 <code class="language-plaintext highlighter-rouge">magnus = { version = "0.3", features = ["rb-sys-interop"] }</code> と指定してあり、 version 0.3 系が駄目そうということが類推されます。ということで公式ページを見ると新しいバージョンが出ているのでこちらにします。</p>
-
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/ext/rust_uuid/Cargo.toml
-</span><span class="gi">+++ b/ext/rust_uuid/Cargo.toml
-</span><span class="p">@@ -10,7 +10,7 @@</span> crate-type = ["cdylib"]
- [dependencies]
- rb-sys = "0.9"
- rb-allocator = "0.9"
-<span class="gd">-magnus = { version = "0.3", features = ["rb-sys-interop"] }
-</span><span class="gi">+magnus = { version = "0.4", features = ["rb-sys-interop"] }
-</span><span class="err">
-</span> [dependencies.uuid]
- version = "1.1.2"
-</code></pre></div></div>
-
-<p>再度ビルド!</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>cargo update
-<span class="nv">$ </span>cargo build
-   Compiling rust_uuid v0.1.0 <span class="o">(</span>/home/katsyoshi/Program/Ruby/rust_uuid/ext/rust_uuid<span class="o">)</span>
-    Finished dev <span class="o">[</span>unoptimized + debuginfo] target<span class="o">(</span>s<span class="o">)</span> <span class="k">in </span>0.18s
-</code></pre></div></div>
-
-<p>おおっ通りました!やったね!</p>
-
-<h2 id="build">build</h2>
-
-<p>ということ <code class="language-plaintext highlighter-rouge">cargo build</code> 通ったので <code class="language-plaintext highlighter-rouge">gem install</code> しましよう。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /path/to/rust_uuid
-<span class="nv">$ </span>bundle <span class="nb">exec </span>rake build
-<span class="nb">cd </span>tmp/x86_64-linux/rust_uuid/3.2.0
-/usr/bin/gmake
-generating target/release/librust_uuid.so <span class="o">(</span>release<span class="o">)</span>
-cargo rustc <span class="nt">--target-dir</span> target <span class="nt">--manifest-path</span> ../../../../ext/rust_uuid/Cargo.toml <span class="nt">--lib</span> <span class="nt">--release</span> <span class="nt">--</span> <span class="nt">-C</span> <span class="nv">linker</span><span class="o">=</span>gcc <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/path/to/rbenv/versions/3.2.0/lib <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/path/to/rbenv/versions/3.2.0/lib <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/home/katsyoshi/.local/lib:-L/home/katsyoshi/.local/lib: <span class="nt">-C</span> link-arg<span class="o">=</span><span class="nt">-lm</span> <span class="nt">-l</span> pthread
-   Compiling libc v0.2.139
-   Compiling proc-macro2 v1.0.49
-   Compiling quote v1.0.23
-   Compiling unicode-ident v1.0.6
-   Compiling clang-sys v1.4.0
-   Compiling regex-syntax v0.6.28
-   Compiling syn v1.0.107
-   Compiling rb-sys-env v0.1.1
-   Compiling libloading v0.7.4
-   Compiling nom v7.1.2
-   Compiling aho-corasick v0.7.20
-   Compiling magnus v0.4.4
-   Compiling bindgen v0.60.1
-   Compiling getrandom v0.2.8
-   Compiling uuid v1.2.2
-   Compiling cexpr v0.6.0
-   Compiling regex v1.7.0
-   Compiling magnus-macros v0.3.0
-   Compiling rb-sys-build v0.9.53
-   Compiling rb-sys v0.9.53
-   Compiling rb-allocator v0.9.6
-   Compiling rust_uuid v0.1.0 <span class="o">(</span>/path/to/rust_uuid/ext/rust_uuid<span class="o">)</span>
-    Finished release <span class="o">[</span>optimized] target<span class="o">(</span>s<span class="o">)</span> <span class="k">in </span>12.03s
-<span class="nb">cd</span> -
-<span class="nb">mkdir</span> <span class="nt">-p</span> tmp/x86_64-linux/stage/lib/rust_uuid
-/usr/bin/gmake <span class="nb">install </span><span class="nv">target_prefix</span><span class="o">=</span>
-generating target/release/librust_uuid.so <span class="o">(</span>release<span class="o">)</span>
-cargo rustc <span class="nt">--target-dir</span> target <span class="nt">--manifest-path</span> ../../../../ext/rust_uuid/Cargo.toml <span class="nt">--lib</span> <span class="nt">--release</span> <span class="nt">--</span> <span class="nt">-C</span> <span class="nv">linker</span><span class="o">=</span>gcc <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/path/to/rbenv/versions/3.2.0/lib <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/path/to/rbenv/versions/3.2.0/lib <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/home/katsyoshi/.local/lib:-L/home/katsyoshi/.local/lib: <span class="nt">-C</span> link-arg<span class="o">=</span><span class="nt">-lm</span> <span class="nt">-l</span> pthread
-    Finished release <span class="o">[</span>optimized] target<span class="o">(</span>s<span class="o">)</span> <span class="k">in </span>0.02s
-installing rust_uuid.so to /path/to/rust_uuid/lib/rust_uuid
-/usr/bin/install <span class="nt">-c</span> <span class="nt">-m</span> 0755 rust_uuid.so /path/to/rust_uuid/lib/rust_uuid
-<span class="nb">cp </span>tmp/x86_64-linux/rust_uuid/3.2.0/rust_uuid.so tmp/x86_64-linux/stage/lib/rust_uuid/rust_uuid.so
-rake aborted!
-Running <span class="sb">`</span>gem build <span class="nt">-V</span> /path/to/rust_uuid/rust_uuid.gemspec<span class="sb">`</span> failed with the following output:
-
-WARNING:  description and summary are identical
-WARNING:  open-ended dependency on benchmark-ips <span class="o">(&gt;=</span> 0, development<span class="o">)</span> is not recommended
-  use a bounded requirement, such as <span class="s1">'~&gt; x.y'</span>
-WARNING:  open-ended dependency on rake <span class="o">(&gt;=</span> 13.0.0, development<span class="o">)</span> is not recommended
-  <span class="k">if </span>rake is semantically versioned, use:
-    add_development_dependency <span class="s1">'rake'</span>, <span class="s1">'~&gt; 13.0'</span>, <span class="s1">'&gt;= 13.0.0'</span>
-WARNING:  open-ended dependency on rake-compiler <span class="o">(&gt;=</span> 0, development<span class="o">)</span> is not recommended
-  use a bounded requirement, such as <span class="s1">'~&gt; x.y'</span>
-WARNING:  open-ended dependency on rb_sys <span class="o">(&gt;=</span> 0, development<span class="o">)</span> is not recommended
-  use a bounded requirement, such as <span class="s1">'~&gt; x.y'</span>
-WARNING:  open-ended dependency on rspec <span class="o">(&gt;=</span> 0, development<span class="o">)</span> is not recommended
-  use a bounded requirement, such as <span class="s1">'~&gt; x.y'</span>
-WARNING:  See https://guides.rubygems.org/specification-reference/ <span class="k">for </span><span class="nb">help
-</span>ERROR:  While executing gem ... <span class="o">(</span>Gem::InvalidSpecificationException<span class="o">)</span>
-    You have specified rust based extension, but Cargo.lock is not part of the gem files. Please run <span class="sb">`</span>cargo generate-lockfile<span class="sb">`</span> or any other <span class="nb">command </span>to generate Cargo.lock and ensure it is added to your gem files section <span class="k">in </span>gemspec.
-
-/path/to/rbenv/versions/3.2.0/bin/bundle:25:in <span class="sb">`</span>load<span class="s1">'
-/path/to/rbenv/versions/3.2.0/bin/bundle:25:in `&lt;main&gt;'</span>
-Tasks: TOP <span class="o">=&gt;</span> build
-<span class="o">(</span>See full trace by running task with <span class="nt">--trace</span><span class="o">)</span>
-bundle <span class="nb">exec </span>rake build  32.87s user 4.33s system 291% cpu 12.741 total
-</code></pre></div></div>
-
-<p>なるほど？ <code class="language-plaintext highlighter-rouge">Cargo.lock</code> ファイルもあるし問題なさそうだな。よくわからんので <strong>rubygems</strong> のリポジトリでエラーメッセージを探してみます。</p>
-
-<p>すると<a href="https://github.com/rubygems/rubygems/blob/05df95280e5f25299f4130a25dc44100226c2235/lib/rubygems/specification_policy.rb#L467-L474">以下のようなコード</a>が</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">validate_rust_extensions</span><span class="p">(</span><span class="n">builder</span><span class="p">)</span> <span class="c1"># :nodoc:</span>
-    <span class="n">rust_extension</span> <span class="o">=</span> <span class="vi">@specification</span><span class="p">.</span><span class="nf">extensions</span><span class="p">.</span><span class="nf">any?</span> <span class="p">{</span><span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">builder</span><span class="p">.</span><span class="nf">builder_for</span><span class="p">(</span><span class="n">s</span><span class="p">).</span><span class="nf">is_a?</span> <span class="no">Gem</span><span class="o">::</span><span class="no">Ext</span><span class="o">::</span><span class="no">CargoBuilder</span> <span class="p">}</span>
-    <span class="n">missing_cargo_lock</span> <span class="o">=</span> <span class="o">!</span><span class="vi">@specification</span><span class="p">.</span><span class="nf">files</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s2">"Cargo.lock"</span><span class="p">)</span>
-
-    <span class="n">error</span> <span class="o">&lt;&lt;-</span><span class="no">ERROR</span> <span class="k">if</span> <span class="n">rust_extension</span> <span class="o">&amp;&amp;</span> <span class="n">missing_cargo_lock</span><span class="sh">
-You have specified rust based extension, but Cargo.lock is not part of the gem files. Please run `cargo generate-lockfile` or any other command to generate Cargo.lock and ensure it is added to your gem files section in gemspec.
-</span><span class="no">    ERROR</span>
-  <span class="k">end</span>
-</code></pre></div></div>
-
-<p>なろほどなろほど、プロジェクトの root 直下に置いておく必要があるのね。でもそのファイルどういうものなの？</p>
-
-<h2 id="gem-bundler-update">gem, bundler update</h2>
-
-<p>ってなわけで、今度は正式に <strong>rubygems</strong> で正式にサポートされ、 <strong>bundler</strong> でも <strong>gem</strong> を作成するときにも <code class="language-plaintext highlighter-rouge">bundle gem --ext=rust gem_name</code> で<a href="https://github.com/rubygems/rubygems/pull/6149">スケルトンが作成</a>されるようになりました。ということでこれを利用して <code class="language-plaintext highlighter-rouge">Cargo.toml</code> を作ってみましょう</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundle gem <span class="nt">--mit</span> <span class="nt">--ext</span><span class="o">=</span>rust gem_name
-ERROR: <span class="s2">"bundle gem"</span> was called with arguments <span class="o">[</span><span class="s2">"rust"</span>, <span class="s2">"gem_name"</span><span class="o">]</span>
-Usage: <span class="s2">"bundle gem NAME [OPTIONS]"</span>
-</code></pre></div></div>
-
-<p>ok, ok, これは <strong>bundler</strong> のバージョンが古いな</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundle version
-Bundler version 2.3.19 <span class="o">(</span>2022-07-27 commit 4f496f93e6<span class="o">)</span>
-</code></pre></div></div>
-
-<p>さっきの <strong>PR</strong> は入ったのは <strong>Ruby 3.2</strong> リリース直前なのでまだ入ってないよなとおもったけど、実際は <code class="language-plaintext highlighter-rouge">Gemfile.lock</code> の <code class="language-plaintext highlighter-rouge">BUNDLED WITH</code> が <code class="language-plaintext highlighter-rouge">2.3.19</code> を指定してるだけだったのです。
-なので対象の 2 行を削除して <code class="language-plaintext highlighter-rouge">bundle update</code> を実行し、続いて <strong>rust</strong> サポートした <strong>gem</strong> を生成して、 <code class="language-plaintext highlighter-rouge">Cargo.toml</code> を見てみましょう。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundle gem <span class="nt">--mit</span> <span class="nt">--ext</span><span class="o">=</span>rust gem_name
-Creating gem <span class="s1">'gem_name'</span>...
-MIT License enabled <span class="k">in </span>config
-Changelog enabled <span class="k">in </span>config
-Initializing git repo <span class="k">in</span> /path/to/rust_uuid/gem_name
-      create  gem_name/Gemfile
-      create  gem_name/lib/gem_name.rb
-      create  gem_name/lib/gem_name/version.rb
-      create  gem_name/sig/gem_name.rbs
-      create  gem_name/gem_name.gemspec
-      create  gem_name/Rakefile
-      create  gem_name/README.md
-      create  gem_name/bin/console
-      create  gem_name/bin/setup
-      create  gem_name/.gitignore
-      create  gem_name/.github/workflows/main.yml
-      create  gem_name/LICENSE.txt
-      create  gem_name/CHANGELOG.md
-      create  gem_name/Cargo.toml
-      create  gem_name/ext/gem_name/Cargo.toml
-      create  gem_name/ext/gem_name/extconf.rb
-      create  gem_name/ext/gem_name/src/lib.rs
-Gem <span class="s1">'gem_name'</span> was successfully created. For more information on making a RubyGem visit https://bundler.io/guides/creating_gem.html
-<span class="nv">$ </span><span class="nb">cat </span>Cargo.toml
-<span class="c"># This Cargo.toml is here to let externals tools (IDEs, etc.) know that this is</span>
-<span class="c"># a Rust project. Your extensions depedencies should be added to the Cargo.toml</span>
-<span class="c"># in the ext/ directory.</span>
-
-<span class="o">[</span>workspace]
-members <span class="o">=</span> <span class="o">[</span><span class="s2">"./ext/gem_name"</span><span class="o">]</span>
-resolver <span class="o">=</span> <span class="s2">"2"</span>
-</code></pre></div></div>
-
-<p>というようなファイルが得られるので真似して作成しちゃいましょう。</p>
-
-<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[workspace]</span>
-<span class="py">members</span> <span class="p">=</span> <span class="p">[</span><span class="s">"./ext/rust_uuid"</span><span class="p">]</span>
-<span class="py">resolver</span> <span class="p">=</span> <span class="s">"2"</span>
-</code></pre></div></div>
-
-<p>そうしたらもう一度ビルドしてしまいます!</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>cargo generate-lockfile
-<span class="nv">$ </span>git add Cargo.toml Carog.lock
-<span class="nv">$ </span>bundle <span class="nb">exec </span>rake build
-/usr/bin/gmake <span class="nb">install </span><span class="nv">target_prefix</span><span class="o">=</span>
-generating target/release/librust_uuid.so <span class="o">(</span>release<span class="o">)</span>
-cargo rustc <span class="nt">--target-dir</span> target <span class="nt">--manifest-path</span> ../../../../ext/rust_uuid/Cargo.toml <span class="nt">--lib</span> <span class="nt">--release</span> <span class="nt">--</span> <span class="nt">-C</span> <span class="nv">linker</span><span class="o">=</span>gcc <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/path/to/rbenv/versions/3.2.0/lib <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/path/to/rbenv/versions/3.2.0/lib <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/home/katsyoshi/.local/lib:-L/home/katsyoshi/.local/lib: <span class="nt">-C</span> link-arg<span class="o">=</span><span class="nt">-lm</span> <span class="nt">-l</span> pthread
-   Compiling rust_uuid v0.1.0 <span class="o">(</span>/path/to/rust_uuid/ext/rust_uuid<span class="o">)</span>
-    Finished release <span class="o">[</span>optimized] target<span class="o">(</span>s<span class="o">)</span> <span class="k">in </span>0.26s
-installing rust_uuid.so to /path/to/rust_uuid/lib/rust_uuid
-/usr/bin/install <span class="nt">-c</span> <span class="nt">-m</span> 0755 rust_uuid.so /path/to/rust_uuid/lib/rust_uuid
-<span class="nb">cp </span>tmp/x86_64-linux/rust_uuid/3.2.0/rust_uuid.so tmp/x86_64-linux/stage/lib/rust_uuid/rust_uuid.so
-rust_uuid 0.1.0 built to pkg/rust_uuid-0.1.0.gem.
-<span class="nv">$ </span>bundle <span class="nb">exec </span>rake <span class="nb">install</span>
-/usr/bin/gmake <span class="nb">install </span><span class="nv">target_prefix</span><span class="o">=</span>
-generating target/release/librust_uuid.so <span class="o">(</span>release<span class="o">)</span>
-cargo rustc <span class="nt">--target-dir</span> target <span class="nt">--manifest-path</span> ../../../../ext/rust_uuid/Cargo.toml <span class="nt">--lib</span> <span class="nt">--release</span> <span class="nt">--</span> <span class="nt">-C</span> <span class="nv">linker</span><span class="o">=</span>gcc <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/path/to/rbenv/versions/3.2.0/lib <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/path/to/rbenv/versions/3.2.0/lib <span class="nt">-L</span> <span class="nv">native</span><span class="o">=</span>/home/katsyoshi/.local/lib:-L/home/katsyoshi/.local/lib: <span class="nt">-C</span> link-arg<span class="o">=</span><span class="nt">-lm</span> <span class="nt">-l</span> pthread
-    Finished release <span class="o">[</span>optimized] target<span class="o">(</span>s<span class="o">)</span> <span class="k">in </span>0.03s
-installing rust_uuid.so to /path/to/rust_uuid/lib/rust_uuid
-/usr/bin/install <span class="nt">-c</span> <span class="nt">-m</span> 0755 rust_uuid.so /path/to/rust_uuid/lib/rust_uuid
-<span class="nb">cp </span>tmp/x86_64-linux/rust_uuid/3.2.0/rust_uuid.so tmp/x86_64-linux/stage/lib/rust_uuid/rust_uuid.so
-<span class="nv">$ </span>bundle <span class="nb">exec </span>ruby <span class="nt">-rrust_uuid</span> <span class="nt">-e</span> <span class="s1">'puts RustUUID.v4'</span>
-2eb053de-8ae7-4669-853b-95f06c872300
-</code></pre></div></div>
-
-<p>ようやっと通ったああぁあ!!!!</p>
-
-<h2 id="conclusion">conclusion</h2>
-
-<p>実際は11月の末あたりに <strong>head</strong> でコンパイルできないなあと気がついていたのですが、そのうち直るやろと思っててなにもしなかったのです。いざ <strong>Ruby 3.2</strong> がリリースされたときに試して動かなかったのでやっと対応してみました。</p>
-
-<p>ということで正式に <strong>Rust</strong> がサポートされるようになったのでまた YARUKI がでてきますね。</p>
-
-<p>それはそうと今度は、<a href="https://jekyllrb.com"><strong>jekyll</strong></a> が <strong>Ruby 3.2</strong> で動かなくなった。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[以前このブログで Rust を利用して rubygems を作成した rust_uuid が Ruby 3.2 がリリース によりコンパイルできなくなったのでその修正顛末。]]></summary></entry></feed>
+</div>]]></content><author><name></name></author><category term="diary" /><category term="compiler" /><summary type="html"><![CDATA[プログラマー三大勉強はしたけど、実装はしたことないものといえば CPU、OS、コンパイラーなのです1が、先日 ruby30th 誕生日会のキーノートで matz が “Static Compiler for Ruby” という今はまだない vaporware として 挙げていたのでこの static compiler を作ろうとなりました。 個人差があります。 &#8617;]]></summary></entry></feed>

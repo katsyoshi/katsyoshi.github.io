@@ -60,6 +60,50 @@
 
 
 
+  <h1><a href="/blog/2015/04/09/file-name-needs-scss-extention/">ファイル名間違えてテスト通らなかった話</a></h1>
+  <p class="author">
+    <span class="date">2015-04-09 15:38:49 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://rails-assets.org">rails-assets.org</a> から <code class="language-plaintext highlighter-rouge">bootstrap-sass-official</code> をインストールし、動かしたら、 test環境でテストが落ちてたのでメモ。</p>
+
+<h2 id="オチ">オチ</h2>
+
+<p>CSSの<a href="https://twitter.com/izumin5210/status/586054782994874368">ファイル名</a>が <code class="language-plaintext highlighter-rouge">application.css.scss</code> じゃなかった。</p>
+
+<h2 id="設定">設定</h2>
+
+<p>まず、<code class="language-plaintext highlighter-rouge">Gemfile</code> に以下のように追記をします。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">source</span> <span class="s1">'https://rails-assets.org'</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s1">'rails-asstes-bootstrap-sass-official'</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>あとはいつも通りにインストールします。
+次に <code class="language-plaintext highlighter-rouge">app/assets/javascripts/application.js</code> や <code class="language-plaintext highlighter-rouge">app/assets/stylesheets/application.css</code> に必要な読み込みを<a href="http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5">設定</a>します。</p>
+
+<h2 id="問題">問題</h2>
+<p>以上の設定が終ったあと、 <code class="language-plaintext highlighter-rouge">cucumber</code> でテストを実行すると、</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>File to import not found or unreadable: bootstrap-sass-official/bootstrap-sprockets.
+</code></pre></div></div>
+
+<p>などといわれますのでオチを参考にファイル名変更して終了です。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>おわり</p>
+
+<h3 id="参考">参考</h3>
+
+<ol>
+  <li>http://qiita.com/izumin5210/items/73f93347a9fe458dbbf5</li>
+  <li>https://twitter.com/izumin5210/status/586054782994874368</li>
+</ol>
+
+  </div>
+
   <h1><a href="/blog/2015/04/07/many-ssh-connection/">known_hostsに載っていないホストに接続確認しないようにする</a></h1>
   <p class="author">
     <span class="date">2015-04-07 19:40:03 +0900</span>
@@ -342,49 +386,6 @@ http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</p>
 <p>-&gt; <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /> &lt;-</p>
 
 <p>ほんとにちょっとずれて気になる…</p>
-
-  </div>
-
-  <h1><a href="/blog/2015/01/27/start-rust/">Start Rust by Example</a></h1>
-  <p class="author">
-    <span class="date">2015-01-27 07:10:29 +0900</span>
-  </p>
-  <div class="content">
-    <p>年ぁけたので、新しいプログラミング言語を覚えようと思い<a href="http://www.rust-lang.org">Rust Lang</a>を始めました。</p>
-
-<p>チュートリアルとして<a href="http://rustbyexample.com">Rust bye Example</a>を<a href="https://github.com/katsyoshi/rustbyexamle">やっていって</a>ます。</p>
-
-<h2 id="気が付いた点">気が付いた点</h2>
-
-<p>Rustという言語は変更が多いらしいのでここでは、Chap.1-14(2015/01/25時点)までで気がついた点で書きます。 まず、今回環境を下に示します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rustc --version
-rustc 1.0.0-nightly (29bd9a06e 2015-01-20 23:03:09 +0000)
-</code></pre></div></div>
-
-<h3 id="i---is">i -&gt; is</h3>
-
-<p>まず、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/2.FormattedPrint/FormattedPrint.rs#L9">Chap. 2のコード</a>で<code class="language-plaintext highlighter-rouge">integer</code>のsuffixが<code class="language-plaintext highlighter-rouge">is</code>に変更されています。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FormattedPrint.rs:9:69: 9:71 warning: the `i` suffix on integers is deprecated; use `is` or one of the fixed-sized suffixes
-FormattedPrint.rs:9     println!("{} of {:b} people know binary, the other half don't", 1i, 2i);
-                                                                                        ^~
-</code></pre></div></div>
-
-<h3 id="rangea-b--ab">range(a, b) –&gt; (a..b)</h3>
-
-<p>つぎに、<a href="https://github.com/katsyoshi/rustbyexample/blob/master/10.ForAndRange/ForAndRange.rs#L2">Chap. 10のコード</a>で<code class="language-plaintext highlighter-rouge">range(a, b)</code>がunstableになっているので<code class="language-plaintext highlighter-rouge">(a..b)</code>に変更しました。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ForAndRange.rs:2:14: 2:19 warning: use of unstable item: will be replaced by range notation, #[warn(unstable)] on by default
-ForAndRange.rs:2     for n in range(1u32, 101) {
-                              ^~~~~
-</code></pre></div></div>
-
-<h2 id="おわり">おわり</h2>
-
-<p>いま確認してたらそもそもRust by Example自体が変更されてた…</p>
-
-<p>ちゃんちゃん</p>
 
   </div>
 
