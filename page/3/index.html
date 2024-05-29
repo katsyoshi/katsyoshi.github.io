@@ -60,6 +60,131 @@
 
 
 
+  <h1><a href="/blog/2021/12/26/xremap/">いんとろでぅーす xremap</a></h1>
+  <p class="author">
+    <span class="date">2021-12-26 13:59:59 +0900</span>
+  </p>
+  <div class="content">
+    <p>仕事で利用したりしている <strong>Slack</strong> などのキーボードでの操作が面倒になってきたので、
+<strong>emacs keybind</strong> が利用できるようにするため <a href="https://github.com/k0kubun/xremap"><strong>xremap</strong></a> を利用することにした。</p>
+
+<p>この記事はその利用するまでの顛末をメモとして残す。</p>
+
+<h2 id="導入">導入</h2>
+
+<p>これは、さくっと <code class="language-plaintext highlighter-rouge">cargo install xremap</code> でインストールできます。
+<a href="https://www.rust-lang.org"><strong>rust</strong></a> をまだ導入していない方は <a href="https://www.rust-lang.org/tools/install">公式ページのインストール</a> を参考にインストールしてください。</p>
+
+<h2 id="起動">起動!!!</h2>
+
+<p>これも簡単で以下のコマンドで起動します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xremap /path/to/your/xremap/config.yml
+</code></pre></div></div>
+
+<h3 id="エラーに遭遇">エラーに遭遇</h3>
+
+<p>起動してみると以下のようなメッセージが出て起動ができませんでした。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Selecting devices from the following list:
+------------------------------------------------------------------------------
+/dev/input/event0 : Power Button
+/dev/input/event1 : Power Button
+/dev/input/event2 : HDA NVidia HDMI/DP,pcm=3
+/dev/input/event3 : HDA NVidia HDMI/DP,pcm=7
+/dev/input/event4 : HDA NVidia HDMI/DP,pcm=8
+/dev/input/event5 : HDA NVidia HDMI/DP,pcm=9
+/dev/input/event6 : HDA NVidia HDMI/DP,pcm=10
+/dev/input/event7 : HDA NVidia HDMI/DP,pcm=11
+/dev/input/event8 : Pekaso The Fortitude60 Keyboard
+/dev/input/event9 : Pekaso The Fortitude60 Keyboard Mouse
+/dev/input/event10: Pekaso The Fortitude60 Keyboard System Control
+/dev/input/event11: Pekaso The Fortitude60 Keyboard Consumer Control
+/dev/input/event12: Kensington Kensington Slimblade Trackball
+/dev/input/event13: Burr-Brown from TI               USB Audio CODEC
+/dev/input/event14: HD Web Camera: HD Web Camera
+------------------------------------------------------------------------------
+Selected keyboards automatically since --device options weren't specified:
+------------------------------------------------------------------------------
+/dev/input/event8 : Pekaso The Fortitude60 Keyboard
+------------------------------------------------------------------------------
+Error: Failed to build an output device: no such file or directory (os error 2)
+</code></pre></div></div>
+
+<p>で、答えは出てるので設定ファイル、対象となる入力デバイスなどを見ますが、
+これらのファイルはあるのでわからんとなります。</p>
+
+<p>しかたないのでソースをダウンロードして手元でデバッグしてみます。
+<strong>rust</strong> というか <strong>cargo</strong> は便利で、<code class="language-plaintext highlighter-rouge">cargo run</code> でソースをいじったあとすぐにコンパイルして利用することができます。
+今回はメンドウなので怪しいところに <code class="language-plaintext highlighter-rouge">println</code> 文を挿入して実行してみます。
+そうすると、どうやら <a href="https://github.com/k0kubun/xremap/blob/f058c444335c153e638ecf3c76492cdf9f8a975d/src/output.rs#L39-L43"><code class="language-plaintext highlighter-rouge">src/output.rs</code> の 39 行目の <code class="language-plaintext highlighter-rouge">VirtualDeviceBuilder</code> に問題がありそう</a> ということがわかりました。</p>
+
+<p>この行のどこに問題あるんだ？と思い利用しているこのライブラリ <a href="https://docs.rs/evdev"><strong>evdev</strong></a> を見ることにしました<sup id="fnref:evdev-rs" role="doc-noteref"><a href="#fn:evdev-rs" class="footnote" rel="footnote">1</a></sup>。
+そうすると <a href="https://docs.rs/evdev/latest/src/evdev/uinput.rs.html#13"><code class="language-plaintext highlighter-rouge">/dev/uinput</code> が必要</a> ということがわかります。
+それで <code class="language-plaintext highlighter-rouge">/dev/uinput</code> があるかどうか <code class="language-plaintext highlighter-rouge">ls</code> で見ますが、当然無いので無いです。
+なぜ無いのかというと <code class="language-plaintext highlighter-rouge">INPUT_UINPUT</code> でドライバーを入れていなかったようです。
+なのでカーネルのビルトインとしてビルドして再起動。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Defined at drivers/input/misc/Kconfig:513
+     Prompt: User level driver support
+     Depends on: INPUT [=y] &amp;&amp; INPUT_MISC [=y]
+     Location:
+       -&gt; Device Drivers
+         -&gt; Input device support
+           -&gt; Generic input layer (needed for keyboard, mouse, ...) (INPUT [=y])
+             -&gt; Miscellaneous devices (INPUT_MISC [=y])
+               -&gt; User level driver support
+</code></pre></div></div>
+
+<p>再起動したら、確認を行ないます。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ xremap ~/.config/xremap/config.yml
+Selecting devices from the following list:
+------------------------------------------------------------------------------
+/dev/input/event0 : Power Button
+/dev/input/event1 : Power Button
+/dev/input/event2 : HDA NVidia HDMI/DP,pcm=3
+/dev/input/event3 : HDA NVidia HDMI/DP,pcm=7
+/dev/input/event4 : HDA NVidia HDMI/DP,pcm=8
+/dev/input/event5 : HDA NVidia HDMI/DP,pcm=9
+/dev/input/event6 : HDA NVidia HDMI/DP,pcm=10
+/dev/input/event7 : HDA NVidia HDMI/DP,pcm=11
+/dev/input/event8 : Pekaso The Fortitude60 Keyboard
+/dev/input/event9 : Pekaso The Fortitude60 Keyboard Mouse
+/dev/input/event10: Pekaso The Fortitude60 Keyboard System Control
+/dev/input/event11: Pekaso The Fortitude60 Keyboard Consumer Control
+/dev/input/event12: Kensington Kensington Slimblade Trackball
+/dev/input/event13: Burr-Brown from TI               USB Audio CODEC
+/dev/input/event14: HD Web Camera: HD Web Camera
+------------------------------------------------------------------------------
+Selected keyboards automatically since --device options weren't specified:
+------------------------------------------------------------------------------
+/dev/input/event8 : Pekaso The Fortitude60 Keyboard
+------------------------------------------------------------------------------
+</code></pre></div></div>
+
+<p>yatta 起動できた!
+あとは、アプリでキーバインドが効いているかどうかを確認して、
+<strong>Window Manager</strong> である <strong>i3</strong> の起動時に <strong>xremap</strong> が起動するようにしたりしています。</p>
+
+<h2 id="おわり">おわり</h2>
+<p>最近、 <strong>Mac</strong> との行き来をしていると <strong>emacs keybind</strong> が使えないときにちょっといらっとしますので使えるようにキーバインドを変更してみました。
+設定ファイルの動的読み込みに対応していないのがちょっと面倒なのですが<sup id="fnref:hotreload" role="doc-noteref"><a href="#fn:hotreload" class="footnote" rel="footnote">2</a></sup>、これで <strong>Slack</strong> などで <code class="language-plaintext highlighter-rouge">C-a</code> で行頭にもどれるようになりました。便利。</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:evdev-rs" role="doc-endnote">
+      <p>はじめは似た名前のライブラリの <a href="https://github.com/ndesh26/evdev-rs"><code class="language-plaintext highlighter-rouge">evdev-rs</code></a> を見てたのですが、対象であるはずのファイル内に宣言されていないのでちょっととまどい、このライブラリは違うやつだとなり <a href="https://crates.io">crates.io</a> で再検索して発見しています。 <a href="#fnref:evdev-rs" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:hotreload" role="doc-endnote">
+      <p>どうせ1回確認できたら再起動する必要はないので問題ないといえば問題ないけど、ちょっと面倒。 <a href="#fnref:hotreload" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
   <h1><a href="/blog/2021/12/06/yancya-club-and-rubyist/">やんちゃクラブとRubyistと川</a></h1>
   <p class="author">
     <span class="date">2021-12-06 23:59:59 +0900</span>
@@ -646,78 +771,6 @@ Ruby on Apple II のやつがぶっとんでてよかったですね。
 <p>いかがでしたでしょうか？来年はまたビールをまとめたいとおもいますのでよろしくおねがいします。</p>
 
 <p><a href="https://drive.google.com/open?id=1NjNMxM0HM_mpi_gccWQyeSy-d3RXCAiF&amp;usp=sharing">sake 2018</a></p>
-
-  </div>
-
-  <h1><a href="/blog/2018/12/09/rails-app-development-using-docker-compose/">docker-composeを利用してRailsアプリ開発を楽にしよう</a></h1>
-  <p class="author">
-    <span class="date">2018-12-09 21:11:56 +0900</span>
-  </p>
-  <div class="content">
-    <p>ていうのを<a href="https://twitter.com/yu_suke1994">うなすけさん</a>に相談したら、<a href="https://blog.unasuke.com/2018/run-rails-test-on-docker-compose/">解決策を示してくれた</a>のでそれを開発向けに変えてみた。
-Dockerとdocker-composeはみなさんごぞんじだと思うので割愛します。</p>
-
-<h2 id="はじめに">はじめに</h2>
-
-<p>Railsアプリ用 Dockerfile を準備します。こちらは、元記事と同じで良いとおもいますが、元記事ではすべての条件を満たすために、不要な <code class="language-plaintext highlighter-rouge">DB</code> やミドルウェアのライブライをインストールしてますので必要なものだけにします。
-このRailsアプリでは、<code class="language-plaintext highlighter-rouge">DB</code> として <code class="language-plaintext highlighter-rouge">postgres</code> を利用していますので関連のライブラリをインストールします。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ruby:2.5.3-stretch
-
-ARG NODE_MAJOR_VER=11
-ARG BUNDLER_JOBS=4
-
-RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VER}.x | bash - \
-  &amp;&amp; curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  &amp;&amp; echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-  &amp;&amp; apt update &amp;&amp; apt install --assume-yes \
-    postgresql-contrib \
-    libpq-dev \
-    libxml2 \
-    libxml2-dev \
-    libxslt1-dev \
-    git \
-    make \
-    nodejs \
-    yarn \
- &amp;&amp; apt-get clean \
- &amp;&amp; rm -rf /var/lib/apt/lists/*
-
-WORKDIR /rails
-COPY . .
-RUN bundle install --jobs=${BUNDLER_JOBS}
-RUN yarn install
-</code></pre></div></div>
-
-<p>同様に <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> を必要なものだけにします。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '3'
-services:
-  rails:
-    build: .
-    command: /bin/bash
-    environment:
-      - NODE_MAJAR_VER=11
-      - BUNDLER_JOBS=4
-      - DB_HOST=postgres
-    volumes:
-      - ".:/rails"
-    links:
-      - postgres
-    command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
-    ports:
-      - "3000:3000"
-  postgres:
-    image: postgres:11.1-alpine
-    ports:
-      - "5432:5432"
-</code></pre></div></div>
-
-<p>こちらも <code class="language-plaintext highlighter-rouge">postgres</code> だけにします。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>あとは <code class="language-plaintext highlighter-rouge">docker-compose up rails</code> とし、実行することで見れるようになっています。</p>
 
   </div>
 

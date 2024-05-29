@@ -60,6 +60,33 @@
 
 
 
+  <h1><a href="/blog/2016/08/31/hello-mikutter/">hello mikutter</a></h1>
+  <p class="author">
+    <span class="date">2016-08-31 22:55:03 +0900</span>
+  </p>
+  <div class="content">
+    <p>表題のとおりmikutterをgemでインストールできるようにしてみました。</p>
+
+<h2 id="どうやって">どうやって？</h2>
+<p><a href="https://rubygems.org">rubygems</a> からはまだインストールはできません。
+ので、以下の様にしてgem packageを作成します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git clone github.com/katsyoshi/mikutter.git
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>mikutter
+<span class="gp">$</span><span class="w"> </span>git checkout reokure-ru
+<span class="gp">$</span><span class="w"> </span>bundle <span class="nb">install</span>
+<span class="gp">$</span><span class="w"> </span>bundle <span class="nb">exec </span>rake build
+<span class="gp">$</span><span class="w"> </span>gem <span class="nb">install </span>pkg/mikutter-3.5.0.pre.dev.gem
+<span class="gp">$</span><span class="w"> </span>mikutter
+</code></pre></div></div>
+
+<p>これでmikutterコマンドで起動できるようになっています
+これすらめんどうな人は<a href="https://katsyoshi.org/mikutter-3.5.0.pre.dev.gem">ここ</a>にあります。
+ダウンロードして <code class="language-plaintext highlighter-rouge">gem install mikutter-3.5.0.pre.dev.gem</code> でインストールできます。
+プラグインで起動できないとかあるなら必要なgemをインストールしてください。</p>
+
+  </div>
+
   <h1><a href="/blog/2016/08/08/renewal-my-site/">RENEWAL MY SITE!!!</a></h1>
   <p class="author">
     <span class="date">2016-08-08 21:05:47 +0900</span>
@@ -462,18 +489,6 @@ Linuxで使ってみた。</p>
 <p>などあります。</p>
 
 <p>そのうちなにかこれで書くかなぁ。</p>
-
-  </div>
-
-  <h1><a href="/blog/2015/04/15/looks-good-new-machine/">おにゅーな</a></h1>
-  <p class="author">
-    <span class="date">2015-04-15 01:15:45 +0900</span>
-  </p>
-  <div class="content">
-    <p>以前買った<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">X240</a>があまりにも使い辛いので
-X250を買った。それ以外にもメガネも一つ買ってみた。</p>
-
-<p>あと欲しいのは、ルンバかなあ</p>
 
   </div>
 

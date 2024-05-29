@@ -60,6 +60,18 @@
 
 
 
+  <h1><a href="/blog/2015/04/15/looks-good-new-machine/">おにゅーな</a></h1>
+  <p class="author">
+    <span class="date">2015-04-15 01:15:45 +0900</span>
+  </p>
+  <div class="content">
+    <p>以前買った<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">X240</a>があまりにも使い辛いので
+X250を買った。それ以外にもメガネも一つ買ってみた。</p>
+
+<p>あと欲しいのは、ルンバかなあ</p>
+
+  </div>
+
   <h1><a href="/blog/2015/04/09/file-name-needs-scss-extention/">ファイル名間違えてテスト通らなかった話</a></h1>
   <p class="author">
     <span class="date">2015-04-09 15:38:49 +0900</span>
@@ -339,53 +351,6 @@ $ sudo emerge -av mozc
 
 <p>あと引越ししたので贈っていただいてもいいんですよ？
 http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</p>
-
-  </div>
-
-  <h1><a href="/blog/2015/01/31/emacs-fonts/">Rictyやめるってよ</a></h1>
-  <p class="author">
-    <span class="date">2015-01-31 07:10:29 +0900</span>
-  </p>
-  <div class="content">
-    <p>普段、emacs上でフォントを <code class="language-plaintext highlighter-rouge">Ricty</code> にして使ってたけど、微妙にずれるのを解消できなかったはなし</p>
-
-<h2 id="症状と設定">症状と設定</h2>
-
-<p>Rictyのときの症状と設定をのせておきます。</p>
-
-<p>-&gt; <img src="/images/screenshot/Ricty.png" alt="Ricty" /> &lt;-</p>
-
-<div class="language-scheme highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">'default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">"Ricty"</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
-<span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="nv">nil</span> <span class="ss">'font</span><span class="p">)</span> <span class="ss">'japanese-jisx0208</span> <span class="o">'</span><span class="p">(</span><span class="s">"Ricty"</span> <span class="o">.</span> <span class="s">"iso10646-1"</span><span class="p">))</span>
-<span class="p">(</span><span class="nf">setq</span> <span class="nv">face-font-rescale-alist</span> <span class="o">'</span><span class="p">((</span><span class="s">"Ricty"</span> <span class="o">.</span> <span class="mf">1.2</span><span class="p">)))</span>
-</code></pre></div></div>
-
-<p>で解消できそうにないので DejaVu を用いて表示するように変更しました。</p>
-
-<p>-&gt; <img src="/images/screenshot/DejaVu.png" alt="DejaVu" /> &lt;-</p>
-
-<div class="language-scheme highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">set-face-attribute</span> <span class="ss">'default</span> <span class="nv">nil</span> <span class="nv">:family</span> <span class="s">"DejaVu"</span> <span class="nv">:height</span> <span class="mi">135</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>こんな感じになりました。</p>
-
-<h2 id="おわり">おわり</h2>
-<p>よくわからないので諦めました。ので参考に</p>
-
-<p>最後に引っ越ししました。</p>
-
-<p>http://www.amazon.co.jp/registry/wishlist/V0YZPO1OYFH5/</p>
-
-<h2 id="追記">追記</h2>
-
-<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/katsyoshi">@katsyoshi</a> (setq face-font-rescale-alist &#39;((&quot;Ricty&quot; . 1.0))) で常用していてずれないのですが、これだとどうなりますか?</p>&mdash; つまみ (@polamjag) <a href="https://twitter.com/polamjag/status/561875516118949889">February 1, 2015</a></blockquote>
-<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<p>とアドバイスがありましたので、やってみました!!!!!!</p>
-
-<p>-&gt; <img src="/images/screenshot/Ricty1.0.png" alt="Ricty-1.0" /> &lt;-</p>
-
-<p>ほんとにちょっとずれて気になる…</p>
 
   </div>
 

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Ruby を KOMPO してみた | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Ruby を KOMPO してみた" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="RubyKaigi2024 の発表、It’s about time to pack Ruby and Ruby scripts in one binary で話されていた kompo を試してみた。" />
+<meta property="og:description" content="RubyKaigi2024 の発表、It’s about time to pack Ruby and Ruby scripts in one binary で話されていた kompo を試してみた。" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-05-29T23:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Ruby を KOMPO してみた" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-05-29T23:59:59+09:00","datePublished":"2024-05-29T23:59:59+09:00","description":"RubyKaigi2024 の発表、It’s about time to pack Ruby and Ruby scripts in one binary で話されていた kompo を試してみた。","headline":"Ruby を KOMPO してみた","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/"},"url":"https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Ruby を KOMPO してみた</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2024-05-29T23:59:59+09:00" itemprop="datePublished">May 29, 2024
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><strong>RubyKaigi2024</strong> の発表、<a href="https://speakerdeck.com/ahogappa0613/its-about-time-to-pack-ruby-and-ruby-scripts-in-one-binary"><strong>It’s about time to pack Ruby and Ruby scripts in one binary</strong></a>
+で話されていた <a href="https://rubygems.org/gems/kompo"><strong>kompo</strong></a> を試してみた。</p>
+
+<h2 id="じゅんびというかとらしゅーというかうごかすまでのきろく">じゅんびというかとらしゅーというかうごかすまでのきろく</h2>
+
+<p>とりあえず動かしてみましょう!!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gem install kompo
+$ mkdir hello; cd hello;
+$ echo puts \"hello, world\" &gt; hello.rb
+$ kompo
+which: no brew in (/home/katsyoshi/.rbenv/versions/3.3.1/bin:/home/katsyoshi/.rbenv/libexec:/home/katsyoshi/.rbenv/plugins/ruby-build/bin:/home/katsyoshi/.local/share/zinit/plugins/rust/bin:/home/katsyoshi/.local/share/zinit/plugins/sk/bin:/home/katsyoshi/.local/share/zinit/plugins/hs/bin:/home/katsyoshi/.local/share/zinit/plugins/fd/bin:/home/katsyoshi/.rbenv/shims:/home/katsyoshi/.rbenv/bin:/home/katsyoshi/.pyenv/plugins/pyenv-virtualenv/shims:/home/katsyoshi/.pyenv/shims:/home/katsyoshi/.pyenv/bin:/home/katsyoshi/.local/share/zinit/polaris/bin:bin:/home/katsyoshi/.go/bin:/home/katsyoshi/bin:/home/katsyoshi/.bin:/usr/lib/llvm/17/bin:/usr/lib/llvm/18/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin)
+which: no brew in (/home/katsyoshi/.rbenv/versions/3.3.1/bin:/home/katsyoshi/.rbenv/libexec:/home/katsyoshi/.rbenv/plugins/ruby-build/bin:/home/katsyoshi/.local/share/zinit/plugins/rust/bin:/home/katsyoshi/.local/share/zinit/plugins/sk/bin:/home/katsyoshi/.local/share/zinit/plugins/hs/bin:/home/katsyoshi/.local/share/zinit/plugins/fd/bin:/home/katsyoshi/.rbenv/shims:/home/katsyoshi/.rbenv/bin:/home/katsyoshi/.pyenv/plugins/pyenv-virtualenv/shims:/home/katsyoshi/.pyenv/shims:/home/katsyoshi/.pyenv/bin:/home/katsyoshi/.local/share/zinit/polaris/bin:bin:/home/katsyoshi/.go/bin:/home/katsyoshi/bin:/home/katsyoshi/.bin:/usr/lib/llvm/17/bin:/usr/lib/llvm/18/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin)
+/home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:110:in `valid?': kompo-cli not found. Please install 'kompo-cli'. (RuntimeError)
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:120:in `block in cd_work_dir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/3.3.0/tmpdir.rb:99:in `mktmpdir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:118:in `cd_work_dir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/exe/kompo:8:in `&lt;top (required)&gt;'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/bin/kompo:25:in `load'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/bin/kompo:25:in `&lt;main&gt;'
+
+</code></pre></div></div>
+
+<p>「なるほどなるほど、 <strong><code class="language-plaintext highlighter-rouge">brew</code></strong> が必要なのか。そっかー。」
+とおもったのだが、そもそも今 <strong>Linux</strong> だぞ？となり、<a href="https://github.com/ahogappa0613/kompo">リポジトリ</a>を見ることに。
+リポジトリを見ると <strong>kompo-vfs</strong> をインストールしろと書いてあるな。
+<a href="https://github.com/ahogappa0613/kompo?tab=readme-ov-file#building">Building</a> に書いてあるように、ダンロードして手元でビルドして、環境変数を設定してみる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone git@github.com:ahogappa0613/kompo-vfs
+$ cd kompo-vfs &amp;&amp; cargo build --release
+$ export KOMPO_CLI=$(realpath target/release/kompo-cli)
+$ export LIB_KOMPO_DIR=$(realpath target/release)
+$ kompo
+which: no brew in (/home/katsyoshi/.rbenv/versions/3.3.1/bin:/home/katsyoshi/.rbenv/libexec:/home/katsyoshi/.rbenv/plugins/ruby-build/bin:/home/katsyoshi/.local/share/zinit/plugins/rust/bin:/home/katsyoshi/.local/share/zinit/plugins/sk/bin:/home/katsyoshi/.local/share/zinit/plugins/hs/bin:/home/katsyoshi/.local/share/zinit/plugins/fd/bin:/home/katsyoshi/.rbenv/shims:/home/katsyoshi/.rbenv/bin:/home/katsyoshi/.pyenv/plugins/pyenv-virtualenv/shims:/home/katsyoshi/.pyenv/shims:/home/katsyoshi/.pyenv/bin:/home/katsyoshi/.local/share/zinit/polaris/bin:bin:/home/katsyoshi/.go/bin:/home/katsyoshi/bin:/home/katsyoshi/.bin:/usr/lib/llvm/17/bin:/usr/lib/llvm/18/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin)
+which: no brew in (/home/katsyoshi/.rbenv/versions/3.3.1/bin:/home/katsyoshi/.rbenv/libexec:/home/katsyoshi/.rbenv/plugins/ruby-build/bin:/home/katsyoshi/.local/share/zinit/plugins/rust/bin:/home/katsyoshi/.local/share/zinit/plugins/sk/bin:/home/katsyoshi/.local/share/zinit/plugins/hs/bin:/home/katsyoshi/.local/share/zinit/plugins/fd/bin:/home/katsyoshi/.rbenv/shims:/home/katsyoshi/.rbenv/bin:/home/katsyoshi/.pyenv/plugins/pyenv-virtualenv/shims:/home/katsyoshi/.pyenv/shims:/home/katsyoshi/.pyenv/bin:/home/katsyoshi/.local/share/zinit/polaris/bin:bin:/home/katsyoshi/.go/bin:/home/katsyoshi/bin:/home/katsyoshi/.bin:/usr/lib/llvm/17/bin:/usr/lib/llvm/18/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin)
+/home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:112:in `valid?': Entrypoint not found: '/home/katsyoshi/hello/main.rb'. Please specify the entry file path with '-e' or '--entrypoint' option. (RuntimeError)
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:120:in `block in cd_work_dir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/3.3.0/tmpdir.rb:99:in `mktmpdir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:118:in `cd_work_dir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/exe/kompo:8:in `&lt;top (required)&gt;'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/bin/kompo:25:in `load'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/bin/kompo:25:in `&lt;main&gt;'
+</code></pre></div></div>
+
+<p>まだ駄目みたですね。エラーメッセージを見ると <code class="language-plaintext highlighter-rouge">-e</code> でエントリーポイントを指定しろとあるな。
+ということで <code class="language-plaintext highlighter-rouge">kompo -e hello.rb</code> と入力してみますね。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kompo -e hello.rb
+...snip...
+gcc -O3 -Wall -I/tmp/d20240530-1369030-t2mico/dest_dir/include/ruby-3.3.0/x86_64-linux -I/tmp/d20240530-1369030-t2mico/dest_dir/include/ruby-3.3.0 -L/tmp/d20240530-1369030-t2mico/dest_dir/lib -L/home/katsyoshi/Program/Ruby/kompo/kompo-vfs/target/release  main.c -Wl,--start-group  fs.o /tmp/d20240530-1369030-t2mico/ruby/ext/extinit.o /tmp/d20240530-1369030-t2mico/ruby/enc/encinit.o /tmp/d20240530-1369030-t2mico/ruby/ext/bigdecimal/bigdecimal.a /tmp/d20240530-1369030-t2mico/ruby/ext/cgi/escape/escape.a /tmp/d20240530-1369030-t2mico/ruby/ext/continuation/continuation.a /tmp/d20240530-1369030-t2mico/ruby/ext/coverage/coverage.a /tmp/d20240530-1369030-t2mico/ruby/ext/date/date_core.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/bubblebabble/bubblebabble.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/digest.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/md5/md5.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/rmd160/rmd160.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/sha1/sha1.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/sha2/sha2.a /tmp/d20240530-1369030-t2mico/ruby/ext/erb/escape/escape.a /tmp/d20240530-1369030-t2mico/ruby/ext/etc/etc.a /tmp/d20240530-1369030-t2mico/ruby/ext/fcntl/fcntl.a /tmp/d20240530-1369030-t2mico/ruby/ext/fiddle/fiddle.a /tmp/d20240530-1369030-t2mico/ruby/ext/io/console/console.a /tmp/d20240530-1369030-t2mico/ruby/ext/io/nonblock/nonblock.a /tmp/d20240530-1369030-t2mico/ruby/ext/io/wait/wait.a /tmp/d20240530-1369030-t2mico/ruby/ext/json/generator/generator.a /tmp/d20240530-1369030-t2mico/ruby/ext/json/parser/parser.a /tmp/d20240530-1369030-t2mico/ruby/ext/monitor/monitor.a /tmp/d20240530-1369030-t2mico/ruby/ext/nkf/nkf.a /tmp/d20240530-1369030-t2mico/ruby/ext/objspace/objspace.a /tmp/d20240530-1369030-t2mico/ruby/ext/openssl/openssl.a /tmp/d20240530-1369030-t2mico/ruby/ext/pathname/pathname.a /tmp/d20240530-1369030-t2mico/ruby/ext/psych/psych.a /tmp/d20240530-1369030-t2mico/ruby/ext/pty/pty.a /tmp/d20240530-1369030-t2mico/ruby/ext/rbconfig/sizeof/sizeof.a /tmp/d20240530-1369030-t2mico/ruby/ext/ripper/ripper.a /tmp/d20240530-1369030-t2mico/ruby/ext/socket/socket.a /tmp/d20240530-1369030-t2mico/ruby/ext/stringio/stringio.a /tmp/d20240530-1369030-t2mico/ruby/ext/strscan/strscan.a /tmp/d20240530-1369030-t2mico/ruby/ext/syslog/syslog.a /tmp/d20240530-1369030-t2mico/ruby/ext/zlib/zlib.a /tmp/d20240530-1369030-t2mico/ruby/enc/libenc.a /tmp/d20240530-1369030-t2mico/ruby/enc/libtrans.a -lkompo -lruby-static -Wl,-Bstatic -lz -lrt -lgmp -lcrypt -lffi -lssl -lcrypto -lyaml -Wl,-Bdynamic -ldl -lm -lpthread -Wl,--end-group -o hello
+/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/bin/ld: -lgmp が見つかりません: そのようなファイルやディレクトリはありません
+/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/bin/ld: -lffi が見つかりません: そのようなファイルやディレクトリはありません
+/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/bin/ld: -lssl が見つかりません: そのようなファイルやディレクトリはありません
+/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/bin/ld: -lcrypto が見つかりません: そのようなファイルやディレクトリはありません
+/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/bin/ld: -lyaml が見つかりません: そのようなファイルやディレクトリはありません
+collect2: エラー: ld はステータス 1 で終了しました
+...snip...
+</code></pre></div></div>
+
+<p>いったとおもったら、今度はライブラリ(<strong>libgmp</strong>、<strong>libffi</strong>、<strong>openssl</strong>、<strong>libcrypt</strong>、<strong>libyaml</strong>)のリンクができないようですね。
+必要なライブラリはインストールされているのか見てみましょう。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ eix -ICU 'dev-libs' -s 'gmp|libcrybp|libffi|libyaml|openssl'
+[I] dev-libs/gmp
+     Available versions:  6.3.0-r1(0/10.4)^d {+asm +cpudetection +cxx doc pic static-libs ABI_MIPS="n32 n64 o32" ABI_S390="32 64" ABI_X86="32 64 x32"}
+     Installed versions:  6.3.0-r1(0/10.4)(02時44分45秒 2024年05月30日)(asm cpudetection cxx -doc -pic -static-libs ABI_MIPS="-n32 -n64 -o32" ABI_S390="-32 -64" ABI_X86="64 -32 -x32")
+     Homepage:            https://gmplib.org/
+     Description:         Library for arbitrary-precision arithmetic on different type of numbers
+
+[I] dev-libs/libffi
+     Available versions:  3.4.4-r4(0/8)^t ~3.4.6(0/8)^t {debug exec-static-trampoline pax-kernel static-libs test ABI_MIPS="n32 n64 o32" ABI_S390="32 64" ABI_X86="32 64 x32"}
+     Installed versions:  3.4.4-r4(0/8)^t(02時43分18秒 2024年05月30日)(-debug -exec-static-trampoline -pax-kernel -static-libs -test ABI_MIPS="-n32 -n64 -o32" ABI_S390="-32 -64" ABI_X86="64 -32 -x32")
+     Homepage:            https://sourceware.org/libffi/
+     Description:         Portable, high level programming interface to various calling conventions
+
+[I] dev-libs/libyaml
+     Available versions:  0.2.2^t 0.2.5^t {doc static-libs test}
+     Installed versions:  0.2.5^t(02時44分57秒 2024年05月30日)(-doc -static-libs -test)
+     Homepage:            https://github.com/yaml/libyaml
+     Description:         YAML 1.1 parser and emitter written in C
+
+[I] dev-libs/openssl
+     Available versions:  [M]1.0.2u-r1^td [M]1.1.1w(0/1.1)^t 3.0.11(0/3)^t 3.0.12(0/3)^t 3.0.13(0/3)^t ~3.0.13-r1(0/3)^t 3.0.13-r2(0/3)^t ~3.1.5-r1(0/3)^t ~3.1.5-r2(0/3)^t ~3.2.1-r1(0/3)^t ~3.2.1-r2(0/3)^t **3.3.0(0/3)^t {+asm bindist fips gmp kerberos ktls rfc3779 sctp sslv2 (+)sslv3 static-libs test tls-compression (+)tls-heartbeat vanilla verify-sig weak-ssl-ciphers ABI_MIPS="n32 n64 o32" ABI_S390="32 64" ABI_X86="32 64 x32" CPU_FLAGS_X86="sse2"}
+     Installed versions:  3.0.13-r2(0/3)^t(02時43分56秒 2024年05月30日)(asm -fips -ktls -rfc3779 -sctp -static-libs -test -tls-compression -vanilla -verify-sig -weak-ssl-ciphers ABI_MIPS="-n32 -n64 -o32" ABI_S390="-32 -64" ABI_X86="64 -32 -x32" CPU_FLAGS_X86="sse2")
+     Homepage:            https://www.openssl.org/
+     Description:         Robust, full-featured Open Source Toolkit for the Transport Layer Security (TLS)
+</code></pre></div></div>
+
+<p>入ってますねこれ…もういちどよくコンパイルしてエラーとなった行をよくみてみましょう。
+どのファイルも <code class="language-plaintext highlighter-rouge">.a</code> でおわってますね。
+ということはこれらのファイルに静的コンパイルされたファイルがなさそうですね。
+<strong>Gentoo Linux</strong> のパッケージマネージャー <strong>portage</strong> では
+<code class="language-plaintext highlighter-rouge">static-libs</code> というオプションをつけてあげることにより静的コンパイルされます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ doas emerge -uDN world
+$ kompo -e hello.rb
+...snip...
+$ ./hello
+`RubyGems' were not loaded.
+`error_highlight' was not loaded.
+`did_you_mean' was not loaded.
+`syntax_suggest' was not loaded.
+hello, world
+</code></pre></div></div>
+
+<p>yatta!!ugoita!!!</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p><strong>kompo</strong> を動かしてみました。
+コンパイルに時間がかかりますが、これで <strong>Ruby</strong> のプログラムを簡単に配ることができそうですね。</p>
+
+  </div><a class="u-url" href="/blog/2024/05/29/startup-kompo/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

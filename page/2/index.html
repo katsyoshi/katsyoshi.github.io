@@ -60,6 +60,114 @@
 
 
 
+  <h1><a href="/blog/2023/03/21/my-hobby-is-building-vaporware/">趣味は vaporware 造りですv0.0.0</a></h1>
+  <p class="author">
+    <span class="date">2023-03-21 13:59:59 +0900</span>
+  </p>
+  <div class="content">
+    <p>プログラマー三大勉強はしたけど、実装はしたことないものといえば
+CPU、OS、コンパイラーなのです<sup id="fnref:kojinsa" role="doc-noteref"><a href="#fn:kojinsa" class="footnote" rel="footnote">1</a></sup>が、先日 <a href="https://www.publickey1.jp/blog/23/ruby30static_compiler_for_ruby.html">ruby30th 誕生日会のキーノート</a>で
+matz が “Static Compiler for Ruby” という今はまだない <code class="language-plaintext highlighter-rouge">vaporware</code> として
+挙げていたのでこの <strong>static compiler</strong> を作ろうとなりました。</p>
+
+<p><a href="https://github.com/katsyoshi/vaporware"><img src="https://gh-card.dev/repos/katsyoshi/vaporware.svg" alt="katsyoshi/vaporware - GitHub" /></a></p>
+
+<h2 id="goal">Goal</h2>
+
+<p><strong>Ruby</strong> のコードを <strong>static compile</strong> できるようにする。</p>
+
+<p>コンパイル先のターゲットは <strong>x86</strong> とします。 <strong>ARM</strong> や <strong>RISC-V</strong> などは今回の実装ではターゲットにしないです。</p>
+
+<p>とはいえすべての <strong>Ruby</strong> の機能を実装すると時間がかかりすぎるので個人で無理のない範囲
+で作ろうとします。無理のない実装範囲は以下なのかなと</p>
+
+<ol>
+  <li>四則演算</li>
+  <li>変数</li>
+  <li>メソッド</li>
+  <li>制御構文</li>
+  <li>プリミティブ型</li>
+</ol>
+
+<p>この5つの機能を実装する予定です。</p>
+
+<h3 id="実現する機能以外のことについて">実現する機能以外のことについて</h3>
+
+<p>5つの機能を実現すること以上のことはやらない予定です。
+やらないこととしては <em>最適化</em> 、 <em>GC</em> 、 外部ファイルで定義したメソッドやクラスの読み込みは実装しない予定です。
+実装しない個人的意見を以下に書いていきます。</p>
+
+<p>最適化は <strong>Ruby</strong> のコードを単純に <em>機械語</em> におとしただけでは現在の <strong>RubyVM</strong>
+より速くならないと考えているからです(要確認)。
+<strong>LLVM IR</strong> などへの変換ではなく、 <em>機械語</em> なのは <strong>LLVM</strong> をインストールする必要があるなどして
+面倒なのが大きいです<sup id="fnref:gentoo" role="doc-noteref"><a href="#fn:gentoo" class="footnote" rel="footnote">2</a></sup>。あとバージョン毎に <strong>LLVM IR</strong> が異なるのも現状では対応しにくい点となっています。</p>
+
+<p><em>GC</em> (Garbage Collection: ガベージコレクション) についてはそもそもクラスをサポートできない、
+変数などのメモリを確保しておく時間が長いプログラムを対象としないので今回はスコープ外としています。</p>
+
+<p>外部ファイル読み込みについてですが、外部ファイルの読み込みして <em>コンパイル</em> するだけなら
+そこまで問題にはならないと考えていますが、外部ファイルで定義された <em>メソッド</em> や <em>クラス</em> を
+事前に <em>コンパイル</em> して最後に <em>リンク</em> するのは型が不定になるのでサポートするのは難しいと考えています。</p>
+
+<h2 id="実装方針">実装方針</h2>
+<p>Goal までの実装は <a href="https://www.sigbus.info/compilerbook">低レイヤを知りたい人のためのCコンパイラ作成入門</a> を参考にすすめていきます。
+最初に <em>コンパイラー</em> を実装するものとして <em>C 言語</em> がたぶん勉強してきてうかぶと思います<sup id="fnref:java" role="doc-noteref"><a href="#fn:java" class="footnote" rel="footnote">3</a></sup>。
+<em>C 言語</em> だと <em>機械語</em> や <em>VM</em> のバイトコードへ落とすことのできる資料が多いので選択しています。
+とは言っても <strong>Ruby</strong> からの脳内変換はある程度必要なので慣れているというのもあります。</p>
+
+<p>実装としては <em>AST</em>(Abstract Syntax Tree: 構文抽象木) から愚直に <strong>x86 アセンブラ</strong> をファイルへ書き出し、
+そこから <em>C コンパイラー</em> (<code class="language-plaintext highlighter-rouge">gcc</code> or <code class="language-plaintext highlighter-rouge">clang</code>) をつかって機械語へ <em>コンパイル</em> します。
+フルフルの <strong>Ruby</strong> を実装するわけじゃないので依存する <strong>gem</strong> の依存も極力減らしたいです。</p>
+
+<h3 id="実装環境">実装環境</h3>
+
+<ul>
+  <li>CPU: Ryzen Thread Ripper 1950x</li>
+  <li>gcc: 12.2.1</li>
+  <li>clang: 16.0.0</li>
+  <li>OS: Gentoo Linux</li>
+  <li>Linux Kernel: 6.2 系</li>
+</ul>
+
+<h2 id="パーサー">パーサー</h2>
+
+<p>まず、<em>AST</em> を得るために <em>パーサー</em> が必要なのですが、 <strong>Ruby</strong> の構文は複雑なのでここは頑張らないようにします。ここをどうやって解決するのかというと <code class="language-plaintext highlighter-rouge">RubyVM::AbstractSyntaxTree</code> や <code class="language-plaintext highlighter-rouge">Ripper</code> をつかうのか、<code class="language-plaintext highlighter-rouge">parser.gem</code> をつかうのかを決めるひつようがあります。今回というかしばらくは <code class="language-plaintext highlighter-rouge">parser.gem</code> を利用して <em>AST</em> を得ることにします。
+ゆくゆくは <code class="language-plaintext highlighter-rouge">RubyVM::AbstractSyntaxTree</code> への置き替えはするよていです。</p>
+
+<p>ここはそのまま <code class="language-plaintext highlighter-rouge">parser.gem</code> のチュートリアルどおりにすれば <em>AST</em> が得られます。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"parser/current"</span>
+
+<span class="nb">puts</span> <span class="no">Parser</span><span class="o">::</span><span class="no">CurrentRuby</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"(1 + 2) * 3 / (5 - 4)"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="きょうはここまで">きょうはここまで</h2>
+
+<p>とりあえず手を動かしはじめましたが、ななななんと、似たような機能が実は <strong>Ruby 3.3</strong> 向けに
+<em>JIT</em> として入ったようです<sup id="fnref:rjit" role="doc-noteref"><a href="#fn:rjit" class="footnote" rel="footnote">4</a></sup>。
+ということでねこの話はね、勉強の話しかないんですが一旦 Goal まで作ってみましょうね。</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:kojinsa" role="doc-endnote">
+      <p>個人差があります。 <a href="#fnref:kojinsa" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:gentoo" role="doc-endnote">
+      <p>Gentoo Linux 使っているので毎回コンパイルしているので本当にめんどう。バイナリあるよとかそういう正論は受け付けていないです。 <a href="#fnref:gentoo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:java" role="doc-endnote">
+      <p>時代によって変わるかも。<strong>Java</strong> だったり、<strong>Lisp</strong> だったりする人がいるかも。 <a href="#fnref:java" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:rjit" role="doc-endnote">
+      <p>https://github.com/ruby/ruby/pull/7448 <a href="#fnref:rjit" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
   <h1><a href="/blog/2023/01/03/upgrade-gems-using-rust-for-new-rubygems/">Update rubygems using Rust for Ruby 3.2</a></h1>
   <p class="author">
     <span class="date">2023-01-03 23:59:59 +0900</span>
@@ -1246,131 +1354,6 @@ ruby bentimark.rb  9.88s user 4.30s system 99% cpu 14.175 total
     </li>
     <li id="fn:window" role="doc-endnote">
       <p>窓開閉する道具もないのでそこから仕入れる必要がありいつになるか不明です。 <a href="#fnref:window" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
-
-  </div>
-
-  <h1><a href="/blog/2021/12/26/xremap/">いんとろでぅーす xremap</a></h1>
-  <p class="author">
-    <span class="date">2021-12-26 13:59:59 +0900</span>
-  </p>
-  <div class="content">
-    <p>仕事で利用したりしている <strong>Slack</strong> などのキーボードでの操作が面倒になってきたので、
-<strong>emacs keybind</strong> が利用できるようにするため <a href="https://github.com/k0kubun/xremap"><strong>xremap</strong></a> を利用することにした。</p>
-
-<p>この記事はその利用するまでの顛末をメモとして残す。</p>
-
-<h2 id="導入">導入</h2>
-
-<p>これは、さくっと <code class="language-plaintext highlighter-rouge">cargo install xremap</code> でインストールできます。
-<a href="https://www.rust-lang.org"><strong>rust</strong></a> をまだ導入していない方は <a href="https://www.rust-lang.org/tools/install">公式ページのインストール</a> を参考にインストールしてください。</p>
-
-<h2 id="起動">起動!!!</h2>
-
-<p>これも簡単で以下のコマンドで起動します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xremap /path/to/your/xremap/config.yml
-</code></pre></div></div>
-
-<h3 id="エラーに遭遇">エラーに遭遇</h3>
-
-<p>起動してみると以下のようなメッセージが出て起動ができませんでした。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Selecting devices from the following list:
-------------------------------------------------------------------------------
-/dev/input/event0 : Power Button
-/dev/input/event1 : Power Button
-/dev/input/event2 : HDA NVidia HDMI/DP,pcm=3
-/dev/input/event3 : HDA NVidia HDMI/DP,pcm=7
-/dev/input/event4 : HDA NVidia HDMI/DP,pcm=8
-/dev/input/event5 : HDA NVidia HDMI/DP,pcm=9
-/dev/input/event6 : HDA NVidia HDMI/DP,pcm=10
-/dev/input/event7 : HDA NVidia HDMI/DP,pcm=11
-/dev/input/event8 : Pekaso The Fortitude60 Keyboard
-/dev/input/event9 : Pekaso The Fortitude60 Keyboard Mouse
-/dev/input/event10: Pekaso The Fortitude60 Keyboard System Control
-/dev/input/event11: Pekaso The Fortitude60 Keyboard Consumer Control
-/dev/input/event12: Kensington Kensington Slimblade Trackball
-/dev/input/event13: Burr-Brown from TI               USB Audio CODEC
-/dev/input/event14: HD Web Camera: HD Web Camera
-------------------------------------------------------------------------------
-Selected keyboards automatically since --device options weren't specified:
-------------------------------------------------------------------------------
-/dev/input/event8 : Pekaso The Fortitude60 Keyboard
-------------------------------------------------------------------------------
-Error: Failed to build an output device: no such file or directory (os error 2)
-</code></pre></div></div>
-
-<p>で、答えは出てるので設定ファイル、対象となる入力デバイスなどを見ますが、
-これらのファイルはあるのでわからんとなります。</p>
-
-<p>しかたないのでソースをダウンロードして手元でデバッグしてみます。
-<strong>rust</strong> というか <strong>cargo</strong> は便利で、<code class="language-plaintext highlighter-rouge">cargo run</code> でソースをいじったあとすぐにコンパイルして利用することができます。
-今回はメンドウなので怪しいところに <code class="language-plaintext highlighter-rouge">println</code> 文を挿入して実行してみます。
-そうすると、どうやら <a href="https://github.com/k0kubun/xremap/blob/f058c444335c153e638ecf3c76492cdf9f8a975d/src/output.rs#L39-L43"><code class="language-plaintext highlighter-rouge">src/output.rs</code> の 39 行目の <code class="language-plaintext highlighter-rouge">VirtualDeviceBuilder</code> に問題がありそう</a> ということがわかりました。</p>
-
-<p>この行のどこに問題あるんだ？と思い利用しているこのライブラリ <a href="https://docs.rs/evdev"><strong>evdev</strong></a> を見ることにしました<sup id="fnref:evdev-rs" role="doc-noteref"><a href="#fn:evdev-rs" class="footnote" rel="footnote">1</a></sup>。
-そうすると <a href="https://docs.rs/evdev/latest/src/evdev/uinput.rs.html#13"><code class="language-plaintext highlighter-rouge">/dev/uinput</code> が必要</a> ということがわかります。
-それで <code class="language-plaintext highlighter-rouge">/dev/uinput</code> があるかどうか <code class="language-plaintext highlighter-rouge">ls</code> で見ますが、当然無いので無いです。
-なぜ無いのかというと <code class="language-plaintext highlighter-rouge">INPUT_UINPUT</code> でドライバーを入れていなかったようです。
-なのでカーネルのビルトインとしてビルドして再起動。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Defined at drivers/input/misc/Kconfig:513
-     Prompt: User level driver support
-     Depends on: INPUT [=y] &amp;&amp; INPUT_MISC [=y]
-     Location:
-       -&gt; Device Drivers
-         -&gt; Input device support
-           -&gt; Generic input layer (needed for keyboard, mouse, ...) (INPUT [=y])
-             -&gt; Miscellaneous devices (INPUT_MISC [=y])
-               -&gt; User level driver support
-</code></pre></div></div>
-
-<p>再起動したら、確認を行ないます。</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ xremap ~/.config/xremap/config.yml
-Selecting devices from the following list:
-------------------------------------------------------------------------------
-/dev/input/event0 : Power Button
-/dev/input/event1 : Power Button
-/dev/input/event2 : HDA NVidia HDMI/DP,pcm=3
-/dev/input/event3 : HDA NVidia HDMI/DP,pcm=7
-/dev/input/event4 : HDA NVidia HDMI/DP,pcm=8
-/dev/input/event5 : HDA NVidia HDMI/DP,pcm=9
-/dev/input/event6 : HDA NVidia HDMI/DP,pcm=10
-/dev/input/event7 : HDA NVidia HDMI/DP,pcm=11
-/dev/input/event8 : Pekaso The Fortitude60 Keyboard
-/dev/input/event9 : Pekaso The Fortitude60 Keyboard Mouse
-/dev/input/event10: Pekaso The Fortitude60 Keyboard System Control
-/dev/input/event11: Pekaso The Fortitude60 Keyboard Consumer Control
-/dev/input/event12: Kensington Kensington Slimblade Trackball
-/dev/input/event13: Burr-Brown from TI               USB Audio CODEC
-/dev/input/event14: HD Web Camera: HD Web Camera
-------------------------------------------------------------------------------
-Selected keyboards automatically since --device options weren't specified:
-------------------------------------------------------------------------------
-/dev/input/event8 : Pekaso The Fortitude60 Keyboard
-------------------------------------------------------------------------------
-</code></pre></div></div>
-
-<p>yatta 起動できた!
-あとは、アプリでキーバインドが効いているかどうかを確認して、
-<strong>Window Manager</strong> である <strong>i3</strong> の起動時に <strong>xremap</strong> が起動するようにしたりしています。</p>
-
-<h2 id="おわり">おわり</h2>
-<p>最近、 <strong>Mac</strong> との行き来をしていると <strong>emacs keybind</strong> が使えないときにちょっといらっとしますので使えるようにキーバインドを変更してみました。
-設定ファイルの動的読み込みに対応していないのがちょっと面倒なのですが<sup id="fnref:hotreload" role="doc-noteref"><a href="#fn:hotreload" class="footnote" rel="footnote">2</a></sup>、これで <strong>Slack</strong> などで <code class="language-plaintext highlighter-rouge">C-a</code> で行頭にもどれるようになりました。便利。</p>
-
-<hr />
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:evdev-rs" role="doc-endnote">
-      <p>はじめは似た名前のライブラリの <a href="https://github.com/ndesh26/evdev-rs"><code class="language-plaintext highlighter-rouge">evdev-rs</code></a> を見てたのですが、対象であるはずのファイル内に宣言されていないのでちょっととまどい、このライブラリは違うやつだとなり <a href="https://crates.io">crates.io</a> で再検索して発見しています。 <a href="#fnref:evdev-rs" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:hotreload" role="doc-endnote">
-      <p>どうせ1回確認できたら再起動する必要はないので問題ないといえば問題ないけど、ちょっと面倒。 <a href="#fnref:hotreload" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

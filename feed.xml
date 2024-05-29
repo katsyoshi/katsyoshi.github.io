@@ -1,4 +1,114 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2024-05-28T21:15:17+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">最果ての沖縄に行ってきた</title><link href="https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa/" rel="alternate" type="text/html" title="最果ての沖縄に行ってきた" /><published>2024-05-18T23:59:59+09:00</published><updated>2024-05-18T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa/"><![CDATA[<p><a href="https://rubykaigi.org/2024"><strong>RubyKaigi2024</strong></a> の翌日 2024-05-18 から五日間 2024-05-22 まで
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2024-05-30T03:18:27+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Ruby を KOMPO してみた</title><link href="https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/" rel="alternate" type="text/html" title="Ruby を KOMPO してみた" /><published>2024-05-29T23:59:59+09:00</published><updated>2024-05-29T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/"><![CDATA[<p><strong>RubyKaigi2024</strong> の発表、<a href="https://speakerdeck.com/ahogappa0613/its-about-time-to-pack-ruby-and-ruby-scripts-in-one-binary"><strong>It’s about time to pack Ruby and Ruby scripts in one binary</strong></a>
+で話されていた <a href="https://rubygems.org/gems/kompo"><strong>kompo</strong></a> を試してみた。</p>
+
+<h2 id="じゅんびというかとらしゅーというかうごかすまでのきろく">じゅんびというかとらしゅーというかうごかすまでのきろく</h2>
+
+<p>とりあえず動かしてみましょう!!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gem install kompo
+$ mkdir hello; cd hello;
+$ echo puts \"hello, world\" &gt; hello.rb
+$ kompo
+which: no brew in (/home/katsyoshi/.rbenv/versions/3.3.1/bin:/home/katsyoshi/.rbenv/libexec:/home/katsyoshi/.rbenv/plugins/ruby-build/bin:/home/katsyoshi/.local/share/zinit/plugins/rust/bin:/home/katsyoshi/.local/share/zinit/plugins/sk/bin:/home/katsyoshi/.local/share/zinit/plugins/hs/bin:/home/katsyoshi/.local/share/zinit/plugins/fd/bin:/home/katsyoshi/.rbenv/shims:/home/katsyoshi/.rbenv/bin:/home/katsyoshi/.pyenv/plugins/pyenv-virtualenv/shims:/home/katsyoshi/.pyenv/shims:/home/katsyoshi/.pyenv/bin:/home/katsyoshi/.local/share/zinit/polaris/bin:bin:/home/katsyoshi/.go/bin:/home/katsyoshi/bin:/home/katsyoshi/.bin:/usr/lib/llvm/17/bin:/usr/lib/llvm/18/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin)
+which: no brew in (/home/katsyoshi/.rbenv/versions/3.3.1/bin:/home/katsyoshi/.rbenv/libexec:/home/katsyoshi/.rbenv/plugins/ruby-build/bin:/home/katsyoshi/.local/share/zinit/plugins/rust/bin:/home/katsyoshi/.local/share/zinit/plugins/sk/bin:/home/katsyoshi/.local/share/zinit/plugins/hs/bin:/home/katsyoshi/.local/share/zinit/plugins/fd/bin:/home/katsyoshi/.rbenv/shims:/home/katsyoshi/.rbenv/bin:/home/katsyoshi/.pyenv/plugins/pyenv-virtualenv/shims:/home/katsyoshi/.pyenv/shims:/home/katsyoshi/.pyenv/bin:/home/katsyoshi/.local/share/zinit/polaris/bin:bin:/home/katsyoshi/.go/bin:/home/katsyoshi/bin:/home/katsyoshi/.bin:/usr/lib/llvm/17/bin:/usr/lib/llvm/18/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin)
+/home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:110:in `valid?': kompo-cli not found. Please install 'kompo-cli'. (RuntimeError)
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:120:in `block in cd_work_dir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/3.3.0/tmpdir.rb:99:in `mktmpdir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:118:in `cd_work_dir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/exe/kompo:8:in `&lt;top (required)&gt;'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/bin/kompo:25:in `load'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/bin/kompo:25:in `&lt;main&gt;'
+
+</code></pre></div></div>
+
+<p>「なるほどなるほど、 <strong><code class="language-plaintext highlighter-rouge">brew</code></strong> が必要なのか。そっかー。」
+とおもったのだが、そもそも今 <strong>Linux</strong> だぞ？となり、<a href="https://github.com/ahogappa0613/kompo">リポジトリ</a>を見ることに。
+リポジトリを見ると <strong>kompo-vfs</strong> をインストールしろと書いてあるな。
+<a href="https://github.com/ahogappa0613/kompo?tab=readme-ov-file#building">Building</a> に書いてあるように、ダンロードして手元でビルドして、環境変数を設定してみる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone git@github.com:ahogappa0613/kompo-vfs
+$ cd kompo-vfs &amp;&amp; cargo build --release
+$ export KOMPO_CLI=$(realpath target/release/kompo-cli)
+$ export LIB_KOMPO_DIR=$(realpath target/release)
+$ kompo
+which: no brew in (/home/katsyoshi/.rbenv/versions/3.3.1/bin:/home/katsyoshi/.rbenv/libexec:/home/katsyoshi/.rbenv/plugins/ruby-build/bin:/home/katsyoshi/.local/share/zinit/plugins/rust/bin:/home/katsyoshi/.local/share/zinit/plugins/sk/bin:/home/katsyoshi/.local/share/zinit/plugins/hs/bin:/home/katsyoshi/.local/share/zinit/plugins/fd/bin:/home/katsyoshi/.rbenv/shims:/home/katsyoshi/.rbenv/bin:/home/katsyoshi/.pyenv/plugins/pyenv-virtualenv/shims:/home/katsyoshi/.pyenv/shims:/home/katsyoshi/.pyenv/bin:/home/katsyoshi/.local/share/zinit/polaris/bin:bin:/home/katsyoshi/.go/bin:/home/katsyoshi/bin:/home/katsyoshi/.bin:/usr/lib/llvm/17/bin:/usr/lib/llvm/18/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin)
+which: no brew in (/home/katsyoshi/.rbenv/versions/3.3.1/bin:/home/katsyoshi/.rbenv/libexec:/home/katsyoshi/.rbenv/plugins/ruby-build/bin:/home/katsyoshi/.local/share/zinit/plugins/rust/bin:/home/katsyoshi/.local/share/zinit/plugins/sk/bin:/home/katsyoshi/.local/share/zinit/plugins/hs/bin:/home/katsyoshi/.local/share/zinit/plugins/fd/bin:/home/katsyoshi/.rbenv/shims:/home/katsyoshi/.rbenv/bin:/home/katsyoshi/.pyenv/plugins/pyenv-virtualenv/shims:/home/katsyoshi/.pyenv/shims:/home/katsyoshi/.pyenv/bin:/home/katsyoshi/.local/share/zinit/polaris/bin:bin:/home/katsyoshi/.go/bin:/home/katsyoshi/bin:/home/katsyoshi/.bin:/usr/lib/llvm/17/bin:/usr/lib/llvm/18/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin)
+/home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:112:in `valid?': Entrypoint not found: '/home/katsyoshi/hello/main.rb'. Please specify the entry file path with '-e' or '--entrypoint' option. (RuntimeError)
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:120:in `block in cd_work_dir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/3.3.0/tmpdir.rb:99:in `mktmpdir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/lib/kompo.rb:118:in `cd_work_dir'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/lib/ruby/gems/3.3.0/gems/kompo-0.2.0/exe/kompo:8:in `&lt;top (required)&gt;'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/bin/kompo:25:in `load'
+        from /home/katsyoshi/.rbenv/versions/3.3.1/bin/kompo:25:in `&lt;main&gt;'
+</code></pre></div></div>
+
+<p>まだ駄目みたですね。エラーメッセージを見ると <code class="language-plaintext highlighter-rouge">-e</code> でエントリーポイントを指定しろとあるな。
+ということで <code class="language-plaintext highlighter-rouge">kompo -e hello.rb</code> と入力してみますね。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kompo -e hello.rb
+...snip...
+gcc -O3 -Wall -I/tmp/d20240530-1369030-t2mico/dest_dir/include/ruby-3.3.0/x86_64-linux -I/tmp/d20240530-1369030-t2mico/dest_dir/include/ruby-3.3.0 -L/tmp/d20240530-1369030-t2mico/dest_dir/lib -L/home/katsyoshi/Program/Ruby/kompo/kompo-vfs/target/release  main.c -Wl,--start-group  fs.o /tmp/d20240530-1369030-t2mico/ruby/ext/extinit.o /tmp/d20240530-1369030-t2mico/ruby/enc/encinit.o /tmp/d20240530-1369030-t2mico/ruby/ext/bigdecimal/bigdecimal.a /tmp/d20240530-1369030-t2mico/ruby/ext/cgi/escape/escape.a /tmp/d20240530-1369030-t2mico/ruby/ext/continuation/continuation.a /tmp/d20240530-1369030-t2mico/ruby/ext/coverage/coverage.a /tmp/d20240530-1369030-t2mico/ruby/ext/date/date_core.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/bubblebabble/bubblebabble.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/digest.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/md5/md5.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/rmd160/rmd160.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/sha1/sha1.a /tmp/d20240530-1369030-t2mico/ruby/ext/digest/sha2/sha2.a /tmp/d20240530-1369030-t2mico/ruby/ext/erb/escape/escape.a /tmp/d20240530-1369030-t2mico/ruby/ext/etc/etc.a /tmp/d20240530-1369030-t2mico/ruby/ext/fcntl/fcntl.a /tmp/d20240530-1369030-t2mico/ruby/ext/fiddle/fiddle.a /tmp/d20240530-1369030-t2mico/ruby/ext/io/console/console.a /tmp/d20240530-1369030-t2mico/ruby/ext/io/nonblock/nonblock.a /tmp/d20240530-1369030-t2mico/ruby/ext/io/wait/wait.a /tmp/d20240530-1369030-t2mico/ruby/ext/json/generator/generator.a /tmp/d20240530-1369030-t2mico/ruby/ext/json/parser/parser.a /tmp/d20240530-1369030-t2mico/ruby/ext/monitor/monitor.a /tmp/d20240530-1369030-t2mico/ruby/ext/nkf/nkf.a /tmp/d20240530-1369030-t2mico/ruby/ext/objspace/objspace.a /tmp/d20240530-1369030-t2mico/ruby/ext/openssl/openssl.a /tmp/d20240530-1369030-t2mico/ruby/ext/pathname/pathname.a /tmp/d20240530-1369030-t2mico/ruby/ext/psych/psych.a /tmp/d20240530-1369030-t2mico/ruby/ext/pty/pty.a /tmp/d20240530-1369030-t2mico/ruby/ext/rbconfig/sizeof/sizeof.a /tmp/d20240530-1369030-t2mico/ruby/ext/ripper/ripper.a /tmp/d20240530-1369030-t2mico/ruby/ext/socket/socket.a /tmp/d20240530-1369030-t2mico/ruby/ext/stringio/stringio.a /tmp/d20240530-1369030-t2mico/ruby/ext/strscan/strscan.a /tmp/d20240530-1369030-t2mico/ruby/ext/syslog/syslog.a /tmp/d20240530-1369030-t2mico/ruby/ext/zlib/zlib.a /tmp/d20240530-1369030-t2mico/ruby/enc/libenc.a /tmp/d20240530-1369030-t2mico/ruby/enc/libtrans.a -lkompo -lruby-static -Wl,-Bstatic -lz -lrt -lgmp -lcrypt -lffi -lssl -lcrypto -lyaml -Wl,-Bdynamic -ldl -lm -lpthread -Wl,--end-group -o hello
+/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/bin/ld: -lgmp が見つかりません: そのようなファイルやディレクトリはありません
+/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/bin/ld: -lffi が見つかりません: そのようなファイルやディレクトリはありません
+/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/bin/ld: -lssl が見つかりません: そのようなファイルやディレクトリはありません
+/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/bin/ld: -lcrypto が見つかりません: そのようなファイルやディレクトリはありません
+/usr/lib/gcc/x86_64-pc-linux-gnu/13/../../../../x86_64-pc-linux-gnu/bin/ld: -lyaml が見つかりません: そのようなファイルやディレクトリはありません
+collect2: エラー: ld はステータス 1 で終了しました
+...snip...
+</code></pre></div></div>
+
+<p>いったとおもったら、今度はライブラリ(<strong>libgmp</strong>、<strong>libffi</strong>、<strong>openssl</strong>、<strong>libcrypt</strong>、<strong>libyaml</strong>)のリンクができないようですね。
+必要なライブラリはインストールされているのか見てみましょう。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ eix -ICU 'dev-libs' -s 'gmp|libcrybp|libffi|libyaml|openssl'
+[I] dev-libs/gmp
+     Available versions:  6.3.0-r1(0/10.4)^d {+asm +cpudetection +cxx doc pic static-libs ABI_MIPS="n32 n64 o32" ABI_S390="32 64" ABI_X86="32 64 x32"}
+     Installed versions:  6.3.0-r1(0/10.4)(02時44分45秒 2024年05月30日)(asm cpudetection cxx -doc -pic -static-libs ABI_MIPS="-n32 -n64 -o32" ABI_S390="-32 -64" ABI_X86="64 -32 -x32")
+     Homepage:            https://gmplib.org/
+     Description:         Library for arbitrary-precision arithmetic on different type of numbers
+
+[I] dev-libs/libffi
+     Available versions:  3.4.4-r4(0/8)^t ~3.4.6(0/8)^t {debug exec-static-trampoline pax-kernel static-libs test ABI_MIPS="n32 n64 o32" ABI_S390="32 64" ABI_X86="32 64 x32"}
+     Installed versions:  3.4.4-r4(0/8)^t(02時43分18秒 2024年05月30日)(-debug -exec-static-trampoline -pax-kernel -static-libs -test ABI_MIPS="-n32 -n64 -o32" ABI_S390="-32 -64" ABI_X86="64 -32 -x32")
+     Homepage:            https://sourceware.org/libffi/
+     Description:         Portable, high level programming interface to various calling conventions
+
+[I] dev-libs/libyaml
+     Available versions:  0.2.2^t 0.2.5^t {doc static-libs test}
+     Installed versions:  0.2.5^t(02時44分57秒 2024年05月30日)(-doc -static-libs -test)
+     Homepage:            https://github.com/yaml/libyaml
+     Description:         YAML 1.1 parser and emitter written in C
+
+[I] dev-libs/openssl
+     Available versions:  [M]1.0.2u-r1^td [M]1.1.1w(0/1.1)^t 3.0.11(0/3)^t 3.0.12(0/3)^t 3.0.13(0/3)^t ~3.0.13-r1(0/3)^t 3.0.13-r2(0/3)^t ~3.1.5-r1(0/3)^t ~3.1.5-r2(0/3)^t ~3.2.1-r1(0/3)^t ~3.2.1-r2(0/3)^t **3.3.0(0/3)^t {+asm bindist fips gmp kerberos ktls rfc3779 sctp sslv2 (+)sslv3 static-libs test tls-compression (+)tls-heartbeat vanilla verify-sig weak-ssl-ciphers ABI_MIPS="n32 n64 o32" ABI_S390="32 64" ABI_X86="32 64 x32" CPU_FLAGS_X86="sse2"}
+     Installed versions:  3.0.13-r2(0/3)^t(02時43分56秒 2024年05月30日)(asm -fips -ktls -rfc3779 -sctp -static-libs -test -tls-compression -vanilla -verify-sig -weak-ssl-ciphers ABI_MIPS="-n32 -n64 -o32" ABI_S390="-32 -64" ABI_X86="64 -32 -x32" CPU_FLAGS_X86="sse2")
+     Homepage:            https://www.openssl.org/
+     Description:         Robust, full-featured Open Source Toolkit for the Transport Layer Security (TLS)
+</code></pre></div></div>
+
+<p>入ってますねこれ…もういちどよくコンパイルしてエラーとなった行をよくみてみましょう。
+どのファイルも <code class="language-plaintext highlighter-rouge">.a</code> でおわってますね。
+ということはこれらのファイルに静的コンパイルされたファイルがなさそうですね。
+<strong>Gentoo Linux</strong> のパッケージマネージャー <strong>portage</strong> では
+<code class="language-plaintext highlighter-rouge">static-libs</code> というオプションをつけてあげることにより静的コンパイルされます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ doas emerge -uDN world
+$ kompo -e hello.rb
+...snip...
+$ ./hello
+`RubyGems' were not loaded.
+`error_highlight' was not loaded.
+`did_you_mean' was not loaded.
+`syntax_suggest' was not loaded.
+hello, world
+</code></pre></div></div>
+
+<p>yatta!!ugoita!!!</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p><strong>kompo</strong> を動かしてみました。
+コンパイルに時間がかかりますが、これで <strong>Ruby</strong> のプログラムを簡単に配ることができそうですね。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[RubyKaigi2024 の発表、It’s about time to pack Ruby and Ruby scripts in one binary で話されていた kompo を試してみた。]]></summary></entry><entry><title type="html">最果ての沖縄に行ってきた</title><link href="https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa/" rel="alternate" type="text/html" title="最果ての沖縄に行ってきた" /><published>2024-05-18T23:59:59+09:00</published><updated>2024-05-18T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa/"><![CDATA[<p><a href="https://rubykaigi.org/2024"><strong>RubyKaigi2024</strong></a> の翌日 2024-05-18 から五日間 2024-05-22 まで
 <a href="http://www.vill.kunigami.okinawa.jp/">沖縄県国頭郡国頭村</a>辺戸に滞在したはなし。</p>
 
 <h2 id="1-日目">1 日目</h2>
@@ -842,103 +952,4 @@ drinkup 終了後は <a href="https://twitter.com/onk">onk</a> とふたりで�
       <p>海外の人が登録して行ったほうがいいんじゃないかと一瞬思った <a href="#fnref:sonnnakotohanai" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[行ってきたのでまとめます。LT やったのですが、 LT の話はまた今度。]]></summary></entry><entry><title type="html">趣味は vaporware 造りですv0.0.0</title><link href="https://blog.katsyoshi.org/blog/2023/03/21/my-hobby-is-building-vaporware/" rel="alternate" type="text/html" title="趣味は vaporware 造りですv0.0.0" /><published>2023-03-21T13:59:59+09:00</published><updated>2023-03-21T13:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/03/21/my-hobby-is-building-vaporware</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/03/21/my-hobby-is-building-vaporware/"><![CDATA[<p>プログラマー三大勉強はしたけど、実装はしたことないものといえば
-CPU、OS、コンパイラーなのです<sup id="fnref:kojinsa" role="doc-noteref"><a href="#fn:kojinsa" class="footnote" rel="footnote">1</a></sup>が、先日 <a href="https://www.publickey1.jp/blog/23/ruby30static_compiler_for_ruby.html">ruby30th 誕生日会のキーノート</a>で
-matz が “Static Compiler for Ruby” という今はまだない <code class="language-plaintext highlighter-rouge">vaporware</code> として
-挙げていたのでこの <strong>static compiler</strong> を作ろうとなりました。</p>
-
-<p><a href="https://github.com/katsyoshi/vaporware"><img src="https://gh-card.dev/repos/katsyoshi/vaporware.svg" alt="katsyoshi/vaporware - GitHub" /></a></p>
-
-<h2 id="goal">Goal</h2>
-
-<p><strong>Ruby</strong> のコードを <strong>static compile</strong> できるようにする。</p>
-
-<p>コンパイル先のターゲットは <strong>x86</strong> とします。 <strong>ARM</strong> や <strong>RISC-V</strong> などは今回の実装ではターゲットにしないです。</p>
-
-<p>とはいえすべての <strong>Ruby</strong> の機能を実装すると時間がかかりすぎるので個人で無理のない範囲
-で作ろうとします。無理のない実装範囲は以下なのかなと</p>
-
-<ol>
-  <li>四則演算</li>
-  <li>変数</li>
-  <li>メソッド</li>
-  <li>制御構文</li>
-  <li>プリミティブ型</li>
-</ol>
-
-<p>この5つの機能を実装する予定です。</p>
-
-<h3 id="実現する機能以外のことについて">実現する機能以外のことについて</h3>
-
-<p>5つの機能を実現すること以上のことはやらない予定です。
-やらないこととしては <em>最適化</em> 、 <em>GC</em> 、 外部ファイルで定義したメソッドやクラスの読み込みは実装しない予定です。
-実装しない個人的意見を以下に書いていきます。</p>
-
-<p>最適化は <strong>Ruby</strong> のコードを単純に <em>機械語</em> におとしただけでは現在の <strong>RubyVM</strong>
-より速くならないと考えているからです(要確認)。
-<strong>LLVM IR</strong> などへの変換ではなく、 <em>機械語</em> なのは <strong>LLVM</strong> をインストールする必要があるなどして
-面倒なのが大きいです<sup id="fnref:gentoo" role="doc-noteref"><a href="#fn:gentoo" class="footnote" rel="footnote">2</a></sup>。あとバージョン毎に <strong>LLVM IR</strong> が異なるのも現状では対応しにくい点となっています。</p>
-
-<p><em>GC</em> (Garbage Collection: ガベージコレクション) についてはそもそもクラスをサポートできない、
-変数などのメモリを確保しておく時間が長いプログラムを対象としないので今回はスコープ外としています。</p>
-
-<p>外部ファイル読み込みについてですが、外部ファイルの読み込みして <em>コンパイル</em> するだけなら
-そこまで問題にはならないと考えていますが、外部ファイルで定義された <em>メソッド</em> や <em>クラス</em> を
-事前に <em>コンパイル</em> して最後に <em>リンク</em> するのは型が不定になるのでサポートするのは難しいと考えています。</p>
-
-<h2 id="実装方針">実装方針</h2>
-<p>Goal までの実装は <a href="https://www.sigbus.info/compilerbook">低レイヤを知りたい人のためのCコンパイラ作成入門</a> を参考にすすめていきます。
-最初に <em>コンパイラー</em> を実装するものとして <em>C 言語</em> がたぶん勉強してきてうかぶと思います<sup id="fnref:java" role="doc-noteref"><a href="#fn:java" class="footnote" rel="footnote">3</a></sup>。
-<em>C 言語</em> だと <em>機械語</em> や <em>VM</em> のバイトコードへ落とすことのできる資料が多いので選択しています。
-とは言っても <strong>Ruby</strong> からの脳内変換はある程度必要なので慣れているというのもあります。</p>
-
-<p>実装としては <em>AST</em>(Abstract Syntax Tree: 構文抽象木) から愚直に <strong>x86 アセンブラ</strong> をファイルへ書き出し、
-そこから <em>C コンパイラー</em> (<code class="language-plaintext highlighter-rouge">gcc</code> or <code class="language-plaintext highlighter-rouge">clang</code>) をつかって機械語へ <em>コンパイル</em> します。
-フルフルの <strong>Ruby</strong> を実装するわけじゃないので依存する <strong>gem</strong> の依存も極力減らしたいです。</p>
-
-<h3 id="実装環境">実装環境</h3>
-
-<ul>
-  <li>CPU: Ryzen Thread Ripper 1950x</li>
-  <li>gcc: 12.2.1</li>
-  <li>clang: 16.0.0</li>
-  <li>OS: Gentoo Linux</li>
-  <li>Linux Kernel: 6.2 系</li>
-</ul>
-
-<h2 id="パーサー">パーサー</h2>
-
-<p>まず、<em>AST</em> を得るために <em>パーサー</em> が必要なのですが、 <strong>Ruby</strong> の構文は複雑なのでここは頑張らないようにします。ここをどうやって解決するのかというと <code class="language-plaintext highlighter-rouge">RubyVM::AbstractSyntaxTree</code> や <code class="language-plaintext highlighter-rouge">Ripper</code> をつかうのか、<code class="language-plaintext highlighter-rouge">parser.gem</code> をつかうのかを決めるひつようがあります。今回というかしばらくは <code class="language-plaintext highlighter-rouge">parser.gem</code> を利用して <em>AST</em> を得ることにします。
-ゆくゆくは <code class="language-plaintext highlighter-rouge">RubyVM::AbstractSyntaxTree</code> への置き替えはするよていです。</p>
-
-<p>ここはそのまま <code class="language-plaintext highlighter-rouge">parser.gem</code> のチュートリアルどおりにすれば <em>AST</em> が得られます。</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"parser/current"</span>
-
-<span class="nb">puts</span> <span class="no">Parser</span><span class="o">::</span><span class="no">CurrentRuby</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"(1 + 2) * 3 / (5 - 4)"</span><span class="p">)</span>
-</code></pre></div></div>
-
-<h2 id="きょうはここまで">きょうはここまで</h2>
-
-<p>とりあえず手を動かしはじめましたが、ななななんと、似たような機能が実は <strong>Ruby 3.3</strong> 向けに
-<em>JIT</em> として入ったようです<sup id="fnref:rjit" role="doc-noteref"><a href="#fn:rjit" class="footnote" rel="footnote">4</a></sup>。
-ということでねこの話はね、勉強の話しかないんですが一旦 Goal まで作ってみましょうね。</p>
-
-<hr />
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:kojinsa" role="doc-endnote">
-      <p>個人差があります。 <a href="#fnref:kojinsa" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:gentoo" role="doc-endnote">
-      <p>Gentoo Linux 使っているので毎回コンパイルしているので本当にめんどう。バイナリあるよとかそういう正論は受け付けていないです。 <a href="#fnref:gentoo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:java" role="doc-endnote">
-      <p>時代によって変わるかも。<strong>Java</strong> だったり、<strong>Lisp</strong> だったりする人がいるかも。 <a href="#fnref:java" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:rjit" role="doc-endnote">
-      <p>https://github.com/ruby/ruby/pull/7448 <a href="#fnref:rjit" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><category term="compiler" /><summary type="html"><![CDATA[プログラマー三大勉強はしたけど、実装はしたことないものといえば CPU、OS、コンパイラーなのです1が、先日 ruby30th 誕生日会のキーノートで matz が “Static Compiler for Ruby” という今はまだない vaporware として 挙げていたのでこの static compiler を作ろうとなりました。 個人差があります。 &#8617;]]></summary></entry></feed>
+</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[行ってきたのでまとめます。LT やったのですが、 LT の話はまた今度。]]></summary></entry></feed>

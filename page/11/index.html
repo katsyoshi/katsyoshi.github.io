@@ -60,6 +60,59 @@
 
 
 
+  <h1><a href="/blog/2014/08/31/gentoo-install-battle-part-iii/">Gentoo Install Battle Part III</a></h1>
+  <p class="author">
+    <span class="date">2014-08-31 10:47:14 +0900</span>
+  </p>
+  <div class="content">
+    <p>これ<a href="/blog/2014/08/20/gentoo-install-battle-part-i/">まで</a>の<a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">流れ</a>で準備が整ったので、Installを始めます。</p>
+
+<h2 id="インストール">インストール</h2>
+
+<p>これは<a href="http://wiki.gentoo.org/">Gentoo Wiki</a>を見ながらで大丈夫です。</p>
+
+<h3 id="嵌ったところ">嵌ったところ</h3>
+
+<p>音が鳴らないという問題が発生しました。<a href="http://pocke.hatenablog.com/entry/2014/02/02/100636">理由</a>は簡単でしたのですぐに設定しました。</p>
+
+<p>つぎにネットワークの設定をnetmountからNetworkManagerに変更しました。
+設定は<a href="http://wiki.gentoo.org/wiki/NetworkManager">ここ</a>で行なえばよいです。</p>
+
+<p>最後にibus-mozcをインストールして終りです。</p>
+
+<h2 id="mikutter">mikutter</h2>
+
+<p>GentooInstallBattleはmikutterをインストールしてtweetすることなのでmikutterをインストールします。
+ここではrbenvを利用してmikutterのインストールします。
+まずはrbenvとruby-buildをインストールします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</code></pre></div></div>
+
+<p>つぎにrbenvの設定を行います。以下の設定を<code class="language-plaintext highlighter-rouge">~/.bashrc</code>あたりに追記してください</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH=~/.rbenv/bin:$PATH
+eval "$(rbenv init -)"
+</code></pre></div></div>
+
+<p>Rubyのインストールは<code class="language-plaintext highlighter-rouge">rbenv install 2.1.2</code>でインストールします。
+最後にmikutterをダウンロードし、環境を構築します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/mikutter/mikutter.git ~/mikutter
+$ cd ~/mikutter
+$ bundle install
+$ bundle exec ruby mikutter.rb
+</code></pre></div></div>
+
+<p>でインストール終了!!
+これで快適なmikutterライフがておくれますね。</p>
+
+<p><img src="/images/photo/mikutter.png" alt="mikutter" /></p>
+
+
+  </div>
+
   <h1><a href="/blog/2014/08/21/gentoo-install-battle-part-ii/">Gentoo Install Battle Part II</a></h1>
   <p class="author">
     <span class="date">2014-08-21 20:01:51 +0900</span>
@@ -380,35 +433,6 @@ tcp4       0      0  localhost.9199         *.*                    LISTEN
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo launchctl load /Library/LaunchDaemon/td-agent.plist
 </code></pre></div></div>
-
-  </div>
-
-  <h1><a href="/blog/2014/05/12/jubatus-runs-on-docker/">JubatusをDocker上で動かしてみた</a></h1>
-  <p class="author">
-    <span class="date">2014-05-12 23:50:33 +0900</span>
-  </p>
-  <div class="content">
-    <p>最近話題の<a href="https://www.docker.io/">Docker</a>使ってJubatusを動かしてみたのでメモ的なものを</p>
-
-<h2 id="環境">環境</h2>
-<p>環境はVagrantでUbuntu14.04を動かしその上でDockerでJubatusVMを動作</p>
-
-<ul>
-  <li>Vagrant: 1.5.4</li>
-  <li>docker: 0.11.1</li>
-</ul>
-
-<h2 id="dockerfile">Dockerfile</h2>
-
-<p><a href="https://github.com/katsyoshi/docker-jubatus">リポジトリ</a>を作成しておきましたのでcloneして実行します。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/katsyoshi/docker-jubatus
-$ cd docker-jubatus
-$ docker build .
-$ docker run -p 9199:9199 最後に出てきたハッシュ値
-</code></pre></div></div>
-
-<p>で動きはじめます。</p>
 
   </div>
 
