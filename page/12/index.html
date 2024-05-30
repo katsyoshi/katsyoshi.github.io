@@ -59,6 +59,27 @@
 
 
 
+  <h1><a href="/blog/2014/05/21/new-td-agent-for-mac/">td-agent.pkg</a></h1>
+  <p class="author">
+    <span class="date">2014-05-21 08:53:46 +0900</span>
+  </p>
+  <div class="content">
+    <p>td-agent2が<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">リリース</a>され、Macへの公式パッケージがでたのでインストールメモ</p>
+
+<h2 id="install">Install</h2>
+
+<p><a href="https://s3.amazonaws.com/td-agent-repository/macosx/td-agent2-1.0.0-0.dmg">ダウンロード</a>してダブルクリックでインストールできます。</p>
+
+<h2 id="設定">設定</h2>
+<p>設定ファイル置場は<code class="language-plaintext highlighter-rouge">/etc/td-agent/td-agent.conf</code>になります。
+設定ファイルはいままでの設定で使えるようです。
+あとは<a href="https://groups.google.com/forum/?fromgroups#!topic/fluentd/ZjxODonIJJo">ML</a>にあるとおりにコマンドを実行すればOKです。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo launchctl load /Library/LaunchDaemon/td-agent.plist
+</code></pre></div></div>
+
+  </div>
+
   <h1><a href="/blog/2014/05/12/jubatus-runs-on-docker/">JubatusをDocker上で動かしてみた</a></h1>
   <p class="author">
     <span class="date">2014-05-12 23:50:33 +0900</span>

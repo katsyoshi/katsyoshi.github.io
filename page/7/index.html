@@ -60,6 +60,34 @@
 
 
 
+  <h1><a href="/blog/2017/02/12/octopress-themes/">Blogのテーマかえた</a></h1>
+  <p class="author">
+    <span class="date">2017-02-12 20:16:01 +0900</span>
+  </p>
+  <div class="content">
+    <p>表題のとおり、Blog(octopress) のテーマをdefaultの classics から <a href="https://github.com/tommy351/Octopress-Theme-Slash">slash</a> に変更した。
+変更の方法は以下のようになります<sup id="fnref:theme" role="doc-noteref"><a href="#fn:theme" class="footnote" rel="footnote">1</a></sup>。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~/octopress
+$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+$ bundle exec rake install\['slash'\]
+$ bundle exec rake generate
+$ bundle exec rake preview
+$ bundle exec rake deploy
+</code></pre></div></div>
+
+<p>ついでにfaviconもかえよう。</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:theme" role="doc-endnote">
+      <p>Octopressのテーマを変更してみよう!, facestarbaby, http://qiita.com/fakestarbaby/items/ab532088453105e1bea4, 2017/02/12 閲覧 <a href="#fnref:theme" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
   <h1><a href="/blog/2017/01/01/good-buy-of-2016/">2016年買ってよかったもの</a></h1>
   <p class="author">
     <span class="date">2017-01-01 08:59:59 +0900</span>
@@ -406,57 +434,6 @@ GPU: Zotac GeForce GTX 1050
 
 <h2 id="おわり">おわり</h2>
 <p>おわり</p>
-
-  </div>
-
-  <h1><a href="/blog/2016/10/09/hello-gentoo-using-itamae/">ItamaeつかってOSのインストールをやってみた</a></h1>
-  <p class="author">
-    <span class="date">2016-10-09 16:43:27 +0900</span>
-  </p>
-  <div class="content">
-    <p>9月はRubyKiagiにいってたりしました。
-そのときに<a href="http://mikutter.blogspot.jp/2016/09/mikutter-3312-343.html">mikutterのコミッター</a>とかになったようです。</p>
-
-<p>シルバーウィークにThinkPadのOS再インストールをしたのでその記録を</p>
-
-<h2 id="なにやったの">なにやったの？</h2>
-
-<p><a href="https://twitter.com/mtsmfm">@mtsmfm</a> と以前話していたとき、``ansibleつかってOSインストールしてるんだけど、完全自動化できないんですよね~’’ みたいな事を聞いたので<a href="https://github.com/itamae-kitchen/itamae">Itamae</a> をつかってやってみました。
-結論から言うと完全自動化は無理だけど、ある程度は自動化できた。</p>
-
-<h3 id="環境">環境</h3>
-<ul>
-  <li>machine: ThinkPad X250</li>
-  <li>OS: Gentoo Linux</li>
-  <li>Provisioning tool: Itamae</li>
-  <li>repo: https://github.com/katsyoshi/itamae-recipes</li>
-</ul>
-
-<h2 id="インストール">インストール</h2>
-<p>インストールディスクを起動するところはipmiとか搭載していない(しらべていない)し<a href="https://wiki.openstack.org/wiki/Ironic">Ironic</a>はつかいたくないので手動で起動し、
-sshdの起動とrootのパスワードを設定します。起動したら以下の手順でパーティション作成からカーネルのインストールまでします。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">git clone https://github.com/katsyoshi/itamae-recipes.git
-cd itamae-recipes
-bundle install
-wget http://ftp.iij.ad.jp/pub/linux/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20161006.tar.bz2
-cp stage3-amd64-20161006.tar.bz2 cookbook/install/stage3.tar.bz2
-itamae ssh -h nu-machine cookbook/install/gentoo.rb -u root -j cookbook/install/gentoo.json
-</span></code></pre></div></div>
-
-<p>でOSのインストールまでできるのですが、gentooのインストールメディアだと、diffがインストールされていないのでitamaeからfileのコピーができません。
-都度コピーしてください(というよりgentooインストーラーにdiffを入れたほうが早そう)</p>
-
-<h2 id="パッケージのインストール">パッケージのインストール</h2>
-<p>ここまで終ったら、パッケージのインストールします。これも以下コマンドを実行することで終ります。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">itamae ssh -h nu-machine cookbook/gentoo/emerge.rb -j cookbook/gentoo/package.json
-</span></code></pre></div></div>
-
-<h2 id="owari">owari</h2>
-
-<p>ItamaeつかってOSのインストールを実行してみました。diffが失いところがとくにつらいですね。
-おわり</p>
 
   </div>
 

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>今日、私が学んだこと | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="今日、私が学んだこと" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="ここ1年ほど Ruby のパーサーがもりあがっているので、 lrama の作者を講師にした 通称ドラゴンブックの「コンパイラ」読書会 に参加しています。" />
+<meta property="og:description" content="ここ1年ほど Ruby のパーサーがもりあがっているので、 lrama の作者を講師にした 通称ドラゴンブックの「コンパイラ」読書会 に参加しています。" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2024/05/30/til/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2024/05/30/til/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-05-30T23:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="今日、私が学んだこと" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-05-30T23:59:59+09:00","datePublished":"2024-05-30T23:59:59+09:00","description":"ここ1年ほど Ruby のパーサーがもりあがっているので、 lrama の作者を講師にした 通称ドラゴンブックの「コンパイラ」読書会 に参加しています。","headline":"今日、私が学んだこと","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2024/05/30/til/"},"url":"https://blog.katsyoshi.org/blog/2024/05/30/til/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">今日、私が学んだこと</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2024-05-30T23:59:59+09:00" itemprop="datePublished">May 30, 2024
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>ここ1年ほど <strong>Ruby</strong> のパーサーがもりあがっているので、
+<a href="https://github.com/ruby/lrama"><strong>lrama</strong></a> の作者を講師にした
+通称<strong>ドラゴンブック</strong>の「<a href="https://www.saiensu.co.jp/search/?isbn=978-4-7819-1229-5&amp;y=2009">コンパイラ</a>」読書会
+に参加しています。</p>
+
+<p>4.8.1 節の「競合解消のための優先順位と結合性」を読み感想を言い合う場で、
+以下のような話になった。（細かいとろこは本を読んでくれ</p>
+<ul>
+  <li>id + id * id
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">+</code> は <code class="language-plaintext highlighter-rouge">*</code> より優先度が低いため shift</li>
+    </ul>
+  </li>
+  <li>id * id + id
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">*</code> は <code class="language-plaintext highlighter-rouge">*</code> より優先度が高いため reduce</li>
+    </ul>
+  </li>
+  <li>id + id + id
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">+</code> は左結合なので reduce</li>
+    </ul>
+  </li>
+  <li>id = id = id
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">=</code> は右結合なので shift</li>
+    </ul>
+  </li>
+</ul>
+
+<p>ここでそういえば <strong>Ruby</strong> ではどう動くのだろうかとおもい、次の式を<strong>irb</strong>で書いてみた
+<code class="language-plaintext highlighter-rouge">0 - i = 1 + j = 2 * 3 #=&gt; -7</code> とまあ普通（？）の答えが返ってきた。
+でも上のパーサーの条件考えてみるとそもそもこのコードはほかのプログラミング言語で
+パースできるのだろうかと思い、やってみた。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>python <span class="nt">-c</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
+<span class="gp">  File "&lt;string&gt;</span><span class="s2">", line 1
+</span><span class="go">    0 - j = 1 + j = 2 * 3
+    ^^^^^
+SyntaxError: cannot assign to expression
+</span><span class="gp">$</span><span class="w"> </span>perl <span class="nt">-e</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
+<span class="go">Can't modify addition (+) in scalar assignment at -e line 1, at EOF
+Execution of -e aborted due to compilation errors.
+</span><span class="gp">$</span><span class="w"> </span>lua <span class="nt">-e</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
+<span class="go">lua: (command line):1: unexpected symbol near '0'
+</span><span class="gp">$</span><span class="w"> </span>crystal <span class="nb">eval</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
+<span class="go">syntax error in eval:1
+Error: unexpected token: "="
+</span><span class="gp">$</span><span class="w"> </span>ruby <span class="nt">-e</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
+<span class="go">
+</span><span class="gp">$</span><span class="w">
+</span></code></pre></div></div>
+
+<p>:thinkingface:？？？とにかく <strong>Ruby</strong> は通るが他のプログラミング言語で通らないことがわかった。</p>
+
+<p>さいごに <strong>Ruby</strong> の <strong>AST</strong> がどうなってるのかとりあずみてみた。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> <span class="n">ruby</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'pp RubyVM::AbstractSyntaxTree.parse "0 - j = 1 + j = 2 * 3"'</span>
+<span class="p">(</span><span class="no">SCOPE</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span>
+ <span class="ss">tbl: </span><span class="p">[</span><span class="ss">:j</span><span class="p">]</span>
+ <span class="ss">args: </span><span class="kp">nil</span>
+ <span class="ss">body:
+   </span><span class="p">(</span><span class="no">OPCALL</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span> <span class="mi">0</span><span class="p">)</span> <span class="p">:</span><span class="o">-</span>
+      <span class="p">(</span><span class="no">LIST</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span>
+         <span class="p">(</span><span class="no">LASGN</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="ss">:j</span>
+            <span class="p">(</span><span class="no">OPCALL</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span><span class="o">+</span>
+               <span class="p">(</span><span class="no">LIST</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span>
+                  <span class="p">(</span><span class="no">LASGN</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="ss">:j</span> <span class="p">(</span><span class="no">OPCALL</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">16</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">16</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">17</span> <span class="mi">2</span><span class="p">)</span> <span class="p">:</span><span class="o">*</span> <span class="p">(</span><span class="no">LIST</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="mi">3</span><span class="p">)</span> <span class="kp">nil</span><span class="p">)))</span>
+                  <span class="kp">nil</span><span class="p">)))</span> <span class="kp">nil</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>まあわかるような木構造になってますね。
+それはそうとパーサーどうなってるんですかねえという話でおわり。</p>
+
+  </div><a class="u-url" href="/blog/2024/05/30/til/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

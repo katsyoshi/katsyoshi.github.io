@@ -1,4 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2024-05-30T03:18:27+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Ruby を KOMPO してみた</title><link href="https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/" rel="alternate" type="text/html" title="Ruby を KOMPO してみた" /><published>2024-05-29T23:59:59+09:00</published><updated>2024-05-29T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/"><![CDATA[<p><strong>RubyKaigi2024</strong> の発表、<a href="https://speakerdeck.com/ahogappa0613/its-about-time-to-pack-ruby-and-ruby-scripts-in-one-binary"><strong>It’s about time to pack Ruby and Ruby scripts in one binary</strong></a>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2024-05-31T01:38:58+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">今日、私が学んだこと</title><link href="https://blog.katsyoshi.org/blog/2024/05/30/til/" rel="alternate" type="text/html" title="今日、私が学んだこと" /><published>2024-05-30T23:59:59+09:00</published><updated>2024-05-30T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/30/til</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/30/til/"><![CDATA[<p>ここ1年ほど <strong>Ruby</strong> のパーサーがもりあがっているので、
+<a href="https://github.com/ruby/lrama"><strong>lrama</strong></a> の作者を講師にした
+通称<strong>ドラゴンブック</strong>の「<a href="https://www.saiensu.co.jp/search/?isbn=978-4-7819-1229-5&amp;y=2009">コンパイラ</a>」読書会
+に参加しています。</p>
+
+<p>4.8.1 節の「競合解消のための優先順位と結合性」を読み感想を言い合う場で、
+以下のような話になった。（細かいとろこは本を読んでくれ</p>
+<ul>
+  <li>id + id * id
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">+</code> は <code class="language-plaintext highlighter-rouge">*</code> より優先度が低いため shift</li>
+    </ul>
+  </li>
+  <li>id * id + id
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">*</code> は <code class="language-plaintext highlighter-rouge">*</code> より優先度が高いため reduce</li>
+    </ul>
+  </li>
+  <li>id + id + id
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">+</code> は左結合なので reduce</li>
+    </ul>
+  </li>
+  <li>id = id = id
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">=</code> は右結合なので shift</li>
+    </ul>
+  </li>
+</ul>
+
+<p>ここでそういえば <strong>Ruby</strong> ではどう動くのだろうかとおもい、次の式を<strong>irb</strong>で書いてみた
+<code class="language-plaintext highlighter-rouge">0 - i = 1 + j = 2 * 3 #=&gt; -7</code> とまあ普通（？）の答えが返ってきた。
+でも上のパーサーの条件考えてみるとそもそもこのコードはほかのプログラミング言語で
+パースできるのだろうかと思い、やってみた。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>python <span class="nt">-c</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
+<span class="gp">  File "&lt;string&gt;</span><span class="s2">", line 1
+</span><span class="go">    0 - j = 1 + j = 2 * 3
+    ^^^^^
+SyntaxError: cannot assign to expression
+</span><span class="gp">$</span><span class="w"> </span>perl <span class="nt">-e</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
+<span class="go">Can't modify addition (+) in scalar assignment at -e line 1, at EOF
+Execution of -e aborted due to compilation errors.
+</span><span class="gp">$</span><span class="w"> </span>lua <span class="nt">-e</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
+<span class="go">lua: (command line):1: unexpected symbol near '0'
+</span><span class="gp">$</span><span class="w"> </span>crystal <span class="nb">eval</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
+<span class="go">syntax error in eval:1
+Error: unexpected token: "="
+</span><span class="gp">$</span><span class="w"> </span>ruby <span class="nt">-e</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
+<span class="go">
+</span><span class="gp">$</span><span class="w">
+</span></code></pre></div></div>
+
+<p>:thinkingface:？？？とにかく <strong>Ruby</strong> は通るが他のプログラミング言語で通らないことがわかった。</p>
+
+<p>さいごに <strong>Ruby</strong> の <strong>AST</strong> がどうなってるのかとりあずみてみた。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> <span class="n">ruby</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'pp RubyVM::AbstractSyntaxTree.parse "0 - j = 1 + j = 2 * 3"'</span>
+<span class="p">(</span><span class="no">SCOPE</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span>
+ <span class="ss">tbl: </span><span class="p">[</span><span class="ss">:j</span><span class="p">]</span>
+ <span class="ss">args: </span><span class="kp">nil</span>
+ <span class="ss">body:
+   </span><span class="p">(</span><span class="no">OPCALL</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span> <span class="mi">0</span><span class="p">)</span> <span class="p">:</span><span class="o">-</span>
+      <span class="p">(</span><span class="no">LIST</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span>
+         <span class="p">(</span><span class="no">LASGN</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="ss">:j</span>
+            <span class="p">(</span><span class="no">OPCALL</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span><span class="o">+</span>
+               <span class="p">(</span><span class="no">LIST</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span>
+                  <span class="p">(</span><span class="no">LASGN</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="ss">:j</span> <span class="p">(</span><span class="no">OPCALL</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">16</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">16</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">17</span> <span class="mi">2</span><span class="p">)</span> <span class="p">:</span><span class="o">*</span> <span class="p">(</span><span class="no">LIST</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="mi">3</span><span class="p">)</span> <span class="kp">nil</span><span class="p">)))</span>
+                  <span class="kp">nil</span><span class="p">)))</span> <span class="kp">nil</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>まあわかるような木構造になってますね。
+それはそうとパーサーどうなってるんですかねえという話でおわり。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[ここ1年ほど Ruby のパーサーがもりあがっているので、 lrama の作者を講師にした 通称ドラゴンブックの「コンパイラ」読書会 に参加しています。]]></summary></entry><entry><title type="html">Ruby を KOMPO してみた</title><link href="https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/" rel="alternate" type="text/html" title="Ruby を KOMPO してみた" /><published>2024-05-29T23:59:59+09:00</published><updated>2024-05-29T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/"><![CDATA[<p><strong>RubyKaigi2024</strong> の発表、<a href="https://speakerdeck.com/ahogappa0613/its-about-time-to-pack-ruby-and-ruby-scripts-in-one-binary"><strong>It’s about time to pack Ruby and Ruby scripts in one binary</strong></a>
 で話されていた <a href="https://rubygems.org/gems/kompo"><strong>kompo</strong></a> を試してみた。</p>
 
 <h2 id="じゅんびというかとらしゅーというかうごかすまでのきろく">じゅんびというかとらしゅーというかうごかすまでのきろく</h2>
@@ -817,139 +889,4 @@ hello, world
       <p>もともとの発表予定ではここまでしかできなかったんですよーって濁す予定でしたが思っている以上に実装がすすんでしまった。 <a href="#fnref:yoteigai" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[RubyKaigi2023に行ってきたのは別エントリにしたのでこのエントリでは LT で話しした内容の説明などをしていこうかと思います。]]></summary></entry><entry><title type="html">RubyKaigi2023 @MATZ本</title><link href="https://blog.katsyoshi.org/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/" rel="alternate" type="text/html" title="RubyKaigi2023 @MATZ本" /><published>2023-05-15T23:59:59+09:00</published><updated>2023-05-15T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/05/15/ruby-kaigi-2023-at-matsumoto/"><![CDATA[<p>行ってきたのでまとめます。LT やったのですが、 LT の話はまた今度。</p>
-
-<h2 id="day--1">Day -1</h2>
-
-<p>前日は恒例の <a href="https://asakusarb.esa.io">Asakusa.rb</a> の <a href="https://asakusarb.doorkeeper.jp/events/154786">predrinkup</a> に行ってました。ここでは、 <a href="https://twitter.com/n0kada">nobu</a> とかとはなししたりしてすごしました。
-drinkup は次の日のため終了後すぐさま帰宅し、就寝した。</p>
-
-<h2 id="day-0">Day 0</h2>
-<p>この日は、 <a href="https://cookpad.connpass.com/event/277569/">RubyistsOnRails</a> というすばらしいイベント列車があったのでノータイム <sup id="fnref:sonnnakotohanai" role="doc-noteref"><a href="#fn:sonnnakotohanai" class="footnote" rel="footnote">1</a></sup> 8時の会に参加申し込み。6時に起床し、7時に出発。
-会ではRubyistと話しながら、山見ながら、松本に到着。
-松本に到着後飯として <a href="https://tabelog.com/nagano/A2002/A200201/20000092/">みよ田</a> という蕎麦屋に直行。
-蕎麦を食べた直後、松本城へ。松本城では <a href="https://twitter.com/yukihiro_matz/">まつもとさん</a> 集団を見つけたので、みんなで Matz本城 背景に記念撮影。まつもとさん一行は開発者会議があったらしく記念撮影後すぐにわかれました。
-われわれは、この記念撮影後松本城観光し、もう一軒蕎麦屋へ昼食へ。二軒目の蕎麦屋は <a href="https://tabelog.com/nagano/A2002/A200201/20002376/">蕎麦倶楽部佐々木</a> へ。</p>
-
-<p>そんなことしてたら宿がチェックイン可能になったので、荷物置くのと下着類を購入しひとやすみ(10min程)。</p>
-
-<p>Day 0 最大のイベント、 <a href="https://keebkaigi.org/2023/">KeebKaigi</a> へ!ここで豪華ノベリティを大量に頂きました!!!1とくによいのが城キーキャップで松本城を3DプリントしたISO エンターキーを頂きました。しかしながらこのキー差すキーボードがないので知人に譲る予定です。</p>
-
-<p>KeebKaigi 自体もたいへん面白い Kaigi で楽しめました。とくに、 t-code の紹介のLT、頭文字Vなどよかったです。
-KeebKaigi 後は懇親会には参加せず、友人とかるく夕飯をして宿へ。</p>
-
-<h2 id="day-1">Day 1</h2>
-
-<p>ここまででも大変楽しいものでしたが、<a href="https://rubykaigi.org/2023/">RubyKaigi本番</a> はこの日から。</p>
-
-<p>1日目の朝食は会場行く途中でもともと聞いていた店の <a href="https://sioribi.jp/">栞日</a> さんへ。
-会場開いて登録したあとノベリティの列をみてげんなりしてたので一旦スポンサーブースをうろうろしてた。
-この日聞いたセッションは以下です。</p>
-
-<h3 id="matz-keynote"><a href="https://rubykaigi.org/2023/presentations/yukihiro_matz.html#day1">Matz Keynote</a></h3>
-
-<p>毎年恒例 Matz のキーノート。</p>
-
-<h3 id="昼飯">昼飯</h3>
-<p>ランチはたまたま居合わせた6人で <a href="https://tabelog.com/nagano/A2002/A200201/20000098/">おきな堂</a> へ。名物のボルガライスとリンゴジュースを。シードルがあったので一緒にいったひとへオススメしてたりした。</p>
-
-<h3 id="the-future-vision-of-ruby-parser"><a href="https://rubykaigi.org/2023/presentations/spikeolaf.html#day1">The future vision of Ruby Parser</a></h3>
-
-<p>コミッターの <a href="https://twitter.com/spikeolaf">spikelaf</a> さんによるパーサーの開発話。魔窟じゃないよーなんかいってまいましたが、難しい問題を丁寧にひとつひとつ倒していった話をしていました。</p>
-
-<h3 id="make-regexpmatch-much-faster"><a href="https://rubykaigi.org/2023/presentations/makenowjust.html#day1">Make Regexp#match much faster</a></h3>
-
-<p>去年 <a href="https://www.ruby-lang.org/ja/news/2023/03/30/redos-in-time-cve-2023-28756/">ReDoS</a> の対応をしたコミッターの発表。正規表現の可能性を話してくれています。</p>
-
-<h3 id="high-performance-real-time-3d-graphics-with-vulkan"><a href="https://rubykaigi.org/2023/presentations/fredolinhares.html#day1">High-performance real-time 3D graphics with Vulkan</a></h3>
-
-<p><a href="https://www.vulkan.org/">Valkan</a> を Ruby で利用できるようにした話。このあたりは LT への緊張感でほとんど覚えていないです。</p>
-
-<h3 id="power-up-your-repl-life-with-types"><a href="https://rubykaigi.org/2023/presentations/tompng.html#day1">Power up your REPL life with types</a></h3>
-
-<p>去年の <a href="https://github.com/tric/trick2022/blob/master/01-tompng/entry.rb">TRICK Winner</a> で今回の話は <code class="language-plaintext highlighter-rouge">irb</code> を利用しているときにどういう感じで補完が出るのか、出すためにどのような型推論を行なっているのかの話だったとおもう。</p>
-
-<h3 id="lt">LT</h3>
-
-<p>しゃべった</p>
-
-<h3 id="オフィシャルパーティー">オフィシャルパーティー</h3>
-
-<p>つかれたのでそこそこで帰った</p>
-
-<h2 id="day-2">Day 2</h2>
-
-<p>朝飯は <a href="https://tabelog.com/nagano/A2002/A200201/20020720/">珈琲茶房かめのや</a> へ。ここもワンオペで配膳されるまで少し時間がかかった。というか、朝食べくるひといないのかどこもワンオペだったので Day 3 も早めに出るようにしようとなった。</p>
-
-<h3 id="on-ruby-and-ꝩduя-or-how-scary-are-trojan-source-attacks"><a href="https://rubykaigi.org/2023/presentations/duerst.html#day2">On Ruby and ꝩduЯ, or How Scary are Trojan Source Attacks</a></h3>
-
-<p>昔他の言語で話題になった Ruby のコード的には正しいが、見た目ではわからない
-不正な文字が入ったときの対策のはなしでした。</p>
-
-<h3 id="build-a-mini-ruby-debugger-in-under-300-lines"><a href="https://rubykaigi.org/2023/presentations/_st0012.html#day2">Build a mini Ruby debugger in under 300 lines</a></h3>
-
-<p>300 行といったなあれは嘘だ。という話。Ruby の Debugger を200 行くらいでつくったはなしでした。</p>
-
-<h3 id="昼飯-1">昼飯</h3>
-
-<p><a href="https://tabelog.com/nagano/A2002/A200201/20015852/">種村</a> で蕎麦と岩魚と日本酒。</p>
-
-<h3 id="revisiting-typeprof---ide-support-as-a-primary-feature"><a href="https://rubykaigi.org/2023/presentations/mametter.html#day2">Revisiting TypeProf - IDE support as a primary feature</a></h3>
-
-<p>Ruby に梱包されている <a href="https://github.com/ruby/typeprof/blob/master/doc/doc.ja.md"><code class="language-plaintext highlighter-rouge">TypeProf</code></a> が遅いので速くして、また書いている途中でもエラーがでたときどうするかとかの説明をしていました。まだ利用できていないので試したくなるものだった。</p>
-
-<h3 id="ruby-implementation-of-quic-progress-and-challenges"><a href="https://rubykaigi.org/2023/presentations/yu_suke1994.html#day2">Ruby Implementation of QUIC: Progress and Challenges</a></h3>
-
-<p><a href="https://twitter.com/yu_suke1994">Unasuke</a> 大先生のライフワーク、 Ruby の <a href="https://datatracker.ietf.org/doc/html/rfc9000">QUIC</a> 対応のはなし。Python での実装はどうとかのはなしで今回は実装がすすんでいるようでよかった。とはいえ道程はまだまだかかりそう。</p>
-
-<h3 id="afternoon-break">afternoon break</h3>
-
-<p>お昼休憩後は Jeremy Evans や Maxime の話を聞いていたが疲れてなにも覚えていない。</p>
-
-<h3 id="leaner-drinkup-at-rubykaigi-2023"><a href="https://leanertechnologies.connpass.com/event/280191/">Leaner Drinkup at RubyKaigi 2023</a></h3>
-
-<p>この日は <a href="https://leaner.jp/">Leaner</a> さん主催の drinkup へ行きました。ここでは主に日本を飲んですごしました。でここで、spikelaf が kaigi でも話してた <a href="https://github.com/ruby/lrama">lrama</a> が Ruby 本体のとりこまれ、 <a href="https://www.ruby-lang.org/ja/news/2023/05/12/ruby-3-3-0-preview1-released/">Ruby 3.3.0-preview1 がリリースされました</a>!なんかさわいでるなと思たらリリース作業シテイタトハ…
-drinkup 終了後は <a href="https://twitter.com/onk">onk</a> とふたりで近所のワインバーへ行き、軽くのんで宿へ帰りました。</p>
-
-<p>宿帰ったら <a href="https://esm.co.jp/">ESM</a> さんのノベリティの <a href="https://blog.agile.esm.co.jp/entry/ruby-method-karuta">Rubyメソッドかるた</a> でみんなでわいわいしながら遊んでました。</p>
-
-<h2 id="day-3">Day 3</h2>
-
-<p>この日の朝食は <a href="https://tabelog.com/nagano/A2002/A200201/20023046">山山食堂</a> というところでしました。</p>
-
-<h3 id="committers-and-the-worldのあと">Committers and the Worldのあと</h3>
-
-<p>今回は Matz本 ということで会場にいる「まつもとさん」一同会して写真を撮ることを目的としてあつめてました。写真は以下になります</p>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">松本さん大集合に、当社の松本さんも混ぜていただきありがとうございましたっ🏯<a href="https://twitter.com/hashtag/RubyKaigi2023?src=hash&amp;ref_src=twsrc%5Etfw">#RubyKaigi2023</a> <a href="https://t.co/neYYer5e2A">pic.twitter.com/neYYer5e2A</a></p>&mdash; Yasunori Suzuki (@yasuzukisan) <a href="https://twitter.com/yasuzukisan/status/1657253330056519680?ref_src=twsrc%5Etfw">May 13, 2023</a></blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<h3 id="ruby--adbc---a-single-api-between-ruby-and-dbs"><a href="https://rubykaigi.org/2023/presentations/ktou.html#day3">Ruby + ADBC - A single API between Ruby and DBs</a></h3>
-
-<p><a href="https://github.com/kou">須藤さん</a> の発表で、 <a href="https://arrow.apache.org/docs/format/ADBC.html"><code class="language-plaintext highlighter-rouge">ADBC</code></a> で DB へ接続し、さらのその接続からのよみかきの高速化のはなしでした。あいかわらずすごいなと思いながら聞いていました。</p>
-
-<h3 id="ruby-jit-hacking-guide"><a href="https://rubykaigi.org/2023/presentations/k0kubun.html#day3">Ruby JIT Hacking Guide</a></h3>
-
-<p><a href="https://github.com/k0kubun">国分さん</a> の新作 <a href="https://github.com/ruby/ruby/pull/7448">RubyJIT</a>。PRみた感じだとやってるネタにてるなあとおもってたけど、アプローチがすこし違い、またこちらは直接ELFを書いているようなのでまだちがうようだ。とはいえ今やっていることは似ているのであとで参考にしよう。</p>
-
-<h3 id="after-party-and-music-mixin">After Party and Music Mixin</h3>
-
-<p><a href="https://stores.jp/">STORESさん</a> の <a href="https://hey.connpass.com/event/277763/">アフターパティー</a> と <a href="https://www.pixiv.net">pixivさん</a> の <a href="https://conference.pixiv.co.jp/2023/rubymusicmixin">ruby music mixin</a> にいってきました。両方ともサイコーでした!!!!</p>
-
-<h2 id="day-4">Day 4</h2>
-
-<p>一人で野沢温泉村いって温泉はいって、ジンのんで、ビールのみいこうと一旦山おりたら温泉にしか飲むとこなかったのでもどったりして帰りました。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>今回のRubyKaigi久しぶりのFull開催で大変楽しめたのですが、LTとは言えはじめての発表があり、心から楽しめたかというとあれですが、すごく楽しかったし、刺激になりました。来年の那覇は本編に出せるようになんとか精進します!!!</p>
-
-<hr />
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:sonnnakotohanai" role="doc-endnote">
-      <p>海外の人が登録して行ったほうがいいんじゃないかと一瞬思った <a href="#fnref:sonnnakotohanai" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[行ってきたのでまとめます。LT やったのですが、 LT の話はまた今度。]]></summary></entry></feed>
+</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[RubyKaigi2023に行ってきたのは別エントリにしたのでこのエントリでは LT で話しした内容の説明などをしていこうかと思います。]]></summary></entry></feed>
