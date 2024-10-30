@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2024-10-30T22:39:45+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">KaigiOnRails 2024 に行ってきました</title><link href="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/" rel="alternate" type="text/html" title="KaigiOnRails 2024 に行ってきました" /><published>2024-10-27T11:09:14+09:00</published><updated>2024-10-27T11:09:14+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/"><![CDATA[<p><a href="https://kaigionrails.org/2024">Kaigi on Rails 2024</a> にはじめて現地参加しました。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2024-10-30T22:42:48+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">KaigiOnRails 2024 に行ってきました</title><link href="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/" rel="alternate" type="text/html" title="KaigiOnRails 2024 に行ってきました" /><published>2024-10-27T11:09:14+09:00</published><updated>2024-10-27T11:09:14+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/"><![CDATA[<p><a href="https://kaigionrails.org/2024">Kaigi on Rails 2024</a> にはじめて現地参加しました。</p>
 
 <h2 id="day-1">day 1</h2>
 
@@ -27,7 +27,7 @@
 
 <p>キーノートの <a href="https://github.com/palkan">@palkan</a> の話はすごくよくて、Rails Wayについて話をしてくれました。
 <a href="https://github.com/yahonda">@yahonda</a> は、 Rails の <a href="https://rubyonrails.org/community#committers">The Committers</a> の一員で Rails でレビューしている際に気を付けている部分について話してくれてました。
-[@asayamakk](https://github.com/asayamakk] は DB にカラムを増やすとどれだけ ActiveRecord のオブジェクトが増え、メモリの消費量が増えるかの話でした。
+<a href="https://github.com/asayamakk">@asayamakk</a> は DB にカラムを増やすとどれだけ ActiveRecord のオブジェクトが増え、メモリの消費量が増えるかの話でした。
 <a href="https://github.com/katty0324">@katty0324</a> は ViewComponent に移行するために自動化した話でした。この話は大変興味深く聞いてました。
 <code class="language-plaintext highlighter-rouge">ViewComponent</code> に対応するために問題の整理、自動化するための準備など丁寧に仕事している印象でした。
 <a href="https://github.com/takeyuweb">@takeyuweb</a> ではアップデートするためになにをしたのか、していくのかという話をしてくれていました。</p>
