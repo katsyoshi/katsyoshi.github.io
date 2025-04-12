@@ -1,4 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2025-04-12T18:59:23+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">KaigiOnRails 2024 に行ってきました</title><link href="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/" rel="alternate" type="text/html" title="KaigiOnRails 2024 に行ってきました" /><published>2024-10-27T11:09:14+09:00</published><updated>2024-10-27T11:09:14+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/"><![CDATA[<p><a href="https://kaigionrails.org/2024">Kaigi on Rails 2024</a> にはじめて現地参加しました。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2025-04-12T20:55:18+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Hello, ZOLA を失敗した話</title><link href="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/" rel="alternate" type="text/html" title="Hello, ZOLA を失敗した話" /><published>2025-04-12T00:00:00+09:00</published><updated>2025-04-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/"><![CDATA[<p><code class="language-plaintext highlighter-rouge">HELLO, [ZOLA](https://www.getzola.org) World!!!!!</code> としたかったけど、
+移行が面倒すぎたので諦めた話。
+以下は作業ログです。一応終りは見えたけど、</p>
+
+<h2 id="elections">ELECTIONS</h2>
+
+<p><em><a href="http://jekyllrb.com/">Jekyll</a></em> でサイト作るの飽きてきたので、
+新しい <em>SSG(Static Site Generator)</em> に変更することにした。</p>
+
+<p>選定必須基準として、以下の条件を。</p>
+
+<ol>
+  <li><em><a href="https://tex2e.github.io/rfc-translater/html/rfc7763.html">markdown 形式</a></em><sup id="fnref:markdown"><a href="#fn:markdown" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> で書けること</li>
+  <li><strong>Jekyll</strong> と同じ <em>URL</em> が生成されること</li>
+</ol>
+
+<p>いまどき直接 <em>HTML</em> で書く人はあまりいないし、いままでの記事があるので <em>markdown</em> で書けることは当然ですね。
+もうひとつの必須条件として、 <strong>Jekyll</strong> で設定した <em>URL</em> で記事が書けることとなります。
+これは現在出している記事の <em>URL</em> を変更しないために必須です。</p>
+
+<p>移行に苦労しないようにするために以下の条件をとることにした。</p>
+
+<ol>
+  <li><strong>Jekyll</strong> と同じ様に <em>markdown</em> の先頭に <em>frontmatter</em> でいろいろと設定できること</li>
+  <li><strong>Jekyll</strong> と同様にテーマが選択できること</li>
+  <li>バイナリーで配ってること</li>
+</ol>
+
+<p><em>frontmatter</em> については移行を楽にするためで多少の書き替えはしかたがないとしています。
+デザイン変更を楽にするためテーマが選択できる <em>SSG</em> だといいなあと思い。
+バイナリーで配ってあると楽なんですよ<sup id="fnref:binary"><a href="#fn:binary" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>。</p>
+
+<p>以上の条件を踏まえいくつか検討してみましたが、 <strong>zola</strong> にしました。</p>
+
+<p><a href="https://github.com/getzola/zola"><img src="https://gh-card.dev/repos/getzola/zola.svg" alt="getzola/zola - GitHub" /></a></p>
+
+<h2 id="jekyll-to-zola">Jekyll to Zola</h2>
+
+<p><a href="https://github.com/katsyoshi/jekyll2zola"><img src="https://gh-card.dev/repos/katsyoshi/jekyll2zola.svg" alt="katsyoshi/jekyll2zola - GitHub" /></a></p>
+
+<h3 id="やったこと">やったこと</h3>
+
+<p>まず、ファイル名が <code class="language-plaintext highlighter-rouge">.markdown</code> と混在してので <code class="language-plaintext highlighter-rouge">.md</code> へ統一。
+つぎに <em>markdown</em> 先頭の <em>frontmatter</em> を <a href="https://yaml.org"><strong>YAML</strong></a> から <a href="https://toml.io"><strong>TOML</strong></a> へ変換する。
+これは大変な話ではなく、 <em>frontmatter</em> 部分を読み込んで変更するだけです。
+でこの変更部分なのですが、大抵の部分は問題にならないです。
+大抵の部分は……</p>
+
+<h4 id="url-の設定"><em>URL</em> の設定</h4>
+
+<p><em>URL</em> の設定は、<a href="https://zenn.dev/anz/scraps/ebf857a5cbcfb6#front-matter-%E3%81%A7%E5%88%B6%E5%BE%A1%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">参考サイト</a> の設定を利用して変換します。
+ここで問題となるのが、<strong>Jekyll</strong> の設定で、 <code class="language-plaintext highlighter-rouge">/blog/%Y/%m/%d/file-name</code> となっていることです。
+<del><strong>Zola</strong> では <code class="language-plaintext highlighter-rouge">config.toml</code> で設定する <code class="language-plaintext highlighter-rouge">slugify</code> に設定する方法があるようですが、イマイチ使えず</del>
+（そもそも <code class="language-plaintext highlighter-rouge">slugify</code> を勘違いしてた）。
+ディレクトリを利用し<a href="https://www.getzola.org/documentation/content/overview/">設定する方法</a>と <em>frontmatter</em> に <code class="language-plaintext highlighter-rouge">path</code> で<a href="https://www.getzola.org/documentation/content/page/">設定する方法</a>があります。
+今回は <em>frontmatter</em> で <code class="language-plaintext highlighter-rouge">path</code> 指定して <em>URL</em> を設定することにしました。
+変換はファイル名から取得すればよいので問題は特になく変換できました。
+ただ、変換する際にこのままだと挿入するには注意が必要で、挿入する必要があります。
+これは <a href="https://docs.ruby-lang.org/ja/latest/method/Array/i/insert.html"><code class="language-plaintext highlighter-rouge">Array#insert</code></a> を利用すれば <a href="https://github.com/katsyoshi/jekyll2zola/blob/main/lib/jekyll2zola/converter.rb#L34">解決</a> ですね。</p>
+
+<h4 id="テーマ">テーマ</h4>
+
+<p><a href="https://www.getzola.org/themes/">テーマ</a> はあるのですがプラグイン形式というわけではなく、 <code class="language-plaintext highlighter-rouge">git clone</code> or <code class="language-plaintext highlighter-rouge">git submodule add</code> して利用する点が慣れない。
+気になる部分は <code class="language-plaintext highlighter-rouge">template/</code> に修正ファイルを全部作る必要があり面倒でした。
+<a href="https://crates.io/"><em>Cargo</em></a> でインストールできればいいのに……
+ということでもっと面倒臭い自分のテーマを作ることでこの気になる点を解決。
+作成方法は <a href="https://www.getzola.org/documentation/getting-started/overview/#templates">公式ドキュメント</a> を参考にすすめれば問題なく作成できます。
+テーマというか、普通にテンプレート化するだけです。
+<a href="https://www.getzola.org/documentation/themes/creating-a-theme/">テーマ化</a> も実際は簡単にでき、 <code class="language-plaintext highlighter-rouge">theme.toml</code> を書いておけば大丈夫なようです。
+個人的に利用しているだけなのでテーマ化はしないですが。</p>
+
+<h4 id="feedxml">FEED.XML</h4>
+
+<p><em><a href="https://www.rssboard.org/rss-specification">RSS Feed</a></em> 自体はサポートされていますが、 <em>URL</em> のパスが <code class="language-plaintext highlighter-rouge">/atom.xml</code> か <code class="language-plaintext highlighter-rouge">/rss.xml</code> になってしまうため
+旧来のパス <code class="language-plaintext highlighter-rouge">/feed.xml</code> は新規にテンプレートを作る必要があります。
+これは追い追い考える。現状 <strong>Jekyll</strong> にあった <code class="language-plaintext highlighter-rouge">feed.xml</code> を作るのは大変すぎる。</p>
+
+<h4 id="こまかい修正">こまかい修正</h4>
+<p>いくつか気になる部分があったがこまかいので手で修正</p>
+
+<ol>
+  <li>脚注の順番が脚注を書いた順に出力</li>
+  <li><em>Syntax Highlighting</em> のサポート言語</li>
+  <li>画像の変更</li>
+  <li><em>rake task</em> の整理</li>
+</ol>
+
+<p>脚注は脚注で引用した順番ではなく、脚注を書いた順になっているので修正してます。
+<em>Syntax Highlighting</em> ではサポートされていない書きかた（<strong>console</strong>）をやめてサポートされている言語（<strong>bash</strong>）へ修正。
+画像の変更はとくに <strong>zola</strong> は関係なく、大きいファイルが多いので変更しています。 
+<em>rake task</em> では、いままでデプロイやら記事作成やらなんだかんだやっていたので整理を行いました。
+今は一旦、記事作成だけにしております。そのうちデプロイを行なえるようになると思います</p>
+
+<h2 id="とここまで書いたけどデプロイやめた">とここまで書いたけどデプロイやめた</h2>
+
+<p>というのが、 <code class="language-plaintext highlighter-rouge">feed.xml</code> の移行とスタイルの修正が思った以上に大変で中止。
+この今 Jekyll のテーマのスタイルがあれば、そのうち変更するかもね。</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:markdown">
+      <p><em><a href="https://www.ietf.org/process/rfcs/">RFC</a>(Request For Comment)</em> になっててびびってる <a href="#fnref:markdown" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:binary">
+      <p><strong>Jekyll</strong> は依存解決とかあって最新の <a href="https://www.ruby-lang.org">Ruby</a> が使えなかったりしたのでストレスたかかった <a href="#fnref:binary" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name></name></author><category term="tech" /><category term="dialy" /><category term="rust" /><summary type="html"><![CDATA[HELLO, [ZOLA](https://www.getzola.org) World!!!!! としたかったけど、 移行が面倒すぎたので諦めた話。 以下は作業ログです。一応終りは見えたけど、]]></summary></entry><entry><title type="html">KaigiOnRails 2024 に行ってきました</title><link href="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/" rel="alternate" type="text/html" title="KaigiOnRails 2024 に行ってきました" /><published>2024-10-27T11:09:14+09:00</published><updated>2024-10-27T11:09:14+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/"><![CDATA[<p><a href="https://kaigionrails.org/2024">Kaigi on Rails 2024</a> にはじめて現地参加しました。</p>
 
 <h2 id="day-1">day 1</h2>
 
@@ -783,59 +892,4 @@ hello, world
       <p>たぶん <strong>twitter.com</strong> で <a href="https://twitter.com/takkanm">@takkanm</a> か <a href="https://twitter.com/talpkeyboard">@talpkeyboard</a> のついーと。 <a href="#fnref:itumono" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[最高だったイベント 第一回keebkaigi 行った影響で、キーボードをいじりたくなりました。 今利用している corne cherry でかなり満足しているため、 新規につくるとかはあまりやる気はないので、見た目(キーキャップ)や触った感じ(キースイッチ)を替えようかとおもいます。]]></summary></entry><entry><title type="html">Zellij はじめました</title><link href="https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij/" rel="alternate" type="text/html" title="Zellij はじめました" /><published>2023-06-19T23:59:59+09:00</published><updated>2023-06-19T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/06/19/hello-zellij/"><![CDATA[<p>はい。タイトルの通り、 <a href="https://zellij.dev/"><strong>Zellij</strong></a> をはじめてみました。
-切っ掛けは以下のツイートを見つけたので。</p>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">tmux みたいなやつは terminal multiplexer とか呼ばれてて，たぶん沼さんが求めてるのは zellij<a href="https://t.co/KlyMMeatzH">https://t.co/KlyMMeatzH</a></p>&mdash; sksat (@sksat_tty) <a href="https://twitter.com/sksat_tty/status/1670656419174191105?ref_src=twsrc%5Etfw">June 19, 2023</a></blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<p>というっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっっことでね、はじめます。</p>
-
-<h2 id="zellijとは">Zellijとは？</h2>
-
-<p><a href="https://rust-lang.org"><strong>Rust</strong></a> 製の <a href="https://github.com/tmux/tmux"><strong>tmux</strong></a> クローン。
-はやってますね <strong>Rust</strong> 。</p>
-
-<h2 id="install">Install</h2>
-
-<p>つかってるのが <strong>Gentoo Linux</strong> なので <code class="language-plaintext highlighter-rouge">portage</code> からもはいります。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>emerge zellij
-</code></pre></div></div>
-
-<p>他の <strong>OS</strong> やソースコードからのインストール方法は公式から見て入れてください。</p>
-
-<h2 id="customize">Customize</h2>
-
-<p><strong>tmux</strong> のクローンとあり、カスタマイズもかなりできるようです。
-とりあえず、起動してみましょう。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>zellij
-</code></pre></div></div>
-
-<p><img src="/images/screenshot/zellij-default.webp" alt="" /></p>
-
-<p>デフォルトでもナビがあり、簡単に利用できて便利です。が、キーバインドが気に食わないので変更しましょう。
-といってもカスタムするファイルを書いていませんでしたね。初期設定を標準出力に <code class="language-plaintext highlighter-rouge">zellij setup --dump-config</code> で出せるので <em>リダイレクト</em> なり、 <em>コピペ</em> なりでファイルを作りましょう。保存先はどこでもいいのですが、標準で読み込んでくれる <code class="language-plaintext highlighter-rouge">$HOME/.config/zellij/config.kdl</code> がいいでしょう。ファイル形式は <a href="https://kdl.dev/"><strong>KDL</strong></a> となっていますがなんんもわからん。</p>
-
-<pre><code class="language-kdl">keybinds clear-defaults=true {
-  shared {
-    bind "Ctrl g" { SwitchToMode "Normal"; }
-  }
-  normal {
-    bind "Ctrl t" { SwitchToMode "Tmux"; }
-  }
-  tmux {
-    bind "c" { NewTab; SwitchToMode "Normal"; }
-    bind "o" { FocusNextPane; SwitchToMode "Normal"; }
-  }
-}
-</code></pre>
-
-<p><code class="language-plaintext highlighter-rouge">keybinds</code> でキーバインドの設定がデキルのですが、 <code class="language-plaintext highlighter-rouge">clear-defaults=true</code> を指定してあげることで <em>デフォルト</em> のキーバインドを消すことができます。<a href="https://zellij.dev/documentation/keybindings-modes.html">モードがたくさんあり</a>、そのモードに対してそれぞれキーバインドを設定することができます。上記の例では、<strong>Normal</strong> モードで <code class="language-plaintext highlighter-rouge">Ctrl t</code> を押すと、<strong>Tmux</strong> モードに入ります。ここで、<code class="language-plaintext highlighter-rouge">c</code> を入力すると新しい <strong>tab</strong> で <strong>Shell</strong> が動きます。今どのモードに居るのかわからなくなっても必ず <strong>Normal</strong> モードへ <code class="language-plaintext highlighter-rouge">Ctrl g</code> で戻れるように <code class="language-plaintext highlighter-rouge">shared</code> に設定してあります。
-こんな感じで設定は簡単にできます。</p>
-
-<h2 id="おわりに">おわりに</h2>
-
-<p>かんたんに <strong>zellij</strong> の現在(2023/6/20 バージョン <code class="language-plaintext highlighter-rouge">0.36.0</code> で確認。最新バージョンは <code class="language-plaintext highlighter-rouge">0.37.0</code>。)の設定をみてきました。カスタムできるのはキーバインドだけじゃなく、カラースキーム、レイアウトなどなど様々に変更できるので御参考までにーーーー。
-ねむい。</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[はい。タイトルの通り、 Zellij をはじめてみました。 切っ掛けは以下のツイートを見つけたので。]]></summary></entry></feed>
+</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[最高だったイベント 第一回keebkaigi 行った影響で、キーボードをいじりたくなりました。 今利用している corne cherry でかなり満足しているため、 新規につくるとかはあまりやる気はないので、見た目(キーキャップ)や触った感じ(キースイッチ)を替えようかとおもいます。]]></summary></entry></feed>

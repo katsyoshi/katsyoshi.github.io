@@ -44,6 +44,53 @@
 
 
 
+  <h1><a href="/blog/2017/04/01/how-to-install-elixir/">Elixirのインストール方法</a></h1>
+  <p class="author">
+    <span class="date">2017-04-01 09:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="http://www.elixirconf.jp/">Elixir Conf Japan</a> に行きましたが、よく考えてみたら
+まだこの PC に <a href="http://elixir-lang.org/">Elixir</a> をインストールしていないことに気がついたので
+隣の<a href="https://twitter.com/zzak_jp">英語のうまいおじさん</a>にインストール方法を<a href="https://gist.github.com/katsyoshi/7ac2579bbe903ff65685570fd3873379">教えてもらいながら</a>インストールしました<sup id="fnref:zakk"><a href="#fn:zakk" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p>
+
+<h2 id="準備">準備</h2>
+
+<p>ここでは <a href="https://gentoo.org/">Gentoo Linux</a> を前提としております。
+まず、Elixir を動かすために <a href="https://www.erlang.org">Erlang</a> をインストールします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">sudo eix-sync
+sudo emerge erlang
+</span></code></pre></div></div>
+
+<p>準備はこれだけです。</p>
+
+<h2 id="インストール">インストール</h2>
+
+<p>次にインストールなのですが、Elixir は Earlang VM 上で動くプログラミング言語のため、コンパイルされたバイナリを置くだけでインストールがおわります。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">wget https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip
+unzip Precompiled.zip -d elixir
+mv elixir /path/to/elixir
+</span><span class="gp">echo 'export PATH=/path/to/elixir/bin:$</span>PATH<span class="s1">' &gt;&gt; ~/.bashrc
+</span><span class="go">source ~/.bashrc
+</span></code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+
+<p>さいごに <code class="language-plaintext highlighter-rouge">iex</code> を起動して確認すればおわり</p>
+
+<h3 id="参考">参考</h3>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:zakk">
+      <p>elixir getting started, https://gist.github.com/zzak/a765d6a63860d75c4444e35f57daed13, 2017/04/01 閲覧 <a href="#fnref:zakk" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
   <h1><a href="/blog/2017/02/20/basic-authenticate-in-h2o/">basic authenticate in h2o</a></h1>
   <p class="author">
     <span class="date">2017-02-20 21:53:49 +0900</span>
@@ -389,56 +436,6 @@ GPU: Zotac GeForce GTX 1050
 
 <p>というかんじになっています。
 今回はメモリー4枚しか買っていないので安くなったらあと12枚買いたいとおもってます</p>
-
-  </div>
-
-  <h1><a href="/blog/2016/11/09/went-to-8-jou-island/">went to 8 jou island</a></h1>
-  <p class="author">
-    <span class="date">2016-11-09 20:13:45 +0900</span>
-  </p>
-  <div class="content">
-    <p>11/3-11/5 で八丈島にいってきました。
-決めたのは10/28の朝でした。</p>
-
-<h2 id="出発">出発</h2>
-<p>は竹橋桟橋から船が出ているのでそこからのっていきます。
-船は11/2 22:30(JST)からでていますのでそれでいきました。</p>
-
-<h2 id="到着">到着</h2>
-<p>は11/3 の朝8時ころに底土港に到着します。</p>
-
-<h2 id="島一周">島一周</h2>
-<p>朝到着し、やることないので宿に荷物を置いて自轉車を借ります。
-この自轉車がブレーキ効かないのであきらめてスクーターを借りました。
-滞在時間ずっと使えるように二日借りることにしました。</p>
-
-<p>スクーターかりたあとは島観光として一周まわることにしました。
-途中いくつか良いポイントがあったので写真をとったりしましたが、
-だいたい2時間ぐらいで島一周できました。</p>
-
-<p>一周してひまだったので、昼飯を宿のちかくで</p>
-
-<h2 id="釣り-1日目">釣り 1日目</h2>
-<p>やることないなどうしようかなとおもってたら、宿の部屋に入れるようになったので、PCの充電と携帯の充電を
-そんなこんなしてたら、時間が16時ごろになったので釣りへ。
-この日は釣る気があまりなかったので坊主で終了。
-飯は島の適当なラーメン屋で。</p>
-
-<h2 id="釣り-2日目">釣り 2日目</h2>
-<p>この日は起きてすぐに温泉に行ってみたら、温泉施設自体がどこ行ってもだめで一番遠いとこは、朝10時からでした。
-ので温泉は諦めて釣りへ行ってみた。</p>
-
-<p>釣りはじめて30分ぐらいで釣れたし、一人で刺身にして食べるには十分な大きさだしで、あとは昼ごろまで適当に釣ってました。</p>
-
-<p>-&gt; <img src="/images/photo/hachijo-ipara.webp" alt="アイッパラ" /> &lt;-</p>
-
-<h2 id="温泉">温泉</h2>
-<p>釣りおわったあとは温泉でまったり2時間ほど時間をつぶしてあとは夕日を見にいきました。</p>
-
-<p>-&gt; <img src="/images/photo/hachijo-sunset.webp" alt="サンセット" /> &lt;-</p>
-
-<h2 id="おわり">おわり</h2>
-<p>たのしい一人旅でした。</p>
 
   </div>
 
