@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Hello, Wezterm | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.3.4" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Hello, Wezterm" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="tmux + Allacritty が疲れてきたのではてぶで流れてきた wezterm が sixel を利用できてよさそうだったので試してみることにした。" />
@@ -100,7 +84,7 @@
 </code></pre></div></div>
 
 <p>とすると以下のようになります。
-<img src="/images/screenshot/open-nvtop-and-ytop-in-wezterm.png" width="100%" />
+<img src="/images/screenshot/open-nvtop-and-ytop-in-wezterm.webp" width="100%" />
 便利!</p>
 
 <p>こんな便利なものということで <code class="language-plaintext highlighter-rouge">systemd</code> でデーモン化しています。</p>
@@ -126,7 +110,7 @@
 
 <p><code class="language-plaintext highlighter-rouge">wezterm</code> には <code class="language-plaintext highlighter-rouge">wezterm-mux-server</code> というマルチプレクサ(tmuxのように扱うため)のサーバーモードプログラムがあるのですが、こいつがどうも <code class="language-plaintext highlighter-rouge">wezterm</code> とは挙動が異なり、前述した監視用のキーバインドが微妙に異なった挙動となってしまっています。サーバーモードに接続した場合の挙動は以下のようになります。</p>
 
-<p><img src="/images/screenshot/failed-nvtop-ytop.png" width="100%" /></p>
+<p><img src="/images/screenshot/failed-nvtop-ytop.webp" width="100%" /></p>
 
 <p>1つ目はpaneの位置が期待したとおりになっていない。2つ目は <code class="language-plaintext highlighter-rouge">ytop</code> が起動していないというので2つ目の方は気にしなければいいのでまあいいかと思っている。1つ目の問題は許容できていないので一旦はこのキーバインドは封印となっています。</p>
 

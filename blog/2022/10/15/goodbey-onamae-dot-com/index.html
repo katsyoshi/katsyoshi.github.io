@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活 | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.3.4" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="お名前ドットコムのメールがうざすぎたので DNS を Cloudflare に移行して快適生活" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="katsyoshi.org の登録先を お名前ドットコム にしてたけど、広告のようなメールとか届くし 更新案内と広告の違いがわからない感じのメールが大量にくるのでやめようやめようと思ってたのでいいかげん変えてみた話。" />
@@ -75,12 +59,12 @@
 <p>レジストラを移管する前に現在登録してある <a href="https://www.nic.ad.jp/ja/whois/">WHOIS 情報</a> を確認します。
 これは移管作業で移管作業用コードが WHOIS 登録者にメールが送られてくるのでどのメールアドレスかの確認です。
 ここで<a href="https://www.onamae.com/service/d-regist/option.html">WHOIS 情報公開代行</a> を利用している場合は、
-WHOIS を一旦登録時のものに変更します<sup id="fnref:org" role="doc-noteref"><a href="#fn:org" class="footnote" rel="footnote">1</a></sup>。</p>
+WHOIS を一旦登録時のものに変更します<sup id="fnref:org"><a href="#fn:org" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>。</p>
 
 <h2 id="移管">移管</h2>
 
 <p>移管作業としては新規レジストラで<a href="https://developers.cloudflare.com/registrar/get-started/transfer-domain-to-cloudflare/">移管依頼</a>を参考に移管依頼ページを開きます。
-開いたら、旧サービスから移管コードの発行を行ないます<sup id="fnref:onamae" role="doc-noteref"><a href="#fn:onamae" class="footnote" rel="footnote">2</a></sup>。
+開いたら、旧サービスから移管コードの発行を行ないます<sup id="fnref:onamae"><a href="#fn:onamae" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>。
 移管コードを <a href="https://zenn.dev/a24k/articles/20220527-cloudflare-dns"><strong>Cloudflare</strong> 側で入力して</a>しばし待機。</p>
 
 <p>しばらくしたら、レコードが登録されるので完了です。</p>
@@ -96,10 +80,10 @@ WHOIS を一旦登録時のものに変更します<sup id="fnref:org" role="doc
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:org" role="doc-endnote">
+    <li id="fn:org">
       <p>前に移行しようとしたとき、<strong>.org</strong> のドメインは WHOIS 情報書き変えられなくて移行失敗。現在この制限はなくなったので移行。 <a href="#fnref:org" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:onamae" role="doc-endnote">
+    <li id="fn:onamae">
       <p>こいつが見つけにくく、お名前ドットコムからは見つけられずに<a href="https://www.tsukimi.net/domain_onamae_xdomain.html">移管レポートブログ</a>から発見。 <a href="#fnref:onamae" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>

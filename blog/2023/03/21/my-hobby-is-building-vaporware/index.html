@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>趣味は vaporware 造りですv0.0.0 | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.3.4" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="趣味は vaporware 造りですv0.0.0" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="プログラマー三大勉強はしたけど、実装はしたことないものといえば CPU、OS、コンパイラーなのです1が、先日 ruby30th 誕生日会のキーノートで matz が “Static Compiler for Ruby” という今はまだない vaporware として 挙げていたのでこの static compiler を作ろうとなりました。 個人差があります。 &#8617;" />
@@ -53,7 +37,7 @@
 
   <div class="post-content e-content" itemprop="articleBody">
     <p>プログラマー三大勉強はしたけど、実装はしたことないものといえば
-CPU、OS、コンパイラーなのです<sup id="fnref:kojinsa" role="doc-noteref"><a href="#fn:kojinsa" class="footnote" rel="footnote">1</a></sup>が、先日 <a href="https://www.publickey1.jp/blog/23/ruby30static_compiler_for_ruby.html">ruby30th 誕生日会のキーノート</a>で
+CPU、OS、コンパイラーなのです<sup id="fnref:kojinsa"><a href="#fn:kojinsa" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>が、先日 <a href="https://www.publickey1.jp/blog/23/ruby30static_compiler_for_ruby.html">ruby30th 誕生日会のキーノート</a>で
 matz が “Static Compiler for Ruby” という今はまだない <code class="language-plaintext highlighter-rouge">vaporware</code> として
 挙げていたのでこの <strong>static compiler</strong> を作ろうとなりました。</p>
 
@@ -87,7 +71,7 @@ matz が “Static Compiler for Ruby” という今はまだない <code class=
 <p>最適化は <strong>Ruby</strong> のコードを単純に <em>機械語</em> におとしただけでは現在の <strong>RubyVM</strong>
 より速くならないと考えているからです(要確認)。
 <strong>LLVM IR</strong> などへの変換ではなく、 <em>機械語</em> なのは <strong>LLVM</strong> をインストールする必要があるなどして
-面倒なのが大きいです<sup id="fnref:gentoo" role="doc-noteref"><a href="#fn:gentoo" class="footnote" rel="footnote">2</a></sup>。あとバージョン毎に <strong>LLVM IR</strong> が異なるのも現状では対応しにくい点となっています。</p>
+面倒なのが大きいです<sup id="fnref:gentoo"><a href="#fn:gentoo" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>。あとバージョン毎に <strong>LLVM IR</strong> が異なるのも現状では対応しにくい点となっています。</p>
 
 <p><em>GC</em> (Garbage Collection: ガベージコレクション) についてはそもそもクラスをサポートできない、
 変数などのメモリを確保しておく時間が長いプログラムを対象としないので今回はスコープ外としています。</p>
@@ -98,7 +82,7 @@ matz が “Static Compiler for Ruby” という今はまだない <code class=
 
 <h2 id="実装方針">実装方針</h2>
 <p>Goal までの実装は <a href="https://www.sigbus.info/compilerbook">低レイヤを知りたい人のためのCコンパイラ作成入門</a> を参考にすすめていきます。
-最初に <em>コンパイラー</em> を実装するものとして <em>C 言語</em> がたぶん勉強してきてうかぶと思います<sup id="fnref:java" role="doc-noteref"><a href="#fn:java" class="footnote" rel="footnote">3</a></sup>。
+最初に <em>コンパイラー</em> を実装するものとして <em>C 言語</em> がたぶん勉強してきてうかぶと思います<sup id="fnref:java"><a href="#fn:java" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>。
 <em>C 言語</em> だと <em>機械語</em> や <em>VM</em> のバイトコードへ落とすことのできる資料が多いので選択しています。
 とは言っても <strong>Ruby</strong> からの脳内変換はある程度必要なので慣れているというのもあります。</p>
 
@@ -131,23 +115,23 @@ matz が “Static Compiler for Ruby” という今はまだない <code class=
 <h2 id="きょうはここまで">きょうはここまで</h2>
 
 <p>とりあえず手を動かしはじめましたが、ななななんと、似たような機能が実は <strong>Ruby 3.3</strong> 向けに
-<em>JIT</em> として入ったようです<sup id="fnref:rjit" role="doc-noteref"><a href="#fn:rjit" class="footnote" rel="footnote">4</a></sup>。
+<em>JIT</em> として入ったようです<sup id="fnref:rjit"><a href="#fn:rjit" class="footnote" rel="footnote" role="doc-noteref">4</a></sup>。
 ということでねこの話はね、勉強の話しかないんですが一旦 Goal まで作ってみましょうね。</p>
 
 <hr />
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:kojinsa" role="doc-endnote">
+    <li id="fn:kojinsa">
       <p>個人差があります。 <a href="#fnref:kojinsa" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:gentoo" role="doc-endnote">
+    <li id="fn:gentoo">
       <p>Gentoo Linux 使っているので毎回コンパイルしているので本当にめんどう。バイナリあるよとかそういう正論は受け付けていないです。 <a href="#fnref:gentoo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:java" role="doc-endnote">
+    <li id="fn:java">
       <p>時代によって変わるかも。<strong>Java</strong> だったり、<strong>Lisp</strong> だったりする人がいるかも。 <a href="#fnref:java" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:rjit" role="doc-endnote">
+    <li id="fn:rjit">
       <p>https://github.com/ruby/ruby/pull/7448 <a href="#fnref:rjit" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>

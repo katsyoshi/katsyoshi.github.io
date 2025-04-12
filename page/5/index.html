@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 5 of 12 for katsyoshi のめもみたいなの - page 5 | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.3.4" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="katsyoshi のめもみたいなの - page 5" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
@@ -222,14 +206,14 @@ index da302ca1..94025817 100755
 <p>流石に平日の午後3時だったので店員さん以外は誰もおらず、一人だけでした。
 とりあえず <a href="https://untappd.com/b/gahaha-beer-danchi-ipa/2502617">Danchi IPA</a> とレバーを頼んでみた。</p>
 
-<p>-&gt; <img src="/images/photo/gahaha-danchi-ipa.jpg" alt="" /> &lt;-</p>
+<p>-&gt; <img src="/images/photo/gahaha-danchi-ipa.webp" alt="" /> &lt;-</p>
 
 <p>Danchi IPA は苦味がすくなく美味しいビールでした。</p>
 
 <p>つぎに <a href="https://untappd.com/b/gahaha-beer-marcy-ipa-ipa/2517460">Marcy IPA</a> とライスなしカツカレーを注文。
 こちらは苦味が強くおいしいビールでした。</p>
 
-<p>-&gt; <img src="/images/photo/gahaha-marcy-ipa.jpg" alt="" /> &lt;-</p>
+<p>-&gt; <img src="/images/photo/gahaha-marcy-ipa.webp" alt="" /> &lt;-</p>
 
 <p>そんなことより、謎のメニューが幾つかあり、店員さんに聞いてみたら、「だってお酒のむ人お米とか麺とかあんまりすきじゃないですよね」っていっておりました。
 あと、軟骨バッファローチキンは頼んでないけどとてもよさそうだったので今度いく時に注文しよう。</p>
@@ -531,24 +515,24 @@ index da302ca1..94025817 100755
 
 <h3 id="25-テンプレートの抽出"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec25">25. テンプレートの抽出</a></h3>
 
-<p>こいつは大変でしたので参考サイト<sup id="fnref:nlp100-25" role="doc-noteref"><a href="#fn:nlp100-25" class="footnote" rel="footnote">1</a></sup> を参考に以下の正規表現でとりあえず抽出しています。</p>
+<p>こいつは大変でしたので参考サイト<sup id="fnref:nlp100-25"><a href="#fn:nlp100-25" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> を参考に以下の正規表現でとりあえず抽出しています。</p>
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">re</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(?ms)(?:^\{\{基礎情報.*?$)(?P&lt;dict&gt;.+?)(?:^\}\}$)"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h3 id="26-強調マークアップの除去"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec26">26. 強調マークアップの除去</a></h3>
 
-<p>こちらも同様に参考サイト<sup id="fnref:nlp100-26" role="doc-noteref"><a href="#fn:nlp100-26" class="footnote" rel="footnote">2</a></sup>を参考に以下の正規表現で</p>
+<p>こちらも同様に参考サイト<sup id="fnref:nlp100-26"><a href="#fn:nlp100-26" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>を参考に以下の正規表現で</p>
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">strong</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"'{2,5}"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h3 id="27-内部リンクの除去"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec27">27. 内部リンクの除去</a></h3>
-<p>こちらも同様に参考サイト<sup id="fnref:nlp100-27" role="doc-noteref"><a href="#fn:nlp100-27" class="footnote" rel="footnote">3</a></sup>を参考に以下の正規表現で</p>
+<p>こちらも同様に参考サイト<sup id="fnref:nlp100-27"><a href="#fn:nlp100-27" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>を参考に以下の正規表現で</p>
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">link</span> <span class="o">=</span> <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"(?:\[{1,2})(?P&lt;link&gt;.+?)(?:\|.+)?(?:\]{1,2})"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
 </code></pre></div></div>
 <h3 id="28-mediawikiマークアップの除去"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec28">28. MediaWikiマークアップの除去</a></h3>
-<p>どうよう<sup id="fnref:nlp100-28" role="doc-noteref"><a href="#fn:nlp100-28" class="footnote" rel="footnote">4</a></sup> (ry</p>
+<p>どうよう<sup id="fnref:nlp100-28"><a href="#fn:nlp100-28" class="footnote" rel="footnote" role="doc-noteref">4</a></sup> (ry</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let link = Regex::new(r"(?:\[{1,2})(?P&lt;link&gt;.+?)(?:\|.+)?(?:\]{1,2})").unwrap();
 let lang = Regex::new(r"(?:\{\{lang\|.+?\|)(?P&lt;lang&gt;.+?)(?:\}\})").unwrap();
@@ -557,7 +541,7 @@ let markup = Regex::new(r"&lt;/*.+?&gt;").unwrap();
 
 <h3 id="29-国旗画像のurlを取得する"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec29">29. 国旗画像のURLを取得する</a></h3>
 
-<p>こちらもさんこおおう<sup id="fnref:nlp100-29" role="doc-noteref"><a href="#fn:nlp100-29" class="footnote" rel="footnote">5</a></sup>にしてますが、主にURL部分だけです。
+<p>こちらもさんこおおう<sup id="fnref:nlp100-29"><a href="#fn:nlp100-29" class="footnote" rel="footnote" role="doc-noteref">5</a></sup>にしてますが、主にURL部分だけです。
 こちらは <a href="https://hyper.rs/">Hyper</a> を利用することで解決しています。</p>
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">extern</span> <span class="k">crate</span> <span class="n">futures</span><span class="p">;</span>
@@ -678,19 +662,19 @@ let markup = Regex::new(r"&lt;/*.+?&gt;").unwrap();
 <h2 id="参考資料">参考資料</h2>
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:nlp100-25" role="doc-endnote">
+    <li id="fn:nlp100-25">
       <p>素人の言語処理100本ノック:25, segavvy, <a href="https://qiita.com/segavvy/items/e402ad0a5b0f52453d7f">https://qiita.com/segavvy/items/e402ad0a5b0f52453d7f</a> <a href="#fnref:nlp100-25" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:nlp100-26" role="doc-endnote">
+    <li id="fn:nlp100-26">
       <p>素人の言語処理100本ノック:26, segavvy, <a href="https://qiita.com/segavvy/items/f6d0f3d6eee5acc33c58">https://qiita.com/segavvy/items/f6d0f3d6eee5acc33c58</a> <a href="#fnref:nlp100-26" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:nlp100-27" role="doc-endnote">
+    <li id="fn:nlp100-27">
       <p>素人の言語処理100本ノック:27, segavvy, <a href="https://qiita.com/segavvy/items/9a8137f045852bc299d6">https://qiita.com/segavvy/items/9a8137f045852bc299d6</a> <a href="#fnref:nlp100-27" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:nlp100-28" role="doc-endnote">
+    <li id="fn:nlp100-28">
       <p>素人の言語処理100本ノック:28, segavvy, <a href="https://qiita.com/segavvy/items/8c4567ec1124320d3354">https://qiita.com/segavvy/items/8c4567ec1124320d3354</a> <a href="#fnref:nlp100-28" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:nlp100-29" role="doc-endnote">
+    <li id="fn:nlp100-29">
       <p>素人の言語処理100本ノック:29, segavvy, <a href="https://qiita.com/segavvy/items/fc7257012d8a590185e5">https://qiita.com/segavvy/items/fc7257012d8a590185e5</a> <a href="#fnref:nlp100-29" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>

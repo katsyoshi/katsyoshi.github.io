@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>いんとろでぅーす xremap | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.3.4" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="いんとろでぅーす xremap" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="仕事で利用したりしている Slack などのキーボードでの操作が面倒になってきたので、 emacs keybind が利用できるようにするため xremap を利用することにした。" />
@@ -106,7 +90,7 @@ Error: Failed to build an output device: no such file or directory (os error 2)
 今回はメンドウなので怪しいところに <code class="language-plaintext highlighter-rouge">println</code> 文を挿入して実行してみます。
 そうすると、どうやら <a href="https://github.com/k0kubun/xremap/blob/f058c444335c153e638ecf3c76492cdf9f8a975d/src/output.rs#L39-L43"><code class="language-plaintext highlighter-rouge">src/output.rs</code> の 39 行目の <code class="language-plaintext highlighter-rouge">VirtualDeviceBuilder</code> に問題がありそう</a> ということがわかりました。</p>
 
-<p>この行のどこに問題あるんだ？と思い利用しているこのライブラリ <a href="https://docs.rs/evdev"><strong>evdev</strong></a> を見ることにしました<sup id="fnref:evdev-rs" role="doc-noteref"><a href="#fn:evdev-rs" class="footnote" rel="footnote">1</a></sup>。
+<p>この行のどこに問題あるんだ？と思い利用しているこのライブラリ <a href="https://docs.rs/evdev"><strong>evdev</strong></a> を見ることにしました<sup id="fnref:evdev-rs"><a href="#fn:evdev-rs" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>。
 そうすると <a href="https://docs.rs/evdev/latest/src/evdev/uinput.rs.html#13"><code class="language-plaintext highlighter-rouge">/dev/uinput</code> が必要</a> ということがわかります。
 それで <code class="language-plaintext highlighter-rouge">/dev/uinput</code> があるかどうか <code class="language-plaintext highlighter-rouge">ls</code> で見ますが、当然無いので無いです。
 なぜ無いのかというと <code class="language-plaintext highlighter-rouge">INPUT_UINPUT</code> でドライバーを入れていなかったようです。
@@ -155,16 +139,16 @@ Selected keyboards automatically since --device options weren't specified:
 
 <h2 id="おわり">おわり</h2>
 <p>最近、 <strong>Mac</strong> との行き来をしていると <strong>emacs keybind</strong> が使えないときにちょっといらっとしますので使えるようにキーバインドを変更してみました。
-設定ファイルの動的読み込みに対応していないのがちょっと面倒なのですが<sup id="fnref:hotreload" role="doc-noteref"><a href="#fn:hotreload" class="footnote" rel="footnote">2</a></sup>、これで <strong>Slack</strong> などで <code class="language-plaintext highlighter-rouge">C-a</code> で行頭にもどれるようになりました。便利。</p>
+設定ファイルの動的読み込みに対応していないのがちょっと面倒なのですが<sup id="fnref:hotreload"><a href="#fn:hotreload" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>、これで <strong>Slack</strong> などで <code class="language-plaintext highlighter-rouge">C-a</code> で行頭にもどれるようになりました。便利。</p>
 
 <hr />
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:evdev-rs" role="doc-endnote">
+    <li id="fn:evdev-rs">
       <p>はじめは似た名前のライブラリの <a href="https://github.com/ndesh26/evdev-rs"><code class="language-plaintext highlighter-rouge">evdev-rs</code></a> を見てたのですが、対象であるはずのファイル内に宣言されていないのでちょっととまどい、このライブラリは違うやつだとなり <a href="https://crates.io">crates.io</a> で再検索して発見しています。 <a href="#fnref:evdev-rs" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:hotreload" role="doc-endnote">
+    <li id="fn:hotreload">
       <p>どうせ1回確認できたら再起動する必要はないので問題ないといえば問題ないけど、ちょっと面倒。 <a href="#fnref:hotreload" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>

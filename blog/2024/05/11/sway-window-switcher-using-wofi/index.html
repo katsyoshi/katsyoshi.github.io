@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Sway 用 Window 切り替えを作った | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.3.4" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Sway 用 Window 切り替えを作った" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="あたらしく PC 買って、 Linux の GUI 環境を X11 から Wayland に乗り変えることにしました。 いままで利用していたデスクトップ環境を i3 から sway に変更しました。 最近利用していた macOS や i3 ではあまり気にしていなかったのですが、Windows の Alt+Tab での ウインドウ切り替えが便利だったのを思い出したのでこの便利な機能を模倣することにしました。" />
@@ -118,7 +102,7 @@
 <span class="no">SwayWindowSwithcer</span><span class="p">.</span><span class="nf">switch</span>
 </code></pre></div></div>
 
-<p><strong>i3</strong> は <a href="https://i3wm.org/docs/ipc.html"><strong>IPC</strong> が定義</a> されています <sup id="fnref:ipc" role="doc-noteref"><a href="#fn:ipc" class="footnote" rel="footnote">1</a></sup> 。
+<p><strong>i3</strong> は <a href="https://i3wm.org/docs/ipc.html"><strong>IPC</strong> が定義</a> されています <sup id="fnref:ipc"><a href="#fn:ipc" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> 。
 今利用している <strong>sway</strong> は <strong>i3</strong> の <strong>wayland</strong> 向け実装なので <strong>IPC</strong> に互換性があります。
 そのまま <strong>i3ipc</strong> 関連のライブラリを利用することが可能です。
 ということで今回は <strong>ruby</strong> の <strong>gem</strong> として <strong>i3ipc.gem</strong> というそのままのやつがあったので利用します。
@@ -127,14 +111,14 @@
 切り替えたいウィンドウを選択したら、今度は <strong>i3</strong> へ選択したウィンドウへのフォーカスする命令を送ります。</p>
 
 <p>ここで注意点として、二つありひとつ目は以下があります。
-<strong>ruby</strong> の <strong>i3ipc</strong> は <code class="language-plaintext highlighter-rouge">I3Ipc::Connection</code> からでしかコマンドを送れないです<sup id="fnref:sanko" role="doc-noteref"><a href="#fn:sanko" class="footnote" rel="footnote">2</a></sup>。
+<strong>ruby</strong> の <strong>i3ipc</strong> は <code class="language-plaintext highlighter-rouge">I3Ipc::Connection</code> からでしかコマンドを送れないです<sup id="fnref:sanko"><a href="#fn:sanko" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>。
 そのためこのプログラムでは <code class="language-plaintext highlighter-rouge">@conn.command</code> でコマンドを送るとします。
 このままではどのウインドウかはわからないので <strong>i3</strong> コマンドを送る際に <code class="language-plaintext highlighter-rouge">[con_id=id]</code> を付けます。
 今回はウィンドウを切り替えることをしたいだけなので <code class="language-plaintext highlighter-rouge">[con_id=id] focus</code> とします。
 ふたつ目はシステムの <strong>ruby</strong> を利用する際には必要な <strong>gem</strong> がシステムにインストールされている必要があります。
-もしインストールされていないのであれば手動でいれる必要があります<sup id="fnref:bundler" role="doc-noteref"><a href="#fn:bundler" class="footnote" rel="footnote">3</a></sup>。</p>
+もしインストールされていないのであれば手動でいれる必要があります<sup id="fnref:bundler"><a href="#fn:bundler" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>。</p>
 
-<p><img src="/images/screenshot/wofi-window-switcher.png" alt="" /></p>
+<p><img src="/images/screenshot/wofi-window-switcher.webp" alt="" /></p>
 
 <h2 id="おわり">おわり</h2>
 
@@ -145,13 +129,13 @@
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:ipc" role="doc-endnote">
+    <li id="fn:ipc">
       <p>InerProcess Communication <a href="#fnref:ipc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:sanko" role="doc-endnote">
+    <li id="fn:sanko">
       <p>参考にした <strong>Python</strong> はウィンドウのオブジェクトから直接コマンドが送れます。 <a href="#fnref:sanko" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:bundler" role="doc-endnote">
+    <li id="fn:bundler">
       <p><strong>root</strong> ユーザーで一度実行するか、手動でやる必要がある。インラインとはいったい…… <a href="#fnref:bundler" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>

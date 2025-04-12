@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>basic authenticate in h2o | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.3.4" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="basic authenticate in h2o" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="H2Oでベーシック認証したい場合は以下のようにします1 Configure &gt; Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧 &#8617;" />
@@ -52,7 +36,7 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:h2odoc" role="doc-noteref"><a href="#fn:h2odoc" class="footnote" rel="footnote">1</a></sup></p>
+    <p>H2Oでベーシック認証したい場合は以下のようにします<sup id="fnref:h2odoc"><a href="#fn:h2odoc" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">paths</span><span class="pi">:</span>
   <span class="s2">"</span><span class="s">/"</span><span class="err">:</span>
@@ -66,7 +50,7 @@
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">failed to validate password using file:/etc/h2o/.htpasswd:crypt-style password hash is not supported
 </span></code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">.htpasswd</code> を手動で作成したい場合は以下の方法でできます<sup id="fnref:apachdoc" role="doc-noteref"><a href="#fn:apachdoc" class="footnote" rel="footnote">2</a></sup></p>
+<p><code class="language-plaintext highlighter-rouge">.htpasswd</code> を手動で作成したい場合は以下の方法でできます<sup id="fnref:apachdoc"><a href="#fn:apachdoc" class="footnote" rel="footnote" role="doc-noteref">2</a></sup></p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"digest/sha1"</span>
 <span class="nb">require</span> <span class="s2">"base64"</span>
@@ -77,10 +61,10 @@
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:h2odoc" role="doc-endnote">
+    <li id="fn:h2odoc">
       <p>Configure &gt; Using Basic Authentication, DeNA Co., Ltd. et al., https://h2o.examp1e.net/configure/basic_auth.html, 2017/02/20 閲覧 <a href="#fnref:h2odoc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:apachdoc" role="doc-endnote">
+    <li id="fn:apachdoc">
       <p>Password Formats, The Apache Software Foundation., https://httpd.apache.org/docs/2.4/misc/password_encryptions.html, 2017/02/20 閲覧 <a href="#fnref:apachdoc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>

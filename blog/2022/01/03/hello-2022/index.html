@@ -1,25 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>冬やすみ | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.3.4" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="冬やすみ" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="冬やすみの間、やりたいこと、やっといたほうがいいやつをやってました。 ひとつは xremap の設定ともうひとつは CO2-mini から CO2 を見える ようにした。" />
@@ -59,7 +43,7 @@
 
 <h2 id="準備">準備</h2>
 
-<p>準備として、 <strong>mackerel</strong> <sup id="fnref:mackerel-token" role="doc-noteref"><a href="#fn:mackerel-token" class="footnote" rel="footnote">1</a></sup> と <strong>Slack</strong> <sup id="fnref:slack-token" role="doc-noteref"><a href="#fn:slack-token" class="footnote" rel="footnote">2</a></sup>
+<p>準備として、 <strong>mackerel</strong> <sup id="fnref:mackerel-token"><a href="#fn:mackerel-token" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> と <strong>Slack</strong> <sup id="fnref:slack-token"><a href="#fn:slack-token" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>
 両アプリケーションの投稿 API 用 Token をそれぞれ用意します。
 各公式ページにあるように生成、取得するだけでよいです。</p>
 
@@ -69,8 +53,8 @@
 
 <h2 id="実装">実装</h2>
 
-<p>今回は対話式の <strong>bot</strong> ではないので、 <a href="https://api.slack.com/rtm"><strong>RTM</strong></a> を利用せずに、<strong>HTTP</strong> クライアントだけで構成しています<sup id="fnref:slack-rs" role="doc-noteref"><a href="#fn:slack-rs" class="footnote" rel="footnote">3</a></sup>。
-<strong>Rust</strong> の <strong>HTTP</strong> クライアントとして <a href="https://github.com/hyperium/hyper"><strong>hyper</strong></a><sup id="fnref:hyper-warning" role="doc-noteref"><a href="#fn:hyper-warning" class="footnote" rel="footnote">4</a></sup> を利用します。
+<p>今回は対話式の <strong>bot</strong> ではないので、 <a href="https://api.slack.com/rtm"><strong>RTM</strong></a> を利用せずに、<strong>HTTP</strong> クライアントだけで構成しています<sup id="fnref:slack-rs"><a href="#fn:slack-rs" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>。
+<strong>Rust</strong> の <strong>HTTP</strong> クライアントとして <a href="https://github.com/hyperium/hyper"><strong>hyper</strong></a><sup id="fnref:hyper-warning"><a href="#fn:hyper-warning" class="footnote" rel="footnote" role="doc-noteref">4</a></sup> を利用します。
 <strong>TLS</strong> は <a href="https://github.com/hyperium/hyper-tls"><strong>hyper_tls</strong></a> を利用しています。</p>
 
 <p>実装とは言っても対象の <strong>mackerel</strong> の APIを叩き値を取得して、
@@ -164,7 +148,7 @@
 
 <p>こうやってポストされたメッセージは以下のようになります。</p>
 
-<p><img src="/images/screenshot/posted-slack-message.png" alt="" /></p>
+<p><img src="/images/screenshot/posted-slack-message.webp" alt="" /></p>
 
 <p>絵文字つきでポストされましたね。</p>
 
@@ -178,16 +162,16 @@
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:mackerel-token" role="doc-endnote">
+    <li id="fn:mackerel-token">
       <p>https://mackerel.io/ja/api-docs/ <a href="#fnref:mackerel-token" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:slack-token" role="doc-endnote">
+    <li id="fn:slack-token">
       <p>https://slack.com/intl/ja-jp/help/articles/215770388-API-%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E7%94%9F%E6%88%90%E3%81%A8%E5%86%8D%E7%94%9F%E6%88%90 <a href="#fnref:slack-token" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:slack-rs" role="doc-endnote">
+    <li id="fn:slack-rs">
       <p><a href="https://github.com/slack-rs/slack-rs">slack-rs</a> という便利ライブラリがあるのですが、ちょっと触ってみたこれは必要なんだっけ？となってやめました。 <a href="#fnref:slack-rs" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:hyper-warning" role="doc-endnote">
+    <li id="fn:hyper-warning">
       <p><a href="https://github.com/hyperium/hyper#low-level">公式の README</a> にあるようにこの場合は <a href="https://github.com/seanmonstar/reqwest"><strong>reqwest</strong></a> を利用するほうがよかったかもしれない。<strong>TLS</strong> は直接 <strong>hyper</strong> が対応していなかったりしてすこし面倒です。 <a href="#fnref:hyper-warning" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
