@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2025-04-12T20:55:18+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Hello, ZOLA を失敗した話</title><link href="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/" rel="alternate" type="text/html" title="Hello, ZOLA を失敗した話" /><published>2025-04-12T00:00:00+09:00</published><updated>2025-04-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/"><![CDATA[<p><code class="language-plaintext highlighter-rouge">HELLO, [ZOLA](https://www.getzola.org) World!!!!!</code> としたかったけど、
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2025-04-13T09:27:42+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Hello, ZOLA を失敗した話</title><link href="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/" rel="alternate" type="text/html" title="Hello, ZOLA を失敗した話" /><published>2025-04-12T00:00:00+09:00</published><updated>2025-04-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/"><![CDATA[<p>HELLO, <a href="https://www.getzola.org"><code class="language-plaintext highlighter-rouge">ZOLA</code></a> World!!!!! としたかったけど、
 移行が面倒すぎたので諦めた話。
 以下は作業ログです。一応終りは見えたけど、</p>
 
@@ -94,7 +94,7 @@
 <h2 id="とここまで書いたけどデプロイやめた">とここまで書いたけどデプロイやめた</h2>
 
 <p>というのが、 <code class="language-plaintext highlighter-rouge">feed.xml</code> の移行とスタイルの修正が思った以上に大変で中止。
-この今 Jekyll のテーマのスタイルがあれば、そのうち変更するかもね。</p>
+この今 <strong>Jekyll</strong> のテーマのスタイルがあれば、そのうち変更するかもね。</p>
 
 <hr />
 
@@ -107,7 +107,7 @@
       <p><strong>Jekyll</strong> は依存解決とかあって最新の <a href="https://www.ruby-lang.org">Ruby</a> が使えなかったりしたのでストレスたかかった <a href="#fnref:binary" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="tech" /><category term="dialy" /><category term="rust" /><summary type="html"><![CDATA[HELLO, [ZOLA](https://www.getzola.org) World!!!!! としたかったけど、 移行が面倒すぎたので諦めた話。 以下は作業ログです。一応終りは見えたけど、]]></summary></entry><entry><title type="html">KaigiOnRails 2024 に行ってきました</title><link href="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/" rel="alternate" type="text/html" title="KaigiOnRails 2024 に行ってきました" /><published>2024-10-27T11:09:14+09:00</published><updated>2024-10-27T11:09:14+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/"><![CDATA[<p><a href="https://kaigionrails.org/2024">Kaigi on Rails 2024</a> にはじめて現地参加しました。</p>
+</div>]]></content><author><name></name></author><category term="tech" /><category term="dialy" /><category term="rust" /><summary type="html"><![CDATA[HELLO, ZOLA World!!!!! としたかったけど、 移行が面倒すぎたので諦めた話。 以下は作業ログです。一応終りは見えたけど、]]></summary></entry><entry><title type="html">KaigiOnRails 2024 に行ってきました</title><link href="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/" rel="alternate" type="text/html" title="KaigiOnRails 2024 に行ってきました" /><published>2024-10-27T11:09:14+09:00</published><updated>2024-10-27T11:09:14+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/"><![CDATA[<p><a href="https://kaigionrails.org/2024">Kaigi on Rails 2024</a> にはじめて現地参加しました。</p>
 
 <h2 id="day-1">day 1</h2>
 
