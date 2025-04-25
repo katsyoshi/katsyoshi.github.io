@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>RubyKaigi 2025 at Matz-yama | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="RubyKaigi 2025 at Matz-yama" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="今年も RubyKaigi 2025 に行ってきました。" />
+<meta property="og:description" content="今年も RubyKaigi 2025 に行ってきました。" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2025/04/25/went-to-rubykaigi-2025/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2025/04/25/went-to-rubykaigi-2025/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-04-25T23:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="RubyKaigi 2025 at Matz-yama" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-04-25T23:00:00+09:00","datePublished":"2025-04-25T23:00:00+09:00","description":"今年も RubyKaigi 2025 に行ってきました。","headline":"RubyKaigi 2025 at Matz-yama","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2025/04/25/went-to-rubykaigi-2025/"},"url":"https://blog.katsyoshi.org/blog/2025/04/25/went-to-rubykaigi-2025/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">RubyKaigi 2025 at Matz-yama</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-04-25T23:00:00+09:00" itemprop="datePublished">Apr 25, 2025
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>今年も <a href="https://rubykaigi.org/2025">RubyKaigi 2025</a> に行ってきました。</p>
+
+<p>今年みたセッション一覧を日毎に。</p>
+
+<h2 id="day-1">Day 1</h2>
+
+<ol>
+  <li><a href="">Ruby Taught Me About Encoding Under the Hood</a></li>
+  <li><a href="https://mensfeld.github.io/bringing_linux_pidfd_to_ruby/">Bringing Linux pidfd to Ruby</a></li>
+  <li><a href="https://speakerdeck.com/kateinoigakukun/the-evolution-of-the-cruby-build-system">The Evolution of the CRuby Build System</a></li>
+  <li><a href="https://speakerdeck.com/k0kubun/rubykaigi-2025">Deoptimization: How YJIT Speeds Up Ruby by Slowing Down</a></li>
+  <li><a href="https://speakerdeck.com/yui_knk/rubys-line-breaks">Ruby’s Line Breaks</a></li>
+  <li><a href="https://speakerdeck.com/tagomoris/state-of-namespace">State of Namespace</a></li>
+  <li><a href="https://github.com/tric/trick2025">TRICK 2025: Episode I</a></li>
+</ol>
+
+<p>初日のキーノートは、 <a href="https://github.com/ima1zumi">@ima1zumi</a> さんで文字コードの話してくれました。
+つぎは <a href="https://github.com/mensfeld">@mensfeld</a> の <code class="language-plaintext highlighter-rouge">pidfd</code> の話を聞きました。
+これは server 動かしているとはまる問題、 <code class="language-plaintext highlighter-rouge">pid</code> の使い回しによるバグの対処方法として <code class="language-plaintext highlighter-rouge">pidfd</code> を <code class="language-plaintext highlighter-rouge">Ruby</code> に対応したという話でした。
+オチは、そもそも <strong>overkill</strong> で不要だったねという。
+午前の終りは <a href="https://github.com/kateinoigakukun">@kateinoigakukun</a> さんのビルドシステムの話でした。 <em>Ruby</em> のビルドシステムのリプレースを考えているようでした。
+午後一発目はお馴染 <strong>Shopify</strong> の <em>YJIT</em> チームの <a href="https://github.com/k0kubun">@k0kubun</a> さんの話。 <em>YJIT</em> を速くするために、如何に <em>deoptimization</em> するかという話で、速くするための方法を話していました。
+<strong>パーサーギャング</strong> 一味のドン、<a href="https://github.com/yui-knk">@yi-knk</a> さんの話で今年楽しみにしてた発表。
+<em>Namespace</em> の話は <a href="https://github.com/tagomoris">@tagomoris</a> さんがやってくれました。
+今年のうちに入りそうな雰囲気を感じた。
+いったん休憩して <strong>trick</strong> へ。</p>
+
+<h2 id="day-2">Day 2</h2>
+
+<ol>
+  <li><a href="https://docs.google.com/presentation/d/1lDnxFkc4URsi0LP4w1M5IXv5A02AG_HUy3gW_SpEWOA/edit#slide=id.g34edb417dc3_0_1471">Performance Bugs and Low-level Ruby Observability APIs</a></li>
+  <li><a href="https://speakerdeck.com/ydah/dissecting-and-reconstructing-ruby-syntactic-structures">Dissecting and Reconstructing Ruby Syntactic Structures</a></li>
+  <li><a href="">ZJIT: Building a Next Generation Ruby JIT</a></li>
+  <li>Bazel for Ruby</li>
+  <li><a href="https://speakerdeck.com/junk0612/the-implementations-of-advanced-lr-parser-algorithm">The Implementations of Advanced LR Parser Algorithm</a></li>
+  <li>Lightning Talks</li>
+</ol>
+
+<p><a href="https://github.com/DataDog/dd-trace-rb"><em>dd-trace-rb</em></a> の作者 <a href="https://github.com/ivoanjo">@ivoanjo</a> の <em>observability</em> の話。
+もう同じ目的をもった <a href="">@osyoyu</a> が<a href="https://blog.smartbank.co.jp/entry/2025/04/25/110000"><em>スマートバンクブログ</em></a>で解説しているのでそちらを参照。
+新米 <a href="https://github.com/orgs/ruby/people"><strong>Ruby Commiter</strong></a> の <a href="https://github.com/ydah">@ydah</a> です。
+<a href="https://github.com/ruby/lrama"><em>lrama</em></a> で <em>Ruby</em> の <code class="language-plaintext highlighter-rouge">parse.y</code> をどう読み込むのか、どう構造化するのかの話でした。
+<strong>Shopify</strong> <em>YJIT</em> チームの親分、 <a href="https://github.com/maximecb">maximecb</a> の発表。
+新しい <em>JIT</em> 、今年一番の衝撃 <em>ZJIT</em> の提案。詳細は <a href="https://bugs.ruby-lang.org/issues/21221">Proposal to upstream ZJIT</a> を見てくれ。
+<strong>パーサーギャング</strong> 一味のトリ <a href="https://github.com/junk0612">@junk0612</a> の発表。
+<em>lrama</em> に <em>IELR</em> を適用してみる話。まあ遅かったりするようです。
+最後に</p>
+
+<h2 id="day-3">Day 3</h2>
+
+<ol>
+  <li>Ruby Committers and the World</li>
+  <li><a href="https://speakerdeck.com/sisshiki1969/improve-my-own-ruby">Improving my own Ruby</a></li>
+  <li><a href="https://speakerdeck.com/ahogappa/the-ruby-one-binary-tool-enhanced-with-kompo">The Ruby One-Binary Tool, Enhanced with Kompo</a></li>
+  <li><a href="https://atdot.net/~ko1/activities/2025_rubykaigi2025.pdf">Toward Ractor local GC</a></li>
+  <li><a href="">Modular Garbage Collectors in Ruby</a></li>
+  <li><a href="">Matz Keynote</a></li>
+</ol>
+
+<p><a href="https://github.com/sisshiki1969">@sisshiki1969</a> さんで、<em>rust</em> の <em>ruby</em> 処理系を作ってる人で、速くした話でした。
+<a href="https://github.com/ahogappa">@ahogappa</a> さんが作ってる <em>kompo</em> というツールの話で、この <em>kompo</em> はバイナリー1つにまとめてくれる便利ツールです。
+今回は <em>Rails</em> アプリが動くようになった話をしていました。
+<a href="https://github.com/peterzhu2118">@peterzhu2118</a> さんが <em>GC</em> (<em>Garbage Collection</em>) をモジュール化して入れ替えれるような話をしてました。
+さいごに <a href="https://github.com/matz">@matz</a> のキーノートで <em>Ruby</em> のこれからの話、<em>AI</em> の話などなど。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>おそくなったけど、一旦聞いたセッションをまとめてみました。来年は函館で東京から電車一本で行けるので楽そうですね。
+おわり。</p>
+
+  </div><a class="u-url" href="/blog/2025/04/25/went-to-rubykaigi-2025/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

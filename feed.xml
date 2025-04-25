@@ -1,4 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2025-04-25T23:41:28+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Hello, ZOLA を失敗した話</title><link href="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/" rel="alternate" type="text/html" title="Hello, ZOLA を失敗した話" /><published>2025-04-12T00:00:00+09:00</published><updated>2025-04-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/"><![CDATA[<p>HELLO, <a href="https://www.getzola.org"><code class="language-plaintext highlighter-rouge">ZOLA</code></a> World!!!!! としたかったけど、
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2025-04-25T23:53:14+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">RubyKaigi 2025 at Matz-yama</title><link href="https://blog.katsyoshi.org/blog/2025/04/25/went-to-rubykaigi-2025/" rel="alternate" type="text/html" title="RubyKaigi 2025 at Matz-yama" /><published>2025-04-25T23:00:00+09:00</published><updated>2025-04-25T23:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/04/25/went-to-rubykaigi-2025</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/04/25/went-to-rubykaigi-2025/"><![CDATA[<p>今年も <a href="https://rubykaigi.org/2025">RubyKaigi 2025</a> に行ってきました。</p>
+
+<p>今年みたセッション一覧を日毎に。</p>
+
+<h2 id="day-1">Day 1</h2>
+
+<ol>
+  <li><a href="">Ruby Taught Me About Encoding Under the Hood</a></li>
+  <li><a href="https://mensfeld.github.io/bringing_linux_pidfd_to_ruby/">Bringing Linux pidfd to Ruby</a></li>
+  <li><a href="https://speakerdeck.com/kateinoigakukun/the-evolution-of-the-cruby-build-system">The Evolution of the CRuby Build System</a></li>
+  <li><a href="https://speakerdeck.com/k0kubun/rubykaigi-2025">Deoptimization: How YJIT Speeds Up Ruby by Slowing Down</a></li>
+  <li><a href="https://speakerdeck.com/yui_knk/rubys-line-breaks">Ruby’s Line Breaks</a></li>
+  <li><a href="https://speakerdeck.com/tagomoris/state-of-namespace">State of Namespace</a></li>
+  <li><a href="https://github.com/tric/trick2025">TRICK 2025: Episode I</a></li>
+</ol>
+
+<p>初日のキーノートは、 <a href="https://github.com/ima1zumi">@ima1zumi</a> さんで文字コードの話してくれました。
+つぎは <a href="https://github.com/mensfeld">@mensfeld</a> の <code class="language-plaintext highlighter-rouge">pidfd</code> の話を聞きました。
+これは server 動かしているとはまる問題、 <code class="language-plaintext highlighter-rouge">pid</code> の使い回しによるバグの対処方法として <code class="language-plaintext highlighter-rouge">pidfd</code> を <code class="language-plaintext highlighter-rouge">Ruby</code> に対応したという話でした。
+オチは、そもそも <strong>overkill</strong> で不要だったねという。
+午前の終りは <a href="https://github.com/kateinoigakukun">@kateinoigakukun</a> さんのビルドシステムの話でした。 <em>Ruby</em> のビルドシステムのリプレースを考えているようでした。
+午後一発目はお馴染 <strong>Shopify</strong> の <em>YJIT</em> チームの <a href="https://github.com/k0kubun">@k0kubun</a> さんの話。 <em>YJIT</em> を速くするために、如何に <em>deoptimization</em> するかという話で、速くするための方法を話していました。
+<strong>パーサーギャング</strong> 一味のドン、<a href="https://github.com/yui-knk">@yi-knk</a> さんの話で今年楽しみにしてた発表。
+<em>Namespace</em> の話は <a href="https://github.com/tagomoris">@tagomoris</a> さんがやってくれました。
+今年のうちに入りそうな雰囲気を感じた。
+いったん休憩して <strong>trick</strong> へ。</p>
+
+<h2 id="day-2">Day 2</h2>
+
+<ol>
+  <li><a href="https://docs.google.com/presentation/d/1lDnxFkc4URsi0LP4w1M5IXv5A02AG_HUy3gW_SpEWOA/edit#slide=id.g34edb417dc3_0_1471">Performance Bugs and Low-level Ruby Observability APIs</a></li>
+  <li><a href="https://speakerdeck.com/ydah/dissecting-and-reconstructing-ruby-syntactic-structures">Dissecting and Reconstructing Ruby Syntactic Structures</a></li>
+  <li><a href="">ZJIT: Building a Next Generation Ruby JIT</a></li>
+  <li>Bazel for Ruby</li>
+  <li><a href="https://speakerdeck.com/junk0612/the-implementations-of-advanced-lr-parser-algorithm">The Implementations of Advanced LR Parser Algorithm</a></li>
+  <li>Lightning Talks</li>
+</ol>
+
+<p><a href="https://github.com/DataDog/dd-trace-rb"><em>dd-trace-rb</em></a> の作者 <a href="https://github.com/ivoanjo">@ivoanjo</a> の <em>observability</em> の話。
+もう同じ目的をもった <a href="">@osyoyu</a> が<a href="https://blog.smartbank.co.jp/entry/2025/04/25/110000"><em>スマートバンクブログ</em></a>で解説しているのでそちらを参照。
+新米 <a href="https://github.com/orgs/ruby/people"><strong>Ruby Commiter</strong></a> の <a href="https://github.com/ydah">@ydah</a> です。
+<a href="https://github.com/ruby/lrama"><em>lrama</em></a> で <em>Ruby</em> の <code class="language-plaintext highlighter-rouge">parse.y</code> をどう読み込むのか、どう構造化するのかの話でした。
+<strong>Shopify</strong> <em>YJIT</em> チームの親分、 <a href="https://github.com/maximecb">maximecb</a> の発表。
+新しい <em>JIT</em> 、今年一番の衝撃 <em>ZJIT</em> の提案。詳細は <a href="https://bugs.ruby-lang.org/issues/21221">Proposal to upstream ZJIT</a> を見てくれ。
+<strong>パーサーギャング</strong> 一味のトリ <a href="https://github.com/junk0612">@junk0612</a> の発表。
+<em>lrama</em> に <em>IELR</em> を適用してみる話。まあ遅かったりするようです。
+最後に</p>
+
+<h2 id="day-3">Day 3</h2>
+
+<ol>
+  <li>Ruby Committers and the World</li>
+  <li><a href="https://speakerdeck.com/sisshiki1969/improve-my-own-ruby">Improving my own Ruby</a></li>
+  <li><a href="https://speakerdeck.com/ahogappa/the-ruby-one-binary-tool-enhanced-with-kompo">The Ruby One-Binary Tool, Enhanced with Kompo</a></li>
+  <li><a href="https://atdot.net/~ko1/activities/2025_rubykaigi2025.pdf">Toward Ractor local GC</a></li>
+  <li><a href="">Modular Garbage Collectors in Ruby</a></li>
+  <li><a href="">Matz Keynote</a></li>
+</ol>
+
+<p><a href="https://github.com/sisshiki1969">@sisshiki1969</a> さんで、<em>rust</em> の <em>ruby</em> 処理系を作ってる人で、速くした話でした。
+<a href="https://github.com/ahogappa">@ahogappa</a> さんが作ってる <em>kompo</em> というツールの話で、この <em>kompo</em> はバイナリー1つにまとめてくれる便利ツールです。
+今回は <em>Rails</em> アプリが動くようになった話をしていました。
+<a href="https://github.com/peterzhu2118">@peterzhu2118</a> さんが <em>GC</em> (<em>Garbage Collection</em>) をモジュール化して入れ替えれるような話をしてました。
+さいごに <a href="https://github.com/matz">@matz</a> のキーノートで <em>Ruby</em> のこれからの話、<em>AI</em> の話などなど。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>おそくなったけど、一旦聞いたセッションをまとめてみました。来年は函館で東京から電車一本で行けるので楽そうですね。
+おわり。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><category term="rubykaigi" /><summary type="html"><![CDATA[今年も RubyKaigi 2025 に行ってきました。]]></summary></entry><entry><title type="html">Hello, ZOLA を失敗した話</title><link href="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/" rel="alternate" type="text/html" title="Hello, ZOLA を失敗した話" /><published>2025-04-12T00:00:00+09:00</published><updated>2025-04-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/"><![CDATA[<p>HELLO, <a href="https://www.getzola.org"><code class="language-plaintext highlighter-rouge">ZOLA</code></a> World!!!!! としたかったけど、
 移行が面倒すぎたので諦めた話。
 以下は作業ログです。一応終りは見えたけど、</p>
 
@@ -833,63 +901,4 @@ hello, world
 
 <h3 id="おわり">おわり</h3>
 
-<p><strong>irb</strong> も便利になってカスタマイズができるようになりました。色とか考えたくないひとは <strong>gem</strong> にして一発で決まるようにすると便利ですよ。たぶん。</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[Reline が 0.4.0 になり、タイトルのとおり irb で補完画面の色を好きなように変更できるようになりました。]]></summary></entry><entry><title type="html">新しいキーキャップ手にいれたよ!!!!</title><link href="https://blog.katsyoshi.org/blog/2023/06/27/my-new-gear/" rel="alternate" type="text/html" title="新しいキーキャップ手にいれたよ!!!!" /><published>2023-06-27T23:59:59+09:00</published><updated>2023-06-27T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/06/27/my-new-gear</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/06/27/my-new-gear/"><![CDATA[<p>最高だったイベント <a href="https://keebkaigi.org/2023/"><strong>第一回keebkaigi</strong></a> 行った影響で、キーボードをいじりたくなりました。
-今利用している <a href="https://github.com/foostan/crkbd"><strong>corne cherry</strong></a> でかなり満足しているため、
-新規につくるとかはあまりやる気はないので、見た目(<em>キーキャップ</em>)や触った感じ(<em>キースイッチ</em>)を替えようかとおもいます。</p>
-
-<h2 id="見た目と触った感じ">見た目と触った感じ</h2>
-
-<p>見た目の変更としてキーキャップを海外のサイト <a href="https://drop.com"><strong>Drop.com</strong></a> や <a href="https://yushakobo.jp"><strong>遊舎工房</strong></a> から買いました。
-買ったのは以下の4つ!</p>
-<ul>
-  <li><a href="https://shop.yushakobo.jp/products/maxkey-sa-purple-keycaps-set">MAXKEY SA Purple keycaps set</a></li>
-  <li><a href="https://drop.com/buy/carbon?defaultSelectionIds=967954">Drop + T0mb3ry SA Carbon Custom Keycap Set</a></li>
-  <li><a href="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2?defaultSelectionIds=966268">Drop + Oblotzky SA Oblivion V2 Custom Keycap Set</a></li>
-  <li><a href="https://drop.com/buy/domikey-abs-doubleshot-sa-cyberpunk-pumper-keycap-set?defaultSelectionIds=958152">DOMIKEY ABS Doubleshot SA Cyberpunk Pumper Keycap Set</a></li>
-</ul>
-
-<p><em>SA プロファイル</em><sup id="fnref:keycap_profile"><a href="#fn:keycap_profile" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> が好きでいつものように遊舎工房へ行ったら展示品でアルファベットだけのを見つけたので即購入。
-一つだけだと寂しいので、なんとなく <strong>Drop.com</strong> を眺めていたら、 <em>SA プロファイル</em> でいくつか安くなっていたので購入。
-現時点では、<strong>MAXKEY SA Purple</strong> と <strong>DOMIKEY ABS Doubleshot SA Cyberpunk Pumper</strong> を市松模様に交互にキャップをはめて使っています。</p>
-
-<p>触った感じの変更として <em>キースイッチ</em> を <a href="https://talpkeyboard.net/"><strong>Talp Keyboard</strong></a> で買っています。</p>
-
-<ul>
-  <li><a href="https://talpkeyboard.net/items/611f422c84ca6370e66aeb85">Durock T1 Shrimp サイレントタクタイル キースイッチ（ターコイズ/5ピン/67g/5個）</a></li>
-  <li><a href="https://talpkeyboard.net/items/640d7ff65d04872b6fa57115">KTT Matcha キースイッチ（グリーン/タクタイル/3ピン/40g/5個）</a></li>
-  <li>KBDiy hp type タクタイル キースイッチ（クリーム/3ピン/62g/5個）<sup id="fnref:soldout"><a href="#fn:soldout" class="footnote" rel="footnote" role="doc-noteref">2</a></sup></li>
-</ul>
-
-<p>もともとは <em>リニア</em> と呼ばれるタイプの <em>キースイッチ</em><sup id="fnref:keyswitch_type"><a href="#fn:keyswitch_type" class="footnote" rel="footnote" role="doc-noteref">3</a></sup> が好きでしたが、感触が最近飽きてきたので、 <em>タクタイル</em> と呼ばれるタイプの
-<em>キースイッチ</em> を利用するようになっています。さらに最近は重めの方が好きなのかもしれないという状況です。
-<strong>Durock T1 Shrimp</strong> をどこか<sup id="fnref:itumono"><a href="#fn:itumono" class="footnote" rel="footnote" role="doc-noteref">4</a></sup>で見かけたので購入。見た目もよく、タクタイルだったので結構気に入ってます。
-<strong>KTT Matcha</strong> と <strong>KBDiy hp type</strong> は <strong>Durock T1 Shrimp</strong> が <strong>corne cherry</strong> の <em>バックライトLED</em> がきつく感じはじめたので購入。
-<strong>KTT Matcha</strong> をしばらく利用してたのですが、<em>タクタイル</em> でもちょっと音が気になるのと、軽すぎる感じでした。
-音が気になったので今時点では <strong>KBDiy hp type</strong> を利用しています。この <em>キースイッチ</em> は少し重いです。</p>
-
-<p>ついでに <em>TRRS ケーブル</em> を変更しました。これは <strong>アマゾン</strong> でてきとうに</p>
-
-<p><img src="/images/photo/kbdiy-maxkey-and-cyberpunk.webp" alt="" /></p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>気分転換にキーボードのキースイッチとキーキャップ変更とを行ってみました!
-自作キーボードはいいぞ。</p>
-
-<hr />
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:keycap_profile">
-      <p>背が高いプロファイルや統一された高さなど様々なプロファイルがあります。キーキャップに関することのくわしくは <a href="https://salicylic-acid3.hatenablog.com/entry/keycap-introduction"><strong>自作キーボード温泉街の歩き方</strong> の キーキャップの湯のお誘い ver2 </a> を参考にしてください。 <a href="#fnref:keycap_profile" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:soldout">
-      <p>2023/6/30 時点、 <strong>Talp Keyboard</strong> では販売終了。 <a href="#fnref:soldout" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:keyswitch_type">
-      <p>音が鳴るようなタイプやクリック感があるようなタイプ様々なタイプがあります。くわしくは <a href="https://shop.yushakobo.jp/pages/how-to-select-switch"><strong>遊舎工房</strong> のキースイッチの説明</a> を参考にしてください。 <a href="#fnref:keyswitch_type" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:itumono">
-      <p>たぶん <strong>twitter.com</strong> で <a href="https://twitter.com/takkanm">@takkanm</a> か <a href="https://twitter.com/talpkeyboard">@talpkeyboard</a> のついーと。 <a href="#fnref:itumono" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[最高だったイベント 第一回keebkaigi 行った影響で、キーボードをいじりたくなりました。 今利用している corne cherry でかなり満足しているため、 新規につくるとかはあまりやる気はないので、見た目(キーキャップ)や触った感じ(キースイッチ)を替えようかとおもいます。]]></summary></entry></feed>
+<p><strong>irb</strong> も便利になってカスタマイズができるようになりました。色とか考えたくないひとは <strong>gem</strong> にして一発で決まるようにすると便利ですよ。たぶん。</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[Reline が 0.4.0 になり、タイトルのとおり irb で補完画面の色を好きなように変更できるようになりました。]]></summary></entry></feed>
