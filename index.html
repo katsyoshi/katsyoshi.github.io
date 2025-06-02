@@ -57,6 +57,69 @@
 
 
 
+  <h1><a href="/blog/2025/05/31/im-happy-to-binary-in-gentoo/">Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した</a></h1>
+  <p class="author">
+    <span class="date">2025-05-31 23:59:59 +0900</span>
+  </p>
+  <div class="content">
+    <p>[<strong>Gentoo Linux</strong>] でバイナリが公式配っていたのを<a href="https://pong.ursm.jp/posts/4">発見</a>したので、
+<a href="https://gist.github.com/katsyoshi/3d28b9609b7d395826ed93dd8288f0a9">退役したデスクトップ</a>をサーバー用途として利用してみます。</p>
+
+<h2 id="設定">設定</h2>
+
+<p>設定自体は発見したブログを参考に設定することで問題はないです。</p>
+
+<h3 id="インストール">インストール</h3>
+
+<p>ではインストールをしてみましょう。
+ブログを参考にリポジトリなどを設定後、以下のコマンドでインストールします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emerge -uDN world
+</code></pre></div></div>
+
+<h3 id="そして失敗へ">そして失敗へ……</h3>
+
+<p>インストールが終わり、動いているのを確認しましょう。
+動いていますね。OK, OK では不要なパッケージを片づけましょうかね。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emerge --depclean
+</code></pre></div></div>
+
+<p>一部バイナリになって便利になりましたねー。便利ー。</p>
+
+<p><a href="https://zellij.dev"><strong>Zellij</strong></a> のセッションが残っている間は問題が特にわからなかったです。
+次の日あたり、クライアントから <a href="https://www.samba.org/"><strong>Samba</strong></a> がなぜか繋がらなくなっています。
+原因を探るため、 <strong>ssh</strong> でログインしてみましょう。
+これもログイン失敗します。しかたないのでユーザーを替えてログインしてみます。こいつはログインできます。
+ログインしたアカウントから <code class="language-plaintext highlighter-rouge">doas</code> してみますが、 <code class="language-plaintext highlighter-rouge">doas</code> できる権限を与えていないので当然できません。
+<code class="language-plaintext highlighter-rouge">sudo</code> は <code class="language-plaintext highlighter-rouge">sudo</code> 自体を削除しているのでできないですね。
+また <code class="language-plaintext highlighter-rouge">su</code> も権限がないので別ユーザーへ変更できないです。
+ということで何かまずいことが起きているのでログインできるようにサーバーの復旧を行ないます。</p>
+
+<p>いつも通り <strong>OS</strong> インストールと同様にインストールディスクを起動して<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base/ja#%E5%BF%85%E8%A6%81%E3%81%AA%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E3%83%9E%E3%82%A6%E3%83%B3%E3%83%88%E3%81%99%E3%82%8B">必要なディレクトリをマウント</a>します。
+そうするとなぜかいつも利用しているはずのコマンド <code class="language-plaintext highlighter-rouge">eix</code> 、 <code class="language-plaintext highlighter-rouge">git</code> や <code class="language-plaintext highlighter-rouge">zsh</code> が無いのです!!!</p>
+
+<p>ということでインストールします。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emerge <span class="nt">--sync</span> <span class="c"># リポジトリを git で読むようにしているので失敗</span>
+emerge git <span class="c"># デフォルトリンカを mold にしているので失敗</span>
+<span class="c"># mold 使わないように修正</span>
+emerge git
+emerge eix
+eix-sync <span class="c"># ようやく成功</span>
+emerge zsh
+</code></pre></div></div>
+
+<p>というようなコマンドを実施してなんとか復旧。</p>
+
+<h3 id="おわり">おわり</h3>
+<p>バイナリの配布リポジトリを設定できるのは薄々知ってはいたのですが、
+動いているのを変更するの面倒だったので今回替えてみました。
+カーネルもバイナリでインストールできるようになったので便利になりました(たぶん)。
+あとうかつに <code class="language-plaintext highlighter-rouge">emerge --depclean</code> はするもんじゃない。</p>
+
+  </div>
+
   <h1><a href="/blog/2025/04/25/went-to-rubykaigi-2025/">RubyKaigi 2025 at Matz-yama</a></h1>
   <p class="author">
     <span class="date">2025-04-25 23:00:00 +0900</span>
@@ -69,7 +132,7 @@
 <h2 id="day-1">Day 1</h2>
 
 <ol>
-  <li><a href="">Ruby Taught Me About Encoding Under the Hood</a></li>
+  <li><a href="https://speakerdeck.com/ima1zumi/ruby-taught-me-about-under-the-hood">Ruby Taught Me About Encoding Under the Hood</a></li>
   <li><a href="https://mensfeld.github.io/bringing_linux_pidfd_to_ruby/">Bringing Linux pidfd to Ruby</a></li>
   <li><a href="https://speakerdeck.com/kateinoigakukun/the-evolution-of-the-cruby-build-system">The Evolution of the CRuby Build System</a></li>
   <li><a href="https://speakerdeck.com/k0kubun/rubykaigi-2025">Deoptimization: How YJIT Speeds Up Ruby by Slowing Down</a></li>
@@ -101,7 +164,7 @@
 </ol>
 
 <p><a href="https://github.com/DataDog/dd-trace-rb"><em>dd-trace-rb</em></a> の作者 <a href="https://github.com/ivoanjo">@ivoanjo</a> の <em>observability</em> の話。
-もう同じ目的をもった <a href="">@osyoyu</a> が<a href="https://blog.smartbank.co.jp/entry/2025/04/25/110000"><em>スマートバンクブログ</em></a>で解説しているのでそちらを参照。
+もう同じ目的をもった <a href="https://github.com/osyoyu">@osyoyu</a> が<a href="https://blog.smartbank.co.jp/entry/2025/04/25/110000"><em>スマートバンクブログ</em></a>で解説しているのでそちらを参照。
 新米 <a href="https://github.com/orgs/ruby/people"><strong>Ruby Commiter</strong></a> の <a href="https://github.com/ydah">@ydah</a> です。
 <a href="https://github.com/ruby/lrama"><em>lrama</em></a> で <em>Ruby</em> の <code class="language-plaintext highlighter-rouge">parse.y</code> をどう読み込むのか、どう構造化するのかの話でした。
 <strong>Shopify</strong> <em>YJIT</em> チームの親分、 <a href="https://github.com/maximecb">maximecb</a> の発表。
@@ -1011,42 +1074,6 @@ hello, world
 <p><strong>gem</strong> は入ってるけど、プロジェクトで利用できないなあとおもい使えるようにしたいということでやってみました。
 今回の <code class="language-plaintext highlighter-rouge">irb</code> は <strong>Ruby</strong> <code class="language-plaintext highlighter-rouge">2.2</code> 以下だとデフォルトでインストールされているのでそもそも
 <code class="language-plaintext highlighter-rouge">Reline</code> の新しいバージョン(<code class="language-plaintext highlighter-rouge">0.4.0</code>)をサポートしていないのこの方法を利用してみました。</p>
-
-  </div>
-
-  <h1><a href="/blog/2023/11/08/makeup-your-irb-suggestions/">irb の補完の色がいじれるようになったのでかっこよくしてみた</a></h1>
-  <p class="author">
-    <span class="date">2023-11-08 23:59:59 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="https://github.com/ruby/reline"><code class="language-plaintext highlighter-rouge">Reline</code></a> が <code class="language-plaintext highlighter-rouge">0.4.0</code> になり、タイトルのとおり <a href="https://github.com/ruby/irb"><code class="language-plaintext highlighter-rouge">irb</code></a> で<a href="https://github.com/ruby/reline/blob/master/doc/reline/face.md">補完画面の色を好きなように変更</a>できるようになりました。</p>
-
-<p>変更できるようになったので <a href="https://draculatheme.com/"><strong>dracula</strong></a> 風のテーマを <a href="https://rubygems.org"><strong>gem</strong></a> としてリリースしました!!!!
-リポジトリは以下です!!!</p>
-
-<p><a href="https://github.com/katsyoshi/irb-theme-dracula"><img src="https://gh-card.dev/repos/katsyoshi/irb-theme-dracula.svg" alt="katsyoshi/irb-theme-dracula - GitHub" /></a></p>
-
-<h3 id="インストール">インストール</h3>
-
-<p>ということで使いかたを。まずは <code class="language-plaintext highlighter-rouge">gem i irb-theme-dracula</code> で <strong>インストール</strong> します。
-<strong>ダーク</strong> と <strong>ライト</strong> を作りました。 <strong>ダーク</strong> は明るい <strong>コンソール</strong> 向けに、 <strong>ライト</strong> は暗い <strong>コンソール</strong> 向けに作っています。
-インストール後は <code class="language-plaintext highlighter-rouge">irbrc</code> ファイルに <code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/dark"</code> か <code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/light"</code> を追加。</p>
-
-<p><code class="language-plaintext highlighter-rouge">irb</code> を実行し、補完をしてみましょう。まず、<code class="language-plaintext highlighter-rouge">irbrc</code> ファイルになにもかかないデフォルトの場合は以下</p>
-
-<p><img src="/images/screenshot/irb-default.webp" alt="" /></p>
-
-<p>次に <strong>ダーク</strong> の <code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/dark"</code> を書いた場合は以下</p>
-
-<p><img src="/images/screenshot/dracula-dark.webp" alt="" /></p>
-
-<p>最後に <strong>ライト</strong> <code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/light"</code> の場合は以下</p>
-
-<p><img src="/images/screenshot/dracula-light.webp" alt="" /></p>
-
-<h3 id="おわり">おわり</h3>
-
-<p><strong>irb</strong> も便利になってカスタマイズができるようになりました。色とか考えたくないひとは <strong>gem</strong> にして一発で決まるようにすると便利ですよ。たぶん。</p>
 
   </div>
 

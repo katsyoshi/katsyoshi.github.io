@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="[Gentoo Linux] でバイナリが公式配っていたのを発見したので、 退役したデスクトップをサーバー用途として利用してみます。" />
+<meta property="og:description" content="[Gentoo Linux] でバイナリが公式配っていたのを発見したので、 退役したデスクトップをサーバー用途として利用してみます。" />
+<link rel="canonical" href="https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo/" />
+<meta property="og:url" content="https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-31T23:59:59+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-31T23:59:59+09:00","datePublished":"2025-05-31T23:59:59+09:00","description":"[Gentoo Linux] でバイナリが公式配っていたのを発見したので、 退役したデスクトップをサーバー用途として利用してみます。","headline":"Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo/"},"url":"https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-05-31T23:59:59+09:00" itemprop="datePublished">May 31, 2025
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>[<strong>Gentoo Linux</strong>] でバイナリが公式配っていたのを<a href="https://pong.ursm.jp/posts/4">発見</a>したので、
+<a href="https://gist.github.com/katsyoshi/3d28b9609b7d395826ed93dd8288f0a9">退役したデスクトップ</a>をサーバー用途として利用してみます。</p>
+
+<h2 id="設定">設定</h2>
+
+<p>設定自体は発見したブログを参考に設定することで問題はないです。</p>
+
+<h3 id="インストール">インストール</h3>
+
+<p>ではインストールをしてみましょう。
+ブログを参考にリポジトリなどを設定後、以下のコマンドでインストールします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emerge -uDN world
+</code></pre></div></div>
+
+<h3 id="そして失敗へ">そして失敗へ……</h3>
+
+<p>インストールが終わり、動いているのを確認しましょう。
+動いていますね。OK, OK では不要なパッケージを片づけましょうかね。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emerge --depclean
+</code></pre></div></div>
+
+<p>一部バイナリになって便利になりましたねー。便利ー。</p>
+
+<p><a href="https://zellij.dev"><strong>Zellij</strong></a> のセッションが残っている間は問題が特にわからなかったです。
+次の日あたり、クライアントから <a href="https://www.samba.org/"><strong>Samba</strong></a> がなぜか繋がらなくなっています。
+原因を探るため、 <strong>ssh</strong> でログインしてみましょう。
+これもログイン失敗します。しかたないのでユーザーを替えてログインしてみます。こいつはログインできます。
+ログインしたアカウントから <code class="language-plaintext highlighter-rouge">doas</code> してみますが、 <code class="language-plaintext highlighter-rouge">doas</code> できる権限を与えていないので当然できません。
+<code class="language-plaintext highlighter-rouge">sudo</code> は <code class="language-plaintext highlighter-rouge">sudo</code> 自体を削除しているのでできないですね。
+また <code class="language-plaintext highlighter-rouge">su</code> も権限がないので別ユーザーへ変更できないです。
+ということで何かまずいことが起きているのでログインできるようにサーバーの復旧を行ないます。</p>
+
+<p>いつも通り <strong>OS</strong> インストールと同様にインストールディスクを起動して<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base/ja#%E5%BF%85%E8%A6%81%E3%81%AA%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E3%83%9E%E3%82%A6%E3%83%B3%E3%83%88%E3%81%99%E3%82%8B">必要なディレクトリをマウント</a>します。
+そうするとなぜかいつも利用しているはずのコマンド <code class="language-plaintext highlighter-rouge">eix</code> 、 <code class="language-plaintext highlighter-rouge">git</code> や <code class="language-plaintext highlighter-rouge">zsh</code> が無いのです!!!</p>
+
+<p>ということでインストールします。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emerge <span class="nt">--sync</span> <span class="c"># リポジトリを git で読むようにしているので失敗</span>
+emerge git <span class="c"># デフォルトリンカを mold にしているので失敗</span>
+<span class="c"># mold 使わないように修正</span>
+emerge git
+emerge eix
+eix-sync <span class="c"># ようやく成功</span>
+emerge zsh
+</code></pre></div></div>
+
+<p>というようなコマンドを実施してなんとか復旧。</p>
+
+<h3 id="おわり">おわり</h3>
+<p>バイナリの配布リポジトリを設定できるのは薄々知ってはいたのですが、
+動いているのを変更するの面倒だったので今回替えてみました。
+カーネルもバイナリでインストールできるようになったので便利になりました(たぶん)。
+あとうかつに <code class="language-plaintext highlighter-rouge">emerge --depclean</code> はするもんじゃない。</p>
+
+  </div><a class="u-url" href="/blog/2025/05/31/im-happy-to-binary-in-gentoo/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

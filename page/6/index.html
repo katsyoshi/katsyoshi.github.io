@@ -60,6 +60,80 @@
 
 
 
+  <h1><a href="/blog/2018/01/19/nlp-100-section-1-part-2/">NLP100本ノック section 1 part 2</a></h1>
+  <p class="author">
+    <span class="date">2018-01-19 20:05:49 +0900</span>
+  </p>
+  <div class="content">
+    <p>前回、<a href="http://www.cl.ecei.tohoku.ac.jp/nlp100">言語処理100本ノック</a> の01までやったので02からやっていきます。</p>
+<h2 id="extern-crate-nlp100"><code class="language-plaintext highlighter-rouge">extern crate nlp100;</code></h2>
+<p>ってやれるように <a href="https://github.com/katsyoshi/zatsu/tree/master/rust/nlp100"><code class="language-plaintext highlighter-rouge">Cargo</code></a> を作成</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cargo new nlp100
+</code></pre></div></div>
+
+<h3 id="02-パトカータクシーパタトクカシーー"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec02">02. 「パトカー」+「タクシー」=「パタトクカシーー」</a></h3>
+<p>これはムズカシイので素直に <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.zip"><code class="language-plaintext highlighter-rouge">zip</code></a> を利用する</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">concat</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span><span class="p">,</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">r</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">in</span> <span class="n">f</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.zip</span><span class="p">(</span><span class="n">s</span><span class="nf">.iter</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">r</span><span class="nf">.push_str</span><span class="p">(</span><span class="o">&amp;</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">p</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"パトカー"</span><span class="p">)</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">t</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"タクシー"</span><span class="p">)</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+    <span class="nf">concat</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="03-円周率"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec03">03. 円周率</a></h3>
+<p>この問題は思い切り勘違いしてたので、「これのどこが円周率なの？」って思ってました。こいつは <a href="https://doc.rust-lang.org/regex/regex/index.html"><code class="language-plaintext highlighter-rouge">Regex</code></a> を用いて単語毎に分解、単語毎に文字数数えて解決してます。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">char_count_list</span><span class="p">(</span><span class="n">w</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">usize</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="nn">Regex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">r"\W+"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.split</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="nf">.map</span><span class="p">(|</span><span class="n">m</span><span class="p">|</span> <span class="n">m</span><span class="nf">.len</span><span class="p">())</span><span class="nf">.collect</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">pi</span> <span class="o">=</span> <span class="nf">char_count_list</span><span class="p">(</span><span class="s">"Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">pi</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="04-元素記号"><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec04">04. 元素記号</a></h3>
+<p>これは、英語版「水兵リーベー僕の船」ですので条件に合うときだけ1文字に変更します。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">collections</span><span class="p">::</span><span class="n">HashMap</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">atomic_words</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">str</span><span class="o">&gt;</span> <span class="o">=</span> <span class="s">"Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."</span><span class="nf">.split</span><span class="p">(</span><span class="sc">' '</span><span class="p">)</span><span class="nf">.collect</span><span class="p">();</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">atomic_table</span> <span class="o">=</span> <span class="nn">HashMap</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">in</span> <span class="n">atomic_words</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.enumerate</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">a</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">v</span><span class="p">|</span> <span class="n">v</span><span class="nf">.to_string</span><span class="p">())</span><span class="py">.collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+        <span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="k">match</span> <span class="n">i</span> <span class="p">{</span>
+            <span class="mi">0</span> <span class="p">|</span> <span class="mi">4</span><span class="o">...</span><span class="mi">8</span> <span class="p">|</span> <span class="mi">14</span><span class="o">...</span><span class="mi">15</span> <span class="p">|</span> <span class="mi">18</span> <span class="k">=&gt;</span> <span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">(),</span>
+            <span class="n">_</span> <span class="k">=&gt;</span> <span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">]</span><span class="nf">.join</span><span class="p">(</span><span class="s">""</span><span class="p">),</span>
+        <span class="p">};</span>
+        <span class="n">atomic_table</span><span class="nf">.insert</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">in</span> <span class="o">&amp;</span><span class="n">atomic_table</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"{}: {}"</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+
+<p>やっぱり難しいのを実感</p>
+
+  </div>
+
   <h1><a href="/blog/2018/01/16/happy-new-year-and-new-language/">happy new year and new language</a></h1>
   <p class="author">
     <span class="date">2018-01-16 00:32:16 +0900</span>
@@ -523,23 +597,6 @@ gcc バージョン 5.4.0 (Gentoo 5.4.0-r3 p1.3, pie-0.6.5)
 
 <h2 id="おわり">おわり</h2>
 <p>ほんとうのもくてきは <code class="language-plaintext highlighter-rouge">fluentd</code> のぷらぐいんをかくことですがつかれたのできょうはここまで</p>
-
-  </div>
-
-  <h1><a href="/blog/2017/05/21/start-watching-dazn/">start watching dazn</a></h1>
-  <p class="author">
-    <span class="date">2017-05-21 14:49:19 +0900</span>
-  </p>
-  <div class="content">
-    <p>タイトルのとおり、DAZNを見はじめた。
-Netflix, Huluを契約してたけど、ぜんぜん見ていなかったので解約した。
-DAZN をみようとおもったきっかけはNBAのカンファレンスファイナルをみようとおもったため。</p>
-
-<p>とりあえず視聴感想ですが、表示は色々なところで言われてるとおもいますが、
-接続開始時にブロックノイズが気になりますが、一旦綺麗に表示されるとそのあとは
-特に気になりません。</p>
-
-<p>肝心の試合内容が現在非常に残念なため試合内の評価はしません。</p>
 
   </div>
 
