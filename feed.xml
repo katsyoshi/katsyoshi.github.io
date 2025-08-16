@@ -1,4 +1,122 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2025-06-03T00:52:08+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した</title><link href="https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo/" rel="alternate" type="text/html" title="Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した" /><published>2025-05-31T23:59:59+09:00</published><updated>2025-05-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo/"><![CDATA[<p>[<strong>Gentoo Linux</strong>] でバイナリが公式配っていたのを<a href="https://pong.ursm.jp/posts/4">発見</a>したので、
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2025-08-16T12:23:52+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">身分証明書を引き出すための方法</title><link href="https://blog.katsyoshi.org/blog/2025/08/11/bootstrap-self-idfication-in-japan/" rel="alternate" type="text/html" title="身分証明書を引き出すための方法" /><published>2025-08-11T00:00:00+09:00</published><updated>2025-08-11T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/08/11/bootstrap-self-idfication-in-japan</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/08/11/bootstrap-self-idfication-in-japan/"><![CDATA[<p>去る 2025/08/03 14:00 ごろに財布を紛失したのでやったことをまとめます。</p>
+
+<h2 id="財布紛失">財布紛失</h2>
+
+<p>普段行かない原宿で買い物してたら、財布がないのに気付く。
+とりあえず気付いた店で「財布落ちてなかったか？」と店員に聞きまわる。
+そこではみつからなかったので、一旦立ち寄った店でも聞きまわり、ないということが分かった。
+ないことが分かったので、近く警察に紛失した旨を申告、遺失物届けを提出。</p>
+
+<h2 id="カード類停止">カード類停止</h2>
+
+<p>原宿という場所柄、クレジットカードが利用されていないかスマートフォンで確認。
+調べた時点では利用されていないので、帰宅後クレジットカード、キャッシュカードを止め、クレジットカードは再発行手続きを実施。
+幸い買い物行く直前にカードから <strong>suica</strong> へ入金していたので got 事なき。
+現金、カードが無いのでその日の夕食はスタ丼屋ヘ。
+紛失した日は一旦これで終わり。</p>
+
+<h2 id="ブートストラップ身分証明書">ブートストラップ身分証明書</h2>
+
+<p>次の日、仕事休んで身分証明書の発行へ。</p>
+
+<p>まず現金が手元にないのでキャッシュカードの再発行手続きへ銀行に行く。
+ここでキャッシュカードの再発行に必要なものとして病院の診察券などの本人確認書類の提示が求められた。
+財布を紛失したことでそもそもそのような身分証明書類になるようなものを所持しておりません。
+正直になにも所持していないことを銀行の窓口に伝える。これ以上は銀行ではできないことがわかりました。
+キャッシュカードの再発行は後回しにして、身分証明書の再発行へ。</p>
+
+<p>まずは、マイナカードの再発行。マイナカードの再発行に居住地区の役所へ、すると役所でのマイナカードの再発行手続きにはどうやら本人確認書類となる運転免許証が必要とわかった。</p>
+
+<p>ということで運転免許証の再発行へ近くの警察署へ。警察署署員に聞くとここでは運転免許証の再発行は行なわれていないことを告げられる。
+運転免許試験場で再発行が行なわれていることを署員さんに教えてもらったので運転免許試験場へ。
+運転免許試験場へ着いて再発行手続きをすると本人確認書類として住民票の提出を求められました。
+そんなものは持っていない状態なので一旦帰宅。</p>
+
+<p>帰宅後、キャッシュカード再発行手続きで必要といわれた身分証明書類を探したが、みつからず。
+住民税の通知書を発見したので手に再び役所へ。
+役所では、身分証明書類を紛失した旨を伝え、住民票の発行手続きへ。
+どうやら住民税支払い通知書だけではダメだったらしく<sup id="fnref:jumin"><a href="#fn:jumin" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>、本人しか知り得ない情報を捻り出してなんとか発行。
+住民票を得たので、今度こそ運転免許証の発行へ最寄りの運転免許試験場に出発。
+運転免許試験場の再発行手続きでは、とくになにも問題なくスムーズに再発行手続きがおわり、再発行できました。
+運転免許証の再発行自体が完了したのは16:00すぎだったのでその他カード類の再発行は手続きは無理そうだったのでこの日は終了。</p>
+
+<h2 id="カード類復活">カード類復活</h2>
+
+<p>身分証明書のブートストラップは解決したので今度は止めてあるカード類の復活を行います。
+まずは銀行のキャッシュカードです。住民票と運転免許証を所持しているのでなにも気にせず銀行へ。
+銀行に到着したら怒られが発生。
+銀行員に「今、ここでキャッシュカードの再発行は予約いっぱいでできないかもしれない。どうしてもやりたいなら予約が空くまでここで待機しておいてください」と。
+朝ごはん食べていなかったので昼食をとりに行きたかったので、何時ごろ空くのか聞いてみたら突然予約が空いたらしくその日の午後に手続きができるようになった<sup id="fnref:temp"><a href="#fn:temp" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>。
+午後、再訪問し再発行完了!!!</p>
+
+<p>この勢いのままマイナカード再発行へ。今度は身分証明書をいろいろ所持しているので大丈夫やろ。
+手続きに入って最終の再発行する際に発行手数料がかかりました。平気平気、この役所は電子マネー使えるから!と思ってたら、
+役所の人に「あ、現金のみです」と告げられました。
+キャッシュカード再発行できたとはいえ、電子マネー使えるので現金を降ろさずに来てます、なので当然現金なんて持っていないです。
+ということで一旦現金降ろしにコンビニへ。</p>
+
+<p>コンビニで現金を引き出そうとすると謎にエラーになります。当然です。カード類停止時にキャッシュカードロックを行なっています。
+引き出せないです。どうしようもなくなったので<sup id="fnref:kinjo"><a href="#fn:kinjo" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>一旦その日の手続きは終わらして、後日やるということを窓口で伝えました。</p>
+
+<p>帰宅後、キャッシュカードロックの解除を行なおうと銀行のサイトで操作してたら、秘密の質問とかいう謎のパスワードを聞かれた<sup id="fnref:secret"><a href="#fn:secret" class="footnote" rel="footnote" role="doc-noteref">4</a></sup>。
+案の定謎パスワードも揮発しているので繰り返し入力してたらそれもバンされて詰み。現金はこの日は引き出せないことが確定。
+そんなことなので再設定をするには銀行に行く必要がでてきた。この日は銀行を予約しておわり。</p>
+
+<h2 id="予約した銀行">予約した銀行</h2>
+
+<p>前日に予約したと思ってた銀行は実際には一週間先で失意で仕事へ。
+昼食へ外出する際にポスト覗くとなにかお手紙が。このお手紙読むとなんと財布が発見されたようです。
+仕事は中抜けして財布を回収へ。回収した財布はなにひとつ欠けることなく現金まで入ってました<sup id="fnref:genkin"><a href="#fn:genkin" class="footnote" rel="footnote" role="doc-noteref">5</a></sup>。
+ということで急いで現金の引き出しが性急にする必要はなくなったので、銀行の予約は一旦そのままにしておきます。</p>
+
+<p>予約した銀行へ訪問し、キャッシュカードロックを解除させるためにアプリのパスワードリセットします。
+といっても銀行の人がリセットしてくれるので眺めておくだけで、こちらはパスワードと秘密のことばをその場で設定しておわりです。</p>
+
+<p>このあと、発見された財布に入ってた旧運転免許証を破棄するために警察署<sup id="fnref:police"><a href="#fn:police" class="footnote" rel="footnote" role="doc-noteref">6</a></sup>へ訪問して一連の作業は終了。
+つかれた。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>財布を紛失した顛末を書いた。
+財布は失くすといろいろと面倒というのはもともと理解してたつもりだったが、いざ失くなると何が必要とか焦ってしまって調べるとかできないこともわかった。</p>
+
+<p>今回の一番面倒だなと思ったのがマイナンバーカードを紛失した際の手続き。
+こいつ自体も強い本人確認証だしほぼすべての本人確認書類が集まっている。
+申請自体は多分そこまでおかしい点はなさそうだが、一時的に利用できなくなる期間が1-2週間かかりそう。
+今回は幸い盗まれたとかではなかったので再発行しなくてよかったけど。</p>
+
+<p>身分証明書と本人確認書類という言葉が出てきますが、基本同じです。
+本人確認書類は相手方(役所、銀行など)として審査、確認する際ときに使う意味として使っています。
+身分証明書は自分が相手方に提出する書類としての意味として使っています。
+区役所のウェブページで「本人確認書類」と掲示されていたため、意識的に分けています。</p>
+
+<h3 id="おまけ-いろいろなもの再発行フローチャート">おまけ: いろいろなもの再発行フローチャート</h3>
+
+<div align="center">
+  <img src="/images/photo/lost-my-wallet-and-cardcase.svg" style="height: 800px" />
+</div>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:jumin">
+      <p><a href="https://www.city.taito.lg.jp/kurashi/todokede/jyuminhyo/honninkakunin.html">台東区では</a> そんなことはなく、住民税の通知でよさそう。 <a href="#fnref:jumin" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:temp">
+      <p>この日の気温は37℃越え。そりゃあキャンセルされるわな。 <a href="#fnref:temp" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:kinjo">
+      <p>近所の人に財布なくしたことは伝えていたので現金化方法はあったが、面倒になったのと窓口の時間も終了が迫っていたので。 <a href="#fnref:kinjo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:secret">
+      <p>ホントウは設定してあったソフトウェアトークンの再設定をするために秘密の質問が必要。 <a href="#fnref:secret" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:genkin">
+      <p>こういうとき何故か大量の現金が入ってたりした。 <a href="#fnref:genkin" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:police">
+      <p>見つけた場所の近所の警察で良いとおもうけど、ついでだったので管轄の警察署にした。 <a href="#fnref:police" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name></name></author><category term="dialy" /><summary type="html"><![CDATA[去る 2025/08/03 14:00 ごろに財布を紛失したのでやったことをまとめます。]]></summary></entry><entry><title type="html">Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した</title><link href="https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo/" rel="alternate" type="text/html" title="Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した" /><published>2025-05-31T23:59:59+09:00</published><updated>2025-05-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo/"><![CDATA[<p>[<strong>Gentoo Linux</strong>] でバイナリが公式配っていたのを<a href="https://pong.ursm.jp/posts/4">発見</a>したので、
 <a href="https://gist.github.com/katsyoshi/3d28b9609b7d395826ed93dd8288f0a9">退役したデスクトップ</a>をサーバー用途として利用してみます。</p>
 
 <h2 id="設定">設定</h2>
@@ -849,83 +967,4 @@ hello, world
       <p><strong>root</strong> ユーザーで一度実行するか、手動でやる必要がある。インラインとはいったい…… <a href="#fnref:bundler" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[あたらしく PC 買って、 Linux の GUI 環境を X11 から Wayland に乗り変えることにしました。 いままで利用していたデスクトップ環境を i3 から sway に変更しました。 最近利用していた macOS や i3 ではあまり気にしていなかったのですが、Windows の Alt+Tab での ウインドウ切り替えが便利だったのを思い出したのでこの便利な機能を模倣することにしました。]]></summary></entry><entry><title type="html">いいかんじに Bundler で管理されていない Gem を使いたい</title><link href="https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/" rel="alternate" type="text/html" title="いいかんじに Bundler で管理されていない Gem を使いたい" /><published>2023-11-16T23:59:59+09:00</published><updated>2023-11-16T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/"><![CDATA[<p>前回作成した <code class="language-plaintext highlighter-rouge">irb-theme-dracula</code> を <strong>bundler</strong> で <strong>gem</strong> が管理されているプロジェクトで利用したい。
-利用したいが、そのままでは利用できないです。
-これは <strong>gem</strong> が <strong>bundler</strong> で管理されているので、 <code class="language-plaintext highlighter-rouge">Gemfile</code> に書いていない <strong>gem</strong> は利用できないです。</p>
-
-<h2 id="対処案">対処案</h2>
-
-<p><strong>bundler</strong> で管理されていない <strong>gem</strong> をどうしても利用したい場合は以下のような方法が考えられます。</p>
-
-<ol>
-  <li>:100: <code class="language-plaintext highlighter-rouge">Gemfile</code> に追加: 正攻法。ただ複数人で開発しているなどの場合色付けだけの機能で追加するのかというと…</li>
-  <li>:+1: 古きよき方法: <a href="https://i.loveruby.net/ja/projects/setup/doc/usage.html"><code class="language-plaintext highlighter-rouge">setup.rb</code></a> を利用して、対象 <strong>gem</strong> の必要ファイルをインストールする。</li>
-  <li>:poop: 実行する <strong>Ruby</strong> の <code class="language-plaintext highlighter-rouge">$LOAD_PATH</code> に <strong>gem</strong> のパスを追加: 強引にパスを追加して <code class="language-plaintext highlighter-rouge">require</code> することで解決。</li>
-</ol>
-
-<p>ということでそれぞれ方法をみてみましょう。</p>
-
-<h3 id="gemfile-に追加">Gemfile に追加</h3>
-
-<p>正攻法ですね。便利で全員が使い、必要なら追加しましょう。
-どうしても利用したい場合でプロジェクトの <code class="language-plaintext highlighter-rouge">Gemfile</code> に書きたくない場合はプロジェクトを管理している<strong>バージョン管理システム</strong> にコミットしないなどオペレーションを行いましょう。
-管理方法が大変なのでこの方法はないなと。</p>
-
-<h3 id="古きよき方法">古きよき方法</h3>
-
-<p><strong>rubygems</strong> が生まれる前の方法をとりましょう。ここでは <strong><code class="language-plaintext highlighter-rouge">setup.rb</code></strong> で <code class="language-plaintext highlighter-rouge">site_ruby</code> に必要なファイルをインストールしてくれます。
-便利なやつです。</p>
-
-<h4 id="使い方">使い方</h4>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gem <span class="nb">install </span>setup <span class="c"># gem でイントールします。</span>
-<span class="gp">#</span><span class="w"> </span>インストールしたい gem のリポジトリをコピーなどして手元にもってきましょう。
-<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /path/to/install/gem
-<span class="gp">$</span><span class="w"> </span>setup.rb <span class="nb">install</span> <span class="c"># gem のインストールが行なわれます。</span>
-<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /path/to/your/project
-<span class="gp">$</span><span class="w"> </span>bundle <span class="nb">exec </span>ruby your/scrip.rb
-</code></pre></div></div>
-
-<p>これでできるのですが問題点があり、この方法では利用したいプロジェクト以外でも利用できてしまうので特定のプログラムだけで <code class="language-plaintext highlighter-rouge">site_ruby</code> を読み込むとかしていいかんじに使い分けるには少し工夫が必要です。
-全部の <strong>Ruby</strong> プログラムで利用したい訳ではないのでこの方法については断念。</p>
-
-<h3 id="実行する-ruby-の-load_path-に利用する-gem-のパスを追加">実行する Ruby の $LOAD_PATH に利用する gem のパスを追加</h3>
-
-<p>この方法は単純で、プログラム側で必要なファイルを読み込む時のみ利用する。
-利用するファイル(<code class="language-plaintext highlighter-rouge">require "irb/theme/dracula/light"</code> を書いているファイル)で利用したい <strong>gem</strong> へのパスを <code class="language-plaintext highlighter-rouge">$LOAD_PATH</code> へ追加します。
-<code class="language-plaintext highlighter-rouge">$LOAD_PATH</code> への追加方法としては以下の方法があります。</p>
-
-<ol>
-  <li>環境変数 (<code class="language-plaintext highlighter-rouge">$RUBYLIB</code>) に指定: 環境変数を利用するごとに指定することができる。</li>
-  <li>実行時に指定: 実行時に <code class="language-plaintext highlighter-rouge">-I/path/to/gem</code> を <code class="language-plaintext highlighter-rouge">ruby</code> の引数に利用可能。利用するごとに指定する必要がある。</li>
-  <li>実行ファイルで指定: 設定ファイルを読み込んで実行するような場合では楽。</li>
-</ol>
-
-<p>ここでは <strong>実行ファイルで指定</strong> する方法を見ていきましょう。</p>
-
-<p>実行対象のプログラムは <code class="language-plaintext highlighter-rouge">irb</code> です。 <code class="language-plaintext highlighter-rouge">irb</code> は <code class="language-plaintext highlighter-rouge">~/.irbrc</code> を読み込んで起動するため、 <code class="language-plaintext highlighter-rouge">~/.irbrc</code> に以下のような設定を書きます。</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Reline 0.4.0 以上に対応した irb のバージョンチェック</span>
-<span class="k">if</span> <span class="no">Gem</span><span class="o">::</span><span class="no">Version</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">IRB</span><span class="o">::</span><span class="no">VERSION</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="no">Gem</span><span class="o">::</span><span class="no">Version</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"1.9.0"</span><span class="p">)</span>
-  <span class="c1"># gem のインストールされるパスを取得。rbenv を利用している場合は以下</span>
-  <span class="c1"># preview 判では version に previewX や 0 がついたりするので * を付与し、検索</span>
-  <span class="n">ld_path</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">ENV</span><span class="p">[</span><span class="s2">"RBENV_ROOT"</span><span class="p">],</span> <span class="s2">"versions"</span><span class="p">,</span> <span class="no">RUBY_VERSION</span> <span class="o">+</span> <span class="s2">"*"</span><span class="p">,</span> <span class="s2">"lib"</span><span class="p">,</span> <span class="s2">"ruby"</span><span class="p">,</span> <span class="s2">"gems"</span><span class="p">,</span> <span class="no">RUBY_VERSION</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="sr">/\d+$/</span><span class="p">,</span> <span class="s2">"0*"</span><span class="p">),</span> <span class="s2">"gems"</span><span class="p">)</span>
-  <span class="c1"># 読み込む gem 対象のパスを取得</span>
-  <span class="n">gem_path</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">Dir</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">ld_path</span><span class="p">,</span> <span class="s2">"irb-theme"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"-*"</span><span class="p">).</span><span class="nf">last</span><span class="p">,</span> <span class="s2">"lib"</span><span class="p">)</span>
-  <span class="vg">$LOAD_PATH</span><span class="p">.</span><span class="nf">unshift</span><span class="p">(</span><span class="n">gem_path</span><span class="p">)</span> <span class="c1"># LOAD_PATH に追加</span>
-  <span class="vg">$LOAD_PATH</span><span class="p">.</span><span class="nf">uniq!</span> <span class="c1"># LOAD_PATH に追加した重複してた場合削除</span>
-  <span class="nb">require</span> <span class="s2">"irb/theme/dracula/light"</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<p>この設定を書いたら <strong>Ruby</strong> を <code class="language-plaintext highlighter-rouge">3.3.0-preview3</code> 以上にして <code class="language-plaintext highlighter-rouge">bundle exec irb</code> と実行してみましょう。</p>
-
-<p><img src="/images/screenshot/force-load-bundler-external-gem.webp" alt="" /></p>
-
-<p>かった!</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p><strong>gem</strong> は入ってるけど、プロジェクトで利用できないなあとおもい使えるようにしたいということでやってみました。
-今回の <code class="language-plaintext highlighter-rouge">irb</code> は <strong>Ruby</strong> <code class="language-plaintext highlighter-rouge">2.2</code> 以下だとデフォルトでインストールされているのでそもそも
-<code class="language-plaintext highlighter-rouge">Reline</code> の新しいバージョン(<code class="language-plaintext highlighter-rouge">0.4.0</code>)をサポートしていないのこの方法を利用してみました。</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[前回作成した irb-theme-dracula を bundler で gem が管理されているプロジェクトで利用したい。 利用したいが、そのままでは利用できないです。 これは gem が bundler で管理されているので、 Gemfile に書いていない gem は利用できないです。]]></summary></entry></feed>
+</div>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[あたらしく PC 買って、 Linux の GUI 環境を X11 から Wayland に乗り変えることにしました。 いままで利用していたデスクトップ環境を i3 から sway に変更しました。 最近利用していた macOS や i3 ではあまり気にしていなかったのですが、Windows の Alt+Tab での ウインドウ切り替えが便利だったのを思い出したのでこの便利な機能を模倣することにしました。]]></summary></entry></feed>
