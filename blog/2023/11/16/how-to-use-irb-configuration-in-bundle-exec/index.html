@@ -1,21 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>いいかんじに Bundler で管理されていない Gem を使いたい | katsyoshi のめもみたいなの</title>
@@ -24,17 +8,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="前回作成した irb-theme-dracula を bundler で gem が管理されているプロジェクトで利用したい。 利用したいが、そのままでは利用できないです。 これは gem が bundler で管理されているので、 Gemfile に書いていない gem は利用できないです。" />
 <meta property="og:description" content="前回作成した irb-theme-dracula を bundler で gem が管理されているプロジェクトで利用したい。 利用したいが、そのままでは利用できないです。 これは gem が bundler で管理されているので、 Gemfile に書いていない gem は利用できないです。" />
-<link rel="canonical" href="https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/" />
+<link rel="canonical" href="http://localhost:3000/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/" />
+<meta property="og:url" content="http://localhost:3000/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2023-11-16T23:59:59+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="いいかんじに Bundler で管理されていない Gem を使いたい" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-11-16T23:59:59+09:00","datePublished":"2023-11-16T23:59:59+09:00","description":"前回作成した irb-theme-dracula を bundler で gem が管理されているプロジェクトで利用したい。 利用したいが、そのままでは利用できないです。 これは gem が bundler で管理されているので、 Gemfile に書いていない gem は利用できないです。","headline":"いいかんじに Bundler で管理されていない Gem を使いたい","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/"},"url":"https://blog.katsyoshi.org/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-11-16T23:59:59+09:00","datePublished":"2023-11-16T23:59:59+09:00","description":"前回作成した irb-theme-dracula を bundler で gem が管理されているプロジェクトで利用したい。 利用したいが、そのままでは利用できないです。 これは gem が bundler で管理されているので、 Gemfile に書いていない gem は利用できないです。","headline":"いいかんじに Bundler で管理されていない Gem を使いたい","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:3000/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/"},"url":"http://localhost:3000/blog/2023/11/16/how-to-use-irb-configuration-in-bundle-exec/"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>

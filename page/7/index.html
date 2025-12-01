@@ -1,21 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQZYYM4LL2');
-</script>
-
-
-<script>
-  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
-  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
-  reproio("track", "pageView");
-</script>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Page 7 of 13 for katsyoshi のめもみたいなの - page 7 | katsyoshi のめもみたいなの</title>
@@ -24,18 +8,18 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="It’s a memos." />
 <meta property="og:description" content="It’s a memos." />
-<link rel="canonical" href="https://blog.katsyoshi.org/page/7/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/page/7/" />
+<link rel="canonical" href="http://localhost:3000/page/7/" />
+<meta property="og:url" content="http://localhost:3000/page/7/" />
 <meta property="og:site_name" content="katsyoshi のめもみたいなの" />
 <meta property="og:type" content="website" />
-<link rel="prev" href="https://blog.katsyoshi.org/page/6/" />
-<link rel="next" href="https://blog.katsyoshi.org/page/8/" />
+<link rel="prev" href="http://localhost:3000/page/6/" />
+<link rel="next" href="http://localhost:3000/page/8/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="katsyoshi のめもみたいなの - page 7" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 7","url":"https://blog.katsyoshi.org/page/7/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"It’s a memos.","headline":"katsyoshi のめもみたいなの - page 7","url":"http://localhost:3000/page/7/"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:3000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
@@ -59,6 +43,65 @@
 </div>
 
 
+
+  <h1><a href="/blog/2017/05/31/use-red-arrow-dot-gem/">use red-arrow.gem</a></h1>
+  <p class="author">
+    <span class="date">2017-05-31 23:27:57 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://blog.katsyoshi.org/blog/2017/05/29/installing-apache-arrow/">こないだインストール</a> した <a href="https://arrow.apache.org/">Apache Arrow</a> がとりあえず <a href="https://github.com/red-data-tools/red-arrow">Ruby</a> でうごくようになったのでメモ</p>
+
+<h2 id="メモ">メモ</h2>
+<p>gemのインストールは前回のインストールを行なえば問題ないです。ですが、arrowを利用しようとすると失敗します。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"arrow"</span>
+<span class="sr">/home/</span><span class="n">katsu</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">-</span><span class="mf">3.1</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">gobject</span><span class="o">-</span><span class="n">introspection</span><span class="o">/</span><span class="n">loader</span><span class="p">.</span><span class="nf">rb</span><span class="p">:</span><span class="mi">37</span><span class="ss">:in</span> <span class="sb">`require':GObjectIntrospection::RepositoryError::TypelibNotFound: Typelib file for namespace 'Arrow' (any version) not found
+</span></code></pre></div></div>
+
+<p>これは <code class="language-plaintext highlighter-rouge">GObjectIntrospection</code> の<a href="https://github.com/red-data-tools/red-arrow/blob/master/lib/arrow.rb#L25">ロードに失敗</a>しているようです。
+なので<a href="http://www.clear-code.com/blog/2013/12/16.html">ここ</a>や<a href="http://qiita.com/groonga/items/71b145b37d77bd160bf2">ここ</a>を参考に環境変数 <code class="language-plaintext highlighter-rouge">GI_TYPELIB_PATH</code> を設定すると読み込まれるようになり実行できます。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">GI_TYPELIB_PATH</span><span class="o">=</span>/path/to/girepository-1.0
+<span class="gp">$</span><span class="w"> </span>irb <span class="nt">-rarrow</span>
+</code></pre></div></div>
+
+<p>とやるとエラーがなくなります。</p>
+
+<p>最後に<a href="https://github.com/red-data-tools/red-arrow/tree/master/example">サンプル</a>を実行して確認しました!</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">% ruby write-file.rb
+% ruby read-file.rb
+========================================
+record-batch[0]:
+  uint8: [1, 2, 4, 8]
+  uint16: [1, 2, 4, 8]
+  uint32: [1, 2, 4, 8]
+  uint64: [1, 2, 4, 8]
+  int8: [1, -2, 4, -8]
+  int16: [1, -2, 4, -8]
+  int32: [1, -2, 4, -8]
+  int64: [1, -2, 4, -8]
+  float: [1.100000023841858, -2.200000047683716, 4.400000095367432, -8.800000190734863]
+  double: [1.1, -2.2, 4.4, -8.8]
+========================================
+record-batch[1]:
+  uint8: [2, 4, 8]
+  uint16: [2, 4, 8]
+  uint32: [2, 4, 8]
+  uint64: [2, 4, 8]
+  int8: [-2, 4, -8]
+  int16: [-2, 4, -8]
+  int32: [-2, 4, -8]
+  int64: [-2, 4, -8]
+  float: [-2.200000047683716, 4.400000095367432, -8.800000190734863]
+  double: [-2.2, 4.4, -8.8]
+</span></code></pre></div></div>
+
+<h2 id="おわり">おわり</h2>
+
+<p>最初ろーどえらーでこまってた</p>
+
+  </div>
 
   <h1><a href="/blog/2017/05/29/installing-apache-arrow/">installing apache arrow</a></h1>
   <p class="author">
@@ -393,28 +436,6 @@ EDIT ~/.mikutter/plugin/emoji/emoji.yml
 <p>この方法ではitamaeのパッケージ管理方法とちがうのでいろいろとあれだなあ
 とおもってたら itamae-plugin-resource-portage みつけてしまったので
 itamaeで管理したいとおもう人は itamae-plugin-resource-portage を使いましょう</p>
-
-  </div>
-
-  <h1><a href="/blog/2016/12/05/d250g2/">d250g2 advent calendar 2016 5日目</a></h1>
-  <p class="author">
-    <span class="date">2016-12-05 00:00:00 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="http://www.adventar.org/calendars/1377">d250g2 Advent Calendar</a> 5日目の記事です</p>
-
-<h2 id="d250g2-について">d250g2 について</h2>
-
-<p>-&gt; <img src="https://d250g2.com/d250g2.jpg" alt="" /> &lt;-</p>
-
-<h2 id="d250g2-とは">d250g2 とは？</h2>
-<p>しらん</p>
-
-<h2 id="kernelvm-camp-4-に行ってきた">KernelVM Camp #4 に行ってきた</h2>
-
-<p>成果物です</p>
-
-<p>-&gt; <img src="https://d250g2.com/d250g2.jpg" alt="" /> &lt;-</p>
 
   </div>
 
