@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html
+  lang="ja"
+
+data-admin-domain="//blog.hatena.ne.jp"
+data-admin-origin="https://blog.hatena.ne.jp"
+data-author="falsandtru"
+data-avail-langs="ja en"
+data-blog="falsandtru.hatenablog.com"
+data-blog-host="falsandtru.hatenablog.com"
+data-blog-is-public="1"
+data-blog-name="falsandtruのメモ帳"
+data-blog-owner="falsandtru"
+data-blog-show-ads="1"
+data-blog-show-sleeping-ads=""
+data-blog-uri="https://falsandtru.hatenablog.com/"
+data-blog-uuid="12921228815718538158"
+data-blogs-uri-base="https://falsandtru.hatenablog.com"
+data-brand="hatenablog"
+data-data-layer="{&quot;hatenablog&quot;:{&quot;admin&quot;:{},&quot;analytics&quot;:{&quot;brand_property_id&quot;:&quot;&quot;,&quot;measurement_id&quot;:&quot;G-4G5SWXVNBF&quot;,&quot;non_sampling_property_id&quot;:&quot;&quot;,&quot;property_id&quot;:&quot;&quot;,&quot;separated_property_id&quot;:&quot;UA-29716941-17&quot;},&quot;blog&quot;:{&quot;blog_id&quot;:&quot;12921228815718538158&quot;,&quot;content_seems_japanese&quot;:&quot;true&quot;,&quot;disable_ads&quot;:&quot;&quot;,&quot;enable_ads&quot;:&quot;true&quot;,&quot;enable_keyword_link&quot;:&quot;true&quot;,&quot;entry_show_footer_related_entries&quot;:&quot;true&quot;,&quot;force_pc_view&quot;:&quot;false&quot;,&quot;is_public&quot;:&quot;true&quot;,&quot;is_responsive_view&quot;:&quot;false&quot;,&quot;is_sleeping&quot;:&quot;false&quot;,&quot;lang&quot;:&quot;ja&quot;,&quot;name&quot;:&quot;falsandtru\u306e\u30e1\u30e2\u5e33&quot;,&quot;owner_name&quot;:&quot;falsandtru&quot;,&quot;uri&quot;:&quot;https://falsandtru.hatenablog.com/&quot;},&quot;brand&quot;:&quot;hatenablog&quot;,&quot;page_id&quot;:&quot;entry&quot;,&quot;permalink_entry&quot;:{&quot;author_name&quot;:&quot;falsandtru&quot;,&quot;categories&quot;:&quot;security&quot;,&quot;character_count&quot;:4702,&quot;date&quot;:&quot;2024-12-18&quot;,&quot;entry_id&quot;:&quot;6802418398312499332&quot;,&quot;first_category&quot;:&quot;security&quot;,&quot;hour&quot;:&quot;9&quot;,&quot;title&quot;:&quot;\u30d1\u30b9\u30ad\u30fc\u306e\u672c\u8cea&quot;,&quot;uri&quot;:&quot;https://falsandtru.hatenablog.com/entry/essence-of-passkey&quot;},&quot;pro&quot;:&quot;free&quot;,&quot;router_type&quot;:&quot;blogs&quot;}}"
+data-device="pc"
+data-dont-recommend-pro="false"
+data-global-domain="https://hatena.blog"
+data-globalheader-color="b"
+data-globalheader-type="pc"
+data-has-touch-view="1"
+data-help-url="https://help.hatenablog.com"
+data-page="entry"
+data-parts-domain="https://hatenablog-parts.com"
+data-plus-available=""
+data-pro="false"
+data-router-type="blogs"
+data-sentry-dsn="https://03a33e4781a24cf2885099fed222b56d@sentry.io/1195218"
+data-sentry-environment="production"
+data-sentry-sample-rate="0.1"
+data-static-domain="https://cdn.blog.st-hatena.com"
+data-version="717f38a22c2f972093f0ce2f8d1821"
+
+
+
+
+  data-initial-state="{}"
+
+  >
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+
+  
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  
+
+
+  
+
+  <meta name="robots" content="max-image-preview:large" />
+
+
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=7; IE=9; IE=10; IE=11" />
+  <title>パスキーの本質 - falsandtruのメモ帳</title>
+
+  
+  <link rel="canonical" href="https://falsandtru.hatenablog.com/entry/essence-of-passkey"/>
+
+
+
+  
+
+<meta itemprop="name" content="パスキーの本質 - falsandtruのメモ帳"/>
+
+  <meta itemprop="image" content="https://ogimage.blog.st-hatena.com/12921228815718538158/6802418398312499332/1764539425"/>
+
+
+  <meta property="og:title" content="パスキーの本質 - falsandtruのメモ帳"/>
+<meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://falsandtru.hatenablog.com/entry/essence-of-passkey"/>
+
+  <meta property="og:image" content="https://ogimage.blog.st-hatena.com/12921228815718538158/6802418398312499332/1764539425"/>
+
+<meta property="og:image:alt" content="パスキーの本質 - falsandtruのメモ帳"/>
+    <meta property="og:description" content="パスキーの本質はユーザー側としてはパスワード入力機会の削減、サービス側としては企業のセキュリティリスクのユーザーへの責任転嫁とコストカットである。 サービス側 企業がユーザーにパスキーを使わせようと強要するのはログイン情報の流出や流出したログイン情報による攻撃のリスクと責任とコストから企業を守るために認証に関する問題がユーザーの責任によってしか発生しないよう責任転嫁したいからに過ぎない。このため認証情報の紛失や盗難などによる喪失リスクと復旧の困難性やその他新たに発生する問題については隠蔽または矮小化される。企業にとってパスキーとはパスワードの定期的変更の最新版なのでありユーザーがパスキーを強要…" />
+<meta property="og:site_name" content="falsandtruのメモ帳"/>
+
+  <meta property="article:published_time" content="2024-12-18T00:36:07Z" />
+
+    <meta property="article:tag" content="security" />
+      <meta name="twitter:card"  content="summary_large_image" />
+    <meta name="twitter:image" content="https://ogimage.blog.st-hatena.com/12921228815718538158/6802418398312499332/1764539425" />  <meta name="twitter:title" content="パスキーの本質 - falsandtruのメモ帳" />    <meta name="twitter:description" content="パスキーの本質はユーザー側としてはパスワード入力機会の削減、サービス側としては企業のセキュリティリスクのユーザーへの責任転嫁とコストカットである。 サービス側 企業がユーザーにパスキーを使わせようと強要するのはログイン情報の流出や流出したログイン情報による攻撃のリスクと責任とコストから企業を守るために認証に関する問題が…" />  <meta name="twitter:app:name:iphone" content="はてなブログアプリ" />
+  <meta name="twitter:app:id:iphone" content="583299321" />
+  <meta name="twitter:app:url:iphone" content="hatenablog:///open?uri=https%3A%2F%2Ffalsandtru.hatenablog.com%2Fentry%2Fessence-of-passkey" />
+  
+    <meta name="description" content="パスキーの本質はユーザー側としてはパスワード入力機会の削減、サービス側としては企業のセキュリティリスクのユーザーへの責任転嫁とコストカットである。 サービス側 企業がユーザーにパスキーを使わせようと強要するのはログイン情報の流出や流出したログイン情報による攻撃のリスクと責任とコストから企業を守るために認証に関する問題がユーザーの責任によってしか発生しないよう責任転嫁したいからに過ぎない。このため認証情報の紛失や盗難などによる喪失リスクと復旧の困難性やその他新たに発生する問題については隠蔽または矮小化される。企業にとってパスキーとはパスワードの定期的変更の最新版なのでありユーザーがパスキーを強要…" />
+
+
+  
+<script
+  id="embed-gtm-data-layer-loader"
+  data-data-layer-page-specific="{&quot;hatenablog&quot;:{&quot;blogs_permalink&quot;:{&quot;has_related_entries_with_elasticsearch&quot;:&quot;true&quot;,&quot;is_author_pro&quot;:&quot;false&quot;,&quot;blog_afc_issued&quot;:&quot;false&quot;,&quot;is_blog_sleeping&quot;:&quot;false&quot;,&quot;entry_afc_issued&quot;:&quot;false&quot;}}}"
+>
+(function() {
+  function loadDataLayer(elem, attrName) {
+    if (!elem) { return {}; }
+    var json = elem.getAttribute(attrName);
+    if (!json) { return {}; }
+    return JSON.parse(json);
+  }
+
+  var globalVariables = loadDataLayer(
+    document.documentElement,
+    'data-data-layer'
+  );
+  var pageSpecificVariables = loadDataLayer(
+    document.getElementById('embed-gtm-data-layer-loader'),
+    'data-data-layer-page-specific'
+  );
+
+  var variables = [globalVariables, pageSpecificVariables];
+
+  if (!window.dataLayer) {
+    window.dataLayer = [];
+  }
+
+  for (var i = 0; i < variables.length; i++) {
+    window.dataLayer.push(variables[i]);
+  }
+})();
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4CXTW');</script>
+<!-- End Google Tag Manager -->
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://falsandtru.hatenablog.com/icon/favicon">
+<link rel="apple-touch-icon" href="https://falsandtru.hatenablog.com/icon/touch">
+<link rel="icon" sizes="192x192" href="https://falsandtru.hatenablog.com/icon/link">
+
+  
+
+<link rel="alternate" type="application/atom+xml" title="Atom" href="https://falsandtru.hatenablog.com/feed"/>
+<link rel="alternate" type="application/rss+xml" title="RSS2.0" href="https://falsandtru.hatenablog.com/rss"/>
+
+  <link rel="alternate" type="application/json+oembed" href="https://hatena.blog/oembed?url=https%3A%2F%2Ffalsandtru.hatenablog.com%2Fentry%2Fessence-of-passkey&amp;format=json" title="oEmbed Profile of パスキーの本質"/>
+<link rel="alternate" type="text/xml+oembed" href="https://hatena.blog/oembed?url=https%3A%2F%2Ffalsandtru.hatenablog.com%2Fentry%2Fessence-of-passkey&amp;format=xml" title="oEmbed Profile of パスキーの本質"/>
+  
+  <link rel="author" href="http://www.hatena.ne.jp/falsandtru/">
+
+  
+
+  
+
+
+  
+    
+<link rel="stylesheet" type="text/css" href="https://cdn.blog.st-hatena.com/css/blog.css?version=717f38a22c2f972093f0ce2f8d1821"/>
+
+    
+  <link rel="stylesheet" type="text/css" href="https://usercss.blog.st-hatena.com/blog_style/12921228815718538158/d1de2ef66cb30d14f6b31d2294eb73aee7c2eff0"/>
+  
+  
+
+  
+
+  
+<script> </script>
+
+  
+<style>
+  div#google_afc_user,
+  div.google-afc-user-container,
+  div.google_afc_image,
+  div.google_afc_blocklink {
+      display: block !important;
+  }
+</style>
+
+
+  
+    <script src="https://cdn.pool.st-hatena.com/valve/valve.js" async></script>
+<script id="test-valve-definition">
+  var valve = window.valve || [];
+
+  valve.push(function(v) {
+    
+    
+
+    v.config({
+      service: 'blog',
+      content: {
+        result: 'adtrust',
+        documentIds: ["blog:entry:6802418398312499332"]
+      }
+    });
+    v.defineDFPSlot({"lazy":1,"sizes":{"mappings":[[[320,568],[[336,280],[300,250],"fluid"]],[[0,0],[[300,250]]]]},"slotId":"ad-in-entry","unit":"/4374287/blog_pc_entry_sleep_in-article"});    v.defineDFPSlot({"lazy":"","sizes":[[300,250],[336,280],[468,60],"fluid"],"slotId":"google_afc_user_container_0","unit":"/4374287/blog_user"});
+    v.sealDFPSlots();
+  });
+</script>
+
+  
+
+  
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","dateModified":"2025-12-01T06:50:25+09:00","datePublished":"2024-12-18T09:36:07+09:00","headline":"パスキーの本質","image":["https://cdn.blog.st-hatena.com/images/theme/og-image-1500.png"]}</script>
+
+  
+
+  <meta name="robots" content="noarchive">
+<link rel="author" href="http://www.hatena.ne.jp/falsandtru/" />
+</head>
+
+  <body class="page-entry category-security globalheader-ng-enabled">
+    
+
+<div id="globalheader-container"
+  data-brand="hatenablog"
+  
+  >
+  <iframe id="globalheader" height="37" frameborder="0" allowTransparency="true"></iframe>
+</div>
+
+
+  
+  
+  
+    <nav class="
+      blog-controlls
+      
+    ">
+      <div class="blog-controlls-blog-icon">
+        <a href="https://falsandtru.hatenablog.com/">
+          <img src="https://cdn.blog.st-hatena.com/images/admin/blog-icon-noimage.png" alt="falsandtruのメモ帳"/>
+        </a>
+      </div>
+      <div class="blog-controlls-title">
+        <a href="https://falsandtru.hatenablog.com/">falsandtruのメモ帳</a>
+      </div>
+      <a href="https://blog.hatena.ne.jp/falsandtru/falsandtru.hatenablog.com/subscribe?utm_medium=button&amp;utm_source=blogs_topright_button&amp;utm_campaign=subscribe_blog" class="blog-controlls-subscribe-btn test-blog-header-controlls-subscribe">
+        読者になる
+      </a>
+    </nav>
+  
+
+  <div id="container">
+    <div id="container-inner">
+      <header id="blog-title" data-brand="hatenablog">
+  <div id="blog-title-inner" >
+    <div id="blog-title-content">
+      <h1 id="title"><a href="https://falsandtru.hatenablog.com/">falsandtruのメモ帳</a></h1>
+      
+    </div>
+  </div>
+</header>
+
+      
+
+      
+      
+
+
+
+
+<div id="content" class="hfeed"
+  
+  >
+  <div id="content-inner">
+    <div id="wrapper">
+      <div id="main">
+        <div id="main-inner">
+          
+
+          
+
+
+  
+
+
+          
+  
+  <!-- google_ad_section_start -->
+  <!-- rakuten_ad_target_begin -->
+  
+  
+  
+
+  
+
+  
+    
+      
+        <article class="entry hentry test-hentry js-entry-article date-first autopagerize_page_element chars-4800 words-100 mode-markdown entry-odd" id="entry-6802418398312499332" data-keyword-campaign="" data-uuid="6802418398312499332" data-publication-type="entry">
+  <div class="entry-inner">
+    <header class="entry-header">
+  
+    <div class="date entry-date first">
+    <a href="https://falsandtru.hatenablog.com/archive/2024/12/18" rel="nofollow">
+      <time datetime="2024-12-18T00:36:07Z" title="2024-12-18T00:36:07Z">
+        <span class="date-year">2024</span><span class="hyphen">-</span><span class="date-month">12</span><span class="hyphen">-</span><span class="date-day">18</span>
+      </time>
+    </a>
+      </div>
+  <h1 class="entry-title">
+  <a href="https://falsandtru.hatenablog.com/entry/essence-of-passkey" class="entry-title-link bookmark">パスキーの本質</a>
+</h1>
+
+  
+  
+
+  <div class="entry-categories categories">
+    
+    <a href="https://falsandtru.hatenablog.com/archive/category/security" class="entry-category-link category-security">security</a>
+    
+  </div>
+
+
+  
+
+  
+
+</header>
+
+    
+
+
+    <div class="entry-content hatenablog-entry">
+  
+    <p>パスキーの本質はユーザー側としてはパスワード入力機会の削減、サービス側としては企業のセキュリティリスクのユーザーへの責任転嫁とコストカットである。</p>
+
+<h2 id="サービス側">サービス側</h2>
+
+<p>企業がユーザーにパスキーを使わせようと強要するのはログイン情報の流出や流出したログイン情報による攻撃のリスクと責任とコストから<strong>企業を守るために認証に関する問題がユーザーの責任によってしか発生しないよう責任転嫁したいからに過ぎない</strong>。このため認証情報の紛失や盗難などによる喪失リスクと復旧の困難性やその他新たに発生する問題については隠蔽または矮小化される。<strong>企業にとってパスキーとはパスワードの定期的変更の最新版なのでありユーザーがパスキーを強要されるのはパスワードの定期的変更を強要された歴史を繰り返しているに過ぎない</strong>。</p>
+
+<p><strong><mark>先にこちらの決定版記事を読むことを推奨</mark></strong>。</p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ffalsandtru.hatenablog.com%2Fentry%2Fpasskey-fido-security-and-vulnerability-and-catastrophic-defect" title="パスキー(FIDO)の安全性と脆弱性と破滅的欠陥 - falsandtruのメモ帳" class="embed-card embed-blogcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 190px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe><cite class="hatena-citation"><a href="https://falsandtru.hatenablog.com/entry/passkey-fido-security-and-vulnerability-and-catastrophic-defect">falsandtru.hatenablog.com</a></cite></p>
+
+<h2 id="ユーザー側">ユーザー側</h2>
+
+<p>パスキーの適切な実装におけるユーザーの本質的利益はパスワード入力機会が減ることによりフィッシング被害を受ける機会が減ることだけであり<strong>パスキーはセキュリティの最小強度の底上げにはならない</strong>。ユーザーが本当に求めていることはパスワード入力の手間とリスクを減らすこととこれを端末非依存にすることだけである。これを実現すると次のようになる。</p>
+
+<p>あるユーザーが唯一所持する端末A(または物理的セキュリティキー)にだけパスキーを保存しているとするとこれを破損や盗難などにより喪失すればユーザーは認証情報を失い永遠にログインできなくなる。復旧コードがあってもこの問題を複製しているに過ぎず<strong>そもそも一般的なユーザーが多数のサービスの多数の復旧コードを適切に管理できるわけがない</strong>。<strong>復旧コードは到底一般化不可能な復旧手段なのであり我々ユーザーはそういうものを管理するコストとリスクと責任を企業から押し付けられている</strong>のである(<a class="keyword" href="https://d.hatena.ne.jp/keyword/Microsoft">Microsoft</a>傘下の<a class="keyword" href="https://d.hatena.ne.jp/keyword/GitHub">GitHub</a>は<strong>復旧コードをダウンロードしなければサイトを一切操作<a class="keyword" href="https://d.hatena.ne.jp/keyword/%C9%D4%C7%BD">不能</a>にする暴挙によりダウンロードを強制</strong>したため復旧コードをダウンロードせざるを得なかった。これで責任転嫁完了というわけである。死ね)。復旧コードを盗まれアカウントをハイジャックされて詰むリスクも押し付けられていることは言うまでもない。極めつけに<strong>ユーザーが多数の復旧コードをいかに管理すべきかはユーザーに丸投げ</strong>である。そこを掘り下げるとパスキーの欠陥があらわになるから言及できないのだろう。すなわち<strong>企業が安全になった代わりにユーザーは非常に危険になったのでありユーザーは企業に企業の安全の代償を押し付けられユーザーがそれまで所有していた安全を搾取された</strong>のである。復旧コードを押し付けてパスワードリセットを取り上げる実装はクソだと断言できる。そして一般化可能な唯一の現実的復旧手段であるメール経由のパスワードリセットで認証を復旧するならば結局セキュリティの最小強度はパスワードから上がっていない(ここでは原理を示すためマジックリンクなどパスワードに近い同格のセキュリティ強度で互換的な認証方式の代表および総称としてパスワードと表記する)。端末Bを追加し<a class="keyword" href="https://d.hatena.ne.jp/keyword/%BE%E9%C4%B9%B2%BD">冗長化</a>および認証情報の共有をしようとすると盗まれた端末から共有先を追加削除できないようにするなど<strong>認証情報を管理するためにさらに別の認証が必要になりパスワード認証に戻る</strong>。結局<strong>喪失に対してパスワード認証と同じ堅牢性を保とうとするとパスワードに回帰することになりパスワードから離れられない</strong>のである。従ってパスキーはパスワード入力機会を減らすに過ぎずユーザーが真に求めるのはこのメリットにデメリットが一切ないようこれをパスワード同様端末非依存かつ端末と復旧コードを喪失しても復旧可能にすることだけなのである。近年お題目に上がり鼻につくようになったパスワードの廃止や根絶は非現実的な<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%A4%A5%C7%A5%AA%A5%ED%A5%AE%A1%BC">イデオロギー</a>と幻想でありIT業界のいつもの見慣れた誇大広告に過ぎない。</p>
+
+<p>なお認証情報の共有には仲介する<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%A6%A5%C9">クラウド</a>ベンダーなどに認証情報を開示しなければならない問題があるため共有する認証情報をE2E暗号化すべきであるがこのE2E暗号化および復号もパスワードに頼ることになる。結局<strong>不特定多数の個人が対象となる限りどれほどセキュリティを強化してもパスワードを完全になくすことを一般化することはできない</strong>のである。</p>
+
+<p><strong>パスキーの危険性の最大の原因はパスキーそのものよりも仕様策定メンバーである<a class="keyword" href="https://d.hatena.ne.jp/keyword/Google">Google</a>や<a class="keyword" href="https://d.hatena.ne.jp/keyword/Microsoft">Microsoft</a>などが旗振り役となり侵害に対する安全性と喪失に対する安全性の<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%C8%A5%EC%A1%BC%A5%C9%A5%AA%A5%D5">トレードオフ</a>をユーザーが選択する自由を奪ってパスワードの廃止と復旧コードという危険な実装方法を事実上の標準として強力に推進していることにある</strong>。<strong>パスキーの危険性が<a class="keyword" href="https://d.hatena.ne.jp/keyword/%BC%C2%C1%F5%B0%CD%C2%B8">実装依存</a>であろうと公式実装が最大の危険であるためパスキーはその危険性の責任を免れない</strong>。パスキーはこの公式実装に反することでしか安全に実装できないものであり<strong>現在パスキーとパスワードの両方を利用できる実装のサービスも過渡期であるから両方を利用できるに過ぎず<a class="keyword" href="https://d.hatena.ne.jp/keyword/Google">Google</a>や<a class="keyword" href="https://d.hatena.ne.jp/keyword/Microsoft">Microsoft</a>などのパスキー公式団体がパスワード廃止を推進しておりそれが企業利益に叶う以上いずれパスキーしか使えなくなることを忘れてはならない</strong>。</p>
+
+<p>この記事は今1時間で書き殴ったものなので雑書きなのはご了承。</p>
+
+<hr />
+
+<p>トップコメ</p>
+
+<pre class="code" data-lang="" data-unlink>FalkyFalky論点を「ユーザーは認証要素を適切に管理できるわけがない」に持っていくなら、まさにパスキーの優位性は「エンドユーザにパスワードマネージャの利用を強制する効果」にこそある、という話になるんじゃないの…？</pre>
+
+
+<p>そんなことは書いていない。管理できるわけがないと書いてあるのは「認証要素」でなく「復旧コード」であり復旧コードはパスワードマネージャを強制することで期待されている効果とは一切関係なく間違った拡大解釈することで間違った結論を導いているに過ぎずこのコメントの批判は最初から最後まですべてコメントを書いた人間の間違いのみから生じた<a class="keyword" href="https://d.hatena.ne.jp/keyword/%BC%AB%B2%C8%C3%E6%C6%C7">自家中毒</a>に過ぎない。同様にこれほど単純な間違った拡大解釈に気づかず書いてあることが読めず書いてないことを読み取りコメントに星をつけた人間の多さには呆れるほかない。</p>
+
+<p>パスキーの<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%A8%A5%D0%A5%F3%A5%B8%A5%A7%A5%EA%A5%B9%A5%C8">エバンジェリスト</a>兼アドカレ主催者の抜粋コメントがあったのでいかほどのものか見てみよう。</p>
+
+<p><blockquote data-conversation="none" class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">&gt; ユーザーが本当に求めていることはパスワード入力の手間とリスクを減らすこととこれを端末非依存にすることだけである。<br><br>そもそもユーザーが何かを求めているとでも？</p>&mdash; 👹秋田の猫🐱 (@ritou) <a href="https://twitter.com/ritou/status/1869273583626973318?ref_src=twsrc%5Etfw">2024年12月18日</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  </p>
+
+<pre class="code" data-lang="" data-unlink>&gt; ユーザーが本当に求めていることはパスワード入力の手間とリスクを減らすこととこれを端末非依存にすることだけである。
+
+そもそもユーザーが何かを求めているとでも？</pre>
+
+
+<p><strong>こうやってセキュリティ関係者がユーザーのニーズを考えずユーザーを唯々諾々と従うべき無知蒙昧の徒であるかのように見下して独りよがりな開発と導入を強引に推し進めているからユーザーに不便を強いて反発されているのである</strong>。</p>
+
+<p>その後こいつは「パスワード、パスキー、生体認証...どんなユーザー認証にも"詰み"はあり得る」という記事を投稿し「パスワード認証はもっとも詰みやすい方式と言えるでしょう」「全ての認証方式が詰む。パスキーも詰むし、ID連携でさえも詰む。パスワードはもっと詰む」(<strong>パスワードリセットできることがわかってるのにパスワードを忘れて"詰んだ"などとユーザーが思うはずもなくこいつの認識と信念は完全に現実から乖離している</strong>。なんならリセットありきでランダムなパスワードを設定して忘れる使い方も珍しくないのが現実である)というユーザーの認識と不満と実情とは真逆の信念を主張しブックマークに「少しずつ共通認識にしていきましょう」とセルフコメントを付けてあくまで自身の信念にユーザーを従わせようとしており<strong>まったく反省していない</strong>。</p>
+
+<p><strong>この悪質なパスキー推進者はユーザーが苦しんでいる現実の問題を何ら解決せず論点をすり替え木で鼻をくくったテンプレ回答をするだけの有害無益な<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%DD%A5%B8%A5%B7%A5%E7%A5%F3%A5%C8%A1%BC%A5%AF">ポジショントーク</a>を繰り返しているに過ぎない</strong>。すなわち<strong>このパスキー推進者はユーザーの敵なのである</strong>。次のツイートはその後の投稿である。</p>
+
+<p><blockquote data-conversation="none" class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">悪徳パスキー推進派の活動にリソースを使いすぎてしまった</p>&mdash; 👹秋田の猫🐱 (@ritou) <a href="https://twitter.com/ritou/status/1871470902510338539?ref_src=twsrc%5Etfw">2024年12月24日</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  </p>
+
+<pre class="code" data-lang="" data-unlink>悪徳パスキー推進派の活動にリソースを使いすぎてしまった</pre>
+
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fb.hatena.ne.jp%2Fentry%2Fs%2Fritou.hatenablog.com%2Fentry%2F2024%2F12%2F17%2F163919" title="『安全な認証のためにユーザーに使わせるべきは「パスキーも扱えるパスワードマネージャー」である - r-weblife』へのコメント" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe></p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fb.hatena.ne.jp%2Fentry%2Fs%2Fritou.hatenablog.com%2Fentry%2F2024%2F12%2F01%2F000000" title="『パスキー認証の必須化/強制についての現状の課題と改善のための勘所 - r-weblife』へのコメント" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe></p>
+
+<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Ftogetter.com%2Fli%2F2443524" title="嫌われるパスキー" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" loading="lazy"></iframe></p>
+
+<p><blockquote data-conversation="none" class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">&gt; あるユーザーが唯一所持する端末A(または物理的セキュリティキー)にだけパスキーを保存しているとするとこれを破損や盗難などにより喪失すればユーザーは認証情報を失い永遠にログインできなくなる。<br><br>パスキーでも詰むって話。勘違いする人が多いが、詰まない認証方式など存在しない。</p>&mdash; 👹秋田の猫🐱 (@ritou) <a href="https://twitter.com/ritou/status/1869273584939725213?ref_src=twsrc%5Etfw">2024年12月18日</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  </p>
+
+<pre class="code" data-lang="" data-unlink>&gt; あるユーザーが唯一所持する端末A(または物理的セキュリティキー)にだけパスキーを保存しているとするとこれを破損や盗難などにより喪失すればユーザーは認証情報を失い永遠にログインできなくなる。
+
+パスキーでも詰むって話。勘違いする人が多いが、詰まない認証方式など存在しない。</pre>
+
+
+<p>ログインできなくならない認証方式など存在しないという極論に走っているに過ぎない。ユーザーが求めているのはパスワードと同じくらい詰みにくい認証方式である。補足するとここでパスワード認証はメールでのパスワードリセットが当然可能であることを含意しておりパスキーで復旧コードを要求されパスワードリセットを利用できなくなる場合の問題と対比したものである。</p>
+
+<p><blockquote data-conversation="none" class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">&gt; 近年お題目に上がり鼻につくようになったパスワードの廃止や根絶は非現実的な<a class="keyword" href="https://d.hatena.ne.jp/keyword/%A5%A4%A5%C7%A5%AA%A5%ED%A5%AE%A1%BC">イデオロギー</a>と幻想でありIT業界のいつもの見慣れた誇大広告に過ぎない。<br><br>聞いてますか！FIDOアライアンスの皆様！</p>&mdash; 👹秋田の猫🐱 (@ritou) <a href="https://twitter.com/ritou/status/1869273590241403178?ref_src=twsrc%5Etfw">2024年12月18日</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  </p>
+
+<pre class="code" data-lang="" data-unlink>&gt; 近年お題目に上がり鼻につくようになったパスワードの廃止や根絶は非現実的なイデオロギーと幻想でありIT業界のいつもの見慣れた誇大広告に過ぎない。
+
+聞いてますか！FIDOアライアンスの皆様！</pre>
+
+
+<p>聞いたらどうだというのかね。</p>
+
+<p><blockquote data-conversation="none" class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">&gt; 結局不特定多数の個人が対象となる限りどれほどセキュリティを強化してもパスワードを完全になくすことを一般化することはできないのである。<br><br>「パスワードをなくす」ことよりも「世の中を安全にする」ことを目指していきたいですね。</p>&mdash; 👹秋田の猫🐱 (@ritou) <a href="https://twitter.com/ritou/status/1869273592955081089?ref_src=twsrc%5Etfw">2024年12月18日</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  </p>
+
+<pre class="code" data-lang="" data-unlink>&gt; 結局不特定多数の個人が対象となる限りどれほどセキュリティを強化してもパスワードを完全になくすことを一般化することはできないのである。
+
+「パスワードをなくす」ことよりも「世の中を安全にする」ことを目指していきたいですね。</pre>
+
+
+<p>誇大広告を指摘した直後の段落に書かれた文にもかかわらず文脈を考慮せずこのように切り出した解釈しかできないのでは読解力がないと言わねばならない。なぜ「完全になくすこと」が対象にされているのか考えようと思えば明らかであることを読み取れていない。</p>
+
+<p>ところで太字でない部分もコメントしてるのに太字で書いてる<strong>そもそも一般的なユーザーが多数のサービスの多数の復旧コードを適切に管理できるわけがない</strong>という部分にコメントがないのは非常に残念である。</p>
+
+<div hidden>
+マジックリンクを基本としパスワードリセット形式でリセット可能なパスキーに強化可能とする
+</div>
+
+
+    
+    
+
+
+
+
+    
+
+  
+</div>
+
+    
+  <footer class="entry-footer">
+    
+    <div class="entry-tags-wrapper">
+  <div class="entry-tags">  </div>
+</div>
+
+    <p class="entry-footer-section track-inview-by-gtm" data-gtm-track-json="{&quot;area&quot;: &quot;finish_reading&quot;}">
+  <span class="author vcard"><span class="fn" data-load-nickname="1" data-user-name="falsandtru" >falsandtru</span></span>
+  <span class="entry-footer-time"><a href="https://falsandtru.hatenablog.com/entry/essence-of-passkey"><time data-relative datetime="2024-12-18T00:36:07Z" title="2024-12-18T00:36:07Z" class="updated">2024-12-18 09:36</time></a></span>
+  
+  
+  
+    <span class="
+      entry-footer-subscribe
+      
+    " data-test-blog-controlls-subscribe>
+      <a href="https://blog.hatena.ne.jp/falsandtru/falsandtru.hatenablog.com/subscribe?utm_medium=button&amp;utm_source=blogs_entry_footer&amp;utm_campaign=subscribe_blog">
+        読者になる
+      </a>
+    </span>
+  
+</p>
+
+    
+  <div
+    class="hatena-star-container"
+    data-hatena-star-container
+    data-hatena-star-url="https://falsandtru.hatenablog.com/entry/essence-of-passkey"
+    data-hatena-star-title="パスキーの本質"
+    data-hatena-star-variant="profile-icon"
+    data-hatena-star-profile-url-template="https://blog.hatena.ne.jp/{username}/"
+  ></div>
+
+
+    
+<div class="social-buttons">
+  
+  
+    <div class="social-button-item">
+      <a href="https://b.hatena.ne.jp/entry/s/falsandtru.hatenablog.com/entry/essence-of-passkey" class="hatena-bookmark-button" data-hatena-bookmark-url="https://falsandtru.hatenablog.com/entry/essence-of-passkey" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="この記事をはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only.gif" alt="この記事をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    </div>
+  
+  
+    <div class="social-button-item">
+      <div class="fb-share-button" data-layout="box_count" data-href="https://falsandtru.hatenablog.com/entry/essence-of-passkey"></div>
+    </div>
+  
+  
+    
+    
+    <div class="social-button-item">
+      <a
+          class="entry-share-button entry-share-button-twitter test-share-button-twitter"
+          href="https://x.com/intent/tweet?text=%E3%83%91%E3%82%B9%E3%82%AD%E3%83%BC%E3%81%AE%E6%9C%AC%E8%B3%AA+-+falsandtru%E3%81%AE%E3%83%A1%E3%83%A2%E5%B8%B3&amp;url=https%3A%2F%2Ffalsandtru.hatenablog.com%2Fentry%2Fessence-of-passkey"
+          title="X（Twitter）で投稿する"
+        ></a>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>
+
+    
+  
+  
+    
+    <div class="google-afc-image test-google-rectangle-ads">      
+      
+      <div id="google_afc_user_container_0" class="google-afc-user-container google_afc_blocklink2_5 google_afc_boder" data-test-unit="/4374287/blog_user"></div>
+      
+        <a href="http://blog.hatena.ne.jp/guide/pro" class="open-pro-modal" data-guide-pro-modal-ad-url="https://hatena.blog/guide/pro/modal/ad">広告を非表示にする</a>
+      
+    </div>
+  
+  
+
+
+    <div class="customized-footer">
+      
+
+        
+
+          <div class="entry-footer-modules" id="entry-footer-secondary-modules">      
+<div class="hatena-module hatena-module-related-entries" >
+      
+  <!-- Hatena-Epic-has-related-entries-with-elasticsearch:true -->
+  <div class="hatena-module-title">
+    関連記事
+  </div>
+  <div class="hatena-module-body">
+    <ul class="related-entries hatena-urllist urllist-with-thumbnails">
+  
+  
+    
+    <li class="urllist-item related-entries-item">
+      <div class="urllist-item-inner related-entries-item-inner">
+        
+          
+                      <div class="urllist-date-link related-entries-date-link">
+  <a href="https://falsandtru.hatenablog.com/archive/2023/12/02" rel="nofollow">
+    <time datetime="2023-12-01T15:00:00Z" title="2023年12月2日">
+      2023-12-02
+    </time>
+  </a>
+</div>
+
+          <a href="https://falsandtru.hatenablog.com/entry/safe-and-robust-mfa-configuration" class="urllist-title-link related-entries-title-link  urllist-title related-entries-title">安全かつ堅牢なMFA構成</a>
+
+
+          
+          
+
+                      <div class="urllist-entry-body related-entries-entry-body">MFAは安全性のために堅牢性を犠牲にして推進されているため両方…</div>
+      </div>
+    </li>
+  
+    
+    <li class="urllist-item related-entries-item">
+      <div class="urllist-item-inner related-entries-item-inner">
+        
+          
+                      <div class="urllist-date-link related-entries-date-link">
+  <a href="https://falsandtru.hatenablog.com/archive/2022/12/24" rel="nofollow">
+    <time datetime="2022-12-23T15:00:00Z" title="2022年12月24日">
+      2022-12-24
+    </time>
+  </a>
+</div>
+
+          <a href="https://falsandtru.hatenablog.com/entry/difference-between-pjax-and-spa" class="urllist-title-link related-entries-title-link  urllist-title related-entries-title">PjaxとSPAの違い</a>
+
+
+          
+          
+
+                      <div class="urllist-entry-body related-entries-entry-body">PjaxとSPAが全く同じ技術構成なのを知らずにPjaxを過去の技術だ…</div>
+      </div>
+    </li>
+  
+    
+    <li class="urllist-item related-entries-item">
+      <div class="urllist-item-inner related-entries-item-inner">
+        
+          
+                      <div class="urllist-date-link related-entries-date-link">
+  <a href="https://falsandtru.hatenablog.com/archive/2020/04/21" rel="nofollow">
+    <time datetime="2020-04-21T02:25:00Z" title="2020年4月21日">
+      2020-04-21
+    </time>
+  </a>
+</div>
+
+          <a href="https://falsandtru.hatenablog.com/entry/zero-trust-security-concept" class="urllist-title-link related-entries-title-link  urllist-title related-entries-title">ゼロトラストセキュリティの基本概念</a>
+
+
+          
+          
+
+                      <div class="urllist-entry-body related-entries-entry-body">境界防御からゼロトラストセキュリティへの変遷を通してゼロト…</div>
+      </div>
+    </li>
+  
+    
+    <li class="urllist-item related-entries-item">
+      <div class="urllist-item-inner related-entries-item-inner">
+        
+          
+                      <div class="urllist-date-link related-entries-date-link">
+  <a href="https://falsandtru.hatenablog.com/archive/2017/12/02" rel="nofollow">
+    <time datetime="2017-12-02T00:51:58Z" title="2017年12月2日">
+      2017-12-02
+    </time>
+  </a>
+</div>
+
+          <a href="https://falsandtru.hatenablog.com/entry/2017/12/02/095158" class="urllist-title-link related-entries-title-link  urllist-title related-entries-title">ポストjQueryの要件</a>
+
+
+          
+          
+
+                      <div class="urllist-entry-body related-entries-entry-body">jQueryからの脱却が叫ばれる所以はクエリによりカプセル化の境…</div>
+      </div>
+    </li>
+  
+    
+    <li class="urllist-item related-entries-item">
+      <div class="urllist-item-inner related-entries-item-inner">
+        
+          
+                      <div class="urllist-date-link related-entries-date-link">
+  <a href="https://falsandtru.hatenablog.com/archive/2015/06/27" rel="nofollow">
+    <time datetime="2015-06-26T15:00:00Z" title="2015年6月27日">
+      2015-06-27
+    </time>
+  </a>
+</div>
+
+          <a href="https://falsandtru.hatenablog.com/entry/spatial-navigation" class="urllist-title-link related-entries-title-link  urllist-title related-entries-title">空間ナビゲーション vs リンクマップ</a>
+
+
+          
+          
+
+                      <div class="urllist-entry-body related-entries-entry-body">自分が思い描くところの理想に近い空間ナビゲーションを実装し…</div>
+      </div>
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+  </div>
+        
+
+      
+    </div>
+    
+
+  </footer>
+
+  </div>
+</article>
+
+      
+      
+    
+  
+
+  
+  <!-- rakuten_ad_target_end -->
+  <!-- google_ad_section_end -->
+  
+  
+  
+  <div class="pager pager-permalink permalink">
+    
+      
+      <span class="pager-prev">
+        <a href="https://falsandtru.hatenablog.com/entry/passkey-fido-security-and-vulnerability-and-catastrophic-defect" rel="prev">
+          <span class="pager-arrow">&laquo; </span>
+          パスキー(FIDO)の安全性と脆弱性と破滅的…
+        </a>
+      </span>
+    
+    
+      
+      <span class="pager-next">
+        <a href="https://falsandtru.hatenablog.com/entry/acvd-day-after-day-lyrics-japanese-translation" rel="next">
+          ACVD「Day After Day」歌詞和訳
+          <span class="pager-arrow"> &raquo;</span>
+        </a>
+      </span>
+    
+  </div>
+
+
+  
+
+
+
+        </div>
+      </div>
+
+      <aside id="box1">
+  <div id="box1-inner">
+  </div>
+</aside>
+
+    </div><!-- #wrapper -->
+
+    
+<aside id="box2">
+  
+  <div id="box2-inner">
+    
+      
+
+<div class="hatena-module hatena-module-profile">
+  <div class="hatena-module-title">
+    プロフィール
+  </div>
+  <div class="hatena-module-body">
+    
+    <a href="https://falsandtru.hatenablog.com/about" class="profile-icon-link">
+      <img src="https://cdn.profile-image.st-hatena.com/users/falsandtru/profile.png"
+      alt="id:falsandtru" class="profile-icon" />
+    </a>
+    
+
+    
+    <span class="id">
+      <a href="https://falsandtru.hatenablog.com/about" class="hatena-id-link"><span data-load-nickname="1" data-user-name="falsandtru">id:falsandtru</span></a>
+      
+  
+  
+
+
+    </span>
+    
+
+    
+
+    
+
+    
+      <div class="hatena-follow-button-box btn-subscribe js-hatena-follow-button-box"
+  
+  >
+
+  <a href="#" class="hatena-follow-button js-hatena-follow-button">
+    <span class="subscribing">
+      <span class="foreground">読者です</span>
+      <span class="background">読者をやめる</span>
+    </span>
+    <span class="unsubscribing" data-track-name="profile-widget-subscribe-button" data-track-once>
+      <span class="foreground">読者になる</span>
+      <span class="background">読者になる</span>
+    </span>
+  </a>
+  <div class="subscription-count-box js-subscription-count-box">
+    <i></i>
+    <u></u>
+    <span class="subscription-count js-subscription-count">
+    </span>
+  </div>
+</div>
+
+    
+
+    
+
+    <div class="profile-about">
+      <a href="https://falsandtru.hatenablog.com/about">このブログについて</a>
+    </div>
+
+  </div>
+</div>
+
+    
+      <div class="hatena-module hatena-module-search-box">
+  <div class="hatena-module-title">
+    検索
+  </div>
+  <div class="hatena-module-body">
+    <form class="search-form" role="search" action="https://falsandtru.hatenablog.com/search" method="get">
+  <input type="text" name="q" class="search-module-input" value="" placeholder="記事を検索" required>
+  <input type="submit" value="検索" class="search-module-button" />
+</form>
+
+  </div>
+</div>
+
+    
+      <div class="hatena-module hatena-module-links">
+  <div class="hatena-module-title">
+    リンク
+  </div>
+  <div class="hatena-module-body">
+    <ul class="hatena-urllist">
+      
+        <li>
+          <a href="https://hatena.blog/">はてなブログ</a>
+        </li>
+      
+        <li>
+          <a href="https://hatena.blog/guide?via=200109">ブログをはじめる</a>
+        </li>
+      
+        <li>
+          <a href="http://blog.hatenablog.com">週刊はてなブログ</a>
+        </li>
+      
+        <li>
+          <a href="https://hatena.blog/guide/pro">はてなブログPro</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+    
+      <div class="hatena-module hatena-module-recent-entries ">
+  <div class="hatena-module-title">
+    <a href="https://falsandtru.hatenablog.com/archive">
+      最新記事
+    </a>
+  </div>
+  <div class="hatena-module-body">
+    <ul class="recent-entries hatena-urllist ">
+  
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+          
+          
+          <a href="https://falsandtru.hatenablog.com/entry/passkey-fido-security-and-vulnerability-and-catastrophic-defect" class="urllist-title-link recent-entries-title-link  urllist-title recent-entries-title">パスキー(FIDO)の安全性と脆弱性と破滅的欠陥</a>
+
+
+          
+          
+
+                </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+          
+          
+          <a href="https://falsandtru.hatenablog.com/entry/essence-of-passkey" class="urllist-title-link recent-entries-title-link  urllist-title recent-entries-title">パスキーの本質</a>
+
+
+          
+          
+
+                </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+          
+          
+          <a href="https://falsandtru.hatenablog.com/entry/acvd-day-after-day-lyrics-japanese-translation" class="urllist-title-link recent-entries-title-link  urllist-title recent-entries-title">ACVD「Day After Day」歌詞和訳</a>
+
+
+          
+          
+
+                </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+          
+          
+          <a href="https://falsandtru.hatenablog.com/entry/differences-and-comparisons-between-yandere-and-menhera" class="urllist-title-link recent-entries-title-link  urllist-title recent-entries-title">ヤンデレとメンヘラの違いと比較</a>
+
+
+          
+          
+
+                </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+          
+          
+          <a href="https://falsandtru.hatenablog.com/entry/ac6-depopulation" class="urllist-title-link recent-entries-title-link  urllist-title recent-entries-title">アーマードコア6はなぜ人口が激減し過疎化したのか</a>
+
+
+          
+          
+
+                </div>
+    </li>
+  
+</ul>
+
+      </div>
+</div>
+
+    
+      
+
+<div class="hatena-module hatena-module-archive" data-archive-type="default" data-archive-url="https://falsandtru.hatenablog.com/archive">
+  <div class="hatena-module-title">
+    <a href="https://falsandtru.hatenablog.com/archive">月別アーカイブ</a>
+  </div>
+  <div class="hatena-module-body">
+    
+      
+        <ul class="hatena-urllist">
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2025">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2025" class="archive-module-year-title archive-module-year-2025">
+                2025
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2025/12" class="archive-module-month-title archive-module-month-2025-12">
+                      2025 / 12
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2024">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2024" class="archive-module-year-title archive-module-year-2024">
+                2024
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2024/12" class="archive-module-month-title archive-module-month-2024-12">
+                      2024 / 12
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2024/10" class="archive-module-month-title archive-module-month-2024-10">
+                      2024 / 10
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2024/07" class="archive-module-month-title archive-module-month-2024-7">
+                      2024 / 7
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2023">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2023" class="archive-module-year-title archive-module-year-2023">
+                2023
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2023/12" class="archive-module-month-title archive-module-month-2023-12">
+                      2023 / 12
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2023/09" class="archive-module-month-title archive-module-month-2023-9">
+                      2023 / 9
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2022">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2022" class="archive-module-year-title archive-module-year-2022">
+                2022
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2022/12" class="archive-module-month-title archive-module-month-2022-12">
+                      2022 / 12
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2022/02" class="archive-module-month-title archive-module-month-2022-2">
+                      2022 / 2
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2020">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2020" class="archive-module-year-title archive-module-year-2020">
+                2020
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2020/12" class="archive-module-month-title archive-module-month-2020-12">
+                      2020 / 12
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2020/04" class="archive-module-month-title archive-module-month-2020-4">
+                      2020 / 4
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2019">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2019" class="archive-module-year-title archive-module-year-2019">
+                2019
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2019/08" class="archive-module-month-title archive-module-month-2019-8">
+                      2019 / 8
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2018">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2018" class="archive-module-year-title archive-module-year-2018">
+                2018
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2018/12" class="archive-module-month-title archive-module-month-2018-12">
+                      2018 / 12
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2018/02" class="archive-module-month-title archive-module-month-2018-2">
+                      2018 / 2
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2017">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2017" class="archive-module-year-title archive-module-year-2017">
+                2017
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2017/12" class="archive-module-month-title archive-module-month-2017-12">
+                      2017 / 12
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2017/06" class="archive-module-month-title archive-module-month-2017-6">
+                      2017 / 6
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2017/05" class="archive-module-month-title archive-module-month-2017-5">
+                      2017 / 5
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2017/01" class="archive-module-month-title archive-module-month-2017-1">
+                      2017 / 1
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2016">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2016" class="archive-module-year-title archive-module-year-2016">
+                2016
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2016/05" class="archive-module-month-title archive-module-month-2016-5">
+                      2016 / 5
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2016/01" class="archive-module-month-title archive-module-month-2016-1">
+                      2016 / 1
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2015">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2015" class="archive-module-year-title archive-module-year-2015">
+                2015
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2015/12" class="archive-module-month-title archive-module-month-2015-12">
+                      2015 / 12
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2015/11" class="archive-module-month-title archive-module-month-2015-11">
+                      2015 / 11
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2015/06" class="archive-module-month-title archive-module-month-2015-6">
+                      2015 / 6
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2015/05" class="archive-module-month-title archive-module-month-2015-5">
+                      2015 / 5
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="archive-module-year archive-module-year-hidden" data-year="2014">
+              <div class="archive-module-button">
+                <span class="archive-module-hide-button">▼</span>
+                <span class="archive-module-show-button">▶</span>
+              </div>
+              <a href="https://falsandtru.hatenablog.com/archive/2014" class="archive-module-year-title archive-module-year-2014">
+                2014
+              </a>
+              <ul class="archive-module-months">
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2014/11" class="archive-module-month-title archive-module-month-2014-11">
+                      2014 / 11
+                    </a>
+                  </li>
+                
+                  <li class="archive-module-month">
+                    <a href="https://falsandtru.hatenablog.com/archive/2014/07" class="archive-module-month-title archive-module-month-2014-7">
+                      2014 / 7
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    
+    
+  </div>
+</aside>
+
+
+  </div>
+</div>
+
+
+
+
+      
+
+      
+
+    </div>
+  </div>
+  
+<footer id="footer" data-brand="hatenablog">
+  <div id="footer-inner">
+    
+      <div style="display:none !important" class="guest-footer js-guide-register test-blogs-register-guide" data-action="guide-register">
+  <div class="guest-footer-content">
+    <h3>はてなブログをはじめよう！</h3>
+    <p>falsandtruさんは、はてなブログを使っています。あなたもはてなブログをはじめてみませんか？</p>
+    <div class="guest-footer-btn-container">
+      <div  class="guest-footer-btn">
+        <a class="btn btn-register js-inherit-ga" href="https://blog.hatena.ne.jp/register?via=200227" target="_blank">はてなブログをはじめる（無料）</a>
+      </div>
+      <div  class="guest-footer-btn">
+        <a href="https://hatena.blog/guide" target="_blank">はてなブログとは</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <address class="footer-address">
+      <a href="https://falsandtru.hatenablog.com/">
+        <img src="https://cdn.blog.st-hatena.com/images/admin/blog-icon-noimage.png" width="16" height="16" alt="falsandtruのメモ帳"/>
+        <span class="footer-address-name">falsandtruのメモ帳</span>
+      </a>
+    </address>
+    <p class="services">
+      Powered by <a href="https://hatena.blog/">Hatena Blog</a>
+      |
+        <a href="https://blog.hatena.ne.jp/-/abuse_report?target_url=https%3A%2F%2Ffalsandtru.hatenablog.com%2Fentry%2Fessence-of-passkey" class="report-abuse-link test-report-abuse-link" target="_blank">ブログを報告する</a>
+    </p>
+  </div>
+</footer>
+
+
+  
+  <script async src="https://s.hatena.ne.jp/js/widget/star.js"></script>
+  
+  
+  <script>
+    if (typeof window.Hatena === 'undefined') {
+      window.Hatena = {};
+    }
+    if (!Hatena.hasOwnProperty('Star')) {
+      Hatena.Star = {
+        VERSION: 2,
+      };
+    }
+  </script>
+
+
+  
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&appId=719729204785177&version=v17.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+  
+  
+
+<div class="quote-box">
+  <div class="tooltip-quote tooltip-quote-stock">
+    <i class="blogicon-quote" title="引用をストック"></i>
+  </div>
+  <div class="tooltip-quote tooltip-quote-tweet js-tooltip-quote-tweet">
+    <a class="js-tweet-quote" target="_blank" data-track-name="quote-tweet" data-track-once>
+      <img src="https://cdn.blog.st-hatena.com/images/admin/quote/quote-x-icon.svg?version=717f38a22c2f972093f0ce2f8d1821" title="引用して投稿する" >
+    </a>
+  </div>
+</div>
+
+<div class="quote-stock-panel" id="quote-stock-message-box" style="position: absolute; z-index: 3000">
+  <div class="message-box" id="quote-stock-succeeded-message" style="display: none">
+    <p>引用をストックしました</p>
+    <button class="btn btn-primary" id="quote-stock-show-editor-button" data-track-name="curation-quote-edit-button">ストック一覧を見る</button>
+    <button class="btn quote-stock-close-message-button">閉じる</button>
+  </div>
+
+  <div class="message-box" id="quote-login-required-message" style="display: none">
+    <p>引用するにはまずログインしてください</p>
+    <button class="btn btn-primary" id="quote-login-button">ログイン</button>
+    <button class="btn quote-stock-close-message-button">閉じる</button>
+  </div>
+
+  <div class="error-box" id="quote-stock-failed-message" style="display: none">
+    <p>引用をストックできませんでした。再度お試しください</p>
+    <button class="btn quote-stock-close-message-button">閉じる</button>
+  </div>
+
+  <div class="error-box" id="unstockable-quote-message-box" style="display: none; position: absolute; z-index: 3000;">
+    <p>限定公開記事のため引用できません。</p>
+  </div>
+</div>
+
+<script type="x-underscore-template" id="js-requote-button-template">
+  <div class="requote-button js-requote-button">
+    <button class="requote-button-btn tipsy-top" title="引用する"><i class="blogicon-quote"></i></button>
+  </div>
+</script>
+
+
+
+  
+  <div id="hidden-subscribe-button" style="display: none;">
+    <div class="hatena-follow-button-box btn-subscribe js-hatena-follow-button-box"
+  
+  >
+
+  <a href="#" class="hatena-follow-button js-hatena-follow-button">
+    <span class="subscribing">
+      <span class="foreground">読者です</span>
+      <span class="background">読者をやめる</span>
+    </span>
+    <span class="unsubscribing" data-track-name="profile-widget-subscribe-button" data-track-once>
+      <span class="foreground">読者になる</span>
+      <span class="background">読者になる</span>
+    </span>
+  </a>
+  <div class="subscription-count-box js-subscription-count-box">
+    <i></i>
+    <u></u>
+    <span class="subscription-count js-subscription-count">
+    </span>
+  </div>
+</div>
+
+  </div>
+
+  
+
+
+
+    
+
+
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+<script type="text/javascript" src="https://cdn.blog.st-hatena.com/js/external/jquery.min.js?v=1.12.4&amp;version=717f38a22c2f972093f0ce2f8d1821"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.blog.st-hatena.com/js/texts-ja.js?version=717f38a22c2f972093f0ce2f8d1821"></script>
+
+
+
+  <script id="vendors-js" data-env="production" src="https://cdn.blog.st-hatena.com/js/vendors.js?version=717f38a22c2f972093f0ce2f8d1821" crossorigin="anonymous"></script>
+
+<script id="hatenablog-js" data-env="production" src="https://cdn.blog.st-hatena.com/js/hatenablog.js?version=717f38a22c2f972093f0ce2f8d1821" crossorigin="anonymous" data-page-id="entry"></script>
+
+
+  <script>Hatena.Diary.GlobalHeader.init()</script>
+
+
+
+
+
+
+
+    
+  <script id="valve-dmp" data-service="blog" src="https://cdn.pool.st-hatena.com/valve/dmp.js" data-test-id="dmpjs" async></script>
+
+
+    
+
+
+
+
+
+  </body>
+</html>
+
