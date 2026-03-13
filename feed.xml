@@ -1,4 +1,157 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2025-12-11T01:36:56+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">老害からのひとこと</title><link href="https://blog.katsyoshi.org/blog/2025/12/01/most-frequent-regular-at-yancya-house/" rel="alternate" type="text/html" title="老害からのひとこと" /><published>2025-12-01T00:00:00+09:00</published><updated>2025-12-01T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/12/01/most-frequent-regular-at-yancya-house</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/12/01/most-frequent-regular-at-yancya-house/"><![CDATA[<p><a href="https://adventar.org/calendars/11975">やんちゃハウス Advent Calendar 2025</a> 1日目の記事となります。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-03-14T02:49:16+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Ruby::Boxを使っただけなのに</title><link href="http://localhost:4000/blog/2026/03/13/how-to-use-ruby-box/" rel="alternate" type="text/html" title="Ruby::Boxを使っただけなのに" /><published>2026-03-13T20:55:22+09:00</published><updated>2026-03-13T20:55:22+09:00</updated><id>http://localhost:4000/blog/2026/03/13/how-to-use-ruby-box</id><content type="html" xml:base="http://localhost:4000/blog/2026/03/13/how-to-use-ruby-box/"><![CDATA[<p><a href="https://www.ruby-lang.org/ja/news/2025/12/25/ruby-4-0-0-released/">ruby-4.0</a> 出ましたね。</p>
+
+<p>待望の新機能、 <a href="https://docs.ruby-lang.org/en/master/Ruby/Box.html"><code class="language-plaintext highlighter-rouge">Ruby::Box</code></a> を使っていますか？
+個人プロジェクトで利用しているのでその利用方法について書いていきますよ。</p>
+
+<h2 id="testで安全にffifiddleを使いたい">Testで安全にFFI(fiddle)を使いたい!!!!</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Ruby::Box</code> はかつて <code class="language-plaintext highlighter-rouge">Namespace</code> と呼ばれていたものです。ということは <em>コンパイラー</em> 書いてる人にとってテストが安全にできるじゃないですか。
+コンパイラーで生成したバイナリを安全に分離できるじゃないですか。
+<em>テスト</em> 向けのロード用ファイルを作ります。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"fiddle/import"</span>
+
+<span class="k">module</span> <span class="nn">Fibonacci</span>
+  <span class="kp">extend</span> <span class="no">Fiddle</span><span class="o">::</span><span class="no">Importer</span>
+  <span class="n">dlload</span> <span class="s2">"./libhoge.so"</span>
+  <span class="n">extern</span> <span class="s2">"int fibo(int)"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>テスト側では以下のようにしますね。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"test/unit"</span>
+<span class="k">class</span> <span class="nc">TestFibo</span> <span class="o">&lt;</span> <span class="no">Test</span><span class="o">::</span><span class="no">Unit</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="k">def</span> <span class="nf">test_load_fiddle</span>
+    <span class="n">omit</span><span class="p">(</span><span class="s1">'"Ruby::Box" needs RUBY_BOX=1'</span><span class="p">)</span> <span class="k">unless</span> <span class="no">ENV</span><span class="p">[</span><span class="s2">"RUBY_BOX"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"1"</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="no">Ruby</span><span class="o">::</span><span class="no">Box</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">box</span><span class="p">.</span><span class="nf">require</span> <span class="s2">"./load_so"</span>
+    <span class="n">assert_equal</span><span class="p">(</span><span class="n">box</span><span class="o">::</span><span class="no">Fibonacci</span><span class="p">.</span><span class="nf">fibo</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">55</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>では実行してみましょう</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ RUBY_BOX</span><span class="o">=</span>1 ruby test_fibo.rb
+ruby: warning: Ruby::Box is experimental, and the behavior may change <span class="k">in </span>the future!
+See https://docs.ruby-lang.org/en/4.0/Ruby/Box.html <span class="k">for </span>known issues, etc.
+Loaded suite test_fibo
+Started
+Finished <span class="k">in </span>0.007523671 seconds.
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
+100% passed
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+132.91 tests/s, 132.91 assertions/s
+</code></pre></div></div>
+
+<p>テスト通りましたね!やった!!便利!!!
+<code class="language-plaintext highlighter-rouge">Ruby::Box</code> つかうには <code class="language-plaintext highlighter-rouge">RUBY_BOX=1</code> が必要ですね。なので無い場合のガードとして <code class="language-plaintext highlighter-rouge">omit...</code> を入れています。
+この確認もしますかね。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ruby test_fibo.rb
+Loaded suite test_fibo
+Started
+O
+<span class="o">===============================================================================================</span>
+Omission: <span class="s2">"Ruby::Box"</span> needs <span class="nv">RUBY_BOX</span><span class="o">=</span>1 <span class="o">[</span>test_load_fiddle<span class="o">(</span>TestFibo<span class="o">)]</span>
+test_fibo.rb:5:in <span class="s1">'TestFibo#test_load_fiddle'</span>
+<span class="o">===============================================================================================</span>
+Finished <span class="k">in </span>0.000660511 seconds.
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1 tests, 0 assertions, 0 failures, 0 errors, 0 pendings, 1 omissions, 0 notifications
+0% passed
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1513.98 tests/s, 0.00 assertions/s
+</code></pre></div></div>
+
+<p>そうしたら <code class="language-plaintext highlighter-rouge">omit</code> しないようにしますかね</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ruby test_fibo.rb
+Loaded suite test_fibo
+Started
+E
+<span class="o">===============================================================================================</span>
+Error: test_load_fiddle<span class="o">(</span>TestFibo<span class="o">)</span>: RuntimeError: Ruby Box is disabled. Set <span class="nv">RUBY_BOX</span><span class="o">=</span>1 environment variable to use Ruby::Box.
+test_fibo.rb:5:in <span class="s1">'Ruby::Box#initialize'</span>
+test_fibo.rb:5:in <span class="s1">'Class#new'</span>
+test_fibo.rb:5:in <span class="s1">'TestFibo#test_load_fiddle'</span>
+     2:
+     3: class TestFibo &lt; Test::Unit::TestCase
+     4:   def test_load_fiddle
+  <span class="o">=&gt;</span> 5:     box <span class="o">=</span> Ruby::Box.new
+     6:     box.require <span class="s2">"./load_so"</span>
+     7:     assert_equal 55, box::Fibonacci.fibo<span class="o">(</span>10<span class="o">)</span>
+     8:   end
+<span class="o">===============================================================================================</span>
+Finished <span class="k">in </span>0.000693731 seconds.
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1 tests, 0 assertions, 0 failures, 1 errors, 0 pendings, 0 omissions, 0 notifications
+0% passed
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1441.48 tests/s, 0.00 assertions/s
+</code></pre></div></div>
+
+<p>とこのようになりますね。<code class="language-plaintext highlighter-rouge">omit</code> 入れることで <code class="language-plaintext highlighter-rouge">error</code> にならなくなりますね。便利!!!!
+ということで <code class="language-plaintext highlighter-rouge">Ruby::Box</code> の便利な面をみてきました。こうやって安全に利用できるようになりましたね。</p>
+
+<h2 id="rubyboxでネームスペースを区切ろう">Ruby::Boxでネームスペースを区切ろう</h2>
+
+<p>コンパイラーつくってると生成したバイナリをロードして読み込みたいんですよ。
+でもテストはプロセス1つじゃないですか？
+<code class="language-plaintext highlighter-rouge">libbinA.so</code> と <code class="language-plaintext highlighter-rouge">libbinB.so</code> を同時に読みたいということはとくになく、
+<code class="language-plaintext highlighter-rouge">libbinA.so</code> は一つで読みとりたい。
+<code class="language-plaintext highlighter-rouge">libbinB.so</code> も <code class="language-plaintext highlighter-rouge">libbinA.so</code> とは別に読みとりたいことがあるじゃないですか。
+このとき、 <code class="language-plaintext highlighter-rouge">Ruby::Box</code> でそれぞれ読めばいいとおもうじゃん？ということでやってみますね。
+といってもいきなり分けてやるよりもどうせネームスペースがわかれるので同じファイルで実験してみましょう。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"test/unit"</span>
+<span class="k">class</span> <span class="nc">TestFibo</span> <span class="o">&lt;</span> <span class="no">Test</span><span class="o">::</span><span class="no">Unit</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="k">def</span> <span class="nf">test_load_fiddle</span>
+    <span class="n">omit</span><span class="p">(</span><span class="s1">'"Ruby::Box" needs RUBY_BOX=1'</span><span class="p">)</span> <span class="k">unless</span> <span class="no">ENV</span><span class="p">[</span><span class="s2">"RUBY_BOX"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"1"</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="no">Ruby</span><span class="o">::</span><span class="no">Box</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">box</span><span class="p">.</span><span class="nf">require</span> <span class="s2">"./load_so"</span>
+    <span class="n">assert_equal</span><span class="p">(</span><span class="n">box</span><span class="o">::</span><span class="no">Fibonacci</span><span class="p">.</span><span class="nf">fibo</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">55</span><span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">test_load_fiddle_2</span>
+    <span class="n">omit</span><span class="p">(</span><span class="s1">'"Ruby::Box" needs RUBY_BOX=1'</span><span class="p">)</span> <span class="k">unless</span> <span class="no">ENV</span><span class="p">[</span><span class="s2">"RUBY_BOX"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"1"</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="no">Ruby</span><span class="o">::</span><span class="no">Box</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">box</span><span class="p">.</span><span class="nf">require</span> <span class="s2">"./load_so"</span>
+    <span class="n">assert_equal</span><span class="p">(</span><span class="n">box</span><span class="o">::</span><span class="no">Fibonacci</span><span class="p">.</span><span class="nf">fibo</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">55</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>実行〜〜</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ RUBY_BOX</span><span class="o">=</span>1 ruby test_fibo.rb
+ruby: warning: Ruby::Box is experimental, and the behavior may change <span class="k">in </span>the future!
+See https://docs.ruby-lang.org/en/4.0/Ruby/Box.html <span class="k">for </span>known issues, etc.
+Loaded suite test_fibo
+Started
+E
+<span class="o">===============================================================================================</span>
+Error: test_load_fiddle_2<span class="o">(</span>TestFibo<span class="o">)</span>
+<span class="o">===============================================================================================</span>
+Error: test_load_fiddle_2<span class="o">(</span>TestFibo<span class="o">)</span>Finished <span class="k">in </span>0.011718944 seconds.
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1 tests, 1 assertions, 0 failures, 2 errors, 0 pendings, 0 omissions, 0 notifications
+100% passed
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+</code></pre></div></div>
+
+<p><strong>WTF</strong> 落ちるなんで!!!？？？？よくみたら <code class="language-plaintext highlighter-rouge">2 errors</code> なのに <code class="language-plaintext highlighter-rouge">100% passed</code> ってなんぞ!？
+そもそも表示も崩壊してんじゃねーか。
+ということでエラー内容みますかね。</p>
+
+<pre><code class="language-log">load_so.rb:1:in 'Kernel#require': cannot load such file -- fiddle/import (LoadError)
+</code></pre>
+
+<p><strong>WTF</strong> 標準ライブラリーが見えねえってどういうことだよ!!!</p>
+
+<p>これから真相を探るため <code class="language-plaintext highlighter-rouge">Ruby::Box</code> を探す旅がはじまります。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><category term="ruby" /><category term="ruby::box" /><summary type="html"><![CDATA[ruby-4.0 出ましたね。]]></summary></entry><entry><title type="html">老害からのひとこと</title><link href="http://localhost:4000/blog/2025/12/01/most-frequent-regular-at-yancya-house/" rel="alternate" type="text/html" title="老害からのひとこと" /><published>2025-12-01T00:00:00+09:00</published><updated>2025-12-01T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/12/01/most-frequent-regular-at-yancya-house</id><content type="html" xml:base="http://localhost:4000/blog/2025/12/01/most-frequent-regular-at-yancya-house/"><![CDATA[<p><a href="https://adventar.org/calendars/11975">やんちゃハウス Advent Calendar 2025</a> 1日目の記事となります。</p>
 
 <h2 id="やんちゃハウスとは"><a href="https://yancya.house">やんちゃハウス</a>とは？</h2>
 
@@ -82,7 +235,7 @@ PCはRubyKaigiのセッション内容の復習とかであるといいとおも
 <h2 id="まとめ">まとめ</h2>
 
 <p>主催者以外で自称最多参加のおじさんからのやんちゃハウス参加への心得を書いてみました。
-来年の函館やんちゃハウスも参加予定ですのでよろしくおねがいします。</p>]]></content><author><name></name></author><category term="diary" /><category term="rubykaigi" /><category term="regional-rubykaigi" /><category term="yancya-house" /><summary type="html"><![CDATA[やんちゃハウス Advent Calendar 2025 1日目の記事となります。]]></summary></entry><entry><title type="html">身分証明書を引き出すための方法</title><link href="https://blog.katsyoshi.org/blog/2025/08/14/bootstrap-self-idfication-in-japan/" rel="alternate" type="text/html" title="身分証明書を引き出すための方法" /><published>2025-08-14T00:00:00+09:00</published><updated>2025-08-14T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/08/14/bootstrap-self-idfication-in-japan</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/08/14/bootstrap-self-idfication-in-japan/"><![CDATA[<p>去る 2025/08/03 14:00 ごろに財布を紛失したのでやったことをまとめます。</p>
+来年の函館やんちゃハウスも参加予定ですのでよろしくおねがいします。</p>]]></content><author><name></name></author><category term="diary" /><category term="rubykaigi" /><category term="regional-rubykaigi" /><category term="yancya-house" /><summary type="html"><![CDATA[やんちゃハウス Advent Calendar 2025 1日目の記事となります。]]></summary></entry><entry><title type="html">身分証明書を引き出すための方法</title><link href="http://localhost:4000/blog/2025/08/14/bootstrap-self-idfication-in-japan/" rel="alternate" type="text/html" title="身分証明書を引き出すための方法" /><published>2025-08-14T00:00:00+09:00</published><updated>2025-08-14T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/08/14/bootstrap-self-idfication-in-japan</id><content type="html" xml:base="http://localhost:4000/blog/2025/08/14/bootstrap-self-idfication-in-japan/"><![CDATA[<p>去る 2025/08/03 14:00 ごろに財布を紛失したのでやったことをまとめます。</p>
 
 <h2 id="財布紛失">財布紛失</h2>
 
@@ -200,7 +353,7 @@ PCはRubyKaigiのセッション内容の復習とかであるといいとおも
       <p>見つけた場所の近所の警察で良いとおもうけど、ついでだったので管轄の警察署にした。 <a href="#fnref:police" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="dialy" /><summary type="html"><![CDATA[去る 2025/08/03 14:00 ごろに財布を紛失したのでやったことをまとめます。]]></summary></entry><entry><title type="html">Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した</title><link href="https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo/" rel="alternate" type="text/html" title="Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した" /><published>2025-05-31T23:59:59+09:00</published><updated>2025-05-31T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/05/31/im-happy-to-binary-in-gentoo/"><![CDATA[<p>[<strong>Gentoo Linux</strong>] でバイナリが公式配っていたのを<a href="https://pong.ursm.jp/posts/4">発見</a>したので、
+</div>]]></content><author><name></name></author><category term="dialy" /><summary type="html"><![CDATA[去る 2025/08/03 14:00 ごろに財布を紛失したのでやったことをまとめます。]]></summary></entry><entry><title type="html">Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した</title><link href="http://localhost:4000/blog/2025/05/31/im-happy-to-binary-in-gentoo/" rel="alternate" type="text/html" title="Gentoo のバイナリ配布公式レポを発見したので対応してみたら大失敗した" /><published>2025-05-31T23:59:59+09:00</published><updated>2025-05-31T23:59:59+09:00</updated><id>http://localhost:4000/blog/2025/05/31/im-happy-to-binary-in-gentoo</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/31/im-happy-to-binary-in-gentoo/"><![CDATA[<p>[<strong>Gentoo Linux</strong>] でバイナリが公式配っていたのを<a href="https://pong.ursm.jp/posts/4">発見</a>したので、
 <a href="https://gist.github.com/katsyoshi/3d28b9609b7d395826ed93dd8288f0a9">退役したデスクトップ</a>をサーバー用途として利用してみます。</p>
 
 <h2 id="設定">設定</h2>
@@ -254,7 +407,7 @@ emerge zsh
 <p>バイナリの配布リポジトリを設定できるのは薄々知ってはいたのですが、
 動いているのを変更するの面倒だったので今回替えてみました。
 カーネルもバイナリでインストールできるようになったので便利になりました(たぶん)。
-あとうかつに <code class="language-plaintext highlighter-rouge">emerge --depclean</code> はするもんじゃない。</p>]]></content><author><name></name></author><category term="diary" /><category term="gentoo" /><category term="tech" /><summary type="html"><![CDATA[[Gentoo Linux] でバイナリが公式配っていたのを発見したので、 退役したデスクトップをサーバー用途として利用してみます。]]></summary></entry><entry><title type="html">RubyKaigi 2025 at Matz-yama</title><link href="https://blog.katsyoshi.org/blog/2025/04/25/went-to-rubykaigi-2025/" rel="alternate" type="text/html" title="RubyKaigi 2025 at Matz-yama" /><published>2025-04-25T23:00:00+09:00</published><updated>2025-04-25T23:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/04/25/went-to-rubykaigi-2025</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/04/25/went-to-rubykaigi-2025/"><![CDATA[<p>今年も <a href="https://rubykaigi.org/2025">RubyKaigi 2025</a> に行ってきました。</p>
+あとうかつに <code class="language-plaintext highlighter-rouge">emerge --depclean</code> はするもんじゃない。</p>]]></content><author><name></name></author><category term="diary" /><category term="gentoo" /><category term="tech" /><summary type="html"><![CDATA[[Gentoo Linux] でバイナリが公式配っていたのを発見したので、 退役したデスクトップをサーバー用途として利用してみます。]]></summary></entry><entry><title type="html">RubyKaigi 2025 at Matz-yama</title><link href="http://localhost:4000/blog/2025/04/25/went-to-rubykaigi-2025/" rel="alternate" type="text/html" title="RubyKaigi 2025 at Matz-yama" /><published>2025-04-25T23:00:00+09:00</published><updated>2025-04-25T23:00:00+09:00</updated><id>http://localhost:4000/blog/2025/04/25/went-to-rubykaigi-2025</id><content type="html" xml:base="http://localhost:4000/blog/2025/04/25/went-to-rubykaigi-2025/"><![CDATA[<p>今年も <a href="https://rubykaigi.org/2025">RubyKaigi 2025</a> に行ってきました。</p>
 
 <p>今年みたセッション一覧を日毎に。</p>
 
@@ -322,7 +475,7 @@ emerge zsh
 <h2 id="おわり">おわり</h2>
 
 <p>おそくなったけど、一旦聞いたセッションをまとめてみました。来年は函館で東京から電車一本で行けるので楽そうですね。
-おわり。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><category term="rubykaigi" /><summary type="html"><![CDATA[今年も RubyKaigi 2025 に行ってきました。]]></summary></entry><entry><title type="html">Hello, ZOLA を失敗した話</title><link href="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/" rel="alternate" type="text/html" title="Hello, ZOLA を失敗した話" /><published>2025-04-12T00:00:00+09:00</published><updated>2025-04-12T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2025/04/12/failed-hello-zola/"><![CDATA[<p>HELLO, <a href="https://www.getzola.org"><code class="language-plaintext highlighter-rouge">ZOLA</code></a> World!!!!! としたかったけど、
+おわり。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><category term="rubykaigi" /><summary type="html"><![CDATA[今年も RubyKaigi 2025 に行ってきました。]]></summary></entry><entry><title type="html">Hello, ZOLA を失敗した話</title><link href="http://localhost:4000/blog/2025/04/12/failed-hello-zola/" rel="alternate" type="text/html" title="Hello, ZOLA を失敗した話" /><published>2025-04-12T00:00:00+09:00</published><updated>2025-04-12T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/04/12/failed-hello-zola</id><content type="html" xml:base="http://localhost:4000/blog/2025/04/12/failed-hello-zola/"><![CDATA[<p>HELLO, <a href="https://www.getzola.org"><code class="language-plaintext highlighter-rouge">ZOLA</code></a> World!!!!! としたかったけど、
 移行が面倒すぎたので諦めた話。
 以下は作業ログです。一応終りは見えたけど、</p>
 
@@ -431,7 +584,7 @@ emerge zsh
       <p><strong>Jekyll</strong> は依存解決とかあって最新の <a href="https://www.ruby-lang.org">Ruby</a> が使えなかったりしたのでストレスたかかった <a href="#fnref:binary" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name></name></author><category term="tech" /><category term="dialy" /><category term="rust" /><summary type="html"><![CDATA[HELLO, ZOLA World!!!!! としたかったけど、 移行が面倒すぎたので諦めた話。 以下は作業ログです。一応終りは見えたけど、]]></summary></entry><entry><title type="html">KaigiOnRails 2024 に行ってきました</title><link href="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/" rel="alternate" type="text/html" title="KaigiOnRails 2024 に行ってきました" /><published>2024-10-27T11:09:14+09:00</published><updated>2024-10-27T11:09:14+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/10/27/kaigi-on-rails-2024/"><![CDATA[<p><a href="https://kaigionrails.org/2024">Kaigi on Rails 2024</a> にはじめて現地参加しました。</p>
+</div>]]></content><author><name></name></author><category term="tech" /><category term="dialy" /><category term="rust" /><summary type="html"><![CDATA[HELLO, ZOLA World!!!!! としたかったけど、 移行が面倒すぎたので諦めた話。 以下は作業ログです。一応終りは見えたけど、]]></summary></entry><entry><title type="html">KaigiOnRails 2024 に行ってきました</title><link href="http://localhost:4000/blog/2024/10/27/kaigi-on-rails-2024/" rel="alternate" type="text/html" title="KaigiOnRails 2024 に行ってきました" /><published>2024-10-27T11:09:14+09:00</published><updated>2024-10-27T11:09:14+09:00</updated><id>http://localhost:4000/blog/2024/10/27/kaigi-on-rails-2024</id><content type="html" xml:base="http://localhost:4000/blog/2024/10/27/kaigi-on-rails-2024/"><![CDATA[<p><a href="https://kaigionrails.org/2024">Kaigi on Rails 2024</a> にはじめて現地参加しました。</p>
 
 <h2 id="day-1">day 1</h2>
 
@@ -500,7 +653,7 @@ emerge zsh
 
 <h2 id="おわり">おわり</h2>
 
-<p>たのしい二日間でした。ありがとうございました。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><category term="conference" /><summary type="html"><![CDATA[Kaigi on Rails 2024 にはじめて現地参加しました。]]></summary></entry><entry><title type="html">今日、私が学んだこと</title><link href="https://blog.katsyoshi.org/blog/2024/05/30/til/" rel="alternate" type="text/html" title="今日、私が学んだこと" /><published>2024-05-30T23:59:59+09:00</published><updated>2024-05-30T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/30/til</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/30/til/"><![CDATA[<p>ここ1年ほど <strong>Ruby</strong> のパーサーがもりあがっているので、
+<p>たのしい二日間でした。ありがとうございました。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><category term="conference" /><summary type="html"><![CDATA[Kaigi on Rails 2024 にはじめて現地参加しました。]]></summary></entry><entry><title type="html">今日、私が学んだこと</title><link href="http://localhost:4000/blog/2024/05/30/til/" rel="alternate" type="text/html" title="今日、私が学んだこと" /><published>2024-05-30T23:59:59+09:00</published><updated>2024-05-30T23:59:59+09:00</updated><id>http://localhost:4000/blog/2024/05/30/til</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/30/til/"><![CDATA[<p>ここ1年ほど <strong>Ruby</strong> のパーサーがもりあがっているので、
 <a href="https://github.com/ruby/lrama"><strong>lrama</strong></a> の作者を講師にした
 通称<strong>ドラゴンブック</strong>の「<a href="https://www.saiensu.co.jp/search/?isbn=978-4-7819-1229-5&amp;y=2009">コンパイラ</a>」読書会
 に参加しています。</p>
@@ -572,7 +725,7 @@ Error: unexpected token: "="
 </code></pre></div></div>
 
 <p>まあわかるような木構造になってますね。
-それはそうとパーサーどうなってるんですかねえという話でおわり。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[ここ1年ほど Ruby のパーサーがもりあがっているので、 lrama の作者を講師にした 通称ドラゴンブックの「コンパイラ」読書会 に参加しています。]]></summary></entry><entry><title type="html">Ruby を KOMPO してみた</title><link href="https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/" rel="alternate" type="text/html" title="Ruby を KOMPO してみた" /><published>2024-05-29T23:59:59+09:00</published><updated>2024-05-29T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/29/startup-kompo/"><![CDATA[<p><strong>RubyKaigi2024</strong> の発表、<a href="https://speakerdeck.com/ahogappa0613/its-about-time-to-pack-ruby-and-ruby-scripts-in-one-binary"><strong>It’s about time to pack Ruby and Ruby scripts in one binary</strong></a>
+それはそうとパーサーどうなってるんですかねえという話でおわり。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[ここ1年ほど Ruby のパーサーがもりあがっているので、 lrama の作者を講師にした 通称ドラゴンブックの「コンパイラ」読書会 に参加しています。]]></summary></entry><entry><title type="html">Ruby を KOMPO してみた</title><link href="http://localhost:4000/blog/2024/05/29/startup-kompo/" rel="alternate" type="text/html" title="Ruby を KOMPO してみた" /><published>2024-05-29T23:59:59+09:00</published><updated>2024-05-29T23:59:59+09:00</updated><id>http://localhost:4000/blog/2024/05/29/startup-kompo</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/29/startup-kompo/"><![CDATA[<p><strong>RubyKaigi2024</strong> の発表、<a href="https://speakerdeck.com/ahogappa0613/its-about-time-to-pack-ruby-and-ruby-scripts-in-one-binary"><strong>It’s about time to pack Ruby and Ruby scripts in one binary</strong></a>
 で話されていた <a href="https://rubygems.org/gems/kompo"><strong>kompo</strong></a> を試してみた。</p>
 
 <h2 id="じゅんびというかとらしゅーというかうごかすまでのきろく">じゅんびというかとらしゅーというかうごかすまでのきろく</h2>
@@ -682,7 +835,7 @@ hello, world
 <h2 id="まとめ">まとめ</h2>
 
 <p><strong>kompo</strong> を動かしてみました。
-コンパイルに時間がかかりますが、これで <strong>Ruby</strong> のプログラムを簡単に配ることができそうですね。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[RubyKaigi2024 の発表、It’s about time to pack Ruby and Ruby scripts in one binary で話されていた kompo を試してみた。]]></summary></entry><entry><title type="html">最果ての沖縄に行ってきた</title><link href="https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa/" rel="alternate" type="text/html" title="最果ての沖縄に行ってきた" /><published>2024-05-18T23:59:59+09:00</published><updated>2024-05-18T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/18/trip-saihate-okinawa/"><![CDATA[<p><a href="https://rubykaigi.org/2024"><strong>RubyKaigi2024</strong></a> の翌日 2024-05-18 から五日間 2024-05-22 まで
+コンパイルに時間がかかりますが、これで <strong>Ruby</strong> のプログラムを簡単に配ることができそうですね。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[RubyKaigi2024 の発表、It’s about time to pack Ruby and Ruby scripts in one binary で話されていた kompo を試してみた。]]></summary></entry><entry><title type="html">最果ての沖縄に行ってきた</title><link href="http://localhost:4000/blog/2024/05/18/trip-saihate-okinawa/" rel="alternate" type="text/html" title="最果ての沖縄に行ってきた" /><published>2024-05-18T23:59:59+09:00</published><updated>2024-05-18T23:59:59+09:00</updated><id>http://localhost:4000/blog/2024/05/18/trip-saihate-okinawa</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/18/trip-saihate-okinawa/"><![CDATA[<p><a href="https://rubykaigi.org/2024"><strong>RubyKaigi2024</strong></a> の翌日 2024-05-18 から五日間 2024-05-22 まで
 <a href="http://www.vill.kunigami.okinawa.jp/">沖縄県国頭郡国頭村</a>辺戸に滞在したはなし。</p>
 
 <h2 id="1-日目">1 日目</h2>
@@ -790,162 +943,4 @@ hello, world
 <img src="/images/photo/hedo-king-machi-king-tacos.webp" alt="" />
 見た目どおり大きく、これは失敗したなと感じましたね。チーズの味が強く大変好みの味でした。
 本店の金武店から空港は遠いのでここで空港に向った。
-この旅はここで終わり。東京もどってビール飲んで寝た。</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[RubyKaigi2024 の翌日 2024-05-18 から五日間 2024-05-22 まで 沖縄県国頭郡国頭村辺戸に滞在したはなし。]]></summary></entry><entry><title type="html">RubyKaigi2024 @沖縄</title><link href="https://blog.katsyoshi.org/blog/2024/05/14/rubykaigi-2024/" rel="alternate" type="text/html" title="RubyKaigi2024 @沖縄" /><published>2024-05-14T23:59:59+09:00</published><updated>2024-05-14T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/14/rubykaigi-2024</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/14/rubykaigi-2024/"><![CDATA[<p>沖縄だったのでいってきました。</p>
-
-<h2 id="day-0">Day 0</h2>
-
-<p>開始日の前日、この日に沖縄に入りました。この日は15:30発の飛行機にしました。
-これはこの日の夜のイベントに参加するための時間にしたつもりでした。
-つもりとは、今回 <a href="https://rubykaigi.org/2024"><strong>RubyKaigi</strong></a> ではプレチェックインが19:00まで行なわれているのをメールでもらい、
-急遽 <a href="https://www.nahart.jp/"><strong>RubyKaigi</strong> 会場</a>へ寄ることにしました。
-プレチェックインでは、沖縄気分な格好をして行ったのですが、それ以上に沖縄楽しみにしてる格好のひとが居てびっくり。
-チェックインを済ませて宿へ行き荷物を置いて<a href="https://esminc.doorkeeper.jp/events/171826">船上パーティ</a>へ。
-この帰りに二次会へ<a href="https://churayagi.com/sakedokoro-yocchan/">山羊刺しがある居酒屋</a>へ行きました。</p>
-
-<h2 id="day-1">Day 1</h2>
-
-<p>みたセッションは以下になります</p>
-
-<ol>
-  <li><a href="https://drive.google.com/file/d/1Dkx15u_5UAGoFqJHCeAuj2FXS-z_U7EE/view">Writing Weird Code</a></li>
-  <li><a href="https://speakerdeck.com/yui_knk/the-grand-strategy-of-ruby-parser">The grand strategy of Ruby Parser</a></li>
-  <li><a href="">Strings! Interpolation, Optimisation &amp; Bugs</a></li>
-  <li><a href="https://speakerdeck.com/tagomoris/namespace-what-and-why">Namespace, What and Why</a></li>
-  <li><a href="https://www.atdot.net/~ko1/activities/2024_rubykaigi.pdf">Ractor Enhancements, 2024</a></li>
-</ol>
-
-<h3 id="writing-weird-code"><a href="https://drive.google.com/file/d/1Dkx15u_5UAGoFqJHCeAuj2FXS-z_U7EE/view">Writing Weird Code</a></h3>
-
-<p>本年は三日間平日だからか Matz のキーノート開始ではなく、<a href="https://github.com/tompng">ぺんさん</a> ではじまりでした。うんまあ、ひとつひとつの話はわかるんだけど、どうしてそうなるのかわからないことをたくさん話されました。</p>
-
-<h3 id="the-grand-strategy-of-ruby-parser"><a href="https://speakerdeck.com/yui_knk/the-grand-strategy-of-ruby-parser">The grand strategy of Ruby Parser</a></h3>
-
-<p>ことしは(も？)パーサー元年な発表だった。<strong>パーサーギャング</strong> の親分こと <a href="https://github.com/yui-knk">金子さん</a> の発表で、去年の発表のあとどのように開発をし、これからどのような機能を開発していくのか、今回でどんな形になったのかを話してくれました。</p>
-
-<h3 id="strings-interpolation-optimisation--bugs"><a href="">Strings! Interpolation, Optimisation &amp; Bugs</a></h3>
-
-<h3 id="namespace-what-and-why"><a href="https://speakerdeck.com/tagomoris/namespace-what-and-why">Namespace, What and Why</a></h3>
-
-<p><a href="https://github.com/tagomoris">@tagomoris</a>さんの全 <strong>rubyist</strong><sup id="fnref:rubyist"><a href="#fn:rubyist" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> 待望の機能である <strong>Namespace</strong> の思想、実装の話です。
-似た機能として <a href="https://docs.ruby-lang.org/ja/latest/method/Module/i/refine.html"><strong>Refinments</strong></a> があるのですが
-機能として分かれているのも便利そう。
-<strong>Namespace</strong> で区切ることでライブラリがより便利に、より安全に利用できそうでした。</p>
-
-<h3 id="ractor-enhancements-2024"><a href="https://www.atdot.net/~ko1/activities/2024_rubykaigi.pdf">Ractor Enhancements, 2024</a></h3>
-
-<p><strong>Ractor</strong> のお話。</p>
-
-<h3 id="オフィシャルパーティー"><a href="https://ti.to/rubykaigi/2024-party">オフィシャルパーティー</a></h3>
-
-<p>オフィシャルパーティーは<a href="https://www.naminouebeach.jp/">波の上うみそら公園</a>のビーチでBBQ(BBQエリア)とパリピだった。</p>
-
-<h2 id="day-2">Day 2</h2>
-
-<ol>
-  <li><a href="">Leveraging Falcon and Rails for Real-Time Interactivity</a></li>
-  <li><a href="">Does Ruby Parser dream of highly expressive grammar?</a></li>
-  <li><a href="https://speakerdeck.com/soutaro/embedding-it-into-ruby-code">Embedding it into Ruby code</a></li>
-  <li><a href="https://code.jeremyevans.net/presentations/rubykaigi2024/index.html#1">Reducing Implicit Allocations During Method Calling</a></li>
-  <li><a href="https://speakerdeck.com/ahogappa0613/its-about-time-to-pack-ruby-and-ruby-scripts-in-one-binary">It’s about time to pack Ruby and Ruby scripts in one binary</a></li>
-  <li><a href="https://drive.google.com/file/d/1-YZR91umkQIngFIq5VDGrz_XcLoq3Ny3/view">Running Optcarrot (faster) on my own Ruby.</a></li>
-  <li>Lightning Talks</li>
-</ol>
-
-<h3 id="leveraging-falcon-and-rails-for-real-time-interactivity"><a href="">Leveraging Falcon and Rails for Real-Time Interactivity</a></h3>
-
-<p><a href="https://github.com/ioquatix">サミュエル</a> の <strong>Async</strong> を使うことによって速くするにはの話。</p>
-
-<h3 id="does-ruby-parser-dream-of-highly-expressive-grammar"><a href="https://speakerdeck.com/ydah/does-ruby-parser-dream-of-highly-expressive-grammar">Does Ruby Parser dream of highly expressive grammar?</a></h3>
-
-<p><a href="https://github.com/ydah/">@ydah_</a> さんの発表。もともと見る予定ではなかったが、前日の発表を見てしまったので興味が出てきたので聴くことに。</p>
-
-<h3 id="embedding-it-into-ruby-code"><a href="https://speakerdeck.com/soutaro/embedding-it-into-ruby-code">Embedding it into Ruby code</a></h3>
-
-<p>みようと思ってたが、ランチ出るまでに時間が掛かりすぎてすこししか見れていない。</p>
-
-<h3 id="reducing-implicit-allocations-during-method-calling"><a href="https://code.jeremyevans.net/presentations/rubykaigi2024/index.html#1">Reducing Implicit Allocations During Method Calling</a></h3>
-
-<p><a href="https://www.lambdanote.com/products/polished-ruby"><strong>研鑽 Ruby プログラミング</strong></a> の著者<a href="https://github.com/jeremyevans">ジェレミー</a>の発表。</p>
-
-<h3 id="its-about-time-to-pack-ruby-and-ruby-scripts-in-one-binary"><a href="https://speakerdeck.com/ahogappa0613/its-about-time-to-pack-ruby-and-ruby-scripts-in-one-binary">It’s about time to pack Ruby and Ruby scripts in one binary</a></h3>
-
-<p><a href="https://github.com/ahogappa0613">@ahogappa0613</a> さんの発表で <strong>Ruby</strong> のプログラムを配るために <strong>One Binary</strong> にプログラムを梱包していくという発表でした。
-<strong>One Binary</strong> を作る方法として、現在ある <strong>Ruby</strong> プログラムを静的リンクしてコンパイルして配る方法を採用していました。
-この方法は <strong>Ruby</strong> 自体を書き替えるのが十分少なく行えそうなので期待できそうです。</p>
-
-<h3 id="running-optcarrot-faster-on-my-own-ruby"><a href="https://drive.google.com/file/d/1-YZR91umkQIngFIq5VDGrz_XcLoq3Ny3/view">Running Optcarrot (faster) on my own Ruby.</a></h3>
-
-<p>今年個人的 <strong>No.1</strong>。<a href="https://github.com/sisshiki1969">@isshiki1969</a> さんの発表で、 <strong>Ruby</strong> の <a href="https://www.rust-lang.org"><strong>Rust</strong></a> での実装だと聞いていたので楽しみにしていました。
-聞いているとどうも <strong>Rust</strong> だけで作ってるわけじゃないぞとなっており、一部 <strong>Assembler</strong> でも作成されているようです。
-必要な機能は実装されているようでしたが、まだ <a href="https://rubyonrails.org/"><strong>Ruby on Rails</strong></a> 動いていないようです。
-とても速いので面白そうでした。</p>
-
-<h3 id="lightning-talks">Lightning Talks</h3>
-
-<p>前の発表が楽しすぎて少し遅れてはいりました。</p>
-
-<h3 id="夕飯とカラオケ">夕飯とカラオケ</h3>
-
-<p>この日の夕飯は会場近くで色々なディナー、パーティーが企画されてたのですが、どうしても行きたいディープな沖縄へ行きたかったのでそちらへ。
-栄町市場の<a href="https://tabelog.com/okinawa/A4701/A470101/47001653/">べんり屋 玉玲瓏</a>へ行き、餃子を食べてきました。
-帰りに <a href="https://rubykaigikaraoke.doorkeeper.jp/"><strong>RubyKaigiKaraoke</strong></a> が丁度いい時間だったので2曲ほど歌ってました。
-だいたい22時ころに翌日発表する人主催のボドゲ会がはじまり、1時ごろ退出しました。</p>
-
-<h2 id="day-3">Day 3</h2>
-<p>聞いたセッションは以下です。前日の <strong>RubyKaigiKaraoke</strong> ではしゃいで疲れてるので記憶が曖昧です。</p>
-
-<ol>
-  <li>Ruby Committers and the World</li>
-  <li><a href="https://speakerdeck.com/k0kubun/rubykaigi-2024">YJIT Makes Rails 1.7x Faster</a></li>
-  <li><a href="">Speeding up Instance Variables with Red-Black Trees</a></li>
-  <li><a href="https://speakerdeck.com/junk0612/from-lalr-to-ielr-a-lramas-next-step">From LALR to IELR: A Lrama’s Next Step</a></li>
-  <li><a href="https://makenowjust.github.io/kantan-regex-book/">Make Your Own Regex Engine!</a></li>
-  <li><a href="">Matz Keynote</a></li>
-</ol>
-
-<h3 id="ruby-committers-and-the-world">Ruby Committers and the World</h3>
-
-<p>いつもどおりの感じが戻ってきた感じのセッションでした。ここで <strong>GVL</strong><sup id="fnref:gvl"><a href="#fn:gvl" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> が出てとくに盛り上がってましたね。個人的に <strong>GVL</strong> を外してもはやくならないと思っていますが、無い状態での実行したときどのような挙動をするのか、はやくするにはどうするのか興味があります。この議論で <strong>Linux</strong> のメンテナーをやってる<a href="https://www.fujitsu.com/jp/about/global-fde/motohiro-kosaki/">小崎さん</a>が賛成してくれてたのでとても心強いなと。</p>
-
-<h3 id="yjit-makes-rails-17x-faster"><a href="https://speakerdeck.com/k0kubun/rubykaigi-2024">YJIT Makes Rails 1.7x Faster</a></h3>
-
-<p><a href="https://github.com/k0kubun">国分</a> さんの <a href="https://docs.ruby-lang.org/en/master/yjit/yjit_md.html"><strong>YJIT</strong></a> で <strong>Rails</strong> を動かすと速くなったという話。
-タイトルに偽りがあり、曰く発表当日には1.8倍高速化されたそうです。</p>
-
-<h3 id="speeding-up-instance-variables-with-red-black-trees"><a href="">Speeding up Instance Variables with Red-Black Trees</a></h3>
-
-<p><a href="https://github.com/tenderlove">アーロン</a> の発表。<strong>インスタンス変数</strong> のデータ保持方法を<a href="https://en.wikipedia.org/wiki/Red%E2%80%93black_tree"><strong>赤黒木</strong></a>で行う話でした。
-<strong>赤黒木</strong>の説明を行い、どう実装していくかを日本語でやってくれました。</p>
-
-<h3 id="from-lalr-to-ielr-a-lramas-next-step"><a href="https://speakerdeck.com/junk0612/from-lalr-to-ielr-a-lramas-next-step">From LALR to IELR: A Lrama’s Next Step</a></h3>
-
-<p><a href="https://github.com/junk0612">コバジュン</a> の発表。
-現在、<a href="https://github.com/ruby/lrama"><strong>Lrama</strong></a> を <a href="https://en.wikipedia.org/wiki/LALR_parser"><strong>LALR パーサー</strong></a>から
-<a href="https://en.wikipedia.org/wiki/Scannerless_parsing"><strong>Scannerless パーサー</strong></a> を動かすために <strong>IELR パーサー</strong> に変更している話でした。</p>
-
-<h3 id="make-your-own-regex-engine"><a href="https://makenowjust.github.io/kantan-regex-book/">Make Your Own Regex Engine!</a></h3>
-
-<p><a href="https://github.com/makenowjust">藤波</a> さんの発表で、<strong>正規表現エンジン</strong> を <strong>Ruby</strong> で作る話。
-意外と小さくできるようでおもしろそうな感じでした。</p>
-
-<h3 id="matz-keynote"><a href="">Matz Keynote</a></h3>
-
-<p>今年は <strong>Ruby4</strong> の話が出てきました。 <strong>Namespace</strong> が実装されて動けば <strong>Ruby4</strong> になるそうです。ガンバレモリスさん。
-あと明確に <a href="https://en.wikipedia.org/wiki/Ahead-of-time_compilation"><strong>AOT コンパイラー</strong></a> が欲しいと言っていました。</p>
-
-<h2 id="owari">owari</h2>
-
-<p>今年も楽しいセッションが盛り沢山で休む暇がなく、全部たのしかったのですが、英語力と体力が足りないのを痛感しております。
-セッション間の立ち話も興味深いのも多く、休みとはと思いながら過しておりました。</p>
-
-<hr />
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:rubyist">
-      <p><a href="https://www.ruby-lang.org/">プログラミング言語 <strong>Ruby</strong></a> が好きな人たちのこと。 <a href="#fnref:rubyist" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:gvl">
-      <p>Giant Virtualmachine Lock の略。これがあるから遅いと主張している人たちがいる。 <a href="#fnref:gvl" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name></name></author><category term="diary" /><category term="rubykaigi" /><category term="tech" /><summary type="html"><![CDATA[沖縄だったのでいってきました。]]></summary></entry></feed>
+この旅はここで終わり。東京もどってビール飲んで寝た。</p>]]></content><author><name></name></author><category term="diary" /><summary type="html"><![CDATA[RubyKaigi2024 の翌日 2024-05-18 から五日間 2024-05-22 まで 沖縄県国頭郡国頭村辺戸に滞在したはなし。]]></summary></entry></feed>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Ruby::Boxを使っただけなのに | katsyoshi のめもみたいなの</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Ruby::Boxを使っただけなのに" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="ruby-4.0 出ましたね。" />
+<meta property="og:description" content="ruby-4.0 出ましたね。" />
+<link rel="canonical" href="http://localhost:4000/blog/2026/03/13/how-to-use-ruby-box/" />
+<meta property="og:url" content="http://localhost:4000/blog/2026/03/13/how-to-use-ruby-box/" />
+<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-03-13T20:55:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Ruby::Boxを使っただけなのに" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-03-13T20:55:22+09:00","datePublished":"2026-03-13T20:55:22+09:00","description":"ruby-4.0 出ましたね。","headline":"Ruby::Boxを使っただけなのに","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2026/03/13/how-to-use-ruby-box/"},"url":"http://localhost:4000/blog/2026/03/13/how-to-use-ruby-box/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Ruby::Boxを使っただけなのに</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2026-03-13T20:55:22+09:00" itemprop="datePublished">Mar 13, 2026
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="https://www.ruby-lang.org/ja/news/2025/12/25/ruby-4-0-0-released/">ruby-4.0</a> 出ましたね。</p>
+
+<p>待望の新機能、 <a href="https://docs.ruby-lang.org/en/master/Ruby/Box.html"><code class="language-plaintext highlighter-rouge">Ruby::Box</code></a> を使っていますか？
+個人プロジェクトで利用しているのでその利用方法について書いていきますよ。</p>
+
+<h2 id="testで安全にffifiddleを使いたい">Testで安全にFFI(fiddle)を使いたい!!!!</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Ruby::Box</code> はかつて <code class="language-plaintext highlighter-rouge">Namespace</code> と呼ばれていたものです。ということは <em>コンパイラー</em> 書いてる人にとってテストが安全にできるじゃないですか。
+コンパイラーで生成したバイナリを安全に分離できるじゃないですか。
+<em>テスト</em> 向けのロード用ファイルを作ります。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"fiddle/import"</span>
+
+<span class="k">module</span> <span class="nn">Fibonacci</span>
+  <span class="kp">extend</span> <span class="no">Fiddle</span><span class="o">::</span><span class="no">Importer</span>
+  <span class="n">dlload</span> <span class="s2">"./libhoge.so"</span>
+  <span class="n">extern</span> <span class="s2">"int fibo(int)"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>テスト側では以下のようにしますね。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"test/unit"</span>
+<span class="k">class</span> <span class="nc">TestFibo</span> <span class="o">&lt;</span> <span class="no">Test</span><span class="o">::</span><span class="no">Unit</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="k">def</span> <span class="nf">test_load_fiddle</span>
+    <span class="n">omit</span><span class="p">(</span><span class="s1">'"Ruby::Box" needs RUBY_BOX=1'</span><span class="p">)</span> <span class="k">unless</span> <span class="no">ENV</span><span class="p">[</span><span class="s2">"RUBY_BOX"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"1"</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="no">Ruby</span><span class="o">::</span><span class="no">Box</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">box</span><span class="p">.</span><span class="nf">require</span> <span class="s2">"./load_so"</span>
+    <span class="n">assert_equal</span><span class="p">(</span><span class="n">box</span><span class="o">::</span><span class="no">Fibonacci</span><span class="p">.</span><span class="nf">fibo</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">55</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>では実行してみましょう</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ RUBY_BOX</span><span class="o">=</span>1 ruby test_fibo.rb
+ruby: warning: Ruby::Box is experimental, and the behavior may change <span class="k">in </span>the future!
+See https://docs.ruby-lang.org/en/4.0/Ruby/Box.html <span class="k">for </span>known issues, etc.
+Loaded suite test_fibo
+Started
+Finished <span class="k">in </span>0.007523671 seconds.
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
+100% passed
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+132.91 tests/s, 132.91 assertions/s
+</code></pre></div></div>
+
+<p>テスト通りましたね!やった!!便利!!!
+<code class="language-plaintext highlighter-rouge">Ruby::Box</code> つかうには <code class="language-plaintext highlighter-rouge">RUBY_BOX=1</code> が必要ですね。なので無い場合のガードとして <code class="language-plaintext highlighter-rouge">omit...</code> を入れています。
+この確認もしますかね。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ruby test_fibo.rb
+Loaded suite test_fibo
+Started
+O
+<span class="o">===============================================================================================</span>
+Omission: <span class="s2">"Ruby::Box"</span> needs <span class="nv">RUBY_BOX</span><span class="o">=</span>1 <span class="o">[</span>test_load_fiddle<span class="o">(</span>TestFibo<span class="o">)]</span>
+test_fibo.rb:5:in <span class="s1">'TestFibo#test_load_fiddle'</span>
+<span class="o">===============================================================================================</span>
+Finished <span class="k">in </span>0.000660511 seconds.
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1 tests, 0 assertions, 0 failures, 0 errors, 0 pendings, 1 omissions, 0 notifications
+0% passed
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1513.98 tests/s, 0.00 assertions/s
+</code></pre></div></div>
+
+<p>そうしたら <code class="language-plaintext highlighter-rouge">omit</code> しないようにしますかね</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ruby test_fibo.rb
+Loaded suite test_fibo
+Started
+E
+<span class="o">===============================================================================================</span>
+Error: test_load_fiddle<span class="o">(</span>TestFibo<span class="o">)</span>: RuntimeError: Ruby Box is disabled. Set <span class="nv">RUBY_BOX</span><span class="o">=</span>1 environment variable to use Ruby::Box.
+test_fibo.rb:5:in <span class="s1">'Ruby::Box#initialize'</span>
+test_fibo.rb:5:in <span class="s1">'Class#new'</span>
+test_fibo.rb:5:in <span class="s1">'TestFibo#test_load_fiddle'</span>
+     2:
+     3: class TestFibo &lt; Test::Unit::TestCase
+     4:   def test_load_fiddle
+  <span class="o">=&gt;</span> 5:     box <span class="o">=</span> Ruby::Box.new
+     6:     box.require <span class="s2">"./load_so"</span>
+     7:     assert_equal 55, box::Fibonacci.fibo<span class="o">(</span>10<span class="o">)</span>
+     8:   end
+<span class="o">===============================================================================================</span>
+Finished <span class="k">in </span>0.000693731 seconds.
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1 tests, 0 assertions, 0 failures, 1 errors, 0 pendings, 0 omissions, 0 notifications
+0% passed
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1441.48 tests/s, 0.00 assertions/s
+</code></pre></div></div>
+
+<p>とこのようになりますね。<code class="language-plaintext highlighter-rouge">omit</code> 入れることで <code class="language-plaintext highlighter-rouge">error</code> にならなくなりますね。便利!!!!
+ということで <code class="language-plaintext highlighter-rouge">Ruby::Box</code> の便利な面をみてきました。こうやって安全に利用できるようになりましたね。</p>
+
+<h2 id="rubyboxでネームスペースを区切ろう">Ruby::Boxでネームスペースを区切ろう</h2>
+
+<p>コンパイラーつくってると生成したバイナリをロードして読み込みたいんですよ。
+でもテストはプロセス1つじゃないですか？
+<code class="language-plaintext highlighter-rouge">libbinA.so</code> と <code class="language-plaintext highlighter-rouge">libbinB.so</code> を同時に読みたいということはとくになく、
+<code class="language-plaintext highlighter-rouge">libbinA.so</code> は一つで読みとりたい。
+<code class="language-plaintext highlighter-rouge">libbinB.so</code> も <code class="language-plaintext highlighter-rouge">libbinA.so</code> とは別に読みとりたいことがあるじゃないですか。
+このとき、 <code class="language-plaintext highlighter-rouge">Ruby::Box</code> でそれぞれ読めばいいとおもうじゃん？ということでやってみますね。
+といってもいきなり分けてやるよりもどうせネームスペースがわかれるので同じファイルで実験してみましょう。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"test/unit"</span>
+<span class="k">class</span> <span class="nc">TestFibo</span> <span class="o">&lt;</span> <span class="no">Test</span><span class="o">::</span><span class="no">Unit</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="k">def</span> <span class="nf">test_load_fiddle</span>
+    <span class="n">omit</span><span class="p">(</span><span class="s1">'"Ruby::Box" needs RUBY_BOX=1'</span><span class="p">)</span> <span class="k">unless</span> <span class="no">ENV</span><span class="p">[</span><span class="s2">"RUBY_BOX"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"1"</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="no">Ruby</span><span class="o">::</span><span class="no">Box</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">box</span><span class="p">.</span><span class="nf">require</span> <span class="s2">"./load_so"</span>
+    <span class="n">assert_equal</span><span class="p">(</span><span class="n">box</span><span class="o">::</span><span class="no">Fibonacci</span><span class="p">.</span><span class="nf">fibo</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">55</span><span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">test_load_fiddle_2</span>
+    <span class="n">omit</span><span class="p">(</span><span class="s1">'"Ruby::Box" needs RUBY_BOX=1'</span><span class="p">)</span> <span class="k">unless</span> <span class="no">ENV</span><span class="p">[</span><span class="s2">"RUBY_BOX"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"1"</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="no">Ruby</span><span class="o">::</span><span class="no">Box</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">box</span><span class="p">.</span><span class="nf">require</span> <span class="s2">"./load_so"</span>
+    <span class="n">assert_equal</span><span class="p">(</span><span class="n">box</span><span class="o">::</span><span class="no">Fibonacci</span><span class="p">.</span><span class="nf">fibo</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">55</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>実行〜〜</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ RUBY_BOX</span><span class="o">=</span>1 ruby test_fibo.rb
+ruby: warning: Ruby::Box is experimental, and the behavior may change <span class="k">in </span>the future!
+See https://docs.ruby-lang.org/en/4.0/Ruby/Box.html <span class="k">for </span>known issues, etc.
+Loaded suite test_fibo
+Started
+E
+<span class="o">===============================================================================================</span>
+Error: test_load_fiddle_2<span class="o">(</span>TestFibo<span class="o">)</span>
+<span class="o">===============================================================================================</span>
+Error: test_load_fiddle_2<span class="o">(</span>TestFibo<span class="o">)</span>Finished <span class="k">in </span>0.011718944 seconds.
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+1 tests, 1 assertions, 0 failures, 2 errors, 0 pendings, 0 omissions, 0 notifications
+100% passed
+<span class="nt">-----------------------------------------------------------------------------------------------</span>
+</code></pre></div></div>
+
+<p><strong>WTF</strong> 落ちるなんで!!!？？？？よくみたら <code class="language-plaintext highlighter-rouge">2 errors</code> なのに <code class="language-plaintext highlighter-rouge">100% passed</code> ってなんぞ!？
+そもそも表示も崩壊してんじゃねーか。
+ということでエラー内容みますかね。</p>
+
+<pre><code class="language-log">load_so.rb:1:in 'Kernel#require': cannot load such file -- fiddle/import (LoadError)
+</code></pre>
+
+<p><strong>WTF</strong> 標準ライブラリーが見えねえってどういうことだよ!!!</p>
+
+<p>これから真相を探るため <code class="language-plaintext highlighter-rouge">Ruby::Box</code> を探す旅がはじまります。</p>
+
+  </div><a class="u-url" href="/blog/2026/03/13/how-to-use-ruby-box/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
