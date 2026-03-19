@@ -17,24 +17,19 @@
 </script>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>known_hostsに載っていないホストに接続確認しないようにする | katsyoshi のめもみたいなの</title>
-<meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="known_hostsに載っていないホストに接続確認しないようにする" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="昨日の続きで、 lxc で大量のサーバを立てて、 SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。" />
-<meta property="og:description" content="昨日の続きで、 lxc で大量のサーバを立てて、 SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。" />
-<link rel="canonical" href="https://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/" />
-<meta property="og:url" content="https://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/" />
-<meta property="og:site_name" content="katsyoshi のめもみたいなの" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2015-04-07T19:40:03+09:00" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="known_hostsに載っていないホストに接続確認しないようにする" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2015-04-07T19:40:03+09:00","datePublished":"2015-04-07T19:40:03+09:00","description":"昨日の続きで、 lxc で大量のサーバを立てて、 SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。","headline":"known_hostsに載っていないホストに接続確認しないようにする","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/"},"url":"https://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/"}</script>
-<!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>known_hostsに載っていないホストに接続確認しないようにする | katsyoshi のめもみたいなの</title>
+  <link rel="canonical" href="https://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/">
+  <meta name="description" content="昨日の続きで、 lxc で大量のサーバを立てて、 SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。">
+
+  <meta property="og:site_name" content="katsyoshi のめもみたいなの">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="known_hostsに載っていないホストに接続確認しないようにする | katsyoshi のめもみたいなの">
+  <meta property="og:description" content="昨日の続きで、 lxc で大量のサーバを立てて、 SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。">
+  <meta property="og:url" content="https://blog.katsyoshi.org/blog/2015/04/07/many-ssh-connection/">
+  <meta property="og:type" content="article"><meta property="og:image" content="https://blog.katsyoshi.org/images/code_bg.webp">
+  <meta property="og:image:alt" content="known_hostsに載っていないホストに接続確認しないようにする"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="known_hostsに載っていないホストに接続確認しないようにする | katsyoshi のめもみたいなの">
+  <meta name="twitter:description" content="昨日の続きで、 lxc で大量のサーバを立てて、 SSH接続すると、ホストごとに毎回接続確認が必要なので、確認せずに接続できるようにした。"><meta name="twitter:site" content="@katsyoshi"><meta name="twitter:image" content="https://blog.katsyoshi.org/images/code_bg.webp"><meta property="article:published_time" content="2015-04-07T19:40:03+09:00"><meta property="article:tag" content="tech"><meta property="article:tag" content="ssh"><link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
 <body><header class="site-header" role="banner">
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
