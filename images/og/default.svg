@@ -1,41 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">katsyoshi のめもみたいなの</title>
   <desc id="desc">Default OGP image for katsyoshi's blog.</desc>
+
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#102a43"/>
-      <stop offset="55%" stop-color="#1f4f7a"/>
-      <stop offset="100%" stop-color="#f0b429"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E52A3"/>
+      <stop offset="25%" stop-color="#3261AB"/>
+      <stop offset="50%" stop-color="#4C75B6"/>
+      <stop offset="75%" stop-color="#DCE6F4"/>
+      <stop offset="100%" stop-color="#F5F9FF"/>
     </linearGradient>
-    <linearGradient id="panel" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0b1726" stop-opacity="0.92"/>
-      <stop offset="100%" stop-color="#16324f" stop-opacity="0.88"/>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5F9FF" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#F5F9FF" stop-opacity="0"/>
     </linearGradient>
-    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
-      <path d="M 36 0 L 0 0 0 36" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
-    </pattern>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#grid)"/>
-  <circle cx="1020" cy="118" r="180" fill="#ffffff" fill-opacity="0.08"/>
-  <circle cx="150" cy="560" r="220" fill="#0b1726" fill-opacity="0.18"/>
-  <rect x="72" y="72" width="1056" height="486" rx="28" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.16"/>
+  <rect width="1200" height="630" fill="url(#shine)"/>
 
-  <g fill="#d9e2ec" font-family="'Avenir Next', 'Hiragino Sans', 'Noto Sans JP', sans-serif">
-    <text x="118" y="170" font-size="30" font-weight="700" letter-spacing="6">BLOG.KATSYOSHI.ORG</text>
-    <text x="118" y="292" font-size="72" font-weight="800">katsyoshi</text>
-    <text x="118" y="382" font-size="56" font-weight="700">のめもみたいなの</text>
-    <text x="118" y="460" font-size="30" font-weight="500" fill="#bcccdc">diary / tech / travel / notes</text>
-    <text x="118" y="518" font-size="26" font-weight="500" fill="#9fb3c8">default social card</text>
-  </g>
+  <circle cx="1030" cy="132" r="156" fill="#F5F9FF" fill-opacity="0.18"/>
+  <circle cx="1128" cy="118" r="76" fill="#DCE6F4" fill-opacity="0.46"/>
+  <circle cx="980" cy="508" r="120" fill="#DCE6F4" fill-opacity="0.16"/>
 
-  <g transform="translate(892 392)">
-    <rect x="0" y="0" width="156" height="108" rx="18" fill="#f0b429"/>
-    <path d="M32 74 L64 42 L88 66 L126 28" fill="none" stroke="#102a43" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="32" cy="74" r="8" fill="#102a43"/>
-    <circle cx="64" cy="42" r="8" fill="#102a43"/>
-    <circle cx="88" cy="66" r="8" fill="#102a43"/>
-    <circle cx="126" cy="28" r="8" fill="#102a43"/>
+  <g transform="translate(92 102)" font-family="'Avenir Next', 'Hiragino Sans', 'Noto Sans JP', sans-serif">
+    <text x="0" y="0" font-size="26" font-weight="700" letter-spacing="5" fill="#DCE6F4">
+      BLOG.KATSYOSHI.ORG
+    </text>
+
+    <rect x="0" y="38" width="104" height="8" rx="4" fill="#DCE6F4" fill-opacity="0.95"/>
+
+    <text x="0" y="188" font-size="88" font-weight="800" fill="#F5F9FF">
+      katsyoshi
+    </text>
+    <text x="0" y="294" font-size="60" font-weight="700" fill="#F5F9FF">
+      のめもみたいなの
+    </text>
   </g>
 </svg>

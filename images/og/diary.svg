@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">katsyoshi のめもみたいなの DIARY</title>
+  <desc id="desc">Diary OGP image for katsyoshi's blog.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E52A3"/>
+      <stop offset="25%" stop-color="#3261AB"/>
+      <stop offset="50%" stop-color="#4C75B6"/>
+      <stop offset="75%" stop-color="#DCE6F4"/>
+      <stop offset="100%" stop-color="#F5F9FF"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5F9FF" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#F5F9FF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="pen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E52A3"/>
+      <stop offset="100%" stop-color="#3261AB"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#shine)"/>
+
+  <circle cx="1030" cy="132" r="156" fill="#F5F9FF" fill-opacity="0.18"/>
+  <circle cx="1128" cy="118" r="76" fill="#DCE6F4" fill-opacity="0.46"/>
+  <circle cx="980" cy="508" r="120" fill="#DCE6F4" fill-opacity="0.16"/>
+
+  <g transform="translate(92 102)" font-family="'Avenir Next', 'Hiragino Sans', 'Noto Sans JP', sans-serif">
+    <text x="0" y="0" font-size="26" font-weight="700" letter-spacing="5" fill="#DCE6F4">BLOG.KATSYOSHI.ORG</text>
+    <rect x="0" y="38" width="104" height="8" rx="4" fill="#DCE6F4" fill-opacity="0.95"/>
+
+    <text x="0" y="188" font-size="88" font-weight="800" fill="#F5F9FF">katsyoshi</text>
+    <text x="0" y="294" font-size="60" font-weight="700" fill="#F5F9FF">のめもみたいなの</text>
+  </g>
+
+  <g transform="translate(758 142)">
+    <rect x="32" y="18" width="238" height="306" rx="28" fill="#F5F9FF" fill-opacity="0.18" stroke="#DCE6F4" stroke-opacity="0.28" stroke-width="3"/>
+
+    <rect x="0" y="0" width="238" height="306" rx="28" fill="#F5F9FF" fill-opacity="0.96"/>
+    <path d="M184 0 H238 V54 Z" fill="#DCE6F4" fill-opacity="0.92"/>
+    <path d="M184 0 V54 H238" fill="none" stroke="#4C75B6" stroke-opacity="0.45" stroke-width="3"/>
+
+    <rect x="30" y="34" width="74" height="22" rx="11" fill="#DCE6F4"/>
+    <circle cx="40" cy="45" r="4" fill="#1E52A3"/>
+    <text x="52" y="51" font-family="'Avenir Next', 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="14" font-weight="800" letter-spacing="2" fill="#1E52A3">DAY</text>
+
+    <path d="M34 90 H192" stroke="#4C75B6" stroke-opacity="0.62" stroke-width="7" stroke-linecap="round"/>
+    <path d="M34 128 H196" stroke="#4C75B6" stroke-opacity="0.52" stroke-width="7" stroke-linecap="round"/>
+    <path d="M34 166 H182" stroke="#4C75B6" stroke-opacity="0.52" stroke-width="7" stroke-linecap="round"/>
+    <path d="M34 204 H194" stroke="#4C75B6" stroke-opacity="0.52" stroke-width="7" stroke-linecap="round"/>
+    <path d="M34 242 H158" stroke="#4C75B6" stroke-opacity="0.52" stroke-width="7" stroke-linecap="round"/>
+
+    <path d="M18 0 V306" stroke="#3261AB" stroke-opacity="0.78" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="18" cy="54" r="7" fill="#F5F9FF" stroke="#3261AB" stroke-width="4"/>
+    <circle cx="18" cy="122" r="7" fill="#F5F9FF" stroke="#3261AB" stroke-width="4"/>
+    <circle cx="18" cy="190" r="7" fill="#F5F9FF" stroke="#3261AB" stroke-width="4"/>
+    <circle cx="18" cy="258" r="7" fill="#F5F9FF" stroke="#3261AB" stroke-width="4"/>
+
+    <g transform="translate(182 176) rotate(28)">
+      <rect x="0" y="0" width="32" height="132" rx="16" fill="url(#pen)"/>
+      <rect x="7" y="18" width="18" height="80" rx="9" fill="#F5F9FF" fill-opacity="0.18"/>
+      <path d="M0 132 H32 L16 166 Z" fill="#DCE6F4"/>
+      <path d="M10 132 H22 L16 149 Z" fill="#1E52A3"/>
+      <rect x="0" y="0" width="32" height="18" rx="9" fill="#DCE6F4"/>
+    </g>
+  </g>
+</svg>

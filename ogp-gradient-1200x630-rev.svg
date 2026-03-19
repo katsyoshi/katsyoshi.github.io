@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="favicon color gradient reversed 1200x630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E52A3"/>
+      <stop offset="25%" stop-color="#3261AB"/>
+      <stop offset="50%" stop-color="#4C75B6"/>
+      <stop offset="75%" stop-color="#DCE6F4"/>
+      <stop offset="100%" stop-color="#F5F9FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+</svg>
