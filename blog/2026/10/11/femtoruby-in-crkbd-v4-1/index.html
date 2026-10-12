@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Hello, FemtoRuby in Corne v4 Cherry | katsyoshi のめもみたいなの</title>
+  <link rel="canonical" href="https://blog.katsyoshi.org/blog/2026/10/11/femtoruby-in-crkbd-v4-1/">
+  <meta name="description" content="結構前に買ったキーボード corne v4 cherry を prk_firmware でうごかそうとして1年くらい放置してた。 そしたらいつのまにか deprecated になって picoruby-keyboard を利用することに なっていました。">
+
+  <meta property="og:site_name" content="katsyoshi のめもみたいなの">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="Hello, FemtoRuby in Corne v4 Cherry | katsyoshi のめもみたいなの">
+  <meta property="og:description" content="結構前に買ったキーボード corne v4 cherry を prk_firmware でうごかそうとして1年くらい放置してた。 そしたらいつのまにか deprecated になって picoruby-keyboard を利用することに なっていました。">
+  <meta property="og:url" content="https://blog.katsyoshi.org/blog/2026/10/11/femtoruby-in-crkbd-v4-1/">
+  <meta property="og:type" content="article"><meta property="og:image" content="https://blog.katsyoshi.org/images/og/tech.svg">
+  <meta property="og:image:alt" content="Hello, FemtoRuby in Corne v4 Cherry"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hello, FemtoRuby in Corne v4 Cherry | katsyoshi のめもみたいなの">
+  <meta name="twitter:description" content="結構前に買ったキーボード corne v4 cherry を prk_firmware でうごかそうとして1年くらい放置してた。 そしたらいつのまにか deprecated になって picoruby-keyboard を利用することに なっていました。"><meta name="twitter:site" content="@katsyoshi"><meta name="twitter:image" content="https://blog.katsyoshi.org/images/og/tech.svg"><meta property="article:published_time" content="2026-10-11T00:00:00+09:00"><meta property="article:tag" content="diary"><meta property="article:tag" content="tech"><meta property="article:tag" content="keyboard"><meta property="article:tag" content="picoruby"><meta property="article:tag" content="femtoruby"><link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Hello, FemtoRuby in Corne v4 Cherry</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2026-10-11T00:00:00+09:00" itemprop="datePublished">Oct 11, 2026
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>結構前に買ったキーボード <a href="https://github.com/foostan/crkbd"><strong>corne v4 cherry</strong></a> を
+<a href="https://github.com/picoruby/prk_firmware"><strong>prk_firmware</strong></a> でうごかそうとして1年くらい放置してた。
+そしたらいつのまにか <em>deprecated</em> になって <strong>picoruby-keyboard</strong> を利用することに
+なっていました。</p>
+
+<h2 id="corne-v4">Corne V4</h2>
+
+<p><strong>prk_firmware</strong> をしばらく <strong>Corne V3</strong> でつかってたのですが、
+動いてる以上替える意味もなかったので替えていなかった。
+いろいろと変更された <strong>Corne V4</strong> になったときに変更をしようとしています。
+この変更も <strong>Corne V4</strong> 自体がキー配線方式がマトリクス方式から
+ダイレクトピン方式に変更されてるためという事情もあります。</p>
+
+<p>まずは <strong>prk_firmware</strong> で <strong>V4</strong> を動かそうとします。
+まあうごかないんですよ。理由は上記にあるダイレクトピン方式になったためですね。
+でいろいろと試したんですが、左右通信が上手くいかず断念。
+ということで1年ほど放置。</p>
+
+<h2 id="picoruby-keyboard">picoruby-keyboard</h2>
+
+<p>そしたら <a href="https://rubykaigi.org/2026"><strong>rubykaigi 2026</strong></a> で <strong>prk_firmware</strong> 作者の
+<a href="https://github.com/hasumikin">@hasumikin</a> にもうやってない。と告げられてそのかわり
+<strong>picoruby-keyboard</strong> でやってるという話になったのでそちらを利用することを決意。</p>
+
+<p>まず <strong>picoruby-keyboard</strong> を <a href="https://github.com/picoruby/picoruby/releases/tag/4.0.5">picoruby のリリースページ</a> からダウンロードしてきます。
+ここでダウンロードのパッケージとして <strong>R2P2-FEMTORUBY</strong> と <strong>R2P2-PICORUBY</strong> の
+<strong>UF2</strong> ファイルがあります。
+<a href="https://github.com/picoruby/picoruby/tree/master/mrbgems/picoruby-r2p2"><strong>R2P2</strong></a> の説明はリンクにあります。
+<strong>FEMTORUBY</strong> と <strong>PICORUBY</strong> の違いなのですが、<strong>Femto Ruby</strong> は <a href="https://github.com/mrubyc/mrubyc"><strong>mruby/c</strong></a> の <em>VM</em> 版だそうです。</p>
+
+<p>どちらを利用するといい？という話になりますよね？
+これは <strong>picoruby-keyboard</strong> が利用できればどちらでもよいのですが、
+今回の <strong>Corne V4</strong> は <strong>RP2040</strong> を搭載しています。
+そのため対応する <strong>R2P2-FEMTORUBY-PICO</strong> を利用します。</p>
+
+<p>ただ使っているモジュールが異なるので単純な比較はできないのですが、
+picoruby 4.0.5 でのファイルサイズはそれぞれ <strong>FemtoRuby</strong> 版は 約1.4MB 、 
+<strong>PicoRuby</strong> 版は 約4.4MB となっています。
+<strong>github</strong> にある <strong>Corne V4 Cherry</strong> の公式基板データ（基板上の表記はv4.1.0）を読むと、
+128Mbit（16MiB）の外付けFLASHが搭載されているようです。
+さらに実際に使用できる領域はファームウェアの構成によって異なります。</p>
+
+<p>まずは <strong>Corne V4</strong> にダウンロードしたファイルをインストールしましょう。
+インストール自体は問題はなく、完了。
+インストールがおわったら次に <strong>picoruby</strong> が動いてるかどうか確認しましょう。
+<a href="https://picoruby.org/terminal">PicoRuby Web Terminal</a> を開いて <strong>R2P2</strong>
+が動いてることを確認します。
+確認できたらつぎはキー配列をキーボードへ送り込みます。
+送り込むときは、 <strong>Open local file</strong> でキー配列を定義したrubyファイルを選択します。
+選択したら <strong>Plain</strong> と <strong>Compile</strong> があるので <strong>Compile</strong> をクリックし、<strong>Upload</strong>
+でコンパイルされたキー配列 <strong>mrb</strong> ファイルを送り込みます。</p>
+
+<p><img src="/images/screenshot/r2p2-femtoruby.png" alt="" /></p>
+
+<h3 id="trouble">trouble!!!</h3>
+
+<p>ここからが本題。
+なにが問題だったかというと結局、この <strong>Femto Ruby</strong> にしても問題は変ってなく、
+左右の通信が上手くいかなかったんですよ。
+ということでここからは <strong>Codex</strong> を利用してトラブルシューティング。</p>
+
+<h4 id="human-side-kanso">HUMAN SIDE KANSO</h4>
+
+<p>まず今回の問題というか諦めかけてた問題は、左側をマスターとしたとき右側との通信が
+上手くいっていないという問題でした。
+といったけどこの時点ではそもそも通信できていないのか、片側が死んでいるのか判断は
+できていないです。なぜできないのかということを探ります。</p>
+
+<p>まず、 そもそも app.mrb のキー配置が間違えていないかを疑ってみます。
+そもそも <strong>V3</strong> では <strong>Adafruit KB2040</strong> を使っていたのでピン配列部分の移植に
+ミスがないかを確認。
+また、上記で述べたとおり、配線方式が <strong>マトリクス方式</strong> から <strong>ダイレクトピン方式</strong>
+に変っているためそこも疑います。
+がどうもそこらへんではないようです。</p>
+
+<p>埒があかないので、 <a href="https://github.com/qmk/qmk_firmware"><strong>QMK Firmware</strong></a> から
+<strong>Corne V4</strong> がどう使っているかの定義を <strong>Codex</strong> に見てもらうことに。
+そしたら、いきなり <strong>Codex</strong> が「6個押せるようにPatchあてました」と言いだして
+なにか <strong>picoruby-keyboard</strong> のバグを修正してくれましたね。
+バグがあったとは報告はきいたものの、この時点ではまだダウンロード版の <strong>FemtoRuby</strong> 
+を利用してます。</p>
+
+<p>このとき 6個同時押しのパッチを適用するため自前ビルドすることにしました。
+自前でビルドした <strong>picoruby</strong> でいったん <strong>デバッグ</strong> 用ログを仕込むようにしてくれました。
+出力されたログを見てわかったのは送ってはいるが受け取れてなさそうということ。
+これにはボーレート(<strong>baud rate</strong>)が怪しそうという助言をもらったので変更。
+状況はかわらず。関係はないことがわかる。</p>
+
+<p>ここでハードウェア自体の故障疑惑が出てくるが、<strong>Codex</strong> はほぼないとのこと。
+またうまくいかず。次に送っているデータの配列をログ化。
+こわれてることは確認できたがよくわからないこわれかた。
+とここでもういちど <strong>picoruby</strong> 側の実装を見てた <strong>Codex</strong> から 
+「内蔵 <strong>RP2040</strong> の <strong>PIO</strong> クロックを止めてる」との報告が。
+<strong>UART</strong> 通信を実現するために <strong>PIO</strong> を利用しているため、これが止まるとまずそう。
+ということで <strong>picoruby</strong> 側を修正して、ようやく左右の通信を確認。
+一件落着と。</p>
+
+<h4 id="ai-side-kanso">AI SIDE KANSO</h4>
+
+<p>最初に確認する必要があったのは、「右側のキーが入力できない」という症状が、
+どこで発生しているかでした。
+キーの読み取り、左右間の通信、左側でのキー処理、USBへの出力と、
+入力が届くまでにはいくつかの段階があります。
+この時点では、右側が動いていないのか、通信だけが失敗しているのかは
+判断できていませんでした。</p>
+
+<p>まず <strong>QMK Firmware</strong> の定義を確認し、<strong>Corne V4.1</strong> の各キーに対応する
+GPIOと、左右間の通信に使用するピンを調べました。
+<strong>V3</strong> のマトリクス方式とは異なり、<strong>V4.1</strong> はダイレクトピン方式なので、
+キーの読み取りもそれに合わせる必要があります。
+また、左右の判定と、右側のキー位置を左側のキーマップへ対応させる処理も確認しました。</p>
+
+<p>途中で追加した「6個のキーを同時押しできるパッチ」は、
+左右間通信とは別の修正です。
+今回使用した <strong>FemtoRuby</strong> のUSB HIDバインディングでは、
+複数のキーコードをまとめて送るための変更が必要でした。
+これは既存のパッチを見つけて適用したものではなく、
+今回の作業で作成した変更でした。</p>
+
+<p>左右間の通信については、右側の送信数と、左側の受信数、
+さらに正常なパケットとして解釈できた数をログへ出しました。
+右側ではキーを押すと状態が変わり、送信処理も進んでいました。
+一方、左側ではデータを受信しても、正常なパケットとして扱えるものが
+ほとんどありませんでした。</p>
+
+<p>ただし、送信数が増えているだけでは、正しい信号がピンから出ているとは限りません。
+ボーレートを下げても改善しなかったため、速度だけでは説明できない状態でした。
+ハードウェア故障も、この段階では完全には除外できませんでした。</p>
+
+<p>そこで、同じ基板内で送信したデータを受信するループバックテストを行いました。
+左右をつなぐケーブルを介さずに確認しても失敗したため、
+まず <strong>PIO</strong> の送受信処理や、ファームウェア側を調べることにしました。</p>
+
+<p>そこで見つかったのが、<strong>RP2040</strong> の待機時のクロック設定でした。
+今回の左右間通信は <strong>PIO</strong> で <strong>UART</strong> を実装していますが、
+待機中にPIOのクロックが止まる設定になっていました。
+そのため、CPUが待機に入ると、通信のタイミングも崩れてしまいます。</p>
+
+<p>PIOのクロックを待機中も動かすよう修正すると、
+ループバックテストで送信した8バイトが正しく受信できるようになりました。
+その後、実際の左右間通信でも正常なパケットとキー状態の変化を確認し、
+右側からの入力が通りました。
+最終的には、ボーレート <strong>9600</strong> でも動作を確認できました。</p>
+
+<h2 id="yey-yey-vibe-coding">yey yey vibe coding!!!</h2>
+
+<p><strong>Corne V4</strong> のファームウェアを <strong>picoruby</strong> に変えてみたのですが、
+いろいろと大変でした。とはいえ何とかうごいたのでおわり</p>
+
+<p>それとdiff
+https://github.com/katsyoshi/picoruby/commit/4aecb0d5338699748893234245fcf68636b7b6cc</p>
+
+  </div><a class="u-url" href="/blog/2026/10/11/femtoruby-in-crkbd-v4-1/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
