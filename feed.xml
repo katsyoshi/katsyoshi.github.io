@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2026-10-12T19:45:32+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Hello, FemtoRuby in Corne v4 Cherry</title><link href="https://blog.katsyoshi.org/blog/2026/10/11/femtoruby-in-crkbd-v4-1/" rel="alternate" type="text/html" title="Hello, FemtoRuby in Corne v4 Cherry" /><published>2026-10-11T00:00:00+09:00</published><updated>2026-10-11T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2026/10/11/femtoruby-in-crkbd-v4-1</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2026/10/11/femtoruby-in-crkbd-v4-1/"><![CDATA[<p>結構前に買ったキーボード <a href="https://github.com/foostan/crkbd"><strong>corne v4 cherry</strong></a> を
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://blog.katsyoshi.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.katsyoshi.org/" rel="alternate" type="text/html" /><updated>2026-10-19T01:13:15+09:00</updated><id>https://blog.katsyoshi.org/feed.xml</id><title type="html">katsyoshi のめもみたいなの</title><subtitle>It&apos;s a memos.</subtitle><entry><title type="html">Lrama の Ruby Parser を Ruby で組みたてたい v 0.0.0</title><link href="https://blog.katsyoshi.org/blog/2026/10/18/arpaka-extension-for-lrama/" rel="alternate" type="text/html" title="Lrama の Ruby Parser を Ruby で組みたてたい v 0.0.0" /><published>2026-10-18T00:00:00+09:00</published><updated>2026-10-18T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2026/10/18/arpaka-extension-for-lrama</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2026/10/18/arpaka-extension-for-lrama/"><![CDATA[<p>皆さんごぞんじだと思いますが <a href="https://github.com/ruby/lrama"><strong>Lrama</strong></a> っていう <a href="https://github.com/ruby/ruby"><strong>Ruby</strong></a>
+製の <em>パーサージェネレーター</em> があります。</p>
+
+<p><em>パーサージェネレーター</em> で有名なのは、<a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V6/usr/source/yacc"><strong>Yacc(yet another compiler compiler)</strong></a>
+や <a href="https://cgit.git.savannah.gnu.org/cgit/bison.git"><strong>Bison</strong></a> があります。
+<strong>Lrama</strong> はこの <strong>Yacc/Bison 形式</strong> で書かれたパーサー定義ファイルから <em>Parser(構文解析)</em> を作ります。</p>
+
+<p><strong>Lrama</strong> は <strong>Yacc/Bison形式</strong> の構文定義ファイルから <em>parser</em> を生成できます。
+ただし、標準の出力先は <strong>C言語</strong> で、 <strong>Ruby</strong> に向けのバックエンドはありません。</p>
+
+<h2 id="ないならしょうがない">ないならしょうがない</h2>
+
+<p>出力されていないならしょうがないつくるしかない。
+のでつくりましょう。
+とその前にどのような <em>parser</em> にしたいのかというものを書いていきましょう。</p>
+
+<ol>
+  <li><strong>Lrama</strong> で <strong>Ruby</strong> の文法定義ファイル(<strong>parse.y</strong>) を読み込む</li>
+  <li>読み込んだ定義から <em>Ruby 向け Parser</em> を作る</li>
+  <li><em>Lexer(字句解析）</em> と生成した <em>Parser</em> を組合せて <strong>Ruby</strong> を読み込む入口となる <strong>Ruby ファイル</strong> を作る</li>
+  <li>作成した入口のプログラムを <strong>Ruby</strong> から利用できるようにする</li>
+</ol>
+
+<p>というのが簡単な流れです。</p>
+
+<h2 id="design-workflow">Design Workflow</h2>
+
+<p>ということでやることが決まったので詳細を考えていきましょう。</p>
+
+<p><img src="/images/arpaka/architecture.webp" alt="architecture" /></p>
+
+<p>上の図が簡単な流れですね。</p>
+
+<p><strong>Lrama</strong> に <strong>Yacc/Bison 形式の定義ファイル</strong> を渡し、
+文法（<em>Grammar</em>）と <strong>Action</strong> から <strong>Ruby Parser</strong> を生成します。
+生成された <em>Parser</em> に <em>Lexer</em> と <em>AST Builder</em> を組み合わせ、
+<strong>Ruby</strong> だけで動作する一つのフロントエンドファイルとして出力します。</p>
+
+<p>ここで <strong>Action</strong> は、文法規則に対応して実行される意味処理です。
+構文木のノードを組み立てる処理などを担当します。</p>
+
+<p><em>Lexer</em> は Ruby のソースを読み取り、
+<em>Parser</em> が扱う <em>token</em> の列に変換します。
+<em>Parser</em> はその <em>token</em> 列を文法定義に従って解析します。</p>
+
+<p><em>Parser</em> の処理の簡易的な流れは以下のようになります。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ruby source -&gt; Lexer -&gt; token 列 -&gt; Parser -&gt; AST
+</code></pre></div></div>
+
+<p>生成されたファイルを <strong>Ruby</strong> の <em>Parser</em> として利用できるようにし、
+<strong>Ruby</strong> から読み込んで <strong>Ruby</strong> プログラムを構文解析できるようにします。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>設計が決まり実装していく手順が見えてきました。
+次回は実際に実装していきましょう。</p>
+
+<p><a href="https://github.com/katsyoshi/arpaka"><img src="https://gh-card.dev/repos/katsyoshi/arpaka.svg" alt="katsyoshi/arpaka - GitHub" /></a></p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><category term="keyboard" /><category term="parser" /><category term="lrama" /><summary type="html"><![CDATA[皆さんごぞんじだと思いますが Lrama っていう Ruby 製の パーサージェネレーター があります。]]></summary></entry><entry><title type="html">Hello, FemtoRuby in Corne v4 Cherry</title><link href="https://blog.katsyoshi.org/blog/2026/10/11/femtoruby-in-crkbd-v4-1/" rel="alternate" type="text/html" title="Hello, FemtoRuby in Corne v4 Cherry" /><published>2026-10-11T00:00:00+09:00</published><updated>2026-10-11T00:00:00+09:00</updated><id>https://blog.katsyoshi.org/blog/2026/10/11/femtoruby-in-crkbd-v4-1</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2026/10/11/femtoruby-in-crkbd-v4-1/"><![CDATA[<p>結構前に買ったキーボード <a href="https://github.com/foostan/crkbd"><strong>corne v4 cherry</strong></a> を
 <a href="https://github.com/picoruby/prk_firmware"><strong>prk_firmware</strong></a> でうごかそうとして1年くらい放置してた。
 そしたらいつのまにか <em>deprecated</em> になって <strong>picoruby-keyboard</strong> を利用することに
 なっていました。</p>
@@ -953,76 +1011,4 @@ emerge zsh
 
 <h2 id="おわり">おわり</h2>
 
-<p>たのしい二日間でした。ありがとうございました。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><category term="conference" /><summary type="html"><![CDATA[Kaigi on Rails 2024 にはじめて現地参加しました。]]></summary></entry><entry><title type="html">今日、私が学んだこと</title><link href="https://blog.katsyoshi.org/blog/2024/05/30/til/" rel="alternate" type="text/html" title="今日、私が学んだこと" /><published>2024-05-30T23:59:59+09:00</published><updated>2024-05-30T23:59:59+09:00</updated><id>https://blog.katsyoshi.org/blog/2024/05/30/til</id><content type="html" xml:base="https://blog.katsyoshi.org/blog/2024/05/30/til/"><![CDATA[<p>ここ1年ほど <strong>Ruby</strong> のパーサーがもりあがっているので、
-<a href="https://github.com/ruby/lrama"><strong>lrama</strong></a> の作者を講師にした
-通称<strong>ドラゴンブック</strong>の「<a href="https://www.saiensu.co.jp/search/?isbn=978-4-7819-1229-5&amp;y=2009">コンパイラ</a>」読書会
-に参加しています。</p>
-
-<p>4.8.1 節の「競合解消のための優先順位と結合性」を読み感想を言い合う場で、
-以下のような話になった。（細かいとろこは本を読んでくれ</p>
-<ul>
-  <li>id + id * id
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">+</code> は <code class="language-plaintext highlighter-rouge">*</code> より優先度が低いため shift</li>
-    </ul>
-  </li>
-  <li>id * id + id
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">*</code> は <code class="language-plaintext highlighter-rouge">*</code> より優先度が高いため reduce</li>
-    </ul>
-  </li>
-  <li>id + id + id
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">+</code> は左結合なので reduce</li>
-    </ul>
-  </li>
-  <li>id = id = id
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">=</code> は右結合なので shift</li>
-    </ul>
-  </li>
-</ul>
-
-<p>ここでそういえば <strong>Ruby</strong> ではどう動くのだろうかとおもい、次の式を<strong>irb</strong>で書いてみた
-<code class="language-plaintext highlighter-rouge">0 - i = 1 + j = 2 * 3 #=&gt; -7</code> とまあ普通（？）の答えが返ってきた。
-でも上のパーサーの条件考えてみるとそもそもこのコードはほかのプログラミング言語で
-パースできるのだろうかと思い、やってみた。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>python <span class="nt">-c</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
-<span class="gp">  File "&lt;string&gt;</span><span class="s2">", line 1
-</span><span class="go">    0 - j = 1 + j = 2 * 3
-    ^^^^^
-SyntaxError: cannot assign to expression
-</span><span class="gp">$</span><span class="w"> </span>perl <span class="nt">-e</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
-<span class="go">Can't modify addition (+) in scalar assignment at -e line 1, at EOF
-Execution of -e aborted due to compilation errors.
-</span><span class="gp">$</span><span class="w"> </span>lua <span class="nt">-e</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
-<span class="go">lua: (command line):1: unexpected symbol near '0'
-</span><span class="gp">$</span><span class="w"> </span>crystal <span class="nb">eval</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
-<span class="go">syntax error in eval:1
-Error: unexpected token: "="
-</span><span class="gp">$</span><span class="w"> </span>ruby <span class="nt">-e</span> <span class="s1">'0 - j = 1 + j = 2 * 3'</span>
-<span class="go">
-</span><span class="gp">$</span><span class="w">
-</span></code></pre></div></div>
-
-<p>:thinkingface:？？？とにかく <strong>Ruby</strong> は通るが他のプログラミング言語で通らないことがわかった。</p>
-
-<p>さいごに <strong>Ruby</strong> の <strong>AST</strong> がどうなってるのかとりあずみてみた。</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> <span class="n">ruby</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'pp RubyVM::AbstractSyntaxTree.parse "0 - j = 1 + j = 2 * 3"'</span>
-<span class="p">(</span><span class="no">SCOPE</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span>
- <span class="ss">tbl: </span><span class="p">[</span><span class="ss">:j</span><span class="p">]</span>
- <span class="ss">args: </span><span class="kp">nil</span>
- <span class="ss">body:
-   </span><span class="p">(</span><span class="no">OPCALL</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span> <span class="mi">0</span><span class="p">)</span> <span class="p">:</span><span class="o">-</span>
-      <span class="p">(</span><span class="no">LIST</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span>
-         <span class="p">(</span><span class="no">LASGN</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="ss">:j</span>
-            <span class="p">(</span><span class="no">OPCALL</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span><span class="o">+</span>
-               <span class="p">(</span><span class="no">LIST</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span>
-                  <span class="p">(</span><span class="no">LASGN</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="ss">:j</span> <span class="p">(</span><span class="no">OPCALL</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">16</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">16</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">17</span> <span class="mi">2</span><span class="p">)</span> <span class="p">:</span><span class="o">*</span> <span class="p">(</span><span class="no">LIST</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="p">(</span><span class="no">LIT</span><span class="err">@</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span> <span class="mi">3</span><span class="p">)</span> <span class="kp">nil</span><span class="p">)))</span>
-                  <span class="kp">nil</span><span class="p">)))</span> <span class="kp">nil</span><span class="p">)))</span>
-</code></pre></div></div>
-
-<p>まあわかるような木構造になってますね。
-それはそうとパーサーどうなってるんですかねえという話でおわり。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><summary type="html"><![CDATA[ここ1年ほど Ruby のパーサーがもりあがっているので、 lrama の作者を講師にした 通称ドラゴンブックの「コンパイラ」読書会 に参加しています。]]></summary></entry></feed>
+<p>たのしい二日間でした。ありがとうございました。</p>]]></content><author><name></name></author><category term="diary" /><category term="tech" /><category term="conference" /><summary type="html"><![CDATA[Kaigi on Rails 2024 にはじめて現地参加しました。]]></summary></entry></feed>

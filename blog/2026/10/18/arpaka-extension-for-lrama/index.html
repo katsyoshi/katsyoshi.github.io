@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Lrama の Ruby Parser を Ruby で組みたてたい v 0.0.0 | katsyoshi のめもみたいなの</title>
+  <link rel="canonical" href="https://blog.katsyoshi.org/blog/2026/10/18/arpaka-extension-for-lrama/">
+  <meta name="description" content="皆さんごぞんじだと思いますが Lrama っていう Ruby 製の パーサージェネレーター があります。">
+
+  <meta property="og:site_name" content="katsyoshi のめもみたいなの">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="Lrama の Ruby Parser を Ruby で組みたてたい v 0.0.0 | katsyoshi のめもみたいなの">
+  <meta property="og:description" content="皆さんごぞんじだと思いますが Lrama っていう Ruby 製の パーサージェネレーター があります。">
+  <meta property="og:url" content="https://blog.katsyoshi.org/blog/2026/10/18/arpaka-extension-for-lrama/">
+  <meta property="og:type" content="article"><meta property="og:image" content="https://blog.katsyoshi.org/images/og/tech.svg">
+  <meta property="og:image:alt" content="Lrama の Ruby Parser を Ruby で組みたてたい v 0.0.0"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lrama の Ruby Parser を Ruby で組みたてたい v 0.0.0 | katsyoshi のめもみたいなの">
+  <meta name="twitter:description" content="皆さんごぞんじだと思いますが Lrama っていう Ruby 製の パーサージェネレーター があります。"><meta name="twitter:site" content="@katsyoshi"><meta name="twitter:image" content="https://blog.katsyoshi.org/images/og/tech.svg"><meta property="article:published_time" content="2026-10-18T00:00:00+09:00"><meta property="article:tag" content="diary"><meta property="article:tag" content="tech"><meta property="article:tag" content="keyboard"><meta property="article:tag" content="parser"><meta property="article:tag" content="lrama"><link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Lrama の Ruby Parser を Ruby で組みたてたい v 0.0.0</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2026-10-18T00:00:00+09:00" itemprop="datePublished">Oct 18, 2026
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>皆さんごぞんじだと思いますが <a href="https://github.com/ruby/lrama"><strong>Lrama</strong></a> っていう <a href="https://github.com/ruby/ruby"><strong>Ruby</strong></a>
+製の <em>パーサージェネレーター</em> があります。</p>
+
+<p><em>パーサージェネレーター</em> で有名なのは、<a href="https://www.tuhs.org/cgi-bin/utree.pl?file=V6/usr/source/yacc"><strong>Yacc(yet another compiler compiler)</strong></a>
+や <a href="https://cgit.git.savannah.gnu.org/cgit/bison.git"><strong>Bison</strong></a> があります。
+<strong>Lrama</strong> はこの <strong>Yacc/Bison 形式</strong> で書かれたパーサー定義ファイルから <em>Parser(構文解析)</em> を作ります。</p>
+
+<p><strong>Lrama</strong> は <strong>Yacc/Bison形式</strong> の構文定義ファイルから <em>parser</em> を生成できます。
+ただし、標準の出力先は <strong>C言語</strong> で、 <strong>Ruby</strong> に向けのバックエンドはありません。</p>
+
+<h2 id="ないならしょうがない">ないならしょうがない</h2>
+
+<p>出力されていないならしょうがないつくるしかない。
+のでつくりましょう。
+とその前にどのような <em>parser</em> にしたいのかというものを書いていきましょう。</p>
+
+<ol>
+  <li><strong>Lrama</strong> で <strong>Ruby</strong> の文法定義ファイル(<strong>parse.y</strong>) を読み込む</li>
+  <li>読み込んだ定義から <em>Ruby 向け Parser</em> を作る</li>
+  <li><em>Lexer(字句解析）</em> と生成した <em>Parser</em> を組合せて <strong>Ruby</strong> を読み込む入口となる <strong>Ruby ファイル</strong> を作る</li>
+  <li>作成した入口のプログラムを <strong>Ruby</strong> から利用できるようにする</li>
+</ol>
+
+<p>というのが簡単な流れです。</p>
+
+<h2 id="design-workflow">Design Workflow</h2>
+
+<p>ということでやることが決まったので詳細を考えていきましょう。</p>
+
+<p><img src="/images/arpaka/architecture.webp" alt="architecture" /></p>
+
+<p>上の図が簡単な流れですね。</p>
+
+<p><strong>Lrama</strong> に <strong>Yacc/Bison 形式の定義ファイル</strong> を渡し、
+文法（<em>Grammar</em>）と <strong>Action</strong> から <strong>Ruby Parser</strong> を生成します。
+生成された <em>Parser</em> に <em>Lexer</em> と <em>AST Builder</em> を組み合わせ、
+<strong>Ruby</strong> だけで動作する一つのフロントエンドファイルとして出力します。</p>
+
+<p>ここで <strong>Action</strong> は、文法規則に対応して実行される意味処理です。
+構文木のノードを組み立てる処理などを担当します。</p>
+
+<p><em>Lexer</em> は Ruby のソースを読み取り、
+<em>Parser</em> が扱う <em>token</em> の列に変換します。
+<em>Parser</em> はその <em>token</em> 列を文法定義に従って解析します。</p>
+
+<p><em>Parser</em> の処理の簡易的な流れは以下のようになります。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ruby source -&gt; Lexer -&gt; token 列 -&gt; Parser -&gt; AST
+</code></pre></div></div>
+
+<p>生成されたファイルを <strong>Ruby</strong> の <em>Parser</em> として利用できるようにし、
+<strong>Ruby</strong> から読み込んで <strong>Ruby</strong> プログラムを構文解析できるようにします。</p>
+
+<h2 id="おわり">おわり</h2>
+
+<p>設計が決まり実装していく手順が見えてきました。
+次回は実際に実装していきましょう。</p>
+
+<p><a href="https://github.com/katsyoshi/arpaka"><img src="https://gh-card.dev/repos/katsyoshi/arpaka.svg" alt="katsyoshi/arpaka - GitHub" /></a></p>
+
+  </div><a class="u-url" href="/blog/2026/10/18/arpaka-extension-for-lrama/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
