@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="220" viewBox="0 0 760 220" role="img" aria-labelledby="title description">
+  <title id="title">katsyoshi/arpaka</title>
+  <desc id="description">Generate Ruby parsers with Lrama, and use their ASTs from Ruby.</desc>
+  <rect width="760" height="220" rx="18" fill="#24292f"/>
+  <rect x="1" y="1" width="758" height="218" rx="17" fill="none" stroke="#57606a"/>
+  <circle cx="58" cy="58" r="26" fill="#f78166"/>
+  <path d="M58 39c-10.5 0-19 8.5-19 19 0 8.4 5.4 15.5 13 18-.2-1.7-.3-4.3 0-6.2-1.4.3-5.6 1.2-6.4-2.4-.2-1.1-.8-1.8-1.4-2.3-.7-.4-1.7-1.2 0-1.2 1.5 0 2.6 1.4 3 2 .9 1.5 2.3 1.1 4 .7.1-.8.5-1.4.9-1.8-5.8-.7-10.4-2.9-10.4-11.3 0-2.5.9-4.5 2.4-6.1-.2-.6-1-3.1.2-6.1 0 0 2-.6 6.3 2.3 1.8-.5 3.7-.8 5.6-.8s3.8.3 5.6.8c4.3-2.9 6.3-2.3 6.3-2.3 1.2 3 .4 5.5.2 6.1 1.5 1.6 2.4 3.6 2.4 6.1 0 8.4-4.6 10.6-10.4 11.3.5.4.9 1.2.9 2.4v7c0 1.7-.1 3-.1 3.4 7.6-2.5 13-9.6 13-18 0-10.5-8.5-19-19-19z" fill="#24292f"/>
+  <text x="102" y="67" fill="#f0f6fc" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="30" font-weight="700">katsyoshi/arpaka</text>
+  <text x="102" y="105" fill="#c9d1d9" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="18">Generate Ruby parsers with Lrama, and use their ASTs from Ruby.</text>
+  <line x1="42" y1="145" x2="718" y2="145" stroke="#57606a"/>
+  <text x="42" y="181" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="16">Ruby</text>
+  <circle cx="96" cy="176" r="7" fill="#701516"/>
+  <text x="690" y="181" text-anchor="end" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="16">github.com/katsyoshi/arpaka</text>
+</svg>

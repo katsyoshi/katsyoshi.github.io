@@ -52,6 +52,156 @@
 
 
 
+  <h1><a href="/blog/2026/10/25/arpaka-requires-action-implementations/">Lrama の Ruby Parser を Ruby で組みたてたい v 0.1.0</a></h1>
+  <p class="author">
+    <span class="date">2026-10-25 00:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://github.com/katsyoshi/arpaka"><img src="/images/arpaka.svg" alt="katsyoshi/arpaka - GitHub" /></a></p>
+
+<p><a href="/blog/2026/10/18/arpaka-extension-for-lrama/">前回</a>は <em>パーサージェネレーター</em> を使って
+<em>parser</em> を作るための準備し、構築する流れをみていきました。
+今回は実際に <em>parser</em> を作っていきます。というか <em>parser</em> を吐き出すようにします。
+<strong>Lrama</strong> の基本的な動作については、<a href="https://github.com/yui-knk">かねこさん</a> の
+<a href="https://yui-knk.hatenablog.com/entry/2023/03/13/101951">Ruby Parser開発日誌 (5)</a> などに詳しいので、
+ここでは Ruby の Parser を組み立てるときに必要になる Action の話をします。</p>
+
+<h2 id="rubyででてこないわけ">Rubyででてこないわけ</h2>
+
+<p>これも <a href="https://yui-knk.hatenablog.com/entry/2023/04/04/190413">Ruby Parser開発日誌 (6)</a> などに詳しく書かれています。
+結論からいうと出力される <strong>C ファイル</strong> に <em>parser</em> と <em>lexer</em> が密結合しており分離する
+ことが困難で分割できないと。
+分離した上で <strong>Ruby</strong> に置き換える意味は薄い、というのは私見です。</p>
+
+<h2 id="parse-できる">Parse できる</h2>
+
+<p>まずは Lrama に簡単な文法を渡して、生成した <em>Parser</em> で token 列を解析します。
+電卓の文法なら、<code class="language-plaintext highlighter-rouge">NUMBER</code> と演算子の token 列を渡して、Action の結果として計算値を
+返せます。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parser_class</span> <span class="o">=</span> <span class="no">Lrama</span><span class="o">::</span><span class="no">Ruby</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"examples/calculator.y"</span><span class="p">),</span>
+  <span class="ss">filename: </span><span class="s2">"examples/calculator.y"</span><span class="p">,</span> <span class="ss">class_name: </span><span class="s2">"Calculator"</span><span class="p">)</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">parser_class</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">parser</span><span class="p">.</span><span class="nf">parse</span><span class="p">([[</span><span class="ss">:NUMBER</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s2">"+"</span><span class="p">,</span> <span class="kp">nil</span><span class="p">],</span> <span class="p">[</span><span class="ss">:NUMBER</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s2">"*"</span><span class="p">,</span> <span class="kp">nil</span><span class="p">],</span> <span class="p">[</span><span class="ss">:NUMBER</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="c1"># =&gt; 14</span>
+</code></pre></div></div>
+
+<p>この時点で、Lrama の解析表と Ruby の Parser は動いています。Parser に渡している
+のはすでに token になった値なので、ここではまだ Ruby のソースを読んでいません。</p>
+
+<h2 id="actionとはなにか">Actionとはなにか</h2>
+
+<p>文法の規則に付いている <code class="language-plaintext highlighter-rouge">{ ... }</code> が <strong>Action</strong> です。<em>Parser</em> は規則に合う
+<em>token</em> を見つけると、その規則の Action を実行します。文法は「どの並びを
+受け付けるか」を決め、Action は「受け付けたものから何を作るか」を決めます。</p>
+
+<p>たとえば電卓の文法なら、次のような規則を書きます。</p>
+
+<pre><code class="language-yacc">expression: NUMBER { $$ = $1 }
+          | expression '+' expression { $$ = $1 + $3 }
+</code></pre>
+
+<p><code class="language-plaintext highlighter-rouge">$1</code> や <code class="language-plaintext highlighter-rouge">$3</code> は規則の右辺で得た値、<code class="language-plaintext highlighter-rouge">$$</code> はこの規則から返す値です。規則だけ
+でも入力を受け付けるかは決められますが、解析結果を組み立てるには Action が必要です。</p>
+
+<p>Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> では、Action は結果を作るだけではありません。<code class="language-plaintext highlighter-rouge">while</code> の
+規則で <code class="language-plaintext highlighter-rouge">COND_PUSH(1)</code> を呼ぶように、Lexer の状態を更新する Action もあります。
+その状態によって、Lexer が後の <code class="language-plaintext highlighter-rouge">do</code> をどの token として返すかが変わります。
+この Parser と Lexer の状態のやり取りについては、[Ruby Parser開発日誌 (6)]
+(https://yui-knk.hatenablog.com/entry/2023/04/04/190413) に詳しく書かれています。</p>
+
+<p>つまり、Lrama が文法から解析表を作れたとしても、Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> に書かれた
+C の Action をそのまま Ruby の <em>Parser</em> で動かすことはできません。Ruby のビルド側に
+ある Action の展開と、その周辺の Parser/Lexer の処理まで含めて対応する必要が
+あります。これが、Ruby Parser を作るために Action の移植だけでは足りない理由です。</p>
+
+<h2 id="mottekuru-bubunn">Mottekuru Bubunn</h2>
+
+<h3 id="action-を持ってくる">Action を持ってくる</h3>
+
+<p>Ruby Parser を Ruby で動かすために、まず Ruby の Parser 実装を持ってくることに
+しましょう。最初は素朴に、<code class="language-plaintext highlighter-rouge">parse.y</code> に書かれている Action を Ruby 側へ持って
+くるところから始めます。</p>
+
+<p>Lrama の汎用バックエンドが作ってくれるのは、文法から作った解析表と、それを
+動かす <em>Parser</em> です。<a href="https://github.com/katsyoshi/arpaka/commit/13c091c">最初の実装</a>
+では、<code class="language-plaintext highlighter-rouge">Lrama::Ruby.compile</code> に文法を渡し、呼び出し側が <code class="language-plaintext highlighter-rouge">[token, value]</code> の列を
+渡していました。これは電卓のような小さな文法を動かすには十分ですが、Ruby の
+ソースを読むには Lexer と値を組み立てる処理が必要です。</p>
+
+<h3 id="action-だけでは-parse-できない">Action だけでは parse できない</h3>
+
+<p>でも、Action だけを移植しても Ruby のソースは parse できません。Ruby の
+ビルド時に Action から生成される C コードは、Parser や Lexer の状態、C のマクロ、
+補助関数などと結び付いています。Action は文法ファイルの中だけで完結していません。</p>
+
+<p>そこから中を掘っていくと、Ruby のビルド側が Action をどのように展開しているか、
+Lexer がどの token を返すか、reduce の結果をどのように組み立てるかまで確認する
+必要があることが分かります。<code class="language-plaintext highlighter-rouge">parse.y</code> だけで Parser を作れるようにする話は、
+これらの部品を切り分けた次回の記事で扱います。</p>
+
+<p>そこで Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> と Lexer の実装、
+さらに <a href="https://github.com/katsyoshi/arpaka/commit/d91c60b">Ruby ソースから standalone frontend を生成する処理</a>
+を持ってきます。<code class="language-plaintext highlighter-rouge">parse.y</code> から
+文法を読み込み、Ruby 側で必要になる Action は対応する Ruby の処理へ置き換えます。
+さらに Lexer と Builder を組み合わせて、Parser だけでなく Ruby のソースを
+token 列へ変換するところまで一つのフロントエンドにします。</p>
+
+<p>ここで持ってくるのは Ruby の Parser を C のまま実行するためのファイルでは
+ありません。Ruby の文法と token の対応を入力として使い、Lrama で解析表を作り、
+Action と実行時の部品は Ruby で生成します。最終的には Parser、Lexer、Builder
+を含んだ Ruby ファイルを出力します。</p>
+
+<h2 id="parse-ruby">Parse Ruby</h2>
+
+<p>まずは生成したフロントエンドを Ruby から読み込みます。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"arpaka"</span>
+
+<span class="n">frontend</span> <span class="o">=</span> <span class="no">Arpaka</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span>
+  <span class="ss">ruby_source: </span><span class="s2">"/path/to/ruby"</span><span class="p">,</span>
+  <span class="ss">class_name: </span><span class="s2">"RubyParser"</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">frontend</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"a = 1</span><span class="se">\n</span><span class="s2">a + 2"</span><span class="p">,</span> <span class="ss">filename: </span><span class="s2">"example.rb"</span><span class="p">)</span>
+<span class="nb">p</span> <span class="n">result</span>
+</code></pre></div></div>
+
+<p>この <code class="language-plaintext highlighter-rouge">parse</code> は、最初の <code class="language-plaintext highlighter-rouge">Lrama::Ruby</code> のように token 列を直接渡すものでは
+ありません。生成した Lexer が Ruby のソースを token 列へ変換し、Parser が
+文法を適用し、Action と Builder が解析結果を組み立てます。ここでは結果の
+データ構造ではなく、生成した <code class="language-plaintext highlighter-rouge">RubyParser</code> が Ruby のソースを受け取り、
+一連の処理を通して結果を返せることを確認します。「Ruby の文法を Lrama に読ませる」
+だけでなく、「Ruby のソースを Ruby のプログラムから parse する」入口になります。</p>
+
+<p>生成したソースを保存したい場合は <code class="language-plaintext highlighter-rouge">Arpaka.generate</code> を使います。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">code</span> <span class="o">=</span> <span class="no">Arpaka</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span>
+  <span class="ss">ruby_source: </span><span class="s2">"/path/to/ruby"</span><span class="p">,</span>
+  <span class="ss">class_name: </span><span class="s2">"RubyParser"</span>
+<span class="p">)</span>
+<span class="no">File</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s2">"ruby_parser.rb"</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>この段階のフロントエンドはまだ Ruby 全体を扱えるわけではありません。まずは
+Action を Ruby へ移植し、Parser と Lexer を組み合わせて、Ruby の入力を
+Ruby の処理へ渡す流れを通すところまでを目標にしています。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>ということで、Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> を Lrama に読み込ませ、Ruby の文法から Parser を
+生成できるようにしました。</p>
+
+<p>さらに、作った Parser で Ruby のソースを読めるようにするため、<code class="language-plaintext highlighter-rouge">parse.y</code> に
+書かれた Action を Ruby 側へ移植しました。ただ、Action の本文を単純に
+書き換えるだけでは足りません。Ruby のビルドシステムに依存した Action の生成
+コードや、Parser と Lexer 周辺の処理も移植する必要がありました。</p>
+
+<p>文法を読み込めることと、Ruby のソースを parse できることの間には、Action と
+その周辺の実装が必要でした。</p>
+
+  </div>
+
   <h1><a href="/blog/2026/10/18/arpaka-extension-for-lrama/">Lrama の Ruby Parser を Ruby で組みたてたい v 0.0.0</a></h1>
   <p class="author">
     <span class="date">2026-10-18 00:00:00 +0900</span>
@@ -115,7 +265,7 @@
 <p>設計が決まり実装していく手順が見えてきました。
 次回は実際に実装していきましょう。</p>
 
-<p><a href="https://github.com/katsyoshi/arpaka"><img src="https://gh-card.dev/repos/katsyoshi/arpaka.svg" alt="katsyoshi/arpaka - GitHub" /></a></p>
+<p><a href="https://github.com/katsyoshi/arpaka"><img src="/images/arpaka.svg" alt="katsyoshi/arpaka - GitHub" /></a></p>
 
   </div>
 
@@ -999,11 +1149,11 @@ emerge zsh
 
 <p>以上の条件を踏まえいくつか検討してみましたが、 <strong>zola</strong> にしました。</p>
 
-<p><a href="https://github.com/getzola/zola"><img src="https://gh-card.dev/repos/getzola/zola.svg" alt="getzola/zola - GitHub" /></a></p>
+<p><a href="https://github.com/getzola/zola"><img src="/images/zola.svg" alt="getzola/zola - GitHub" /></a></p>
 
 <h2 id="jekyll-to-zola">Jekyll to Zola</h2>
 
-<p><a href="https://github.com/katsyoshi/jekyll2zola"><img src="https://gh-card.dev/repos/katsyoshi/jekyll2zola.svg" alt="katsyoshi/jekyll2zola - GitHub" /></a></p>
+<p><a href="https://github.com/katsyoshi/jekyll2zola"><img src="/images/jekyll2zola.svg" alt="katsyoshi/jekyll2zola - GitHub" /></a></p>
 
 <h3 id="やったこと">やったこと</h3>
 
@@ -1075,84 +1225,6 @@ emerge zsh
     </li>
   </ol>
 </div>
-
-  </div>
-
-  <h1><a href="/blog/2024/10/27/kaigi-on-rails-2024/">KaigiOnRails 2024 に行ってきました</a></h1>
-  <p class="author">
-    <span class="date">2024-10-27 11:09:14 +0900</span>
-  </p>
-  <div class="content">
-    <p><a href="https://kaigionrails.org/2024">Kaigi on Rails 2024</a> にはじめて現地参加しました。</p>
-
-<h2 id="day-1">day 1</h2>
-
-<h3 id="day-1-before">day 1 before</h3>
-<p>kaigiが始まるまえに場所が有明だったので朝寿司へ。
-1年くらい前はよく朝寿司に行っていたので余裕だろうとおもい、朝9時集合に設定した。
-普段行ってる店ではなく新規開拓ということで tabelog の評価が高い、<a href="https://tabelog.com/tokyo/A1313/A131307/13023020/">寿司処 やまざき</a> さんにしました。
-食べたあと丁度いい時間に会場へ入れそうだったので歩いて向いました。</p>
-
-<h3 id="会議">会議</h3>
-
-<p>聞いたセッションは以下のとおり</p>
-
-<ol>
-  <li><a href="https://speakerdeck.com/palkan/kaigi-on-rails-2024-rails-way-or-the-highway">rails-way-or-the-highway</a></li>
-  <li><a href="https://speakerdeck.com/yahonda/railsnopull-requestsnorebiyunoshi-nisi-gakao-eteirukoto">RailsのPull requestsのレビューの時に私が考えていること</a></li>
-  <li><a href="https://speakerdeck.com/asayamakk/karamuzhui-jia-dezeng-eruactiverecordnomemorisaizu-imezidekimasuka">そのカラム追加、ちょっと待って！カラム追加で増えるActiveRecordのメモリサイズ、イメージできますか?</a></li>
-  <li><a href="https://speakerdeck.com/ymtdzzz/opentelemetryderailsnopahuomansufen-xi-woshi-metemiyou-kor2024">モノリスでも使える！OpenTelemetryでRailsアプリのパフォーマンス分析を始めてみよう</a></li>
-  <li><a href="https://speakerdeck.com/phigasui/cxml-toiudian-zi-shang-qu-yin-no-toranzakusiyonwozhi-eru-purotokorutoxiang-kiatuteiruhua">cXML という電子商取引のトランザクションを支えるプロトコルと向きあっている話</a></li>
-  <li><a href="https://speakerdeck.com/katty0324/ririsu8nian-mu-nosabisuno1800ge-noerbhuairuwoviewcomponentniyi-xing-sitafang-fa-tosonojie-guo">リリース8年目のサービスの1800個のERBファイルをViewComponentに移行した方法とその結果</a></li>
-  <li>[ActionCableなら簡単? 生成 AIの応答をタイピングアニメーションで表示。実装、コスト削減、テスト、運用まで。]</li>
-  <li><a href="https://speakerdeck.com/takeyuweb/railsatupuguredo">現実のRuby/Railsアップグレード</a></li>
-</ol>
-
-<h4 id="感想">感想</h4>
-
-<p>キーノートの <a href="https://github.com/palkan">@palkan</a> の話はすごくよくて、Rails Wayについて話をしてくれました。
-<a href="https://github.com/yahonda">@yahonda</a> は、 Rails の <a href="https://rubyonrails.org/community#committers">The Committers</a> の一員で Rails でレビューしている際に気を付けている部分について話してくれてました。
-<a href="https://github.com/asayamakk">@asayamakk</a> は DB にカラムを増やすとどれだけ ActiveRecord のオブジェクトが増え、メモリの消費量が増えるかの話でした。
-<a href="https://github.com/katty0324">@katty0324</a> は ViewComponent に移行するために自動化した話でした。この話は大変興味深く聞いてました。
-<code class="language-plaintext highlighter-rouge">ViewComponent</code> に対応するために問題の整理、自動化するための準備など丁寧に仕事している印象でした。
-<a href="https://github.com/takeyuweb">@takeyuweb</a> ではアップデートするためになにをしたのか、していくのかという話をしてくれていました。</p>
-
-<h3 id="day-1-after">day 1 after</h3>
-<p>この日はオフィシャルの懇親会があり、わいわいと話してました。このとき <a href="https://github.com/tagomoris">@tagomoris</a> が Ruby でやっている Namespace のビルドが通ったらしく皆でお祝い。
-懇親会後に @palkan や @yahonda たちと二次会で新橋へ。私は早々に帰ったのですが会は1:30ごろ解散だったようです。</p>
-
-<h2 id="day-2">day 2</h2>
-
-<h3 id="day-2-before">day 2 before</h3>
-
-<p>この日の 10:00 のセッションに間に合うはずだったのですが、出る時間の予定が狂ってしまった。
-出る直前に近所のおじさんが向っていることに気がついたので有楽町で落ちあい、タクシーで向かうことに。</p>
-
-<h3 id="kaigi">Kaigi</h3>
-
-<ol>
-  <li><a href="https://speakerdeck.com/ydah/zuo-tuteli-jie-suru-rdbmsnosikumi">作って理解する RDBMSのしくみ</a></li>
-  <li><a href="https://speakerdeck.com/shinkufencer/state-for-beginners-with-rails">入門『状態』</a></li>
-  <li><a href="https://speakerdeck.com/nay3/hotwireguang-nodao-tostimulus">Hotwire光の道とStimulus</a></li>
-  <li><a href="https://speakerdeck.com/ohbarye/data-migration-on-rails">Data Migration on Rails</a></li>
-  <li><a href="https://speakerdeck.com/moro/identifying-user-idenity">Identifying User Identity</a></li>
-  <li><a href="https://speakerdeck.com/snoozer05/wholeness-repairing-and-to-have-fun">WHOLENESS, REPAIRING, AND TO HAVE FUN: 全体性、修復、そして楽しむこと</a></li>
-</ol>
-
-<h4 id="kansou">Kansou</h4>
-
-<p>最初のセッションは前日いっしょに飲んでた <a href="https://github.com/ydah">@ydah</a> で、RDBの中身の基本的な話をしてくれました。
-その後はちょくちょくづつ聞く感じになりました。
-<a href="https://github.com/snoozer05">@snoozer05</a> のキーノートはいい話でした。</p>
-
-<h3 id="day-2-after">day 2 after</h3>
-
-<p>会議後の懇親会は <a href="https://mov.am">mov</a> Drinkup と <a href="https://pixiv.net">pixiv</a> RubyMusicMixin へ。
-この日は前日の疲れが取れていないので終ったあとすぐに帰宅。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>たのしい二日間でした。ありがとうございました。</p>
 
   </div>
 

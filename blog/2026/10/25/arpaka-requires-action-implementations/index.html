@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Lrama の Ruby Parser を Ruby で組みたてたい v 0.1.0 | katsyoshi のめもみたいなの</title>
+  <link rel="canonical" href="https://blog.katsyoshi.org/blog/2026/10/25/arpaka-requires-action-implementations/">
+  <meta name="description" content="">
+
+  <meta property="og:site_name" content="katsyoshi のめもみたいなの">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="Lrama の Ruby Parser を Ruby で組みたてたい v 0.1.0 | katsyoshi のめもみたいなの">
+  <meta property="og:description" content="">
+  <meta property="og:url" content="https://blog.katsyoshi.org/blog/2026/10/25/arpaka-requires-action-implementations/">
+  <meta property="og:type" content="article"><meta property="og:image" content="https://blog.katsyoshi.org/images/og/tech.svg">
+  <meta property="og:image:alt" content="Lrama の Ruby Parser を Ruby で組みたてたい v 0.1.0"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lrama の Ruby Parser を Ruby で組みたてたい v 0.1.0 | katsyoshi のめもみたいなの">
+  <meta name="twitter:description" content=""><meta name="twitter:site" content="@katsyoshi"><meta name="twitter:image" content="https://blog.katsyoshi.org/images/og/tech.svg"><meta property="article:published_time" content="2026-10-25T00:00:00+09:00"><meta property="article:tag" content="diary"><meta property="article:tag" content="tech"><meta property="article:tag" content="parser"><meta property="article:tag" content="lrama"><link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Lrama の Ruby Parser を Ruby で組みたてたい v 0.1.0</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2026-10-25T00:00:00+09:00" itemprop="datePublished">Oct 25, 2026
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="https://github.com/katsyoshi/arpaka"><img src="/images/arpaka.svg" alt="katsyoshi/arpaka - GitHub" /></a></p>
+
+<p><a href="/blog/2026/10/18/arpaka-extension-for-lrama/">前回</a>は <em>パーサージェネレーター</em> を使って
+<em>parser</em> を作るための準備し、構築する流れをみていきました。
+今回は実際に <em>parser</em> を作っていきます。というか <em>parser</em> を吐き出すようにします。
+<strong>Lrama</strong> の基本的な動作については、<a href="https://github.com/yui-knk">かねこさん</a> の
+<a href="https://yui-knk.hatenablog.com/entry/2023/03/13/101951">Ruby Parser開発日誌 (5)</a> などに詳しいので、
+ここでは Ruby の Parser を組み立てるときに必要になる Action の話をします。</p>
+
+<h2 id="rubyででてこないわけ">Rubyででてこないわけ</h2>
+
+<p>これも <a href="https://yui-knk.hatenablog.com/entry/2023/04/04/190413">Ruby Parser開発日誌 (6)</a> などに詳しく書かれています。
+結論からいうと出力される <strong>C ファイル</strong> に <em>parser</em> と <em>lexer</em> が密結合しており分離する
+ことが困難で分割できないと。
+分離した上で <strong>Ruby</strong> に置き換える意味は薄い、というのは私見です。</p>
+
+<h2 id="parse-できる">Parse できる</h2>
+
+<p>まずは Lrama に簡単な文法を渡して、生成した <em>Parser</em> で token 列を解析します。
+電卓の文法なら、<code class="language-plaintext highlighter-rouge">NUMBER</code> と演算子の token 列を渡して、Action の結果として計算値を
+返せます。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parser_class</span> <span class="o">=</span> <span class="no">Lrama</span><span class="o">::</span><span class="no">Ruby</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"examples/calculator.y"</span><span class="p">),</span>
+  <span class="ss">filename: </span><span class="s2">"examples/calculator.y"</span><span class="p">,</span> <span class="ss">class_name: </span><span class="s2">"Calculator"</span><span class="p">)</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">parser_class</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">parser</span><span class="p">.</span><span class="nf">parse</span><span class="p">([[</span><span class="ss">:NUMBER</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s2">"+"</span><span class="p">,</span> <span class="kp">nil</span><span class="p">],</span> <span class="p">[</span><span class="ss">:NUMBER</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s2">"*"</span><span class="p">,</span> <span class="kp">nil</span><span class="p">],</span> <span class="p">[</span><span class="ss">:NUMBER</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="c1"># =&gt; 14</span>
+</code></pre></div></div>
+
+<p>この時点で、Lrama の解析表と Ruby の Parser は動いています。Parser に渡している
+のはすでに token になった値なので、ここではまだ Ruby のソースを読んでいません。</p>
+
+<h2 id="actionとはなにか">Actionとはなにか</h2>
+
+<p>文法の規則に付いている <code class="language-plaintext highlighter-rouge">{ ... }</code> が <strong>Action</strong> です。<em>Parser</em> は規則に合う
+<em>token</em> を見つけると、その規則の Action を実行します。文法は「どの並びを
+受け付けるか」を決め、Action は「受け付けたものから何を作るか」を決めます。</p>
+
+<p>たとえば電卓の文法なら、次のような規則を書きます。</p>
+
+<pre><code class="language-yacc">expression: NUMBER { $$ = $1 }
+          | expression '+' expression { $$ = $1 + $3 }
+</code></pre>
+
+<p><code class="language-plaintext highlighter-rouge">$1</code> や <code class="language-plaintext highlighter-rouge">$3</code> は規則の右辺で得た値、<code class="language-plaintext highlighter-rouge">$$</code> はこの規則から返す値です。規則だけ
+でも入力を受け付けるかは決められますが、解析結果を組み立てるには Action が必要です。</p>
+
+<p>Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> では、Action は結果を作るだけではありません。<code class="language-plaintext highlighter-rouge">while</code> の
+規則で <code class="language-plaintext highlighter-rouge">COND_PUSH(1)</code> を呼ぶように、Lexer の状態を更新する Action もあります。
+その状態によって、Lexer が後の <code class="language-plaintext highlighter-rouge">do</code> をどの token として返すかが変わります。
+この Parser と Lexer の状態のやり取りについては、[Ruby Parser開発日誌 (6)]
+(https://yui-knk.hatenablog.com/entry/2023/04/04/190413) に詳しく書かれています。</p>
+
+<p>つまり、Lrama が文法から解析表を作れたとしても、Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> に書かれた
+C の Action をそのまま Ruby の <em>Parser</em> で動かすことはできません。Ruby のビルド側に
+ある Action の展開と、その周辺の Parser/Lexer の処理まで含めて対応する必要が
+あります。これが、Ruby Parser を作るために Action の移植だけでは足りない理由です。</p>
+
+<h2 id="mottekuru-bubunn">Mottekuru Bubunn</h2>
+
+<h3 id="action-を持ってくる">Action を持ってくる</h3>
+
+<p>Ruby Parser を Ruby で動かすために、まず Ruby の Parser 実装を持ってくることに
+しましょう。最初は素朴に、<code class="language-plaintext highlighter-rouge">parse.y</code> に書かれている Action を Ruby 側へ持って
+くるところから始めます。</p>
+
+<p>Lrama の汎用バックエンドが作ってくれるのは、文法から作った解析表と、それを
+動かす <em>Parser</em> です。<a href="https://github.com/katsyoshi/arpaka/commit/13c091c">最初の実装</a>
+では、<code class="language-plaintext highlighter-rouge">Lrama::Ruby.compile</code> に文法を渡し、呼び出し側が <code class="language-plaintext highlighter-rouge">[token, value]</code> の列を
+渡していました。これは電卓のような小さな文法を動かすには十分ですが、Ruby の
+ソースを読むには Lexer と値を組み立てる処理が必要です。</p>
+
+<h3 id="action-だけでは-parse-できない">Action だけでは parse できない</h3>
+
+<p>でも、Action だけを移植しても Ruby のソースは parse できません。Ruby の
+ビルド時に Action から生成される C コードは、Parser や Lexer の状態、C のマクロ、
+補助関数などと結び付いています。Action は文法ファイルの中だけで完結していません。</p>
+
+<p>そこから中を掘っていくと、Ruby のビルド側が Action をどのように展開しているか、
+Lexer がどの token を返すか、reduce の結果をどのように組み立てるかまで確認する
+必要があることが分かります。<code class="language-plaintext highlighter-rouge">parse.y</code> だけで Parser を作れるようにする話は、
+これらの部品を切り分けた次回の記事で扱います。</p>
+
+<p>そこで Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> と Lexer の実装、
+さらに <a href="https://github.com/katsyoshi/arpaka/commit/d91c60b">Ruby ソースから standalone frontend を生成する処理</a>
+を持ってきます。<code class="language-plaintext highlighter-rouge">parse.y</code> から
+文法を読み込み、Ruby 側で必要になる Action は対応する Ruby の処理へ置き換えます。
+さらに Lexer と Builder を組み合わせて、Parser だけでなく Ruby のソースを
+token 列へ変換するところまで一つのフロントエンドにします。</p>
+
+<p>ここで持ってくるのは Ruby の Parser を C のまま実行するためのファイルでは
+ありません。Ruby の文法と token の対応を入力として使い、Lrama で解析表を作り、
+Action と実行時の部品は Ruby で生成します。最終的には Parser、Lexer、Builder
+を含んだ Ruby ファイルを出力します。</p>
+
+<h2 id="parse-ruby">Parse Ruby</h2>
+
+<p>まずは生成したフロントエンドを Ruby から読み込みます。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"arpaka"</span>
+
+<span class="n">frontend</span> <span class="o">=</span> <span class="no">Arpaka</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span>
+  <span class="ss">ruby_source: </span><span class="s2">"/path/to/ruby"</span><span class="p">,</span>
+  <span class="ss">class_name: </span><span class="s2">"RubyParser"</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">frontend</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"a = 1</span><span class="se">\n</span><span class="s2">a + 2"</span><span class="p">,</span> <span class="ss">filename: </span><span class="s2">"example.rb"</span><span class="p">)</span>
+<span class="nb">p</span> <span class="n">result</span>
+</code></pre></div></div>
+
+<p>この <code class="language-plaintext highlighter-rouge">parse</code> は、最初の <code class="language-plaintext highlighter-rouge">Lrama::Ruby</code> のように token 列を直接渡すものでは
+ありません。生成した Lexer が Ruby のソースを token 列へ変換し、Parser が
+文法を適用し、Action と Builder が解析結果を組み立てます。ここでは結果の
+データ構造ではなく、生成した <code class="language-plaintext highlighter-rouge">RubyParser</code> が Ruby のソースを受け取り、
+一連の処理を通して結果を返せることを確認します。「Ruby の文法を Lrama に読ませる」
+だけでなく、「Ruby のソースを Ruby のプログラムから parse する」入口になります。</p>
+
+<p>生成したソースを保存したい場合は <code class="language-plaintext highlighter-rouge">Arpaka.generate</code> を使います。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">code</span> <span class="o">=</span> <span class="no">Arpaka</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span>
+  <span class="ss">ruby_source: </span><span class="s2">"/path/to/ruby"</span><span class="p">,</span>
+  <span class="ss">class_name: </span><span class="s2">"RubyParser"</span>
+<span class="p">)</span>
+<span class="no">File</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s2">"ruby_parser.rb"</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>この段階のフロントエンドはまだ Ruby 全体を扱えるわけではありません。まずは
+Action を Ruby へ移植し、Parser と Lexer を組み合わせて、Ruby の入力を
+Ruby の処理へ渡す流れを通すところまでを目標にしています。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>ということで、Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> を Lrama に読み込ませ、Ruby の文法から Parser を
+生成できるようにしました。</p>
+
+<p>さらに、作った Parser で Ruby のソースを読めるようにするため、<code class="language-plaintext highlighter-rouge">parse.y</code> に
+書かれた Action を Ruby 側へ移植しました。ただ、Action の本文を単純に
+書き換えるだけでは足りません。Ruby のビルドシステムに依存した Action の生成
+コードや、Parser と Lexer 周辺の処理も移植する必要がありました。</p>
+
+<p>文法を読み込めることと、Ruby のソースを parse できることの間には、Action と
+その周辺の実装が必要でした。</p>
+
+  </div><a class="u-url" href="/blog/2026/10/25/arpaka-requires-action-implementations/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+digraph G {
+    rankdir=LR
+    router [shape="cylinder", label="ルーター", labelloc="b", style="filled", height=1]
+    home [shape="house", label="家", color="green", style="filled"]
+    peer [shape="tripleoctagon", label="対向器", color="green", style="filled", fontcolor="black", height=1]
+
+    home -> router [label="1: ok"]
+    router -> peer [label="2: ok"]
+    peer -> router [label="3: ok?"]
+    router -> home [label="4: NG"]
+}
