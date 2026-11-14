@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en"><head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQZYYM4LL2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LQZYYM4LL2');
+</script>
+
+
+<script>
+  !function(o,e,n){var r=[];if(window.reproio)console.info("Repro Web SDK was loaded more than once");else{window.reproio=function(){r.push(arguments)};var i=o.createElement(e),t=o.getElementsByTagName(e)[0];i.src="https://cdn.reproio.com/web/v2/repro-sdk.min.js",i.async=!0,i.crossOrigin="",i.onload=function(){window.reproio("setSnippetVersion","2.1"),r.forEach(function(o){window.reproio.apply(window.reproio,o)})},t.parentNode.insertBefore(i,t)}}(document,"script");
+  reproio("setup", "ff3c22fd-f7d1-4958-b16e-e57054f33d44");
+  reproio("track", "pageView");
+</script>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><title>Lrama の Ruby Parser を Ruby で組みたてたい v 0.2.0 | katsyoshi のめもみたいなの</title>
+  <link rel="canonical" href="https://blog.katsyoshi.org/blog/2026/11/01/arpaka-parser-result/">
+  <meta name="description" content="">
+
+  <meta property="og:site_name" content="katsyoshi のめもみたいなの">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="Lrama の Ruby Parser を Ruby で組みたてたい v 0.2.0 | katsyoshi のめもみたいなの">
+  <meta property="og:description" content="">
+  <meta property="og:url" content="https://blog.katsyoshi.org/blog/2026/11/01/arpaka-parser-result/">
+  <meta property="og:type" content="article"><meta property="og:image" content="https://blog.katsyoshi.org/images/og/tech.svg">
+  <meta property="og:image:alt" content="Lrama の Ruby Parser を Ruby で組みたてたい v 0.2.0"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lrama の Ruby Parser を Ruby で組みたてたい v 0.2.0 | katsyoshi のめもみたいなの">
+  <meta name="twitter:description" content=""><meta name="twitter:site" content="@katsyoshi"><meta name="twitter:image" content="https://blog.katsyoshi.org/images/og/tech.svg"><meta property="article:published_time" content="2026-11-01T00:00:00+09:00"><meta property="article:tag" content="diary"><meta property="article:tag" content="tech"><meta property="article:tag" content="parser"><meta property="article:tag" content="lrama"><link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.katsyoshi.org/feed.xml" title="katsyoshi のめもみたいなの" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">katsyoshi のめもみたいなの</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Lrama の Ruby Parser を Ruby で組みたてたい v 0.2.0</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2026-11-01T00:00:00+09:00" itemprop="datePublished">Nov 1, 2026
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="https://github.com/katsyoshi/arpaka"><img src="/images/arpaka.svg" alt="katsyoshi/arpaka - GitHub" /></a></p>
+
+<p><a href="/blog/2026/10/25/arpaka-requires-action-implementations/">前回</a>は、Ruby の
+<code class="language-plaintext highlighter-rouge">parse.y</code> を読み込み、Action を Ruby 側へ移植して、Ruby のソースを parse できる
+ところまで進めました。</p>
+
+<p>今回は、その Parser の結果をどう返すかを整理します。ここで作ったものをコードの中では
+<code class="language-plaintext highlighter-rouge">AST</code> と呼んでいますが、Ruby の構文全体を表す AST を完成させたわけではありません。
+この時点で必要だったのは、Class や Module と、それに伴う Method の定義を取り出し、
+木構造として返すことでした。</p>
+
+<p>Class / Module の定義を追加したのは、<a href="https://github.com/katsyoshi/arpaka/commit/59728ac">59728ac</a>
+です。そこへ Method の定義を追加した <a href="https://github.com/katsyoshi/arpaka/commit/ab6028f">ab6028f</a>
+を重ねています。その後、Ruby のソースから standalone frontend を生成する形を
+<a href="https://github.com/katsyoshi/arpaka/commit/d91c60b">d91c60b</a> で整理しました。</p>
+
+<h2 id="parser-として利用するための入口">Parser として利用するための入口</h2>
+
+<p>最初の <code class="language-plaintext highlighter-rouge">Lrama::Ruby</code> は token 列を直接受け取る Parser でした。
+これは文法や Parser の動作を確認するには十分ですが、Ruby の Parser として利用するには
+少し低い API です。</p>
+
+<p>Ruby のソースを渡して、Parser が必要な Lexer や Builder を内部で使い、結果を返す形にします。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">frontend</span> <span class="o">=</span> <span class="no">Arpaka</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span>
+  <span class="ss">ruby_source: </span><span class="s2">"/path/to/ruby"</span><span class="p">,</span>
+  <span class="ss">class_name: </span><span class="s2">"RubyParser"</span>
+<span class="p">)</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">frontend</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span>
+  <span class="s2">"class Example</span><span class="se">\n</span><span class="s2">  def call</span><span class="se">\n</span><span class="s2">  end</span><span class="se">\n</span><span class="s2">end</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+  <span class="ss">filename: </span><span class="s2">"example.rb"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>呼び出し側が token を作ったり、Lexer の状態を管理したりする必要はありません。
+ここで必要なのは Parser の内部を直接操作することではなく、Ruby のソースを渡して
+結果を受け取る入口です。<code class="language-plaintext highlighter-rouge">frontend.parse</code> の戻り値である <code class="language-plaintext highlighter-rouge">tree</code> が、Parser が構築した
+定義木です。この例なら、<code class="language-plaintext highlighter-rouge">Example</code> という Class と、その中の <code class="language-plaintext highlighter-rouge">call</code> という Method を
+辿れる結果を返します。</p>
+
+<p>この結果を置く名前として、実装では先に <code class="language-plaintext highlighter-rouge">AST</code> という名前空間を用意しました。これは、
+この時点ですでに Ruby 全体の AST を設計し終えていたという意味ではありません。Class や
+Method 以外の構文をあとから追加できる場所を、Parser の戻り値として先に決めておきたかった
+からです。実際の v0.2.0 で返している情報は、定義を中心にした小さな木構造です。</p>
+
+<h2 id="何を木構造にするのか">何を木構造にするのか</h2>
+
+<p>Parser の結果をそのまま Action の一時的な値として返すのではなく、まず定義の構造を
+木にします。対象にしたのは、Class や Module の入れ子と、そこに定義された Method です。</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Source
+└── Class Example
+    └── Method call
+</code></pre></div></div>
+
+<p>この木を使えば、アプリケーション側はソース全体の式を再解釈しなくても、どの Class の中に
+どの Method が定義されているかを辿れます。今回必要だったのは、式の細部をすべて保持する
+ことではなく、まずこの定義構造を Parser の結果として返すことでした。</p>
+
+<h2 id="どこまでやるのか">どこまでやるのか</h2>
+
+<p>今回は Ruby 全体の構文を完全に表すことを目標にしません。Class、Module、Method の定義を
+取り出せるところから実装し、まだ必要でない式の細部は対象外にしました。</p>
+
+<p>そのため、次の二つは分けて考えます。</p>
+
+<ul>
+  <li>Parser が入力を文法的に受け付けられるか</li>
+  <li>受け付けた入力から、定義木を構築できるか</li>
+</ul>
+
+<p>入力を parse できても、Class や Method の構造を期待した形で返せるとは限りません。
+現在の実装で扱えない構文は、曖昧な値にして返すのではなく、未対応の構文として扱います。
+何が木に含まれていないのか分からなくなると、利用側で結果を使えないからです。</p>
+
+<p>Rails のソースや Ruby Trick の入賞作品も Parser に渡して、定義木をどこまで構築できるのかを
+確認しています。これは Ruby 全体との互換性を保証するチェックではなく、単純なサンプルだけ
+では見つからない文法上の問題を見つけるための確認です。</p>
+
+<h2 id="互換性は後から考える">互換性は後から考える</h2>
+
+<p>Ruby Parser として使う以上、既存の Ruby Parser と結果を比べたくなります。ただ、この時点で
+必要だったのは、どの AST 表現を正解にするかを決めることではありませんでした。</p>
+
+<p><code class="language-plaintext highlighter-rouge">RubyVM::AbstractSyntaxTree.parse</code> は比較対象にはできますが、Ruby の内部実装に依存した
+表現です。Parser の結果として何を返すかが固まっていない段階で、RubyVM AST のクラス構造を
+そのまま契約にするつもりはありませんでした。</p>
+
+<p>この時点では、互換性を自動で確認する機構もリポジトリにはまだありません。まず Parser を
+動かし、定義木を返せるようにする。その後で、どの Parser のどの表現と比較するのかを考える
+順番です。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>今回は、Ruby のソースを受け取る Parser の入口を用意し、Class、Module、Method の定義を
+木構造として返せるようにしました。</p>
+
+<ul>
+  <li>Parser の内部を直接操作せず、<code class="language-plaintext highlighter-rouge">parse(source, filename:)</code> を入口にする</li>
+  <li>Class / Module と Method の定義を木構造として取り出す</li>
+  <li><code class="language-plaintext highlighter-rouge">AST</code> という名前は将来の拡張のために先に置く</li>
+  <li>Ruby 全体の AST や互換性を、この段階で固定しない</li>
+</ul>
+
+<p>Parser を動かすことと、Parser の結果をどう表現するかは別の問題でした。次は、この定義木を
+どこまで拡張するのか、そして AST と呼ぶ範囲をどこで決めるのかを考えます。</p>
+
+  </div><a class="u-url" href="/blog/2026/11/01/arpaka-parser-result/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">katsyoshi のめもみたいなの</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">katsyoshi のめもみたいなの</li><li><a class="u-email" href="mailto:web@katsyoshi.org">web@katsyoshi.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">katsyoshi</span></a></li><li><a href="https://www.twitter.com/katsyoshi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">katsyoshi</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>It&#39;s a memos.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

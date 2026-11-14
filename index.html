@@ -52,6 +52,121 @@
 
 
 
+  <h1><a href="/blog/2026/11/01/arpaka-parser-result/">Lrama の Ruby Parser を Ruby で組みたてたい v 0.2.0</a></h1>
+  <p class="author">
+    <span class="date">2026-11-01 00:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://github.com/katsyoshi/arpaka"><img src="/images/arpaka.svg" alt="katsyoshi/arpaka - GitHub" /></a></p>
+
+<p><a href="/blog/2026/10/25/arpaka-requires-action-implementations/">前回</a>は、Ruby の
+<code class="language-plaintext highlighter-rouge">parse.y</code> を読み込み、Action を Ruby 側へ移植して、Ruby のソースを parse できる
+ところまで進めました。</p>
+
+<p>今回は、その Parser の結果をどう返すかを整理します。ここで作ったものをコードの中では
+<code class="language-plaintext highlighter-rouge">AST</code> と呼んでいますが、Ruby の構文全体を表す AST を完成させたわけではありません。
+この時点で必要だったのは、Class や Module と、それに伴う Method の定義を取り出し、
+木構造として返すことでした。</p>
+
+<p>Class / Module の定義を追加したのは、<a href="https://github.com/katsyoshi/arpaka/commit/59728ac">59728ac</a>
+です。そこへ Method の定義を追加した <a href="https://github.com/katsyoshi/arpaka/commit/ab6028f">ab6028f</a>
+を重ねています。その後、Ruby のソースから standalone frontend を生成する形を
+<a href="https://github.com/katsyoshi/arpaka/commit/d91c60b">d91c60b</a> で整理しました。</p>
+
+<h2 id="parser-として利用するための入口">Parser として利用するための入口</h2>
+
+<p>最初の <code class="language-plaintext highlighter-rouge">Lrama::Ruby</code> は token 列を直接受け取る Parser でした。
+これは文法や Parser の動作を確認するには十分ですが、Ruby の Parser として利用するには
+少し低い API です。</p>
+
+<p>Ruby のソースを渡して、Parser が必要な Lexer や Builder を内部で使い、結果を返す形にします。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">frontend</span> <span class="o">=</span> <span class="no">Arpaka</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span>
+  <span class="ss">ruby_source: </span><span class="s2">"/path/to/ruby"</span><span class="p">,</span>
+  <span class="ss">class_name: </span><span class="s2">"RubyParser"</span>
+<span class="p">)</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">frontend</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span>
+  <span class="s2">"class Example</span><span class="se">\n</span><span class="s2">  def call</span><span class="se">\n</span><span class="s2">  end</span><span class="se">\n</span><span class="s2">end</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+  <span class="ss">filename: </span><span class="s2">"example.rb"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>呼び出し側が token を作ったり、Lexer の状態を管理したりする必要はありません。
+ここで必要なのは Parser の内部を直接操作することではなく、Ruby のソースを渡して
+結果を受け取る入口です。<code class="language-plaintext highlighter-rouge">frontend.parse</code> の戻り値である <code class="language-plaintext highlighter-rouge">tree</code> が、Parser が構築した
+定義木です。この例なら、<code class="language-plaintext highlighter-rouge">Example</code> という Class と、その中の <code class="language-plaintext highlighter-rouge">call</code> という Method を
+辿れる結果を返します。</p>
+
+<p>この結果を置く名前として、実装では先に <code class="language-plaintext highlighter-rouge">AST</code> という名前空間を用意しました。これは、
+この時点ですでに Ruby 全体の AST を設計し終えていたという意味ではありません。Class や
+Method 以外の構文をあとから追加できる場所を、Parser の戻り値として先に決めておきたかった
+からです。実際の v0.2.0 で返している情報は、定義を中心にした小さな木構造です。</p>
+
+<h2 id="何を木構造にするのか">何を木構造にするのか</h2>
+
+<p>Parser の結果をそのまま Action の一時的な値として返すのではなく、まず定義の構造を
+木にします。対象にしたのは、Class や Module の入れ子と、そこに定義された Method です。</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Source
+└── Class Example
+    └── Method call
+</code></pre></div></div>
+
+<p>この木を使えば、アプリケーション側はソース全体の式を再解釈しなくても、どの Class の中に
+どの Method が定義されているかを辿れます。今回必要だったのは、式の細部をすべて保持する
+ことではなく、まずこの定義構造を Parser の結果として返すことでした。</p>
+
+<h2 id="どこまでやるのか">どこまでやるのか</h2>
+
+<p>今回は Ruby 全体の構文を完全に表すことを目標にしません。Class、Module、Method の定義を
+取り出せるところから実装し、まだ必要でない式の細部は対象外にしました。</p>
+
+<p>そのため、次の二つは分けて考えます。</p>
+
+<ul>
+  <li>Parser が入力を文法的に受け付けられるか</li>
+  <li>受け付けた入力から、定義木を構築できるか</li>
+</ul>
+
+<p>入力を parse できても、Class や Method の構造を期待した形で返せるとは限りません。
+現在の実装で扱えない構文は、曖昧な値にして返すのではなく、未対応の構文として扱います。
+何が木に含まれていないのか分からなくなると、利用側で結果を使えないからです。</p>
+
+<p>Rails のソースや Ruby Trick の入賞作品も Parser に渡して、定義木をどこまで構築できるのかを
+確認しています。これは Ruby 全体との互換性を保証するチェックではなく、単純なサンプルだけ
+では見つからない文法上の問題を見つけるための確認です。</p>
+
+<h2 id="互換性は後から考える">互換性は後から考える</h2>
+
+<p>Ruby Parser として使う以上、既存の Ruby Parser と結果を比べたくなります。ただ、この時点で
+必要だったのは、どの AST 表現を正解にするかを決めることではありませんでした。</p>
+
+<p><code class="language-plaintext highlighter-rouge">RubyVM::AbstractSyntaxTree.parse</code> は比較対象にはできますが、Ruby の内部実装に依存した
+表現です。Parser の結果として何を返すかが固まっていない段階で、RubyVM AST のクラス構造を
+そのまま契約にするつもりはありませんでした。</p>
+
+<p>この時点では、互換性を自動で確認する機構もリポジトリにはまだありません。まず Parser を
+動かし、定義木を返せるようにする。その後で、どの Parser のどの表現と比較するのかを考える
+順番です。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>今回は、Ruby のソースを受け取る Parser の入口を用意し、Class、Module、Method の定義を
+木構造として返せるようにしました。</p>
+
+<ul>
+  <li>Parser の内部を直接操作せず、<code class="language-plaintext highlighter-rouge">parse(source, filename:)</code> を入口にする</li>
+  <li>Class / Module と Method の定義を木構造として取り出す</li>
+  <li><code class="language-plaintext highlighter-rouge">AST</code> という名前は将来の拡張のために先に置く</li>
+  <li>Ruby 全体の AST や互換性を、この段階で固定しない</li>
+</ul>
+
+<p>Parser を動かすことと、Parser の結果をどう表現するかは別の問題でした。次は、この定義木を
+どこまで拡張するのか、そして AST と呼ぶ範囲をどこで決めるのかを考えます。</p>
+
+  </div>
+
   <h1><a href="/blog/2026/10/25/arpaka-requires-action-implementations/">Lrama の Ruby Parser を Ruby で組みたてたい v 0.1.0</a></h1>
   <p class="author">
     <span class="date">2026-10-25 00:00:00 +0900</span>
@@ -1107,124 +1222,6 @@ emerge zsh
 
 <p>おそくなったけど、一旦聞いたセッションをまとめてみました。来年は函館で東京から電車一本で行けるので楽そうですね。
 おわり。</p>
-
-  </div>
-
-  <h1><a href="/blog/2025/04/12/failed-hello-zola/">Hello, ZOLA を失敗した話</a></h1>
-  <p class="author">
-    <span class="date">2025-04-12 00:00:00 +0900</span>
-  </p>
-  <div class="content">
-    <p>HELLO, <a href="https://www.getzola.org"><code class="language-plaintext highlighter-rouge">ZOLA</code></a> World!!!!! としたかったけど、
-移行が面倒すぎたので諦めた話。
-以下は作業ログです。一応終りは見えたけど、</p>
-
-<h2 id="elections">ELECTIONS</h2>
-
-<p><strong><a href="http://jekyllrb.com/">Jekyll</a></strong> でサイト作るの飽きてきたので、
-新しい <em>SSG(Static Site Generator)</em> に変更することにした。</p>
-
-<p>選定必須基準として、以下の条件を。</p>
-
-<ol>
-  <li><em><a href="https://tex2e.github.io/rfc-translater/html/rfc7763.html">markdown 形式</a></em><sup id="fnref:markdown"><a href="#fn:markdown" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> で書けること</li>
-  <li><strong>Jekyll</strong> と同じ <em>URL</em> が生成されること</li>
-</ol>
-
-<p>いまどき直接 <em>HTML</em> で書く人はあまりいないし、いままでの記事があるので <em>markdown</em> で書けることは当然ですね。
-もうひとつの必須条件として、 <strong>Jekyll</strong> で設定した <em>URL</em> で記事が書けることとなります。
-これは現在出している記事の <em>URL</em> を変更しないために必須です。</p>
-
-<p>移行に苦労しないようにするために以下の条件をとることにした。</p>
-
-<ol>
-  <li><strong>Jekyll</strong> と同じ様に <em>markdown</em> の先頭に <em>frontmatter</em> でいろいろと設定できること</li>
-  <li><strong>Jekyll</strong> と同様にテーマが選択できること</li>
-  <li>バイナリーで配ってること</li>
-</ol>
-
-<p><em>frontmatter</em> については移行を楽にするためで多少の書き替えはしかたがないとしています。
-デザイン変更を楽にするためテーマが選択できる <em>SSG</em> だといいなあと思い。
-バイナリーで配ってあると楽なんですよ<sup id="fnref:binary"><a href="#fn:binary" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>。</p>
-
-<p>以上の条件を踏まえいくつか検討してみましたが、 <strong>zola</strong> にしました。</p>
-
-<p><a href="https://github.com/getzola/zola"><img src="/images/zola.svg" alt="getzola/zola - GitHub" /></a></p>
-
-<h2 id="jekyll-to-zola">Jekyll to Zola</h2>
-
-<p><a href="https://github.com/katsyoshi/jekyll2zola"><img src="/images/jekyll2zola.svg" alt="katsyoshi/jekyll2zola - GitHub" /></a></p>
-
-<h3 id="やったこと">やったこと</h3>
-
-<p>まず、ファイル名が <code class="language-plaintext highlighter-rouge">.markdown</code> と混在してので <code class="language-plaintext highlighter-rouge">.md</code> へ統一。
-つぎに <em>markdown</em> 先頭の <em>frontmatter</em> を <a href="https://yaml.org"><strong>YAML</strong></a> から <a href="https://toml.io"><strong>TOML</strong></a> へ変換する。
-これは大変な話ではなく、 <em>frontmatter</em> 部分を読み込んで変更するだけです。
-でこの変更部分なのですが、大抵の部分は問題にならないです。
-大抵の部分は……</p>
-
-<h4 id="url-の設定"><em>URL</em> の設定</h4>
-
-<p><em>URL</em> の設定は、<a href="https://zenn.dev/anz/scraps/ebf857a5cbcfb6#front-matter-%E3%81%A7%E5%88%B6%E5%BE%A1%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">参考サイト</a> の設定を利用して変換します。
-ここで問題となるのが、<strong>Jekyll</strong> の設定で、 <code class="language-plaintext highlighter-rouge">/blog/%Y/%m/%d/file-name</code> となっていることです。
-<del><strong>Zola</strong> では <code class="language-plaintext highlighter-rouge">config.toml</code> で設定する <code class="language-plaintext highlighter-rouge">slugify</code> に設定する方法があるようですが、イマイチ使えず</del>
-（そもそも <code class="language-plaintext highlighter-rouge">slugify</code> を勘違いしてた）。
-ディレクトリを利用し<a href="https://www.getzola.org/documentation/content/overview/">設定する方法</a>と <em>frontmatter</em> に <code class="language-plaintext highlighter-rouge">path</code> で<a href="https://www.getzola.org/documentation/content/page/">設定する方法</a>があります。
-今回は <em>frontmatter</em> で <code class="language-plaintext highlighter-rouge">path</code> 指定して <em>URL</em> を設定することにしました。
-変換はファイル名から取得すればよいので問題は特になく変換できました。
-ただ、変換する際にこのままだと挿入するには注意が必要で、挿入する必要があります。
-これは <a href="https://docs.ruby-lang.org/ja/latest/method/Array/i/insert.html"><code class="language-plaintext highlighter-rouge">Array#insert</code></a> を利用すれば <a href="https://github.com/katsyoshi/jekyll2zola/blob/main/lib/jekyll2zola/converter.rb#L34">解決</a> ですね。</p>
-
-<h4 id="テーマ">テーマ</h4>
-
-<p><a href="https://www.getzola.org/themes/">テーマ</a> はあるのですがプラグイン形式というわけではなく、 <code class="language-plaintext highlighter-rouge">git clone</code> or <code class="language-plaintext highlighter-rouge">git submodule add</code> して利用する点が慣れない。
-気になる部分は <code class="language-plaintext highlighter-rouge">template/</code> に修正ファイルを全部作る必要があり面倒でした。
-<a href="https://crates.io/"><em>Cargo</em></a> でインストールできればいいのに……
-ということでもっと面倒臭い自分のテーマを作ることでこの気になる点を解決。
-作成方法は <a href="https://www.getzola.org/documentation/getting-started/overview/#templates">公式ドキュメント</a> を参考にすすめれば問題なく作成できます。
-テーマというか、普通にテンプレート化するだけです。
-<a href="https://www.getzola.org/documentation/themes/creating-a-theme/">テーマ化</a> も実際は簡単にでき、 <code class="language-plaintext highlighter-rouge">theme.toml</code> を書いておけば大丈夫なようです。
-個人的に利用しているだけなのでテーマ化はしないですが。</p>
-
-<h4 id="feedxml">FEED.XML</h4>
-
-<p><em><a href="https://www.rssboard.org/rss-specification">RSS Feed</a></em> 自体はサポートされていますが、 <em>URL</em> のパスが <code class="language-plaintext highlighter-rouge">/atom.xml</code> か <code class="language-plaintext highlighter-rouge">/rss.xml</code> になってしまうため
-旧来のパス <code class="language-plaintext highlighter-rouge">/feed.xml</code> は新規にテンプレートを作る必要があります。
-これは追い追い考える。現状 <strong>Jekyll</strong> にあった <code class="language-plaintext highlighter-rouge">feed.xml</code> を作るのは大変すぎる。</p>
-
-<h4 id="こまかい修正">こまかい修正</h4>
-<p>いくつか気になる部分があったがこまかいので手で修正</p>
-
-<ol>
-  <li>脚注の順番が脚注を書いた順に出力</li>
-  <li><em>Syntax Highlighting</em> のサポート言語</li>
-  <li>画像の変更</li>
-  <li><em>rake task</em> の整理</li>
-</ol>
-
-<p>脚注は脚注で引用した順番ではなく、脚注を書いた順になっているので修正してます。
-<em>Syntax Highlighting</em> ではサポートされていない書きかた（<strong>console</strong>）をやめてサポートされている言語（<strong>bash</strong>）へ修正。
-画像の変更はとくに <strong>zola</strong> は関係なく、大きいファイルが多いので変更しています。 
-<em>rake task</em> では、いままでデプロイやら記事作成やらなんだかんだやっていたので整理を行いました。
-今は一旦、記事作成だけにしております。そのうちデプロイを行なえるようになると思います</p>
-
-<h2 id="とここまで書いたけどデプロイやめた">とここまで書いたけどデプロイやめた</h2>
-
-<p>というのが、 <code class="language-plaintext highlighter-rouge">feed.xml</code> の移行とスタイルの修正が思った以上に大変で中止。
-この今 <strong>Jekyll</strong> のテーマのスタイルがあれば、そのうち変更するかもね。</p>
-
-<hr />
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:markdown">
-      <p><em><a href="https://www.ietf.org/process/rfcs/">RFC</a>(Request For Comment)</em> になっててびびってる <a href="#fnref:markdown" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:binary">
-      <p><strong>Jekyll</strong> は依存解決とかあって最新の <a href="https://www.ruby-lang.org">Ruby</a> が使えなかったりしたのでストレスたかかった <a href="#fnref:binary" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
 
   </div>
 
