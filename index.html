@@ -52,6 +52,148 @@
 
 
 
+  <h1><a href="/blog/2026/11/07/arpaka-parse-y-only/">Lrama の Ruby Parser を Ruby で組みたてたい v 1.0.0</a></h1>
+  <p class="author">
+    <span class="date">2026-11-07 00:00:00 +0900</span>
+  </p>
+  <div class="content">
+    <p><a href="https://github.com/katsyoshi/arpaka"><img src="/images/arpaka.svg" alt="katsyoshi/arpaka - GitHub" /></a></p>
+
+<p><a href="/blog/2026/11/01/arpaka-parser-result/">前回</a>は、Ruby のソースを Parser に渡し、
+Class や Module、それに含まれる Method の定義を木構造として返すところまで進めました。
+コードの中ではその結果を <code class="language-plaintext highlighter-rouge">AST</code> と呼んでいますが、この時点では Ruby の構文全体を
+表すことよりも、Parser を使える入口と、必要な定義を返すことを優先しています。</p>
+
+<p>今回は、入力を Ruby のソースコード一式ではなく <code class="language-plaintext highlighter-rouge">parse.y</code> だけにして、同じ Parser を
+動かすために何が必要なのかを整理します。</p>
+
+<h2 id="what-parsey-doesnt-include">What <code class="language-plaintext highlighter-rouge">parse.y</code> Doesn’t Include</h2>
+
+<p>最初は、<code class="language-plaintext highlighter-rouge">parse.y</code> が文法そのものなのだから、これを Lrama に渡せば Parser ができると
+考えました。実際、文法を読み込んで解析表を作るところまでは <code class="language-plaintext highlighter-rouge">parse.y</code> だけで進められます。</p>
+
+<p>でも、できあがった Parser が Ruby のソースを受け取って結果を返すには、それだけでは足りません。
+<code class="language-plaintext highlighter-rouge">parse.y</code> が決めているのは、どの token の並びを受け付けるかと、reduce のときにどの
+Action を実行するかです。Ruby のソースを token に変換する処理や、Action が組み立てる
+値の入れ物までは <code class="language-plaintext highlighter-rouge">parse.y</code> の中にありません。</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ruby source
+    ↓
+  Lexer
+    ↓
+  Parser generated from parse.y
+    ↓
+  Action / Builder
+    ↓
+  Parser result
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">parse.y</code> だけで動かすというのは、周辺の実装をなくすことではありません。呼び出し側が
+Ruby のソースコード一式を用意しなくてもよくし、文法の入力を <code class="language-plaintext highlighter-rouge">parse.y</code> に限定した上で、必要な
+周辺部品は Arpaka 側に持つ、という意味になります。</p>
+
+<h2 id="token-名を解決">token 名を解決</h2>
+
+<p>Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> には、<code class="language-plaintext highlighter-rouge">RUBY_TOKEN(tIDENTIFIER)</code> のような記述があります。Ruby の
+ビルドでは <code class="language-plaintext highlighter-rouge">defs/id.def</code> と <code class="language-plaintext highlighter-rouge">tool/id2token.rb</code> を使って、これを Parser が扱う token
+番号へ展開しています。</p>
+
+<p><code class="language-plaintext highlighter-rouge">parse.y</code> だけを受け取る場合、この展開に必要な Ruby のソースコード一式はありません。そこで
+Arpaka は <code class="language-plaintext highlighter-rouge">RUBY_TOKEN(NAME)</code> を token 名へ置き換えてから Lrama に渡します。token 番号を
+呼び出し側に要求するのではなく、文法の中にある名前を使って Parser を生成するためです。</p>
+
+<p>ただし、これは token の名前を解決しているだけです。Lexer が Ruby の文字列を読み、
+その token を返す処理は別に必要です。</p>
+
+<h2 id="combining-the-lexer-with-the-parser">Combining the Lexer with the Parser</h2>
+
+<p>Lrama が生成するのは token 列を読む Parser です。Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> を渡しても、文字列や
+コメント、正規表現、heredoc、補間などを Ruby の token 列へ変換する Lexer までは生成されません。</p>
+
+<p>そのため、Arpaka では Parser とは別に Lexer を用意します。Lexer はソースを読み、
+<code class="language-plaintext highlighter-rouge">parse.y</code> が期待する token と値を返します。さらに、<code class="language-plaintext highlighter-rouge">do</code> や <code class="language-plaintext highlighter-rouge">{</code> のように前後の状態で
+意味が変わる token については、Parser や Action と状態を共有する必要があります。</p>
+
+<p>ここを省略して token 列を手で渡すだけなら、Lrama の Parser の動作確認はできます。でも、
+それは Ruby の Parser としてソースを読む入口にはなりません。</p>
+
+<h2 id="parsey-の外側にあるもの"><code class="language-plaintext highlighter-rouge">parse.y</code> の外側にあるもの</h2>
+
+<p><code class="language-plaintext highlighter-rouge">parse.y</code> には文法規則と Action が書かれています。ただし、Parser を動かすために必要な
+ものがすべて入っているわけではありません。</p>
+
+<p>Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> は、次のような外側の仕組みに依存しています。</p>
+
+<ul>
+  <li>token 名や token 番号の展開</li>
+  <li>Ruby のソースを token に変換する Lexer</li>
+  <li>Action から呼ばれるマクロや補助関数</li>
+  <li>Parser と Lexer が共有する状態</li>
+  <li>Action の値を受け取り、結果の木を組み立てる Builder</li>
+</ul>
+
+<p>Ruby のビルドでは、これらが C の Parser や Lexer、生成スクリプトの中で組み合わされます。
+<code class="language-plaintext highlighter-rouge">parse.y</code> だけを Lrama に渡しても、文法から解析表を作れるだけで、Ruby のソースを読んで
+結果を返すところまではできません。</p>
+
+<h3 id="action-だけでは足りない">Action だけでは足りない</h3>
+
+<p>文法認識だけなら Action は必須ではありません。しかし Arpaka のように Parser の結果を
+木構造として返す場合は、規則を適用したときに値を組み立てる Action が必要です。</p>
+
+<p>それでも、Action の本文だけを Ruby に書き換えれば動くわけではありません。<code class="language-plaintext highlighter-rouge">$$</code> や <code class="language-plaintext highlighter-rouge">$1</code> を
+Ruby の値へ変換し、Action から呼ばれる処理を Builder として用意し、Parser や Lexer の
+状態を共有する仕組みも必要です。</p>
+
+<p>Arpaka の生成処理では、文法規則に対応する Action mapping と、Lexer、Builder、Parser の
+runtime を一つの standalone frontend にまとめます。</p>
+
+<h2 id="parsey-だけを入力にする"><code class="language-plaintext highlighter-rouge">parse.y</code> だけを入力にする</h2>
+
+<p>必要な部品が揃ったので、呼び出し側の入力を <code class="language-plaintext highlighter-rouge">parse.y</code> だけにできます。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">frontend</span> <span class="o">=</span> <span class="no">Arpaka</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span>
+  <span class="ss">parse_y: </span><span class="s2">"/path/to/parse.y"</span><span class="p">,</span>
+  <span class="ss">class_name: </span><span class="s2">"RubyParser"</span>
+<span class="p">)</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">frontend</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span>
+  <span class="s2">"class Example</span><span class="se">\n</span><span class="s2">  def call</span><span class="se">\n</span><span class="s2">  end</span><span class="se">\n</span><span class="s2">end</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+  <span class="ss">filename: </span><span class="s2">"example.rb"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>ここで <code class="language-plaintext highlighter-rouge">parse_y:</code> に渡しているのは文法の入力だけです。token 名の前処理、Action mapping、
+Lexer、Builder、runtime は Arpaka が持っているものを使います。つまり、<code class="language-plaintext highlighter-rouge">parse.y</code> だけで
+Parser を動かすために必要なのは、<code class="language-plaintext highlighter-rouge">parse.y</code> の内容を増やすことではなく、文法の外側に
+あった依存を切り出して、生成時に組み合わせることでした。</p>
+
+<p>このモードは、どの Ruby の <code class="language-plaintext highlighter-rouge">parse.y</code> でも自動的に互換性が得られるという意味ではありません。
+文法の変更に合わせて Action mapping や runtime が変わることもあります。Ruby のソースコード一式
+を渡すモードでは、その版の <code class="language-plaintext highlighter-rouge">parse.y</code> と周辺ファイルをまとめて確認できますが、<code class="language-plaintext highlighter-rouge">parse.y</code> だけ
+のモードでは、Arpaka が対応している範囲を明示しておく必要があります。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p><code class="language-plaintext highlighter-rouge">parse.y</code> だけで Arpaka の Parser を動かすために必要だったのは、次の部品でした。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">RUBY_TOKEN</code> を解決して文法を Lrama に渡す前処理</li>
+  <li>Ruby のソースを token 列へ変換する Lexer</li>
+  <li>Action の値を組み立てる Builder と runtime</li>
+  <li>文法規則と Ruby 側の処理を対応付ける Action mapping</li>
+  <li>それらを standalone frontend としてまとめる生成処理</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">parse.y</code> は Parser の中心ですが、Parser 全体ではありません。文法だけを入力にできるように
+するには、文法から外に出ている token、Action、Lexer、値の構築を別々に見つけて、最後に
+一つの入口へ戻す必要がありました。</p>
+
+<p>これで <code class="language-plaintext highlighter-rouge">parse.y</code> だけから Parser を生成する道具はできました。次は、異なる Ruby の文法を
+受け取ったときに、どこまで同じ結果を保証するのかを考えることになります。</p>
+
+  </div>
+
   <h1><a href="/blog/2026/11/01/arpaka-parser-result/">Lrama の Ruby Parser を Ruby で組みたてたい v 0.2.0</a></h1>
   <p class="author">
     <span class="date">2026-11-01 00:00:00 +0900</span>
@@ -1145,83 +1287,6 @@ emerge zsh
 動いているのを変更するの面倒だったので今回替えてみました。
 カーネルもバイナリでインストールできるようになったので便利になりました(たぶん)。
 あとうかつに <code class="language-plaintext highlighter-rouge">emerge --depclean</code> はするもんじゃない。</p>
-
-  </div>
-
-  <h1><a href="/blog/2025/04/25/went-to-rubykaigi-2025/">RubyKaigi 2025 at Matz-yama</a></h1>
-  <p class="author">
-    <span class="date">2025-04-25 23:00:00 +0900</span>
-  </p>
-  <div class="content">
-    <p>今年も <a href="https://rubykaigi.org/2025">RubyKaigi 2025</a> に行ってきました。</p>
-
-<p>今年みたセッション一覧を日毎に。</p>
-
-<h2 id="day-1">Day 1</h2>
-
-<ol>
-  <li><a href="https://speakerdeck.com/ima1zumi/ruby-taught-me-about-under-the-hood">Ruby Taught Me About Encoding Under the Hood</a></li>
-  <li><a href="https://mensfeld.github.io/bringing_linux_pidfd_to_ruby/">Bringing Linux pidfd to Ruby</a></li>
-  <li><a href="https://speakerdeck.com/kateinoigakukun/the-evolution-of-the-cruby-build-system">The Evolution of the CRuby Build System</a></li>
-  <li><a href="https://speakerdeck.com/k0kubun/rubykaigi-2025">Deoptimization: How YJIT Speeds Up Ruby by Slowing Down</a></li>
-  <li><a href="https://speakerdeck.com/yui_knk/rubys-line-breaks">Ruby’s Line Breaks</a></li>
-  <li><a href="https://speakerdeck.com/tagomoris/state-of-namespace">State of Namespace</a></li>
-  <li><a href="https://github.com/tric/trick2025">TRICK 2025: Episode I</a></li>
-</ol>
-
-<p>初日のキーノートは、 <a href="https://github.com/ima1zumi">@ima1zumi</a> さんで文字コードの話してくれました。
-つぎは <a href="https://github.com/mensfeld">@mensfeld</a> の <code class="language-plaintext highlighter-rouge">pidfd</code> の話を聞きました。
-これは server 動かしているとはまる問題、 <code class="language-plaintext highlighter-rouge">pid</code> の使い回しによるバグの対処方法として <code class="language-plaintext highlighter-rouge">pidfd</code> を <code class="language-plaintext highlighter-rouge">Ruby</code> に対応したという話でした。
-オチは、そもそも <strong>overkill</strong> で不要だったねという。
-午前の終りは <a href="https://github.com/kateinoigakukun">@kateinoigakukun</a> さんのビルドシステムの話でした。 <em>Ruby</em> のビルドシステムのリプレースを考えているようでした。
-午後一発目はお馴染 <strong>Shopify</strong> の <em>YJIT</em> チームの <a href="https://github.com/k0kubun">@k0kubun</a> さんの話。 <em>YJIT</em> を速くするために、如何に <em>deoptimization</em> するかという話で、速くするための方法を話していました。
-<strong>パーサーギャング</strong> 一味のドン、<a href="https://github.com/yui-knk">@yi-knk</a> さんの話で今年楽しみにしてた発表。
-<em>Namespace</em> の話は <a href="https://github.com/tagomoris">@tagomoris</a> さんがやってくれました。
-今年のうちに入りそうな雰囲気を感じた。
-いったん休憩して <strong>trick</strong> へ。</p>
-
-<h2 id="day-2">Day 2</h2>
-
-<ol>
-  <li><a href="https://docs.google.com/presentation/d/1lDnxFkc4URsi0LP4w1M5IXv5A02AG_HUy3gW_SpEWOA/edit#slide=id.g34edb417dc3_0_1471">Performance Bugs and Low-level Ruby Observability APIs</a></li>
-  <li><a href="https://speakerdeck.com/ydah/dissecting-and-reconstructing-ruby-syntactic-structures">Dissecting and Reconstructing Ruby Syntactic Structures</a></li>
-  <li><a href="">ZJIT: Building a Next Generation Ruby JIT</a></li>
-  <li>Bazel for Ruby</li>
-  <li><a href="https://speakerdeck.com/junk0612/the-implementations-of-advanced-lr-parser-algorithm">The Implementations of Advanced LR Parser Algorithm</a></li>
-  <li>Lightning Talks</li>
-</ol>
-
-<p><a href="https://github.com/DataDog/dd-trace-rb"><em>dd-trace-rb</em></a> の作者 <a href="https://github.com/ivoanjo">@ivoanjo</a> の <em>observability</em> の話。
-もう同じ目的をもった <a href="https://github.com/osyoyu">@osyoyu</a> が<a href="https://blog.smartbank.co.jp/entry/2025/04/25/110000"><em>スマートバンクブログ</em></a>で解説しているのでそちらを参照。
-新米 <a href="https://github.com/orgs/ruby/people"><strong>Ruby Commiter</strong></a> の <a href="https://github.com/ydah">@ydah</a> です。
-<a href="https://github.com/ruby/lrama"><em>lrama</em></a> で <em>Ruby</em> の <code class="language-plaintext highlighter-rouge">parse.y</code> をどう読み込むのか、どう構造化するのかの話でした。
-<strong>Shopify</strong> <em>YJIT</em> チームの親分、 <a href="https://github.com/maximecb">maximecb</a> の発表。
-新しい <em>JIT</em> 、今年一番の衝撃 <em>ZJIT</em> の提案。詳細は <a href="https://bugs.ruby-lang.org/issues/21221">Proposal to upstream ZJIT</a> を見てくれ。
-<strong>パーサーギャング</strong> 一味のトリ <a href="https://github.com/junk0612">@junk0612</a> の発表。
-<em>lrama</em> に <em>IELR</em> を適用してみる話。まあ遅かったりするようです。
-最後に</p>
-
-<h2 id="day-3">Day 3</h2>
-
-<ol>
-  <li>Ruby Committers and the World</li>
-  <li><a href="https://speakerdeck.com/sisshiki1969/improve-my-own-ruby">Improving my own Ruby</a></li>
-  <li><a href="https://speakerdeck.com/ahogappa/the-ruby-one-binary-tool-enhanced-with-kompo">The Ruby One-Binary Tool, Enhanced with Kompo</a></li>
-  <li><a href="https://atdot.net/~ko1/activities/2025_rubykaigi2025.pdf">Toward Ractor local GC</a></li>
-  <li><a href="">Modular Garbage Collectors in Ruby</a></li>
-  <li><a href="">Matz Keynote</a></li>
-</ol>
-
-<p><a href="https://github.com/sisshiki1969">@sisshiki1969</a> さんで、<em>rust</em> の <em>ruby</em> 処理系を作ってる人で、速くした話でした。
-<a href="https://github.com/ahogappa">@ahogappa</a> さんが作ってる <em>kompo</em> というツールの話で、この <em>kompo</em> はバイナリー1つにまとめてくれる便利ツールです。
-今回は <em>Rails</em> アプリが動くようになった話をしていました。
-<a href="https://github.com/peterzhu2118">@peterzhu2118</a> さんが <em>GC</em> (<em>Garbage Collection</em>) をモジュール化して入れ替えれるような話をしてました。
-さいごに <a href="https://github.com/matz">@matz</a> のキーノートで <em>Ruby</em> のこれからの話、<em>AI</em> の話などなど。</p>
-
-<h2 id="おわり">おわり</h2>
-
-<p>おそくなったけど、一旦聞いたセッションをまとめてみました。来年は函館で東京から電車一本で行けるので楽そうですね。
-おわり。</p>
 
   </div>
 
